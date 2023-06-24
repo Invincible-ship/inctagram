@@ -1,0 +1,108 @@
+.Button {
+  min-width: 182px;
+  font-weight: 600;
+  padding: 6px 24px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: background-color .2s linear,
+              color .2s linear;
+}
+
+.primary {
+  color: var(--light-color-500);
+  background-color: var(--accent-color-500);
+
+  &:hover {
+    background-color: var(--accent-color-100);
+    color: var(--light-color-100);
+  }
+
+  &:active {
+    background-color: var(--accent-color-700);
+    color: var(--light-color-500);
+  }
+
+  &:focus {
+    outline: 2px solid var(--accent-color-700);
+    color: var(--primary-text-color);
+  }
+
+  &[disabled="true"] {
+    background-color: var(--accent-color-900);
+    color: var(--light-color-900);
+  }
+}
+
+.secondary {
+  color: var(--primary-text-color);
+  background-color: var(--dark-color-300);
+
+  &:hover {
+    background-color: var(--dark-color-100);
+    color: var(--light-color-100);
+  }
+
+  &:active {
+    background-color: #212121;
+  }
+
+  &:focus {
+    outline: 1px solid var(--accent-color-300);
+    color: var(--primary-text-color);
+  }
+
+  &[disabled="true"] {
+    background-color: var(--dark-color-500);
+    color: var(--light-color-900);
+  }
+}
+
+.outlined {
+  color: var(--accent-color-500);
+  background-color: transparent;
+  border: 1px solid var(--accent-color-500);  
+
+  &:hover {
+    color: var(--accent-color-100);
+    border: 1px solid var(--accent-color-100);
+  }
+
+  &:active {
+    color: var(--accent-color-700);
+    border: 1px solid var(--accent-color-700);
+  }
+
+  &:focus {
+    color: var(--accent-color-700);
+    border: 2px solid var(--accent-color-700);
+  }
+
+  &[disabled="true"] {
+    color: var(--accent-color-900);
+    border: 1px solid var(--accent-color-900);
+  }
+}
+
+.text {
+  width: auto;
+  color: var(--accent-color-500);
+  background-color: transparent;
+
+  &:hover {
+    color: var(--accent-color-100);
+  }
+
+  &:active {
+    color: var(--accent-color-700);
+  }
+
+  &:focus {
+    color: var(--accent-color-700);
+    border: 2px solid var(--accent-color-700);
+  }
+
+  &[disabled="true"] {
+    color: var(--accent-color-900);
+  }
+}

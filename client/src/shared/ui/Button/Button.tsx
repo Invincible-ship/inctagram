@@ -1,13 +1,12 @@
 import { ButtonHTMLAttributes, FC } from "react"
+import { classNames } from "@/shared/lib/classNames/classNames"
+import cls from './Button.module.scss'
 
 export enum ButtonTheme {
-
-}
-
-export enum ButtonSizes {
-  M = 'size-m',
-  L = 'size-l',
-  XL = 'size-xl'
+  DEFAULT = 'primary',
+  SECONDARY = 'secondary',
+  OUTLINED = 'outlined',
+  TEXT = 'text'
 }
 
 interface ButtonProps extends
@@ -17,17 +16,19 @@ interface ButtonProps extends
   size?: string;
 }
 
-const Button: FC<ButtonProps> = ({
-  className,
-  theme = '',
+export const Button: FC<ButtonProps> = ({
+  className = '',
+  theme = ButtonTheme.DEFAULT,
   children,
-  size = ButtonSizes.M,
   ...rest
 }) => {
   return (
     <button 
       type="button"
-      className={''}
+      className={
+        classNames(cls.Button, {}, [className, cls[theme]])
+      }
+      {...rest}
     >
       {children}
     </button>

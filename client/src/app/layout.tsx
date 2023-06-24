@@ -1,6 +1,8 @@
-// import { Inter } from 'next/font/google'
+import { Inter } from 'next/font/google'
+import '@/shared/styles/index.scss'
 
-// const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin', 'cyrillic'] })
+
 export const metadata = {
   title: 'Inctagram | Social Media Service',
   description: 'Chat and share ',
@@ -12,8 +14,8 @@ const RootLayout = ({
   children: React.ReactNode
 }) => {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }
