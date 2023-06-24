@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build --env mode=production",
     "start": "next start",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
@@ -25,6 +25,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-i18next": "^13.0.1",
+    "sass": "^1.63.6",
     "typescript": "5.1.3"
   }
 }

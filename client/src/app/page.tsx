@@ -3,7 +3,7 @@
 import '@/shared/config/i18n/i18n'
 import { useTranslation } from 'react-i18next'
 import { Suspense } from 'react'
-import styles from './page.module.css'
+import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 
 const Home = () => {
   const { t, i18n } = useTranslation()
@@ -14,9 +14,14 @@ const Home = () => {
 
   return (
     <Suspense fallback="loading">
-      <main className={styles.main} style={{height: "100vh", padding: 0}}>
+      <main className="app" style={{height: "100vh"}}>
         <h1>{t('test')}</h1>
-        <button onClick={toggle}>Переключить язык</button>
+        <Button 
+          onClick={toggle} 
+          theme={ButtonTheme.DEFAULT}
+        >
+          Switch
+        </Button>
       </main>
     </Suspense>
   )
