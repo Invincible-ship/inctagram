@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --env mode=production",
     "start": "next start",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix"
@@ -14,12 +14,17 @@
     "@types/react": "18.2.13",
     "@types/react-dom": "18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "encoding": "^0.1.13",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "eslint-plugin-i18next": "^6.0.3",
+    "i18next": "^23.2.3",
+    "i18next-browser-languagedetector": "^7.0.2",
+    "i18next-http-backend": "^2.2.1",
     "next": "13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-i18next": "^13.0.1",
     "typescript": "5.1.3"
   }
 }

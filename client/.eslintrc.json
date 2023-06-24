@@ -9,7 +9,7 @@
   "rules": {
     "semi": [2, "never"],
     "react/jsx-indent": [2, 2],
-    "react/function-component-definition": [2, {
+    "react/function-component-definition": [1, {
       "namedComponents": "arrow-function",
       "unnamedComponents": "arrow-function"
     }],
@@ -39,5 +39,8 @@
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "react-hooks/rules-of-hooks": "error"
+  },
+  "globals": {
+    "__IS_DEV__": true
   }
 }
