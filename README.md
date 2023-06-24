@@ -1,2 +1,2 @@
-# inctagram
+# Inctagram
 Production instagram clone
