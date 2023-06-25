@@ -1,9 +1,12 @@
 "use client"
 
 import '@/shared/config/i18n/i18n'
-import { useTranslation } from 'react-i18next'
-import { Suspense } from 'react'
-import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
+import {useTranslation} from 'react-i18next'
+import React, {Suspense} from 'react'
+import {Button, ButtonTheme} from '@/shared/ui/Button/Button'
+import Input from "@/shared/ui/Input/Input";
+import Eye from '@/assets/icon/eye.svg';
+import Image from 'next/image'
 
 const Home = () => {
   const { t, i18n } = useTranslation()
@@ -22,6 +25,10 @@ const Home = () => {
         >
           Switch
         </Button>
+
+        <Input title={'Email'} type={'email'} />
+        {/*<Image src={Eye}*/}
+        {/*        alt="Follow us on Twitter"/>*/}
       </main>
     </Suspense>
   )
