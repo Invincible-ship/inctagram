@@ -6,7 +6,7 @@ import React, {
     ReactNode,
 } from 'react'
 import s from './Input.module.scss';
-import {classNames} from "@/shared/lib/classNames/classNames";
+//
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
