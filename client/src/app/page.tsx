@@ -4,6 +4,7 @@ import '@/shared/config/i18n/i18n'
 import { useTranslation } from 'react-i18next'
 import { Suspense } from 'react'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
+import OutlineIcon from '../../public/icons/home-outline.svg'
 
 const Home = () => {
   const { t, i18n } = useTranslation()
@@ -22,6 +23,7 @@ const Home = () => {
         >
           Switch
         </Button>
+        <OutlineIcon stroke="white" />
       </main>
     </Suspense>
   )
