@@ -1,0 +1,45 @@
+.inputWrapper {
+  color: var(--light-color-900);
+  font-size: 14px;
+  font-family: Inter, sans-serif;
+  line-height: 24px;
+
+  .styledInput:hover{
+    border: 1px solid var(--light-color-900);
+    color: var(--light-color-900);
+  }
+  .styledInput:focus {
+    border: 1px solid var( --accent-color-500);
+  }
+  .styledInput:active {
+    border: 1px solid var( --light-color-100);
+    color: var(--light-color-100);
+  }
+
+
+  .styledInput {
+    outline: none;
+    min-width: 279px;
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid var(--dark-color-100);
+    color: var(--light-color-900);
+    background: transparent;
+    border-radius: 2px;
+    flex-shrink: 0;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    line-height: 24px;
+
+  }
+
+  .errorLbl {
+    color: var( --danger-color-500);
+    font-size: 14px;
+    margin-top: 2px;
+  }
+}
+
+.error{
+border: 1px solid red;
+}
