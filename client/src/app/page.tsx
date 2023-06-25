@@ -5,12 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { Suspense } from 'react'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import OutlineIcon from '../../public/icons/home-outline.svg'
-import {useTranslation} from 'react-i18next'
-import React, {Suspense} from 'react'
-import {Button, ButtonTheme} from '@/shared/ui/Button/Button'
 import Input from "@/shared/ui/Input/Input";
-import Eye from '@/assets/icon/eye.svg';
-import Image from 'next/image'
+
 
 const Home = () => {
   const { t, i18n } = useTranslation()
