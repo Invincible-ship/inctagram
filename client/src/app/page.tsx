@@ -1,6 +1,10 @@
 "use client"
 
 import '@/shared/config/i18n/i18n'
+import { useTranslation } from 'react-i18next'
+import { Suspense } from 'react'
+import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
+import OutlineIcon from '../../public/icons/home-outline.svg'
 import {useTranslation} from 'react-i18next'
 import React, {Suspense} from 'react'
 import {Button, ButtonTheme} from '@/shared/ui/Button/Button'
@@ -25,6 +29,7 @@ const Home = () => {
         >
           Switch
         </Button>
+        <OutlineIcon stroke="white" />
 
         <Input title={'Email'} type={'email'} />
         {/*<Image src={Eye}*/}
