@@ -2,6 +2,7 @@ import s from './LoginForm.module.scss'
 import {Button, ButtonTheme} from "@/shared/ui/Button/Button"
 import Link from "next/link"
 import {useForm} from "react-hook-form"
+import Input from "@/shared/ui/Input/Input"
 
 type LogInFormProps = {
 	// email?: string
@@ -24,7 +25,14 @@ export const LogInForm = () => {
   <div className={s.wrapper}>
     <form onSubmit={onSubmit} className={s.form}>
       <label>Email</label>
-      <input {...register('email')} />
+      <Input
+          id={"userEmail"}
+          type={"email"}
+          className={'input'}
+          placeholder={'Epam@epam.com'}
+          title={'Email'}
+          {...register('email')}
+      />
       <label>Password</label>
       <input {...register("password")} />
       <p className={s.passRecovery}>
