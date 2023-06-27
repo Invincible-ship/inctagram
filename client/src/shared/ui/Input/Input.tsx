@@ -5,7 +5,7 @@ import React, {
     KeyboardEvent,
     ReactNode,
 } from 'react'
-import s from './Input.module.scss';
+import s from './Input.module.scss'
 //
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -49,9 +49,9 @@ const Input: React.FC<InputPropsType> = (
     }
 
     return (
-        <div className={s.inputWrapper}>
-            <div>{title}</div>
-            <input
+      <div className={s.inputWrapper}>
+        <div>{title}</div>
+        <input
                 id={id}
                 type={type ? type : 'text'}
                 onChange={onChangeCallback}
@@ -60,13 +60,13 @@ const Input: React.FC<InputPropsType> = (
                 {...restProps}
             />
 
-            <div
+        <div
                 id={id ? id + '-span' : undefined}
                 className='input-info'
             >
-                {error}
-            </div>
+          {error}
         </div>
+      </div>
     )
 }
 

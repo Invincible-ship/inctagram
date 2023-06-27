@@ -1,10 +1,10 @@
-import {LogInForm} from "@/features/auth/signin/ui/LogInForm";
+import LogInForm from "@/features/auth/signin"
 
 const Login = () => {
   return (
-		<div>
-			<LogInForm/>
-		</div>
+    <div>
+      <LogInForm/>
+    </div>
 	)
 }
 
