@@ -19,7 +19,7 @@ const Home = () => {
         <div className={'content'}>
           <Signup/>
         </div>
-        {/*<h1>{t('test')}</h1>*/}
+        <h1>{t('test')}</h1>
         {/*<Button*/}
         {/*  onClick={toggle}*/}
         {/*  theme={ButtonTheme.DEFAULT}*/}
