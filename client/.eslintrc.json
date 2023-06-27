@@ -8,7 +8,7 @@
   ],
   "rules": {
     "semi": [2, "never"],
-    "react/jsx-indent": [2, 2],
+    "react/jsx-indent": [2, 2, {"indentLogicalExpressions": true}],
     "react/function-component-definition": [1, {
       "namedComponents": "arrow-function",
       "unnamedComponents": "arrow-function"
@@ -34,7 +34,7 @@
       "markupOnly": true,
       "ignoreAttribute": ["data-testid", "fallback", "to"]
     }],
-    "max-len": [2, { "code": 100, "ignoreComments": true, "ignoreStrings": true }],
+    "max-len": [2, { "code": 120, "ignoreComments": true, "ignoreStrings": true }],
     "linebreak-style": ["error", "unix"],
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
