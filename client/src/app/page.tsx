@@ -3,9 +3,7 @@
 import '@/shared/config/i18n/i18n'
 import { useTranslation } from 'react-i18next'
 import { Suspense } from 'react'
-import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-import OutlineIcon from '../../public/icons/home-outline.svg'
-import Input from "@/shared/ui/Input/Input";
+import {Signup} from "@/features/auth/signup/ui/signup"
 
 
 const Home = () => {
@@ -18,17 +16,20 @@ const Home = () => {
   return (
     <Suspense fallback="loading">
       <main className="app" style={{height: "100vh"}}>
-        <h1>{t('test')}</h1>
-        <Button 
-          onClick={toggle} 
-          theme={ButtonTheme.DEFAULT}
-        >
-          Switch
-        </Button>
-        <OutlineIcon stroke="white" />
+        <div className={'content'}>
+          <Signup/>
+        </div>
+        {/*<h1>{t('test')}</h1>*/}
+        {/*<Button*/}
+        {/*  onClick={toggle}*/}
+        {/*  theme={ButtonTheme.DEFAULT}*/}
+        {/*>*/}
+        {/*  Switch*/}
+        {/*</Button>*/}
+        {/*<OutlineIcon stroke="white" />*/}
 
-        <Input title={'Email'} type={'email'} />
-        {/*<Image src={Eye}*/}
+        {/*<Input title={'Email'} type={'email'} />*/}
+        {/*/!*<Image src={Eye}*!/*/}
         {/*        alt="Follow us on Twitter"/>*/}//
       </main>
     </Suspense>
