@@ -11,21 +11,21 @@ import Google from '../../../../assets/icon/google.svg'
 import Github from '../../../../assets/icon/github.svg'
 
 export const Signup = () => {
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
 
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     const toggleShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
+        setShowPassword(!showPassword)
+    }
 
     const toggleShowConfirmPassword = () => {
-        setShowConfirmPassword(!showConfirmPassword);
-    };
+        setShowConfirmPassword(!showConfirmPassword)
+    }
 
     return (
         <div className={'form registration'}>
-            <div className='form-wrapper auth-form'>
+            <div className="form-wrapper auth-form">
 
                 <div className={'title b-title bt26 semibold align-center'}>Sign Up</div>
                 <div className={'icon-wrapper'}>
@@ -33,7 +33,7 @@ export const Signup = () => {
                     <Github/>
                 </div>
 
-                <form  className={'form-style'}>
+                <form className={'form-style'}>
                     <div className={'field input-field'}>
                         <Input
                             id="userName"
@@ -43,15 +43,15 @@ export const Signup = () => {
                             title={'UserName'}
                         />
                         <span className={'error-lbl'}>{}</span>
-                        </div>
-                        <Input
-                            id="email"
-                            type="email"
-                            className={'input'}
-                            placeholder={'Epam@epam.com'}
-                            title={'Email'}
-                        />
-                            <span className={'error-lbl'}>{}</span>
+                    </div>
+                    <Input
+                        id="email"
+                        type="email"
+                        className={'input'}
+                        placeholder={'Epam@epam.com'}
+                        title={'Email'}
+                    />
+                    <span className={'error-lbl'}>{}</span>
 
                     <div className={'password-wrapper'}>
                         <Input
@@ -61,8 +61,8 @@ export const Signup = () => {
                             type={showPassword ? 'text' : 'password'}
                             title={'Password'}
                         />
-                            <span className={'error-lbl'}>{}</span>
-                        <span className='eye' onClick={toggleShowPassword}><Eye /></span>
+                        <span className={'error-lbl'}>{}</span>
+                        <span className="eye" onClick={toggleShowPassword}><Eye/></span>
                     </div>
 
                     <div className={'password-wrapper'}>
@@ -73,13 +73,15 @@ export const Signup = () => {
                             type={showConfirmPassword ? 'text' : 'password'}
                             title={'Password confirmation'}
                         />
-                            <span className={'error-lbl'}>{}</span>
-                        <span className='eye' onClick={toggleShowConfirmPassword}><Eye /></span>
+                        <span className={'error-lbl'}>{}</span>
+                        <span className="eye" onClick={toggleShowConfirmPassword}><Eye/></span>
                     </div>
                     <Button type="submit" className={'styled-btn styled-btn-1'}>Sign Up</Button>
                 </form>
-                <span className={'info b-title bt14  align-center semibold'}>Do you have an account?</span>
-                <Link href={'/login'} className="b-title bt16 semibold link-registration align-center"><span>Sign In</span></Link>
+                <span
+                    className={'info b-title bt14  align-center semibold'}>Do you have an account?</span>
+                <Link href={'/login'}
+                      className="b-title bt16 semibold link-registration align-center"><span>Sign In</span></Link>
             </div>
         </div>
     )
