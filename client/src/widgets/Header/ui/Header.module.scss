@@ -1,0 +1,29 @@
+.header {
+  border-bottom: solid 1px var(--dark-color-300);
+
+  .headerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    margin: 0 60px 0 60px;
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+  }
+}
+
