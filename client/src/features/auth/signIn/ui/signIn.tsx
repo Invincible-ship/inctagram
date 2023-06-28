@@ -1,14 +1,17 @@
+'use client'
+
 import React, { useState } from 'react'
 import Input from "@/shared/ui/Input/Input"
 import Eye from '@/assets/icon/eye-outline.svg'
 import Link from "next/link"
-import './signup.scss'
+import './../../signup/ui/signup.scss'
 import '../../../../shared/styles/variables/common/_form.scss'
 import '../../../../shared/styles/variables/common/_b-titles.scss'
 import '../../../../shared/styles/variables/common/_buttons.scss'
 import { Button } from "@/shared/ui/Button/Button"
 import Google from '../../../../assets/icon/google.svg'
 import Github from '../../../../assets/icon/github.svg'
+import s from './signIn.module.scss'
 
 export const SignIn = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -34,16 +37,7 @@ export const SignIn = () => {
 				</div>
 
 				<form className={'form-style'}>
-					<div className={'field input-field'}>
-						<Input
-							id="userName"
-							type="text"
-							className={'input'}
-							placeholder={'Epam'}
-							title={'UserName'}
-						/>
-						<span className={'error-lbl'}>{ }</span>
-					</div>
+
 					<Input
 						id="email"
 						type="email"
@@ -65,21 +59,14 @@ export const SignIn = () => {
 						<span className='eye' onClick={toggleShowPassword}><Eye /></span>
 					</div>
 
-					<div className={'password-wrapper'}>
-						<Input
-							id="confirmPassword"
-							className={'password'}
-							placeholder={'******************'}
-							type={showConfirmPassword ? 'text' : 'password'}
-							title={'Password confirmation'}
-						/>
-						<span className={'error-lbl'}>{ }</span>
-						<span className='eye' onClick={toggleShowConfirmPassword}><Eye /></span>
+					<div className={s.forgotPassword}>
+						<Link className={s.forgotPasswordLink} href={'/forgotPassword'}>Forgot Password</Link>
 					</div>
-					<Button type="submit" className={'styled-btn styled-btn-1'}>Sign Up</Button>
+
+					<Button type="submit" className={'styled-btn styled-btn-1'}>Sign In</Button>
 				</form>
 				<span className={'info b-title bt14  align-center semibold'}>Do you have an account?</span>
-				<Link href={'/login'} className="b-title bt16 semibold link-registration align-center"><span>Sign In</span></Link>
+				<Link href={'/login'} className="b-title bt16 semibold link-registration align-center"><span>Sign Up</span></Link>
 			</div>
 		</div>
 	)
