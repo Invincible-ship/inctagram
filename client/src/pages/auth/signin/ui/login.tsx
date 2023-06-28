@@ -1,3 +1,5 @@
+"use client"
+
 import LogInForm from "@/features/auth/signin"
 
 const Login = () => {
@@ -5,7 +7,7 @@ const Login = () => {
     <div>
       <LogInForm/>
     </div>
-	)
+  )
 }
 
 export default Login
