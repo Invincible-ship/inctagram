@@ -80,7 +80,7 @@ export const Signup = () => {
 					</div>
 					<Button type="submit" className={'styled-btn styled-btn-1'}>Sign Up</Button>
 				</form>
-				<span className={'info b-title bt14  align-center semibold'}>Do you have an account?</span>
+				<span className={'info b-title bt16  align-center semibold'}>Do you have an account?</span>
 				<Link href={'/login'} className="b-title bt16 semibold link-registration align-center"><span>Sign In</span></Link>
 			</div>
 		</div>
