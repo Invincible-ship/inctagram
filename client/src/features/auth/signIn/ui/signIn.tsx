@@ -63,7 +63,7 @@ export const SignIn = () => {
 						<Link className={s.forgotPasswordLink} href={'/forgotPassword'}>Forgot Password</Link>
 					</div>
 
-					<Button type="submit" className={'styled-btn styled-btn-1'}>Sign In</Button>
+					<Button type="submit" className={s.signInButton}>Sign In</Button>
 				</form>
 				<span className={'info b-title bt14  align-center semibold'}>Do you have an account?</span>
 				<Link href={'/login'} className="b-title bt16 semibold link-registration align-center"><span>Sign Up</span></Link>
