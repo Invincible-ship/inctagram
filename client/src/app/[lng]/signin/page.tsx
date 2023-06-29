@@ -1,11 +1,4 @@
-'use client'
+import SignInPage from "@/pages/auth/signin"
 
-import { SignIn } from "@/features/auth/signIn/ui/signIn"
+export default SignInPage
 
-const PageSignIn = () => {
-	return <>
-		<SignIn />
-	</>
-}
-
-export default PageSignIn;

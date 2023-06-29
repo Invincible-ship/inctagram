@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState } from 'react'
 import Input from "@/shared/ui/Input/Input"
 import Eye from '@/assets/icon/eye-outline.svg'
@@ -13,6 +11,7 @@ import Google from '../../../../assets/icon/google.svg'
 import Github from '../../../../assets/icon/github.svg'
 import s from './signIn.module.scss'
 import { useClientTranslation } from '@/shared/config/i18n/client'
+import {useForm} from "react-hook-form"
 
 export const SignIn = () => {
 	const { t } = useClientTranslation()
@@ -22,6 +21,12 @@ export const SignIn = () => {
 	const toggleShowPassword = () => {
 		setShowPassword(!showPassword);
 	};
+
+  const {register, handleSubmit} = useForm({
+    mode: "onChange",
+  })
+
+  const onSubmit = handleSubmit((data) => console.log(data))
 
 	return (
 		<div className={'form registration' + ' ' + `${s.wrapper}`}>
@@ -33,14 +38,14 @@ export const SignIn = () => {
 					<Github />
 				</div>
 
-				<form className={'form-style'}>
-
+				<form onSubmit={onSubmit} className={'form-style'}>
 					<Input
 						id="email"
 						type="email"
 						className={'input'}
 						placeholder={'Epam@epam.com'}
 						title={t("email")}
+            {...register('email')}
 					/>
 					<span className={'error-lbl'}>{ }</span>
 
@@ -51,6 +56,7 @@ export const SignIn = () => {
 							placeholder={'******************'}
 							type={showPassword ? 'text' : 'password'}
 							title={t("password")}
+              {...register("password")}
 						/>
 						<span className={'error-lbl'}>{ }</span>
 						<span className='eye' onClick={toggleShowPassword}><Eye /></span>
@@ -62,7 +68,7 @@ export const SignIn = () => {
 
 					<Button type="submit" className={s.signInButton}>{t('signIn')}</Button>
 				</form>
-				<span className={'info b-title bt16 align-center'}>{t("dontHaveAnAccount")}</span>
+				<span className={'info b-title bt16 align-center'}>{t("dontHaveAnAccount")}?</span>
 				<Link href={'/signup'} className="b-title bt16 semibold link-registration align-center"><span>{t('signUp')}</span></Link>
 			</div>
 		</div>
