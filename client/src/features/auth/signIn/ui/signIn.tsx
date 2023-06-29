@@ -65,7 +65,7 @@ export const SignIn = () => {
 
 					<Button type="submit" className={s.signInButton}>Sign In</Button>
 				</form>
-				<span className={'info b-title bt16  align-center semibold'}>Do you have an account?</span>
+				<span className={'info b-title bt16 align-center'}>Do you have an account?</span>
 				<Link href={'/login'} className="b-title bt16 semibold link-registration align-center"><span>Sign Up</span></Link>
 			</div>
 		</div>
