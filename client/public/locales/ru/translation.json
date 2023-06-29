@@ -1,3 +1,8 @@
 {
-  "greeting": "Привет Мир!"
+	"greeting": "Привет Мир!",
+	"signUp": "Зарегистрироваться",
+	"signIn": "Войти",
+	"forgotPassword": "Забыли пароль",
+	"haveAnAccount": "Уже есть аккаунт",
+	"dontHaveAnAccount": "Еще не зарегистрированы"
 }

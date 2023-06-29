@@ -9,12 +9,6 @@ const Page = async ({ params: { lng } }: { params: LanguageParams }) => {
 	return (
 		<div>
 			{t('greeting')}
-			<div>
-				<SignIn />
-			</div>
-			<div>
-				<Signup />
-			</div>
 		</div>
 	)
 }
