@@ -1,3 +1,5 @@
+'use client'
+
 import { SignIn } from "@/features/auth/signIn/ui/signIn"
 
 const PageSignIn = () => {
