@@ -27,7 +27,7 @@ export const SignIn = () => {
 	};
 
 	return (
-		<div className={'form registration'}>
+		<div className={'form registration' + ' ' + `${s.wrapper}`}>
 			<div className='form-wrapper auth-form'>
 
 				<div className={'title b-title bt26 semibold align-center'}>Sign Up</div>
