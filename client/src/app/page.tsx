@@ -30,7 +30,7 @@ const Home = () => {
 
         {/*<Input title={'Email'} type={'email'} />*/}
         {/*/!*<Image src={Eye}*!/*/}
-        {/*        alt="Follow us on Twitter"/>*/}//
+        {/*        alt="Follow us on Twitter"/>*/}
       </main>
     </Suspense>
   )

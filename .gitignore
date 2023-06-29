@@ -6,6 +6,7 @@
 /client.pnp.js
 
 # testing
+/client/.swc
 /client/coverage
 
 # next.js
