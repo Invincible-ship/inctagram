@@ -1,16 +1,22 @@
-import React, {useState} from 'react'
+"use client"
+
+import React, {FC, useState} from 'react'
 import Input from "@/shared/ui/Input/Input"
-import Eye from '@/assets/icon/eye-outline.svg'
+import Eye from '@/shared/assets/icons/eye-outline.svg'
 import Link from "next/link"
 import './signup.scss'
-import '../../../../shared/styles/variables/common/_form.scss'
-import '../../../../shared/styles/variables/common/_b-titles.scss'
-import '../../../../shared/styles/variables/common/_buttons.scss'
+import '@/shared/styles/variables/common/_form.scss'
+import '@/shared/styles/variables/common/_b-titles.scss'
+import '@/shared/styles/variables/common/_buttons.scss'
 import {Button} from "@/shared/ui/Button/Button"
-import Google from '../../../../assets/icon/google.svg'
-import Github from '../../../../assets/icon/github.svg'
+import Google from '@/shared/assets/icons/google.svg'
+import Github from '@/shared/assets/icons/github.svg'
 
-export const Signup = () => {
+type SignUpProps = {
+  lng: string
+}
+
+export const SignUp: FC<SignUpProps> = ({ lng }) => {
     const [showPassword, setShowPassword] = useState(false)
 
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)

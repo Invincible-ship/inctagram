@@ -19,8 +19,6 @@
         "name": "next"
       }
     ],
-    "rootDir": ".",
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
