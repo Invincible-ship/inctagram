@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState } from 'react'
 import Input from "@/shared/ui/Input/Input"
 import Eye from '@/assets/icon/eye-outline.svg'
