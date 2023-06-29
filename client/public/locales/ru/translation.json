@@ -2,6 +2,10 @@
 	"greeting": "Привет Мир!",
 	"signUp": "Зарегистрироваться",
 	"signIn": "Войти",
+	"username": "Имя пользователя",
+	"email": "Электронная почта",
+	"password": "Пароль",
+	"passwordConfirmation": "Подтверждение пароля",
 	"forgotPassword": "Забыли пароль",
 	"haveAnAccount": "Уже есть аккаунт",
 	"dontHaveAnAccount": "Еще не зарегистрированы"

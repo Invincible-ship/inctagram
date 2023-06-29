@@ -2,6 +2,10 @@
 	"greeting": "Hello World!",
 	"signUp": "Sign Up",
 	"signIn": "Sign In",
+	"username": "Username",
+	"email": "Email",
+	"password": "Email",
+	"passwordConfirmation": "Password confirmation",
 	"forgotPassword": "Forgot Password",
 	"haveAnAccount": "Do you have an account",
 	"dontHaveAnAccount": "Don’t have an account"

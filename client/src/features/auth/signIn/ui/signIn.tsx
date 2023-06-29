@@ -40,7 +40,7 @@ export const SignIn = () => {
 						type="email"
 						className={'input'}
 						placeholder={'Epam@epam.com'}
-						title={'Email'}
+						title={t("email")}
 					/>
 					<span className={'error-lbl'}>{ }</span>
 
@@ -50,7 +50,7 @@ export const SignIn = () => {
 							className={'password'}
 							placeholder={'******************'}
 							type={showPassword ? 'text' : 'password'}
-							title={'Password'}
+							title={t("password")}
 						/>
 						<span className={'error-lbl'}>{ }</span>
 						<span className='eye' onClick={toggleShowPassword}><Eye /></span>
