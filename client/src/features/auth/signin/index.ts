@@ -1,3 +1,1 @@
-import {SignIn} from './ui/signIn'
-
-export default SignIn
+export {SignIn} from './ui/signIn'

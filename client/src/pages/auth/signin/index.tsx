@@ -1,3 +1,3 @@
-import Login from "@/pages/auth/signin/ui/login"
+export {SignInPage} from "@/pages/auth/signin/ui/SignInPage"
 
-export default Login
+
