@@ -1,0 +1,349 @@
+@import '../mixins';
+
+.form.registration {
+    padding-top: 5%;
+}
+
+.password-wrapper, .field.input-field  {
+    width: 100%;
+}
+
+.form-style {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .f-item {
+
+        display: flex;
+        width: 100%;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        &+.f-item {
+            margin-top: 15px;
+
+            @include tbmb {
+                margin-top: 10px;
+            }
+        }
+
+        label {
+            margin-bottom: 5px;
+            display: block;
+
+            @include tbmb {
+                margin-bottom: 3px;
+            }
+
+            span {
+                color: var(--danger-color-500);
+            }
+        }
+    }
+
+    .error-lbl {
+        position: absolute;
+        font-size: 11px;
+        color: var(--danger-color-500);
+        margin-top: 2px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"],
+    textarea {
+        width: 100%;
+        height: 45px;
+        outline: none;
+        font-family: 'Montserrat', sans-serif;
+        padding: 0px 10px;
+        border-radius: 2px;
+        border: 1px solid var(--light-color-900);
+        background-color: transparent;
+        color: var(--light-color-900);
+        font-size: 16px;
+        outline: none;
+
+        @include nbtbmb {
+            font-size: 14px;
+        }
+
+        @include placeholder {
+            color: var(--light-color-900);
+        }
+
+        ;
+
+        &:focus {
+            color: darken(#FFFFFF, 30%);
+            border-radius: 2px;
+            border: 1px solid  var(--light-color-100);
+
+            @include placeholder {
+                color: var(--light-color-100);
+            }
+
+            ;
+        }
+
+        &.error {
+            border-color: var(--danger-color-500);
+            color: var(--danger-color-500);
+
+            @include placeholder {
+                color: rgba(var(--danger-color-500), 0.2);
+            }
+
+            ;
+        }
+    }
+
+    textarea {
+        padding: 10px;
+        resize: none;
+        height: 120px;
+
+        @include nbtbmb {
+            height: 120px;
+        }
+    }
+
+    input[type=number]::-webkit-inner-adjust-hue-button,
+    input[type=number]::-webkit-outer-adjust-hue-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.styled-checkbox {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 29px;
+
+    & label {
+        cursor: pointer;
+    }
+
+    & input[type='checkbox'] {
+        width: 18px;
+        height: 18px;
+        margin-right: 12px;
+    }
+}
+
+.auth-form {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 24px;
+    background: var(--dark-color-500);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    width: 420px;
+
+
+    @include nb {
+        padding: 25px;
+    }
+
+    @include tb {
+        padding: 20px;
+    }
+
+    @include mb {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .title {
+        &+form {
+            margin-top: 35px;
+
+            @include nb {
+                margin-top: 30px;
+            }
+
+            @include tb {
+                margin-top: 20px;
+            }
+
+            @include mb {
+                margin-top: 15px;
+            }
+        }
+    }
+
+    .image {
+        display: flex;
+        justify-content: center;
+        max-height: 108px;
+
+        @include nb {
+            max-height: 100px;
+        }
+
+        @include tb {
+            max-height: 90px;
+        }
+
+        @include mb {
+            max-height: 8ƒ0px;
+        }
+
+        &:not(:first-child) {
+            margin-top: 30px;
+        }
+
+        img {
+            height: 100%;
+        }
+    }
+
+    .avatar-wrapper {
+        position: relative;
+
+        &:not(:first-child) {
+            margin-top: 30px;
+
+            @include nb {
+                margin-top: 25px;
+            }
+
+            @include tb {
+                margin-top: 20px;
+            }
+
+            @include mb {
+                margin-top: 15px;
+            }
+        }
+
+        .avatar {
+            display: flex;
+            justify-content: center;
+
+            img {
+                width: 96px;
+                height: 96px;
+                object-fit: cover;
+                border-radius: 50%;
+
+                @include nbtb {
+                    width: 86px;
+                    height: 86px;
+                }
+
+                @include mb {
+                    width: 80px;
+                    height: 80px;
+                }
+            }
+        }
+
+        .icon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            right: 0;
+            bottom: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid red;
+            background: lighten(red, 20%);
+            @include animate;
+
+            svg {
+                fill: white;
+            }
+
+            &:hover {
+                opacity: 0.9;
+            }
+
+            &:active {
+                background-color: darken(red, 20%);
+            }
+        }
+    }
+
+    .info {
+        &:not(:first-child) {
+            margin-top: 25px;
+
+            @include nb {
+                margin-top: 20px;
+            }
+
+            @include tbmb {
+                margin-top: 15px;
+            }
+        }
+    }
+
+    .styled-btn {
+        width: 100%;
+
+        &:not(:first-child) {
+            margin-top: 35px;
+
+            @include nb {
+                margin-top: 40px;
+            }
+
+            @include tb {
+                margin-top: 30px;
+            }
+
+            @include mb {
+                margin-top: 20px;
+            }
+        }
+    }
+
+    .bottom {
+        &:not(:first-child) {
+            margin-top: 30px;
+
+            @include nb {
+                margin-top: 25px;
+            }
+
+            @include tb {
+                margin-top: 20px;
+            }
+
+            @include mb {
+                margin-top: 15px;
+            }
+        }
+
+        .b-title {
+            &+.b-title {
+                margin-top: 10px;
+            }
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: red;
+            @include animate;
+
+            &:hover {
+                color: darken(red, 10%);
+            }
+        }
+    }
+}

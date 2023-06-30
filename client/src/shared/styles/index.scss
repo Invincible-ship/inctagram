@@ -1,0 +1,14 @@
+@import 'variables/global';
+@import 'reset';
+//@import "variables/common";
+
+.app {
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 20px 0;
+  }
+}
+

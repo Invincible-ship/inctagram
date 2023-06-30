@@ -1,0 +1,201 @@
+//pc
+@mixin pc {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+//pcMax
+@mixin pcMax {
+    @media (max-width: 1200px) {
+        @content;
+    }
+}
+
+//notebook
+@mixin nb {
+    @media (min-width: 992px) and (max-width: 1199px) {
+        @content;
+    }
+}
+
+//tablet
+@mixin tb {
+    @media (min-width: 768px) and (max-width: 991px) {
+        @content;
+    }
+}
+
+//mobile
+@mixin mb {
+    @media (min-width: 0px) and (max-width: 767px) {
+        @content;
+    }
+}
+
+//mobile2
+@mixin mb2 {
+    @media (min-width: 0px) and (max-width: 360px) {
+        @content;
+    }
+}
+
+//mobile3
+@mixin mb3 {
+    @media (min-width: 0px) and (max-width: 350px) {
+        @content;
+    }
+}
+
+//full
+@mixin full {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+//full2
+@mixin full2 {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+//tablet + mobile
+@mixin tbmb {
+    @media only screen and (min-width: 0px) and (max-width: 991px) {
+        @content;
+    }
+}
+
+//notebook + tablet
+@mixin nbtb {
+    @media only screen and (min-width: 768px) and (max-width: 1199px) {
+        @content;
+    }
+}
+
+//notebook + tablet + mobile
+@mixin nbtbmb {
+    @media only screen and (min-width: 0px) and (max-width: 1199px) {
+        @content;
+    }
+}
+
+@mixin animate {
+    transition: all 0.2s ease-out !important;
+}
+
+//placeholder color
+@mixin placeholder {
+    &.placeholder { @content }
+    &:-moz-placeholder { @content }
+    &::-webkit-input-placeholder { @content }
+}
+
+@mixin customScrollbar($color: rgba(0, 0, 0, 0.2), $width: 5px, $height: 5px, $radius: 4px, $trackColor: none) {
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: $width;
+        height: $height;
+    }
+
+    &::-webkit-scrollbar-button:start:decrement,
+    &::-webkit-scrollbar-button:end:increment {
+        display: block;
+        height: 0;
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+        border: 0 0 $radius $radius;
+    }
+
+    &::-webkit-scrollbar-thumb:vertical {
+        height: 50px;
+        background-color: $color;
+        border-radius: $radius;
+    }
+
+    &::-webkit-scrollbar-thumb:horizontal {
+        width: 50px;
+        background-color: $color;
+        border-radius: $radius;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $trackColor;
+    }
+}
+
+@mixin clearfix {
+
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        display: block;
+        clear: both;
+        height: 1px;
+        margin-top: -1px;
+        visibility: hidden;
+    }
+
+    & {
+        *zoom: 1;
+    }
+}
+
+%clearfix {
+    zoom: 1;
+
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin typographyMargins($mPc, $mTb, $mMb) {
+    margin-bottom: $mPc;
+
+    @include tb {
+        margin-bottom: $mTb;
+    }
+
+    @include mb {
+        margin-bottom: $mMb;
+    }
+}
+
+@mixin typographyHeadersSizes($fsPc, $lhPc, $fsNb, $lhNb, $fsTb, $lhTb, $fsMb, $lhMb) {
+    font-size: $fsPc;
+    line-height: $lhPc;
+
+    @include nb {
+        font-size: $fsNb;
+        line-height: $lhNb;
+    }
+
+    @include tb {
+        font-size: $fsTb;
+        line-height: $lhTb;
+    }
+
+    @include mb {
+        font-size: $fsMb;
+        line-height: $lhMb;
+    }
+}
+
+@mixin itemWidth($itemsInRow, $margin) {
+    width: calc((100% / #{$itemsInRow}) - ((#{$margin} * (#{$itemsInRow} - 1)) / #{$itemsInRow}));
+}
