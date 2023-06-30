@@ -1,1 +1,0 @@
-export { EmailSent } from './ui/emailSent'

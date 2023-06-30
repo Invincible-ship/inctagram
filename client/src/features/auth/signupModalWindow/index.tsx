@@ -1,0 +1,1 @@
+export { SignUpModalWindow } from './ui/SignUpModalWindow'

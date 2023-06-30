@@ -1,3 +1,6 @@
+"use client"
+
+import React from 'react'
 import s from './emailSent.module.scss'
 import Close from '@/shared/assets/icons/close.svg'
 import { Button } from '@/shared/ui/Button/Button'
@@ -5,7 +8,7 @@ import '@/shared/styles/reset.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import Link from 'next/link'
 
-export const EmailSent = () => {
+export const SignUpModalWindow = () => {
 	return (
 		<div className={s.wrapper}>
 			<div className={s.body}>
