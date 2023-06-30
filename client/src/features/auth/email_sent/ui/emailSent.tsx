@@ -1,5 +1,6 @@
 import s from './emailSent.module.scss'
 import Close from '@/shared/assets/icons/close.svg'
+import '@/shared/styles/reset.scss'
 
 export const EmailSent = () => {
 	return (
