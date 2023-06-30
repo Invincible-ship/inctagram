@@ -76,7 +76,7 @@ export const LangSwitcher: FC<LangSwitcherProps> = ({ currentLngId }) => {
 
 const Option = ({ option }: { option: TLanguageOption }) => (
   <div className={cls.value}>
-    <span>{option.icon}</span>
-    {option.lng}
+    <span>{option?.icon}</span>
+    {option?.lng}
   </div>
 )
