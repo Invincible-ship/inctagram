@@ -1,3 +1,3 @@
-import {LogInForm} from './ui/LogInForm'
+import {SignIn} from './ui/signIn'
 
-export default LogInForm
+export default SignIn

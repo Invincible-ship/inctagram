@@ -1,13 +1,13 @@
 "use client"
 
-import LogInForm from "@/features/auth/signin"
+import SignIn from "@/features/auth/signin"
 
-const Login = () => {
+const SignInPage = () => {
   return (
     <div>
-      <LogInForm/>
+      <SignIn/>
     </div>
   )
 }
 
-export default Login
+export default SignInPage

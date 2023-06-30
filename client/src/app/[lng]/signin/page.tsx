@@ -1,9 +1,4 @@
-import { SignIn } from "@/features/auth/signIn/ui/signIn"
+import SignInPage from "@/pages/auth/signin"
 
-const PageSignIn = () => {
-	return <>
-		<SignIn />
-	</>
-}
+export default SignInPage
 
-export default PageSignIn;
