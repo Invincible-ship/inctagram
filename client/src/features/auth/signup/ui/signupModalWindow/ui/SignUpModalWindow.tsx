@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { FC } from 'react'
 import s from './emailSent.module.scss'
 import Close from '@/shared/assets/icons/close.svg'
 import { Button } from '@/shared/ui/Button/Button'
@@ -9,9 +9,15 @@ import '@/shared/styles/variables/common/_buttons.scss'
 import Link from 'next/link'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 
-export const SignUpModalWindow = () => {
+type SignUpProps = {
+	lng: string
+}
 
-	const { t } = useClientTranslation()
+export const SignUpModalWindow: FC<SignUpProps> = ({ lng }) => {
+
+	const { t } = useClientTranslation(lng, 'signUpModal')
+	const exampleEmail = 'Email from SignUp : epam@epam.com'
+	const closeModal = () => alert('closeModal')
 
 	return (
 		<div className={s.wrapper}>
@@ -23,9 +29,9 @@ export const SignUpModalWindow = () => {
 					</Link>
 				</div>
 				<div className={s.content}>
-					<p className={s.text}>{t('SignUpModal.text')} epam@epam.com</p>
+					<p className={s.text}>{t('SignUpModal.text')} {exampleEmail}</p>
 					<Link href={'#'} className={s.link}>
-						<	Button type='button' className={s.button}>OK</Button>
+						<	Button onClick={closeModal} type='button' className={s.button}>OK</Button>
 					</Link>
 				</div>
 			</div>

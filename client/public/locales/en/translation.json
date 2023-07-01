@@ -1,7 +1,3 @@
 {
-	"greeting": "Hello World!",
-	"SignUpModal": {
-		"title": "Email sent",
-		"text": "We have sent a link to confirm your email to"
-	}
+	"greeting": "Hello World!"
 }
