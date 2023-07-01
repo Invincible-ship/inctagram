@@ -2,7 +2,7 @@ import { SignUp } from '@/features/auth/signup'
 import { LanguageParams } from '@/shared/config/i18n/types'
 import { FC } from 'react'
 
-export const SignUpPage: FC<{ params: LanguageParams }> = (
+const SignUpPage: FC<{ params: LanguageParams }> = (
   { params: { lng } }
 ) => {
   return (
@@ -11,3 +11,5 @@ export const SignUpPage: FC<{ params: LanguageParams }> = (
     </div>
   )
 }
+
+export default SignUpPage

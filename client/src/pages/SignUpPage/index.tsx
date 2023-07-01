@@ -1,1 +1,2 @@
-export { SignUpPage } from './ui/SignUpPage'
+import SignUpPage from "./ui/SignUpPage"
+export default SignUpPage
