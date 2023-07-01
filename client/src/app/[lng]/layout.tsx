@@ -5,6 +5,9 @@ import { Inter } from 'next/font/google'
 import { LanguageParams } from '@/shared/config/i18n/types'
 import '@/shared/styles/index.scss'
 import { Header } from '@/widgets/Header'
+import {Provider} from "react-redux";
+import {store} from "@/providers/StoreProvider/config/store";
+import {Providers} from "@/providers/StoreProvider/provider";
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
@@ -25,13 +28,15 @@ const RootLayout = ({
   params: LanguageParams
 }) => {
   return (
-    <html lang={lng} dir={dir(lng)} className={inter.className}>
-      <head />
-      <body className='app'>
+        <html lang={lng} dir={dir(lng)} className={inter.className}>
+        <head />
+        <body className='app'>
         <Header lng={lng} />
-        {children}
-      </body>
-    </html>
+        <Providers>{children}</Providers>
+        </body>
+        </html>
+
+
   )
 }
 

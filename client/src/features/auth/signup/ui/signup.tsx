@@ -1,3 +1,5 @@
+"use client"
+
 import React, {useState} from 'react'
 import Input from "@/shared/ui/Input/Input"
 import Eye from '@/assets/icon/eye-outline.svg'
@@ -9,11 +11,50 @@ import '../../../../shared/styles/variables/common/_buttons.scss'
 import {Button} from "@/shared/ui/Button/Button"
 import Google from '../../../../assets/icon/google.svg'
 import Github from '../../../../assets/icon/github.svg'
+import {SubmitHandler, useForm} from "react-hook-form";
+import {z} from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {authThunks} from "@/features/auth/auth.slice";
+import {useAppDispatch, useAppSelector} from "@/shared/lib/hooks";
+
+type FormSchemaType = z.infer<typeof formSchema>
+
+const formSchema = z
+    .object({
+        username: z.string().min(1, "Username is required").max(100),
+        email: z.string().email("Invalid email").min(1, "Email is required"),
+        password: z
+            .string()
+            .min(1, "Password is required")
+            .min(8, "Password must have more than 8 characters"),
+        confirmPassword: z.string().min(1, "Password confirmation is required"),
+        terms: z.literal(true, {
+            errorMap: () => ({message: "You must accept the terms and conditions"}),
+        }),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+        path: ["confirmPassword"],
+        message: "Passwords do not match",
+    });
 
 export const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
-
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const dispatch = useAppDispatch()
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+
+    const {
+        register,
+        handleSubmit,
+        formState: {
+            errors,
+            isSubmitting
+        }
+    } = useForm({
+        resolver: zodResolver(formSchema),
+    });
+
 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -22,6 +63,15 @@ export const Signup = () => {
     const toggleShowConfirmPassword = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
+
+    const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
+        dispatch(authThunks.register(data))
+    };
+
+    // if (isLoggedIn) {
+    //     return <div>SuccessSuccessSuccessSuccessSuccessSuccessSuccessSuccess</div>
+    // }
+
 
     return (
         <div className={'form registration'}>
@@ -33,26 +83,33 @@ export const Signup = () => {
                     <Github/>
                 </div>
 
-                <form  className={'form-style'}>
+                <form onSubmit={handleSubmit(onSubmit)} className={'form-style'}>
                     <div className={'field input-field'}>
                         <Input
-                            id="userName"
+                            id="username"
                             type="text"
                             className={'input'}
                             placeholder={'Epam'}
                             title={'UserName'}
+                            username="Username"
+                            {...register('username')}
                         />
-                        <span className={'error-lbl'}>{}</span>
-                        </div>
-                        <Input
-                            id="email"
-                            type="email"
-                            className={'input'}
-                            placeholder={'Epam@epam.com'}
-                            title={'Email'}
-                        />
-                            <span className={'error-lbl'}>{}</span>
-
+                        {errors.username && (
+                            <span className={'error-lbl'}>{errors.username.message}</span>
+                        )}
+                    </div>
+                    <Input
+                        id="email"
+                        type="email"
+                        className={'input'}
+                        placeholder={'Epam@epam.com'}
+                        title={'Email'}
+                        name="email"
+                        {...register('email')}
+                    />
+                    {errors.email && (
+                        <span className={'error-lbl'}>{errors.email.message}</span>
+                    )}
                     <div className={'password-wrapper'}>
                         <Input
                             id="password"
@@ -60,9 +117,12 @@ export const Signup = () => {
                             placeholder={'******************'}
                             type={showPassword ? 'text' : 'password'}
                             title={'Password'}
+                            name="password" {...register('password')}
                         />
-                            <span className={'error-lbl'}>{}</span>
-                        <span className='eye' onClick={toggleShowPassword}><Eye /></span>
+                        {errors.password && errors.password ? (
+                            <span className={'error-lbl'}>{errors.password}</span>
+                        ) : null}
+                        <span className='eye' onClick={toggleShowPassword}><Eye/></span>
                     </div>
 
                     <div className={'password-wrapper'}>
@@ -72,14 +132,18 @@ export const Signup = () => {
                             placeholder={'******************'}
                             type={showConfirmPassword ? 'text' : 'password'}
                             title={'Password confirmation'}
+                            name="confirmPassword" {...register('confirmPassword')}
                         />
-                            <span className={'error-lbl'}>{}</span>
-                        <span className='eye' onClick={toggleShowConfirmPassword}><Eye /></span>
+                        {errors.confirmPassword && errors.confirmPassword ? (
+                            <span className={'error-lbl'}>{errors.confirmPassword}</span>
+                        ) : null}
+                        <span className='eye' onClick={toggleShowConfirmPassword}><Eye/></span>
                     </div>
-                    <Button type="submit" className={'styled-btn styled-btn-1'}>Sign Up</Button>
+                    <Button type="submit" className={'styled-btn styled-btn-1'} disabled={isSubmitting}>Sign Up</Button>
                 </form>
                 <span className={'info b-title bt14  align-center semibold'}>Do you have an account?</span>
-                <Link href={'/login'} className="b-title bt16 semibold link-registration align-center"><span>Sign In</span></Link>
+                <Link href={'/login'}
+                      className="b-title bt16 semibold link-registration align-center"><span>Sign In</span></Link>
             </div>
         </div>
     )
