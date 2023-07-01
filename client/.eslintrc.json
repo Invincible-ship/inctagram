@@ -1,5 +1,9 @@
 {
-  "extends": ["next"],
+  "extends": [
+    "next",
+    "plugin:storybook/recommended",
+    "plugin:storybook/recommended"
+  ],
   "plugins": [
     "react",
     "@typescript-eslint",
@@ -7,15 +11,34 @@
     "react-hooks"
   ],
   "rules": {
-    "semi": [2, "never"],
-    "react/jsx-indent": [2, 2, {"indentLogicalExpressions": true}],
-    "react/function-component-definition": [1, {
-      "namedComponents": "arrow-function",
-      "unnamedComponents": "arrow-function"
-    }],
-    "react/jsx-filename-extension": [2, {
-      "extensions": [".js", ".jsx", ".tsx"]
-    }],
+    "semi": [
+      2,
+      "never"
+    ],
+    "react/jsx-indent": [
+      2,
+      2,
+      {
+        "indentLogicalExpressions": true
+      }
+    ],
+    "react/function-component-definition": [
+      1,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ],
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
@@ -25,22 +48,53 @@
     "react/jsx-props-no-spreading": "warn",
     "no-shadow": "off",
     "no-underscore-dangle": "off",
-    "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": true,
-      "optionalDependencies": true,
-      "peerDependencies": true
-    }],
-    "i18next/no-literal-string": [1, {
-      "markupOnly": true,
-      "ignoreAttribute": ["data-testid", "fallback", "to"]
-    }],
-    "max-len": [2, { "code": 120, "ignoreComments": true, "ignoreStrings": true }],
-    "linebreak-style": ["error", "unix"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": true,
+        "peerDependencies": true
+      }
+    ],
+    "i18next/no-literal-string": [
+      1,
+      {
+        "markupOnly": true,
+        "ignoreAttribute": [
+          "data-testid",
+          "fallback",
+          "to"
+        ]
+      }
+    ],
+    "max-len": [
+      2,
+      {
+        "code": 120,
+        "ignoreComments": true,
+        "ignoreStrings": true
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "react-hooks/rules-of-hooks": "error"
   },
   "globals": {
     "__IS_DEV__": true
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/src/**/*.{test,stories}.{ts,tsx}"
+      ],
+      "rules": {
+        "i18next/no-literal-string": "off",
+        "max-len": "off"
+      }
+    }
+  ]
 }

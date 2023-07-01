@@ -4,6 +4,7 @@ import { dir } from 'i18next'
 import { Inter } from 'next/font/google'
 import { LanguageParams } from '@/shared/config/i18n/types'
 import { Header } from '@/widgets/Header'
+import {Providers} from "@/providers/StoreProvider/provider";
 import '@/shared/styles/index.scss'
 import '@/shared/styles/variables/common.scss'
 
@@ -26,13 +27,15 @@ const RootLayout = ({
   params: LanguageParams
 }) => {
   return (
-    <html lang={lng} dir={dir(lng)} className={inter.className}>
-      <head />
-      <body className='app'>
+        <html lang={lng} dir={dir(lng)} className={inter.className}>
+        <head />
+        <body className='app'>
         <Header lng={lng} />
-        {children}
-      </body>
-    </html>
+        <Providers>{children}</Providers>
+        </body>
+        </html>
+
+
   )
 }
 
