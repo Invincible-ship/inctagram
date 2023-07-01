@@ -1,15 +1,15 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {createAppAsyncThunk} from "@/shared/lib/utils/createAppAsyncThunk";
-import {thunkTryCatch} from "@/shared/lib/utils/thunk-try-catch";
-import {authApi} from "@/features/auth/auth.api";
+import {createSlice} from "@reduxjs/toolkit"
+import {createAppAsyncThunk} from "@/shared/lib/utils/createAppAsyncThunk"
+import {thunkTryCatch} from "@/shared/lib/utils/thunk-try-catch"
+import {authApi} from "@/features/auth/auth.api"
 
 
 
 const register = createAppAsyncThunk<void, any>("auth/register", async (arg: any, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
-        await authApi.register(arg);
-    });
-});
+        await authApi.register(arg)
+    })
+})
 
 
 const slice = createSlice({
@@ -25,9 +25,9 @@ const slice = createSlice({
     },
     extraReducers: (builder) => {
     },
-});
+})
 
 
-export const authReducer = slice.reducer;
-export const authThunks = {register};
-export const authActions = slice.actions;
+export const authReducer = slice.reducer
+export const authThunks = {register}
+export const authActions = slice.actions

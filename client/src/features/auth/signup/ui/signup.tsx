@@ -13,11 +13,11 @@ import '@/shared/styles/variables/common/_buttons.scss'
 import {Button} from "@/shared/ui/Button/Button"
 import Google from '../../../../assets/icon/google.svg'
 import Github from '../../../../assets/icon/github.svg'
-import {SubmitHandler, useForm} from "react-hook-form";
-import {z} from "zod";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {authThunks} from "@/features/auth/auth.slice";
-import {useAppDispatch, useAppSelector} from "@/shared/lib/hooks";
+import {SubmitHandler, useForm} from "react-hook-form"
+import {z} from "zod"
+import {zodResolver} from "@hookform/resolvers/zod"
+import {authThunks} from "@/features/auth/auth.slice"
+import {useAppDispatch, useAppSelector} from "@/shared/lib/hooks"
 
 type FormSchemaType = z.infer<typeof formSchema>
 
@@ -37,7 +37,7 @@ const formSchema = z
     .refine((data) => data.password === data.confirmPassword, {
         path: ["confirmPassword"],
         message: "Passwords do not match",
-    });
+    })
 
 type SignUpProps = {
   lng: string
@@ -60,7 +60,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
         }
     } = useForm({
         resolver: zodResolver(formSchema),
-    });
+    })
 
 
     const toggleShowPassword = () => {
@@ -73,7 +73,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
 
     const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
         dispatch(authThunks.register(data))
-    };
+    }
 
     // if (isLoggedIn) {
     //     return <div>SuccessSuccessSuccessSuccessSuccessSuccessSuccessSuccess</div>
@@ -90,9 +90,9 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
             <Github/>
           </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className={'form-style'}>
-                    <div className={'field input-field'}>
-                        <Input
+          <form onSubmit={handleSubmit(onSubmit)} className={'form-style'}>
+            <div className={'field input-field'}>
+              <Input
                             id="username"
                             type="text"
                             className={'input'}
@@ -101,11 +101,11 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
                             username="Username"
                             {...register('username')}
                         />
-                        {errors.username && (
-                            <span className={'error-lbl'}>{errors.username.message}</span>
+              {errors.username && (
+                <span className={'error-lbl'}>{errors.username.message}</span>
                         )}
-                    </div>
-                    <Input
+            </div>
+            <Input
                         id="email"
                         type="email"
                         className={'input'}
@@ -114,11 +114,11 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
                         name="email"
                         {...register('email')}
                     />
-                    {errors.email && (
-                        <span className={'error-lbl'}>{errors.email.message}</span>
+            {errors.email && (
+              <span className={'error-lbl'}>{errors.email.message}</span>
                     )}
-                    <div className={'password-wrapper'}>
-                        <Input
+            <div className={'password-wrapper'}>
+              <Input
                             id="password"
                             className={'password'}
                             placeholder={'******************'}
@@ -126,11 +126,11 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
                             title={'Password'}
                             name="password" {...register('password')}
                         />
-                        {errors.password && errors.password ? (
-                            <span className={'error-lbl'}>{errors.password}</span>
+              {errors.password && errors.password ? (
+                <span className={'error-lbl'}>{errors.password}</span>
                         ) : null}
-                        <span className='eye' onClick={toggleShowPassword}><Eye/></span>
-                    </div>
+              <span className='eye' onClick={toggleShowPassword}><Eye/></span>
+            </div>
 
             <div className={'password-wrapper'}>
               <Input
@@ -141,18 +141,18 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
                             title={'Password confirmation'}
                             name="confirmPassword" {...register('confirmPassword')}
                         />
-                        {errors.confirmPassword && errors.confirmPassword ? (
-                            <span className={'error-lbl'}>{errors.confirmPassword}</span>
+              {errors.confirmPassword && errors.confirmPassword ? (
+                <span className={'error-lbl'}>{errors.confirmPassword}</span>
                         ) : null}
-                        <span className='eye' onClick={toggleShowConfirmPassword}><Eye/></span>
-                    </div>
-                    <Button type="submit" className={'styled-btn styled-btn-1'} disabled={isSubmitting}>Sign Up</Button>
-                </form>
-                <span className={'info b-title bt14  align-center semibold'}>Do you have an account?</span>
-                <Link href={'/login'}
-                      className="b-title bt16 semibold link-registration align-center"><span>Sign In</span></Link>
+              <span className='eye' onClick={toggleShowConfirmPassword}><Eye/></span>
             </div>
+            <Button type="submit" className={'styled-btn styled-btn-1'} disabled={isSubmitting}>Sign Up</Button>
+          </form>
+          <span className={'info b-title bt14  align-center semibold'}>Do you have an account?</span>
+          <Link href={'/login'}
+                      className="b-title bt16 semibold link-registration align-center"><span>Sign In</span></Link>
         </div>
+      </div>
     )
 }
 
