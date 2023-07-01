@@ -1,4 +1,6 @@
 "use client"
+// TODO: повторяющиеся input-field и password-wrapper сделать отдельным компонентом
+// TODO: стили из signup.scss сделать модульными, чтобы избежать коллизии имен - signup.module.scss
 
 import React, {FC, useState} from 'react'
 import Input from "@/shared/ui/Input/Input"
