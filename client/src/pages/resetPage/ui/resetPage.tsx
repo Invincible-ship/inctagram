@@ -1,4 +1,5 @@
-import { Reset } from '@/features/auth/reset'
+import { ForgotPassword } from '@/features/auth/reset'
+import { ResetPassword } from '@/features/auth/reset'
 import { LanguageParams } from '@/shared/config/i18n/types'
 import { FC } from 'react'
 
@@ -7,7 +8,8 @@ export const ResetPage: FC<{ params: LanguageParams }> = (
 ) => {
   return (
     <div className={'content'}>
-      <Reset lng={lng} />
+      {/*<ForgotPassword lng={lng} />*/}
+      <ResetPassword lng={lng} />
     </div>
   )
 }

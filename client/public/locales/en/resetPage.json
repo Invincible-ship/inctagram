@@ -1,0 +1,12 @@
+{
+  "mainTitle": "Forgot Password",
+  "info": "Enter your email address and we will send you further instructions",
+  "sendLink": "Send Link",
+  "BackToSignIn": "Back to Sign In",
+
+  "mainTitleReset": "Create New Password",
+  "infoReset": "Your password must be between 6 and 20 characters",
+  "CreateNewPasswordReset": "Create new password",
+  "inputTitleNewPassword": "New password",
+  "inputTitleConfirmPassword": "Password confirmation"
+}
