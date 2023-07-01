@@ -18,15 +18,23 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: initial modules
-        run: npm install
+        run: |
+          cd client
+          npm install
       - name: build production project
-        run: npm run build
+        run: |
+          cd client
+          npm run build
         if: always()
       - name: linting typescript
-        run: npm run lint:ts
+        run: |
+          cd client
+          npm run lint:ts
         if: always()
       - name: unit testing
-        run: npm run test:unit
+        run: |
+          cd client
+          npm run test:unit
         if: always()
       - name: ui testing
         uses: chromaui/action@v1
