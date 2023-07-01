@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build --env mode=production",
+    "build": "next build",
     "start": "next start",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "test:unit": "jest --config ./config/jest/jest.config.mjs",
+    "test:ui": "npx chromatic --exit-zero-on-changes",
+    "test:ui:ok": "npx chromatic --auto-accept-changes",
     "storybook": "storybook dev -p 6006 -c ./config/storybook",
     "build-storybook": "storybook build -c ./config/storybook"
   },
@@ -48,7 +50,10 @@
     "@storybook/nextjs": "^7.0.24",
     "@storybook/react": "^7.0.24",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "chromatic": "^6.19.9",
     "eslint-plugin-storybook": "^0.6.12",
     "storybook": "^7.0.24"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "client@0.1.0"
 }

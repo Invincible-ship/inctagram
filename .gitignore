@@ -28,11 +28,18 @@
 # local env files
 /client/.env*.local
 
+# global env file
+/client/.env
+
 # vercel
 /client/.vercel
 
 # typescript
 /client/*.tsbuildinfo
 /client/next-env.d.ts
+
+# storybook
+/client/storybook-build
+/client/build-storybook.log
 
 /.idea

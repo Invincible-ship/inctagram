@@ -1,0 +1,35 @@
+name: linting, testing, building
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  pipline:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: initial modules
+        run: npm install
+      - name: build production project
+        run: npm run build
+        if: always()
+      - name: linting typescript
+        run: npm run lint:ts
+        if: always()
+      - name: unit testing
+        run: npm run test:unit
+        if: always()
+      - name: ui testing
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        if: always()
