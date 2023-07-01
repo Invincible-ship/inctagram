@@ -1,10 +1,10 @@
 'use client'
 
 import * as Select from '@radix-ui/react-select'
-import ArrowDown from './../../../../public/icons/arrow-down.svg'
-import FlagRU from './../../../../public/icons/ru-flag.svg'
-import FlagUK from './../../../../public/icons/uk-flag.svg'
-import CheckIcon from './../../../../public/icons/check.svg'
+import ArrowDown from '@/shared/assets/icons/arrow-down.svg'
+import FlagRU from '@/shared/assets/icons/ru-flag.svg'
+import FlagUK from '@/shared/assets/icons/uk-flag.svg'
+import CheckIcon from '@/shared/assets/icons/check.svg'
 import { languages } from '@/shared/config/i18n/settings'
 import { FC, ReactNode, useMemo, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
@@ -76,7 +76,7 @@ export const LangSwitcher: FC<LangSwitcherProps> = ({ currentLngId }) => {
 
 const Option = ({ option }: { option: TLanguageOption }) => (
   <div className={cls.value}>
-    <span>{option.icon}</span>
-    {option.lng}
+    <span>{option?.icon}</span>
+    {option?.lng}
   </div>
 )

@@ -13,7 +13,6 @@ interface ButtonProps extends
   ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   theme?: ButtonTheme;
-  size?: string;
 }
 
 export const Button: FC<ButtonProps> = ({

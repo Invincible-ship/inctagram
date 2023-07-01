@@ -1,13 +1,15 @@
 "use client"
+// TODO: повторяющиеся input-field и password-wrapper сделать отдельным компонентом
+// TODO: стили из signup.scss сделать модульными, чтобы избежать коллизии имен - signup.module.scss
 
-import React, {useState} from 'react'
+import React, {FC, useState} from 'react'
 import Input from "@/shared/ui/Input/Input"
-import Eye from '@/assets/icon/eye-outline.svg'
+import Eye from '@/shared/assets/icons/eye-outline.svg'
 import Link from "next/link"
 import './signup.scss'
-import '../../../../shared/styles/variables/common/_form.scss'
-import '../../../../shared/styles/variables/common/_b-titles.scss'
-import '../../../../shared/styles/variables/common/_buttons.scss'
+import '@/shared/styles/variables/common/_form.scss'
+import '@/shared/styles/variables/common/_b-titles.scss'
+import '@/shared/styles/variables/common/_buttons.scss'
 import {Button} from "@/shared/ui/Button/Button"
 import Google from '../../../../assets/icon/google.svg'
 import Github from '../../../../assets/icon/github.svg'
@@ -37,9 +39,14 @@ const formSchema = z
         message: "Passwords do not match",
     });
 
-export const Signup = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+type SignUpProps = {
+  lng: string
+}
+
+export const SignUp: FC<SignUpProps> = ({ lng }) => {
+    const [showPassword, setShowPassword] = useState(false)
+
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
@@ -57,12 +64,12 @@ export const Signup = () => {
 
 
     const toggleShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
+        setShowPassword(!showPassword)
+    }
 
     const toggleShowConfirmPassword = () => {
-        setShowConfirmPassword(!showConfirmPassword);
-    };
+        setShowConfirmPassword(!showConfirmPassword)
+    }
 
     const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
         dispatch(authThunks.register(data))
@@ -74,14 +81,14 @@ export const Signup = () => {
 
 
     return (
-        <div className={'form registration'}>
-            <div className='form-wrapper auth-form'>
+      <div className={'form registration'}>
+        <div className='form-wrapper auth-form'>
 
-                <div className={'title b-title bt26 semibold align-center'}>Sign Up</div>
-                <div className={'icon-wrapper'}>
-                    <Google/>
-                    <Github/>
-                </div>
+          <div className={'title b-title bt26 semibold align-center'}>Sign Up</div>
+          <div className={'icon-wrapper'}>
+            <Google/>
+            <Github/>
+          </div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className={'form-style'}>
                     <div className={'field input-field'}>
@@ -125,8 +132,8 @@ export const Signup = () => {
                         <span className='eye' onClick={toggleShowPassword}><Eye/></span>
                     </div>
 
-                    <div className={'password-wrapper'}>
-                        <Input
+            <div className={'password-wrapper'}>
+              <Input
                             id="confirmPassword"
                             className={'password'}
                             placeholder={'******************'}

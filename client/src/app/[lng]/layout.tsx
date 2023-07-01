@@ -3,11 +3,10 @@ import { languages } from '@/shared/config/i18n/settings'
 import { dir } from 'i18next'
 import { Inter } from 'next/font/google'
 import { LanguageParams } from '@/shared/config/i18n/types'
-import '@/shared/styles/index.scss'
 import { Header } from '@/widgets/Header'
-import {Provider} from "react-redux";
-import {store} from "@/providers/StoreProvider/config/store";
 import {Providers} from "@/providers/StoreProvider/provider";
+import '@/shared/styles/index.scss'
+import '@/shared/styles/variables/common.scss'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
