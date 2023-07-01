@@ -1,6 +1,6 @@
-import {configureStore, ThunkAction, Action, ThunkDispatch, AnyAction} from "@reduxjs/toolkit";
-import {authReducer} from "@/features/auth/auth.slice";
-import {setupListeners} from "@reduxjs/toolkit/query";
+import {configureStore, ThunkAction, Action, ThunkDispatch, AnyAction} from "@reduxjs/toolkit"
+import {authReducer} from "@/features/auth/auth.slice"
+import {setupListeners} from "@reduxjs/toolkit/query"
 
 
 export const store = configureStore({
@@ -10,7 +10,7 @@ export const store = configureStore({
     devTools: process.env.NODE_ENV !== "production",
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({}).concat([]),
-});
+})
 
 // setupListeners(store.dispatch);
 
