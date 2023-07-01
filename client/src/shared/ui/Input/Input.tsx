@@ -32,6 +32,7 @@ const Input: React.FC<InputPropsType> = (
         type,
         title,
 
+
         ...restProps
     }
 ) => {
