@@ -1,0 +1,26 @@
+.accountMerging{
+	width: 100%;
+	//background-color: red;
+
+	.wrapper{
+		max-width: 100%;
+		display: flex;
+		justify-content: center;
+		//background-color: yellow;
+	}
+	.body{
+
+		.title{}
+
+		.content{}
+
+		.buttons{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 24px;
+		}
+
+		.image{}
+	}
+}
