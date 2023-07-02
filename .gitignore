@@ -6,6 +6,7 @@
 /client.pnp.js
 
 # testing
+/client/.swc
 /client/coverage
 
 # next.js
@@ -33,3 +34,5 @@
 # typescript
 /client/*.tsbuildinfo
 /client/next-env.d.ts
+
+/.idea
