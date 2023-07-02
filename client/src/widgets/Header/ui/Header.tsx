@@ -4,7 +4,7 @@ import Logo from '@/shared/assets/icons/logo.svg'
 import { LangSwitcher } from "@/features/LangSwitcher"
 import cls from './Header.module.scss'
 
-type HeaderProps = {
+export type HeaderProps = {
   lng: string;
 }
 
@@ -14,7 +14,7 @@ export const Header: FC<HeaderProps> = ({ lng }) => (
       <div className={cls.logo}><Logo /></div>
       <div className={cls.right}>
         {/*FIXME: implement notifications */}
-        <span><OutlineBell /></span>
+        <span data-testid="bell-icon"><OutlineBell /></span>
         <LangSwitcher currentLngId={lng} />
       </div>
     </div>
