@@ -39,9 +39,9 @@
   --primary-text-color: var(--light-color-100);
   --secondary-text-color: var(--dark-color-100);
 
-  // fonts
-
-
+  // z - indexes
+  --modal-z-index: 1000;
+  --overlay-z-index: 100;
 }
 .dotted-background {
   background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);

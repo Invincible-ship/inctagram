@@ -1,0 +1,6 @@
+.Overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--overlay-z-index);
+  background-color: rgba(0, 0, 0, .7);
+}
