@@ -11,7 +11,6 @@ const register = createAppAsyncThunk<void, any>("auth/register", async (arg: any
     })
 })
 
-const login =
 
 
 const slice = createSlice({
