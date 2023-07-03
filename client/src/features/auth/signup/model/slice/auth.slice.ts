@@ -1,11 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {createAppAsyncThunk} from "@/shared/lib/utils/createAppAsyncThunk";
 import {thunkTryCatch} from "@/shared/lib/utils/thunk-try-catch";
-import {authApi} from "@/features/auth/auth.api";
+import {authApi, RegisterParamsType, RegisterResponseType} from "@/features/auth/auth.api";
 
 
 
-const register = createAppAsyncThunk<void, any>("auth/register", async (arg: any, thunkAPI) => {
+const register = createAppAsyncThunk<RegisterResponseType, RegisterParamsType>("auth/register", async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
         await authApi.register(arg);
     });
@@ -18,7 +18,6 @@ const slice = createSlice({
         isLoggedIn: false
     },
     reducers: {
-        // Пустая функция-обработчик
        setIsLoggedIn: (state: {isLoggedIn: boolean}, action) => {
            state.isLoggedIn = action.payload.isLoggedIn
        }

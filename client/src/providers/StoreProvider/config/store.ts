@@ -1,19 +1,31 @@
-import {configureStore, ThunkAction, Action, ThunkDispatch, AnyAction} from "@reduxjs/toolkit";
-import {authReducer} from "@/features/auth/auth.slice";
-import {setupListeners} from "@reduxjs/toolkit/query";
+import {configureStore, ThunkAction, Action, ThunkDispatch, AnyAction} from '@reduxjs/toolkit'
+import {authActions, authReducer} from "@/features/auth/signup/model/slice/auth.slice";
 
 
-export const store = configureStore({
-    reducer: {
-        auth: authReducer,
-    },
-    devTools: process.env.NODE_ENV !== "production",
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({}).concat([]),
-});
+export function makeStore() {
+    return configureStore({
+        reducer: {
+            auth: authReducer,
 
-// setupListeners(store.dispatch);
+        },
+        middleware: gDM => gDM().concat()
+    })
+}
+
+const store = makeStore()
+
+export type AppStore = ReturnType<typeof makeStore>;
+
+export type RootState = ReturnType<typeof store.getState>
 
 export type AppDispatch = ThunkDispatch<RootState, AppDispatch, AnyAction>;
-export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    RootState,
+    unknown,
+    Action<string>
+    >
+
+export default store
+

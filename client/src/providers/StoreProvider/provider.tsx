@@ -2,9 +2,10 @@
 
 
 import { Provider } from "react-redux";
-import {store} from "@/providers/StoreProvider/config/store";
+import store from "@/providers/StoreProvider/config/store";
 
 
-export function Providers({ children }: { children: React.ReactNode }) {
+
+export function StoreProvider({ children }: { children: React.ReactNode }) {
     return <Provider store={store}>{children}</Provider>;
 }
