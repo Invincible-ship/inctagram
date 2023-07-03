@@ -8,6 +8,8 @@
 			padding: 17px 15px;
 		}
 		.body{
+			max-width: 425px;
+			margin: 0 auto;
 			font-family: Inter;
 			display: flex;
 			flex-direction: column;
@@ -23,8 +25,6 @@
 				}
 			}
 			.content{
-				padding: 0 20px;
-				max-width: 294px;
 				margin: 0 auto;
 
 				&:not(:last-child) {
@@ -55,6 +55,7 @@
 						width: 100%;
 						.btn {
 							width: 100%;
+							padding: 12px 24px
 						}
 					}
 					
