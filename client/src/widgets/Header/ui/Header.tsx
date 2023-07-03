@@ -5,7 +5,7 @@ import { LangSwitcher } from "@/features/LangSwitcher"
 import cls from './Header.module.scss'
 
 type HeaderProps = {
-  lng: string;
+  lng?: string;
 }
 
 export const Header: FC<HeaderProps> = ({ lng }) => (
@@ -15,7 +15,7 @@ export const Header: FC<HeaderProps> = ({ lng }) => (
       <div className={cls.right}>
         {/*FIXME: implement notifications */}
         <span><OutlineBell /></span>
-        <LangSwitcher currentLngId={lng} />
+        {/*<LangSwitcher currentLngId={lng} />*/}
       </div>
     </div>
   </header>

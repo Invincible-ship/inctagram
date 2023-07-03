@@ -1,10 +1,9 @@
-import {AuthInstance} from "@/features/auth/auth.instance"
-import {ArgRegisterType} from "@/features/auth/signup/model/slice/types/signUp"
-import {LoginRequestType, LoginResponseType} from "@/features/auth/signin/model/types/types"
+import {AuthInstance} from "@/features/auth/auth.instance";
+
 
 export const authApi = {
-  register: (arg: any) => {
-    return AuthInstance.post<any>("registration", arg)
+  register: (data: RegisterParamsType) => {
+    return AuthInstance.post<RegisterResponseType>("registration", data);
   },
   login: (arg: LoginRequestType) => {
     return AuthInstance.post<LoginResponseType>('login', arg)
@@ -21,6 +20,19 @@ export const authApi = {
   logout: () => {
     return
   },
-}
+};
 
 // Types
+export type RegisterParamsType = {
+	userName: string;
+	email: string;
+	password: string;
+	passwordConfirmation: string;
+}
+export type RegisterResponseType = {
+	id: string;
+	userName: string;
+	email: string;
+	createdAt: string;
+}
+

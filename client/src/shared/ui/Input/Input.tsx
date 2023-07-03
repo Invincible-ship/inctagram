@@ -1,6 +1,6 @@
 import React, {
     ChangeEvent,
-    DetailedHTMLProps,
+    DetailedHTMLProps, forwardRef,
     InputHTMLAttributes,
     KeyboardEvent,
     ReactNode,
@@ -19,21 +19,22 @@ type InputPropsType = Omit<DefaultInputPropsType, 'type'> & {
     title?: string
 }
 
-const Input: React.FC<InputPropsType> = React.forwardRef((
-  {
-    onChange,
-    onChangeText,
-    onKeyPress,
-    onEnter,
-    error,
-    className,
-    spanClassName,
-    id,
-    type,
-    title,
+const Input = forwardRef<HTMLInputElement, InputPropsType>((
+    {
+        onChange,
+        onChangeText,
+        onKeyPress,
+        onEnter,
+        error,
+        className,
+        spanClassName,
+        id,
+        type,
+        title,
 
-    ...restProps
-  }, ref
+
+        ...restProps
+    }, ref
 ) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
         onChange?.(e)
@@ -43,32 +44,32 @@ const Input: React.FC<InputPropsType> = React.forwardRef((
     const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
         onKeyPress?.(e)
 
-    onEnter && // если есть пропс onEnter
-    e.key === 'Enter' && // и если нажата кнопка Enter
-    onEnter() // то вызвать его
-  }
+        onEnter && // если есть пропс onEnter
+        e.key === 'Enter' && // и если нажата кнопка Enter
+        onEnter() // то вызвать его
+    }
 
-  return (
-    <div className={s.inputWrapper}>
-      <div>{title}</div>
-      <input
-        id={id}
-        ref={ref}
-        type={type ? type : 'text'}
-        onChange={onChangeCallback}
-        onKeyPress={onKeyPressCallback}
-        className={s.styledInput}
-        {...restProps}
-      />
+    return (
+      <div className={s.inputWrapper}>
+        <div>{title}</div>
+        <input
+            ref={ref}
+                id={id}
+                type={type ? type : 'text'}
+                onChange={onChangeCallback}
+                onKeyPress={onKeyPressCallback}
+                className={s.styledInput}
+                {...restProps}
+            />
 
-      <div
-        id={id ? id + '-span' : undefined}
-        className='input-info'
-      >
-        {error}
+        <div
+                id={id ? id + '-span' : undefined}
+                className='input-info'
+            >
+          {error}
+        </div>
       </div>
-    </div>
-  )
-})
-
+    )
+}
+)
 export default Input
