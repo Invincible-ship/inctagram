@@ -1,14 +1,16 @@
-import {Meta, StoryObj} from '@storybook/react'
-import {Header} from "@/widgets/Header/ui/Header"
+import { Meta, Story } from '@storybook/react';
+import { Header } from './Header';
 
-const meta: Meta<typeof Header> = {
+const meta: Meta = {
     title: 'widgets/Header',
     component: Header,
-}
+};
 
-export default meta
-type Story = StoryObj<typeof Header>;
+export default meta;
 
-export const Default: Story = {
-    render: () => <Header lng={'en'}/>,
-}
+const Template: Story = (args) => <Header {...args} />;
+
+export const InctagramHeader = Template.bind({});
+InctagramHeader.args = {
+    lng: 'ru',
+};
