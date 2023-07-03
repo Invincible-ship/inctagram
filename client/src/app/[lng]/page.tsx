@@ -4,5 +4,5 @@
 //import { SignUpModalPage } from '@/pages/SignUpPage/signupModalPage/signupModalPage'
 //export default SignUpModalPage
 
-import { AccountMergingPage } from '@/pages/SignUpPage'
-export default AccountMergingPage
+import { SignUpAdditionsPage } from '@/pages/SignUpPage'
+export default SignUpAdditionsPage

@@ -1,12 +1,12 @@
 'use client'
 
 import { Button } from '@/shared/ui/Button/Button'
-import s from './accountMerging.module.scss'
+import s from './SignUpAdditionPages.module.scss'
 import PictureQuestion from '@/shared/assets/icons/merge-image.svg'
 import PictureDone from '@/shared/assets/icons/mergeDone-image.svg'
 import { ButtonTheme } from '@/shared/ui/Button/Button'
 
-export const AccountMerging = () => {
+export const SignUpAdditionPages = () => {
 	const changePageContent = {
 		merge: false,
 		//merge: true,
@@ -17,7 +17,7 @@ export const AccountMerging = () => {
 		<div className={s.accountMerging}>
 			<div className={s.wrapper}>
 				<div className={s.body}>
-					<Title titleText='Merger of Accounts lorem' />
+					<Title titleText='Merger of Accounts' />
 					<div className={s.content}>
 						<p>The user with email Epam@epam.com is already in the system. Could we merge this accounts?</p>
 					</div>

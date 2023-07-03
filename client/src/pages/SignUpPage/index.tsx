@@ -1,2 +1,2 @@
 export { SignUpPage } from './ui/SignUpPage'
-export { AccountMergingPage } from './accountMerging/ui/accountMergingPage'
+export { SignUpAdditionsPage } from './SignUpAdditionsPage/ui/accountMergingPage'
