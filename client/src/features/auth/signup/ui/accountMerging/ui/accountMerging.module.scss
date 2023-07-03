@@ -1,26 +1,56 @@
 .accountMerging{
 	width: 100%;
-	//background-color: red;
-
+	height: 100%;
 	.wrapper{
-		max-width: 100%;
-		display: flex;
-		justify-content: center;
-		//background-color: yellow;
-	}
-	.body{
-
-		.title{}
-
-		.content{}
-
-		.buttons{
+		padding-top: 35px;
+		padding-left: 30px;
+		padding-right: 30px;
+		text-align: center;
+		@media (max-width:320px) {
+			padding: 10px;
+		}
+		.body{
+			font-family: Inter;
 			display: flex;
 			flex-direction: column;
-			align-items: center;
-			gap: 24px;
-		}
+			justify-content: center;
+			.title {
+				font-size: 20px;
+				line-height: 36px;
+				font-weight: 700;
+				overflow: hidden;
 
-		.image{}
+				&:not(:last-child) {
+					padding-bottom: 19px;
+				}
+			}
+			.content{
+				padding: 0 20px;
+				max-width: 294px;
+				margin: 0 auto;
+
+				&:not(:last-child) {
+					padding-bottom: 30px;
+				}	
+
+			}
+			.buttons{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 24px;
+				&:not(:last-child) {
+					padding-bottom: 24px;
+					@media (max-width: 320px) {
+						padding-bottom: 3px;
+					}
+				}
+			}
+
+			.image{
+				.picture {
+				}
+			}
+		}
 	}
 }

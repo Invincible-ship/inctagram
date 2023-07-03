@@ -1,6 +1,9 @@
+'use client'
+
 import { Button } from '@/shared/ui/Button/Button'
 import s from './accountMerging.module.scss'
-import Image from 'next/image'
+import Pic from '@/shared/assets/icons/merge-image.svg'
+
 export const AccountMerging = () => {
 	return (
 		<div className={s.accountMerging}>
@@ -17,12 +20,13 @@ export const AccountMerging = () => {
 						<Button>No</Button>
 					</div>
 					<div className={s.image}>
-						{/*<Image />*/}
+						<div className={s.imageBox}>
+							<Pic
+							//viewBox="0 0 432 300" width="100%" className={s.picture}
+							/>
+						</div>
 					</div>
-
-
 				</div>
-
 			</div>
 		</div>
 	)
