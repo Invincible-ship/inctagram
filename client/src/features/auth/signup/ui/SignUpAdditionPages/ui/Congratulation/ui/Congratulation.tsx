@@ -1,3 +1,5 @@
+'use client'
+
 import { FC } from "react"
 import { CommonBlock, SignUpAdditionPagespProps } from "../../CommonBlock/ui/CommonBlock"
 import { useClientTranslation } from "@/shared/config/i18n/client"

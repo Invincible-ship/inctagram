@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/shared/ui/Button/Button'
-import s from './SignUpAdditionPages.module.scss'
+import s from './SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss'
 import PictureQuestion from '@/shared/assets/icons/merge-image.svg'
 import PictureDone from '@/shared/assets/icons/mergeDone-image.svg'
 import PictureVerification from '@/shared/assets/icons/mergeLinkVerification-image.svg'
