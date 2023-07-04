@@ -6,7 +6,9 @@ import React, {
     ReactNode,
 } from 'react'
 import s from './Input.module.scss'
-//
+import '@/shared/styles/variables/common/_form.scss'
+
+
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
@@ -49,6 +51,7 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>((
         onEnter() // то вызвать его
     }
 
+
     return (
       <div className={s.inputWrapper}>
         <div>{title}</div>
@@ -58,15 +61,19 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>((
                 type={type ? type : 'text'}
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}
-                className={s.styledInput}
-                {...restProps}
+                className={`${s.styledInput} ${error?.message ? s.errorInput : ''}`}
+
+            {...restProps}
             />
 
         <div
                 id={id ? id + '-span' : undefined}
-                className='input-info'
             >
-          {error}
+            {error && (
+                <span className={`${s.error}`}>{error.message}</span>
+            )}
+
+          {/*{error && error.message}*/}
         </div>
       </div>
     )
