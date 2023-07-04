@@ -1,6 +1,6 @@
 import React, {
     ChangeEvent,
-    DetailedHTMLProps,
+    DetailedHTMLProps, forwardRef,
     InputHTMLAttributes,
     KeyboardEvent,
     ReactNode,
@@ -19,7 +19,7 @@ type InputPropsType = Omit<DefaultInputPropsType, 'type'> & {
     title?: string
 }
 
-const Input: React.FC<InputPropsType> = (
+const Input = forwardRef<HTMLInputElement, InputPropsType>((
     {
         onChange,
         onChangeText,
@@ -32,8 +32,9 @@ const Input: React.FC<InputPropsType> = (
         type,
         title,
 
+
         ...restProps
-    }
+    }, ref
 ) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
         onChange?.(e)
@@ -52,6 +53,7 @@ const Input: React.FC<InputPropsType> = (
       <div className={s.inputWrapper}>
         <div>{title}</div>
         <input
+            ref={ref}
                 id={id}
                 type={type ? type : 'text'}
                 onChange={onChangeCallback}
@@ -69,5 +71,5 @@ const Input: React.FC<InputPropsType> = (
       </div>
     )
 }
-
+)
 export default Input
