@@ -13,7 +13,7 @@ type SignUpProps = {
 	lng: string;
 	onClose?: () => void;
 }
-export const ModalWindow: FC<SignUpProps> = ({ lng }) => {
+export const SignUpModalWindow: FC<SignUpProps> = ({ lng }) => {
 
 	const onClose = () => {
 		setIsOpen(!isOpen)
@@ -22,12 +22,12 @@ export const ModalWindow: FC<SignUpProps> = ({ lng }) => {
 	const [isOpen, setIsOpen] = useState(true);
 	return <>
 		<Modal onClose={onClose} isOpen={isOpen}  >
-			<SignUpModalWindow lng={lng} onClose={onClose} />
+			<ModalWindow lng={lng} onClose={onClose} />
 		</Modal>
 	</>
 }
 
-const SignUpModalWindow: FC<SignUpProps> = ({ lng, onClose }) => {
+const ModalWindow: FC<SignUpProps> = ({ lng, onClose }) => {
 
 	const exampleEmail = 'Email from SignUp : epam@epam.com'
 

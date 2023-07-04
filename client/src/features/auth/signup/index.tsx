@@ -1,2 +1,2 @@
 export { SignUp } from './ui/signup'
-export { ModalWindow } from './ui/modalWindow/ui/ModalWindow'
+export { SignUpModalWindow } from './ui/modalWindow/ui/SignUpModal'

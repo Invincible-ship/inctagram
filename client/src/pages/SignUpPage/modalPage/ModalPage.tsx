@@ -1,4 +1,4 @@
-import { ModalWindow } from '@/features/auth/signup'
+import { SignUpModalWindow } from '@/features/auth/signup'
 import { FC } from 'react'
 
 type SignUpProps = {
@@ -8,7 +8,7 @@ type SignUpProps = {
 export const SignUpModalPage: FC<SignUpProps> = ({ lng }) => {
 	return (
 		<>
-			<ModalWindow lng={lng} />
+			<SignUpModalWindow lng={lng} />
 		</>
 	)
 }
