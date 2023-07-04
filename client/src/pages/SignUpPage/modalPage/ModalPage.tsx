@@ -7,8 +7,8 @@ type SignUpProps = {
 
 export const SignUpModalPage: FC<SignUpProps> = ({ lng }) => {
 	return (
-		<div className={'content'}>
+		<>
 			<ModalWindow lng={lng} />
-		</div>
+		</>
 	)
 }
