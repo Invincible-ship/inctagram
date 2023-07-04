@@ -1,3 +1,4 @@
+'use client'
 import { FC } from "react"
 import Close from '@/shared/assets/icons/close.svg'
 import { Button } from "@/shared/ui/Button/Button"
