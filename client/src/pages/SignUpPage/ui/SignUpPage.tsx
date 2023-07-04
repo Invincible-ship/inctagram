@@ -1,15 +1,14 @@
-import { SignUpModalWindow, SignUp } from '@/features/auth/signup'
+import { SignUpModal, SignUp } from '@/features/auth/signup'
 import { LanguageParams } from '@/shared/config/i18n/types'
 import { FC } from 'react'
-import s from '@/features/auth/signup/ui/modalWindow/ui/emailSent.module.scss'
 
 export const SignUpPage: FC<{ params: LanguageParams }> = (
 	{ params: { lng } }
 ) => {
 	return (
-		<div className={s.pageContainer}>
+		<div style={{ marginTop: '100px', padding: '0 20px' }}>
 			<SignUp lng={lng} />
-			<SignUpModalWindow lng={lng} />
+			<SignUpModal lng={lng} />
 		</div>
 	)
 }
