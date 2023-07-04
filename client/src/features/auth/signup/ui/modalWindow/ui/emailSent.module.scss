@@ -1,15 +1,13 @@
 .pageContainer{
-	position: relative;
 	margin-top: 100px;
 	padding: 0 20px;
 }
+
+//transform: scale(0.2);
 .dislpayNone {
 	display: none;
 }
 .wrapper{
-	position: absolute;
-	left: 0;
-	top: 0;
 	margin: 0 auto;
 	width: 100%;
 	min-height: 100%;
@@ -17,9 +15,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 0 10px;
-	background-color: transparent;
-	backdrop-filter: blur(1px);
+	//padding: 0 10px;
 
 	.body{
 		align-self: center;

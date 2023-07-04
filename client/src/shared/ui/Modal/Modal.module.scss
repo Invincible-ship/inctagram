@@ -10,9 +10,7 @@
 }
 
 .content {
-  max-width: 60%;
-  padding: 15px;
-  background-color: var(--dark-color-100);
+  max-width: 85%;
   transform: scale(.5);
   transition: transform .2s;
   z-index: var(--modal-z-index);

@@ -86,8 +86,8 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
 
 				<div className={'title b-title bt26 semibold align-center'}>Sign Up</div>
 				<div className={'icon-wrapper'}>
-					<Google />
-					<Github />
+					{/*<Google />
+					<Github />*/}
 				</div>
 
 				<form onSubmit={handleSubmit(onSubmit)} className={'form-style'}>

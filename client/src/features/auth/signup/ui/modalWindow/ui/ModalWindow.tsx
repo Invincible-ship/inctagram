@@ -7,39 +7,46 @@ import { Button } from '@/shared/ui/Button/Button'
 import '@/shared/styles/reset.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import { useModal } from '@/shared/lib/hooks/useModal/useModal'
+import { Modal } from '@/shared/ui/Modal/Modal'
 
 type SignUpProps = {
-	lng: string
+	lng: string;
+	onClose?: () => void;
 }
-
 export const ModalWindow: FC<SignUpProps> = ({ lng }) => {
-	const [isOpen, setIsOpen] = useState(true)
 
 	const onClose = () => {
-		setIsOpen(false);
+		setIsOpen(!isOpen)
 	}
-	const animationDelay = 1;
+
+	const [isOpen, setIsOpen] = useState(true);
+	return <>
+		<Modal onClose={onClose} isOpen={isOpen}  >
+			<SignUpModalWindow lng={lng} onClose={onClose} />
+		</Modal>
+	</>
+}
+
+const SignUpModalWindow: FC<SignUpProps> = ({ lng, onClose }) => {
 
 	const exampleEmail = 'Email from SignUp : epam@epam.com'
 
 	const { t } = useClientTranslation(lng, 'signUpModal')
-	const { isClosing, close } = useModal({ onClose, isOpen, animationDelay })
 
 	return (
 
-		<div className={isClosing ? s.dislpayNone : s.wrapper}>
+		<div className={s.wrapper}>
 			<div className={s.body}>
 				<div className={s.title}>
 					<h3>{t('SignUpModal.title')}</h3>
-					<div onClick={close} className={s.xButton}>
+					<div onClick={onClose} className={s.xButton}>
 						<span><Close /></span>
 					</div>
 				</div>
 				<div className={s.content}>
 					<p className={s.text}>{t('SignUpModal.text')} {exampleEmail}</p>
 					<div className={s.buttonContainer}>
-						<	Button onClick={close} type='button' className={s.button}>OK</Button>
+						<	Button onClick={onClose} type='button' className={s.button}>OK</Button>
 					</div>
 				</div>
 			</div>
