@@ -37,11 +37,9 @@ export const PasswordWrapper: FC<PasswordWrapperProps> = ({
                 placeholder={placeholder}
                 type={type}
                 title={title}
+                error={error}
                 {...register}
             />
-            {error && error ? (
-                <span className={'error-lbl'}>{error.message}</span>
-            ) : null}
             <span className={cls.eye} onClick={toggleShowPassword}><Eye/></span>
         </div>
     );

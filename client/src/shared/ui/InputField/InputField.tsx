@@ -4,7 +4,7 @@ import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import {FieldError} from "react-hook-form";
-import { DeepPartial } from 'react-hook-form/dist/types/utils';
+import {DeepPartial} from 'react-hook-form/dist/types/utils';
 
 type InputFieldProps = {
     id: string;
@@ -16,7 +16,7 @@ type InputFieldProps = {
     error?: DeepPartial<FieldError> | undefined;
 };
 
-export const InputField: FC<InputFieldProps> = ({ id, type, className, placeholder, title, register, error }) => {
+export const InputField: FC<InputFieldProps> = ({id, type, className, placeholder, title, register, error}) => {
     return (
         <div className={'field input-field'}>
             <Input
@@ -25,11 +25,9 @@ export const InputField: FC<InputFieldProps> = ({ id, type, className, placehold
                 className={className}
                 placeholder={placeholder}
                 title={title}
+                error={error}
                 {...register}
             />
-            {error && (
-                <span className={'error-lbl'}>{error.message}</span>
-            )}
         </div>
     );
 };
