@@ -1,13 +1,15 @@
-'use client'
+//'use client'
 import { FC } from "react"
 import Close from '@/shared/assets/icons/close.svg'
+import picture from '@/img/testImages.png'
 import { Button } from "@/shared/ui/Button/Button"
 import { useClientTranslation } from "@/shared/config/i18n/client";
 import s from './modalWindow.module.scss';
+import Image from "next/image";
 
 export type ModalWindowProps = {
 	lng: string;
-	onClose: () => void;
+	onClose?: () => void;
 }
 
 export const ModalWindow: FC<ModalWindowProps> = ({ lng, onClose }) => {
@@ -23,7 +25,10 @@ export const ModalWindow: FC<ModalWindowProps> = ({ lng, onClose }) => {
 				<div className={s.title}>
 					<h3>{t('SignUpModal.title')}</h3>
 					<div onClick={onClose} className={s.xButton}>
-						<span><Close /></span>
+						<span> <Close /> </span>
+						{/*<span> <Image src={close} alt="picture" /> </span>*/}
+						{/*<span><img src='./../../../../../img/testImages.png' alt="cloce image" /></span>*/}
+						{/*<span><img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRglEDIYPYkpKt8VH_JCr6g4KNDaW33pCKzGKJaUAg&s'} alt="cloce image" /></span>*/}
 					</div>
 				</div>
 				<div className={s.content}>
