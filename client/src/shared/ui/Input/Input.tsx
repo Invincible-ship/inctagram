@@ -57,13 +57,16 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>((
         <div>{title}</div>
         <input
             ref={ref}
+
                 id={id}
                 type={type ? type : 'text'}
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}
+
                 className={`${s.styledInput} ${error?.message ? s.errorInput : ''}`}
 
             {...restProps}
+            data-testid="input"
             />
 
         <div
