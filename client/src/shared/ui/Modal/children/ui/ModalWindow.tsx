@@ -1,11 +1,16 @@
 //'use client'
 import { FC } from "react"
-import Close from '@/shared/assets/icons/close.svg'
-import picture from '@/img/testImages.png'
+import x from 'public/svg/close.svg'
+import Close from 'public/svg/close.svg'
 import { Button } from "@/shared/ui/Button/Button"
 import { useClientTranslation } from "@/shared/config/i18n/client";
 import s from './modalWindow.module.scss';
 import Image from "next/image";
+import testPngImg from '@/shared/assets/img/testPng.png'
+
+
+//const testPngImg = '@/shared/assets/img/testPng.png'
+
 
 export type ModalWindowProps = {
 	lng: string;
@@ -25,10 +30,12 @@ export const ModalWindow: FC<ModalWindowProps> = ({ lng, onClose }) => {
 				<div className={s.title}>
 					<h3>{t('SignUpModal.title')}</h3>
 					<div onClick={onClose} className={s.xButton}>
-						<span> <Close /> </span>
-						{/*<span> <Image src={close} alt="picture" /> </span>*/}
-						{/*<span><img src='./../../../../../img/testImages.png' alt="cloce image" /></span>*/}
-						{/*<span><img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRglEDIYPYkpKt8VH_JCr6g4KNDaW33pCKzGKJaUAg&s'} alt="cloce image" /></span>*/}
+						<Close />
+						<span> <Image src={x} alt="pic" width={50} height={50} /> </span>
+						<span> <Image src={'https://www.svgrepo.com/show/513953/alt-battery-0.svg'} alt="picture" width={50} height={50} /> </span>
+						<span> <Image src={testPngImg} alt="pic" width={50} height={50} /> </span>
+						<img src="./../../../../assets/icons/close.svg" alt="close" />
+						<img src={'./../../../../assets/img/testPng.png'} alt="close" />
 					</div>
 				</div>
 				<div className={s.content}>
