@@ -19,7 +19,7 @@ import { PasswordWrapper } from "@/shared/ui/PasswordWrapper/PasswordWrapper";
 import { useClientTranslation } from "@/shared/config/i18n/client";
 import { useRouter } from "next/navigation";
 import { GoogleButton } from "@/components/GoogleButton";
-import { signIn } from "next-auth/react";
+//import { signIn } from "next-auth/react";
 import { GitHubButton } from "@/components/GitHubButton";
 
 type FormSchemaType = z.infer<typeof formSchema>
