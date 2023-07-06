@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {createAppAsyncThunk} from "@/shared/lib/utils/createAppAsyncThunk";
 import {thunkTryCatch} from "@/shared/lib/utils/thunk-try-catch";
-import {authApi, RegisterParamsType, RegisterResponseType} from "@/features/auth/auth.api";
+import {authApi} from "@/features/auth/auth.api";
 
 
 
@@ -27,6 +27,6 @@ const slice = createSlice({
 });
 
 
-export const authReducer = slice.reducer;
-export const authThunks = {register};
-export const authActions = slice.actions;
+export const authReducer = slice.reducer
+export const authThunks = {register}
+export const authActions = slice.actions

@@ -37,7 +37,7 @@ const formSchema = z
     .refine((data) => data.password === data.passwordConfirmation, {
         path: ["passwordConfirmation"],
         message: "Passwords do not match",
-    });
+    })
 
 type SignUpProps = {
     lng: string
@@ -58,7 +58,7 @@ export const SignUp: FC<SignUpProps> = ({lng}) => {
         }
     } = useForm({
         resolver: zodResolver(formSchema),
-    });
+    })
 
 
     const toggleShowPassword = () => {

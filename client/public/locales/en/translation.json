@@ -1,3 +1,11 @@
 {
-  "greeting": "Hello World!"
+	"greeting": "Hello World!",
+  "signIn": {
+    "signIn": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password",
+    "dontHaveAnAccount": "Don’t have an account",
+    "signUp": "Sign Up"
+  }
 }
