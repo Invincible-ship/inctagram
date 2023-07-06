@@ -88,7 +88,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
                 setIsOpen(!isOpen);
                 setUserEmail(response.meta.arg.email)
             }
-        } catch (error) {
+        } catch (error) { //! сюда надо засунуть ошибку с бэка
             console.error(error);
         }
     };
