@@ -5,16 +5,11 @@ import '@/shared/styles/variables/common/_buttons.scss'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { ModalWindow, ModalWindowProps } from '@/shared/ui/Modal/children/ui/ModalWindow'
 
-export const SignUpModal: FC<ModalWindowProps> = ({ lng }) => {
-	const [isOpen, setIsOpen] = useState(true);
+export const SignUpModal: FC<ModalWindowProps> = ({ lng, onClose, isOpen, userEmail }) => {
 
-	const onClose = () => {
-		setIsOpen(!isOpen)
-	}
-
-	return <>
-		<Modal onClose={onClose} isOpen={isOpen}  >
-			<ModalWindow lng={lng} onClose={onClose} />
-		</Modal>
-	</>
+    return <>
+        <Modal onClose={onClose} isOpen={isOpen}  >
+            <ModalWindow lng={lng} onClose={onClose} isOpen={isOpen} userEmail={userEmail} />
+        </Modal>
+    </>
 }

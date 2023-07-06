@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { GoogleButton } from "@/components/GoogleButton";
 //import { signIn } from "next-auth/react";
 import { GitHubButton } from "@/components/GitHubButton";
+import { SignUpModal } from './modalWindow/ui/SignUpModal'
 
 type FormSchemaType = z.infer<typeof formSchema>
 
@@ -49,6 +50,15 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     const router = useRouter();
     const dispatch = useAppDispatch()
     const { t } = useClientTranslation(lng, 'signUp')
+    //========================================================================================================================================================
+    //for SignUpModal
+    const [isOpen, setIsOpen] = useState(false);
+    const [userEmail, setUserEmail] = useState('')
+
+    const onClose = () => {
+        setIsOpen(!isOpen)
+    }
+    //========================================================================================================================================================
 
     const {
         register,
@@ -69,9 +79,21 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
         setShowConfirmPassword(!showConfirmPassword)
     }
 
+    //========================================================================================================================================================
+    //изменения в onSubmit для SignUpModal
     const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
-        dispatch(authThunks.register(data))
-    }
+        try {
+            const response = await dispatch(authThunks.register(data));
+            if (response) {
+                setIsOpen(!isOpen);
+                setUserEmail(response.meta.arg.email)
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    //========================================================================================================================================================
+
 
     return (
         <div className={'form registration'}>
@@ -99,7 +121,10 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
                 </form>
                 <span className={`info b-title bt14  align-center semibold`}>Do you have an account?</span>
                 <Link href={'/login'}
-                    className={`b-title bt16 semibold ${style.linkRegistration} align-center`}><span>Sign In</span></Link>
+                    className={`b-title bt16 semibold ${style.linkRegistration} align-center`}><span>Sign In</span>
+                </Link>
+                <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={userEmail} />
+
             </div>
         </div>
     )
