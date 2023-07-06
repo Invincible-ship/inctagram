@@ -124,7 +124,6 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
                     className={`b-title bt16 semibold ${style.linkRegistration} align-center`}><span>Sign In</span>
                 </Link>
                 <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={userEmail} />
-
             </div>
         </div>
     )
