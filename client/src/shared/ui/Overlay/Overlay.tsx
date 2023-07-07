@@ -1,5 +1,5 @@
 import { classNames } from "@/shared/lib/classNames/classNames"
-import { FC } from "react"
+import { FC, memo } from "react"
 import cls from './Overlay.module.scss'
 
 type OverlayProps = {
@@ -7,13 +7,12 @@ type OverlayProps = {
   onClick?: () => void;
 }
 
-export const Overlay: FC<OverlayProps> = (
+// eslint-disable-next-line
+export const Overlay: FC<OverlayProps> = memo((
   { className, onClick }
-) => {
-  return (
-    <div 
+) => (
+  <div 
       className={classNames(cls.Overlay, {}, [className])}
       onClick={onClick}
     />
-  )
-} 
+))

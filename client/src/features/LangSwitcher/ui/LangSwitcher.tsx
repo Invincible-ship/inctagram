@@ -48,29 +48,31 @@ export const LangSwitcher: FC<LangSwitcherProps> = ({ currentLngId }) => {
   }
 
   return (
-    <Select.Root onValueChange={onChange}>
-      <Select.Trigger className={cls.trigger}>
-        <Select.Value>
-          <Option option={selectedLanguage} />
-        </Select.Value>
-        <Select.Icon className={cls['lng-icon']}>
-          <ArrowDown />
-        </Select.Icon>
-      </Select.Trigger>
+    <div data-testid="lang-switcher">
+      <Select.Root onValueChange={onChange}>
+        <Select.Trigger className={cls.trigger}>
+          <Select.Value>
+            <Option option={selectedLanguage} />
+          </Select.Value>
+          <Select.Icon className={cls['lng-icon']}>
+            <ArrowDown />
+          </Select.Icon>
+        </Select.Trigger>
 
-      <Select.Content className={cls.content} position="popper">
-        <Select.Viewport>
-          {languagesOptions.map(option => (
-            <Select.Item key={option.id} value={option.id} className={cls.item}>
-              <Option option={option} />
-              <Select.ItemIndicator className={cls.indicator}>
-                <CheckIcon className={cls['check-icon']} />
-              </Select.ItemIndicator> 
-            </Select.Item>
+        <Select.Content className={cls.content} position="popper">
+          <Select.Viewport>
+            {languagesOptions.map(option => (
+              <Select.Item key={option.id} value={option.id} className={cls.item}>
+                <Option option={option} />
+                <Select.ItemIndicator className={cls.indicator}>
+                  <CheckIcon className={cls['check-icon']} />
+                </Select.ItemIndicator> 
+              </Select.Item>
             ))}
-        </Select.Viewport>
-      </Select.Content>
-    </Select.Root>
+          </Select.Viewport>
+        </Select.Content>
+      </Select.Root>
+    </div>
   )
 }
 
