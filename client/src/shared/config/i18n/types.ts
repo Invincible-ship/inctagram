@@ -1,1 +1,1 @@
-export type LanguageParams = { lng: string }
+export type LanguageParams = { lng: string };

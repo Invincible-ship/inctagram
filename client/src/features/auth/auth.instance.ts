@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const AuthInstance = axios.create({
-  baseURL: 'https://inctagram-api.fly.dev/' + 'auth/',
+  baseURL: "https://inctagram-api.fly.dev/" + "auth/",
 });

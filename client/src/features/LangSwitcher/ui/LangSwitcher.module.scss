@@ -19,8 +19,8 @@
   .lng-icon {
     display: flex;
     align-items: center;
-    transition: transform .15s ease-in;
-  
+    transition: transform 0.15s ease-in;
+
     svg g path {
       fill: var(--light-color-100);
     }
@@ -40,7 +40,7 @@
     padding: 6px 12px;
     padding-right: 16px;
     cursor: pointer;
-  
+
     &:hover {
       background-color: var(--dark-color-100);
     }
@@ -65,8 +65,3 @@
     align-items: center;
   }
 }
-
-
-
-
-
