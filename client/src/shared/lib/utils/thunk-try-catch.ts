@@ -1,10 +1,10 @@
 import { BaseThunkAPI } from "@reduxjs/toolkit/dist/createAsyncThunk";
-import {AppDispatch, RootState} from "@/providers/StoreProvider/config/store";
+import { AppDispatch, RootState } from "@/providers/StoreProvider/config/store";
 
 export const thunkTryCatch = async (
   thunkAPI: BaseThunkAPI<RootState, any, AppDispatch, unknown>,
   logic: Function,
-  showGlobalError: boolean = true
+  showGlobalError: boolean = true,
 ) => {
   const { dispatch, rejectWithValue } = thunkAPI;
   try {

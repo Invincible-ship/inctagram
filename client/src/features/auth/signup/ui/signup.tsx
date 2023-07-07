@@ -37,7 +37,7 @@ const formSchema = z
     .refine((data) => data.password === data.passwordConfirmation, {
         path: ["passwordConfirmation"],
         message: "Passwords do not match",
-    });
+    })
 
 type SignUpProps = {
     lng: string
@@ -53,55 +53,75 @@ export const SignUp: FC<SignUpProps> = ({lng}) => {
     const {
         register,
         handleSubmit,
-        formState: {
-            errors
-        }
+        formState: {errors},
     } = useForm({
         resolver: zodResolver(formSchema),
     });
 
-
     const toggleShowPassword = () => {
-        setShowPassword(!showPassword)
-    }
+        setShowPassword(!showPassword);
+    };
 
     const toggleShowConfirmPassword = () => {
-        setShowConfirmPassword(!showConfirmPassword)
-    }
+        setShowConfirmPassword(!showConfirmPassword);
+    };
 
     const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
-        dispatch(authThunks.register(data))
-    }
+        dispatch(authThunks.register(data));
+    };
 
     return (
-        <div className={'form registration'}>
-            <div className='form-wrapper auth-form'>
-                <div className={'title b-title bt26 semibold align-center'}>Sign Up</div>
+        <div className={"form registration"}>
+            <div className="form-wrapper auth-form">
+                <div className={"title b-title bt26 semibold align-center"}>{t('signUp.signUp')}</div>
                 <div className={style.iconWrapper}>
                     <GoogleButton/>
-                   <GitHubButton/>
+                    <GitHubButton/>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)} className={'form-style'}>
-                    <InputField id={'userName'} type={'text'} placeholder={'Epam'} title={'UserName'}
-                                register={...register('userName')} error={errors.userName}/>
-                    <InputField id={'email'} type={'email'} placeholder={'Epam@epam.com'} title={'Email'}
-                                register={...register('email')} error={errors.email}/>
-                    <PasswordWrapper id={'password'} placeholder={'******************'}
-                                     type={showPassword ? 'text' : 'password'} title={'Password'}
-                                     register={...register('password')} toggleShowPassword={toggleShowPassword}
-                                     error={errors.password}/>
-                    <PasswordWrapper id={'passwordConfirmation'} placeholder={'******************'}
-                                     type={showConfirmPassword ? 'text' : 'password'} title={'Password confirmation'}
-                                     register={...register('passwordConfirmation')}
-                                     toggleShowPassword={toggleShowConfirmPassword}
-                                     error={errors.passwordConfirmation}/>
-                    <Button type="submit" className={'styled-btn styled-btn-1'}>Sign Up</Button>
+                <form onSubmit={handleSubmit(onSubmit)} className={"form-style"}>
+                    <InputField
+                        id={"userName"}
+                        type={"text"}
+                        placeholder={t('signUp.userName')}
+                        title={t('signUp.userName')}
+                        register={...register("userName")}
+                        error={errors.userName}
+                    />
+                    <InputField
+                        id={"email"}
+                        type={"email"}
+                        placeholder={t('signUp.email')}
+                        title={t('signUp.email')}
+                        register={...register("email")}
+                        error={errors.email}
+                    />
+                    <PasswordWrapper
+                        id={"password"}
+                        placeholder={t('signUp.password')}
+                        type={showPassword ? "text" : "password"}
+                        title={t('signUp.password')}
+                        register={...register("password")}
+                        toggleShowPassword={toggleShowPassword}
+                        error={errors.password}
+                    />
+                    <PasswordWrapper
+                        id={"passwordConfirmation"}
+                        placeholder={t('signUp.passwordConfirmation')}
+                        type={showConfirmPassword ? "text" : "password"}
+                        title={t('signUp.passwordConfirmation')}
+                        register={...register("passwordConfirmation")}
+                        toggleShowPassword={toggleShowConfirmPassword}
+                        error={errors.passwordConfirmation}
+                    />
+                    <Button type="submit" className={"styled-btn styled-btn-1"}>
+                        {t('signUp.signUp')}
+                    </Button>
                 </form>
-                <span className={`info b-title bt14  align-center semibold`}>Do you have an account?</span>
-                <Link href={'/login'}
-                      className={`b-title bt16 semibold ${style.linkRegistration} align-center`}><span>Sign In</span></Link>
+                <span className={`info b-title bt14  align-center semibold`}>{t('signUp.doYouHaveAnAccount')}</span>
+                <Link href={"/login"} className={`b-title bt16 semibold ${style.linkRegistration} align-center`}>
+                    <span>{t('signUp.signIn')}</span>
+                </Link>
             </div>
         </div>
-    )
-}
-
+    );
+};

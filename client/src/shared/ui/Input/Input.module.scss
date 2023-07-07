@@ -5,19 +5,9 @@
   line-height: 24px;
   margin-top: 15px;
 
-
-  //.styledInput:hover{
-  //  border: 1px solid var(--light-color-900);
-  //  color: var(--light-color-900);
-  //}
-  //.styledInput:focus {
-  //  border: 1px solid var( --accent-color-500);
-  //}
-  //.styledInput:active {
-  //  border: 1px solid var( --light-color-100);
-  //  color: var(--light-color-100);
-  //}
-
+  align-items: center;
+  gap: 9px;
+  font-weight: 400;
 
   .styledInput {
     outline: none;
@@ -28,20 +18,56 @@
     color: var(--light-color-900);
     background: transparent;
     border-radius: 2px;
-    flex-shrink: 0;
     font-size: 16px;
     font-family: Inter, sans-serif;
     line-height: 24px;
 
-  }
+    &:active {
+      border-radius: 2px;
+      border: 1px solid var(--light-color-500);
+      background: var(--dark-color-500);
+    }
 
-  .errorLbl {
-    color: var( --danger-color-500);
-    font-size: 14px;
-    margin-top: 2px;
+    &:hover {
+      color: var(--light-color-900);
+    }
+
+    &:focus {
+      color: var(--light-color-900);
+      border-radius: 2px;
+      border: 1px solid var(--accent-color-700);
+    }
+    &.errorInput {
+      border-radius: 2px;
+      border: 1px solid var(--danger-500, #cc1439) !important;
+    }
   }
 }
 
-.error{
-border: 1px solid red;
+.input:focus {
+}
+
+.input {
+}
+
+.inputWrapper {
+}
+
+.superInput {
+}
+
+.errorInput {
+  border-radius: 2px;
+  border: 1px solid var(--danger-500, #cc1439);
+}
+
+.errorInput:focus {
+}
+
+.error {
+  position: absolute;
+  font-size: 14px;
+  color: var(--danger-color-500);
+  font-weight: 400;
+  line-height: 24px;
 }
