@@ -8,7 +8,7 @@ const register = createAppAsyncThunk<RegisterResponseType, RegisterParamsType>(
   async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
       await authApi.register(arg);
-    });
+    },true);
   },
 );
 

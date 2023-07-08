@@ -21,35 +21,38 @@ import {useRouter} from "next/navigation";
 import {GoogleButton} from "@/components/GoogleButton";
 import {signIn} from "next-auth/react";
 import {GitHubButton} from "@/components/GitHubButton";
+import {formSchema} from "@/features/auth/signIn/ui/signIn";
 
 type FormSchemaType = z.infer<typeof formSchema>
-
-const formSchema = z
-    .object({
-        userName: z.string().min(6, "Username is required").max(30),
-        email: z.string().email("Invalid email").min(1, "Email is required"),
-        password: z
-            .string()
-            .min(1, "Password is required")
-            .min(6, "Password must have more than 6 characters").max(20),
-        passwordConfirmation: z.string().min(1, "Password confirmation is required"),
-    })
-    .refine((data) => data.password === data.passwordConfirmation, {
-        path: ["passwordConfirmation"],
-        message: "Passwords do not match",
-    })
-
-type SignUpProps = {
-    lng: string
-}
-
-export const SignUp: FC<SignUpProps> = ({lng}) => {
+export const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-    const router = useRouter();
-    const dispatch = useAppDispatch()
-    const {t} = useClientTranslation(lng, 'signUp')
 
+    const dispatch = useAppDispatch()
+    const {t} = useClientTranslation()
+    const userNameRequired = t("signUp.validate.userNameRequired");
+    const userNameMaxLength = t("signUp.validate.userNameMaxLength");
+    const emailInvalid = t("signUp.validate.emailInvalid");
+    const emailRequired = t("signUp.validate.emailRequired");
+    const passwordRequired = t("signUp.validate.passwordRequired");
+    const passwordMinLength = t("signUp.validate.passwordMinLength");
+    const passwordMaxLength = t("signUp.validate.passwordMaxLength");
+    const passwordConfirmationRequired = t("signUp.validate.passwordConfirmationRequired");
+    const passwordsDoNotMatch = t("signUp.validate.passwordsDoNotMatch");
+    const formSchema = z
+        .object({
+            userName: z.string().min(6, userNameRequired).max(30, userNameMaxLength),
+            email: z.string().email(emailInvalid).min(1, emailRequired),
+            password: z
+                .string()
+                .min(1, passwordRequired)
+                .min(6, passwordMinLength).max(20, passwordMaxLength),
+            passwordConfirmation: z.string().min(1, passwordConfirmationRequired),
+        })
+        .refine((data) => data.password === data.passwordConfirmation, {
+            path: ["passwordConfirmation"],
+            message: passwordsDoNotMatch,
+        })
     const {
         register,
         handleSubmit,

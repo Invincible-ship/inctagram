@@ -13,7 +13,7 @@
     "userName": "Username",
     "email": "Email",
     "password": "Password",
-    "errors": {
+    "validate": {
       "userNameRequired": "Username is required",
       "userNameMaxLength": "Username must be less than or equal to 30 characters",
       "emailInvalid": "Invalid email format",
@@ -26,8 +26,8 @@
     },
     "passwordConfirmation": "Password Confirmation",
     "forgotPassword": "Forgot Password",
-    "dontHaveAnAccount": "Don't have an account",
-    "signUp": "Sign Up"
+    "doYouHaveAnAccount": "Do you have an account",
+    "signIn": "Sign In"
   },
   "input": {
     "title": "Title",

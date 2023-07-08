@@ -13,7 +13,7 @@
     "userName": "Имя пользователя",
     "email": "Email",
     "password": "Пароль",
-    "errors": {
+    "validate": {
       "userNameRequired": "Имя пользователя обязательно",
       "userNameMaxLength": "Максимальная длина имени пользователя - 30 символов",
       "emailInvalid": "Неверный формат email",
