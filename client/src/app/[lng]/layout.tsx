@@ -8,16 +8,11 @@ import "@/shared/styles/index.scss";
 import "@/shared/styles/variables/common.scss";
 import {Providers} from "@/components/Providers";
 import {StoreProvider} from "@/providers/StoreProvider/provider";
-import {useAppSelector} from "@/shared/lib/hooks";
-import Preloader from "@/shared/ui/Preloader/Preloader";
+import {Suspense} from "react";
+import Loading from "@/app/[lng]/loading";
+
 
 const inter = Inter({subsets: ["latin", "cyrillic"]});
-
-const navItems = [
-    {label: "Home", href: "/"},
-    {label: "Blog", href: "/blog"},
-    {label: "About", href: "/about"},
-];
 
 export const metadata = {
     title: "Inctagram | Social Media Service",
@@ -36,7 +31,9 @@ const RootLayout = ({children, params: {lng}}: { children: ReactNode; params: La
         <Providers>
             <StoreProvider>
                 <Header lng={lng}/>
-                 {children}
+                <Suspense fallback={<Loading/>}>
+                    {children}
+                </Suspense>
             </StoreProvider>
         </Providers>
         </body>

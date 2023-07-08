@@ -1,5 +1,6 @@
 import { AuthInstance } from "@/features/auth/auth.instance";
 import { LoginRequestType, LoginResponseType } from "@/features/auth/signin/model/types/types";
+import {RegisterParamsType, RegisterResponseType} from "@/features/auth/signup/model/types";
 
 export const authApi = {
   register: (data: RegisterParamsType) => {
@@ -20,18 +21,4 @@ export const authApi = {
   logout: () => {
     return;
   },
-};
-
-// Types
-export type RegisterParamsType = {
-  userName: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-};
-export type RegisterResponseType = {
-  id: string;
-  userName: string;
-  email: string;
-  createdAt: string;
 };

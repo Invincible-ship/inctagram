@@ -1,7 +1,7 @@
 @storybook/cli v7.0.24
 
 info => Cleaning outputDir: C:\Users\vasil\AppData\Local\Temp\chromatic--9252-vOJ8eGmTlqEC
-info => Loading presets
+info => Loader presets
 info => Building manager..
 info => Manager built (502 ms)
 info => Compiling preview..

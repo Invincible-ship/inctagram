@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import GitHub from "../shared/assets/icons/github.svg";
+import GitHub from "src/shared/assets/icons/github.svg";
 
 const GitHubButton = () => {
   const searchParams = useSearchParams();

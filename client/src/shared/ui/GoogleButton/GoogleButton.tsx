@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import Google from "../shared/assets/icons/google.svg";
+import Google from "src/shared/assets/icons/google.svg";
 
 const GoogleButton = () => {
   const searchParams = useSearchParams();

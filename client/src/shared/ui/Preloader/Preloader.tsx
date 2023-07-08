@@ -1,7 +1,7 @@
 import React from 'react'
 import './Preloader.scss'
 
-const Preloader = () => {
+export const Preloader = () => {
     return (
         <div className="preloader-wrapper">
           <div className="loader gradient"></div>
@@ -9,4 +9,3 @@ const Preloader = () => {
     )
 }
 
-export default Preloader
