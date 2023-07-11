@@ -1,3 +1,36 @@
 {
-  "greeting": "Hello World!"
+  "greeting": "Hello World!",
+  "signIn": {
+    "signIn": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password",
+    "dontHaveAnAccount": "Don’t have an account",
+    "signUp": "Sign Up"
+  },
+  "signUp": {
+    "signUp": "Sign Up",
+    "userName": "Username",
+    "email": "Email",
+    "password": "Password",
+    "errors": {
+      "userNameRequired": "Username is required",
+      "userNameMaxLength": "Username must be less than or equal to 30 characters",
+      "emailInvalid": "Invalid email format",
+      "emailRequired": "Email is required",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must have at least 6 characters",
+      "passwordMaxLength": "Password must be less than or equal to 20 characters",
+      "passwordConfirmationRequired": "Password confirmation is required",
+      "passwordsDoNotMatch": "Passwords do not match"
+    },
+    "passwordConfirmation": "Password Confirmation",
+    "forgotPassword": "Forgot Password",
+    "dontHaveAnAccount": "Don't have an account",
+    "signUp": "Sign Up"
+  },
+  "input": {
+    "title": "Title",
+    "error": "Error occurred"
+  }
 }

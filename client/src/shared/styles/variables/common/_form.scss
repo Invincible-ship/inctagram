@@ -1,26 +1,27 @@
-@import '../mixins';
+@import "../mixins";
 
-.form.registration {
-    padding-top: 5%;
+.field.input-field {
+    width: 100%;
 }
 
-.password-wrapper, .field.input-field  {
+.signup_passwordWrapper__Byu65 {
     width: 100%;
 }
 
 .form-style {
     display: flex;
-    align-items: center;
+    justify-content: center;
     flex-direction: column;
+    align-items: center;
     .f-item {
-
+        position: relative;
         display: flex;
         width: 100%;
         align-items: center;
         flex-direction: row;
         flex-wrap: wrap;
 
-        &+.f-item {
+        & + .f-item {
             margin-top: 15px;
 
             @include tbmb {
@@ -75,18 +76,24 @@
             color: var(--light-color-900);
         }
 
-        ;
+        &:hover {
+            color: var(--light-color-900);
+        }
+        &[disabled="true"] {
+            color: var(--dark-color-100);
+            border: 1px solid var(--dark-color-100);
+        }
 
         &:focus {
-            color: darken(#FFFFFF, 30%);
-            border-radius: 2px;
-            border: 1px solid  var(--light-color-100);
+            //color: var(--light-color-900);
+            //border-radius: 2px;
+            //border: 1px solid var(--accent-color-700);
 
             @include placeholder {
                 color: var(--light-color-100);
             }
 
-            ;
+        ;
         }
 
         &.error {
@@ -97,7 +104,7 @@
                 color: rgba(var(--danger-color-500), 0.2);
             }
 
-            ;
+        ;
         }
     }
 
@@ -139,17 +146,20 @@
 }
 
 .auth-form {
-
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;
     padding: 24px;
     background: var(--dark-color-500);
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow:
+            1px 1px 2px rgba(0, 0, 0, 0.1),
+            -1px -1px 2px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
+    border: 1px solid var(--dark-color-300);
     width: 420px;
-
+    position: relative;
 
     @include nb {
         padding: 25px;
@@ -296,10 +306,10 @@
         width: 100%;
 
         &:not(:first-child) {
-            margin-top: 35px;
+            margin-top: 36px;
 
             @include nb {
-                margin-top: 40px;
+                margin-top: 50px;
             }
 
             @include tb {

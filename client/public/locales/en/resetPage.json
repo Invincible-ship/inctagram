@@ -3,10 +3,13 @@
   "info": "Enter your email address and we will send you further instructions",
   "sendLink": "Send Link",
   "BackToSignIn": "Back to Sign In",
+  "sentByEmail": "The link has been sent by email. If you don’t receive an email send link again",
 
   "mainTitleReset": "Create New Password",
   "infoReset": "Your password must be between 6 and 20 characters",
   "CreateNewPasswordReset": "Create new password",
   "inputTitleNewPassword": "New password",
-  "inputTitleConfirmPassword": "Password confirmation"
+  "inputTitleConfirmPassword": "Password confirmation",
+
+  "errorEmail": "invalid email"
 }

@@ -1,5 +1,12 @@
+
+
 .info {
   margin-bottom: 7px;
+  color: #8D9094;
+}
+
+.field.input-field {
+  width: 100%;
 }
 
 .link-registration {
@@ -9,6 +16,16 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+.sentByEmail {
+  color: var(--light-100, #FFF);
+  margin-top: 23px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .link-recovery {
@@ -37,7 +54,7 @@
   cursor: pointer;
 }
 
-.icon-wrapper{
+.icon-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -45,3 +62,9 @@
   gap: 60px;
   padding: 13px;
 }
+
+.b-title.bt16 {
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+

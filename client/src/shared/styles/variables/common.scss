@@ -1,7 +1,7 @@
-  @import "global.scss";
-  @import "mixins";
+@import "global.scss";
+@import "mixins";
 
-    * {
+* {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -60,10 +60,7 @@ html {
     margin: auto;
 }
 
-@import "common/_b-paddings",
-"common/_b-titles",
-"common/_form",
-"common/_buttons";
+@import "common/_b-paddings", "common/_b-titles", "common/_form", "common/_buttons";
 
 input[type="text"],
 input[type="tel"],
@@ -91,18 +88,18 @@ select {
     font-weight: normal;
 
     &:before {
-        content: 'full (pc) => ';
+        content: "full (pc) => ";
 
         @include nb {
-            content: 'notebook =>';
+            content: "notebook =>";
         }
 
         @include tb {
-            content: 'tablet =>';
+            content: "tablet =>";
         }
 
         @include mb {
-            content: 'mobile =>';
+            content: "mobile =>";
         }
     }
 

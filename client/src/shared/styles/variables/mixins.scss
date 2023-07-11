@@ -88,9 +88,15 @@
 
 //placeholder color
 @mixin placeholder {
-    &.placeholder { @content }
-    &:-moz-placeholder { @content }
-    &::-webkit-input-placeholder { @content }
+    &.placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &::-webkit-input-placeholder {
+        @content;
+    }
 }
 
 @mixin customScrollbar($color: rgba(0, 0, 0, 0.2), $width: 5px, $height: 5px, $radius: 4px, $trackColor: none) {
@@ -130,7 +136,6 @@
 }
 
 @mixin clearfix {
-
     &:before,
     &:after {
         content: " ";

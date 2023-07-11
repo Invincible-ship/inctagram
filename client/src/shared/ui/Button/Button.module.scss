@@ -5,8 +5,9 @@
   border-radius: 2px;
   border: none;
   cursor: pointer;
-  transition: background-color .2s linear,
-              color .2s linear;
+  transition:
+          background-color 0.2s linear,
+          color 0.2s linear;
 }
 
 .primary {
@@ -61,7 +62,7 @@
 .outlined {
   color: var(--accent-color-500);
   background-color: transparent;
-  border: 1px solid var(--accent-color-500);  
+  border: 1px solid var(--accent-color-500);
 
   &:hover {
     color: var(--accent-color-100);
