@@ -1,20 +1,34 @@
 'use client'
 
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { CommonBlock, SignUpAdditionPagespProps } from "../../CommonBlock/ui/CommonBlock"
 import { useClientTranslation } from "@/shared/config/i18n/client"
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
 import PictureCongratulation from '@/shared/assets/icons/mergeDone-image.svg'
 import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss'
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useRegistrationConfirmationMutation } from "@/features/auth/signup/model/slice/rtkQslice"
 
 
 export const Congratulation: FC<SignUpAdditionPagespProps> = ({ lng }) => {
+
     const router = useRouter();
+    const search = useSearchParams()
+    const [sendConfirmCode, response] = useRegistrationConfirmationMutation()
+
+    useEffect(() => {
+        if (search) {
+            const confirmationCode = search.get('confirmationCode')
+            {
+                confirmationCode && sendConfirmCode({ confirmationCode: confirmationCode }).unwrap()
+            }
+        }
+    }, [search])
 
     const goToLogin = () => {
         router.push('/login')
     }
+
 
     const { t } = useClientTranslation(lng, 'SignUpAdditionPages')
     return <>
