@@ -1,16 +1,16 @@
-import {DeepPartial} from "react-hook-form/dist/types/utils";
-import {FieldError} from "react-hook-form";
-import {FC} from "react";
+import { DeepPartial } from "react-hook-form/dist/types/utils";
+import { FieldError } from "react-hook-form";
+import { FC } from "react";
 import Input from "@/shared/ui/Input/Input";
-import Eye from '@/shared/assets/icons/eye-outline.svg'
-import '@/shared/styles/variables/common/_form.scss'
-import '@/shared/styles/variables/common/_b-titles.scss'
-import '@/shared/styles/variables/common/_buttons.scss'
-import cls from '@/features/auth/signup/ui/signup.module.scss'
+import Eye from "@/shared/assets/icons/eye-outline.svg";
+import "@/shared/styles/variables/common/_form.scss";
+import "@/shared/styles/variables/common/_b-titles.scss";
+import "@/shared/styles/variables/common/_buttons.scss";
+import cls from "@/features/auth/signup/ui/signup.module.scss";
 
 type PasswordWrapperProps = {
     id: string;
-    className?: 'password';
+    className?: "password";
     placeholder: string;
     type: string;
     title: string;
@@ -37,12 +37,12 @@ export const PasswordWrapper: FC<PasswordWrapperProps> = ({
                 placeholder={placeholder}
                 type={type}
                 title={title}
+                error={error}
                 {...register}
             />
-            {error && error ? (
-                <span className={'error-lbl'}>{error.message}</span>
-            ) : null}
-            <span className={cls.eye} onClick={toggleShowPassword}><Eye/></span>
+            <span className={cls.eye} onClick={toggleShowPassword}>
+        <Eye />
+      </span>
         </div>
     );
 };

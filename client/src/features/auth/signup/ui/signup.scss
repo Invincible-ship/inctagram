@@ -1,6 +1,5 @@
 .info {
   margin-bottom: 7px;
-  color: #8D9094;
 }
 
 .link-registration {
@@ -10,19 +9,6 @@
   &:hover {
     text-decoration: underline;
   }
-}
-
-.signup_passwordWrapper__Byu65 {
-  width: 100%;
-}
-
-.Input_inputWrapper__Wdr2V {
-  margin-top: 24px;
-  margin-bottom: 24px;
-}
-
-.signup_eye__PsHhz {
-  top: 68% !important;
 }
 
 .link-recovery {
@@ -51,7 +37,7 @@
   cursor: pointer;
 }
 
-.icon-wrapper {
+.icon-wrapper{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -59,32 +45,3 @@
   gap: 60px;
   padding: 13px;
 }
-
-.b-title.bt16 {
-  padding-bottom: 30px;
-  padding-top: 30px;
-}
-
-
-  .label {
-    font-size: 14px;
-    font-family: Inter, serif;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-  }
-  .error {
-    color: var(--danger-500, #CC1439);
-    font-size: 14px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-
-    .input {
-      border-color: 1px solid var(--danger-500, #CC1439);
-
-    }
-  }
-
-

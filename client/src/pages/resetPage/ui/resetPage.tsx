@@ -8,8 +8,8 @@ export const ResetPage: FC<{ params: LanguageParams }> = (
 ) => {
   return (
     <div className={'content'}>
-      {/*<ForgotPassword lng={lng} />*/}
-      <ResetPassword lng={lng} />
+      <ForgotPassword lng={lng} />
+      {/*<ResetPassword lng={lng} />*/}
     </div>
   )
 }

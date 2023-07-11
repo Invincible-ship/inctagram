@@ -46,8 +46,8 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
             onKeyPress?.(e);
             onEnter && // если есть пропс onEnter
             e.key === "Enter" && // и если нажата кнопка Enter
-            onEnter() // то вызвать его
-        }
+            onEnter(); // то вызвать его
+        };
 
         return (
             <div className={s.inputWrapper}>

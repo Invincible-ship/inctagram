@@ -2,12 +2,19 @@
 @import "./reset";
 
 //common
-@import "./variables/global.scss", "./variables/mixins.scss", "./variables/common.scss";
+
+@import "./variables/global.scss",
+        "./variables/mixins.scss",
+        "./variables/common.scss";
 
 // blocks/common
-@import "../ui/Input/Input.module", "../ui/Button/Button.module";
+@import "../ui/Input/Input.module",
+        "../ui/Button/Button.module";
+
 
 // blocks
 
+       
 // features
-@import "../../features/auth/signup/ui/signup.module";
+@import "../../features/auth/signup/ui/signup";
+

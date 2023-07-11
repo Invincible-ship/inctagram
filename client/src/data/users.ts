@@ -20,4 +20,4 @@ export const users = [
         password: "12345",
         role: "guest",
     },
-]
+];

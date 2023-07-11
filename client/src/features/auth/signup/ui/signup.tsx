@@ -7,6 +7,8 @@ import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import {Button} from "@/shared/ui/Button/Button"
+import Google from '../../../../shared/assets/icons/google.svg'
+import Github from '../../../../shared/assets/icons/github.svg'
 import {SubmitHandler, useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -17,7 +19,7 @@ import {PasswordWrapper} from "@/shared/ui/PasswordWrapper/PasswordWrapper";
 import {useClientTranslation} from "@/shared/config/i18n/client";
 import {useRouter} from "next/navigation";
 import {GoogleButton} from "@/components/GoogleButton";
-// import {signIn} from "next-auth/react";
+import {signIn} from "next-auth/react";
 import {GitHubButton} from "@/components/GitHubButton";
 
 type FormSchemaType = z.infer<typeof formSchema>

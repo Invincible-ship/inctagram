@@ -3,3 +3,5 @@ import { ResetPage } from "@/pages/resetPage"
 
 export default SignUpPage
 // export default ResetPage
+
+

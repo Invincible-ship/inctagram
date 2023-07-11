@@ -24,13 +24,8 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "process.d.ts",
-    "next-auth.d.ts"
-  ],
+
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/shared/lib/hooks/useModal"],
   "exclude": ["node_modules"]
 }
+
