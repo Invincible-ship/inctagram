@@ -6,11 +6,8 @@ export const SignUpPage: FC<{ params: LanguageParams }> = (
     { params: { lng } }
 ) => {
     return (
-        <div style={{ marginTop: '100px', padding: '0 20px', display: 'flex', gap: '30px' }}>
+        <div style={{ marginTop: '100px', padding: '0 20px', display: 'flex', gap: '30px', justifyContent: 'center' }}>
             <SignUp lng={lng} />
-            <MergeAccount lng={lng} />
-            <Congratulation lng={lng} />
-            <Verification lng={lng} />
         </div>
     )
 }

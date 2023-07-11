@@ -19,12 +19,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({ lng, onClose, userEmail }) =
 
     return (
         <div className={s.wrapper}>
-            {userEmail && <ModalWindowBody lng={lng} onClose={onClose} userEmail={userEmail} />}
-            {/*{userEmail
-                ? <ModalWindowBody lng={lng} onClose={onClose} userEmail={userEmail} />
-                : <div className={s.body}>
-                    <p>Loading....</p>
-                </div>}*/}
+            <ModalWindowBody lng={lng} onClose={onClose} userEmail={userEmail} />
         </div >
     )
 }
@@ -37,11 +32,11 @@ const ModalWindowBody: FC<ModalWindowProps> = ({ lng, onClose, userEmail }) => {
                 <h3>{t('SignUpModal.title')}</h3>
                 <div onClick={onClose} className={s.xButton}>
                     <Close />
-                    <span> <Image src={x} alt="pic" width={50} height={50} /> </span>
+                    {/*<span> <Image src={x} alt="pic" width={50} height={50} /> </span>
                     <span> <Image src={'https://www.svgrepo.com/show/513953/alt-battery-0.svg'} alt="picture" width={50} height={50} /> </span>
                     <span> <Image src={testPngImg} alt="pic" width={50} height={50} /> </span>
                     <img src="./../../../../assets/icons/close.svg" alt="close" />
-                    <img src={'./../../../../assets/img/testPng.png'} alt="close" />
+                    <img src={'./../../../../assets/img/testPng.png'} alt="close" />*/}
                 </div>
             </div>
             <div className={s.content}>

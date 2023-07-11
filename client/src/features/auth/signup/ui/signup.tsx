@@ -1,6 +1,6 @@
 "use client"
 
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Link from "next/link"
 import style from './signup.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
@@ -12,7 +12,7 @@ import Github from '../../../../shared/assets/icons/github.svg'
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { authThunks } from "@/features/auth/signup/model/slice/auth.slice";
+import { authActions, authThunks } from "@/features/auth/signup/model/slice/auth.slice";
 import { useAppDispatch } from "@/shared/lib/hooks";
 import { InputField } from "@/shared/ui/InputField/InputField";
 import { PasswordWrapper } from "@/shared/ui/PasswordWrapper/PasswordWrapper";
@@ -22,8 +22,9 @@ import { GoogleButton } from "@/components/GoogleButton";
 //import { signIn } from "next-auth/react";
 import { GitHubButton } from "@/components/GitHubButton";
 import { SignUpModal } from './modalWindow/ui/SignUpModal'
+import { useUserRegistrationMutation } from '../model/slice/rtkQslice'
 
-type FormSchemaType = z.infer<typeof formSchema>
+export type FormSchemaType = z.infer<typeof formSchema>
 
 const formSchema = z
     .object({
@@ -50,15 +51,6 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     const router = useRouter();
     const dispatch = useAppDispatch()
     const { t } = useClientTranslation(lng, 'signUp')
-    //========================================================================================================================================================
-    //for SignUpModal
-    const [isOpen, setIsOpen] = useState(false);
-    const [userEmail, setUserEmail] = useState('')
-
-    const onClose = () => {
-        setIsOpen(!isOpen)
-    }
-    //========================================================================================================================================================
 
     const {
         register,
@@ -80,20 +72,27 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     }
 
     //========================================================================================================================================================
-    //изменения в onSubmit для SignUpModal
-    const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
-        try {
-            const response = await dispatch(authThunks.register(data));
-            if (response) {
-                setIsOpen(!isOpen);
-                setUserEmail(response.meta.arg.email)
-            }
-        } catch (error) { //! сюда надо засунуть ошибку с бэка
-            console.error(error);
-        }
-    };
-    //========================================================================================================================================================
+    //for SignUpModal & Congratulations
+    const [isOpen, setIsOpen] = useState(false);
+    const onClose = () => {
+        setIsOpen(!isOpen)
+    }
+    const [registerUser, response] = useUserRegistrationMutation()
 
+    const onSubmit: SubmitHandler<FormSchemaType> = async (payload) => {
+        await registerUser(payload).unwrap()
+    }
+    useEffect(() => {
+        if (response.isSuccess) {
+            setIsOpen(true);
+        }
+    }, [response.isSuccess]);
+
+    if (response.isLoading) {
+        return <div><h2>Loading....</h2></div>
+    }
+
+    //========================================================================================================================================================
 
     return (
         <div className={'form registration'}>
@@ -123,7 +122,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
                 <Link href={'/login'}
                     className={`b-title bt16 semibold ${style.linkRegistration} align-center`}><span>Sign In</span>
                 </Link>
-                <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={userEmail} />
+                {response.isSuccess && <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={response.data.email} />}
             </div>
         </div>
     )

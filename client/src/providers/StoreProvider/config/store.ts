@@ -1,14 +1,16 @@
 import { configureStore, ThunkAction, Action, ThunkDispatch, AnyAction } from '@reduxjs/toolkit'
 import { authActions, authReducer } from "@/features/auth/signup/model/slice/auth.slice";
+import { regisrationAPI } from '@/features/auth/signup/model/slice/rtkQslice'
 
 
 export function makeStore() {
     return configureStore({
         reducer: {
             auth: authReducer,
+            [regisrationAPI.reducerPath]: regisrationAPI.reducer
 
         },
-        middleware: gDM => gDM().concat()
+        middleware: gDM => gDM().concat(regisrationAPI.middleware)
     })
 }
 
