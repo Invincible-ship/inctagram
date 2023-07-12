@@ -11,7 +11,7 @@ type CommonBlockProps = {
 
 export type SignUpAdditionPagespProps = {
     lng: string,
-    goToLogin?: () => void
+    buttonAction?: () => void,
 }
 
 export const CommonBlock: FC<CommonBlockProps> =

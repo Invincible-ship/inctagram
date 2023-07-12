@@ -4,7 +4,8 @@ import { FormSchemaType } from '../../ui/signup'
 const endpoints = {
     baseUrl: 'https://inctagram-api.fly.dev',
     registration: '/auth/registration',
-    confirmation: '/auth/registration-confirmation'
+    confirmation: '/auth/registration-confirmation',
+    resendEmail: '/auth/confirmation-email-resending'
 }
 
 
@@ -24,13 +25,21 @@ export const regisrationAPI = createApi({
                 url: `${endpoints.confirmation}?${code}`,
                 method: 'POST'
             })
+        }),
+        emailResending: builder.mutation({
+            query: (body: { email: string }) => ({
+                url: endpoints.resendEmail,
+                method: 'POST',
+                body
+            })
         })
     })
 })
 
 export const {
     useUserRegistrationMutation,
-    useRegistrationConfirmationMutation
+    useRegistrationConfirmationMutation,
+    useEmailResendingMutation
 } = regisrationAPI
 
 

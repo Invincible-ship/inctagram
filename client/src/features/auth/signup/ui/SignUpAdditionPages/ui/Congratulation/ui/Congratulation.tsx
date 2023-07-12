@@ -10,8 +10,8 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useRegistrationConfirmationMutation } from "@/features/auth/signup/model/slice/rtkQslice"
 
 
-export const Congratulation: FC<SignUpAdditionPagespProps> = ({ lng, goToLogin }) => {
-
+export const Congratulation: FC<SignUpAdditionPagespProps> = ({ lng, buttonAction }) => {
+    //buttonAction is goToLogin from EmailConfirmation
 
     const { t } = useClientTranslation(lng, 'SignUpAdditionPages')
     return <>
@@ -20,7 +20,7 @@ export const Congratulation: FC<SignUpAdditionPagespProps> = ({ lng, goToLogin }
             title={t('congratulation.title')} >
             <div className={s.changinBox}>
                 <div className={s.buttons}>
-                    <Button onClick={goToLogin} className={s.btn} theme={ButtonTheme.DEFAULT}>{t('congratulation.buttonText')}</Button>
+                    <Button onClick={buttonAction} className={s.btn} theme={ButtonTheme.DEFAULT}>{t('congratulation.buttonText')}</Button>
                 </div>
                 <div className={s.image}>
                     <PictureCongratulation
