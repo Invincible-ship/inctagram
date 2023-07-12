@@ -1,6 +1,10 @@
 {
-	"SignUpModal": {
-		"title": "Email sent",
-		"text": "We have sent a link to confirm your email to"
-	}
+    "SignUpModal": {
+        "title": "Email sent",
+        "text": "We have sent a link to confirm your email to"
+    },
+    "EmailConfirmationModal": {
+        "title": "Email is confirmed",
+        "text": "Go to the Login page"
+    }
 }

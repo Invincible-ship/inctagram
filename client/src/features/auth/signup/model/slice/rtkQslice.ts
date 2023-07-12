@@ -20,12 +20,6 @@ export const regisrationAPI = createApi({
                 body,
             })
         }),
-        registrationConfirmation: builder.mutation({
-            query: (code: string) => ({
-                url: `${endpoints.confirmation}?${code}`,
-                method: 'POST'
-            })
-        }),
         emailResending: builder.mutation({
             query: (body: { email: string }) => ({
                 url: endpoints.resendEmail,
@@ -38,10 +32,5 @@ export const regisrationAPI = createApi({
 
 export const {
     useUserRegistrationMutation,
-    useRegistrationConfirmationMutation,
     useEmailResendingMutation
 } = regisrationAPI
-
-
-//registrationСonfirm: builder.mutation<void | ServerErrorResponse, string>
-//registration-confirmation?confirmationCode=1689167348610

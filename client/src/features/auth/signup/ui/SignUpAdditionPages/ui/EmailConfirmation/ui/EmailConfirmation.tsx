@@ -33,7 +33,6 @@ export const EmailConfirmation: FC<SignUpAdditionPagespProps> = ({ lng }) => {
     }
     const onClose = () => {
         setIsOpen(!isOpen)
-        goToLogin()
     }
 
     if (status === emailIsConfirmed) {
@@ -42,7 +41,7 @@ export const EmailConfirmation: FC<SignUpAdditionPagespProps> = ({ lng }) => {
     else if (status === emailWasUsed) {
         return <>
             <Congratulation buttonAction={goToLogin} lng={lng} />
-            <EmailConfirmationModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={''} />
+            <EmailConfirmationModal lng={lng} onClose={onClose} isOpen={isOpen} />
         </>
     }
 }
