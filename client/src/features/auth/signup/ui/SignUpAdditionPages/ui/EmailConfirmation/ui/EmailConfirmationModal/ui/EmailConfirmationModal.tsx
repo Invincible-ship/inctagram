@@ -1,5 +1,5 @@
 "use client"
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import '@/shared/styles/reset.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import { Modal } from '@/shared/ui/Modal/Modal'
@@ -8,16 +8,13 @@ import { useClientTranslation } from '@/shared/config/i18n/client'
 
 type EmailConfirmationModalPropsType = Omit<ModalWindowProps, 'title' | 'text'>
 
+const modalTitle = 'EmailConfirmationModal.title'
+const modalText = 'EmailConfirmationModal.text'
+const languageDatabase = 'signUpModal'
+
 export const EmailConfirmationModal: FC<EmailConfirmationModalPropsType> = ({ lng, onClose, isOpen }) => {
-    const modalTitle = 'EmailConfirmationModal.title'
-    const modalText = 'EmailConfirmationModal.text'
-    const languageDatabase = 'signUpModal'
 
     const { t } = useClientTranslation(lng, languageDatabase)
-
-    const [title, setTitle] = useState(t(modalTitle))
-    const [text, setText] = useState(t(modalText))
-
 
     return <>
         <Modal onClose={onClose} isOpen={isOpen}  >
@@ -25,8 +22,8 @@ export const EmailConfirmationModal: FC<EmailConfirmationModalPropsType> = ({ ln
                 lng={lng}
                 onClose={onClose}
                 isOpen={isOpen}
-                title={title}
-                text={text}
+                title={t(modalTitle)}
+                text={t(modalText)}
             />
         </Modal>
     </>
