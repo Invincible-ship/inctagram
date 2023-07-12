@@ -10,24 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useRegistrationConfirmationMutation } from "@/features/auth/signup/model/slice/rtkQslice"
 
 
-export const Congratulation: FC<SignUpAdditionPagespProps> = ({ lng }) => {
-
-    const router = useRouter();
-    const search = useSearchParams()
-    const [sendConfirmCode, response] = useRegistrationConfirmationMutation()
-
-    useEffect(() => {
-        if (search) {
-            const confirmationCode = search.get('confirmationCode')
-            {
-                confirmationCode && sendConfirmCode({ confirmationCode: confirmationCode }).unwrap()
-            }
-        }
-    }, [search])
-
-    const goToLogin = () => {
-        router.push('/login')
-    }
+export const Congratulation: FC<SignUpAdditionPagespProps> = ({ lng, goToLogin }) => {
 
 
     const { t } = useClientTranslation(lng, 'SignUpAdditionPages')

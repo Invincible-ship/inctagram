@@ -20,10 +20,9 @@ export const regisrationAPI = createApi({
             })
         }),
         registrationConfirmation: builder.mutation({
-            query: (body: { confirmationCode: string }) => ({
-                url: endpoints.confirmation,
-                method: 'POST',
-                body
+            query: (code: string) => ({
+                url: `${endpoints.confirmation}?${code}`,
+                method: 'POST'
             })
         })
     })
