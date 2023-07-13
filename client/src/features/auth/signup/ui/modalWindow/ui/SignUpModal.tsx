@@ -1,15 +1,29 @@
 "use client"
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import '@/shared/styles/reset.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { ModalWindow, ModalWindowProps } from '@/shared/ui/Modal/children/ui/ModalWindow'
+import { useClientTranslation } from '@/shared/config/i18n/client'
+
+const modalTitle = 'signUpModal.title'
+const modalText = 'signUpModal.text'
+const languageDatabase = 'signUpModal'
 
 export const SignUpModal: FC<ModalWindowProps> = ({ lng, onClose, isOpen, userEmail }) => {
 
+    const { t } = useClientTranslation(lng, languageDatabase)
+
     return <>
         <Modal onClose={onClose} isOpen={isOpen}  >
-            <ModalWindow lng={lng} onClose={onClose} isOpen={isOpen} userEmail={userEmail} />
+            <ModalWindow
+                lng={lng}
+                title={t(modalTitle)}
+                text={t(modalText)}
+                onClose={onClose}
+                isOpen={isOpen}
+                userEmail={userEmail}
+            />
         </Modal>
     </>
 }

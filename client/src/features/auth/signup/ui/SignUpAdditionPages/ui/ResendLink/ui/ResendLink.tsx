@@ -13,7 +13,7 @@ import { useEmailResendingMutation } from "@/features/auth/signup/model/slice/rt
 const title = 'verification.title'
 const text = 'verification.text'
 const buttonText = 'verification.buttonText'
-const languageDatabase = 'SignUpAdditionPages'
+const languageDatabase = 'signUpAdditionPages'
 
 export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)

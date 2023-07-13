@@ -8,8 +8,8 @@ import { useClientTranslation } from '@/shared/config/i18n/client'
 
 type EmailConfirmationModalPropsType = Omit<ModalWindowProps, 'title' | 'text'>
 
-const modalTitle = 'EmailConfirmationModal.title'
-const modalText = 'EmailConfirmationModal.text'
+const modalTitle = 'signUpModal.title'
+const modalText = 'signUpModal.text'
 const languageDatabase = 'signUpModal'
 
 export const ResendLinkModal: FC<EmailConfirmationModalPropsType> = ({ lng, onClose, isOpen }) => {

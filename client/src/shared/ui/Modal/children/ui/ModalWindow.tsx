@@ -2,7 +2,6 @@
 import { FC } from "react"
 import Close from 'public/svg/close.svg'
 import { Button } from "@/shared/ui/Button/Button"
-import { useClientTranslation } from "@/shared/config/i18n/client";
 import s from './modalWindow.module.scss';
 
 export type ModalWindowProps = {
