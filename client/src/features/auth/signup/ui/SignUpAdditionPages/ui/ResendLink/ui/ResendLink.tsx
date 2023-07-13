@@ -9,6 +9,7 @@ import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss
 import { ResendLinkModal } from "./ResendLinkModal/ui/ResendLinkModal"
 import { useSearchParams } from "next/navigation"
 import { useEmailResendingMutation } from "@/features/auth/signup/model/slice/rtkQslice"
+import { ErrorModal } from "./ResendLinkModal/ui/ErrorModal"
 
 const title = 'verification.title'
 const text = 'verification.text'
@@ -19,15 +20,15 @@ export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [email, setEmail] = useState<string>()
     const search = useSearchParams()
-    const [sendLinkAgain, { isSuccess, isLoading }] = useEmailResendingMutation()
+    const [sendLinkAgain, { isSuccess, isLoading, isError }] = useEmailResendingMutation()
 
     useEffect(() => {
         if (search) {
             const queryEmail = search.get('email')
             { queryEmail && setEmail(queryEmail) }
         }
-        { isSuccess && setIsOpen(true) }
-    }, [search, isSuccess])
+        { (isSuccess || isError) && setIsOpen(true) }
+    }, [search, isSuccess, isError])
 
     const resendLink = () => {
         { email && sendLinkAgain({ email: email }) }
@@ -42,7 +43,6 @@ export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
     if (isLoading) {
         return <div>Loading...</div>
     }
-
     return <>
         <CommonBlock
             title={t(title)}
@@ -60,6 +60,9 @@ export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
                 </div>
             </div>
         </CommonBlock>
-        <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />
+        {isError
+            ? <ErrorModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />
+            : <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />
+        }
     </>
 }

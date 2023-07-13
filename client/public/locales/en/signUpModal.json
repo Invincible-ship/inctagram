@@ -6,5 +6,9 @@
     "emailConfirmationModal": {
         "title": "Email is confirmed",
         "text": "Go to the Login page"
+    },
+    "error": {
+        "title": "Email error",
+        "text": "Email is incorrect"
     }
 }
