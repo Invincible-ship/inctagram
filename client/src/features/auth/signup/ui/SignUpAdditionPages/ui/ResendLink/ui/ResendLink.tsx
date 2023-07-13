@@ -1,14 +1,18 @@
 'use client'
 
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
 import { CommonBlock, SignUpAdditionPagespProps } from "../../CommonBlock/ui/CommonBlock"
 import { useClientTranslation } from "@/shared/config/i18n/client"
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
 import PictureVerification from '@/shared/assets/icons/mergeLinkVerification-image.svg'
 import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss'
+import { ResendLinkModal } from "./ResendLinkModal/ui/ResendLinkModal"
+import { useSearchParams } from "next/navigation"
+import { useEmailResendingMutation } from "@/features/auth/signup/model/slice/rtkQslice"
 
-export const Verification: FC<SignUpAdditionPagespProps> = ({ lng, buttonAction }) => {
-    //buttonAction is resendLink from EmailConfirmation
+export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
+
+
     const { t } = useClientTranslation(lng, 'SignUpAdditionPages')
     return <>
         <CommonBlock
@@ -17,7 +21,7 @@ export const Verification: FC<SignUpAdditionPagespProps> = ({ lng, buttonAction 
         >
             <div className={s.changinBox}>
                 <div className={s.buttons}>
-                    <Button onClick={buttonAction} className={s.btn} theme={ButtonTheme.DEFAULT}>{t('verification.buttonText')}</Button>
+                    <Button onClick={() => { }} className={s.btn} theme={ButtonTheme.DEFAULT}>{t('verification.buttonText')}</Button>
                 </div>
                 <div className={s.image}>
                     <PictureVerification
@@ -27,5 +31,6 @@ export const Verification: FC<SignUpAdditionPagespProps> = ({ lng, buttonAction 
                 </div>
             </div>
         </CommonBlock>
+        <ResendLinkModal lng={lng} isOpen={true} onClose={() => { }} />
     </>
 }

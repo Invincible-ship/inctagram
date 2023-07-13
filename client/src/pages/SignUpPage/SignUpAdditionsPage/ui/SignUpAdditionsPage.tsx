@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { EmailConfirmation, MergeAccount } from '@/features/auth/signup'
+import { EmailConfirmation, MergeAccount, ResendLink } from '@/features/auth/signup'
 import { LanguageParams } from '@/shared/config/i18n/types'
 
 export const MergeAccountPage: FC<{ params: LanguageParams }> = (
@@ -11,5 +11,10 @@ export const EmailConfirmationPage: FC<{ params: LanguageParams }> = (
     { params: { lng } }
 ) => {
     return <EmailConfirmation lng={lng} />
+}
+export const ResendLinkPage: FC<{ params: LanguageParams }> = (
+    { params: { lng } }
+) => {
+    return <ResendLink lng={lng} />
 }
 

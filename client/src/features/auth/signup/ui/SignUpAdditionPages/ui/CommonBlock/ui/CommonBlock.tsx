@@ -1,19 +1,6 @@
 import { FC, ReactNode } from 'react'
 import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss'
 
-type CommonBlockProps = {
-    title: string
-    text: string | any
-    textSecondPart?: string | any
-    children?: ReactNode
-    email?: string
-}
-
-export type SignUpAdditionPagespProps = {
-    lng: string,
-    buttonAction?: () => void,
-}
-
 export const CommonBlock: FC<CommonBlockProps> =
     ({ email, title, text, textSecondPart, children }) => {
         return <>
@@ -31,12 +18,25 @@ export const CommonBlock: FC<CommonBlockProps> =
         </>
     }
 
-type TitleProps = {
-    titleText: string;
-}
-
-export const Title = ({ titleText }: TitleProps) => {
+const Title = ({ titleText }: TitleProps) => {
     return <div className={s.title}>
         <h3>{titleText}</h3>
     </div>
+}
+
+//========================================================================================================================================================
+
+type CommonBlockProps = {
+    title: string
+    text: string | any
+    textSecondPart?: string | any
+    children?: ReactNode
+    email?: string
+}
+type TitleProps = {
+    titleText: string;
+}
+export type SignUpAdditionPagespProps = {
+    lng: string,
+    buttonAction?: () => void
 }
