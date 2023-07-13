@@ -4,17 +4,9 @@
     "plugin:storybook/recommended",
     "plugin:storybook/recommended"
   ],
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "i18next",
-    "react-hooks"
-  ],
+  "plugins": ["react", "@typescript-eslint", "i18next", "react-hooks"],
   "rules": {
-    "semi": [
-      2,
-      "never"
-    ],
+    "semi": [2, "never"],
     "react/jsx-indent": [
       2,
       2,
@@ -32,11 +24,7 @@
     "react/jsx-filename-extension": [
       2,
       {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".tsx"
-        ]
+        "extensions": [".js", ".jsx", ".tsx"]
       }
     ],
     "import/no-unresolved": "off",
@@ -60,11 +48,7 @@
       1,
       {
         "markupOnly": true,
-        "ignoreAttribute": [
-          "data-testid",
-          "fallback",
-          "to"
-        ]
+        "ignoreAttribute": ["data-testid", "fallback", "to"]
       }
     ],
     "max-len": [
@@ -75,10 +59,7 @@
         "ignoreStrings": true
       }
     ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
+    "linebreak-style": ["error", "unix"],
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "react-hooks/rules-of-hooks": "error"
@@ -88,9 +69,7 @@
   },
   "overrides": [
     {
-      "files": [
-        "**/src/**/*.{test,stories}.{ts,tsx}"
-      ],
+      "files": ["**/src/**/*.{test,stories}.{ts,tsx}"],
       "rules": {
         "i18next/no-literal-string": "off",
         "max-len": "off"
