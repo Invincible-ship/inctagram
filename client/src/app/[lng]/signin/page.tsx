@@ -1,4 +1,4 @@
-import { SignInPage } from "@/pages/auth/signin/ui/SignInPage"
+import { SignInPage } from "@/pages/auth/signin"
 
 export default SignInPage
 

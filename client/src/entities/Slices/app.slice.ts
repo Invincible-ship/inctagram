@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AxiosError, isAxiosError } from "axios";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { AxiosError, isAxiosError } from "axios"
 
 const slice = createSlice({
   name: "app",
@@ -10,10 +10,10 @@ const slice = createSlice({
   },
   reducers: {
     setIsLoading: (state: {isLoading: boolean}, action: PayloadAction<{ isLoading: boolean }>) => {
-      state.isLoading = action.payload.isLoading;
+      state.isLoading = action.payload.isLoading
     },
     setError: (state: {error}, action: PayloadAction<{ error: string | null }>) => {
-      state.error = action.payload.error;
+      state.error = action.payload.error
     },
   },
   extraReducers: (builder) => {
@@ -21,31 +21,31 @@ const slice = createSlice({
       .addMatcher(
         (action) => action.type.endsWith("/pending"),
         (state:{isLoading}, action) => {
-          state.isLoading = true;
+          state.isLoading = true
         }
       )
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
         (state:{isLoading, error}, action) => {
-          state.isLoading = false;
-          if (!action.payload.showGlobalError) return;
-          const err = action.payload.e as Error | AxiosError<{ error: string }>;
+          state.isLoading = false
+          if (!action.payload.showGlobalError) return
+          const err = action.payload.e as Error | AxiosError<{ error: string }>
           if (isAxiosError(err)) {
-            state.error = err.response ? err.response.data.error : err.message;
+            state.error = err.response ? err.response.data.error : err.message
           } else {
-            state.error = `Native error ${err.message}`;
+            state.error = `Native error ${err.message}`
           }
         }
       )
       .addMatcher(
         (action) => action.type.endsWith("/fulfilled"),
         (state: {isLoading}, action) => {
-          state.isLoading = false;
+          state.isLoading = false
         }
-      );
+      )
   },
-});
+})
 
-export const appReducer = slice.reducer;
-export const appActions = slice.actions;
+export const appReducer = slice.reducer
+export const appActions = slice.actions
 

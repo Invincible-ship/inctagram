@@ -4,7 +4,6 @@
 
 .forgotPassword {
   font-size: 14px;
-  font-family: Inter, sans-serif;
   line-height: 24px;
   float: right;
 
@@ -14,7 +13,7 @@
 
   &:not(:last-child),
   &:not(:first-child) {
-    margin: 48px 0 24px 0;
+    margin: 30px 0 0 0;
   }
 }
 
