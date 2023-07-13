@@ -10,33 +10,47 @@ import { ResendLinkModal } from "./ResendLinkModal/ui/ResendLinkModal"
 import { useSearchParams } from "next/navigation"
 import { useEmailResendingMutation } from "@/features/auth/signup/model/slice/rtkQslice"
 
+const title = 'verification.title'
+const text = 'verification.text'
+const buttonText = 'verification.buttonText'
+const languageDatabase = 'SignUpAdditionPages'
+
 export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [email, setEmail] = useState<string>()
     const search = useSearchParams()
-    const [sendLinkAgain] = useEmailResendingMutation()
+    const [sendLinkAgain, { isSuccess, isLoading }] = useEmailResendingMutation()
 
     useEffect(() => {
         if (search) {
             const queryEmail = search.get('email')
             { queryEmail && setEmail(queryEmail) }
         }
-    })
+        { isSuccess && setIsOpen(true) }
+    }, [search, isSuccess])
 
     const resendLink = () => {
         { email && sendLinkAgain({ email: email }) }
     }
 
+    const onClose = () => {
+        setIsOpen(false);
+    }
 
-    const { t } = useClientTranslation(lng, 'SignUpAdditionPages')
+    const { t } = useClientTranslation(lng, languageDatabase)
+
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
+
     return <>
         <CommonBlock
-            title={t('verification.title')}
-            text={t('verification.text')}
+            title={t(title)}
+            text={t(text)}
         >
             <div className={s.changinBox}>
                 <div className={s.buttons}>
-                    <Button onClick={resendLink} className={s.btn} theme={ButtonTheme.DEFAULT}>{t('verification.buttonText')}</Button>
+                    <Button onClick={resendLink} className={s.btn} theme={ButtonTheme.DEFAULT}>{t(buttonText)}</Button>
                 </div>
                 <div className={s.image}>
                     <PictureVerification
@@ -46,6 +60,6 @@ export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
                 </div>
             </div>
         </CommonBlock>
-        <ResendLinkModal lng={lng} isOpen={true} onClose={() => { }} />
+        <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} />
     </>
 }
