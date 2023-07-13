@@ -6,24 +6,25 @@ import { useClientTranslation } from "@/shared/config/i18n/client"
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
 import PictureCongratulation from '@/shared/assets/icons/mergeDone-image.svg'
 import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss'
-import { useRouter } from "next/navigation"
+
+const title = 'congratulation.title'
+const text = 'congratulation.text'
+const buttonText = 'congratulation.buttonText'
+const languageDatabase = 'signUpAdditionPages'
 
 
-export const Congratulation: FC<SignUpAdditionPagespProps> = ({ lng }) => {
-    const router = useRouter();
+export const Congratulation: FC<SignUpAdditionPagespProps> = ({ lng, buttonAction }) => {
+    //buttonAction is goToLogin from EmailConfirmation
 
-    const goToLogin = () => {
-        router.push('/login')
-    }
-
-    const { t } = useClientTranslation(lng, 'SignUpAdditionPages')
+    const { t } = useClientTranslation(lng, languageDatabase)
     return <>
         <CommonBlock
-            text={t('congratulation.text')}
-            title={t('congratulation.title')} >
+            title={t(title)}
+            text={t(text)}
+        >
             <div className={s.changinBox}>
                 <div className={s.buttons}>
-                    <Button onClick={goToLogin} className={s.btn} theme={ButtonTheme.DEFAULT}>{t('congratulation.buttonText')}</Button>
+                    <Button onClick={buttonAction} className={s.btn} theme={ButtonTheme.DEFAULT}>{t(buttonText)}</Button>
                 </div>
                 <div className={s.image}>
                     <PictureCongratulation
