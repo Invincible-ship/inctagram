@@ -1,35 +1,42 @@
-import React, { useEffect } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import {useAppDispatch, useAppSelector} from "@/shared/lib/hooks";
+"use client"
+
 import {toast, ToastContainer} from "react-toastify";
-import {appActions} from "@/entities/Slices/app.slice";
+import { useEffect} from "react";
 
+export default function GlobalError({
+                                        error,
+                                    }: {
+    error?: Error
+}) {
 
-export const GlobalError = () => {
-  const error = useAppSelector((state) => state.app.error);
-  const dispatch = useAppDispatch();
-  if (error !== null) {
-    toast.error(error);
-  }
+    if (error !== null) {
+        toast.error(error?.message);
+    }
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(appActions.setError({ error: null }));
-    }, 2000);
-  }, [error]);
+    // useEffect(() => {
+    //     if (error) {
+    //         toast.error(error);
+    //     }
+    // }, [error]);
 
-  return (
-    <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-    />
-  );
-};
+    useEffect(() => {
+        setTimeout(() => {
+            toast.error(error?.message);
+        }, 2000);
+    }, [error]);
+
+    return (
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+        />
+    )
+}

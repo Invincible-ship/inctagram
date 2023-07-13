@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import {ReactNode, Suspense} from "react";
 import {languages} from "@/shared/config/i18n/settings";
 import {dir} from "i18next";
 import {Inter} from "next/font/google";
@@ -6,9 +6,8 @@ import {LanguageParams} from "@/shared/config/i18n/types";
 import {Header} from "@/widgets/Header";
 import "@/shared/styles/index.scss";
 import "@/shared/styles/variables/common.scss";
-import {Providers} from "@/components/Providers";
-import {StoreProvider} from "@/providers/StoreProvider/provider";
-import {Suspense} from "react";
+import {AuthenticationProvider} from "@/providers/Provider/AuthenticationProvider";
+import {StoreProvider} from "@/providers/Provider/StoreProvider";
 import Loading from "@/app/[lng]/loading";
 
 
@@ -28,14 +27,14 @@ const RootLayout = ({children, params: {lng}}: { children: ReactNode; params: La
         <html lang={lng} dir={dir(lng)} className={inter.className}>
         <head/>
         <body className="app">
-        <Providers>
+        <AuthenticationProvider>
             <StoreProvider>
                 <Header lng={lng}/>
                 <Suspense fallback={<Loading/>}>
-                    {children}
+                       {children}
                 </Suspense>
             </StoreProvider>
-        </Providers>
+        </AuthenticationProvider>
         </body>
         </html>
     );

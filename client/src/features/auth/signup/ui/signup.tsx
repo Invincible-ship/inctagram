@@ -10,33 +10,38 @@ import {Button} from "@/shared/ui/Button/Button"
 import {SubmitHandler, useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {authThunks} from "@/features/auth/signup/model/slice/auth.slice";
-import {useAppDispatch} from "@/shared/lib/hooks";
 import {InputField} from "@/shared/ui/InputField/InputField";
 import {PasswordWrapper} from "@/shared/ui/PasswordWrapper/PasswordWrapper";
 import {useClientTranslation} from "@/shared/config/i18n/client";
-import {useRouter} from "next/navigation";
 import {GoogleButton} from "@/shared/ui/GoogleButton/GoogleButton";
-import {signIn} from "next-auth/react";
 import {GitHubButton} from "@/shared/ui/GitHubButton/GitHubButton";
-import {formSchema} from "@/features/auth/signIn/ui/signIn";
+import {useSignUpMutation} from "@/features/auth/signup/model/api/signUpApi";
+import {Preloader} from "@/shared/ui/Preloader/Preloader";
+import {useAppDispatch} from "@/shared/lib/hooks";
+import {userActions} from "@/entities/User/model/slice/user.slice";
+import GlobalError from "@/shared/ui/GlobalError/GlobalError";
 
-type FormSchemaType = z.infer<typeof formSchema>
-export const SignUp = () => {
+type SignUpProps= {
+    lng?: string
+}
+
+export const SignUp:FC<SignUpProps> = ({lng}) => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     const dispatch = useAppDispatch()
-    const {t} = useClientTranslation()
-    const userNameRequired = t("signUp.validate.userNameRequired");
-    const userNameMaxLength = t("signUp.validate.userNameMaxLength");
-    const emailInvalid = t("signUp.validate.emailInvalid");
-    const emailRequired = t("signUp.validate.emailRequired");
-    const passwordRequired = t("signUp.validate.passwordRequired");
-    const passwordMinLength = t("signUp.validate.passwordMinLength");
-    const passwordMaxLength = t("signUp.validate.passwordMaxLength");
-    const passwordConfirmationRequired = t("signUp.validate.passwordConfirmationRequired");
-    const passwordsDoNotMatch = t("signUp.validate.passwordsDoNotMatch");
+
+    const {t} = useClientTranslation(lng, 'signUp')
+
+    const userNameRequired = t("validate.userNameRequired");
+    const userNameMaxLength = t("validate.userNameMaxLength");
+    const emailInvalid = t("validate.emailInvalid");
+    const emailRequired = t("validate.emailRequired");
+    const passwordRequired = t("validate.passwordRequired");
+    const passwordMinLength = t("validate.passwordMinLength");
+    const passwordMaxLength = t("validate.passwordMaxLength");
+    const passwordConfirmationRequired = t("validate.passwordConfirmationRequired");
+    const passwordsDoNotMatch = t("validate.passwordsDoNotMatch");
     const formSchema = z
         .object({
             userName: z.string().min(6, userNameRequired).max(30, userNameMaxLength),
@@ -51,11 +56,13 @@ export const SignUp = () => {
             path: ["passwordConfirmation"],
             message: passwordsDoNotMatch,
         })
+    type FormSchemaType = z.infer<typeof formSchema>
+
     const {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm({
+    } = useForm<FormSchemaType>({
         resolver: zodResolver(formSchema),
     })
 
@@ -67,14 +74,35 @@ export const SignUp = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
+    const [signUp, {isLoading, isError, error}] = useSignUpMutation();
+
+
+    if (isLoading) {
+        return <Preloader/>;
+    }
+
+    if (isError) {
+        if (typeof error === 'string') {
+            return <h1>{error}</h1>;
+        } else if (error && 'error' in error) {
+            return <h1>{error.error}</h1>;
+        }
+    }
+
+
     const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
-        dispatch(authThunks.register(data));
+        try {
+            await signUp(data);
+            dispatch(userActions.setAuthData(data))
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
         <div className={"form registration"}>
             <div className="form-wrapper auth-form">
-                <div className={"title b-title bt26 semibold align-center"}>{t('signUp.signUp')}</div>
+                <div className={"title b-title bt26 semibold align-center"}>{t('signUp')}</div>
                 <div className={style.iconWrapper}>
                     <GoogleButton/>
                     <GitHubButton/>
@@ -83,44 +111,44 @@ export const SignUp = () => {
                     <InputField
                         id={"userName"}
                         type={"text"}
-                        placeholder={t('signUp.userName')}
-                        title={t('signUp.userName')}
-                        register={...register("userName")}
+                        placeholder={t('userName')}
+                        title={t('userName')}
+                        register={register("userName")}
                         error={errors.userName}
                     />
                     <InputField
                         id={"email"}
                         type={"email"}
-                        placeholder={t('signUp.email')}
-                        title={t('signUp.email')}
-                        register={...register("email")}
+                        placeholder={t('email')}
+                        title={t('email')}
+                        register={register("email")}
                         error={errors.email}
                     />
                     <PasswordWrapper
                         id={"password"}
-                        placeholder={t('signUp.password')}
+                        placeholder={t('password')}
                         type={showPassword ? "text" : "password"}
-                        title={t('signUp.password')}
-                        register={...register("password")}
+                        title={t('password')}
+                        register={register("password")}
                         toggleShowPassword={toggleShowPassword}
                         error={errors.password}
                     />
                     <PasswordWrapper
                         id={"passwordConfirmation"}
-                        placeholder={t('signUp.passwordConfirmation')}
+                        placeholder={t('passwordConfirmation')}
                         type={showConfirmPassword ? "text" : "password"}
-                        title={t('signUp.passwordConfirmation')}
-                        register={...register("passwordConfirmation")}
+                        title={t('passwordConfirmation')}
+                        register={register("passwordConfirmation")}
                         toggleShowPassword={toggleShowConfirmPassword}
                         error={errors.passwordConfirmation}
                     />
                     <Button type="submit" className={"styled-btn styled-btn-1"}>
-                        {t('signUp.signUp')}
+                        {t('signUp')}
                     </Button>
                 </form>
-                <span className={`info b-title bt14  align-center semibold`}>{t('signUp.doYouHaveAnAccount')}</span>
+                <span className={`info b-title bt14  align-center semibold`}>{t('doYouHaveAnAccount')}</span>
                 <Link href={"/login"} className={`b-title bt16 semibold ${style.linkRegistration} align-center`}>
-                    <span>{t('signUp.signIn')}</span>
+                    <span>{t('signIn')}</span>
                 </Link>
             </div>
         </div>

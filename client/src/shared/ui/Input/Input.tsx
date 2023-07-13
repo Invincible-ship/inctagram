@@ -13,7 +13,7 @@ type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
 type InputPropsType = Omit<DefaultInputPropsType, "type"> & {
     onChangeText?: (value: string) => void;
     onEnter?: () => void;
-    error?: ReactNode;
+    error?: { message?: ReactNode };
     spanClassName?: string;
     type?: string;
     title?: string;

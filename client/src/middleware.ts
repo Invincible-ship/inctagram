@@ -6,8 +6,11 @@ acceptLanguage.languages(languages);
 
 export const config = {
   // matcher: '/:lng*'
-  matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)"],
-};
+  matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)",
+    "/profile",
+    "/protected/:path*"
+  ],
+}
 
 const cookieName = "i18next";
 

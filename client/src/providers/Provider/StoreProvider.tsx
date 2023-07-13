@@ -1,12 +1,13 @@
 "use client"
 
 import { Provider } from "react-redux";
-import store from "@/providers/StoreProvider/config/store";
-import {GlobalError} from "@/shared/ui/GlobalError/GlobalError";
+import {store} from "@/providers/Provider/config/store";
+
+
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
   return <Provider store={store}>
-    <GlobalError/>
+    {/*<GlobalError/> //перенести в layout*/}
     {children}
   </Provider>;
 }
