@@ -9,7 +9,7 @@ type HeaderProps = {
 };
 
 export const Header: FC<HeaderProps> = ({ lng }) => (
-  <header className={cls.header}>
+  <header data-testid="header" className={cls.header}>
     <div className={cls.headerContainer}>
       <div className={cls.logo}>
         <Logo />

@@ -9,14 +9,21 @@ export enum ButtonTheme {
   TEXT = "text",
 }
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends
+  ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   theme?: ButtonTheme;
 }
 
 export const Button: FC<ButtonProps> = ({ className = "", theme = ButtonTheme.DEFAULT, children, ...rest }) => {
   return (
-    <button type="button" className={classNames(cls.Button, {}, [className, cls[theme]])} {...rest}>
+    <button 
+      type="button"
+      className={
+        classNames(cls.Button, {}, [className, cls[theme]])
+      }
+      {...rest}
+    >
       {children}
     </button>
   );
