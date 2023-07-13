@@ -12,7 +12,7 @@ const modalTitle = 'signUpModal.title'
 const modalText = 'signUpModal.text'
 const languageDatabase = 'signUpModal'
 
-export const ResendLinkModal: FC<EmailConfirmationModalPropsType> = ({ lng, onClose, isOpen }) => {
+export const ResendLinkModal: FC<EmailConfirmationModalPropsType> = ({ lng, onClose, isOpen, userEmail }) => {
 
     const { t } = useClientTranslation(lng, languageDatabase)
 
@@ -24,6 +24,7 @@ export const ResendLinkModal: FC<EmailConfirmationModalPropsType> = ({ lng, onCl
                 isOpen={isOpen}
                 title={t(modalTitle)}
                 text={t(modalText)}
+                userEmail={userEmail}
             />
         </Modal>
     </>

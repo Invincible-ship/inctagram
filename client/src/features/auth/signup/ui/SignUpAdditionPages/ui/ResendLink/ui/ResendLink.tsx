@@ -60,6 +60,6 @@ export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
                 </div>
             </div>
         </CommonBlock>
-        <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} />
+        <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />
     </>
 }
