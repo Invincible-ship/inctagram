@@ -1,5 +1,2 @@
-export default function ResendLink() {
-    return <div>
-        <h1>resendLink</h1>
-    </div>
-} 
+import { ResendLinkPage } from "@/pages/SignUpPage"
+export default ResendLinkPage

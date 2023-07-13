@@ -1,9 +1,9 @@
 {
-    "SignUpModal": {
+    "signUpModal": {
         "title": "Письмо отправлено",
         "text": "Мы отправили ссылку для подтверждения электронной почты на"
     },
-    "EmailConfirmationModal": {
+    "emailConfirmationModal": {
         "title": "Ваша почта уже подтверждена",
         "text": "Перейдите на страницу входа"
     }

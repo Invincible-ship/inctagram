@@ -6,11 +6,13 @@ import { Modal } from '@/shared/ui/Modal/Modal'
 import { ModalWindow, ModalWindowProps } from '@/shared/ui/Modal/children/ui/ModalWindow'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 
+type EmailConfirmationModalPropsType = Omit<ModalWindowProps, 'title' | 'text'>
+
 const modalTitle = 'signUpModal.title'
 const modalText = 'signUpModal.text'
 const languageDatabase = 'signUpModal'
 
-export const SignUpModal: FC<ModalWindowProps> = ({ lng, onClose, isOpen, userEmail }) => {
+export const ResendLinkModal: FC<EmailConfirmationModalPropsType> = ({ lng, onClose, isOpen, userEmail }) => {
 
     const { t } = useClientTranslation(lng, languageDatabase)
 
@@ -18,10 +20,10 @@ export const SignUpModal: FC<ModalWindowProps> = ({ lng, onClose, isOpen, userEm
         <Modal onClose={onClose} isOpen={isOpen}  >
             <ModalWindow
                 lng={lng}
-                title={t(modalTitle)}
-                text={t(modalText)}
                 onClose={onClose}
                 isOpen={isOpen}
+                title={t(modalTitle)}
+                text={t(modalText)}
                 userEmail={userEmail}
             />
         </Modal>

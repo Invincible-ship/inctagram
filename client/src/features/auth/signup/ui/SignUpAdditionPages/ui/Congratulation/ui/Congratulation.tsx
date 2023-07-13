@@ -7,18 +7,24 @@ import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
 import PictureCongratulation from '@/shared/assets/icons/mergeDone-image.svg'
 import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss'
 
+const title = 'congratulation.title'
+const text = 'congratulation.text'
+const buttonText = 'congratulation.buttonText'
+const languageDatabase = 'signUpAdditionPages'
+
 
 export const Congratulation: FC<SignUpAdditionPagespProps> = ({ lng, buttonAction }) => {
     //buttonAction is goToLogin from EmailConfirmation
 
-    const { t } = useClientTranslation(lng, 'SignUpAdditionPages')
+    const { t } = useClientTranslation(lng, languageDatabase)
     return <>
         <CommonBlock
-            text={t('congratulation.text')}
-            title={t('congratulation.title')} >
+            title={t(title)}
+            text={t(text)}
+        >
             <div className={s.changinBox}>
                 <div className={s.buttons}>
-                    <Button onClick={buttonAction} className={s.btn} theme={ButtonTheme.DEFAULT}>{t('congratulation.buttonText')}</Button>
+                    <Button onClick={buttonAction} className={s.btn} theme={ButtonTheme.DEFAULT}>{t(buttonText)}</Button>
                 </div>
                 <div className={s.image}>
                     <PictureCongratulation
