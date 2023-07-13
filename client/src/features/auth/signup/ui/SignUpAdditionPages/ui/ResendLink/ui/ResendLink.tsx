@@ -11,6 +11,21 @@ import { useSearchParams } from "next/navigation"
 import { useEmailResendingMutation } from "@/features/auth/signup/model/slice/rtkQslice"
 
 export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [email, setEmail] = useState<string>()
+    const search = useSearchParams()
+    const [sendLinkAgain] = useEmailResendingMutation()
+
+    useEffect(() => {
+        if (search) {
+            const queryEmail = search.get('email')
+            { queryEmail && setEmail(queryEmail) }
+        }
+    })
+
+    const resendLink = () => {
+        { email && sendLinkAgain({ email: email }) }
+    }
 
 
     const { t } = useClientTranslation(lng, 'SignUpAdditionPages')
@@ -21,7 +36,7 @@ export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
         >
             <div className={s.changinBox}>
                 <div className={s.buttons}>
-                    <Button onClick={() => { }} className={s.btn} theme={ButtonTheme.DEFAULT}>{t('verification.buttonText')}</Button>
+                    <Button onClick={resendLink} className={s.btn} theme={ButtonTheme.DEFAULT}>{t('verification.buttonText')}</Button>
                 </div>
                 <div className={s.image}>
                     <PictureVerification
