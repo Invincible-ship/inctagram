@@ -22,6 +22,7 @@
     "@types/react-dom": "18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "accept-language": "^3.0.18",
+    "axios": "^1.4.0",
     "encoding": "^0.1.13",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
