@@ -2,7 +2,7 @@
 
 import React, {FC, useState} from 'react'
 import Link from "next/link"
-import './forgot.scss'
+import './forgotPassword.scss'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'

@@ -1,7 +1,7 @@
 "use client"
 
 import React, {FC, useEffect, useState} from 'react'
-import './reset.scss'
+import './resetPassword.scss'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'

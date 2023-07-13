@@ -1,0 +1,1 @@
+export { ForgotPage } from './ui/forgotPage'

@@ -1,14 +1,13 @@
-
-import { ResetPassword } from '@/features/auth/resetPassword'
+import { ForgotPassword } from '@/features/auth/forgotPassword'
 import { LanguageParams } from '@/shared/config/i18n/types'
 import { FC } from 'react'
 
-export const ResetPage: FC<{ params: LanguageParams }> = (
+export const ForgotPage: FC<{ params: LanguageParams }> = (
   { params: { lng } }
 ) => {
   return (
     <div className={'content'}>
-      <ResetPassword lng={lng} />
+      <ForgotPassword lng={lng} />
     </div>
   )
 }
