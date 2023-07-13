@@ -16,7 +16,7 @@ export type ModalWindowProps = {
 export const ModalWindow: FC<ModalWindowProps> = ({ lng, onClose, userEmail, title, text }) => {
 
     return (
-        <div className={s.wrapper}>
+        <div data-testid="ModalWindow" className={s.wrapper}>
             <div className={s.body}>
                 <div className={s.title}>
                     <h3>{title}</h3>
@@ -30,7 +30,7 @@ export const ModalWindow: FC<ModalWindowProps> = ({ lng, onClose, userEmail, tit
                         : (text && <p className={s.text}>{text}</p>)
                     }
                     <div className={s.buttonContainer}>
-                        <Button onClick={onClose} type='button' className={s.button}>OK</Button>
+                        <Button data-testid="closeButton" onClick={onClose} type='button' className={s.button}>OK</Button>
                     </div>
                 </div>
             </div>
