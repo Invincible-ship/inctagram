@@ -8,8 +8,8 @@ import PictureVerification from '@/shared/assets/icons/mergeLinkVerification-ima
 import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss'
 import { ResendLinkModal } from "./ResendLinkModal/ui/ResendLinkModal"
 import { useSearchParams } from "next/navigation"
-import { useEmailResendingMutation } from "@/features/auth/signup/model/slice/rtkQslice"
 import { ErrorModal } from "./ResendLinkModal/ui/ErrorModal"
+import { useEmailResendingMutation } from "@/features/auth/signup/model/api/signUpApi"
 
 const title = 'verification.title'
 const text = 'verification.text'
