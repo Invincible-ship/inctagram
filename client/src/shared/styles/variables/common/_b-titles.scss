@@ -1,188 +1,188 @@
-@import '../mixins';
+@import "../mixins";
 
 .b-title {
-    font-size: 46px;
-    line-height: 52px;
-    @include nb {
-        font-size: 40px;
-        line-height: 48px;
+  font-size: 46px;
+  line-height: 52px;
+  @include nb {
+    font-size: 40px;
+    line-height: 48px;
+  }
+  @include tb {
+    font-size: 34px;
+    line-height: 42px;
+  }
+  @include mb {
+    font-size: 28px;
+    line-height: 34px;
+  }
+  &.bt10 {
+    font-size: 10px;
+    line-height: 15px;
+  }
+  &.bt14 {
+    font-size: 14px;
+    line-height: 20px;
+    @include nbtb {
+      font-size: 13px;
+      line-height: 18px;
     }
     @include tb {
-        font-size: 34px;
-        line-height: 42px;
+      line-height: 17px;
     }
     @include mb {
-        font-size: 28px;
-        line-height: 34px;
+      font-size: 12px;
+      line-height: 17px;
     }
-    &.bt10 {
-        font-size: 10px;
-        line-height: 15px;
+  }
+  &.bt16 {
+    font-size: 16px;
+    line-height: 22px;
+    @include nb {
+      font-size: 15px;
+      line-height: 21px;
     }
-    &.bt14 {
-        font-size: 14px;
-        line-height: 20px;
-        @include nbtb {
-            font-size: 13px;
-            line-height: 18px;
-        }
-        @include tb {
-            line-height: 17px;
-        }
-        @include mb {
-            font-size: 12px;
-            line-height: 17px;
-        }
+    @include tb {
+      font-size: 14px;
+      line-height: 20px;
     }
-    &.bt16 {
-        font-size: 16px;
-        line-height: 22px;
-        @include nb {
-            font-size: 15px;
-            line-height: 21px;
-        }
-        @include tb {
-            font-size: 14px;
-            line-height: 20px;
-        }
-        @include mb {
-            font-size: 13px;
-            line-height: 19px;
-        }
+    @include mb {
+      font-size: 13px;
+      line-height: 19px;
     }
-    &.bt18 {
-        font-size: 18px;
-        line-height: 24px;
-        @include nb {
-            font-size: 17px;
-            line-height: 22px;
-        }
-        @include tb {
-            font-size: 16px;
-            line-height: 21px;
-        }
-        @include mb {
-            font-size: 14px;
-            line-height: 19px;
-        }
+  }
+  &.bt18 {
+    font-size: 18px;
+    line-height: 24px;
+    @include nb {
+      font-size: 17px;
+      line-height: 22px;
     }
-    &.bt20 {
-        font-size: 20px;
-        line-height: 28px;
-        @include nb {
-            font-size: 18px;
-            line-height: 26px;
-        }
-        @include tb {
-            font-size: 16px;
-            line-height: 24px;
-        }
-        @include mb {
-            font-size: 14px;
-            line-height: 20px;
-        }
+    @include tb {
+      font-size: 16px;
+      line-height: 21px;
     }
-    &.bt22 {
-        font-size: 22px;
-        line-height: 29px;
-        @include nb {
-            font-size: 20px;
-            line-height: 27px;
-        }
-        @include tb {
-            font-size: 18px;
-            line-height: 25px;
-        }
-        @include mb {
-            font-size: 17px;
-            line-height: 24px;
-        }
+    @include mb {
+      font-size: 14px;
+      line-height: 19px;
     }
-    &.bt24 {
-        font-size: 24px;
-        line-height: 31px;
-        @include nb {
-            font-size: 22px;
-            line-height: 29px;
-        }
-        @include tb {
-            font-size: 20px;
-            line-height: 27px;
-        }
-        @include mb {
-            font-size: 18px;
-            line-height: 24px;
-        }
+  }
+  &.bt20 {
+    font-size: 20px;
+    line-height: 28px;
+    @include nb {
+      font-size: 18px;
+      line-height: 26px;
     }
-    &.bt26 {
-        font-size: 26px;
-        line-height: 32px;
-        @include nb {
-            font-size: 24px;
-            line-height: 30px;
-        }
-        @include tb {
-            font-size: 22px;
-            line-height: 28px;
-        }
-        @include mb {
-            font-size: 20px;
-            line-height: 28px;
-        }
+    @include tb {
+      font-size: 16px;
+      line-height: 24px;
     }
-    &.bt30 {
-        font-size: 30px;
-        line-height: 36px;
-        @include nb {
-            font-size: 26px;
-            line-height: 32px;
-        }
-        @include tb {
-            font-size: 23px;
-            line-height: 29px;
-        }
-        @include mb {
-            font-size: 17px;
-            line-height: 23px;
-        }
+    @include mb {
+      font-size: 14px;
+      line-height: 20px;
     }
-    &.bt50 {
-        font-size: 50px;
-        line-height: 60px;
-        @include nb {
-            font-size: 40px;
-            line-height: 50px;
-        }
-        @include tb {
-            font-size: 32px;
-            line-height: 40px;
-        }
-        @include mb {
-            font-size: 24px;
-            line-height: 32px;
-        }
+  }
+  &.bt22 {
+    font-size: 22px;
+    line-height: 29px;
+    @include nb {
+      font-size: 20px;
+      line-height: 27px;
     }
-    &.color1 {
-        color: var(--accent-color-100);
+    @include tb {
+      font-size: 18px;
+      line-height: 25px;
     }
-    &.color6 {
-        color: var(--accent-color-100);
+    @include mb {
+      font-size: 17px;
+      line-height: 24px;
     }
-    &.align-center {
-        text-align: center;
+  }
+  &.bt24 {
+    font-size: 24px;
+    line-height: 31px;
+    @include nb {
+      font-size: 22px;
+      line-height: 29px;
     }
-    &.light {
-        font-weight: 300;
+    @include tb {
+      font-size: 20px;
+      line-height: 27px;
     }
-    &.medium {
-        font-weight: 500;
+    @include mb {
+      font-size: 18px;
+      line-height: 24px;
     }
-    &.semibold {
-        font-weight: 600;
+  }
+  &.bt26 {
+    font-size: 26px;
+    line-height: 32px;
+    @include nb {
+      font-size: 24px;
+      line-height: 30px;
     }
-    &.bold,
-    strong,
-    b {
-        font-weight: 700;
+    @include tb {
+      font-size: 22px;
+      line-height: 28px;
     }
+    @include mb {
+      font-size: 20px;
+      line-height: 28px;
+    }
+  }
+  &.bt30 {
+    font-size: 30px;
+    line-height: 36px;
+    @include nb {
+      font-size: 26px;
+      line-height: 32px;
+    }
+    @include tb {
+      font-size: 23px;
+      line-height: 29px;
+    }
+    @include mb {
+      font-size: 17px;
+      line-height: 23px;
+    }
+  }
+  &.bt50 {
+    font-size: 50px;
+    line-height: 60px;
+    @include nb {
+      font-size: 40px;
+      line-height: 50px;
+    }
+    @include tb {
+      font-size: 32px;
+      line-height: 40px;
+    }
+    @include mb {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+  &.color1 {
+    color: var(--accent-color-100);
+  }
+  &.color6 {
+    color: var(--accent-color-100);
+  }
+  &.align-center {
+    text-align: center;
+  }
+  &.light {
+    font-weight: 300;
+  }
+  &.medium {
+    font-weight: 500;
+  }
+  &.semibold {
+    font-weight: 600;
+  }
+  &.bold,
+  strong,
+  b {
+    font-weight: 700;
+  }
 }

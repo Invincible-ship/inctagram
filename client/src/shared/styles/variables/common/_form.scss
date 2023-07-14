@@ -1,36 +1,35 @@
-@import '../mixins';
-
+@import "../mixins";
 
 .form-style {
-    .f-item {
-        position: relative;
-        display: flex;
-        width: 100%;
-        align-items: center;
-        flex-direction: row;
-        flex-wrap: wrap;
+  .f-item {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-        &+.f-item {
-            margin-top: 15px;
+    & + .f-item {
+      margin-top: 15px;
 
-            @include tbmb {
-                margin-top: 10px;
-            }
-        }
-
-        label {
-            margin-bottom: 5px;
-            display: block;
-
-            @include tbmb {
-                margin-bottom: 3px;
-            }
-
-            span {
-                color: var(--danger-color-500);
-            }
-        }
+      @include tbmb {
+        margin-top: 10px;
+      }
     }
+
+    label {
+      margin-bottom: 5px;
+      display: block;
+
+      @include tbmb {
+        margin-bottom: 3px;
+      }
+
+      span {
+        color: var(--danger-color-500);
+      }
+    }
+  }
 
     .error-lbl {
         position: absolute;
@@ -57,20 +56,26 @@
         font-size: 16px;
         outline: none;
 
-        @include nbtbmb {
-            font-size: 14px;
-        }
+    @include nbtbmb {
+      font-size: 14px;
+    }
 
-        @include placeholder {
-            color: var(--light-color-900);
-        }
+    @include placeholder {
+      color: var(--light-color-900);
+    }
 
-        ;
+    &:hover {
+      color: var(--light-color-900);
+    }
+    &[disabled="true"] {
+      color: var(--dark-color-100);
+      border: 1px solid var(--dark-color-100);
+    }
 
-        &:focus {
-            color: darken(#FFFFFF, 30%);
-            border-radius: 2px;
-            border: 1px solid  var(--light-color-100);
+    &:focus {
+      //color: var(--light-color-900);
+      //border-radius: 2px;
+      //border: 1px solid var(--accent-color-700);
 
             @include placeholder {
                 color: var(--light-color-100);
@@ -129,17 +134,20 @@
 }
 
 .auth-form {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 24px;
-    background: var(--dark-color-500);
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    width: 420px;
-    position: relative;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 24px;
+  background: var(--dark-color-500);
+  box-shadow:
+    1px 1px 2px rgba(0, 0, 0, 0.1),
+    -1px -1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  border: 1px solid var(--dark-color-300);
+  width: 420px;
+  position: relative;
 
     @include nb {
         padding: 25px;
