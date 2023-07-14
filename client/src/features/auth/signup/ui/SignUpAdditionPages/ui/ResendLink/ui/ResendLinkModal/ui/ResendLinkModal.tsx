@@ -3,10 +3,10 @@ import React, { FC } from 'react'
 import '@/shared/styles/reset.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import { Modal } from '@/shared/ui/Modal/Modal'
-import { ModalWindow, ModalWindowProps } from '@/shared/ui/Modal/children/ui/ModalWindow'
+import { ModalWindow, ModalWindowPropsType } from '@/shared/ui/Modal/children/ui/ModalWindow'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 
-type EmailConfirmationModalPropsType = Omit<ModalWindowProps, 'title' | 'text'>
+type EmailConfirmationModalPropsType = Omit<ModalWindowPropsType, 'title' | 'text'>
 
 const modalTitle = 'signUpModal.title'
 const modalText = 'signUpModal.text'

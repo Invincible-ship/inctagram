@@ -4,7 +4,7 @@ import Close from 'public/svg/close.svg'
 import { Button } from "@/shared/ui/Button/Button"
 import s from './modalWindow.module.scss';
 
-export type ModalWindowProps = {
+export type ModalWindowPropsType = {
     lng: string;
     onClose: () => void;
     isOpen: boolean;
@@ -13,7 +13,7 @@ export type ModalWindowProps = {
     text: string,
 }
 
-export const ModalWindow: FC<ModalWindowProps> = ({ lng, onClose, userEmail, title, text }) => {
+export const ModalWindow: FC<ModalWindowPropsType> = ({ lng, onClose, userEmail, title, text }) => {
 
     return (
         <div data-testid="ModalWindow" className={s.wrapper}>

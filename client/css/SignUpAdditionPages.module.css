@@ -1,0 +1,76 @@
+.box {
+  display: flex;
+  gap: 30px;
+}
+@media (max-width: 999px) {
+  .box {
+    flex-direction: column;
+  }
+}
+
+.accountMerging {
+  width: 100%;
+  height: 100%;
+}
+.accountMerging .wrapper {
+  padding: 35px 30px 0 30px;
+  text-align: center;
+}
+@media (max-width: 425px) {
+  .accountMerging .wrapper {
+    padding: 17px 15px;
+  }
+}
+.accountMerging .wrapper .body {
+  max-width: 425px;
+  margin: 0 auto;
+  font-family: Inter;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.accountMerging .wrapper .body .title {
+  font-size: 20px;
+  line-height: 36px;
+  font-weight: 700;
+  overflow: hidden;
+}
+.accountMerging .wrapper .body .title:not(:last-child) {
+  padding-bottom: 19px;
+}
+.accountMerging .wrapper .body .content {
+  margin: 0 auto;
+}
+.accountMerging .wrapper .body .content:not(:last-child) {
+  padding-bottom: 30px;
+}
+@media (max-width: 425px) {
+  .accountMerging .wrapper .body .content:not(:last-child) {
+    padding-bottom: 10px;
+  }
+}
+.accountMerging .wrapper .body .changinBox {
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+  padding-top: 30px;
+}
+.accountMerging .wrapper .body .changinBox .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.accountMerging .wrapper .body .changinBox .buttons:not(:last-child) {
+  padding-bottom: 24px;
+}
+@media (max-width: 425px) {
+  .accountMerging .wrapper .body .changinBox .buttons {
+    order: 2;
+    width: 100%;
+  }
+  .accountMerging .wrapper .body .changinBox .buttons .btn {
+    width: 100%;
+    padding: 12px 24px;
+  }
+}
