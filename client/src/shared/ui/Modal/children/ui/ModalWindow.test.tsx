@@ -1,9 +1,9 @@
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-import { ModalWindow } from "./ModalWindow";
+import React from 'react'
+import { render, fireEvent } from "@testing-library/react"
+import { ModalWindow } from "./ModalWindow"
 
 describe("ModalWindow", () => {
-    const mockOnClose = jest.fn();
+    const mockOnClose = jest.fn()
 
     const defaultProps = {
         lng: "en",
@@ -15,33 +15,32 @@ describe("ModalWindow", () => {
     };
 
     afterEach(() => {
-        jest.clearAllMocks();
+        jest.clearAllMocks()
     });
 
     it("renders modal window with correct props", () => {
         const { getByTestId, getByText } = render(
             <ModalWindow {...defaultProps} />
         );
-
-        expect(getByTestId("ModalWindow")).toBeInTheDocument();
-        expect(getByText("Modal Title")).toBeInTheDocument();
-        expect(getByText("Modal Text test@example.com")).toBeInTheDocument();
-        expect(getByText("OK")).toBeInTheDocument();
+        expect(getByTestId("ModalWindow")).toBeInTheDocument()
+        expect(getByText("Modal Title")).toBeInTheDocument()
+        expect(getByText("Modal Text test@example.com")).toBeInTheDocument()
+        expect(getByText("OK")).toBeInTheDocument()
     });
 
     it("calls onClose when close button is clicked", () => {
-        const { getByTestId } = render(<ModalWindow {...defaultProps} />);
+        const { getByTestId } = render(<ModalWindow {...defaultProps} />)
 
-        fireEvent.click(getByTestId("closeButton"));
+        fireEvent.click(getByTestId("closeButton"))
 
-        expect(mockOnClose).toHaveBeenCalled();
+        expect(mockOnClose).toHaveBeenCalled()
     });
 
     it("calls onClose when OK button is clicked", () => {
-        const { getByText } = render(<ModalWindow {...defaultProps} />);
+        const { getByText } = render(<ModalWindow {...defaultProps} />)
 
-        fireEvent.click(getByText("OK"));
+        fireEvent.click(getByText("OK"))
 
-        expect(mockOnClose).toHaveBeenCalled();
+        expect(mockOnClose).toHaveBeenCalled()
     });
 });
