@@ -13,11 +13,7 @@ const preview: Preview = {
     nextjs: {
       appDirectory: true,
     },
-    decorators: [
-      (Story: StoryFn) => (
-        StyleDecorator(Story)
-      ),
-    ],
+    decorators: [(Story: StoryFn) => StyleDecorator(Story)],
   },
 }
 
