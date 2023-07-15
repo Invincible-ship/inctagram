@@ -1,12 +1,12 @@
 import { $api } from "@/shared/api/api"
 import { StateSchema, ThunkExtraArg } from "./StateSchema"
 import { rtkApi } from "@/shared/api/rtkApi"
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore, ReducersMapObject } from "@reduxjs/toolkit"
 
 export function createReduxStore(
   initialState?: StateSchema
 ) {
-  const rootReducer = {
+  const rootReducer: ReducersMapObject<StateSchema> = {
     // Ваши остальные редьюсеры
     [rtkApi.reducerPath]: rtkApi.reducer
   }
