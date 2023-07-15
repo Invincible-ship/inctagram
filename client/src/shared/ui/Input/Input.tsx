@@ -38,21 +38,21 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
         ref,
     ) => {
         const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-            onChange?.(e);
+            onChange?.(e)
 
-            onChangeText?.(e.currentTarget.value);
-        };
+            onChangeText?.(e.currentTarget.value)
+        }
         const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
-            onKeyPress?.(e);
+            onKeyPress?.(e)
             onEnter && // если есть пропс onEnter
             e.key === "Enter" && // и если нажата кнопка Enter
-            onEnter(); // то вызвать его
-        };
+            onEnter() // то вызвать его
+        }
 
         return (
-            <div className={s.inputWrapper}>
-                <div>{title}</div>
-                <input
+          <div className={s.inputWrapper}>
+            <div>{title}</div>
+            <input
                     ref={ref}
                     id={id}
                     type={type ? type : "text"}
@@ -63,11 +63,11 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
                     data-testid="input"
                 />
 
-                <div id={id ? id + "-span" : undefined}>
-                    {error && <span className={`${s.error}`}>{error.message}</span>}
-                </div>
+            <div id={id ? id + "-span" : undefined}>
+              {error && <span className={`${s.error}`}>{error.message}</span>}
             </div>
-        );
+          </div>
+        )
     },
-);
-export default Input;
+)
+export default Input

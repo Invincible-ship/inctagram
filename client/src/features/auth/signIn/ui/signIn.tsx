@@ -81,8 +81,8 @@ export const SignIn = () => {
           />
           {errors.email && (
             <span className={'error-lbl'}>
-            {errors.email.message}
-          </span>
+              {errors.email.message}
+            </span>
           )}
           <div className={'password-wrapper'}>
             <Input
@@ -98,8 +98,8 @@ export const SignIn = () => {
             </span>
             {errors.password && (
               <span className={'error-lbl'}>
-              {errors.password.message}
-            </span>
+                {errors.password.message}
+              </span>
             )}
           </div>
           <div className={s.forgotPassword}>
@@ -116,9 +116,9 @@ export const SignIn = () => {
           {t("signIn.dontHaveAnAccount")}?
         </span>
         <Link href={'/'} className="b-title bt16 semibold link-registration align-center">
-        <span>
-          {t('signIn.signUp')}
-        </span>
+          <span>
+            {t('signIn.signUp')}
+          </span>
         </Link>
       </div>
     </div>

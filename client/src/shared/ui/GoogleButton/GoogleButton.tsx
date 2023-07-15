@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import Google from "src/shared/assets/icons/google.svg";
+import { signIn } from "next-auth/react"
+import { useSearchParams } from "next/navigation"
+import Google from "src/shared/assets/icons/google.svg"
 
 const GoogleButton = () => {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/profile";
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get("callbackUrl") || "/profile"
 
-  return <Google onClick={() => signIn("google", { callbackUrl })}></Google>;
-};
+  return <Google onClick={() => signIn("google", { callbackUrl })}></Google>
+}
 
-export { GoogleButton };
+export { GoogleButton }

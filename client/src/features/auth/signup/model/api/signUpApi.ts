@@ -1,5 +1,5 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {RegisterParamsType, RegisterResponseType} from "@/features/auth/signup/model/types/types";
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
+import {RegisterParamsType, RegisterResponseType} from "@/features/auth/signup/model/types/types"
 
 
 export const signUpApi = createApi({
@@ -14,8 +14,8 @@ export const signUpApi = createApi({
                     body: data,
                 }),
             }),
-        };
+        }
     },
-});
+})
 
 export const {useSignUpMutation} = signUpApi
