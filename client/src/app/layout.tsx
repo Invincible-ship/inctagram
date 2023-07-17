@@ -1,5 +1,5 @@
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  return children;
-};
+  return children
+}
 
-export default RootLayout;
+export default RootLayout

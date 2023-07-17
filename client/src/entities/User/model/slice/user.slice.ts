@@ -1,5 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {IUserSchema} from "@/entities/User/model/types/types";
+import {createSlice} from "@reduxjs/toolkit"
+import {IUserSchema} from "@/entities/User/model/types/types"
 
 
 const initialState: IUserSchema = {
@@ -9,20 +9,20 @@ const initialState: IUserSchema = {
         email: "",
         createdAt: ""
     }
-};
+}
 
 const slice = createSlice({
     name: "user",
     initialState,
     reducers: {
         setAuthData: (state, action) => {
-            state.authData = action.payload.signUpData;
+            state.authData = action.payload.signUpData
         }
     },
     extraReducers: (builder) => {
     }
-});
+})
 
-export const userReducer = slice.reducer;
-export const userThunks = {};
-export const userActions = slice.actions;
+export const userReducer = slice.reducer
+export const userThunks = {}
+export const userActions = slice.actions

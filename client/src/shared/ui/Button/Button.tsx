@@ -1,6 +1,6 @@
-import { ButtonHTMLAttributes, FC } from "react";
-import { classNames } from "@/shared/lib/classNames/classNames";
-import cls from "./Button.module.scss";
+import { ButtonHTMLAttributes, FC } from "react"
+import { classNames } from "@/shared/lib/classNames/classNames"
+import cls from "./Button.module.scss"
 
 export enum ButtonTheme {
   DEFAULT = "primary",
@@ -26,5 +26,5 @@ export const Button: FC<ButtonProps> = ({ className = "", theme = ButtonTheme.DE
     >
       {children}
     </button>
-  );
-};
+  )
+}

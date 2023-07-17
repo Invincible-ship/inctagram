@@ -1,7 +1,7 @@
 "use client"
 
-import {toast, ToastContainer} from "react-toastify";
-import { useEffect} from "react";
+import {toast, ToastContainer} from "react-toastify"
+import { useEffect} from "react"
 
 export default function GlobalError({
                                         error,
@@ -10,7 +10,7 @@ export default function GlobalError({
 }) {
 
     if (error !== null) {
-        toast.error(error?.message);
+        toast.error(error?.message)
     }
 
     // useEffect(() => {
@@ -21,12 +21,12 @@ export default function GlobalError({
 
     useEffect(() => {
         setTimeout(() => {
-            toast.error(error?.message);
-        }, 2000);
-    }, [error]);
+            toast.error(error?.message)
+        }, 2000)
+    }, [error])
 
     return (
-        <ToastContainer
+      <ToastContainer
             position="top-right"
             autoClose={5000}
             hideProgressBar={false}

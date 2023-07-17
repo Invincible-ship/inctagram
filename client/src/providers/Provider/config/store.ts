@@ -1,7 +1,7 @@
-import {configureStore, ThunkAction, Action, ThunkDispatch, AnyAction} from "@reduxjs/toolkit";
+import {configureStore, ThunkAction, Action, ThunkDispatch, AnyAction} from "@reduxjs/toolkit"
 
-import {setupListeners} from "@reduxjs/toolkit/query";
-import {signUpApi} from "@/features/auth/signup/model/api/signUpApi";
+import {setupListeners} from "@reduxjs/toolkit/query"
+import {signUpApi} from "@/features/auth/signup/model/api/signUpApi"
 
 
 export const  store = configureStore( {
@@ -9,9 +9,9 @@ export const  store = configureStore( {
             [signUpApi.reducerPath]: signUpApi.reducer
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(signUpApi.middleware),
-    });
+    })
 
-setupListeners(store.dispatch);
+setupListeners(store.dispatch)
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch ;
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
