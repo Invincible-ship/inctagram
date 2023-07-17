@@ -11,9 +11,9 @@ import { useSearchParams } from "next/navigation"
 import { ErrorModal } from "./ResendLinkModal/ui/ErrorModal"
 import { useEmailResendingMutation } from "@/features/auth/signup/model/api/signUpApi"
 
-const title = 'verification.title'
-const text = 'verification.text'
-const buttonText = 'verification.buttonText'
+const title = 'resendLink.title'
+const text = 'resendLink.text'
+const buttonText = 'resendLink.buttonText'
 const languageDatabase = 'signUpAdditionPages'
 
 export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
