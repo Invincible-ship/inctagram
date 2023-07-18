@@ -1,14 +1,15 @@
 {
-    "signUpModal": {
-        "title": "Email sent",
-        "text": "We have sent a link to confirm your email to"
-    },
-    "emailConfirmationModal": {
-        "title": "Email is confirmed",
-        "text": "Go to the Login page"
-    },
-    "error": {
-        "title": "Email error",
-        "text": "Email is incorrect"
-    }
+  "signUpModal": {
+    "title": "Email sent",
+    "text": "We have sent a link to confirm your email to"
+  },
+  "emailConfirmationModal": {
+    "title": "Email is confirmed",
+    "text": "Go to the Login page"
+  },
+  "error": {
+    "title": "Email error",
+    "text": "Email is incorrect",
+    "emptyEmail": "Go back to email and try again"
+  }
 }

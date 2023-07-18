@@ -6,26 +6,40 @@ import { Modal } from '@/shared/ui/Modal/Modal'
 import { ModalWindow, ModalWindowPropsType } from '@/shared/ui/Modal/children/ui/ModalWindow'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 
-type EmailConfirmationModalPropsType = Omit<ModalWindowPropsType, 'title' | 'text'>
+type EmailConfirmationModalPropsType = Omit<ModalWindowPropsType, 'title' | 'text'> & { lng: string }
 
+const languageDatabase = 'signUpModal'
 const modalTitle = 'error.title'
 const modalText = 'error.text'
-const languageDatabase = 'signUpModal'
+const emptyEmail = 'error.emptyEmail'
 
 export const ErrorModal: FC<EmailConfirmationModalPropsType> = ({ lng, onClose, isOpen, userEmail }) => {
 
-    const { t } = useClientTranslation(lng, languageDatabase)
+  const { t } = useClientTranslation(lng, languageDatabase)
 
+  if (userEmail) {
     return <>
-        <Modal onClose={onClose} isOpen={isOpen}  >
-            <ModalWindow
-                lng={lng}
-                onClose={onClose}
-                isOpen={isOpen}
-                title={t(modalTitle)}
-                text={t(modalText)}
-                userEmail={userEmail}
-            />
-        </Modal>
+      <Modal onClose={onClose} isOpen={isOpen}  >
+        <ModalWindow
+          onClose={onClose}
+          isOpen={isOpen}
+          title={t(modalTitle)}
+          text={t(modalText)}
+          userEmail={userEmail}
+        />
+      </Modal>
     </>
+  }
+  else {
+    return <>
+      <Modal onClose={onClose} isOpen={isOpen}  >
+        <ModalWindow
+          onClose={onClose}
+          isOpen={isOpen}
+          title={t(modalTitle)}
+          text={t(emptyEmail)}
+        />
+      </Modal>
+    </>
+  }
 }

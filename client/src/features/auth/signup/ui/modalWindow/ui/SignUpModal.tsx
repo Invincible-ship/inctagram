@@ -12,22 +12,23 @@ const languageDatabase = 'signUpModal'
 
 export const SignUpModal: FC<EmailConfirmationModalPropsType> = ({ lng, onClose, isOpen, userEmail }) => {
 
-    const { t } = useClientTranslation(lng, languageDatabase)
+  const { t } = useClientTranslation(lng, languageDatabase)
 
-    return <>
-        <Modal onClose={onClose} isOpen={isOpen}  >
-            <ModalWindow
-                lng={lng}
-                title={t(modalTitle)}
-                text={t(modalText)}
-                onClose={onClose}
-                isOpen={isOpen}
-                userEmail={userEmail}
-            />
-        </Modal>
-    </>
+  return <>
+    <Modal onClose={onClose} isOpen={isOpen}  >
+      <ModalWindow
+        title={t(modalTitle)}
+        text={t(modalText)}
+        onClose={onClose}
+        isOpen={isOpen}
+        userEmail={userEmail}
+      />
+    </Modal>
+  </>
 }
 
 //========================================================================================================================================================
 //types
-type EmailConfirmationModalPropsType = Omit<ModalWindowPropsType, 'title' | 'text'>
+type EmailConfirmationModalPropsType = Omit<ModalWindowPropsType, 'title' | 'text'> & {
+  lng: string;
+};

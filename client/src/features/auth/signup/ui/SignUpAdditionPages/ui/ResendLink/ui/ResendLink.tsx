@@ -9,45 +9,46 @@ import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss
 import { ResendLinkModal } from "./ResendLinkModal/ui/ResendLinkModal"
 import { useSearchParams } from "next/navigation"
 import { ErrorModal } from "./ResendLinkModal/ui/ErrorModal"
-import { rtkApi } from '@/shared/api/rtkApi'
 import { useEmailResendingMutation } from "../../../model/resendLinkAPI"
+import { Preloader } from "@/shared/ui/Preloader/Preloader"
 
-
-
+const languageDatabase = 'signUpAdditionPages'
 const title = 'resendLink.title'
 const text = 'resendLink.text'
 const buttonText = 'resendLink.buttonText'
-const languageDatabase = 'signUpAdditionPages'
 
 export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
-  console.log('Render');
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [email, setEmail] = useState<string>()
+  const [noEmail, setNoEmail] = useState<boolean>(false)
   const search = useSearchParams()
+  const { t } = useClientTranslation(lng, languageDatabase)
   const [sendLinkAgain, { isSuccess, isLoading, isError }] = useEmailResendingMutation()
 
   useEffect(() => {
     if (search) {
       const queryEmail = search.get('email')
-      { queryEmail && setEmail(queryEmail) }
+      { queryEmail ? setEmail(queryEmail) : setNoEmail(true) }
     }
-    { (isSuccess || isError) && setIsOpen(true) }
-  }, [search, isSuccess, isError])
+  }, [search])
 
-  const resendLink = () => {
-    { email && sendLinkAgain({ email: email }) }
-  }
+  useEffect(() => {
+    { (isSuccess || isError) && setIsOpen(true) }
+  }, [isSuccess, isError])
 
   const onClose = () => {
     setIsOpen(false);
   }
 
-  const { t } = useClientTranslation(lng, languageDatabase)
+  const resendLink = () => {
+    { email ? sendLinkAgain({ email: email }) : setIsOpen(true) }
+  }
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Preloader />;
   }
+
   return <>
     <CommonBlock
       title={t(title)}
@@ -65,15 +66,8 @@ export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
         </div>
       </div>
     </CommonBlock>
-    {/* так перересовывается 2 раза */}
+    {noEmail && <ErrorModal lng={lng} isOpen={isOpen} onClose={onClose} />}
     {isError && <ErrorModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />}
     {isSuccess && <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />}
-
-    {/* так перересовывается 1 раз */}
-    {/*{isError
-      ? <ErrorModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />
-      : <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />
-    }*/}
-
   </>
 }
