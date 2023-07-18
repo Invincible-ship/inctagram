@@ -9,7 +9,10 @@ import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss
 import { ResendLinkModal } from "./ResendLinkModal/ui/ResendLinkModal"
 import { useSearchParams } from "next/navigation"
 import { ErrorModal } from "./ResendLinkModal/ui/ErrorModal"
-import { useEmailResendingMutation } from "@/features/auth/signup/model/api/signUpApi"
+import { rtkApi } from '@/shared/api/rtkApi'
+import { useEmailResendingMutation } from "../../../model/resendLinkAPI"
+
+
 
 const title = 'resendLink.title'
 const text = 'resendLink.text'
@@ -17,52 +20,60 @@ const buttonText = 'resendLink.buttonText'
 const languageDatabase = 'signUpAdditionPages'
 
 export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [email, setEmail] = useState<string>()
-    const search = useSearchParams()
-    const [sendLinkAgain, { isSuccess, isLoading, isError }] = useEmailResendingMutation()
+  console.log('Render');
 
-    useEffect(() => {
-        if (search) {
-            const queryEmail = search.get('email')
-            { queryEmail && setEmail(queryEmail) }
-        }
-        { (isSuccess || isError) && setIsOpen(true) }
-    }, [search, isSuccess, isError])
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [email, setEmail] = useState<string>()
+  const search = useSearchParams()
+  const [sendLinkAgain, { isSuccess, isLoading, isError }] = useEmailResendingMutation()
 
-    const resendLink = () => {
-        { email && sendLinkAgain({ email: email }) }
+  useEffect(() => {
+    if (search) {
+      const queryEmail = search.get('email')
+      { queryEmail && setEmail(queryEmail) }
     }
+    { (isSuccess || isError) && setIsOpen(true) }
+  }, [search, isSuccess, isError])
 
-    const onClose = () => {
-        setIsOpen(false);
-    }
+  const resendLink = () => {
+    { email && sendLinkAgain({ email: email }) }
+  }
 
-    const { t } = useClientTranslation(lng, languageDatabase)
+  const onClose = () => {
+    setIsOpen(false);
+  }
 
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
-    return <>
-        <CommonBlock
-            title={t(title)}
-            text={t(text)}
-        >
-            <div className={s.changinBox}>
-                <div className={s.buttons}>
-                    <Button onClick={resendLink} className={s.btn} theme={ButtonTheme.DEFAULT}>{t(buttonText)}</Button>
-                </div>
-                <div className={s.image}>
-                    <PictureVerification
-                        viewBox="0 0 330 246" width="100%"
-                        className={s.picture}
-                    />
-                </div>
-            </div>
-        </CommonBlock>
-        {isError
-            ? <ErrorModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />
-            : <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />
-        }
-    </>
+  const { t } = useClientTranslation(lng, languageDatabase)
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+  return <>
+    <CommonBlock
+      title={t(title)}
+      text={t(text)}
+    >
+      <div className={s.changinBox}>
+        <div className={s.buttons}>
+          <Button onClick={resendLink} className={s.btn} theme={ButtonTheme.DEFAULT}>{t(buttonText)}</Button>
+        </div>
+        <div className={s.image}>
+          <PictureVerification
+            viewBox="0 0 330 246" width="100%"
+            className={s.picture}
+          />
+        </div>
+      </div>
+    </CommonBlock>
+    {/* так перересовывается 2 раза */}
+    {isError && <ErrorModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />}
+    {isSuccess && <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />}
+
+    {/* так перересовывается 1 раз */}
+    {/*{isError
+      ? <ErrorModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />
+      : <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />
+    }*/}
+
+  </>
 }

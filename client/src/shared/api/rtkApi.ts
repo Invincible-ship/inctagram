@@ -1,6 +1,6 @@
 import { AuthRefreshResponse } from '@/shared/api/types'
 import { LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage'
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type {
   BaseQueryFn,
   FetchArgs,
@@ -8,7 +8,7 @@ import type {
 } from '@reduxjs/toolkit/query'
 
 const baseQuery = fetchBaseQuery(
-  { 
+  {
     baseUrl: process.env.__API__,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)
@@ -18,7 +18,7 @@ const baseQuery = fetchBaseQuery(
       }
 
       return headers
-    } 
+    }
   }
 )
 
@@ -30,7 +30,7 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions)
 
   if (result.error && result.error.status === 401) {
-    const refreshResult = await baseQuery('/refresh-token', api, extraOptions) as {data: AuthRefreshResponse}
+    const refreshResult = await baseQuery('/refresh-token', api, extraOptions) as { data: AuthRefreshResponse }
 
     if (refreshResult.data) {
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, refreshResult.data.accessToken)
