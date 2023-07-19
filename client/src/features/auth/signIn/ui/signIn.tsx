@@ -12,12 +12,12 @@ import {useClientTranslation} from '@/shared/config/i18n/client'
 import {SubmitHandler, useForm} from "react-hook-form"
 import {z} from "zod"
 import {zodResolver} from "@hookform/resolvers/zod"
-import {GoogleButton} from "@/components/GoogleButton"
-import {GitHubButton} from "@/components/GitHubButton"
 import {PasswordWrapper} from "@/shared/ui/PasswordWrapper/PasswordWrapper"
 import {InputField} from "@/shared/ui/InputField/InputField"
 import {FormSchemaType} from "@/features/auth/signIn/model/types/types"
 import {useSignInMutation} from "@/features/auth/signIn/api/signIn.api"
+import { GoogleButton } from '@/shared/ui/GoogleButton/GoogleButton'
+import {GitHubButton} from "@/shared/ui/GitHubButton/GitHubButton";
 
 
 export const SignIn = () => {

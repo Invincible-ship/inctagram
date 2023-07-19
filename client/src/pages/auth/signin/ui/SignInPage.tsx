@@ -1,4 +1,5 @@
-import {SignIn} from "@/features/auth/signin"
+import {SignIn} from "@/features/auth/signIn";
+
 
 export const SignInPage = () => {
   return (
