@@ -1,16 +1,14 @@
 'use client'
 
 import { FC, useEffect, useState } from "react"
-import { CommonBlock, SignUpAdditionPagespProps } from "../../CommonBlock/ui/CommonBlock"
+import { SignUpAdditionPagespProps } from "../CommonBlock/ui/CommonBlock"
 import { useClientTranslation } from "@/shared/config/i18n/client"
-import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
-import PictureVerification from '@/shared/assets/icons/mergeLinkVerification-image.svg'
-import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss'
-import { ResendLinkModal } from "./ResendLinkModal/ui/ResendLinkModal"
+import { ResendLinkModal } from "./ResendLinkModal/ResendLinkModal"
 import { useSearchParams } from "next/navigation"
-import { ErrorModal } from "./ResendLinkModal/ui/ErrorModal"
-import { useEmailResendingMutation } from "../../../model/resendLinkAPI"
+import { ErrorModal } from "./ResendLinkModal/ErrorModal"
+import { useEmailResendingMutation } from "../../model/resendLinkAPI"
 import { Preloader } from "@/shared/ui/Preloader/Preloader"
+import { ResendLinkUI } from "./ui/ResendLinkUI"
 
 const languageDatabase = 'signUpAdditionPages'
 const title = 'resendLink.title'
@@ -50,22 +48,12 @@ export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
   }
 
   return <>
-    <CommonBlock
+    <ResendLinkUI
       title={t(title)}
       text={t(text)}
-    >
-      <div className={s.changinBox}>
-        <div className={s.buttons}>
-          <Button onClick={resendLink} className={s.btn} theme={ButtonTheme.DEFAULT}>{t(buttonText)}</Button>
-        </div>
-        <div className={s.image}>
-          <PictureVerification
-            viewBox="0 0 330 246" width="100%"
-            className={s.picture}
-          />
-        </div>
-      </div>
-    </CommonBlock>
+      resendLink={resendLink}
+      buttonText={t(buttonText)}
+    />
     {noEmail && <ErrorModal lng={lng} isOpen={isOpen} onClose={onClose} />}
     {isError && <ErrorModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />}
     {isSuccess && <ResendLinkModal lng={lng} isOpen={isOpen} onClose={onClose} userEmail={email} />}

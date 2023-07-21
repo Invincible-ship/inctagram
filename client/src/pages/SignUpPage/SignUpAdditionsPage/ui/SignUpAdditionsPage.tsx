@@ -1,20 +1,20 @@
 import { FC } from 'react'
-import { EmailConfirmation, MergeAccount, ResendLink } from '@/features/auth/signup'
+import { Congratulation, MergeAccount, ResendLink } from '@/features/auth/signup'
 import { LanguageParams } from '@/shared/config/i18n/types'
 
 export const MergeAccountPage: FC<{ params: LanguageParams }> = (
-    { params: { lng } }
+  { params: { lng } }
 ) => {
-    return <MergeAccount lng={lng} />
+  return <MergeAccount lng={lng} />
 }
 export const EmailConfirmationPage: FC<{ params: LanguageParams }> = (
-    { params: { lng } }
+  { params: { lng } }
 ) => {
-    return <EmailConfirmation lng={lng} />
+  return <Congratulation lng={lng} />
 }
 export const ResendLinkPage: FC<{ params: LanguageParams }> = (
-    { params: { lng } }
+  { params: { lng } }
 ) => {
-    return <ResendLink lng={lng} />
+  return <ResendLink lng={lng} />
 }
 
