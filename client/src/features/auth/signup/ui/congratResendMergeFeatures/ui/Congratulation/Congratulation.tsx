@@ -1,16 +1,22 @@
 'use client'
-
 import { FC, useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { CongratulationModal } from "./CongratulationModal/CongratulationModal"
 import { CongratulationUI } from "./ui/CongratulationUI"
 import { congratResendMergePropsType } from "../../model/types/congratResendMergeTypes"
+import { useClientTranslation } from "@/shared/config/i18n/client"
 
 const emailIsConfirmed = 'success'
 const emailWasUsed = 'confirm'
+//====================================
+const title = 'congratulation.title'
+const text = 'congratulation.text'
+const buttonText = 'congratulation.buttonText'
+const languageDatabase = 'signUpAdditionPages'
 
 export const Congratulation: FC<congratResendMergePropsType> = ({ lng }) => {
 
+  const { t } = useClientTranslation(lng, languageDatabase)
   const router = useRouter();
   const search = useSearchParams()
   const [status, setStatus] = useState<string | null>(null);
@@ -19,11 +25,7 @@ export const Congratulation: FC<congratResendMergePropsType> = ({ lng }) => {
   useEffect(() => {
     if (search) {
       const queryStatus = search.get('status')
-      {
-        queryStatus === emailWasUsed
-          ? setIsOpen(true)
-          : null
-      }
+      { (queryStatus === emailWasUsed) && setIsOpen(true) }
       { queryStatus && setStatus(queryStatus) }
     }
   }, [search])
@@ -36,11 +38,21 @@ export const Congratulation: FC<congratResendMergePropsType> = ({ lng }) => {
   }
 
   if (status === emailIsConfirmed) {
-    return <CongratulationUI buttonAction={goToLogin} lng={lng} />
+    return <CongratulationUI
+      title={t(title)}
+      text={t(text)}
+      action={goToLogin}
+      buttonText={t(buttonText)}
+    />
   }
   else if (status === emailWasUsed) {
     return <>
-      <CongratulationUI buttonAction={goToLogin} lng={lng} />
+      <CongratulationUI
+        title={t(title)}
+        text={t(text)}
+        action={goToLogin}
+        buttonText={t(buttonText)}
+      />
       <CongratulationModal lng={lng} onClose={onClose} isOpen={isOpen} />
     </>
   }

@@ -1,5 +1,11 @@
 
 export type congratResendMergePropsType = {
   lng: string,
-  buttonAction?: () => void
+}
+
+export type CongratResendUIPropsType = {
+  title: string
+  text: string
+  buttonText: string
+  action: () => void
 }

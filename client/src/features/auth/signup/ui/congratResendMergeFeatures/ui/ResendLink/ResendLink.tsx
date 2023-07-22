@@ -51,7 +51,7 @@ export const ResendLink: FC<congratResendMergePropsType> = ({ lng }) => {
     <ResendLinkUI
       title={t(title)}
       text={t(text)}
-      resendLink={resendLink}
+      action={resendLink}
       buttonText={t(buttonText)}
     />
     {noEmail && <ErrorModal lng={lng} isOpen={isOpen} onClose={onClose} />}

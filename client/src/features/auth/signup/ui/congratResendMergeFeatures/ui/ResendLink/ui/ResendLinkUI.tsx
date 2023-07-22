@@ -5,8 +5,10 @@ import { CommonBlock } from "../../CommonBlock/CommonBlock"
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
 import PictureVerification from '@/shared/assets/icons/mergeLinkVerification-image.svg'
 import s from './../../styles/congratResendMergeStyles.module.scss'
+import { CongratResendUIPropsType } from "../../../model/types/congratResendMergeTypes"
 
-export const ResendLinkUI: FC<ResendLinkUIPropsType> = ({ title, text, buttonText, resendLink }) => {
+export const ResendLinkUI: FC<CongratResendUIPropsType> = ({ title, text, action, buttonText }) => {
+  //action is resendLink from ResendLink
 
   return <>
     <CommonBlock
@@ -15,7 +17,7 @@ export const ResendLinkUI: FC<ResendLinkUIPropsType> = ({ title, text, buttonTex
     >
       <div className={s.changinBox}>
         <div className={s.buttons}>
-          <Button onClick={resendLink} className={s.btn} theme={ButtonTheme.DEFAULT}>{buttonText}</Button>
+          <Button onClick={action} className={s.btn} theme={ButtonTheme.DEFAULT}>{buttonText}</Button>
         </div>
         <div className={s.image}>
           <PictureVerification
@@ -26,12 +28,4 @@ export const ResendLinkUI: FC<ResendLinkUIPropsType> = ({ title, text, buttonTex
       </div>
     </CommonBlock>
   </>
-}
-
-//types========================================================================================================================================================
-type ResendLinkUIPropsType = {
-  title: string
-  text: string
-  buttonText: string
-  resendLink: () => void
 }
