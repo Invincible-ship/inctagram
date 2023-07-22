@@ -36,7 +36,7 @@ export const ResendLink: FC<congratResendMergePropsType> = ({ lng }) => {
   }, [isSuccess, isError])
 
   const onClose = () => {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   const resendLink = () => {
@@ -44,7 +44,7 @@ export const ResendLink: FC<congratResendMergePropsType> = ({ lng }) => {
   }
 
   if (isLoading) {
-    return <Preloader />;
+    return <Preloader />
   }
 
   return <>

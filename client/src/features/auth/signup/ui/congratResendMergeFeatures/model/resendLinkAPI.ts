@@ -1,5 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi'
-import { RegisterParamsType, RegisterResponseType } from '../../../model/types/types';
+import { RegisterParamsType, RegisterResponseType } from '../../../model/types/types'
 
 const endpoints = {
   baseUrl: 'https://inctagram-api.fly.dev/',
@@ -27,7 +27,7 @@ export const resendLinkApi = rtkApi.injectEndpoints({
         })
       }),
       //========================================================================================================================================================
-    };
+    }
   },
 })
 

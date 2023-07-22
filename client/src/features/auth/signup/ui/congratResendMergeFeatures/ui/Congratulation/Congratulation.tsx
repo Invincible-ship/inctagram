@@ -17,10 +17,10 @@ const languageDatabase = 'signUpAdditionPages'
 export const Congratulation: FC<congratResendMergePropsType> = ({ lng }) => {
 
   const { t } = useClientTranslation(lng, languageDatabase)
-  const router = useRouter();
+  const router = useRouter()
   const search = useSearchParams()
-  const [status, setStatus] = useState<string | null>(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [status, setStatus] = useState<string | null>(null)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   useEffect(() => {
     if (search) {

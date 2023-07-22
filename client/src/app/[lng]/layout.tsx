@@ -29,19 +29,19 @@ const RootLayout = ({
     params: LanguageParams
 }) => {
     return (
-        <html lang={lng} dir={dir(lng)} className={inter.className}>
-            <head />
-            <AuthenticationProvider>
-                <StoreProvider>
-                    <body className='app'>
-                        <Header lng={lng} />
-                        <Suspense fallback={<Loading />}>
-                            {children}
-                        </Suspense>
-                    </body>
-                </StoreProvider>
-            </AuthenticationProvider>
-        </html>
+      <html lang={lng} dir={dir(lng)} className={inter.className}>
+        <head />
+        <AuthenticationProvider>
+          <StoreProvider>
+            <body className='app'>
+              <Header lng={lng} />
+              <Suspense fallback={<Loading />}>
+                {children}
+              </Suspense>
+            </body>
+          </StoreProvider>
+        </AuthenticationProvider>
+      </html>
     )
 }
 

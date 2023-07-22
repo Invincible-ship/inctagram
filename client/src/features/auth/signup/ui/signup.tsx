@@ -75,7 +75,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     setShowConfirmPassword(!showConfirmPassword)
   }
 
-  const [signUp, { isLoading, isError, error, data }] = useSignUpMutation();
+  const [signUp, { isLoading, isError, error, data }] = useSignUpMutation()
 
   if (isError) {
     if (typeof error === 'string') {
@@ -93,25 +93,25 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     } catch (error) {
       console.error(error)
     }
-  };
+  }
 
   //========================================================================================================================================================
   //for SignUpModal
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   const onClose = () => {
     setIsOpen(!isOpen)
   }
 
   useEffect(() => {
     if (!isError) {
-      setIsOpen(true);
+      setIsOpen(true)
     }
-  }, [isError]);
+  }, [isError])
 
   //========================================================================================================================================================
 
   if (isLoading) {
-    return <Preloader />;
+    return <Preloader />
   }
 
   return (
@@ -168,5 +168,5 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
         {(!isError && data && lng) && <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={data.email} />}
       </div>
     </div>
-  );
-};
+  )
+}

@@ -2,7 +2,7 @@
 import { FC } from "react"
 import Close from 'public/svg/close.svg'
 import { Button } from "@/shared/ui/Button/Button"
-import s from './modalWindow.module.scss';
+import s from './modalWindow.module.scss'
 
 export type ModalWindowPropsType = {
   onClose: () => void;

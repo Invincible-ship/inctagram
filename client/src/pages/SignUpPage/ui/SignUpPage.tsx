@@ -4,8 +4,8 @@ import { FC } from "react"
 
 export const SignUpPage: FC<{ params: LanguageParams }> = ({ params: { lng } }) => {
     return (
-        <div className={"content"}>
-            <SignUp lng={lng} />
-        </div>
+      <div className={"content"}>
+        <SignUp lng={lng} />
+      </div>
     )
 }
