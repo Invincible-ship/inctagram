@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import '@/shared/styles/reset.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import { Modal } from '@/shared/ui/Modal/Modal'
-import { ModalWindow } from '@/shared/ui/Modal/children/ui/ModalWindow'
+import { ModalWindow } from '@/shared/ui/Modal/children/ModalWindow'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { ModalPropsType } from '../../../model/types/congratResendMergeTypes'
 
