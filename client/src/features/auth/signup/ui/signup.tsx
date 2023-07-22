@@ -16,7 +16,7 @@ import { useClientTranslation } from "@/shared/config/i18n/client"
 import { GoogleButton } from "@/shared/ui/GoogleButton/GoogleButton"
 import { GitHubButton } from "@/shared/ui/GitHubButton/GitHubButton"
 import { Preloader } from "@/shared/ui/Preloader/Preloader"
-import { useAppDispatch } from "@/shared/lib/hooks"
+import { useDispatch } from 'react-redux'
 import { userActions } from "@/entities/User/model/slice/user.slice"
 import { RegisterParamsType } from '../model/types/types'
 import { SignUpModal } from './signUpModalWindow/SignUpModal'
@@ -30,7 +30,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
 
   const { t } = useClientTranslation(lng, 'signUp')
 
