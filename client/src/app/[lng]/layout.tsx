@@ -6,9 +6,9 @@ import { LanguageParams } from '@/shared/config/i18n/types'
 import { Header } from '@/widgets/Header'
 import '@/shared/styles/index.scss'
 import '@/shared/styles/variables/common.scss'
-import { AuthenticationProvider } from "@/providers/Provider/AuthenticationProvider"
+import { AuthenticationProvider } from "@/providers/AuthenticationProvider/AuthenticationProvider"
 import { StoreProvider } from '@/providers/StoreProvider'
-import Loading from "@/app/[lng]/loading"
+import Loading from "./loading"
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] })
 
