@@ -19,8 +19,8 @@ import { Preloader } from "@/shared/ui/Preloader/Preloader"
 import { useAppDispatch } from "@/shared/lib/hooks"
 import { userActions } from "@/entities/User/model/slice/user.slice"
 import { RegisterParamsType } from '../model/types/types'
-import { SignUpModal } from './modalWindow/ui/SignUpModal'
-import { useSignUpMutation } from './SignUpAdditionPages/model/resendLinkAPI'
+import { SignUpModal } from './signUpModalWindow/SignUpModal'
+import { useSignUpMutation } from './congratResendMergeFeatures/model/resendLinkAPI'
 
 type SignUpProps = {
   lng?: string

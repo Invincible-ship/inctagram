@@ -1,10 +1,10 @@
 'use client'
 
 import { FC } from "react"
-import { CommonBlock } from "../../CommonBlock/ui/CommonBlock"
+import { CommonBlock } from "../../CommonBlock/CommonBlock"
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
 import PictureVerification from '@/shared/assets/icons/mergeLinkVerification-image.svg'
-import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss'
+import s from './../../styles/congratResendMergeStyles.module.scss'
 
 export const ResendLinkUI: FC<ResendLinkUIPropsType> = ({ title, text, buttonText, resendLink }) => {
 

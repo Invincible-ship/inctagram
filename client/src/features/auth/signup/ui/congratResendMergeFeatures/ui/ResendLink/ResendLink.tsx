@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, useEffect, useState } from "react"
-import { SignUpAdditionPagespProps } from "../CommonBlock/ui/CommonBlock"
+import { congratResendMergePropsType } from "../../model/types/congratResendMergeTypes"
 import { useClientTranslation } from "@/shared/config/i18n/client"
 import { ResendLinkModal } from "./ResendLinkModal/ResendLinkModal"
 import { useSearchParams } from "next/navigation"
@@ -15,7 +15,7 @@ const title = 'resendLink.title'
 const text = 'resendLink.text'
 const buttonText = 'resendLink.buttonText'
 
-export const ResendLink: FC<SignUpAdditionPagespProps> = ({ lng }) => {
+export const ResendLink: FC<congratResendMergePropsType> = ({ lng }) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [email, setEmail] = useState<string>()

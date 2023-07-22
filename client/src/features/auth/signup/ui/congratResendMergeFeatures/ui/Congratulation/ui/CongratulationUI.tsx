@@ -1,19 +1,18 @@
 'use client'
-
 import { FC } from "react"
-import { CommonBlock, SignUpAdditionPagespProps } from "../../CommonBlock/ui/CommonBlock"
+import { CommonBlock } from "../../CommonBlock/CommonBlock"
 import { useClientTranslation } from "@/shared/config/i18n/client"
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
 import PictureCongratulation from '@/shared/assets/icons/mergeDone-image.svg'
-import s from './../../SignUpAdditionPagesStyles/SignUpAdditionPages.module.scss'
+import s from './../../styles/congratResendMergeStyles.module.scss'
+import { congratResendMergePropsType } from "../../../model/types/congratResendMergeTypes"
 
 const title = 'congratulation.title'
 const text = 'congratulation.text'
 const buttonText = 'congratulation.buttonText'
 const languageDatabase = 'signUpAdditionPages'
 
-
-export const CongratulationUI: FC<SignUpAdditionPagespProps> = ({ lng, buttonAction }) => {
+export const CongratulationUI: FC<congratResendMergePropsType> = ({ lng, buttonAction }) => {
   //buttonAction is goToLogin from EmailConfirmation
 
   const { t } = useClientTranslation(lng, languageDatabase)

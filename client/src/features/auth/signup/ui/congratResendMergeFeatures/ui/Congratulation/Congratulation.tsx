@@ -4,12 +4,12 @@ import { FC, useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { CongratulationModal } from "./CongratulationModal/CongratulationModal"
 import { CongratulationUI } from "./ui/CongratulationUI"
-import { SignUpAdditionPagespProps } from "../CommonBlock/ui/CommonBlock"
+import { congratResendMergePropsType } from "../../model/types/congratResendMergeTypes"
 
 const emailIsConfirmed = 'success'
 const emailWasUsed = 'confirm'
 
-export const Congratulation: FC<SignUpAdditionPagespProps> = ({ lng }) => {
+export const Congratulation: FC<congratResendMergePropsType> = ({ lng }) => {
 
   const router = useRouter();
   const search = useSearchParams()
