@@ -3,17 +3,16 @@ import React, { FC } from 'react'
 import '@/shared/styles/reset.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import { Modal } from '@/shared/ui/Modal/Modal'
-import { ModalWindow, ModalWindowPropsType } from '@/shared/ui/Modal/children/ui/ModalWindow'
+import { ModalWindow } from '@/shared/ui/Modal/children/ui/ModalWindow'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-
-type EmailConfirmationModalPropsType = Omit<ModalWindowPropsType, 'title' | 'text'> & { lng: string }
+import { ModalPropsType } from '../../../model/types/congratResendMergeTypes'
 
 const languageDatabase = 'signUpModal'
 const modalTitle = 'error.title'
 const modalText = 'error.text'
 const emptyEmail = 'error.emptyEmail'
 
-export const ErrorModal: FC<EmailConfirmationModalPropsType> = ({ lng, onClose, isOpen, userEmail }) => {
+export const ErrorModal: FC<ModalPropsType> = ({ lng, onClose, isOpen, userEmail }) => {
 
   const { t } = useClientTranslation(lng, languageDatabase)
 
