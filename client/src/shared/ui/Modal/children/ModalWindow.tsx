@@ -1,8 +1,8 @@
 'use client'
 import { FC } from "react"
-import Close from 'public/svg/close.svg'
 import { Button } from "@/shared/ui/Button/Button"
 import s from './modalWindow.module.scss'
+import { Close } from "./CloseImageSVG/Close"
 
 export type ModalWindowPropsType = {
   onClose: () => void;
