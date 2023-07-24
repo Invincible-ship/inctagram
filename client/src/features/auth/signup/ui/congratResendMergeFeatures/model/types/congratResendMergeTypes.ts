@@ -1,4 +1,4 @@
-import { ModalWindowPropsType } from "@/shared/ui/Modal/children/ui/ModalWindow"
+import { ModalWindowPropsType } from "@/shared/ui/Modal/children/ModalWindow"
 
 export type congratResendMergePropsType = {
   lng: string,
