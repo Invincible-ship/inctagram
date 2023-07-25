@@ -1,3 +1,11 @@
-import { SignUpPage } from "@/pages/SignUpPage"
+import React from 'react';
 
-export default SignUpPage
+const Page = () => {
+  return (
+    <div>
+      <h1>Home page</h1>
+    </div>
+  );
+};
+
+export default Page;
