@@ -24,12 +24,6 @@ const slice = createSlice({
     setIsLoggedIn: (state: { isLoggedIn: boolean }, action) => {
       state.isLoggedIn = action.payload.isLoggedIn
     },
-    // setAccessToken: (state: { accessToken: string }, action) => {
-    //   state.accessToken = action.payload.accessToken
-    // },
-    // setUnauthorized: (state: { unauthorized: boolean }, action) => {
-    //   state.unauthorized = action.payload.unauthorized
-    // }
   },
   extraReducers: (builder) => {
   },
