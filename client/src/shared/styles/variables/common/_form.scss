@@ -1,6 +1,4 @@
-
-@import '../mixins';
-
+@import "../mixins";
 
 .field.input-field {
     width: 100%;
@@ -8,10 +6,15 @@
 .signup_passwordWrapper__Byu65{
     width: 100%;
 }
+
 .form-style {
+  .f-item {
+    position: relative;
     display: flex;
-    flex-direction: column;
+    width: 100%;
     align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     .f-item {
         position: relative;
@@ -21,27 +24,27 @@
         flex-direction: row;
         flex-wrap: wrap;
 
-        &+.f-item {
-            margin-top: 15px;
+    & + .f-item {
+      margin-top: 15px;
 
-            @include tbmb {
-                margin-top: 10px;
-            }
-        }
-
-        label {
-            margin-bottom: 5px;
-            display: block;
-
-            @include tbmb {
-                margin-bottom: 3px;
-            }
-
-            span {
-                color: var(--danger-color-500);
-            }
-        }
+      @include tbmb {
+        margin-top: 10px;
+      }
     }
+
+    label {
+      margin-bottom: 5px;
+      display: block;
+
+      @include tbmb {
+        margin-bottom: 3px;
+      }
+
+      span {
+        color: var(--danger-color-500);
+      }
+    }
+  }
 
     .error-lbl {
         position: absolute;
@@ -68,22 +71,32 @@
         font-size: 16px;
         outline: none;
 
-        @include nbtbmb {
-            font-size: 14px;
-        }
+    @include nbtbmb {
+      font-size: 14px;
+    }
 
-        @include placeholder {
-            color: var(--light-color-900);
-        }
+    @include placeholder {
+      color: var(--light-color-900);
+    }
 
-        &:focus {
-            color: darken(#FFFFFF, 30%);
-            border-radius: 2px;
-            border: 1px solid  var(--light-color-100);
+    &:hover {
+      color: var(--light-color-900);
+    }
+    &[disabled="true"] {
+      color: var(--dark-color-100);
+      border: 1px solid var(--dark-color-100);
+    }
+
+    &:focus {
+      //color: var(--light-color-900);
+      //border-radius: 2px;
+      //border: 1px solid var(--accent-color-700);
 
             @include placeholder {
                 color: var(--light-color-100);
-            } ;
+            }
+
+            ;
         }
 
         &.error {
@@ -135,213 +148,214 @@
 }
 
 .auth-form {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 24px;
-    background: var(--dark-color-500);
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 24px;
+  background: var(--dark-color-500);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1),
+  -1px -1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  border: 1px solid var(--dark-color-300);
+  width: 420px;
 
-    width: 420px;
-    position: relative;
+  @include nb {
+    padding: 25px;
+  }
+
+  @include tb {
+    padding: 20px;
+  }
+
+  @include mb {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .title {
+    & + form {
+      margin-top: 35px;
+
+      @include nb {
+        margin-top: 30px;
+      }
+
+      @include tb {
+        margin-top: 20px;
+      }
+
+      @include mb {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .image {
+    display: flex;
+    justify-content: center;
+    max-height: 108px;
 
     @include nb {
-        padding: 25px;
+      max-height: 100px;
     }
 
     @include tb {
-        padding: 20px;
+      max-height: 90px;
     }
 
     @include mb {
-        width: 100%;
-        padding: 15px;
+      max-height: 8 ƒ0px;
     }
 
-    .title {
-        &+form {
-            margin-top: 35px;
-
-            @include nb {
-                margin-top: 30px;
-            }
-
-            @include tb {
-                margin-top: 20px;
-            }
-
-            @include mb {
-                margin-top: 15px;
-            }
-        }
+    &:not(:first-child) {
+      margin-top: 30px;
     }
 
-    .image {
-        display: flex;
-        justify-content: center;
-        max-height: 108px;
+    img {
+      height: 100%;
+    }
+  }
 
-        @include nb {
-            max-height: 100px;
-        }
+  .avatar-wrapper {
+    position: relative;
 
-        @include tb {
-            max-height: 90px;
+    &:not(:first-child) {
+      margin-top: 30px;
+
+      @include nb {
+        margin-top: 25px;
+      }
+
+      @include tb {
+        margin-top: 20px;
+      }
+
+      @include mb {
+        margin-top: 15px;
+      }
+    }
+
+    .avatar {
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 96px;
+        height: 96px;
+        object-fit: cover;
+        border-radius: 50%;
+
+        @include nbtb {
+          width: 86px;
+          height: 86px;
         }
 
         @include mb {
-            max-height: 8ƒ0px;
+          width: 80px;
+          height: 80px;
         }
-
-        &:not(:first-child) {
-            margin-top: 30px;
-        }
-
-        img {
-            height: 100%;
-        }
+      }
     }
 
-    .avatar-wrapper {
-        position: relative;
+    .icon {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      right: 0;
+      bottom: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid red;
+      background: lighten(red, 20%);
+      @include animate;
 
-        &:not(:first-child) {
-            margin-top: 30px;
+      svg {
+        fill: white;
+      }
 
-            @include nb {
-                margin-top: 25px;
-            }
+      &:hover {
+        opacity: 0.9;
+      }
 
-            @include tb {
-                margin-top: 20px;
-            }
+      &:active {
+        background-color: darken(red, 20%);
+      }
+    }
+  }
 
-            @include mb {
-                margin-top: 15px;
-            }
-        }
+  .info {
+    &:not(:first-child) {
+      margin-top: 25px;
 
-        .avatar {
-            display: flex;
-            justify-content: center;
+      @include nb {
+        margin-top: 20px;
+      }
 
-            img {
-                width: 96px;
-                height: 96px;
-                object-fit: cover;
-                border-radius: 50%;
+      @include tbmb {
+        margin-top: 15px;
+      }
+    }
+  }
 
-                @include nbtb {
-                    width: 86px;
-                    height: 86px;
-                }
+  .styled-btn {
+    width: 100%;
 
-                @include mb {
-                    width: 80px;
-                    height: 80px;
-                }
-            }
-        }
+    &:not(:first-child) {
+      margin-top: 36px;
 
-        .icon {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            right: 0;
-            bottom: 0;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 1px solid red;
-            background: lighten(red, 20%);
-            @include animate;
+      @include nb {
+        margin-top: 50px;
+      }
 
-            svg {
-                fill: white;
-            }
+      @include tb {
+        margin-top: 30px;
+      }
 
-            &:hover {
-                opacity: 0.9;
-            }
+      @include mb {
+        margin-top: 20px;
+      }
+    }
+  }
 
-            &:active {
-                background-color: darken(red, 20%);
-            }
-        }
+  .bottom {
+    &:not(:first-child) {
+      margin-top: 30px;
+
+      @include nb {
+        margin-top: 25px;
+      }
+
+      @include tb {
+        margin-top: 20px;
+      }
+
+      @include mb {
+        margin-top: 15px;
+      }
     }
 
-    .info {
-        &:not(:first-child) {
-            margin-top: 25px;
-
-            @include nb {
-                margin-top: 20px;
-            }
-
-            @include tbmb {
-                margin-top: 15px;
-            }
-        }
+    .b-title {
+      & + .b-title {
+        margin-top: 10px;
+      }
     }
 
-    .styled-btn {
-        width: 100%;
+    a {
+      display: block;
+      text-decoration: none;
+      color: red;
+      @include animate;
 
-        &:not(:first-child) {
-            margin-top: 36px;
-
-            @include nb {
-                margin-top: 50px;
-            }
-
-            @include tb {
-                margin-top: 30px;
-            }
-
-            @include mb {
-                margin-top: 20px;
-            }
-        }
+      &:hover {
+        color: darken(red, 10%);
+      }
     }
-
-    .bottom {
-        &:not(:first-child) {
-            margin-top: 30px;
-
-            @include nb {
-                margin-top: 25px;
-            }
-
-            @include tb {
-                margin-top: 20px;
-            }
-
-            @include mb {
-                margin-top: 15px;
-            }
-        }
-
-        .b-title {
-            &+.b-title {
-                margin-top: 10px;
-            }
-        }
-
-        a {
-            display: block;
-            text-decoration: none;
-            color: red;
-            @include animate;
-
-            &:hover {
-                color: darken(red, 10%);
-            }
-        }
-    }
+  }
+}
 }
 

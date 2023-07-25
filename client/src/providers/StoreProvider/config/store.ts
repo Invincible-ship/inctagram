@@ -1,25 +1,33 @@
-import {configureStore, ThunkAction, Action, ThunkDispatch, AnyAction} from "@reduxjs/toolkit";
-import {authActions, authReducer} from "@/features/auth/signup/model/slice/auth.slice";
-import {appReducer} from "@/entities/Slices/app.slice";
+import { $api } from "@/shared/api/api"
+import { StateSchema, ThunkExtraArg } from "./StateSchema"
+import { rtkApi } from "@/shared/api/rtkApi"
+import { configureStore, ReducersMapObject } from "@reduxjs/toolkit"
 
-export function makeStore() {
-    return configureStore({
-        reducer: {
-            app: appReducer,
-            auth: authReducer
-        },
-        middleware: (gDM) => gDM().concat(),
-    });
+export function createReduxStore(
+  initialState?: StateSchema
+) {
+  const rootReducer: ReducersMapObject<StateSchema> = {
+    // Ваши остальные редьюсеры
+    [rtkApi.reducerPath]: rtkApi.reducer
+  }
+
+  const extraArg: ThunkExtraArg = {
+    api: $api
+  }
+
+  const store = configureStore({
+    reducer: rootReducer,
+    preloadedState: initialState,
+    devTools: Boolean(process.env.IS_DEV),
+    middleware: (getDefaultMiddleware) => 
+      getDefaultMiddleware({
+        thunk: {
+          extraArgument: extraArg
+        }
+      }).concat(rtkApi.middleware)
+  })
+
+  return store
 }
 
-const store = makeStore();
-
-export type AppStore = ReturnType<typeof makeStore>;
-
-export type RootState = ReturnType<typeof store.getState>;
-
-export type AppDispatch = ThunkDispatch<RootState, AppDispatch, AnyAction>;
-
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
-
-export default store;
+export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];

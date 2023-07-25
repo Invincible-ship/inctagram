@@ -1,71 +1,66 @@
+@import "global.scss";
+@import "mixins";
 
-  @import "global.scss";
-  @import "mixins";
-
-    * {
-
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 img,
 svg {
-    display: block;
+  display: block;
 }
 
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 #__next {
-    min-height: 100%;
-    display: grid;
-    grid-template-rows: 1fr auto;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
 }
 
 body {
-    font-family: Inter, sans-serif;
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--light-color-100);
-    background: var(--dark-color-700);
-    font-weight: normal;
-    position: relative;
+  font-family: Inter, sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--light-color-100);
+  background: var(--dark-color-700);
+  font-weight: normal;
+  position: relative;
 }
 
 html {
-    //@include customScrollbar(var(--dark-color-100), 7px, 5px, 0px);
-    overflow-x: hidden;
+  //@include customScrollbar(var(--dark-color-100), 7px, 5px, 0px);
+  overflow-x: hidden;
 }
 
 #__next {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 #main-wrapper {
-    flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
 .container {
-    max-width: 1280px;
-    width: 100%;
-    padding: 0px 10px 0px 10px;
-    @include clearfix;
-    display: block;
-    margin: auto;
+  max-width: 1280px;
+  width: 100%;
+  padding: 0px 10px 0px 10px;
+  @include clearfix;
+  display: block;
+  margin: auto;
 }
 
-@import "common/_b-paddings",
-"common/_b-titles",
-"common/_form",
-"common/_buttons";
+@import "common/_b-paddings", "common/_b-titles", "common/_form", "common/_buttons";
 
 input[type="text"],
 input[type="tel"],
@@ -74,80 +69,79 @@ input[type="number"],
 input[type="password"],
 textarea,
 select {
-    box-shadow: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    border-radius: 0;
+  box-shadow: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 
 .resp-mode {
-    position: fixed;
-    z-index: 100;
-    background: var(--danger-color-500);
-    color: var(--light-color-100);
-    padding: 3px 5px;
-    right: 0;
-    bottom: 0;
-    font-size: 12px;
-    z-index: 999999999999999;
-    font-weight: normal;
+  position: fixed;
+  z-index: 100;
+  background: var(--danger-color-500);
+  color: var(--light-color-100);
+  padding: 3px 5px;
+  right: 0;
+  bottom: 0;
+  font-size: 12px;
+  z-index: 999999999999999;
+  font-weight: normal;
 
-    &:before {
+  &:before {
+    content: "full (pc) => ";
 
-        content: 'full (pc) => ';
-
-        @include nb {
-            content: 'notebook =>';
-        }
-
-        @include tb {
-            content: 'tablet =>';
-        }
-
-        @include mb {
-            content: 'mobile =>';
-        }
+    @include nb {
+      content: "notebook =>";
     }
 
-    span {
-        font-weight: 600;
+    @include tb {
+      content: "tablet =>";
     }
+
+    @include mb {
+      content: "mobile =>";
+    }
+  }
+
+  span {
+    font-weight: 600;
+  }
 }
 
 .hidden-on-mobile {
-    @include mb {
-        display: none !important;
-    }
+  @include mb {
+    display: none !important;
+  }
 }
 
 .show-on-mobile {
-    display: none !important;
+  display: none !important;
 
-    @include mb {
-        display: block !important;
-    }
+  @include mb {
+    display: block !important;
+  }
 }
 
 .block-title {
-    font-size: 12px;
-    line-height: 12px;
-    font-weight: 600;
-    color: var(--dark-color-100);
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 600;
+  color: var(--dark-color-100);
 }
 
 .block-subtitle {
-    font-weight: bold;
-    font-size: 22px;
+  font-weight: bold;
+  font-size: 22px;
 
-    @include mb {
-        font-size: 20px;
+  @include mb {
+    font-size: 20px;
+  }
+
+  &:not(:first-child) {
+    margin-top: 15px;
+
+    @include nbtbmb {
+      margin-top: 10px;
     }
-
-    &:not(:first-child) {
-        margin-top: 15px;
-
-        @include nbtbmb {
-            margin-top: 10px;
-        }
-    }
+  }
 }

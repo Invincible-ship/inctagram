@@ -1,102 +1,102 @@
-
-@import '../mixins';
+@import "../mixins";
 
 .styledButton {
-    @include animate;
-    text-align: center;
-    text-decoration: none !important;
-    outline: none;
-    cursor: pointer;
-    position: relative;
+  @include animate;
+  text-align: center;
+  text-decoration: none !important;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  border: 0;
+  font-family: "Montserrat", sans-serif;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+
+  &.styled-btn-1,
+  &.styled-btn-2 {
+    border-radius: 2px;
     border: 0;
+    //padding: 0px 15px;
+    min-height: 36px;
+    min-width: 200px;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    color: var(--accent-color-500);
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 500;
+    background: var(--light-color-100);
+    box-shadow:
+      0px 4px 18px rgba(54, 110, 255, 0.35),
+      inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
 
-    font-family: 'Montserrat', sans-serif;
-
-
-    &:hover,
-    &:focus,
-    &:active {
-        text-decoration: none;
+    @include nbtbmb {
+      font-size: 15px;
+      line-height: 15px;
+      min-width: 180px;
     }
 
-    &.styled-btn-1,
-    &.styled-btn-2 {
-        border-radius: 2px;
-        border: 0;
-        //padding: 0px 15px;
-        min-height: 36px;
-        min-width: 200px;
-        align-items: center;
-        justify-content: center;
-        display: inline-flex;
-        color: var(--accent-color-500);
-        font-size: 16px;
-        line-height: 16px;
-        font-weight: 500;
-        background: var(--light-color-100);
-
-        box-shadow: 0px 4px 18px rgba(54, 110, 255, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
-        border-radius: 30px;
-
-        @include nbtbmb {
-            font-size: 15px;
-            line-height: 15px;
-            min-width: 180px;
-        }
-
-        @include tbmb {
-            min-width: 180px;
-        }
-
-        @include mb {
-            min-width: inherit;
-            width: 100%;
-        }
-
-        &:after {
-
-            content: '';
-            min-height: inherit;
-            font-size: 0;
-        }
-
-        &.disabled {
-            background: var(--danger-color-100);
-            cursor: not-allowed;
-
-            &:hover {
-                background:  var(--danger-color-100);
-            }
-        }
+    @include tbmb {
+      min-width: 180px;
     }
 
-    &.styled-btn-1 {
-        &:hover {
-            background-color: darken(red, 10%);
-        }
+    @include mb {
+      min-width: inherit;
+      width: 100%;
     }
 
-    &.styled-btn-2 {
-
-        color:  var(--danger-color-100);
-        min-width: 130px;
-        background:  var(--danger-color-100);
-        box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.25), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
-
-        svg {
-            fill:  var(--danger-color-100);
-
-            margin-right: 5px;
-            width: 16px;
-            height: 16px;
-
-            @include mb {
-                width: 14px;
-                height: 14px;
-            }
-        }
-        &:hover {
-            box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.7), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
-        }
+    &:after {
+      content: "";
+      min-height: inherit;
+      font-size: 0;
     }
+
+    &.disabled {
+      background: var(--danger-color-100);
+      cursor: not-allowed;
+
+      &:hover {
+        background: var(--danger-color-100);
+      }
+    }
+  }
+
+  &.styled-btn-1 {
+    &:hover {
+      background-color: darken(red, 10%);
+    }
+  }
+
+  &.styled-btn-2 {
+    color: var(--danger-color-100);
+    min-width: 130px;
+    background: var(--danger-color-100);
+    box-shadow:
+      0px 2px 10px rgba(109, 109, 109, 0.25),
+      inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+
+    svg {
+      fill: var(--danger-color-100);
+      margin-right: 5px;
+      width: 16px;
+      height: 16px;
+
+      @include mb {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &:hover {
+      box-shadow:
+        0px 2px 10px rgba(109, 109, 109, 0.7),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+    }
+  }
 }

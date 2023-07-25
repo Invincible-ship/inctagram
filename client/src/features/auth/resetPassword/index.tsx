@@ -1,2 +1,2 @@
 
-export { ResetPassword } from './ui/ResetPassword/ResetPassword'
+export { ResetPassword } from './ui/ResetPassword'
