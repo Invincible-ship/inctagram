@@ -17,8 +17,6 @@ import {GoogleButton} from "@/shared/ui/GoogleButton/GoogleButton"
 import {GitHubButton} from "@/shared/ui/GitHubButton/GitHubButton"
 import {useSignUpMutation} from "@/features/auth/signup/model/api/signUpApi"
 import {Preloader} from "@/shared/ui/Preloader/Preloader"
-import {useAppDispatch} from "@/shared/lib/hooks"
-import {userActions} from "@/entities/User/model/slice/user.slice"
 import { RegisterParamsType } from '../model/types/types'
 
 type SignUpProps= {
@@ -28,8 +26,6 @@ type SignUpProps= {
 export const SignUp:FC<SignUpProps> = ({lng}) => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-
-    const dispatch = useAppDispatch()
 
     const {t} = useClientTranslation(lng, 'signUp')
 
@@ -93,7 +89,6 @@ export const SignUp:FC<SignUpProps> = ({lng}) => {
     const onSubmit: SubmitHandler<FormSchemaType> = async (data: RegisterParamsType) => {
         try {
             await signUp(data)
-            dispatch(userActions.setAuthData(data))
         } catch (error) {
             console.error(error)
         }

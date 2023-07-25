@@ -1,18 +1,21 @@
 import axios from 'axios'
-import { LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage'
+import { LOCAL_STORAGE_LANGUAGE_ID_KEY, LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage'
 import { AuthRefreshResponse } from './types'
 
 export const $api = axios.create({
     withCredentials: true,
-    baseURL: process.env.__API__
+    baseURL: process.env.__API__,
 })
 
 $api.interceptors.request.use((config) => {
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)
+    const languageId = localStorage.getItem(LOCAL_STORAGE_LANGUAGE_ID_KEY) || 'en'
 
     if (config.headers && token) {
       config.headers.Authorization = `Bearer ${token}`
     }
+
+    config.headers['Accept-Language'] = languageId
 
     return config
 })
