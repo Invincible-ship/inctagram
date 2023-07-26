@@ -5,7 +5,7 @@ import s from './modalWindow.module.scss'
 import { Close } from "./CloseImageSVG/Close"
 
 export type ModalWindowPropsType = {
-  onClose: () => void;
+  onClose?: () => void;
   isOpen: boolean;
   userEmail?: string,
   title: string,
