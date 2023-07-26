@@ -11,7 +11,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 // import {formSchema, FormSchema} from "@/features/auth/reset/model/types";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {authThunks} from "@/features/auth/signup/model/slice/auth.slice";
-import {useAppDispatch} from "@/shared/lib/hooks";
+// import {useAppDispatch} from "@/shared/lib/hooks";
 import {z} from "zod";
 import {PasswordWrapper} from "@/shared/ui/PasswordWrapper/PasswordWrapper";
 
