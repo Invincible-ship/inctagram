@@ -1,5 +1,5 @@
 import {RegisterParamsType, RegisterResponseType} from "@/features/auth/signup/model/types/types"
-import {rtkApi} from "@/shared/api/rtkApi";
+import {rtkApi} from "@/shared/api/rtkApi"
 
 
 export const signUpApi = rtkApi.injectEndpoints({

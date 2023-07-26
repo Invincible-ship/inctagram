@@ -20,3 +20,11 @@
 .signInButton {
   width: 100%;
 }
+
+.error {
+  position: absolute;
+  font-size: 14px;
+  color: var(--danger-color-500);
+  font-weight: 400;
+  line-height: 24px;
+}
