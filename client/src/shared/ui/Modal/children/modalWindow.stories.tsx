@@ -7,11 +7,10 @@ const meta = {
   component: ModalWindow,
   title: "shared/Modal/children",
   tags: ['autodocs'],
-  argTypes: { onClose: { action: 'clicked' } },
+  //argTypes: { onClose: { action: 'clicked' } },
 } satisfies Meta<typeof ModalWindow>
 
 export default meta
-
 type Story = StoryObj<typeof meta>;
 
 export const ChildrenDefault: Story = {
@@ -21,8 +20,6 @@ export const ChildrenDefault: Story = {
     isOpen: true,
     onClose: action('clicked'),
   },
-
-
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 

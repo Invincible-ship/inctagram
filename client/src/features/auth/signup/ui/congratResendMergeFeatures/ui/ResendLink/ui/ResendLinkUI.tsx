@@ -3,9 +3,9 @@
 import { FC } from "react"
 import { CommonBlock } from "../../CommonBlock/CommonBlock"
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
-import PictureVerification from '@/shared/assets/icons/mergeLinkVerification-image.svg'
 import s from './../../styles/congratResendMergeStyles.module.scss'
 import { CongratResendUIPropsType } from "../../../model/types/congratResendMergeTypes"
+import { PictureVerification } from "./PictureVerification"
 
 export const ResendLinkUI: FC<CongratResendUIPropsType> = ({ title, text, action, buttonText }) => {
   //action is resendLink from ResendLink
@@ -20,10 +20,7 @@ export const ResendLinkUI: FC<CongratResendUIPropsType> = ({ title, text, action
           <Button onClick={action} className={s.btn} theme={ButtonTheme.DEFAULT}>{buttonText}</Button>
         </div>
         <div className={s.image}>
-          <PictureVerification
-            viewBox="0 0 330 246" width="100%"
-            className={s.picture}
-          />
+          <PictureVerification />
         </div>
       </div>
     </CommonBlock>

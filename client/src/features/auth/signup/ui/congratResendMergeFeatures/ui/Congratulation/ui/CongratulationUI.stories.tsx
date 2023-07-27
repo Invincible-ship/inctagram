@@ -1,15 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CongratulationUI } from './CongratulationUI';
-import { within } from '@testing-library/react';
-import { userEvent } from '@storybook/testing-library';
+import { userEvent, within } from '@storybook/testing-library';
+import { action } from '@storybook/addon-actions';
 
 const meta = {
+  title: 'FEATURES/auth/signup/Congratulation',
   component: CongratulationUI,
+  tags: ['autodocs'],
   args: {
     title: 'some title',
     text: 'some text',
     buttonText: 'some button text',
-    action: () => { }
+    action: action('clicked')
   }
 } satisfies Meta<typeof CongratulationUI>
 
