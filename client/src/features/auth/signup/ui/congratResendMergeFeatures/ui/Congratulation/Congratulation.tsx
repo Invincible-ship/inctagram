@@ -5,9 +5,13 @@ import { CongratulationModal } from "./CongratulationModal/CongratulationModal"
 import { CongratulationUI } from "./ui/CongratulationUI"
 import { congratResendMergePropsType } from "../../model/types/congratResendMergeTypes"
 import { useClientTranslation } from "@/shared/config/i18n/client"
+import { ErrorModal } from "../ResendLink/ResendLinkModal/ErrorModal"
 
 const emailIsConfirmed = 'success'
 const emailWasUsed = 'confirm'
+const noEmail = 'noEmail'
+//====================================
+const loginPath = '/login'
 //====================================
 const title = 'congratulation.title'
 const text = 'congratulation.text'
@@ -26,12 +30,12 @@ export const Congratulation: FC<congratResendMergePropsType> = ({ lng }) => {
     if (search) {
       const queryStatus = search.get('status')
       { (queryStatus === emailWasUsed) && setIsOpen(true) }
-      { queryStatus && setStatus(queryStatus) }
+      { queryStatus ? setStatus(queryStatus) : setStatus(noEmail), setIsOpen(true) }
     }
   }, [search])
 
   const goToLogin = () => {
-    router.push('/login')
+    router.push(loginPath)
   }
   const onClose = () => {
     setIsOpen(!isOpen)
@@ -54,6 +58,11 @@ export const Congratulation: FC<congratResendMergePropsType> = ({ lng }) => {
         buttonText={t(buttonText)}
       />
       <CongratulationModal lng={lng} onClose={onClose} isOpen={isOpen} />
+    </>
+  }
+  else if (status === noEmail) {
+    return <>
+      <ErrorModal isOpen={isOpen} lng={lng} onClose={onClose} />
     </>
   }
 }
