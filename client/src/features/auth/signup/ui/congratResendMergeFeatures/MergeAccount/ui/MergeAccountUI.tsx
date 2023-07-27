@@ -1,7 +1,7 @@
 'use client'
 
 import { FC } from "react"
-import { CommonBlock } from './../../CommonBlock/CommonBlock'
+import { CommonBlock } from '../../CommonBlock/CommonBlock'
 import { useClientTranslation } from "@/shared/config/i18n/client"
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
 import PictureQuestion from '@/shared/assets/icons/merge-image.svg'

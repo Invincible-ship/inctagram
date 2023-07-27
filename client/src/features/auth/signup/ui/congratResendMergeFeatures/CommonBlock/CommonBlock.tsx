@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react'
-import s from './../../ui/styles/congratResendMergeStyles.module.scss'
+import s from './../styles/congratResendMergeStyles.module.scss'
 
 export const CommonBlock: FC<CommonBlockProps> =
   ({ email, title, text, textSecondPart, children }) => {
