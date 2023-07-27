@@ -5,7 +5,7 @@ import s from './modalWindow.module.scss'
 import { Close } from "./CloseImageSVG/Close"
 
 export type ModalWindowPropsType = {
-  onClose: () => void;
+  onClose?: () => void;
   isOpen: boolean;
   userEmail?: string,
   title: string,
@@ -18,7 +18,7 @@ export const ModalWindow: FC<ModalWindowPropsType> = ({ onClose, userEmail, titl
       <div className={s.body}>
         <div className={s.title}>
           <h3>{title}</h3>
-          <div onClick={onClose} className={s.xButton}>
+          <div data-testid={'ModalWindowStioryTestId'} onClick={onClose} className={s.xButton}>
             <Close />
           </div>
         </div>
