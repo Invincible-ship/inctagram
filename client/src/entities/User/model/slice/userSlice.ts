@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { IUserSchema } from '@/entities/User/model/types/types';
+import { createSlice } from '@reduxjs/toolkit'
+import { IUserSchema } from '@/entities/User/model/types/types'
 
 const initialState: IUserSchema = {
   _inited: false,
-};
+}
 
 const slice = createSlice({
   name: 'user',
@@ -11,12 +11,12 @@ const slice = createSlice({
   reducers: {
     setAuthData: (state, action) => {},
     clearAuthData: state => {
-      state.authData = undefined;
+      state.authData = undefined
     },
   },
   extraReducers: builder => {},
-});
+})
 
-export const userReducer = slice.reducer;
-export const userThunks = {};
-export const { setAuthData, clearAuthData } = slice.actions;
+export const userReducer = slice.reducer
+export const userThunks = {}
+export const { setAuthData, clearAuthData } = slice.actions

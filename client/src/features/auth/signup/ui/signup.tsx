@@ -1,30 +1,30 @@
-'use client';
-import { FC, useEffect, useState } from 'react';
-import { SignUpForm } from './SignUpForm';
-import { SocialButtons } from '@/features/auth/signup/ui/SocialButtons';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useClientTranslation } from '@/shared/config/i18n/client';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { useSignUpMutation } from '@/features/auth/signup/model/api/signUpApi';
-import '@/shared/styles/variables/common/_form.scss';
-import '@/shared/styles/variables/common/_b-titles.scss';
-import style from './signup.module.scss';
+'use client'
+import { FC, useEffect, useState } from 'react'
+import { SignUpForm } from './SignUpForm'
+import { SocialButtons } from '@/features/auth/signup/ui/SocialButtons'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useClientTranslation } from '@/shared/config/i18n/client'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch'
+import { useSignUpMutation } from '@/features/auth/signup/model/api/signUpApi'
+import '@/shared/styles/variables/common/_form.scss'
+import '@/shared/styles/variables/common/_b-titles.scss'
+import style from './signup.module.scss'
 import {
   formSchema,
   FormSchemaType,
-} from '@/features/auth/signup/lib/validationConstants/validationConstants';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
-import { Preloader } from '@/shared/ui/Preloader/Preloader';
+} from '@/features/auth/signup/lib/validationConstants/validationConstants'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { SignUpModal } from './signUpModalWindow/SignUpModal'
 
 export type SignUpProps = {
   lng?: string;
 };
 export const SignUp: FC<SignUpProps> = ({ lng }) => {
-  const [signUp, { isLoading, isError, data }] = useSignUpMutation();
-  const { t } = useClientTranslation(lng, 'signUp');
-  const schema = formSchema(t);
+  const [signUp, { isLoading, isError, data }] = useSignUpMutation()
+  const { t } = useClientTranslation(lng, 'signUp')
+  const schema = formSchema(t)
   const {
     register,
     handleSubmit,
@@ -32,24 +32,24 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     setError,
   } = useForm<FormSchemaType>({
     resolver: zodResolver(schema),
-  });
+  })
 
   const onSubmit: SubmitHandler<FormSchemaType> = async data => {
     try {
-      await signUp(data).unwrap();
+      await signUp(data).unwrap()
     } catch (error) {
       if (error.data && error.data.errors) {
         for (const err of error.data.errors) {
           setError(err.field, {
             type: 'server',
             message: err.message,
-          });
+          })
         }
       } else {
-        console.error(error);
+        console.error(error)
       }
     }
-  };
+  }
 
   //for SignUpModal
   const [isOpen, setIsOpen] = useState(false)
@@ -64,7 +64,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
   }, [isError])
 
   if (isLoading) {
-    return <Preloader />;
+    return <Preloader />
   }
 
   return (
@@ -93,5 +93,5 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
         {(!isError && data && lng) && <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={data.email} />}
       </div>
     </div>
-  );
-};
+  )
+}

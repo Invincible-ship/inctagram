@@ -1,10 +1,10 @@
 // SignUpForm.tsx
-'use client';
-import { FC, FormEventHandler, useState } from 'react';
-import { InputField } from '@/shared/ui/InputField/InputField';
-import { PasswordWrapper } from '@/shared/ui/PasswordWrapper/PasswordWrapper';
-import { Button } from '@/shared/ui/Button/Button';
-import '@/shared/styles/variables/common/_form.scss';
+'use client'
+import { FC, FormEventHandler, useState } from 'react'
+import { InputField } from '@/shared/ui/InputField/InputField'
+import { PasswordWrapper } from '@/shared/ui/PasswordWrapper/PasswordWrapper'
+import { Button } from '@/shared/ui/Button/Button'
+import '@/shared/styles/variables/common/_form.scss'
 
 export type SignUpFormProps = {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined;
@@ -20,15 +20,15 @@ export const SignUpForm: FC<SignUpFormProps> = ({
   errors,
   register,
 }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+    setShowPassword(!showPassword)
+  }
 
   const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
+    setShowConfirmPassword(!showConfirmPassword)
+  }
 
   return (
     <form onSubmit={onSubmit} className={'form-style'}>
@@ -74,5 +74,5 @@ export const SignUpForm: FC<SignUpFormProps> = ({
         {t('signUp')}
       </Button>
     </form>
-  );
-};
+  )
+}
