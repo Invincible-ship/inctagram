@@ -1,6 +1,6 @@
-import { action } from "@storybook/addon-actions";
-import { ModalWindow } from "./ModalWindow";
-import type { Meta, StoryObj } from '@storybook/react';
+import { action } from "@storybook/addon-actions"
+import { ModalWindow } from "./ModalWindow"
+import type { Meta, StoryObj } from '@storybook/react'
 import { userEvent, within } from '@storybook/testing-library'
 
 const meta = {
@@ -21,13 +21,13 @@ export const ChildrenDefault: Story = {
     onClose: action('clicked'),
   },
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+    const canvas = within(canvasElement)
 
-    const button = canvas.getByRole('button');
-    await userEvent.click(button);
+    const button = canvas.getByRole('button')
+    await userEvent.click(button)
 
-    const closeImg = canvas.getByTestId('ModalWindowStioryTestId');
-    await userEvent.click(closeImg);
+    const closeImg = canvas.getByTestId('ModalWindowStioryTestId')
+    await userEvent.click(closeImg)
   },
 } satisfies Story
 

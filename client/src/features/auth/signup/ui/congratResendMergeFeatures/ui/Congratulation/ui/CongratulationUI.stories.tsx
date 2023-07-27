@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { CongratulationUI } from './CongratulationUI';
-import { userEvent, within } from '@storybook/testing-library';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/react'
+import { CongratulationUI } from './CongratulationUI'
+import { userEvent, within } from '@storybook/testing-library'
+import { action } from '@storybook/addon-actions'
 
 const meta = {
   title: 'FEATURES/auth/signup/Congratulation',
@@ -20,10 +20,10 @@ type Story = StoryObj<typeof meta>
 
 export const CongratulationUiStory: Story = {
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+    const canvas = within(canvasElement)
 
-    const button = canvas.getByRole('button');
-    await userEvent.click(button);
+    const button = canvas.getByRole('button')
+    await userEvent.click(button)
   },
 
 } satisfies Story
