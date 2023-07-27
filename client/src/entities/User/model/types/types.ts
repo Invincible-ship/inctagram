@@ -1,4 +1,5 @@
 export type IUser = {
+    isAuthorized: boolean,
     id: string,
     userName: string,
     email: string,
@@ -6,5 +7,6 @@ export type IUser = {
 }
 
 export type IUserSchema = {
-    authData?: IUser
+    authData?: IUser,
+    _inited: boolean
 }

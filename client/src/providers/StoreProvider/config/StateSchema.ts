@@ -1,4 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi'
+import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import { AxiosInstance } from 'axios'
 
 export type StateSchema = {

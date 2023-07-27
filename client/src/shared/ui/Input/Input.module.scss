@@ -37,31 +37,12 @@
       border-radius: 2px;
       border: 1px solid var(--accent-color-700);
     }
+
     &.errorInput {
       border-radius: 2px;
       border: 1px solid var(--danger-500, #cc1439) !important;
     }
   }
-}
-
-.input:focus {
-}
-
-.input {
-}
-
-.inputWrapper {
-}
-
-.superInput {
-}
-
-.errorInput {
-  border-radius: 2px;
-  border: 1px solid var(--danger-500, #cc1439);
-}
-
-.errorInput:focus {
 }
 
 .error {
