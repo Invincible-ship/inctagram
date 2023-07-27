@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, useEffect, useState } from "react"
-import { congratResendMergePropsType } from "../../model/types/congratResendMergeTypes"
+import { congratResendMergePropsType } from "@/features/auth/signup/model/types/types"
 import { useClientTranslation } from "@/shared/config/i18n/client"
 import { ResendLinkModal } from "./ResendLinkModal/ResendLinkModal"
 import { useSearchParams } from "next/navigation"

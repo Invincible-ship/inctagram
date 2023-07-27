@@ -5,7 +5,7 @@ import '@/shared/styles/variables/common/_buttons.scss'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { ModalWindow } from '@/shared/ui/Modal/children/ModalWindow'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import { ModalPropsType } from '../../../model/types/congratResendMergeTypes'
+import { ModalPropsType } from '@/features/auth/signup/model/types/types'
 
 const languageDatabase = 'signUpModal'
 const modalTitle = 'error.title'
