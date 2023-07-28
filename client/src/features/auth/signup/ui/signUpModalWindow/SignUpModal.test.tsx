@@ -1,9 +1,6 @@
-// signUpModal.test.js
-
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { SignUpModal } from './SignUpModal';
-import { useClientTranslation } from '@/shared/config/i18n/client';
 
 // Mock the useClientTranslation hook
 jest.mock('./../../../../../shared/config/i18n/client', () => ({

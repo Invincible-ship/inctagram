@@ -4,7 +4,7 @@ import { FC } from "react"
 import { CommonBlock } from "../../CommonBlock/CommonBlock"
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
 import s from './../../styles/congratResendMergeStyles.module.scss'
-import { CongratResendUIPropsType } from "../../../model/types/congratResendMergeTypes"
+import { CongratResendUIPropsType } from "@/features/auth/signup/model/types/types"
 import { PictureVerification } from "./PictureVerification"
 
 export const ResendLinkUI: FC<CongratResendUIPropsType> = ({ title, text, action, buttonText }) => {

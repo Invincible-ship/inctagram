@@ -4,7 +4,7 @@ import { CommonBlock } from "../../CommonBlock/CommonBlock"
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
 import { PictureCongratulation } from "./PictureCongratulation"
 import s from './../../styles/congratResendMergeStyles.module.scss'
-import { CongratResendUIPropsType } from "../../../model/types/congratResendMergeTypes"
+import { CongratResendUIPropsType } from "@/features/auth/signup/model/types/types"
 
 export const CongratulationUI: FC<CongratResendUIPropsType> = ({ title, text, action, buttonText }) => {
   //action is goToLogin from Congratulation
