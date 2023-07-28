@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IUserSchema } from '@/entities/User/model/types/types'
+import {signInThunk} from "@/features/auth/signIn/lib/signInThunk/signInThunk"
 
 const initialState: IUserSchema = {
   _inited: false,
@@ -14,7 +15,12 @@ const slice = createSlice({
       state.authData = undefined
     },
   },
-  extraReducers: builder => {},
+  extraReducers: builder => {
+    builder
+      .addCase(signInThunk.fulfilled, (state, action) => {
+        state.authData = action.payload.data
+      })
+  },
 })
 
 export const userReducer = slice.reducer

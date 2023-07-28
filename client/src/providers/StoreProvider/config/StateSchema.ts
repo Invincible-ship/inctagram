@@ -1,10 +1,11 @@
-import { rtkApi } from '@/shared/api/rtkApi'
-import { AnyAction, Dispatch } from '@reduxjs/toolkit'
-import { AxiosInstance } from 'axios'
+import {rtkApi} from '@/shared/api/rtkApi'
+import {AxiosInstance} from 'axios'
+import {signInReducer} from "@/features/auth/signIn/model/slice/signInSlice"
 
 export type StateSchema = {
   // Остальные типы ваших редьюсеров
-  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
+  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>,
+  signInReducer: ReturnType<typeof signInReducer>
 }
 
 export type ThunkExtraArg = {

@@ -1,10 +1,11 @@
-import {InputField} from "@/shared/ui/InputField/InputField";
-import {PasswordWrapper} from "@/shared/ui/PasswordWrapper/PasswordWrapper";
-import s from "@/features/auth/signIn/ui/signIn.module.scss";
-import Link from "next/link";
-import {Button} from "@/shared/ui/Button/Button";
-import React, {FC, FormEventHandler, useState} from "react";
-// import s from '@/shared/ui/Input/Input.module.scss'
+import {InputField} from "@/shared/ui/InputField/InputField"
+import {PasswordWrapper} from "@/shared/ui/PasswordWrapper/PasswordWrapper"
+import s from "@/features/auth/signIn/ui/signIn.module.scss"
+import Link from "next/link"
+import {Button} from "@/shared/ui/Button/Button"
+import React, {FC, FormEventHandler, useState} from "react"
+import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch"
+import {setDisableError} from "@/features/auth/signIn/model/slice/signInSlice"
 
 export type SignInFormProps = {
 	errorLogin?: string
@@ -16,14 +17,19 @@ export type SignInFormProps = {
 
 export const SignInForm: FC<SignInFormProps> = ({onSubmit, t, errors, register, errorLogin}) => {
 
+	const dispatch = useAppDispatch()
 	const [showPassword, setShowPassword] = useState(false)
 	const toggleShowPassword = () => {
 		setShowPassword(!showPassword)
 	}
 
+	const disableError = () => {
+		dispatch(setDisableError())
+	}
+
 	return (
-		<form onSubmit={onSubmit} className={'form-style'}>
-			<InputField
+  <form onSubmit={onSubmit} className={'form-style'} onClick={disableError}>
+    <InputField
 				id={'email'}
 				type={'email'}
 				placeholder={'Epam@epam.com'}
@@ -31,7 +37,7 @@ export const SignInForm: FC<SignInFormProps> = ({onSubmit, t, errors, register, 
 				register={...register('email')}
 				error={errors.email}
 			/>
-			<PasswordWrapper
+    <PasswordWrapper
 				id="password"
 				className={'password'}
 				placeholder={'******************'}
@@ -41,16 +47,16 @@ export const SignInForm: FC<SignInFormProps> = ({onSubmit, t, errors, register, 
 				register={...register('password')}
 				error={errors.password}
 			/>
-			<div className={s.error}>{errorLogin}</div>
-			<div className={s.forgotPassword}>
-				<Link className={s.forgotPasswordLink}
+    <div className={s.error}>{errorLogin}</div>
+    <div className={s.forgotPassword}>
+      <Link className={s.forgotPasswordLink}
 							href={'/forgotPassword'}>
-					{t('forgotPassword')}
-				</Link>
-			</div>
-			<Button type="submit" className={'styled-btn styled-btn-1'}>
-				{t('signIn')}
-			</Button>
-		</form>
+        {t('forgotPassword')}
+      </Link>
+    </div>
+    <Button type="submit" className={'styled-btn styled-btn-1'}>
+      {t('signIn')}
+    </Button>
+  </form>
 	)
 }
