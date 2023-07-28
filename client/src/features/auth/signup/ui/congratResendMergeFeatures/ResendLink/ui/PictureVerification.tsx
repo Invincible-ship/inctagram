@@ -1,6 +1,6 @@
 export const PictureVerification = () => {
   return (
-    <svg width="100%" height="246" viewBox="0 0 330 246" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg role="img" width="100%" height="246" viewBox="0 0 330 246" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M330 216.181H0V216.346H330V216.181Z" fill="#4C4C4C" />
       <path d="M296.934 226.805H275.075V226.97H296.934V226.805Z" fill="#4C4C4C" />
       <path d="M218.605 228.601H212.87V228.766H218.605V228.601Z" fill="#EBEBEB" />
