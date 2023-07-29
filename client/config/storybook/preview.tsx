@@ -1,5 +1,6 @@
-import type { Preview, StoryFn } from "@storybook/react"
-import { StyleDecorator } from "../../src/shared/config/storybook/StyleDecorator/StyleDecorator"
+import type { Preview, StoryFn } from "@storybook/react";
+import { StyleDecorator } from "@/shared/config/storybook/StyleDecorator/StyleDecorator";
+import { StoreDecorator } from "@/shared/config/storybook/StoreDecorator/StoreDecorator";
 
 const preview: Preview = {
   parameters: {
@@ -13,8 +14,11 @@ const preview: Preview = {
     nextjs: {
       appDirectory: true,
     },
-    decorators: [(Story: StoryFn) => StyleDecorator(Story)],
+    decorators: [
+      (Story: StoryFn) => StyleDecorator(Story),
+      (Story: StoryFn) => StoreDecorator(Story),
+    ],
   },
-}
+};
 
-export default preview
+export default preview;

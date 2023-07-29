@@ -15,11 +15,7 @@ const slice = createSlice({
       state.authData = undefined;
     },
   },
-  extraReducers: builder => {
-    builder.addCase(signupThunk.fulfilled, (state, action) => {
-      state.authData = action.payload;
-    });
-  },
+  extraReducers: builder => {},
 });
 
 export const userReducer = slice.reducer;
