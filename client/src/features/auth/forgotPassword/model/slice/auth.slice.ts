@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createAppAsyncThunk } from "@/shared/lib/utils/createAppAsyncThunk";
+// import { createAppAsyncThunk } from "@/shared/lib/utils/createAppAsyncThunk";
 import { thunkTryCatch } from "@/shared/lib/utils/thunk-try-catch";
 import { authApi, RegisterParamsType, RegisterResponseType } from "@/features/auth/auth.api";
 

@@ -14,7 +14,9 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {z} from "zod";
 import {InputField} from "@/shared/ui/InputField/InputField";
 import {authThunks} from "@/features/auth/signup/model/slice/auth.slice";
-import {useAppDispatch} from "@/shared/lib/hooks"
+import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch"
+import {avatarUpload} from "@/features/avatarUpload";
+
 
 
 type ForgotPassword = {
@@ -65,6 +67,8 @@ export const ForgotPassword: FC<ForgotPassword> = ({lng}) => {
         }
     }
 
+
+
     return (
         <div className={'form'}>
             <div className='form-wrapper auth-form'>
@@ -97,7 +101,9 @@ export const ForgotPassword: FC<ForgotPassword> = ({lng}) => {
                         theme="dark"
                     />
                 </form>
+
             </div>
+
         </div>
     )
 }

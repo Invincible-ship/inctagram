@@ -4,7 +4,7 @@ import { rtkApi } from "@/shared/api/rtkApi"
 import { configureStore, ReducersMapObject } from "@reduxjs/toolkit"
 
 export function createReduxStore(
-  initialState?: StateSchema
+    initialState?: StateSchema
 ) {
   const rootReducer: ReducersMapObject<StateSchema> = {
     // Ваши остальные редьюсеры
@@ -19,12 +19,12 @@ export function createReduxStore(
     reducer: rootReducer,
     preloadedState: initialState,
     devTools: Boolean(process.env.IS_DEV),
-    middleware: (getDefaultMiddleware) => 
-      getDefaultMiddleware({
-        thunk: {
-          extraArgument: extraArg
-        }
-      }).concat(rtkApi.middleware)
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+          thunk: {
+            extraArgument: extraArg
+          }
+        }).concat(rtkApi.middleware)
   })
 
   return store

@@ -1,0 +1,1 @@
+export { avatarUpload } from "./ui/avatarUpload"

@@ -14,6 +14,11 @@ import {authThunks} from "@/features/auth/signup/model/slice/auth.slice";
 // import {useAppDispatch} from "@/shared/lib/hooks";
 import {z} from "zod";
 import {PasswordWrapper} from "@/shared/ui/PasswordWrapper/PasswordWrapper";
+import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch";
+import {Modal} from "@/shared/ui/Modal/Modal";
+import cls from "@/features/auth/signout/ui/SignOutModal/SignOutModal.module.scss";
+import {SignOutButton} from "@/features/auth/signout";
+import {avatarUpload} from "@/features/avatarUpload";
 
 type ResetPassword = {
     lng: string
@@ -92,7 +97,7 @@ export const ResetPassword: FC<ResetPassword> = ({lng}) => {
                         toggleShowPassword={toggleShowConfirmPassword}
                         error={errors.passwordConfirmation}
                     />
-                    <span className={'info b-title bt14  align-center semibold'}>{t('infoReset')}</span>
+                  <span className={'info b-title bt14  align-start semibold'}>{t('infoReset')}</span>
                     <Button
                         type="submit"
                         className={'styled-btn styled-btn-1'}
