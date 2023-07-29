@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { CongratulationModal } from '@/features/auth/signup/ui/congratResendMergeFeatures/ui/Congratulation/CongratulationModal/CongratulationModal'
+import { CongratulationModal } from './CongratulationModal'
 import { action } from '@storybook/addon-actions'
 
 const meta: Meta<typeof CongratulationModal> = {

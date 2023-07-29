@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Modal } from './Modal'
 import { ModalWindow } from './children/ModalWindow'
-import { ChildrenDefault } from './children/ModalWindow.stories'
+import { ChildrenDefault } from './children/modalWindow.stories'
 
 const meta = {
   component: Modal,
