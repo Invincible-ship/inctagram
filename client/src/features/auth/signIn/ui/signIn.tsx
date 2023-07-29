@@ -28,8 +28,6 @@ export const SignIn: FC<SignInProps> = ({lng}) => {
 	const schema = formSchema(t)
 	const isLoading = useSelector<StateSchema, boolean>(state => state.signInReducer.isLoading)
 	const dispatch = useAppDispatch()
-	// const [signIn, {isLoading}] = useSignInMutation()
-	// const [errorLogin, setErrorLogin] = useState<string>('')
 	const error = useSelector<StateSchema, boolean>(state => state.signInReducer.error)
 
 	const {

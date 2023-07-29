@@ -6,6 +6,8 @@ import {Button} from "@/shared/ui/Button/Button"
 import React, {FC, FormEventHandler, useState} from "react"
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch"
 import {setDisableError} from "@/features/auth/signIn/model/slice/signInSlice"
+import '@/shared/styles/variables/common/_form.scss'
+import '@/shared/styles/variables/common/_b-titles.scss'
 
 export type SignInFormProps = {
 	errorLogin?: string
@@ -34,7 +36,7 @@ export const SignInForm: FC<SignInFormProps> = ({onSubmit, t, errors, register, 
 				type={'email'}
 				placeholder={'Epam@epam.com'}
 				title={t('email')}
-				register={...register('email')}
+				register={register('email')}
 				error={errors.email}
 			/>
     <PasswordWrapper
@@ -44,7 +46,7 @@ export const SignInForm: FC<SignInFormProps> = ({onSubmit, t, errors, register, 
 				type={showPassword ? 'text' : 'password'}
 				title={t("password")}
 				toggleShowPassword={toggleShowPassword}
-				register={...register('password')}
+				register={register('password')}
 				error={errors.password}
 			/>
     <div className={s.error}>{errorLogin}</div>
