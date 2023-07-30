@@ -12,14 +12,10 @@ const meta: Meta<typeof SignIn> = {
 export default meta
 type Story = StoryObj<typeof SignIn>
 
-export const Default: Story = {
-	render: () => <SignIn lng="en" isLoading={false} />,
+export const  EnglishVersion: Story = {
+	render: () => <SignIn lng="en" />,
 }
 
-export const Loading: Story = {
-	render: () => <SignIn lng="en" isLoading={true} />,
-}
-
-export const Error: Story = {
-	render: () => <SignIn lng="en" isError={true} error={{ message: 'Error message' }} />,
+export const RussianVersion: Story = {
+	render: () => <SignIn lng="ru"  />,
 }
