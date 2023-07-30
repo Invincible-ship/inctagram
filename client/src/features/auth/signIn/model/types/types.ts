@@ -4,5 +4,11 @@ export type LoginRequestType = {
 }
 
 export type LoginResponseType = {
-	"accessToken": "string"
+	"accessToken": string,
+	"user": {
+		"id": string,
+		"userName": string,
+		"email": string,
+		"createdAt": string
+	}
 }

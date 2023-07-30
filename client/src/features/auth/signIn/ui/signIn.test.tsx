@@ -1,14 +1,10 @@
 import {render, screen} from '@testing-library/react'
 import {SignIn} from './signIn'
 
-jest.mock('@/shared/config/i18n/client', () => ({
-  useClientTranslation: jest.fn().mockReturnValue({ t: jest.fn().mockReturnValue('Войти') }),
-}))
-
 test('renders SignIn component with correct title', () => {
-  render(<SignIn />)
+  render(<SignIn lng={'en'}/>)
 
   // Check if the translated text is rendered
-  const titleElement = screen.getByText('Войти')
+  const titleElement = screen.getByText('Sign In')
   expect(titleElement).toBeInTheDocument()
 })
