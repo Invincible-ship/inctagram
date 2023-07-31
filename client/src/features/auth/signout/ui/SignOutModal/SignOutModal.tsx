@@ -6,16 +6,15 @@ import Link from "next/link"
 import { useClientTranslation } from "@/shared/config/i18n/client"
 
 type SignOutModalProps = {
-  lngId: string,
   isOpen: boolean,
   onClose: () => void,
   signOut: () => void
 }
 
 export const SignOutModal: FC<SignOutModalProps> = (
-  { isOpen, onClose, signOut, lngId }
+  { isOpen, onClose, signOut }
 ) => {
-  const { t } = useClientTranslation(lngId, 'signout')
+  const { t } = useClientTranslation('', 'signout')
 
   return (
     <Modal

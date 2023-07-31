@@ -18,29 +18,29 @@ export const metadata = {
 }
 
 export async function generateStaticParams() {
-    return languages.map((lng) => ({lng}))
+    return languages.map((lngId) => ({lngId}))
 }
 
 const RootLayout = ({
   children,
-  params: { lng }
+  params: { lng: lngId }
 } : {
   children: ReactNode,
   params: LanguageParams
 }) => {
   return (
-    <html lang={lng} dir={dir(lng)} className={inter.className}>
+    <html lang={lngId} dir={dir(lngId)} className={inter.className}>
       <head />
-      <AuthenticationProvider>
-        <StoreProvider>
-          <body className='app'>
-            <Header lng={lng}/>
+      <body className='app'>
+        <AuthenticationProvider>
+          <StoreProvider>
             <Suspense fallback={<Loading/>}>
+              <Header lngId={lngId} />
               {children}
             </Suspense>
-          </body>
-        </StoreProvider>
-      </AuthenticationProvider>
+          </StoreProvider>
+        </AuthenticationProvider>
+      </body>
     </html>
   )
 }

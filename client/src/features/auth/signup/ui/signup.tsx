@@ -1,6 +1,6 @@
 "use client"
 
-import React, {FC, useState} from 'react'
+import React, { useContext, useState} from 'react'
 import Link from "next/link"
 import style from './signup.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
@@ -19,15 +19,11 @@ import {useSignUpMutation} from "@/features/auth/signup/model/api/signUpApi"
 import {Preloader} from "@/shared/ui/Preloader/Preloader"
 import { RegisterParamsType } from '../model/types/types'
 
-type SignUpProps= {
-    lng?: string
-}
-
-export const SignUp:FC<SignUpProps> = ({lng}) => {
+export const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-    const {t} = useClientTranslation(lng, 'signUp')
+    const {t} = useClientTranslation('', 'signUp')
 
     const userNameRequired = t("validate.userNameRequired")
     const userNameMaxLength = t("validate.userNameMaxLength")

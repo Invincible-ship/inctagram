@@ -9,13 +9,14 @@ import { languages } from "@/shared/config/i18n/settings"
 import { FC, ReactNode, useMemo, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import cls from "./LangSwitcher.module.scss"
+import { LanguageIds } from "@/shared/config/i18n/types"
 
 type LangSwitcherProps = {
-  currentLngId: string;
+  initialLngId: LanguageIds;
 };
 
 type TLanguageOption = {
-  id: string;
+  id: LanguageIds;
   lng: string;
   icon: ReactNode;
 };
@@ -23,16 +24,16 @@ type TLanguageOption = {
 const languagesOptions: TLanguageOption[] = languages.map((lng) => {
   switch (lng) {
     case "en":
-      return { id: "en", lng: "English", icon: <FlagUK /> }
+      return { id: LanguageIds.EN, lng: "English", icon: <FlagUK /> }
     case "ru":
-      return { id: "ru", lng: "Russian", icon: <FlagRU /> }
+      return { id: LanguageIds.RU, lng: "Russian", icon: <FlagRU /> }
     default:
-      return { id: "en", lng: "English", icon: <FlagUK /> }
+      return { id: LanguageIds.EN, lng: "English", icon: <FlagUK /> }
   }
 })
 
-export const LangSwitcher: FC<LangSwitcherProps> = ({ currentLngId }) => {
-  const [lngId, setLngId] = useState(currentLngId || "en")
+export const LangSwitcher: FC<LangSwitcherProps> = ({ initialLngId }) => {
+  const [lngId, setLngId] = useState(initialLngId)
   const router = useRouter()
   const pathname = usePathname() as string
 
@@ -40,10 +41,14 @@ export const LangSwitcher: FC<LangSwitcherProps> = ({ currentLngId }) => {
     return languagesOptions.find((option) => option?.id == lngId)
   }, [lngId]) as TLanguageOption
 
-  const onChange = (value: string) => {
+  const onChange = (value: LanguageIds) => {
     setLngId(value)
 
-    const newPathname = pathname.replace(`${currentLngId}`, value)
+    const newPathname = pathname.replace(`${lngId}`, value)
+    console.log({
+      lngId,
+      value
+    })
     router.replace(newPathname)
   }
 

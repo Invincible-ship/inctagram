@@ -6,12 +6,13 @@ import Logo from "@/shared/assets/icons/logo.svg"
 import { LangSwitcher } from "@/features/LangSwitcher"
 import cls from "./Header.module.scss"
 import { SignOutButton } from "@/features/auth/signout"
+import { LanguageIds } from "@/shared/config/i18n/types"
 
 type HeaderProps = {
-  lng?: string;
+  lngId: LanguageIds;
 };
 
-export const Header: FC<HeaderProps> = ({ lng = 'en' }) => (
+export const Header: FC<HeaderProps> = ({ lngId }) => (
   <header data-testid="header" className={cls.header}>
     <div className={cls.headerContainer}>
       <div className={cls.logo}>
@@ -22,8 +23,8 @@ export const Header: FC<HeaderProps> = ({ lng = 'en' }) => (
         <span>
           <OutlineBell />
         </span>
-        <LangSwitcher currentLngId={lng} />
-        <SignOutButton lngId={lng} />
+        <LangSwitcher initialLngId={lngId} />
+        <SignOutButton />
       </div>
     </div>
   </header>

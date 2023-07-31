@@ -2,10 +2,10 @@ import { SignUp } from "@/features/auth/signup"
 import { LanguageParams } from "@/shared/config/i18n/types"
 import { FC } from "react"
 
-export const SignUpPage: FC<{ params: LanguageParams }> = ({ params: { lng } }) => {
+export const SignUpPage = () => {
   return (
     <div className={"content"}>
-      <SignUp lng={lng} />
+      <SignUp />
     </div>
   )
 }

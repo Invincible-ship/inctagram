@@ -4,6 +4,7 @@ import { initReactI18next, useTranslation as useTranslationOrg } from "react-i18
 import resourcesToBackend from "i18next-resources-to-backend"
 import LanguageDetector from "i18next-browser-languagedetector"
 import { getOptions, languages } from "./settings"
+import { LanguageIds } from "@/providers/LanguageProvider/context"
 
 const runsOnServerSide = typeof window === "undefined"
 
@@ -24,7 +25,7 @@ i18next
     preload: runsOnServerSide ? languages : [],
   })
 
-export function useClientTranslation(lng: string = "", ns: string = "translation", options: Record<string, any> = {}) {
+export function useClientTranslation(lng: LanguageIds | '' = '', ns: string = "translation", options: Record<string, any> = {}) {
   const ret = useTranslationOrg(ns, options)
   const { i18n } = ret
   if (runsOnServerSide && i18n.resolvedLanguage !== lng) {

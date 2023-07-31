@@ -1,3 +1,12 @@
-.signoutModal {
-  
+.btn {
+  color: var(--primary-text-color);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .icon {
+    g {
+      fill: var(--primary-text-color);
+    }
+  }
 }
