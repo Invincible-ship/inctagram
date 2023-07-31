@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { signupThunk } from '@/features/auth/signup/model/signup';
+import { createSlice } from '@reduxjs/toolkit'
+import { signupThunk } from '@/features/auth/signup/model/signup'
 
 const slice = createSlice({
   name: 'signup',
@@ -8,22 +8,22 @@ const slice = createSlice({
   },
   reducers: {
     dummyReducer: state => {
-      return state;
+      return state
     },
   },
   extraReducers: builder => {
     builder.addCase(signupThunk.pending, state => {
-      state.isLoading = true;
-    });
+      state.isLoading = true
+    })
 
     builder.addCase(signupThunk.fulfilled, state => {
-      state.isLoading = false;
-    });
+      state.isLoading = false
+    })
 
     builder.addCase(signupThunk.rejected, state => {
-      state.isLoading = false;
-    });
+      state.isLoading = false
+    })
   },
-});
+})
 
-export const signupReducer = slice.reducer;
+export const signupReducer = slice.reducer

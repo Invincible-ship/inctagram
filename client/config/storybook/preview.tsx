@@ -1,6 +1,6 @@
-import type { Preview, StoryFn } from "@storybook/react";
-import { StyleDecorator } from "@/shared/config/storybook/StyleDecorator/StyleDecorator";
-import { StoreDecorator } from "@/shared/config/storybook/StoreDecorator/StoreDecorator";
+import type { Preview, StoryFn } from "@storybook/react"
+import { StyleDecorator } from "@/shared/config/storybook/StyleDecorator/StyleDecorator"
+import { StoreDecorator } from "@/shared/config/storybook/StoreDecorator/StoreDecorator"
 
 const preview: Preview = {
   parameters: {
@@ -19,6 +19,6 @@ const preview: Preview = {
       (Story: StoryFn) => StoreDecorator(Story),
     ],
   },
-};
+}
 
-export default preview;
+export default preview

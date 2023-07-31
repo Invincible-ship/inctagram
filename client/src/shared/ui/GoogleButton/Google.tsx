@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Google = () => {
   return (
@@ -33,7 +33,7 @@ const Google = () => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
 
-export default Google;
+export default Google
