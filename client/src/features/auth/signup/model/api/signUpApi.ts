@@ -1,4 +1,3 @@
-import { RegisterParamsType, RegisterResponseType } from "@/features/auth/signup/model/types/types"
 import { rtkApi } from "@/shared/api/rtkApi"
 
 const endpoints = {
@@ -10,13 +9,6 @@ const endpoints = {
 export const signUpApi = rtkApi.injectEndpoints({
   endpoints: (build) => {
     return {
-      signUp: build.mutation<RegisterResponseType, RegisterParamsType>({
-        query: (data) => ({
-          method: 'POST',
-          url: endpoints.registration,
-          body: data,
-        })
-      }),
       //* request for ResendLink component
       emailResending: build.mutation<any, any>({
         query: (body: { email: string }) => ({
@@ -30,7 +22,6 @@ export const signUpApi = rtkApi.injectEndpoints({
 })
 
 export const {
-  useSignUpMutation,
   useEmailResendingMutation
 } = signUpApi
 

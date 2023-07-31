@@ -32,25 +32,34 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     handleSubmit,
     formState: { errors },
     setError,
+
   } = useForm<FormSchemaType>({
     resolver: zodResolver(schema),
   })
 
+  //for SignUpModal
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [email, setEmail] = useState<string>()
+  const onClose = () => setIsOpen(false)
+  //===============
+
   const onSubmit = data => {
     dispatch(signupThunk({ body: data, setError }))
+    //for SignUpModal
+    setEmail(data.email)
+    setIsOpen(true)
+    //===============
   }
 
   //for SignUpModal
-  const [isOpen, setIsOpen] = useState(false)
-  const onClose = () => {
-    setIsOpen(!isOpen)
-  }
+  useEffect(() => {
+    if (Object.keys(errors).length !== 0) {
+      setIsOpen(false)
+      setEmail('')
+    }
+  }, [{ errors }])
+  //===============
 
-  //useEffect(() => {
-  //  if (!isError) {
-  //    setIsOpen(true)
-  //  }
-  //}, [isError])
   if (isLoading) {
     return <Preloader />
   }
@@ -76,7 +85,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
         >
           <span>{t('signIn')}</span>
         </Link>
-        {/*{(!isError && data && lng) && <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={data.email} />}*/}
+        {(isOpen && Object.keys(errors).length === 0 && lng) && <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={email} />}
       </div>
     </div>
   )
