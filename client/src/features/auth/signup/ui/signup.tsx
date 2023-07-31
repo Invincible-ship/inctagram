@@ -2,10 +2,8 @@
 import { FC, useEffect, useState } from 'react'
 import { SignUpForm } from './SignUpForm'
 import { SocialButtons } from '@/features/auth/signup/ui/SocialButtons'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch'
-import { useSignUpMutation } from '@/features/auth/signup/model/api/signUpApi'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import style from './signup.module.scss'
@@ -16,13 +14,17 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
+import { signupThunk } from '@/features/auth/signup/model/signup'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { SignUpModal } from './signUpModalWindow/SignUpModal'
 
 export type SignUpProps = {
-  lng?: string;
-};
+  lng?: string
+}
 export const SignUp: FC<SignUpProps> = ({ lng }) => {
-  const [signUp, { isLoading, isError, data }] = useSignUpMutation()
+  const isLoading = useSelector(state => state.signup.isLoading)
+  const dispatch = useAppDispatch()
   const { t } = useClientTranslation(lng, 'signUp')
   const schema = formSchema(t)
   const {
@@ -34,21 +36,8 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     resolver: zodResolver(schema),
   })
 
-  const onSubmit: SubmitHandler<FormSchemaType> = async data => {
-    try {
-      await signUp(data).unwrap()
-    } catch (error) {
-      if (error.data && error.data.errors) {
-        for (const err of error.data.errors) {
-          setError(err.field, {
-            type: 'server',
-            message: err.message,
-          })
-        }
-      } else {
-        console.error(error)
-      }
-    }
+  const onSubmit = data => {
+    dispatch(signupThunk({ body: data, setError }))
   }
 
   //for SignUpModal
@@ -57,12 +46,11 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     setIsOpen(!isOpen)
   }
 
-  useEffect(() => {
-    if (!isError) {
-      setIsOpen(true)
-    }
-  }, [isError])
-
+  //useEffect(() => {
+  //  if (!isError) {
+  //    setIsOpen(true)
+  //  }
+  //}, [isError])
   if (isLoading) {
     return <Preloader />
   }
@@ -70,9 +58,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
   return (
     <div className={'form registration'}>
       <div className="form-wrapper auth-form">
-        <div className={'title b-title bt26 semibold align-center'}>
-          {t('signUp')}
-        </div>
+        <div className={'title b-title bt26 semibold align-center'}>{t('signUp')}</div>
         <SocialButtons />
         <SignUpForm
           onSubmit={handleSubmit(onSubmit)}
@@ -90,7 +76,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
         >
           <span>{t('signIn')}</span>
         </Link>
-        {(!isError && data && lng) && <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={data.email} />}
+        {/*{(!isError && data && lng) && <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={data.email} />}*/}
       </div>
     </div>
   )
