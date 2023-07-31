@@ -2,7 +2,8 @@
   "extends": [
     "next",
     "plugin:storybook/recommended",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "prettier"
   ],
   "plugins": ["react", "@typescript-eslint", "i18next", "react-hooks"],
   "rules": {
