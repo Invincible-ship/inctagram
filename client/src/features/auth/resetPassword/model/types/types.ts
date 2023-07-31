@@ -3,5 +3,6 @@ export type ResetPasswordParamsType = {
     passwordConfirmation: string;
 };
 export type ResetPasswordResponseType = {
+    id: string;
     createdAt: string;
 };

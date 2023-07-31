@@ -16,49 +16,32 @@ import {InputField} from "@/shared/ui/InputField/InputField";
 import {authThunks} from "@/features/auth/signup/model/slice/auth.slice";
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch"
 import {avatarUpload} from "@/features/avatarUpload";
-
-
+import {ForgotPasswordForm} from "@/features/auth/forgotPassword/ui/ForgotPasswordForm";
+import {Preloader} from "@/shared/ui/Preloader/Preloader";
+import {formSchema, FormSchemaType} from "@/features/auth/signup/lib/validationConstants/validationConstants";
+import {useSignUpMutation} from "@/features/auth/signup/model/api/signUpApi";
 
 type ForgotPassword = {
-    lng: string
-}
-
-type FormSchemaType = z.infer<typeof formSchema>
-
-const formSchema = z
-    .object({
-        userName: z.string().min(6, "Username is required").max(30),
-        email: z.string().email("Invalid email").min(1, "Email is required"),
-        password: z
-            .string()
-            .min(1, "Password is required")
-            .min(6, "Password must have more than 6 characters").max(20),
-        passwordConfirmation: z.string().min(1, "Password confirmation is required"),
-    })
-    .refine((data) => data.password === data.passwordConfirmation, {
-        path: ["passwordConfirmation"],
-        message: "Passwords do not match",
-    })
-
-function onChange(value) {
-    console.log("Captcha value:", value)
+    lng?: string
 }
 
 export const ForgotPassword: FC<ForgotPassword> = ({lng}) => {
 
+    const [signUp, { isLoading }] = useSignUpMutation();
     const { t } = useClientTranslation(lng, 'resetPage')
     const dispatch = useAppDispatch()
     const [isActive, setIsActive] = useState(false)
-
-    let handleClick
+    const schema = formSchema(t);
 
     const {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm({
-        resolver: zodResolver(formSchema),
+    } = useForm<FormSchemaType>({
+        resolver: zodResolver(schema),
     })
+
+    let handleClick
 
     const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
         dispatch(authThunks.register(data))
@@ -67,7 +50,9 @@ export const ForgotPassword: FC<ForgotPassword> = ({lng}) => {
         }
     }
 
-
+    if (isLoading) {
+        return <Preloader />;
+    }
 
     return (
         <div className={'form'}>
@@ -75,32 +60,14 @@ export const ForgotPassword: FC<ForgotPassword> = ({lng}) => {
 
                 <div className={'title b-title bt26 semibold align-center'}>{t('mainTitle')}</div>
 
-                <form className={'form-style' } onSubmit={handleSubmit(onSubmit)} novalidate>
-
-                        <InputField
-                            id={"email"}
-                            type={"email"}
-                            placeholder={t('signUp.email')}
-                            title={t('signUp.email')}
-                            register={...register("email")}
-                            error={errors.email}
-                        />
-
-                    <span className={'info b-title bt14 semibold'}>{t('info')}</span>
-
-                    <span className="sentByEmail" style={{display: isActive ? " " : "none"}}>{t('sentByEmail')}</span>
-
-                    <Button type="submit" onClick={handleClick} className={'styled-btn styled-btn-1'} >{t('sendLink')}</Button>
-
-                    <Link href={'/login'} className="b-title bt16 semibold link-registration align-center"><span>{t('BackToSignIn')}</span></Link>
-
-                    <ReCAPTCHA
-                        style={{display: isActive ? "none" : ""}}
-                        sitekey="6LdPYuImAAAAAGngeM-aK5HsW-CVdTPXbQP6GB6Y"
-                        onChange={onChange}
-                        theme="dark"
-                    />
-                </form>
+                <ForgotPasswordForm
+                    onSubmit={handleSubmit(onSubmit)}
+                    handleClick={handleSubmit(handleClick)}
+                    isLoading={isLoading}
+                    t={t}
+                    errors={errors}
+                    register={register}
+                />
 
             </div>
 
