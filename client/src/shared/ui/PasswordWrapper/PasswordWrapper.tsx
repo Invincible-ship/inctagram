@@ -1,24 +1,23 @@
-import {FieldError, FieldErrorsImpl} from "react-hook-form"
-import {FC} from "react"
-import Input from "@/shared/ui/Input/Input"
-
-import "@/shared/styles/variables/common/_form.scss"
-import "@/shared/styles/variables/common/_b-titles.scss"
-import "@/shared/styles/variables/common/_buttons.scss"
-import cls from "@/features/auth/signup/ui/signup.module.scss"
-import {Merge} from "type-fest"
-import Eye from "@/shared/ui/Eye/Eye"
+import { FieldError, FieldErrorsImpl } from 'react-hook-form'
+import { FC } from 'react'
+import Input from '@/shared/ui/Input/Input'
+import '@/shared/styles/variables/common/_form.scss'
+import '@/shared/styles/variables/common/_b-titles.scss'
+import '@/shared/styles/variables/common/_buttons.scss'
+import cls from '@/features/auth/signup/ui/signup.module.scss'
+import { Merge } from 'type-fest'
+import Eye from '@/shared/ui/Eye/Eye'
 
 export type PasswordWrapperProps = {
-  id: string;
-  className?: "password";
-  placeholder: string;
-  type: string;
-  title: string;
-  register: any;
-  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
-  toggleShowPassword: () => void;
-};
+  id: string
+  className?: 'password'
+  placeholder: string
+  type: string
+  title: string
+  register: any
+  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
+  toggleShowPassword: () => void
+}
 
 export const PasswordWrapper: FC<PasswordWrapperProps> = ({
   id,

@@ -4,7 +4,7 @@ import {signInThunk} from "@/features/auth/signIn/lib/signInThunk/signInThunk"
 
 const initialState: IUserSchema = {
 	_inited: false,
-}
+};
 
 const slice = createSlice({
 	name: 'user',
@@ -19,9 +19,7 @@ const slice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(signInThunk.fulfilled, (state: IUserSchema, action) => {
-				if (state.authData) {
-					Object.assign(state.authData, action.payload.user, { isAuthorized: true });
-				}
+				Object.assign(state.authData, action.payload.user, {isAuthorized: true});
 			})
 	},
 })

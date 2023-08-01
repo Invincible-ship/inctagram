@@ -21,8 +21,8 @@ export const formSchema = t =>
         .max(30, { message: t(userNameMaxLength) }),
       email: z
         .string()
-        .email({ message: t(emailInvalid) })
-        .min(1, { message: t(emailRequired) }),
+        .min(1, { message: t(emailRequired) })
+        .email({ message: t(emailInvalid) }),
       password: z
         .string()
         .min(1, { message: t(passwordRequired) })

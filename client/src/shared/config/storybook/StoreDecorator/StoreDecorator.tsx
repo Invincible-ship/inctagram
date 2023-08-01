@@ -5,12 +5,12 @@ import { StoreProvider } from '@/providers/StoreProvider'
 import { createReduxStore } from '@/providers/StoreProvider/config/store'
 
 export const StoreDecorator = (StoryComponent: StoryFn) => {
-	const store = createReduxStore()
-	return (
-		<div className="app">
-			<StoreProvider store={store}>
-				<StoryComponent />
-			</StoreProvider>
-		</div>
-	)
+  const store = createReduxStore()
+  return (
+    <div className="app">
+      <StoreProvider store={store}>
+        <StoryComponent />
+      </StoreProvider>
+    </div>
+  )
 }
