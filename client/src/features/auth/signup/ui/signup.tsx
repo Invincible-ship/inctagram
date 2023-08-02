@@ -2,7 +2,7 @@
 import { FC } from 'react'
 import { SignUpForm } from './SignUpForm'
 import { SocialButtons } from '@/features/auth/signup/ui/SocialButtons'
-import { useForm } from 'react-hook-form'
+import {SubmitHandler, useForm} from 'react-hook-form'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
@@ -18,13 +18,10 @@ import { signupThunk } from '@/features/auth/signup/model/signup'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 
-export type SignUpProps = {
-  lng?: string
-}
-export const SignUp: FC<SignUpProps> = ({ lng }) => {
+export const SignUp = () => {
   const isLoading = useSelector(state => state.signup.isLoading)
   const dispatch = useAppDispatch()
-  const { t } = useClientTranslation(lng, 'signUp')
+  const { t } = useClientTranslation("", 'signUp')
   const schema = formSchema(t)
   const {
     register,
@@ -35,7 +32,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     resolver: zodResolver(schema),
   })
 
-  const onSubmit = data => {
+  const onSubmit:SubmitHandler<FormSchemaType> = data => {
     dispatch(signupThunk({ body: data, setError }))
   }
 

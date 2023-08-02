@@ -2,6 +2,11 @@ import React from 'react'
 import { Meta, Story, StoryObj } from '@storybook/react'
 import { SignUp } from './signup'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
+import '@/shared/styles/variables/common/_form.scss'
+import '@/shared/styles/variables/common/_b-titles.scss'
+import  './signup.module.scss'
+
+
 
 const meta: Meta<typeof SignUp> = {
   title: 'Components/SignUp',
