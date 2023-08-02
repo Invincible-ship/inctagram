@@ -1,8 +1,6 @@
 import { rtkApi } from "@/shared/api/rtkApi"
 import { USER_TAG } from "@/shared/const/rtk"
 import {LoginRequestType, LoginResponseType} from "@/features/auth/signIn/model/types/types"
-import { rtkApi } from '@/shared/api/rtkApi';
-import { USER_TAG } from '@/shared/const/rtk';
 import {
   RegisterParamsType,
   RegisterResponseType,

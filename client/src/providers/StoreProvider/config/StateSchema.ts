@@ -6,8 +6,8 @@ import {signInReducer} from "@/features/auth/signIn/model/slice/signInSlice"
 
 export type StateSchema = {
   // Остальные типы ваших редьюсеров
-  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>,
-  signInReducer: ReturnType<typeof signInReducer>
+  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
+  signIn: ReturnType<typeof signInReducer>
   signup: ReturnType<typeof signupReducer>
 };
 

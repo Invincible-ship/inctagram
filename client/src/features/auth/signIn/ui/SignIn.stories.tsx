@@ -12,10 +12,6 @@ const meta: Meta<typeof SignIn> = {
 export default meta
 type Story = StoryObj<typeof SignIn>
 
-export const  EnglishVersion: Story = {
-	render: () => <SignIn lng="en" />,
-}
-
-export const RussianVersion: Story = {
-	render: () => <SignIn lng="ru"  />,
+export const SignInComponent: Story = {
+	render: () => <SignIn/>,
 }

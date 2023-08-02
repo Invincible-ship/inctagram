@@ -4,10 +4,10 @@ import s from "@/features/auth/signIn/ui/signIn.module.scss"
 import Link from "next/link"
 import {Button} from "@/shared/ui/Button/Button"
 import React, {FC, FormEventHandler, useState} from "react"
-import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch"
 import {setDisableError} from "@/features/auth/signIn/model/slice/signInSlice"
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
+import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
 
 export type SignInFormProps = {
 	errorLogin?: string

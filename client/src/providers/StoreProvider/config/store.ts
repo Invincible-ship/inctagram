@@ -9,8 +9,8 @@ export function createReduxStore(initialState?: StateSchema) {
   const rootReducer: ReducersMapObject<StateSchema> = {
     // Ваши остальные редьюсеры
     [rtkApi.reducerPath]: rtkApi.reducer,
-    signInReducer: signInReducer
-    signup: signupReducer,
+    signIn: signInReducer,
+    signup: signupReducer
   };
 
   const extraArg: ThunkExtraArg = {

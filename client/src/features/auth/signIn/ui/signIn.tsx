@@ -17,18 +17,14 @@ import {SignInForm} from "@/features/auth/signIn/ui/SignInForm"
 import {useSelector} from "react-redux"
 import {StateSchema} from "@/providers/StoreProvider"
 import {signInThunk} from "@/features/auth/signIn/lib/signInThunk/signInThunk"
-import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch"
+import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
 
-export type SignInProps = {
-	lng?: string;
-};
-
-export const SignIn: FC<SignInProps> = ({lng}) => {
-	const {t} = useClientTranslation(lng, 'signIn')
+export const SignIn: FC = () => {
+	const { t } = useClientTranslation('', 'signIn')
 	const schema = formSchema(t)
-	const isLoading = useSelector<StateSchema, boolean>(state => state.signInReducer.isLoading)
+	const isLoading = useSelector<StateSchema, boolean>(state => state.signIn.isLoading)
 	const dispatch = useAppDispatch()
-	const error = useSelector<StateSchema, boolean>(state => state.signInReducer.error)
+	const error = useSelector<StateSchema, boolean>(state => state.signIn.error)
 
 	const {
 		register,
