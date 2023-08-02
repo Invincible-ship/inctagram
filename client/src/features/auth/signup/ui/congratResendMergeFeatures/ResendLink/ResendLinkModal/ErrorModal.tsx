@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import React, { FC } from 'react'
 import '@/shared/styles/reset.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
@@ -13,32 +13,34 @@ const modalText = 'error.text'
 const emptyEmail = 'error.emptyEmail'
 
 export const ErrorModal: FC<ModalPropsType> = ({ lng, onClose, isOpen, userEmail }) => {
-
-  const { t } = useClientTranslation(lng, languageDatabase)
+  const { t } = useClientTranslation('', languageDatabase)
 
   if (userEmail) {
-    return <>
-      <Modal onClose={onClose} isOpen={isOpen}  >
-        <ModalWindow
-          onClose={onClose}
-          isOpen={isOpen}
-          title={t(modalTitle)}
-          text={t(modalText)}
-          userEmail={userEmail}
-        />
-      </Modal>
-    </>
-  }
-  else {
-    return <>
-      <Modal onClose={onClose} isOpen={isOpen}  >
-        <ModalWindow
-          onClose={onClose}
-          isOpen={isOpen}
-          title={t(modalTitle)}
-          text={t(emptyEmail)}
-        />
-      </Modal>
-    </>
+    return (
+      <>
+        <Modal onClose={onClose} isOpen={isOpen}>
+          <ModalWindow
+            onClose={onClose}
+            isOpen={isOpen}
+            title={t(modalTitle)}
+            text={t(modalText)}
+            userEmail={userEmail}
+          />
+        </Modal>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <Modal onClose={onClose} isOpen={isOpen}>
+          <ModalWindow
+            onClose={onClose}
+            isOpen={isOpen}
+            title={t(modalTitle)}
+            text={t(emptyEmail)}
+          />
+        </Modal>
+      </>
+    )
   }
 }

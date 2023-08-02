@@ -20,7 +20,7 @@ export const ResendLink: FC<congratResendMergePropsType> = ({ lng }) => {
   const [email, setEmail] = useState<string>()
   const [noEmail, setNoEmail] = useState<boolean>(false)
   const search = useSearchParams()
-  const { t } = useClientTranslation(lng, languageDatabase)
+  const { t } = useClientTranslation('', languageDatabase)
   const [sendLinkAgain, { isSuccess, isLoading, isError }] = useEmailResendingMutation()
 
   useEffect(() => {
