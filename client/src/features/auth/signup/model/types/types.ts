@@ -1,21 +1,27 @@
-import { ModalWindowPropsType } from "@/shared/ui/Modal/children/ModalWindow"
+import { ModalWindowPropsType } from '@/shared/ui/Modal/children/ModalWindow'
 
 export type RegisterParamsType = {
-  userName: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-};
+  userName: string
+  email: string
+  password: string
+  passwordConfirmation: string
+}
 export type RegisterResponseType = {
-  id: string;
-  userName: string;
-  email: string;
-  createdAt: string;
-};
+  id: string
+  userName: string
+  email: string
+  createdAt: string
+}
+
+// ResendLink API types
+export type ResendLinkResponseType = {}
+export type ResendLinkParamsType = {
+  email: string
+}
 
 // congratResendMergeTypes
 export type congratResendMergePropsType = {
-  lng: string,
+  lng: string
 }
 
 export type CongratResendUIPropsType = {

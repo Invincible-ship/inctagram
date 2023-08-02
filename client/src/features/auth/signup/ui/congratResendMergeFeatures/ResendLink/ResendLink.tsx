@@ -6,7 +6,7 @@ import { useClientTranslation } from '@/shared/config/i18n/client'
 import { ResendLinkModal } from './ResendLinkModal/ResendLinkModal'
 import { useSearchParams } from 'next/navigation'
 import { ErrorModal } from './ResendLinkModal/ErrorModal'
-import { useEmailResendingMutation } from '@/features/auth/signup/model/api/signUpApi'
+import { useEmailResendingMutation } from '@/entities/User/api/userApi'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { ResendLinkUI } from './ui/ResendLinkUI'
 
