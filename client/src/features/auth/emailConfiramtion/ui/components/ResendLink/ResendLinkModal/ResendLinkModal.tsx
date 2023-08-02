@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import '@/shared/styles/reset.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import { Modal } from '@/shared/ui/Modal/Modal'
-import { ModalWindow } from '@/shared/ui/Modal/children/ModalWindow'
+import { ModalWindow } from '@/features/auth/emailConfiramtion/ui/ModalWindow/ModalWindow'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { ModalPropsType } from '@/features/auth/signup/model/types/types'
 

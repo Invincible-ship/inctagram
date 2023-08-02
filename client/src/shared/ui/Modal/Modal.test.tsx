@@ -2,28 +2,28 @@ import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect' // For extending Jest matchers
 import { Modal } from './Modal'
-import { ModalWindow } from './children/ModalWindow'
+import { ModalWindow } from '../../../features/auth/emailConfiramtion/ui/ModalWindow/ModalWindow'
 
 describe('ModalWindow', () => {
   const mockProps = {
     children: ModalWindow,
     isOpen: true,
-    onClose: jest.fn()
+    onClose: jest.fn(),
   }
 
   const ModalWindowMockProps = {
     onClose: mockProps.onClose,
     isOpen: true,
-    userEmail: "test@example.com",
-    title: "Modal Title",
-    text: "Modal Text",
+    userEmail: 'test@example.com',
+    title: 'Modal Title',
+    text: 'Modal Text',
   }
 
   it('renders without crashing', () => {
     render(
       <Modal {...mockProps}>
         <ModalWindow {...ModalWindowMockProps} />
-      </Modal>
+      </Modal>,
     )
   })
 
@@ -31,7 +31,7 @@ describe('ModalWindow', () => {
     const { getByText, getByRole } = render(
       <Modal {...mockProps}>
         <ModalWindow {...ModalWindowMockProps} />
-      </Modal>
+      </Modal>,
     )
     expect(getByText('Modal Title')).toBeInTheDocument()
     expect(getByText('Modal Text test@example.com')).toBeInTheDocument()
@@ -42,7 +42,7 @@ describe('ModalWindow', () => {
     const { getByText } = render(
       <Modal {...mockProps}>
         <ModalWindow {...ModalWindowMockProps} userEmail={undefined} />
-      </Modal>
+      </Modal>,
     )
     expect(getByText('Modal Text')).toBeInTheDocument()
   })
@@ -51,7 +51,7 @@ describe('ModalWindow', () => {
     const { getByRole } = render(
       <Modal {...mockProps}>
         <ModalWindow {...ModalWindowMockProps} />
-      </Modal>
+      </Modal>,
     )
     const button = getByRole('button')
     fireEvent.click(button)
@@ -62,7 +62,7 @@ describe('ModalWindow', () => {
     render(
       <Modal {...mockProps}>
         <ModalWindow {...ModalWindowMockProps} isOpen={false} />
-      </Modal>
+      </Modal>,
     )
     expect(screen.queryByText('Congratulations!')).not.toBeInTheDocument()
     expect(screen.queryByText('You have successfully signed up.')).not.toBeInTheDocument()

@@ -1,4 +1,4 @@
-import { ModalWindowPropsType } from '@/shared/ui/Modal/children/ModalWindow'
+import { ModalWindowPropsType } from '@/features/auth/emailConfiramtion/ui/ModalWindow/ModalWindow'
 
 export type RegisterParamsType = {
   userName: string
