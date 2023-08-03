@@ -5,7 +5,7 @@ import { CongratulationModal } from './CongratulationModal/CongratulationModal'
 import { CongratulationUI } from './ui/CongratulationUI'
 import { congratResendMergePropsType } from '@/features/auth/signup/model/types/types'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import { ErrorModal } from '../ResendLink/ResendLinkModal/ErrorModal'
+import { ErrorModal } from '../../ResendLink/ResendLinkModal/ErrorModal'
 
 const emailIsConfirmed = 'success'
 const emailWasUsed = 'confirm'

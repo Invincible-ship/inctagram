@@ -18,28 +18,19 @@ export const ErrorModal: FC<ModalPropsType> = ({ lng, onClose, isOpen, userEmail
   if (userEmail) {
     return (
       <>
-        <Modal onClose={onClose} isOpen={isOpen}>
-          <ModalWindow
-            onClose={onClose}
-            isOpen={isOpen}
-            title={t(modalTitle)}
-            text={t(modalText)}
-            userEmail={userEmail}
-          />
-        </Modal>
+        <ModalWindow
+          onClose={onClose}
+          isOpen={isOpen}
+          title={t(modalTitle)}
+          text={t(modalText)}
+          userEmail={userEmail}
+        />
       </>
     )
   } else {
     return (
       <>
-        <Modal onClose={onClose} isOpen={isOpen}>
-          <ModalWindow
-            onClose={onClose}
-            isOpen={isOpen}
-            title={t(modalTitle)}
-            text={t(emptyEmail)}
-          />
-        </Modal>
+        <ModalWindow onClose={onClose} isOpen={isOpen} title={t(modalTitle)} text={t(emptyEmail)} />
       </>
     )
   }
