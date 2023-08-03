@@ -8,13 +8,11 @@ import '@/shared/styles/variables/common/_buttons.scss'
 import {useClientTranslation} from "@/shared/config/i18n/client"
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {authThunks} from "@/features/auth/signup/model/slice/auth.slice";
-import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch";
 import {
     formSchema,
     FormSchemaType,
 } from '@/features/auth/resetPassword/lib/validationConstants/validationConstants';
-import {resetPasswordForm} from "@/features/auth/resetPassword/ui/resetPasswordForm";
+import {ResetPasswordForm} from "@/features/auth/resetPassword/ui/resetPasswordForm";
 import {Preloader} from "@/shared/ui/Preloader/Preloader";
 import {useResetPasswordMutation} from "@/features/auth/resetPassword/model/api/reset_password.api.ts";
 
@@ -62,7 +60,7 @@ export const ResetPassword: FC<ResetPassword> = ({lng}) => {
         <div className={'form'}>
             <div className='form-wrapper auth-form'>
                 <div className={'title b-title bt26 semibold align-center'}>{t('mainTitleReset')}</div>
-                <resetPasswordForm
+                <ResetPasswordForm
                     onSubmit={handleSubmit(onSubmit)}
                     isLoading={isLoading}
                     t={t}

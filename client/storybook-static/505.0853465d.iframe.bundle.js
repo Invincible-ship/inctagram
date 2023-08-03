@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkclient=self.webpackChunkclient||[]).push([[505],{"./public/locales/ru/avatarUp.json":module=>{module.exports={}}}]);

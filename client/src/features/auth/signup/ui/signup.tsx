@@ -1,29 +1,31 @@
-'use client';
-import { FC } from 'react';
-import { SignUpForm } from './SignUpForm';
-import { SocialButtons } from '@/features/auth/signup/ui/SocialButtons';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useClientTranslation } from '@/shared/config/i18n/client';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { useSignUpMutation } from '@/features/auth/signup/model/api/signUpApi';
-import '@/shared/styles/variables/common/_form.scss';
-import '@/shared/styles/variables/common/_b-titles.scss';
-import style from './signup.module.scss';
+'use client'
+import { FC } from 'react'
+import { SignUpForm } from './SignUpForm'
+import { SocialButtons } from '@/features/auth/signup/ui/SocialButtons'
+import { useForm } from 'react-hook-form'
+import { useClientTranslation } from '@/shared/config/i18n/client'
+import '@/shared/styles/variables/common/_form.scss'
+import '@/shared/styles/variables/common/_b-titles.scss'
+import style from './signup.module.scss'
 import {
   formSchema,
   FormSchemaType,
-} from '@/features/auth/signup/lib/validationConstants/validationConstants';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
-import { Preloader } from '@/shared/ui/Preloader/Preloader';
+} from '@/features/auth/signup/lib/validationConstants/validationConstants'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import { Preloader } from '@/shared/ui/Preloader/Preloader'
+import { signupThunk } from '@/features/auth/signup/model/signup'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 
 export type SignUpProps = {
-  lng?: string;
-};
+  lng?: string
+}
 export const SignUp: FC<SignUpProps> = ({ lng }) => {
-  const [signUp, { isLoading }] = useSignUpMutation();
-  const { t } = useClientTranslation(lng, 'signUp');
-  const schema = formSchema(t);
+  const isLoading = useSelector(state => state.signup.isLoading)
+  const dispatch = useAppDispatch()
+  const { t } = useClientTranslation(lng, 'signUp')
+  const schema = formSchema(t)
   const {
     register,
     handleSubmit,
@@ -31,35 +33,20 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     setError,
   } = useForm<FormSchemaType>({
     resolver: zodResolver(schema),
-  });
+  })
 
-  const onSubmit: SubmitHandler<FormSchemaType> = async data => {
-    try {
-      await signUp(data).unwrap();
-    } catch (error) {
-      if (error.data && error.data.errors) {
-        for (const err of error.data.errors) {
-          setError(err.field, {
-            type: 'server',
-            message: err.message,
-          });
-        }
-      } else {
-        console.error(error);
-      }
-    }
-  };
+  const onSubmit = data => {
+    dispatch(signupThunk({ body: data, setError }))
+  }
 
   if (isLoading) {
-    return <Preloader />;
+    return <Preloader />
   }
 
   return (
     <div className={'form registration'}>
       <div className="form-wrapper auth-form">
-        <div className={'title b-title bt26 semibold align-center'}>
-          {t('signUp')}
-        </div>
+        <div className={'title b-title bt26 semibold align-center'}>{t('signUp')}</div>
         <SocialButtons />
         <SignUpForm
           onSubmit={handleSubmit(onSubmit)}
@@ -79,5 +66,5 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -7,16 +7,22 @@ import { Button } from '@/shared/ui/Button/Button';
 import '@/shared/styles/variables/common/_form.scss';
 import Link from "next/link";
 import ReCAPTCHA from "react-google-recaptcha";
-import {toast} from "react-toastify";
-import isActive = toast.isActive;
+import {SubmitHandler, useForm} from "react-hook-form";
+import {formSchema, FormSchemaType} from "@/features/auth/signup/lib/validationConstants/validationConstants";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {useClientTranslation} from "@/shared/config/i18n/client";
 
 export type ForgotPasswordFormProps = {
-  onSubmit: FormEventHandler<HTMLFormElement> | undefined;
-  handleClick: FormEventHandler<HTMLFormElement> | undefined;
+  // onSubmit: FormEventHandler<HTMLFormElement> | undefined;
+  // onClick: FormEventHandler<HTMLFormElement> | undefined;
+    // ChangeStatus: FormEventHandler<HTMLFormElement> | undefined;
+    // handleClick: FormEventHandler<HTMLFormElement> | undefined;
   isLoading: boolean;
   t: (key: string) => string;
   errors: Record<string, any>;
   register: any;
+  //   isActive: boolean;
+  //   setIsActive: boolean;
 };
 
 function onChange(value) {
@@ -24,22 +30,31 @@ function onChange(value) {
 }
 
 export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
-  onSubmit,
   t,
   errors,
   register,
 }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+    const { t } = useClientTranslation("", 'resetPage')
+    const schema = formSchema(t);
 
-  const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm<FormSchemaType>({
+        resolver: zodResolver(schema),
+    })
 
+    const [isActive, setIsActive] = useState(false)
 
+    let handleClick
+
+    const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
+        // dispatch(authThunks.register(data))
+        handleClick = () => {
+            setIsActive(true)
+        }
+    }
 
   return (
       <form className={'form-style'} onSubmit={onSubmit} noValidate>
@@ -47,8 +62,8 @@ export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
           <InputField
               id={"email"}
               type={"email"}
-              placeholder={t('signUp.email')}
-              title={t('signUp.email')}
+              placeholder={t('email')}
+              title={t('email')}
               register={...register("email")}
               error={errors.email}
           />

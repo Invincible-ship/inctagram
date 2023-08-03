@@ -64,6 +64,7 @@
     "@storybook/testing-library": "^0.0.14-next.2",
     "@types/react-google-recaptcha": "^2.1.5",
     "eslint-plugin-storybook": "^0.6.12",
+    "prettier": "^3.0.0",
     "storybook": "^7.0.24",
     "zod": "^3.21.4"
   }

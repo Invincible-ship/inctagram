@@ -13,7 +13,7 @@ export type resetPasswordFormProps = {
     register: any;
 };
 
-export const resetPasswordForm: FC<resetPasswordFormProps> = ({
+export const ResetPasswordForm: FC<resetPasswordFormProps> = ({
    onSubmit,
    t,
    errors,
