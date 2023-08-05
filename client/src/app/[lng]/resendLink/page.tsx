@@ -1,2 +1,2 @@
-import { ResendLinkPage } from "@/pages/SignUpPage"
-export default ResendLinkPage
+import { EmailConfiramtionPage } from '@/pages/EmailConfiramtion'
+export default EmailConfiramtionPage

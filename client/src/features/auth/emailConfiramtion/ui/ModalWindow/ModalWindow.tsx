@@ -2,7 +2,7 @@
 import { FC } from 'react'
 import { Button } from '@/shared/ui/Button/Button'
 import s from './modalWindow.module.scss'
-import { Close } from '../../../../../shared/ui/Close/Close'
+import { Close } from '../../../signup/ui/modalWindow/Close'
 import { Modal } from '@/shared/ui/Modal/Modal'
 
 export type ModalWindowPropsType = {

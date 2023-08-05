@@ -26,16 +26,12 @@ export const ResendLink: FC<congratResendMergePropsType> = ({ lng }) => {
   useEffect(() => {
     if (search) {
       const queryEmail = search.get('email')
-      {
-        queryEmail ? setEmail(queryEmail) : setNoEmail(true)
-      }
+      queryEmail ? setEmail(queryEmail) : setNoEmail(true)
     }
   }, [search])
 
   useEffect(() => {
-    {
-      ;(isSuccess || isError) && setIsOpen(true)
-    }
+    ;(isSuccess || isError) && setIsOpen(true)
   }, [isSuccess, isError])
 
   const onClose = () => {
@@ -43,9 +39,7 @@ export const ResendLink: FC<congratResendMergePropsType> = ({ lng }) => {
   }
 
   const resendLink = () => {
-    {
-      email ? sendLinkAgain({ email: email }) : setIsOpen(true)
-    }
+    email ? sendLinkAgain({ email: email }) : setIsOpen(true)
   }
 
   if (isLoading) {
