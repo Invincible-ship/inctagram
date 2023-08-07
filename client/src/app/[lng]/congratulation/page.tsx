@@ -1,2 +1,2 @@
-import { EmailConfiramtionPage } from '@/pages/EmailConfiramtion'
-export default EmailConfiramtionPage
+import { EmailConfirmationPage } from '@/pages/EmailConfirmation'
+export default EmailConfirmationPage

@@ -28,7 +28,7 @@ const MODAL_TEXT = 'modalWindows.emailConfirmationModal.text'
 const ERROR_MODAL_TITLE = 'modalWindows.error.title'
 const ERROR_MODAL_TEXT = 'modalWindows.error.text'
 
-export const EmailConfiramtion: FC<congratResendMergePropsType> = ({ lng }) => {
+export const EmailConfirmation: FC<congratResendMergePropsType> = ({ lng }) => {
   const { t } = useClientTranslation(lng, LANGUAGE_DATABASE)
   const router = useRouter()
   const search = useSearchParams()
