@@ -29,7 +29,7 @@ const signUpModaText = 'signUpModal.text'
 export const SignUp: FC<SignUpProps> = ({ lng }) => {
   const isLoading = useSelector(state => state.signup.isLoading)
   const dispatch = useAppDispatch()
-  const { t } = useClientTranslation(lng, 'signUp')
+  const { t } = useClientTranslation('', 'signUp')
   const schema = formSchema(t)
   const {
     register,

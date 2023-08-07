@@ -25,7 +25,7 @@ import {
 } from '../lib/constants'
 
 export const EmailConfirmation: FC<congratResendMergePropsType> = ({ lng }) => {
-  const { t } = useClientTranslation(lng, LANGUAGE_DATABASE)
+  const { t } = useClientTranslation('', LANGUAGE_DATABASE)
   const router = useRouter()
   const search = useSearchParams()
   const [status, setStatus] = useState<string>()
