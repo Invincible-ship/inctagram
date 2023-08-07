@@ -1,13 +1,13 @@
 import axios from 'axios'
 import { LOCAL_STORAGE_LANGUAGE_ID_KEY, LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage'
 import { AuthRefreshResponse } from './types'
-import { config } from 'dotenv';
+import { config } from 'dotenv'
 
 config()
 
 export const $api = axios.create({
     withCredentials: true,
-    baseURL: process.env.__API__,
+    baseURL: process.env.NEXT_PUBLIC_API,
 })
 
 $api.interceptors.request.use((config) => {
