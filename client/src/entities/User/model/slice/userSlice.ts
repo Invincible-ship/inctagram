@@ -19,5 +19,4 @@ const slice = createSlice({
 })
 
 export const userReducer = slice.reducer
-export const userThunks = {}
 export const { setAuthData, clearAuthData } = slice.actions

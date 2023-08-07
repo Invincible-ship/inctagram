@@ -18,12 +18,15 @@ import {GitHubButton} from "@/shared/ui/GitHubButton/GitHubButton"
 import {useSignUpMutation} from "@/features/auth/signup/model/api/signUpApi"
 import {Preloader} from "@/shared/ui/Preloader/Preloader"
 import { RegisterParamsType } from '../model/types/types'
+import { Namespaces } from '@/shared/config/i18n/types'
+import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 
-export const SignUp = () => {
+export const SignUp = async () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-    const {t} = useClientTranslation('', 'signUp')
+    // const lngId = useContext(LanguageContext)
+    const {t} = useClientTranslation('', Namespaces.SIGNUP)
 
     const userNameRequired = t("validate.userNameRequired")
     const userNameMaxLength = t("validate.userNameMaxLength")
@@ -84,7 +87,7 @@ export const SignUp = () => {
 
     const onSubmit: SubmitHandler<FormSchemaType> = async (data: RegisterParamsType) => {
         try {
-            await signUp(data)
+            signUp(data)
         } catch (error) {
             console.error(error)
         }

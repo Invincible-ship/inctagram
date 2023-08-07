@@ -4,11 +4,11 @@ export const fallbackLng = LanguageIds.EN
 export const languages: LanguageIds[] = [fallbackLng, LanguageIds.RU]
 export const defaultNS = "translation"
 
-export function getOptions(lng = fallbackLng, ns = defaultNS) {
+export function getOptions(lng: LanguageIds | '' = fallbackLng, ns = defaultNS) {
   return {
-    // debug: true,
+    debug: true,
     supportedLngs: languages,
-    fallbackLng,
+    fallbackLng: languages,
     lng,
     fallbackNS: defaultNS,
     defaultNS,

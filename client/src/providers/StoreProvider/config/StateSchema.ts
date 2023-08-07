@@ -1,10 +1,11 @@
+import { IUserSchema } from '@/entities/User/model/types/types'
 import { rtkApi } from '@/shared/api/rtkApi'
-import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import { AxiosInstance } from 'axios'
 
 export type StateSchema = {
   // Остальные типы ваших редьюсеров
-  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
+  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>,
+  user: IUserSchema
 }
 
 export type ThunkExtraArg = {

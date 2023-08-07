@@ -1,9 +1,10 @@
-import { createInstance } from "i18next"
+import { TFunction, createInstance, i18n } from "i18next"
 import resourcesToBackend from "i18next-resources-to-backend"
 import { initReactI18next } from "react-i18next/initReactI18next"
 import { getOptions } from "./settings"
+import { LanguageIds } from "./types"
 
-const initI18next = async (lng: string, ns: string) => {
+const initI18next = async (lng: LanguageIds | '', ns: string) => {
   const i18nInstance = createInstance()
   await i18nInstance
     .use(initReactI18next)
@@ -17,7 +18,7 @@ const initI18next = async (lng: string, ns: string) => {
 }
 
 export async function useServerTranslation(
-  lng: string = "",
+  lng: LanguageIds | '' = "",
   ns: string = "translation",
   options: Record<string, any> = {},
 ) {

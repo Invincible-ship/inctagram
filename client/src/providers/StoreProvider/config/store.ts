@@ -2,13 +2,15 @@ import { $api } from "@/shared/api/api"
 import { StateSchema, ThunkExtraArg } from "./StateSchema"
 import { rtkApi } from "@/shared/api/rtkApi"
 import { configureStore, ReducersMapObject } from "@reduxjs/toolkit"
+import { userReducer } from "@/entities/User/model/slice/userSlice"
 
 export function createReduxStore(
   initialState?: StateSchema
 ) {
   const rootReducer: ReducersMapObject<StateSchema> = {
     // Ваши остальные редьюсеры
-    [rtkApi.reducerPath]: rtkApi.reducer
+    [rtkApi.reducerPath]: rtkApi.reducer,
+    user: userReducer
   }
 
   const extraArg: ThunkExtraArg = {

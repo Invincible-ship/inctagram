@@ -1,8 +1,11 @@
 .btn {
-  color: var(--primary-text-color);
   display: flex;
   align-items: center;
   gap: 12px;
+
+  .text {
+    color: var(--primary-text-color);
+  }
 
   .icon {
     g {
