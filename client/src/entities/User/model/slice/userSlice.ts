@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserSchema } from '@/entities/User/model/types/types';
-import { signupThunk } from '@/features/auth/signup/model/signup';
+
 
 const initialState: IUserSchema = {
   _inited: false,
