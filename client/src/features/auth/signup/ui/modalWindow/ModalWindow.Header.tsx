@@ -13,7 +13,7 @@ export const Header: FC<HeaderProps> = ({ title, onClose }) => {
     <>
       <div className={s.header}>
         <h3>{title}</h3>
-        <div data-testid={'ModalWindowStioryTestId'} onClick={onClose} className={s.xButton}>
+        <div data-testid={'svgModalWindow'} onClick={onClose} className={s.xButton}>
           <Close />
         </div>
       </div>

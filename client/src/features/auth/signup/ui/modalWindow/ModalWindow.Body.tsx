@@ -22,7 +22,7 @@ export const Body: FC<BodyProps> = ({ userEmail, text, onClose }) => {
             )
           : text && <p className={s.text}>{text}</p>}
         <div className={s.buttonContainer}>
-          <Button data-testid="closeButton" onClick={onClose} type="button" className={s.button}>
+          <Button onClick={onClose} type="button" className={s.button}>
             OK
           </Button>
         </div>

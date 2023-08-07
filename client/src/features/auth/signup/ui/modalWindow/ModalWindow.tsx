@@ -25,7 +25,7 @@ export const ModalWindow: FC<ModalWindowPropsType> = ({
   return (
     <>
       <Modal onClose={onClose} isOpen={isOpen}>
-        <div data-testid="ModalWindow" className={s.wrapper}>
+        <div className={s.wrapper}>
           <div className={s.body}>
             <Header onClose={onClose} title={title} />
             <Body onClose={onClose} text={text} userEmail={userEmail} />
