@@ -9,6 +9,7 @@ describe('EmailConfirmation', () => {
     text: 'You did it!',
     buttonText: 'Go to Login',
     action: jest.fn(),
+    status: 'some status',
   }
 
   it('renders the component with correct props', () => {

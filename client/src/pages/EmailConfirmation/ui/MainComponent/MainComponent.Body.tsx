@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import s from './emailConfiramtion.module.scss'
+import s from './emailConfirmation.module.scss'
 
 type TextContentProps = {
   text: string

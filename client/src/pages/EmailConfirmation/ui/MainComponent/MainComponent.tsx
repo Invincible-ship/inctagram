@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import s from './emailConfiramtion.module.scss'
+import s from './emailConfirmation.module.scss'
 import { Header } from './MainComponent.Header'
 import { TextContent } from './MainComponent.Body'
 import { ImageComponent } from './MainComponent.Image'

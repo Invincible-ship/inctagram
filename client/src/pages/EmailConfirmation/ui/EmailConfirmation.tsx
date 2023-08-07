@@ -3,30 +3,26 @@ import { FC, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { congratResendMergePropsType } from '@/features/auth/signup/model/types/types'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import { MainComponent } from './MainComponent'
+import { MainComponent } from './MainComponent/MainComponent'
 import { useEmailResendingMutation } from '@/entities/User/api/userApi'
 import { ModalWindow } from '../../../features/auth/signup/ui/modalWindow/ModalWindow'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
-
-const SUCCESS = 'success'
-const EMAIL_WAS_USED = 'confirm'
-//====================================
-const LOGIN_PATH = '/login'
-//====================================
-const LANGUAGE_DATABASE = 'emailConfiramtion'
-const CONGRATULATION_TITLE = 'congratulation.title'
-const CONGRATULATION_TEXT = 'congratulation.text'
-const CONGRATULATION_BUTTON_TEXT = 'congratulation.buttonText'
-//====================================
-const RESEND_LINK_TITLE = 'resendLink.title'
-const RESEND_LINK_TEXT = 'resendLink.text'
-const RESEND_LINK_BUTTON_TEXT = 'resendLink.buttonText'
-//====================================
-const MODAL_TITLE = 'modalWindows.emailConfirmationModal.title'
-const MODAL_TEXT = 'modalWindows.emailConfirmationModal.text'
-//====================================
-const ERROR_MODAL_TITLE = 'modalWindows.error.title'
-const ERROR_MODAL_TEXT = 'modalWindows.error.text'
+import {
+  CONGRATULATION_BUTTON_TEXT,
+  CONGRATULATION_TEXT,
+  CONGRATULATION_TITLE,
+  EMAIL_WAS_USED,
+  ERROR_MODAL_TEXT,
+  ERROR_MODAL_TITLE,
+  LANGUAGE_DATABASE,
+  LOGIN_PATH,
+  MODAL_TEXT,
+  MODAL_TITLE,
+  RESEND_LINK_BUTTON_TEXT,
+  RESEND_LINK_TEXT,
+  RESEND_LINK_TITLE,
+  SUCCESS,
+} from '../lib/constants'
 
 export const EmailConfirmation: FC<congratResendMergePropsType> = ({ lng }) => {
   const { t } = useClientTranslation(lng, LANGUAGE_DATABASE)

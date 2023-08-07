@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import s from './emailConfiramtion.module.scss'
+import s from './emailConfirmation.module.scss'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 
 type ButtonComponentProps = {
