@@ -17,11 +17,15 @@ import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { signupThunk } from '@/features/auth/signup/model/signup'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { SignUpModal } from './signUpModalWindow/SignUpModal'
+import { ModalWindow } from './modalWindow/ModalWindow'
 
 export type SignUpProps = {
   lng?: string
 }
+
+const signUpModaTitle = 'signUpModal.title'
+const signUpModaText = 'signUpModal.text'
+
 export const SignUp: FC<SignUpProps> = ({ lng }) => {
   const isLoading = useSelector(state => state.signup.isLoading)
   const dispatch = useAppDispatch()
@@ -32,7 +36,6 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
     handleSubmit,
     formState: { errors },
     setError,
-
   } = useForm<FormSchemaType>({
     resolver: zodResolver(schema),
   })
@@ -85,7 +88,15 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
         >
           <span>{t('signIn')}</span>
         </Link>
-        {(isOpen && Object.keys(errors).length === 0 && lng) && <SignUpModal lng={lng} onClose={onClose} isOpen={isOpen} userEmail={email} />}
+        {isOpen && Object.keys(errors).length === 0 && lng && (
+          <ModalWindow
+            text={t(signUpModaText)}
+            title={t(signUpModaTitle)}
+            onClose={onClose}
+            isOpen={isOpen}
+            userEmail={email}
+          />
+        )}
       </div>
     </div>
   )

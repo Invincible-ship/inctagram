@@ -1,0 +1,23 @@
+{
+  "congratulation": {
+    "title": "Congratulations!",
+    "text": "Your email has been confirmed",
+    "buttonText": "Sign In"
+  },
+  "resendLink": {
+    "title": "Email verification link expired",
+    "text": "Looks like the verification link has expired. Not to worry, we can send the link again",
+    "buttonText": "Resend verification link"
+  },
+  "modalWindows": {
+    "emailConfirmationModal": {
+      "title": "Email is confirmed",
+      "text": "Go to the Login page"
+    },
+    "error": {
+      "title": "Email error",
+      "text": "Email is incorrect",
+      "emptyEmail": "Go back to email and try again"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+.box {
+  display: flex;
+  gap: 30px;
+  @media (max-width: 999px) {
+    flex-direction: column;
+  }
+}
+
+.emailConfiramtion {
+  width: 100%;
+  height: 100%;
+  .wrapper {
+    padding: 70px 30px 20px 30px;
+    text-align: center;
+    @media (max-width: 425px) {
+      padding: 17px 15px;
+    }
+    .body {
+      max-width: 425px;
+      margin: 0 auto;
+      font-family: Inter;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .title {
+        font-size: 20px;
+        line-height: 36px;
+        font-weight: 700;
+        overflow: hidden;
+
+        &:not(:last-child) {
+          padding-bottom: 19px;
+        }
+      }
+      .content {
+        margin: 0 auto;
+
+        &:not(:last-child) {
+          padding-bottom: 30px;
+          @media (max-width: 425px) {
+            padding-bottom: 10px;
+          }
+        }
+      }
+      .image {
+        padding-bottom: 2rem;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        &:not(:last-child) {
+          padding-bottom: 24px;
+        }
+        @media (max-width: 425px) {
+          order: 2;
+          width: 100%;
+          .btn {
+            width: 100%;
+            padding: 12px 24px;
+          }
+        }
+
+        .btn {
+        }
+      }
+    }
+  }
+}

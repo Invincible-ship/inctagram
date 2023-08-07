@@ -3,7 +3,15 @@ import { USER_TAG } from '@/shared/const/rtk'
 import {
   RegisterParamsType,
   RegisterResponseType,
+  ResendLinkParamsType,
+  ResendLinkResponseType,
 } from '@/features/auth/signup/model/types/types'
+
+const endpoints = {
+  baseUrl: 'https://inctagram-api.fly.dev/',
+  registration: 'auth/registration',
+  resendEmail: 'auth/confirmation-email-resending',
+}
 
 export const userApi = rtkApi.injectEndpoints({
   endpoints: build => ({
@@ -21,5 +29,15 @@ export const userApi = rtkApi.injectEndpoints({
         body: data,
       }),
     }),
+    //* request for ResendLink component
+    emailResending: build.mutation<ResendLinkResponseType, ResendLinkParamsType>({
+      query: body => ({
+        url: endpoints.resendEmail,
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
+
+export const { useEmailResendingMutation } = userApi

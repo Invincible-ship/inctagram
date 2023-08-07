@@ -1,2 +1,2 @@
-import { CongratulationPage } from "@/pages/SignUpPage"
-export default CongratulationPage
+import { EmailConfirmationPage } from '@/pages/EmailConfirmation'
+export default EmailConfirmationPage
