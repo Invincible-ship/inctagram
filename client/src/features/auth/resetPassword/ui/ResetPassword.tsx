@@ -35,6 +35,9 @@ export const ResetPassword: FC<ResetPassword> = ({lng}) => {
         resolver: zodResolver(schema),
     })
 
+    console.log(errors)
+
+
     const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
         try {
             await resetPassword(data).unwrap();

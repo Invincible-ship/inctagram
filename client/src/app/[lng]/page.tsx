@@ -5,8 +5,8 @@ import { ForgotPage } from "@/pages/forgotPasswordPage"
 import { AvatarUploadPage } from "@/pages/avatarUpload"
 
 // export default SignUpPage
-export default ResetPage
-// export default ForgotPage
+// export default ResetPage
+export default ForgotPage
 // export default AvatarUploadPage
 
 // const Page = () => {

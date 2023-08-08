@@ -3,7 +3,7 @@ import { FC } from 'react'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
-import { FieldError, FieldErrorsImpl } from 'react-hook-form'
+import {FieldError, FieldErrorsImpl, UseFormRegister} from 'react-hook-form'
 import { Merge } from 'type-fest'
 
 type InputFieldProps = {
