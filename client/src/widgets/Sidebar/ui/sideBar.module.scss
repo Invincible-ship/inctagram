@@ -1,0 +1,17 @@
+.item {
+  list-style-type: none;
+  .link {
+    display: flex;
+    column-gap: 12px;
+    align-items: center;
+    .image {
+      position: relative;
+      svg {
+        fill: white;
+      }
+    }
+    .text {
+      color: white;
+    }
+  }
+}
