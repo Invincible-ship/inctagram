@@ -7,7 +7,7 @@ import React, {FC, FormEventHandler, useState} from "react"
 import {setDisableError} from "@/features/auth/signIn/model/slice/signInSlice"
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
-import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
+import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch"
 
 export type SignInFormProps = {
 	errorLogin?: string

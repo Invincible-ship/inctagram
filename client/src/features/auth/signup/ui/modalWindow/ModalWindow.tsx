@@ -1,9 +1,7 @@
 'use client'
 import { FC } from 'react'
-import { Button } from '@/shared/ui/Button/Button'
 import s from './modalWindow.module.scss'
 import { Modal } from '@/shared/ui/Modal/Modal'
-import { Close } from './Close'
 import { Header } from './ModalWindow.Header'
 import { Body } from './ModalWindow.Body'
 

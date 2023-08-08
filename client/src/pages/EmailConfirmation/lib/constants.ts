@@ -12,8 +12,11 @@ export const RESEND_LINK_TITLE = 'resendLink.title'
 export const RESEND_LINK_TEXT = 'resendLink.text'
 export const RESEND_LINK_BUTTON_TEXT = 'resendLink.buttonText'
 //====================================
-export const MODAL_TITLE = 'modalWindows.emailConfirmationModal.title'
-export const MODAL_TEXT = 'modalWindows.emailConfirmationModal.text'
+export const MODAL_WAS_USED_TITLE = 'modalWindows.emailConfirmationModal.title'
+export const MODAL_WAS_USED_TEXT = 'modalWindows.emailConfirmationModal.text'
+//====================================
+export const MODAL_TITLE = 'modalWindows.signUpModal.title'
+export const MODAL_TEXT = 'modalWindows.signUpModal.text'
 //====================================
 export const ERROR_MODAL_TITLE = 'modalWindows.error.title'
 export const ERROR_MODAL_TEXT = 'modalWindows.error.text'

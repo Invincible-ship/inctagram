@@ -17,7 +17,7 @@ import {SignInForm} from "@/features/auth/signIn/ui/SignInForm"
 import {useSelector} from "react-redux"
 import {StateSchema} from "@/providers/StoreProvider"
 import {signInThunk} from "@/features/auth/signIn/lib/signInThunk/signInThunk"
-import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
+import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch"
 
 export const SignIn: FC = () => {
 	const { t } = useClientTranslation('', 'signIn')

@@ -18,6 +18,10 @@
       "title": "Email error",
       "text": "Email is incorrect",
       "emptyEmail": "Go back to email and try again"
+    },
+    "signUpModal": {
+      "title": "Email sent",
+      "text": "We have sent a link to confirm your email to"
     }
   }
 }

@@ -14,13 +14,16 @@ export const Body: FC<BodyProps> = ({ userEmail, text, onClose }) => {
   return (
     <>
       <div className={s.content}>
-        {userEmail
+        <p className={s.text}>
+          {text} {userEmail}
+        </p>
+        {/*{userEmail
           ? text && (
             <p className={s.text}>
               {text} {userEmail}
             </p>
             )
-          : text && <p className={s.text}>{text}</p>}
+          : text && <p className={s.text}>{text}</p>}*/}
         <div className={s.buttonContainer}>
           <Button onClick={onClose} type="button" className={s.button}>
             OK

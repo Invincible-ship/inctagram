@@ -5,7 +5,6 @@ import {
   RegisterParamsType,
   RegisterResponseType,
   ResendLinkParamsType,
-  ResendLinkResponseType,
 } from '@/features/auth/signup/model/types/types'
 
 const endpoints = {
@@ -31,15 +30,15 @@ export const userApi = rtkApi.injectEndpoints({
       }),
     }),
     signIn: build.mutation<LoginResponseType, LoginRequestType>({
-      query: (data) => ({
+      query: data => ({
         url: 'auth/login',
         method: 'POST',
-        body: data
+        body: data,
       }),
       invalidatesTags: [USER_TAG],
-    })
+    }),
     //* request for ResendLink component
-    emailResending: build.mutation<ResendLinkResponseType, ResendLinkParamsType>({
+    emailResending: build.mutation<void, ResendLinkParamsType>({
       query: body => ({
         url: endpoints.resendEmail,
         method: 'POST',

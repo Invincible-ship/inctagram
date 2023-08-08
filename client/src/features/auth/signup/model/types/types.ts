@@ -1,5 +1,3 @@
-import { ModalWindowPropsType } from '@/features/auth/emailConfiramtion/ui/ModalWindow/ModalWindow'
-
 export type RegisterParamsType = {
   userName: string
   email: string
@@ -14,14 +12,8 @@ export type RegisterResponseType = {
 }
 
 // ResendLink API types
-export type ResendLinkResponseType = {}
 export type ResendLinkParamsType = {
   email: string
-}
-
-// congratResendMergeTypes
-export type congratResendMergePropsType = {
-  lng: string
 }
 
 export type CongratResendUIPropsType = {
@@ -30,5 +22,3 @@ export type CongratResendUIPropsType = {
   buttonText: string
   action: () => void
 }
-
-export type ModalPropsType = Omit<ModalWindowPropsType, 'title' | 'text'> & { lng: string }

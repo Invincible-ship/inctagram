@@ -1,7 +1,6 @@
 'use client'
 import { FC, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { congratResendMergePropsType } from '@/features/auth/signup/model/types/types'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { MainComponent } from './MainComponent/MainComponent'
 import { useEmailResendingMutation } from '@/entities/User/api/userApi'
@@ -18,13 +17,15 @@ import {
   LOGIN_PATH,
   MODAL_TEXT,
   MODAL_TITLE,
+  MODAL_WAS_USED_TEXT,
+  MODAL_WAS_USED_TITLE,
   RESEND_LINK_BUTTON_TEXT,
   RESEND_LINK_TEXT,
   RESEND_LINK_TITLE,
   SUCCESS,
 } from '../lib/constants'
 
-export const EmailConfirmation: FC<congratResendMergePropsType> = ({ lng }) => {
+export const EmailConfirmation: FC<LngProps> = ({ lng }) => {
   const { t } = useClientTranslation('', LANGUAGE_DATABASE)
   const router = useRouter()
   const search = useSearchParams()
@@ -78,8 +79,8 @@ export const EmailConfirmation: FC<congratResendMergePropsType> = ({ lng }) => {
           <ModalWindow
             isOpen={isOpen}
             onClose={onClose}
-            title={t(MODAL_TITLE)}
-            text={t(MODAL_TEXT)}
+            title={t(MODAL_WAS_USED_TITLE)}
+            text={t(MODAL_WAS_USED_TEXT)}
           />
         )}
       </>
@@ -101,6 +102,7 @@ export const EmailConfirmation: FC<congratResendMergePropsType> = ({ lng }) => {
             onClose={onClose}
             title={t(MODAL_TITLE)}
             text={t(MODAL_TEXT)}
+            userEmail={email}
           />
         )}
         {isError && (
@@ -116,3 +118,5 @@ export const EmailConfirmation: FC<congratResendMergePropsType> = ({ lng }) => {
     )
   }
 }
+
+type LngProps = { lng: string }
