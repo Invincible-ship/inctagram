@@ -233,27 +233,19 @@
             }
         }
 
-        .avatar {
-            display: flex;
-            justify-content: center;
+      .avatar {
+        /* Базовые стили для аватара */
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
 
-            img {
-                width: 96px;
-                height: 96px;
-                object-fit: cover;
-                border-radius: 50%;
-
-                @include nbtb {
-                    width: 86px;
-                    height: 86px;
-                }
-
-                @include mb {
-                    width: 80px;
-                    height: 80px;
-                }
-            }
+        /* Адаптивные стили для больших экранов */
+        @media (min-width: 768px) {
+          width: 200px;
+          height: 200px;
         }
+      }
 
         .icon {
             position: absolute;

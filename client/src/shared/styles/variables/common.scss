@@ -59,6 +59,10 @@ html {
   @include clearfix;
   display: block;
   margin: auto;
+  //display: flex;
+  //flex-direction: column;
+//border: 1px solid blue;
+//  margin-left: 17%;
 }
 
 @import "common/_b-paddings", "common/_b-titles", "common/_form", "common/_buttons";
@@ -131,8 +135,10 @@ select {
 }
 
 .block-subtitle {
-  font-weight: bold;
-  font-size: 22px;
+  font-weight: 700;
+  line-height: 36px;
+  font-size: 20px;
+
 
   @include mb {
     font-size: 20px;

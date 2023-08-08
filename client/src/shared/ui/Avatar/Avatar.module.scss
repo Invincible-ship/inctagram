@@ -1,0 +1,20 @@
+.avatar {
+  /* Базовые стили для аватара */
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  /* Адаптивные стили для больших экранов */
+  @media (min-width: 768px) {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Стили для изображения внутри аватара */
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

@@ -12,6 +12,7 @@ type HeaderProps = {
 };
 
 export const Header: FC<HeaderProps> = ({ lng = 'en' }) => (
+
   <header data-testid="header" className={cls.header}>
     <div className={cls.headerContainer}>
       <div className={cls.logo}>
@@ -27,4 +28,5 @@ export const Header: FC<HeaderProps> = ({ lng = 'en' }) => (
       </div>
     </div>
   </header>
+
 )
