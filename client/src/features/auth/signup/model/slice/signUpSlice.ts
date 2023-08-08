@@ -8,7 +8,7 @@ const slice = createSlice({
   },
   reducers: {
     dummyReducer: state => {
-      return state
+      return
     },
   },
   extraReducers: builder => {

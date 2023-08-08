@@ -7,10 +7,10 @@ config()
 
 export const $api = axios.create({
   withCredentials: true,
-  baseURL: process.env.__API__,
+  baseURL: process.env.NEXT_PUBLIC_API,
 })
 
-$api.interceptors.request.use((config) => {
+$api.interceptors.request.use(config => {
   const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)
   const languageId = localStorage.getItem(LOCAL_STORAGE_LANGUAGE_ID_KEY) || 'en'
 
@@ -24,18 +24,20 @@ $api.interceptors.request.use((config) => {
 })
 
 $api.interceptors.response.use(
-  (config) => {
+  config => {
     return config
   },
-  async (error) => {
+  async error => {
     const originalRequest = error.config
 
     if (error.response.status == 401 && error.config && !error.config._isRetry) {
       originalRequest._isRetry = true
 
       try {
-        const response = await axios.get<AuthRefreshResponse>
-          (`${process.env.__API__}/refresh-token`, { withCredentials: true })
+        const response = await axios.get<AuthRefreshResponse>(
+          `${process.env.__API__}/refresh-token`,
+          { withCredentials: true },
+        )
 
         localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)
         return $api.request(originalRequest)
@@ -44,5 +46,5 @@ $api.interceptors.response.use(
       }
     }
     // TODO: add loggedOut
-  }
+  },
 )

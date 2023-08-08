@@ -2,7 +2,7 @@
 import { FC, useEffect, useState } from 'react'
 import { SignUpForm } from './SignUpForm'
 import { SocialButtons } from '@/features/auth/signup/ui/SocialButtons'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
@@ -19,14 +19,10 @@ import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { ModalWindow } from './modalWindow/ModalWindow'
 
-export type SignUpProps = {
-  lng?: string
-}
-
 const signUpModaTitle = 'signUpModal.title'
 const signUpModaText = 'signUpModal.text'
 
-export const SignUp: FC<SignUpProps> = ({ lng }) => {
+export const SignUp = ({ lng }) => {
   const isLoading = useSelector(state => state.signup.isLoading)
   const dispatch = useAppDispatch()
   const { t } = useClientTranslation('', 'signUp')
@@ -46,7 +42,7 @@ export const SignUp: FC<SignUpProps> = ({ lng }) => {
   const onClose = () => setIsOpen(false)
   //===============
 
-  const onSubmit = data => {
+  const onSubmit: SubmitHandler<FormSchemaType> = data => {
     dispatch(signupThunk({ body: data, setError }))
     //for SignUpModal
     setEmail(data.email)
