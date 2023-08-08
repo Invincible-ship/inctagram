@@ -1,5 +1,5 @@
-import { getServerSession } from "next-auth/next"
-import { authConfig } from "config/nextAuth/auth"
+import { getServerSession } from 'next-auth/next'
+import { authConfig } from 'config/nextAuth/auth'
 
 export default async function Profile() {
   const session = await getServerSession(authConfig)
