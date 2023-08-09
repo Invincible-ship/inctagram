@@ -19,11 +19,10 @@ const slice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(signInThunk.fulfilled, (state: IUserSchema, action) => {
-				Object.assign(state.authData, action.payload.user, {isAuthorized: true})
+				state.authData = { isAuthorized: true, ...action.payload.user }
 			})
 	},
 })
 
 export const userReducer = slice.reducer
-export const userThunks = {}
-export const {setAuthData, clearAuthData} = slice.actions
+export const { setAuthData, clearAuthData } = slice.actions

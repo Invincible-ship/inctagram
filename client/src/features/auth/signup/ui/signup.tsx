@@ -1,5 +1,5 @@
 'use client'
-import {FC} from 'react'
+import {FC, useContext} from 'react'
 import {SignUpForm} from './SignUpForm'
 import {SocialButtons} from '@/features/auth/signup/ui/SocialButtons'
 import {SubmitHandler, useForm} from 'react-hook-form'
@@ -9,7 +9,7 @@ import '@/shared/styles/variables/common/_b-titles.scss'
 import style from './signup.module.scss'
 import {
     formSchema,
-    FormSchemaType,
+    // FormSchemaType,
 } from '@/features/auth/signup/lib/validationConstants/validationConstants'
 import {zodResolver} from '@hookform/resolvers/zod'
 import Link from 'next/link'
@@ -17,12 +17,19 @@ import {Preloader} from '@/shared/ui/Preloader/Preloader'
 import {signupThunk} from '@/features/auth/signup/model/signup'
 import {useSelector} from 'react-redux'
 import {useAppDispatch} from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { z } from 'zod'
+import { isLoadingSelector } from '../model/selectors/selectors'
+import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { Namespaces } from '@/shared/config/i18n/types'
 
 export const SignUp = () => {
-    const isLoading = useSelector(state => state.signup.isLoading)
+    const lngId = useContext(LanguageContext)
+    const isLoading = useSelector(isLoadingSelector)
     const dispatch = useAppDispatch()
-    const {t} = useClientTranslation("", 'signUp')
+    const { t } = useClientTranslation(lngId, Namespaces.SIGNOUT)
     const schema = formSchema(t)
+    type FormSchemaType = z.infer<typeof schema>
+
     const {
         register,
         handleSubmit,
