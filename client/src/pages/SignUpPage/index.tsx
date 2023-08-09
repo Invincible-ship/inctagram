@@ -1,2 +1,1 @@
-import { SignUpPage } from "./ui/SignUpPage"
-export default SignUpPage
+export { SignUpPage } from "./ui/SignUpPage"
