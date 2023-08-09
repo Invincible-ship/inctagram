@@ -1,12 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {IUserSchema} from '@/entities/User/model/types/types'
-import {signInThunk} from "@/features/auth/signIn/lib/signInThunk/signInThunk"
+import {IUserSchema} from '../types/types'
+import {signInThunk} from "@/features/auth/signIn/model/signInThunk"
 
 const initialState: IUserSchema = {
 	_inited: false,
 }
 
-const slice = createSlice({
+const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
@@ -24,5 +24,5 @@ const slice = createSlice({
 	},
 })
 
-export const userReducer = slice.reducer
-export const { setAuthData, clearAuthData } = slice.actions
+export const userReducer = userSlice.reducer
+export const { setAuthData, clearAuthData } = userSlice.actions

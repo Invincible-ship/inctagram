@@ -40,7 +40,7 @@ const RootLayout = async ({
           <AuthenticationProvider>
             <StoreProvider>
               <Suspense fallback={<Loading/>}>
-                <Header lngId={lngId} />
+                <Header />
                 {children}
               </Suspense>
             </StoreProvider>

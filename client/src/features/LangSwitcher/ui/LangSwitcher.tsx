@@ -6,14 +6,15 @@ import FlagRU from "@/shared/assets/icons/ru-flag.svg"
 import FlagUK from "@/shared/assets/icons/uk-flag.svg"
 import CheckIcon from "@/shared/assets/icons/check.svg"
 import { languages } from "@/shared/config/i18n/settings"
-import { FC, ReactNode, useMemo, useState } from "react"
-import { useRouter, usePathname } from "next/navigation"
+import { FC, ReactNode, Suspense, useContext, useMemo, useState } from "react"
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import cls from "./LangSwitcher.module.scss"
 import { LanguageIds } from "@/shared/config/i18n/types"
+import { LanguageContext } from "@/providers/LanguageProvider/LanguageProvider"
 
-type LangSwitcherProps = {
-  initialLngId: LanguageIds;
-};
+// type LangSwitcherProps = {
+//   initialLngId: LanguageIds;
+// };
 
 type TLanguageOption = {
   id: LanguageIds;
@@ -32,10 +33,12 @@ const languagesOptions: TLanguageOption[] = languages.map((lng) => {
   }
 })
 
-export const LangSwitcher: FC<LangSwitcherProps> = ({ initialLngId }) => {
+const LangSwitcher = () => {
+  const initialLngId = useContext(LanguageContext)
   const [lngId, setLngId] = useState(initialLngId)
   const router = useRouter()
   const pathname = usePathname() as string
+  const searchParams = useSearchParams()
 
   const selectedLanguage = useMemo(() => {
     return languagesOptions.find((option) => option?.id == lngId)
@@ -44,11 +47,7 @@ export const LangSwitcher: FC<LangSwitcherProps> = ({ initialLngId }) => {
   const onChange = (value: LanguageIds) => {
     setLngId(value)
 
-    const newPathname = pathname.replace(`${lngId}`, value)
-    console.log({
-      lngId,
-      value
-    })
+    const newPathname = `${pathname.replace(`${lngId}`, value)}?${searchParams?.toString()}`
     router.replace(newPathname)
   }
 
@@ -84,4 +83,10 @@ const Option = ({ option }: { option: TLanguageOption }) => (
     <span>{option?.icon}</span>
     {option?.lng}
   </div>
+)
+
+export const SuspenseLangSwitcher = () => (
+  <Suspense fallback={<>placeholder</>}>
+    <LangSwitcher />
+  </Suspense>
 )

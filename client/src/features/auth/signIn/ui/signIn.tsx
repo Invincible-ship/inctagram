@@ -1,6 +1,6 @@
 "use client"
 
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 import Link from "next/link"
 import style from '@/features/auth/signup/ui/signup.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
@@ -11,31 +11,35 @@ import {useClientTranslation} from '@/shared/config/i18n/client'
 import {SubmitHandler, useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {Preloader} from "@/shared/ui/Preloader/Preloader"
+// ТАК ДЕЛАТЬ НЕЛЬЗЯ: если какой-то UI принадлежит одному и более модулю, то его стоит вынести в shared слой
 import {SocialButtons} from "@/features/auth/signup/ui/SocialButtons"
-import {formSchema, FormSchemaType} from "@/features/auth/signIn/lib/validationConstants/validationConstants"
-import {SignInForm} from "@/features/auth/signIn/ui/SignInForm"
+import {formSchema, FormSchemaType} from "../lib/validationConstants/validationConstants"
+import {SignInForm} from "./SignInForm"
 import {useSelector} from "react-redux"
-import {StateSchema} from "@/providers/StoreProvider"
-import {signInThunk} from "@/features/auth/signIn/lib/signInThunk/signInThunk"
+import {signInThunk} from "../model/signInThunk"
 import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
+// import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { Namespaces } from '@/shared/config/i18n/types'
+import { errorSelector, isLoadingSelector } from '../model/selectors/selectors'
 
 export const SignIn: FC = () => {
-	const { t } = useClientTranslation('', 'signIn')
+	// const lngId = useContext(LanguageContext)
+	const { t } = useClientTranslation('', Namespaces.SIGNIN)
 	const schema = formSchema(t)
-	const isLoading = useSelector<StateSchema, boolean>(state => state.signIn.isLoading)
+	const isLoading = useSelector(isLoadingSelector)
+	const error = useSelector(errorSelector)
 	const dispatch = useAppDispatch()
-	const error = useSelector<StateSchema, boolean>(state => state.signIn.error)
 
 	const {
 		register,
 		handleSubmit,
 		formState: {errors},
-	} = useForm({
+	} = useForm<FormSchemaType>({
 		resolver: zodResolver(schema),
 	})
 
-	const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
-		await dispatch(signInThunk(data))
+	const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
+		dispatch(signInThunk(data))
 	}
 
 	if (isLoading) {
