@@ -6,7 +6,7 @@ import { LanguageParams } from '@/shared/config/i18n/types'
 import { Header } from '@/widgets/Header'
 import '@/shared/styles/index.scss'
 import '@/shared/styles/variables/common.scss'
-import { AuthenticationProvider } from "@/providers/AuthenticationProvider/AuthenticationProvider"
+import { AuthenticationProvider } from '@/providers/AuthenticationProvider/AuthenticationProvider'
 import { StoreProvider } from '@/providers/StoreProvider'
 import Loading from "./loading"
 import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
@@ -17,8 +17,8 @@ const inter = Inter({
 })
 
 export const metadata = {
-    title: "Inctagram | Social Media Service",
-    description: "Chat and share ",
+  title: 'Inctagram | Social Media Service',
+  description: 'Chat and share ',
 }
 
 export async function generateStaticParams() {

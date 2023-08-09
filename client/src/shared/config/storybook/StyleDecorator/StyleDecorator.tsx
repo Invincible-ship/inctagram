@@ -1,6 +1,6 @@
-import "@/shared/styles/index.scss"
-import "@/shared/styles/variables/common.scss"
-import { StoryFn } from "@storybook/react"
+import '@/shared/styles/index.scss'
+import '@/shared/styles/variables/common.scss'
+import { StoryFn } from '@storybook/react'
 
 export const StyleDecorator = (StoryComponent: StoryFn) => {
   return (
@@ -9,3 +9,4 @@ export const StyleDecorator = (StoryComponent: StoryFn) => {
     </div>
   )
 }
+

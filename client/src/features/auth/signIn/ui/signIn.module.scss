@@ -4,7 +4,6 @@
 
 .forgotPassword {
   font-size: 14px;
-  font-family: Inter, sans-serif;
   line-height: 24px;
   float: right;
 
@@ -14,10 +13,18 @@
 
   &:not(:last-child),
   &:not(:first-child) {
-    margin: 48px 0 24px 0;
+    margin: 30px 0 0 0;
   }
 }
 
 .signInButton {
   width: 100%;
+}
+
+.error {
+  position: absolute;
+  font-size: 14px;
+  color: var(--danger-color-500);
+  font-weight: 400;
+  line-height: 24px;
 }

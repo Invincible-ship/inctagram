@@ -3,33 +3,35 @@ import { StateSchema, ThunkExtraArg } from "./StateSchema"
 import { rtkApi } from "@/shared/api/rtkApi"
 import { configureStore, ReducersMapObject } from "@reduxjs/toolkit"
 import { userReducer } from "@/entities/User/model/slice/userSlice"
+import { signInReducer } from "@/features/auth/signIn/model/slice/signInSlice"
+import { signupReducer } from '@/features/auth/signup/model/slice/signUpSlice';
 
-export function createReduxStore(
-  initialState?: StateSchema
-) {
+export function createReduxStore(initialState?: StateSchema) {
   const rootReducer: ReducersMapObject<StateSchema> = {
     // Ваши остальные редьюсеры
     [rtkApi.reducerPath]: rtkApi.reducer,
-    user: userReducer
+    user: userReducer,
+    signIn: signInReducer,
+    signup: signupReducer
   }
 
   const extraArg: ThunkExtraArg = {
-    api: $api
-  }
+    api: $api,
+  };
 
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: initialState,
     devTools: Boolean(process.env.IS_DEV),
-    middleware: (getDefaultMiddleware) => 
+    middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
         thunk: {
-          extraArgument: extraArg
-        }
-      }).concat(rtkApi.middleware)
-  })
+          extraArgument: extraArg,
+        },
+      }).concat(rtkApi.middleware),
+  });
 
-  return store
+  return store;
 }
 
 export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];

@@ -1,6 +1,11 @@
-import dynamic from 'next/dynamic'
-// import SignUpPage from "@/pages/SignUpPage"
+import React from 'react'
 
-export default dynamic(() => import('@/pages/SignUpPage'), { ssr: false })
+const Page = () => {
+  return (
+    <div>
+      <h1>Home page</h1>
+    </div>
+  )
+}
 
-// export default SignUpPage
+export default Page
