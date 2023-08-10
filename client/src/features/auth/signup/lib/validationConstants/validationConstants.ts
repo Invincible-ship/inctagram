@@ -1,3 +1,4 @@
+import { TFunction } from 'i18next'
 import { z } from 'zod'
 
 const userNameRequired = 'validate.userNameRequired'
@@ -10,9 +11,9 @@ const passwordMaxLength = 'validate.passwordMaxLength'
 const passwordConfirmationRequired = 'validate.passwordConfirmationRequired'
 const passwordsDoNotMatch = 'validate.passwordsDoNotMatch'
 
-export type FormSchemaType = z.infer<typeof formSchema>;
+export type FormSchemaType = z.infer<ReturnType<typeof formSchema>>
 
-export const formSchema = t =>
+export const formSchema = (t: TFunction<string, undefined>) =>
   z
     .object({
       userName: z
