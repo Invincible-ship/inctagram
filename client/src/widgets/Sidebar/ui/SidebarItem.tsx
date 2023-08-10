@@ -1,24 +1,38 @@
 'use client'
-import homeIcon from '@/shared/assets/icons/home-outline.svg'
-import Image from 'next/image'
 import { FC } from 'react'
 import s from './sideBar.module.scss'
-import { IconHome } from './iconsComponent/IconHome'
 import Link from 'next/link'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 type SidebarItemProps = {
   text: string
+  icon: React.ReactNode
+  iconActive?: React.ReactNode
+  path: string
+  isActive: boolean
+  onClick: () => void
 }
 
-export const SidebarItem: FC<SidebarItemProps> = ({ text }) => {
+export const SidebarItem: FC<SidebarItemProps> = ({
+  onClick,
+  isActive,
+  text,
+  icon,
+  iconActive,
+  path,
+}) => {
   return (
     <>
       <li className={s.item}>
-        <Link className={s.link} href={'#'}>
-          <div className={s.image}>
-            <IconHome />
-          </div>
+        <Link
+          onClick={onClick}
+          className={isActive ? classNames(s.link, {}, [s.active]) : s.link}
+          href={path}
+        >
+          {/*<Link onClick={onClick} className={s.link} href={path}>*/}
+          <span className={s.image}>{isActive ? (iconActive ? iconActive : icon) : icon}</span>
           <span className={s.text}>{text}</span>
+          {/*<span className={isActive ? classNames(s.text, {}, [s.active]) : s.text}>{text}</span>*/}
         </Link>
       </li>
     </>
