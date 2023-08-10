@@ -1,14 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { signupThunk } from '@/features/auth/signup/model/signup';
+import { ISignUpSchema } from '../types/types';
+
+const initialState: ISignUpSchema = {
+  isLoading: false
+}
 
 const slice = createSlice({
   name: 'signup',
-  initialState: {
-    isLoading: false,
-  },
+  initialState,
   reducers: {
     dummyReducer: state => {
-      return state;
+      return ;
     },
   },
   extraReducers: builder => {

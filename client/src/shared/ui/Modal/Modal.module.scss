@@ -11,11 +11,15 @@
 
 .content {
   max-width: 60%;
-  padding: 15px;
-  background-color: var(--dark-color-100);
+  background-color: var(--dark-color-300);
+  border: 1px solid var(--dark-color-100);
   transform: scale(.5);
   transition: transform .2s;
   z-index: var(--modal-z-index);
+
+  @media (max-width: 769px) {
+    max-width: 95%;
+  }
 }
 
 .opened {
@@ -31,5 +35,35 @@
 .isClosing {
   .content {
       transform: scale(0.2);
+  }
+}
+
+.header {
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--dark-color-100);
+
+  @media (max-width: 769px) {
+    padding: 12px 18px;
+  }
+
+  .title {
+    font-size: 20px;
+    line-height: 1.8;
+    font-weight: 700;
+  }
+
+  .close {
+    cursor: pointer;
+  }
+}
+
+.body {
+  padding: 24px;
+
+  @media (max-width: 769px) {
+    padding: 24px 15px;
   }
 }

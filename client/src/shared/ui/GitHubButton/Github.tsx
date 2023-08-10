@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Github = () => {
   return (
@@ -21,7 +21,7 @@ const Github = () => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
 
-export default Github;
+export default Github

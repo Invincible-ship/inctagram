@@ -1,13 +1,5 @@
 {
   "greeting": "Hello World!",
-  "signIn": {
-    "signIn": "Sign In",
-    "email": "Email",
-    "password": "Password",
-    "forgotPassword": "Forgot Password",
-    "dontHaveAnAccount": "Don’t have an account",
-    "signUp": "Sign Up"
-  },
   "signUp": {
     "signUp": "Sign Up",
     "userName": "Username",
@@ -26,7 +18,8 @@
     },
     "passwordConfirmation": "Password Confirmation",
     "forgotPassword": "Forgot Password",
-    "dontHaveAnAccount": "Don't have an account"
+    "dontHaveAnAccount": "Don't have an account",
+    "sigIn": "Sign In"
   },
   "input": {
     "title": "Title",

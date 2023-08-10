@@ -1,16 +1,19 @@
-import { $api } from '@/shared/api/api';
-import { StateSchema, ThunkExtraArg } from './StateSchema';
-import { rtkApi } from '@/shared/api/rtkApi';
-import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
-import { signupReducer } from '@/features/auth/signup/model/slice/signUpSlice';
+import { $api } from "@/shared/api/api"
+import { StateSchema, ThunkExtraArg } from "./StateSchema"
+import { rtkApi } from "@/shared/api/rtkApi"
+import { configureStore, ReducersMapObject } from "@reduxjs/toolkit"
+import { userReducer } from "@/entities/User"
+import { signInReducer } from "@/features/auth/signIn"
+import { signupReducer } from '@/features/auth/signup';
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducer: ReducersMapObject<StateSchema> = {
     // Ваши остальные редьюсеры
     [rtkApi.reducerPath]: rtkApi.reducer,
-    signup: signupReducer,
-
-  };
+    user: userReducer,
+    signIn: signInReducer,
+    signup: signupReducer
+  }
 
   const extraArg: ThunkExtraArg = {
     api: $api,

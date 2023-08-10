@@ -1,13 +1,5 @@
 {
   "greeting": "Привет Мир!",
-  "signIn": {
-    "signIn": "Войти",
-    "email": "Электронная почта",
-    "password": "Пароль",
-    "forgotPassword": "Забыли пароль",
-    "dontHaveAnAccount": "Еще не зарегистрированы",
-    "signUp": "Зарегистрироваться"
-  },
   "signUp": {
     "signUp": "Зарегистрироваться",
     "userName": "Имя пользователя",

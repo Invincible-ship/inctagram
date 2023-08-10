@@ -1,0 +1,30 @@
+.text {
+  margin-bottom: 30px;
+
+  @media screen and (max-width: 769px) {
+    text-align: center;
+  }
+}
+
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+
+    a {
+      display: inline-flex;
+    }
+  }
+
+  .btn {
+    width: 96px;
+
+    @media (max-width: 769px) {
+      width: auto;
+      flex: 1 1 100%;
+    }
+  }
+}

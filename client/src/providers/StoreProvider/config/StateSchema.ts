@@ -1,12 +1,15 @@
 import { rtkApi } from '@/shared/api/rtkApi';
-import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { signupReducer } from '@/features/auth/signup/model/slice/signUpSlice';
+import { ISignUpSchema } from '@/features/auth/signup';
+import { IUserSchema } from '@/entities/User';
+import { ISignInSchema } from '@/features/auth/signIn';
 
 export type StateSchema = {
   // Остальные типы ваших редьюсеров
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
-  signup: ReturnType<typeof signupReducer>;
+  user: IUserSchema
+  signIn: ISignInSchema;
+  signup: ISignUpSchema;
 };
 
 export type ThunkExtraArg = {

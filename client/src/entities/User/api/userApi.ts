@@ -1,5 +1,6 @@
-import { rtkApi } from '@/shared/api/rtkApi';
-import { USER_TAG } from '@/shared/const/rtk';
+import { rtkApi } from "@/shared/api/rtkApi"
+import { USER_TAG } from "@/shared/const/rtk"
+import {LoginRequestType, LoginResponseType} from "@/features/auth/signIn/model/types/types"
 import {
   RegisterParamsType,
   RegisterResponseType,
@@ -21,5 +22,13 @@ export const userApi = rtkApi.injectEndpoints({
         body: data,
       }),
     }),
+    signIn: build.mutation<LoginResponseType, LoginRequestType>({
+      query: (data) => ({
+        url: 'auth/login',
+        method: 'POST',
+        body: data
+      }),
+      invalidatesTags: [USER_TAG],
+    })
   }),
 });

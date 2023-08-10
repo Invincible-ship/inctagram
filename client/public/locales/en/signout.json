@@ -1,3 +1,6 @@
 {
-  "signout": "Log Out"
+  "signout": "Log Out",
+  "logout-text": "Are you really want to log out of your account",
+  "yes": "Yes",
+  "no": "No"
 }
