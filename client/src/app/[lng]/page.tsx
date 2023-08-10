@@ -6,8 +6,8 @@ import { AvatarUploadPage } from "@/pages/avatarUpload"
 
 // export default SignUpPage
 // export default ResetPage
-export default ForgotPage
-// export default AvatarUploadPage
+// export default ForgotPage
+export default AvatarUploadPage
 
 // const Page = () => {
 //   return (
