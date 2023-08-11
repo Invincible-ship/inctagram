@@ -3,8 +3,7 @@ import { FC, ReactNode } from 'react'
 import s from './sideBar.module.scss'
 import Link from 'next/link'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { useClientTranslation } from '@/shared/config/i18n/client'
-import { Namespaces } from '@/shared/config/i18n/types'
+import { TFunction } from 'i18next'
 
 type SidebarItemProps = {
   text: string
@@ -13,6 +12,7 @@ type SidebarItemProps = {
   path: string
   isActive: boolean
   onClick: () => void
+  t: TFunction<string, undefined>
 }
 
 export const SidebarItem: FC<SidebarItemProps> = ({
@@ -22,8 +22,8 @@ export const SidebarItem: FC<SidebarItemProps> = ({
   icon,
   iconActive,
   path,
+  t,
 }) => {
-  const { t } = useClientTranslation('', Namespaces.SIDEBAR)
   return (
     <>
       <li className={s.item}>
