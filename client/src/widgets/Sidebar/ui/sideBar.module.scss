@@ -57,38 +57,43 @@
       color: var(--dark-color-100);
     }
 
-    //.image {
-    //  position: relative;
-    //  svg {
-    //    fill: white;
-    //  }
-    //}
+    .image {
+      display: flex;
+      align-items: center;
+      svg {
+        fill: currentColor;
+        transition: fill 0.2s linear;
+      }
+    }
     .text {
-      font-family: Inter;
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
       line-height: 24px;
     }
   }
-  &:hover {
+
+  &:hover,
+  .active:hover {
     color: var(--accent-color-100);
     .text {
       color: var(--accent-color-100);
     }
-    svg {
-      fill: var(--accent-color-100);
-      transition: fill 0.2s linear;
+    .image svg {
+      path {
+        fill: var(--accent-color-100);
+      }
     }
   }
-}
-.active {
-  color: var(--accent-color-500);
-  //&:hover {
-  //  color: var(--accent-color-100);
-  //  svg {
-  //    fill: var(--accent-color-100);
-  //    transition: fill 0.2s linear;
-  //  }
-  //}
+  .active {
+    color: var(--accent-color-500);
+    .text {
+      color: var(--accent-color-500);
+    }
+    .image svg {
+      path {
+        fill: var(--accent-color-500);
+      }
+    }
+  }
 }

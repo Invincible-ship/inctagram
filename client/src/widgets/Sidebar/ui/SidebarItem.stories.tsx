@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { SidebarItem } from './SidebarItem'
-import { HomeIcon } from './iconsComponents/HomeIcon'
-import { HomeIconActive } from './iconsComponents/HomeIconActive'
+import HomeIconActive from '@/shared/assets/icons/home-active.svg'
+import HomeIcon from '@/shared/assets/icons/home-outline.svg'
 
 const meta: Meta<typeof SidebarItem> = {
   title: 'WIDGETS/SideBar/Item',
