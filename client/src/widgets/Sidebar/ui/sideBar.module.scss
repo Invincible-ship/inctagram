@@ -60,7 +60,7 @@
     .image {
       display: flex;
       align-items: center;
-      svg {
+      svg > path {
         fill: currentColor;
         transition: fill 0.2s linear;
       }
@@ -70,6 +70,7 @@
       font-style: normal;
       font-weight: 500;
       line-height: 24px;
+      transition: color 0.2s linear;
     }
   }
 

@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { SidebarItem } from './SidebarItem'
+import { SidebarItem } from './Sidebar.Item'
 import s from './sideBar.module.scss'
 import { footerItems, mainItems, midleBlockItems } from '../lib/sidebarItemsData'
 

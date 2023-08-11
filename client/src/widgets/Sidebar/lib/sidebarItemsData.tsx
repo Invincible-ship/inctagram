@@ -1,24 +1,24 @@
-import HomeIcon from '@/shared/assets/icons/home-outline.svg'
-import HomeIconActive from '@/shared/assets/icons/home-active.svg'
-import { CreateIcon } from '../ui/iconsComponents/CreateIcon'
-import { CreateIconActive } from '../ui/iconsComponents/CreateIconActive'
-import { ProfileIcon } from '../ui/iconsComponents/ProfileIcon'
-import { ProfileIconActive } from '../ui/iconsComponents/ProfileIconActive'
-import { MessengerIconActive } from '../ui/iconsComponents/MessengerIconActive'
-import { MessengerIcon } from '../ui/iconsComponents/MessengerIcon'
-import { SearchIcon } from '../ui/iconsComponents/SearchIcon'
-import { SearchIconActive } from '../ui/iconsComponents/SearchIconActive'
-import { StatisticsIcon } from '../ui/iconsComponents/StatisticsIcon'
-import { StatisticsIconActive } from '../ui/iconsComponents/StatisticsIconActive'
-import { FavoritesIcon } from '../ui/iconsComponents/FavoritesIcon'
-import { FavoritesIconActive } from '../ui/iconsComponents/FavoritesIconActive'
-import { LogOutIcon } from '../ui/iconsComponents/LogOutIcon'
-import { LogOutIconActive } from '../ui/iconsComponents/LogOutIconActive'
+import HomeIcon from '../../../../public/icons/home-outline.svg'
+import HomeIconActive from '../../../../public/icons/home-active.svg'
+import CreateIcon from '../../../../public/icons/create-outline.svg'
+import CreateIconActive from '../../../../public/icons/create-active.svg'
+import ProfileIcon from '../../../../public/icons/profile-outline.svg'
+import ProfileIconActive from '../../../../public/icons/profile-active.svg'
+import MessengerIcon from '../../../../public/icons/messenger-outline.svg'
+import MessengerIconActive from '../../../../public/icons/messenger-active.svg'
+import SearchIcon from '../../../../public/icons/search-outline.svg'
+import SearchIconActive from '../../../../public/icons/search-active.svg'
+import StatisticsIcon from '../../../../public/icons/statistics-outline.svg'
+import StatisticsIconActive from '../../../../public/icons/statistics-active.svg'
+import FavoritesIcon from '../../../../public/icons/favorites-outline.svg'
+import FavoritesIconActive from '../../../../public/icons/favorites-active.svg'
+import LogOutIcon from '../../../../public/icons/log-out.svg'
+import LogOutIconActive from '../../../../public/icons/log-out-active.svg'
 
 export const mainItems = [
   { text: 'home', icon: <HomeIcon />, iconActive: <HomeIconActive />, path: '/#' },
   { text: 'create', icon: <CreateIcon />, iconActive: <CreateIconActive />, path: '/#' },
-  { text: 'myProfile', icon: <ProfileIcon />, iconActive: <ProfileIconActive />, path: '/#' },
+  { text: 'profile', icon: <ProfileIcon />, iconActive: <ProfileIconActive />, path: '/#' },
   { text: 'messenger', icon: <MessengerIcon />, iconActive: <MessengerIconActive />, path: '/#' },
   { text: 'search', icon: <SearchIcon />, iconActive: <SearchIconActive />, path: '/#' },
 ]
