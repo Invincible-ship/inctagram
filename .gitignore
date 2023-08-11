@@ -36,4 +36,7 @@
 /client/*.tsbuildinfo
 /client/next-env.d.ts
 
+# storybook
+/client/storybook-static
+
 /.idea
