@@ -16,21 +16,21 @@ import { LogOutIcon } from '../ui/iconsComponents/LogOutIcon'
 import { LogOutIconActive } from '../ui/iconsComponents/LogOutIconActive'
 
 export const mainItems = [
-  { text: 'Home', icon: <HomeIcon />, iconActive: <HomeIconActive />, path: '/#' },
-  { text: 'Create', icon: <CreateIcon />, iconActive: <CreateIconActive />, path: '/#' },
-  { text: 'My Profile', icon: <ProfileIcon />, iconActive: <ProfileIconActive />, path: '/#' },
-  { text: 'Messenger', icon: <MessengerIcon />, iconActive: <MessengerIconActive />, path: '/#' },
-  { text: 'Search', icon: <SearchIcon />, iconActive: <SearchIconActive />, path: '/#' },
+  { text: 'home', icon: <HomeIcon />, iconActive: <HomeIconActive />, path: '/#' },
+  { text: 'create', icon: <CreateIcon />, iconActive: <CreateIconActive />, path: '/#' },
+  { text: 'myProfile', icon: <ProfileIcon />, iconActive: <ProfileIconActive />, path: '/#' },
+  { text: 'messenger', icon: <MessengerIcon />, iconActive: <MessengerIconActive />, path: '/#' },
+  { text: 'search', icon: <SearchIcon />, iconActive: <SearchIconActive />, path: '/#' },
 ]
 export const midleBlockItems = [
   {
-    text: 'Statistics',
+    text: 'statistics',
     icon: <StatisticsIcon />,
     iconActive: <StatisticsIconActive />,
     path: '/#',
   },
-  { text: 'Favorites', icon: <FavoritesIcon />, iconActive: <FavoritesIconActive />, path: '/#' },
+  { text: 'favorites', icon: <FavoritesIcon />, iconActive: <FavoritesIconActive />, path: '/#' },
 ]
 export const footerItems = [
-  { text: 'Log Out', icon: <LogOutIcon />, iconActive: <LogOutIconActive />, path: '/#' },
+  { text: 'logOut', icon: <LogOutIcon />, iconActive: <LogOutIconActive />, path: '/#' },
 ]

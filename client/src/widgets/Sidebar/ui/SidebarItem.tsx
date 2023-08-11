@@ -1,16 +1,18 @@
 'use client'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import s from './sideBar.module.scss'
 import Link from 'next/link'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { TFunction } from 'i18next'
 
 type SidebarItemProps = {
   text: string
-  icon: React.ReactNode
-  iconActive?: React.ReactNode
+  icon: ReactNode
+  iconActive?: ReactNode
   path: string
   isActive: boolean
   onClick: () => void
+  t: TFunction<string, undefined>
 }
 
 export const SidebarItem: FC<SidebarItemProps> = ({
@@ -20,6 +22,7 @@ export const SidebarItem: FC<SidebarItemProps> = ({
   icon,
   iconActive,
   path,
+  t,
 }) => {
   return (
     <>
@@ -30,7 +33,7 @@ export const SidebarItem: FC<SidebarItemProps> = ({
           href={path}
         >
           <span className={s.image}>{isActive ? (iconActive ? iconActive : icon) : icon}</span>
-          <span className={s.text}>{text}</span>
+          <span className={s.text}>{t(text)}</span>
         </Link>
       </li>
     </>

@@ -1,13 +1,14 @@
 export enum LanguageIds {
   RU = 'ru',
-  EN = 'en'
+  EN = 'en',
 }
 
 export enum Namespaces {
   DEFAULT = 'translation',
   SIGNUP = 'signUp',
   SIGNOUT = 'signout',
-  SIGNIN = 'signin'
+  SIGNIN = 'signin',
+  SIDEBAR = 'sidebar',
 }
 
-export type LanguageParams = { lng: LanguageIds };
+export type LanguageParams = { lng: LanguageIds }

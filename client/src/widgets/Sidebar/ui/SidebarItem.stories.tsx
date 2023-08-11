@@ -9,6 +9,7 @@ const meta: Meta<typeof SidebarItem> = {
   component: SidebarItem,
   args: {
     isActive: true,
+    // ругается на t
   },
 }
 
