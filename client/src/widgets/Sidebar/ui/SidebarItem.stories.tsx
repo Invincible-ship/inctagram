@@ -9,7 +9,7 @@ const meta: Meta<typeof SidebarItem> = {
   component: SidebarItem,
   args: {
     isActive: true,
-    // ругается на t
+    path: '/path',
   },
 }
 
@@ -18,9 +18,8 @@ type Story = StoryObj<typeof SidebarItem>
 
 export const Home: Story = {
   args: {
-    text: 'Home',
+    text: 'home',
     icon: <HomeIcon />,
     iconActive: <HomeIconActive />,
-    path: '/path',
   },
 }
