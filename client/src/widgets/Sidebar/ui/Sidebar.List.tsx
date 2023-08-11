@@ -1,11 +1,8 @@
 'use client'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { SidebarItem } from './SidebarItem'
 import s from './sideBar.module.scss'
 import { footerItems, mainItems, midleBlockItems } from '../lib/sidebarItemsData'
-import { Namespaces } from '@/shared/config/i18n/types'
-import { useClientTranslation } from '@/shared/config/i18n/client'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 
 export const SidebarList = () => {
   const [mainActiveIndex, setMainActiveIndex] = useState<number | null>(null)
@@ -29,8 +26,6 @@ export const SidebarList = () => {
     setMidleBlockActiveIndex(null)
     setFooterActiveIndex(index)
   }
-  const lngId = useContext(LanguageContext)
-  const { t } = useClientTranslation(lngId, Namespaces.SIDEBAR)
 
   return (
     <>
@@ -40,7 +35,6 @@ export const SidebarList = () => {
             {mainItems.map((i, index) => {
               return (
                 <SidebarItem
-                  t={t}
                   key={i.text}
                   icon={i.icon}
                   iconActive={i.iconActive}
@@ -56,7 +50,6 @@ export const SidebarList = () => {
             {midleBlockItems.map((i, index) => {
               return (
                 <SidebarItem
-                  t={t}
                   key={i.text}
                   icon={midleBlockActiveIndex === index ? i.iconActive : i.icon}
                   path={i.path}
@@ -71,7 +64,6 @@ export const SidebarList = () => {
             {footerItems.map((i, index) => {
               return (
                 <SidebarItem
-                  t={t}
                   key={i.text}
                   icon={footerActiveIndex === index ? i.iconActive : i.icon}
                   path={i.path}
