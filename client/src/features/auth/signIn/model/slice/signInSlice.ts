@@ -1,17 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit"
-import {signInThunk} from "@/features/auth/signIn/lib/signInThunk/signInThunk"
+import {signInThunk} from "@/features/auth/signIn/model/signInThunk"
+import { ISignInSchema } from "../types/types";
 
-type initialStateType = {
-	isLoading: boolean;
-	error: boolean;
-}
-
-const initialState: initialStateType = {
+const initialState: ISignInSchema = {
 	isLoading: false,
 	error: false,
 }
 
-const slice = createSlice<initialStateType>({
+const slice = createSlice({
 	name: 'signIn',
 	initialState,
 	reducers: {

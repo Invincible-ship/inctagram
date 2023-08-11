@@ -4,11 +4,16 @@ export type LoginRequestType = {
 }
 
 export type LoginResponseType = {
-	"accessToken": string,
-	"user": {
-		"id": string,
-		"userName": string,
-		"email": string,
-		"createdAt": string
+	accessToken: string,
+	user: {
+		id: string,
+		userName: string,
+		email: string,
+		createdAt: string
 	}
+}
+
+export type ISignInSchema = {
+	isLoading: boolean;
+	error: boolean;
 }

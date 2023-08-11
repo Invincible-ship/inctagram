@@ -8,9 +8,13 @@ import '@/shared/styles/index.scss'
 import '@/shared/styles/variables/common.scss'
 import { AuthenticationProvider } from '@/providers/AuthenticationProvider/AuthenticationProvider'
 import { StoreProvider } from '@/providers/StoreProvider'
-import Loading from '@/app/[lng]/loading'
+import Loading from "./loading"
+import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
 
-const inter = Inter({ subsets: ['latin', 'cyrillic'] })
+const inter = Inter({
+  weight: ["400", "500", "700", "900"],
+  subsets: ["latin", "cyrillic"]
+})
 
 export const metadata = {
   title: 'Inctagram | Social Media Service',
@@ -18,27 +22,31 @@ export const metadata = {
 }
 
 export async function generateStaticParams() {
-  return languages.map(lng => ({ lng }))
+    return languages.map((lngId) => ({lngId}))
 }
 
-const RootLayout = ({
+const RootLayout = async ({
   children,
-  params: { lng },
-}: {
-  children: ReactNode;
-  params: LanguageParams;
+  params: { lng: lngId }
+} : {
+  children: ReactNode,
+  params: LanguageParams
 }) => {
   return (
-    <html lang={lng} dir={dir(lng)} className={inter.className}>
+    <html lang={lngId} dir={dir(lngId)} className={inter.className}>
       <head />
-      <AuthenticationProvider>
-        <StoreProvider>
-          <body className="app">
-            <Header lng={lng} />
-            <Suspense fallback={<Loading />}>{children}</Suspense>
-          </body>
-        </StoreProvider>
-      </AuthenticationProvider>
+      <body className='app'>
+        <LanguageProvider lngId={lngId}>
+          <AuthenticationProvider>
+            <StoreProvider>
+              <Suspense fallback={<Loading/>}>
+                <Header />
+                {children}
+              </Suspense>
+            </StoreProvider>
+          </AuthenticationProvider>
+        </LanguageProvider>
+      </body>
     </html>
   )
 }
