@@ -1,5 +1,5 @@
-import { HomeIconActive } from '../ui/iconsComponents/HomeIconActive'
-import { HomeIcon } from '../ui/iconsComponents/HomeIcon'
+import HomeIcon from '@/shared/assets/icons/home-outline.svg'
+import HomeIconActive from '@/shared/assets/icons/home-active.svg'
 import { CreateIcon } from '../ui/iconsComponents/CreateIcon'
 import { CreateIconActive } from '../ui/iconsComponents/CreateIconActive'
 import { ProfileIcon } from '../ui/iconsComponents/ProfileIcon'
