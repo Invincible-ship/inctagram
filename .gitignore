@@ -38,11 +38,3 @@
 # typescript
 /client/*.tsbuildinfo
 /client/next-env.d.ts
-
-
-
-/.idea
-storybook-stat
-storybook-static
-storybook-static
-storybook-static
