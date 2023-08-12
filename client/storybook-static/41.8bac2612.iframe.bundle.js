@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkclient=self.webpackChunkclient||[]).push([[41],{"./public/locales/ru/signout.json":module=>{module.exports={signout:"Выйти"}}}]);

@@ -5,6 +5,9 @@
 /client/.pnp
 /client.pnp.js
 
+# storybook
+/client/storybook-static
+
 # testing
 /client/.swc
 /client/coverage
@@ -36,7 +39,10 @@
 /client/*.tsbuildinfo
 /client/next-env.d.ts
 
-# storybook
-/client/storybook-static
+
 
 /.idea
+storybook-stat
+storybook-static
+storybook-static
+storybook-static
