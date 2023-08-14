@@ -5,6 +5,9 @@
 /client/.pnp
 /client.pnp.js
 
+# storybook
+/client/storybook-static
+
 # testing
 /client/.swc
 /client/coverage

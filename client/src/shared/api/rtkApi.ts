@@ -30,23 +30,23 @@ const baseQuery = fetchBaseQuery({
 })
 
 const baseQueryWithReauth: BaseQueryFn<
-  string | FetchArgs,
-  unknown,
-  FetchBaseQueryError
-> = async (args, api, extraOptions) => {
+    string | FetchArgs,
+    unknown,
+    FetchBaseQueryError
+    > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
 
   if (result.error && result.error.status === 401) {
     const refreshResult = (await baseQuery(
-      '/refresh-token',
-      api,
-      extraOptions,
+        '/refresh-token',
+        api,
+        extraOptions,
     )) as { data: AuthRefreshResponse }
 
     if (refreshResult.data) {
       localStorage.setItem(
-        LOCAL_STORAGE_TOKEN_KEY,
-        refreshResult.data.accessToken,
+          LOCAL_STORAGE_TOKEN_KEY,
+          refreshResult.data.accessToken,
       )
       result = await baseQuery(args, api, extraOptions)
     } else {

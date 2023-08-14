@@ -1,11 +1,16 @@
 import React from 'react'
+import { ResetPage } from "@/pages/resetPage"
+import { ForgotPage } from "@/pages/forgotPasswordPage"
 
-const Page = () => {
-  return (
-    <div>
-      <h1>Home page</h1>
-    </div>
-  )
-}
+// export default ResetPage
+export default ForgotPage
 
-export default Page
+// const Page = () => {
+//   return (
+//     <div>
+//       <h1>Home page</h1>
+//     </div>
+//   )
+// }
+//
+// export default Page
