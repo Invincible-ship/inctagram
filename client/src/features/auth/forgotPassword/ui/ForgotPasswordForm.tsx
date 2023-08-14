@@ -1,15 +1,11 @@
-// SignUpForm.tsx
+// ForgotPasswordForm.tsx
 'use client';
 import React, { FC, FormEventHandler, useState } from 'react';
 import { InputField } from '@/shared/ui/InputField/InputField';
 import { Button } from '@/shared/ui/Button/Button';
-import '@/shared/styles/variables/common/_form.scss';
+import '@/shared/styles/variables/common/_form.scss'
 import Link from "next/link";
 import ReCAPTCHA from "react-google-recaptcha";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {formSchema, FormSchemaType} from "@/features/auth/forgotPassword/lib/validationConstants/validationConstants";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {useClientTranslation} from "@/shared/config/i18n/client";
 
 export type ForgotPasswordFormProps = {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined;
@@ -38,8 +34,6 @@ export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
   verifyCaptcha,
   onChange,
 }) => {
-
-
 
   return (
       <form className={'form-style'} onSubmit={onSubmit} >

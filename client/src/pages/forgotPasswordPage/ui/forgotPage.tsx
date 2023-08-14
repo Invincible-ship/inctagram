@@ -1,4 +1,4 @@
-import { ForgotPassword } from '@/features/auth/forgotPassword'
+import { ForgotPassword } from '@/../src/features/auth/forgotPassword'
 import { LanguageParams } from '@/shared/config/i18n/types'
 import { FC } from 'react'
 

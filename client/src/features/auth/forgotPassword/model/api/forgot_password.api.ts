@@ -1,4 +1,4 @@
-import {ForgotParamsType, ForgotResponseType} from "@/features/auth/forgotPassword/model/types/types";
+import {ForgotParamsType, ForgotResponseType} from "../types/types";
 import {rtkApi} from "@/shared/api/rtkApi";
 
 

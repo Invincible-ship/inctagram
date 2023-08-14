@@ -5,13 +5,13 @@ import './forgotPassword.scss'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
-import {useClientTranslation} from "@/shared/config/i18n/client";
+import {useClientTranslation} from '@/shared/config/i18n/client'
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {ForgotPasswordForm} from "@/features/auth/forgotPassword/ui/ForgotPasswordForm";
-import {Preloader} from "@/shared/ui/Preloader/Preloader";
-import {formSchema, FormSchemaType} from "@/features/auth/forgotPassword/lib/validationConstants/validationConstants";
-import {useForgotPasswordMutation} from "@/features/auth/forgotPassword/model/api/forgot_password.api";
+import {ForgotPasswordForm} from "./ForgotPasswordForm";
+import {Preloader} from '@/shared/ui/Preloader/Preloader'
+import {formSchema, FormSchemaType} from "../lib/validationConstants/validationConstants";
+import {useForgotPasswordMutation} from "../model/api/forgot_password.api";
 
 
 type ForgotPassword = {
