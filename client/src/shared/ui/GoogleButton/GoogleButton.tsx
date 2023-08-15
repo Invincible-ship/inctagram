@@ -1,15 +1,9 @@
-"use client"
+'use client'
 
-import { signIn } from "next-auth/react"
-import { useSearchParams } from "next/navigation"
-import Google from "@/shared/ui/GoogleButton/Google"
-
+import Google from '@/shared/ui/GoogleButton/Google'
 
 const GoogleButton = () => {
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get("callbackUrl") || "/profile"
-
-  return <Google onClick={() => signIn("google", { callbackUrl })}/>
+  return <Google />
 }
 
 export { GoogleButton }

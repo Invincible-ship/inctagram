@@ -1,13 +1,13 @@
-"use client"
+'use client'
 
-import { FC, ReactNode } from "react"
-import { StateSchema } from "../config/StateSchema"
-import { Provider } from "react-redux"
-import { createReduxStore } from "../config/store"
-import { DeepPartial } from "@reduxjs/toolkit"
+import { FC, ReactNode } from 'react'
+import { StateSchema } from '../config/StateSchema'
+import { Provider } from 'react-redux'
+import { createReduxStore } from '../config/store'
+import { DeepPartial } from '@reduxjs/toolkit'
 
 type StoreProviderProps = {
-  initialState?: DeepPartial<StateSchema>,
+  initialState?: DeepPartial<StateSchema>
   children?: ReactNode
 }
 

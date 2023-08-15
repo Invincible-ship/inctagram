@@ -59,6 +59,8 @@
     "@storybook/nextjs": "^7.0.24",
     "@storybook/react": "^7.0.24",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-storybook": "^0.6.12",
     "prettier": "^3.0.0",
     "storybook": "^7.0.24",
