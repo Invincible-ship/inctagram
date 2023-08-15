@@ -1,15 +1,15 @@
 export type RegisterParamsType = {
-	userName: string;
-	email: string;
-	password: string;
-	passwordConfirmation: string;
-};
+  userName: string
+  email: string
+  password: string
+  passwordConfirmation: string
+}
 export type RegisterResponseType = {
-	id: string;
-	userName: string;
-	email: string;
-	createdAt: string;
-};
+  id: string
+  userName: string
+  email: string
+  createdAt: string
+}
 export type ISignUpSchema = {
-	isLoading: boolean;
+  isLoading: boolean
 }

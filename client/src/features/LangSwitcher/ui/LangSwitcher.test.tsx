@@ -14,9 +14,7 @@ jest.mock('next/navigation', () => ({
 
 describe('LangSwitcher', () => {
   test('Test render', () => {
-    render(
-      <LangSwitcher currentLngId="en" />
-    )
+    render(<LangSwitcher currentLngId="en" />)
     expect(screen.getByTestId('lang-switcher')).toBeInTheDocument()
     screen.debug()
   })

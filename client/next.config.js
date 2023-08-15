@@ -8,16 +8,6 @@ const nextConfig = {
 
     return config;
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-        port: "",
-        pathname: "/a/**",
-      },
-    ],
-  },
   env: {
     IS_DEV: process.env.NODE_ENV === "development",
   },
