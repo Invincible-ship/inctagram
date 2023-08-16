@@ -9,7 +9,7 @@
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "test:unit": "jest --config ./config/jest/jest.config.mjs",
-    "test:ui": "npx chromatic --exit-zero-on-changes",
+    "test:ui": "npx chromatic",
     "test:ui:ok": "npx chromatic --auto-accept-changes",
     "storybook": "storybook dev -p 6006 -c ./config/storybook",
     "build-storybook": "storybook build -c ./config/storybook"
