@@ -1,16 +1,14 @@
-import { MutableRefObject, useCallback, useEffect, useRef, useState } from "react"
+import { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react'
 
 type UseModalProps = {
-  onClose?: () => void;
-  isOpen?: boolean;
-  animationDelay: number;
+  onClose?: () => void
+  isOpen?: boolean
+  animationDelay: number
 }
 
 export const useModal = ({ onClose, animationDelay, isOpen }: UseModalProps) => {
   const [isClosing, setIsClosing] = useState<boolean>(false)
-  const timerRef = useRef() as MutableRefObject<
-    ReturnType<typeof setTimeout>
-  >
+  const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>
 
   const close = useCallback(() => {
     if (onClose) {
@@ -22,11 +20,14 @@ export const useModal = ({ onClose, animationDelay, isOpen }: UseModalProps) => 
     }
   }, [onClose, animationDelay])
 
-  const onKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key == 'Escape') {
-      close()
-    }
-  }, [close])
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key == 'Escape') {
+        close()
+      }
+    },
+    [close],
+  )
 
   useEffect(() => {
     if (isOpen) {
@@ -38,9 +39,9 @@ export const useModal = ({ onClose, animationDelay, isOpen }: UseModalProps) => 
       clearTimeout(timerRef.current)
     }
   }, [isOpen, onKeyDown])
-  
+
   return {
     isClosing,
-    close
+    close,
   }
 }

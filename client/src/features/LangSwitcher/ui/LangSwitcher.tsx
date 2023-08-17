@@ -1,12 +1,12 @@
 'use client'
 
 import * as Select from '@radix-ui/react-select'
-import ArrowDown from '../../../../public/icons/arrow-down.svg'
-import FlagRU from '../../../../public/icons/ru-flag.svg'
-import FlagUK from '../../../../public/icons/uk-flag.svg'
-import CheckIcon from '../../../../public/icons/check.svg'
+import ArrowDown from '@/shared/assets/icons/arrow-down.svg'
+import FlagRU from '@/shared/assets/icons/ru-flag.svg'
+import FlagUK from '@/shared/assets/icons/uk-flag.svg'
+import CheckIcon from '@/shared/assets/icons/check.svg'
 import { languages } from '@/shared/config/i18n/settings'
-import { FC, ReactNode, Suspense, useContext, useMemo, useState } from 'react'
+import { ReactNode, Suspense, useContext, useMemo, useState } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import cls from './LangSwitcher.module.scss'
 import { LanguageIds } from '@/shared/config/i18n/types'
@@ -53,7 +53,7 @@ const LangSwitcher = () => {
 
   return (
     <Select.Root onValueChange={onChange}>
-      <Select.Trigger className={cls.trigger}>
+      <Select.Trigger className={cls.trigger} data-testid="lang-switcher">
         <Select.Value>
           <Option option={selectedLanguage} />
         </Select.Value>
