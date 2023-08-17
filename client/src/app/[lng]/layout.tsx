@@ -9,6 +9,7 @@ import '@/shared/styles/variables/common.scss'
 import { StoreProvider } from '@/providers/StoreProvider'
 import Loading from './loading'
 import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
+import { InitializeUser } from '@/providers/InitializeUser/InitializeUser'
 
 const inter = Inter({
   weight: ['400', '500', '700', '900'],
@@ -37,10 +38,12 @@ const RootLayout = async ({
       <body className="app">
         <LanguageProvider lngId={lngId}>
           <StoreProvider>
-            <Suspense fallback={<Loading />}>
-              <Header />
-              {children}
-            </Suspense>
+            <InitializeUser>
+              <Suspense fallback={<Loading />}>
+                <Header />
+                {children}
+              </Suspense>
+            </InitializeUser>
           </StoreProvider>
         </LanguageProvider>
       </body>

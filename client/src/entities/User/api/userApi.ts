@@ -2,6 +2,7 @@ import { rtkApi } from '@/shared/api/rtkApi'
 import { USER_TAG } from '@/shared/const/rtk'
 import { LoginRequestType, LoginResponseType } from '@/features/auth/signIn/model/types/types'
 import { RegisterParamsType, RegisterResponseType } from '@/features/auth/signup/model/types/types'
+import { IUser } from '@/entities/User/model/types/types'
 
 export const userApi = rtkApi.injectEndpoints({
   endpoints: build => ({
@@ -27,5 +28,10 @@ export const userApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: [USER_TAG],
     }),
+    me: build.query<IUser, string>({
+      query: id => `user/${id}`,
+    }),
   }),
 })
+
+export const getUserDataByIdQuery = userApi.endpoints.me.initiate
