@@ -31,7 +31,9 @@ const DropdownMenu: FC<DropdownMenuProps> = ({ icon, items, t }) => {
   return (
     <Dropdown.Root open={isOpen} onOpenChange={onClickOpenChange}>
       <Dropdown.Trigger asChild>
-        <button className={s.iconButton}>{icon}</button>
+        <button onClick={onClickOpenChange} className={s.iconButton}>
+          {icon}
+        </button>
       </Dropdown.Trigger>
 
       <Dropdown.Portal>
