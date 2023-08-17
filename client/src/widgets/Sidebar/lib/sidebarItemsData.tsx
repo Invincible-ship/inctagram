@@ -14,7 +14,20 @@ import FavoritesIcon from '../../../../public/icons/favorites-outline.svg'
 import FavoritesIconActive from '../../../../public/icons/favorites-active.svg'
 import LogOutIcon from '../../../../public/icons/log-out.svg'
 import LogOutIconActive from '../../../../public/icons/log-out-active.svg'
+import SettingsIcon from '../../../../public/icons/settings-outline.svg'
+import SettingsIconActive from '../../../../public/icons/settings-active.svg'
 
+export const mobileMenuItems = [
+  { text: 'settings', icon: <SettingsIcon />, iconActive: <SettingsIconActive />, path: '/#' },
+  {
+    text: 'statistics',
+    icon: <StatisticsIcon />,
+    iconActive: <StatisticsIconActive />,
+    path: '/#',
+  },
+  { text: 'favorites', icon: <FavoritesIcon />, iconActive: <FavoritesIconActive />, path: '/#' },
+  { text: 'logOut', icon: <LogOutIcon />, iconActive: <LogOutIconActive />, path: '/#' },
+]
 export const mainItems = [
   { text: 'home', icon: <HomeIcon />, iconActive: <HomeIconActive />, path: '/#' },
   { text: 'create', icon: <CreateIcon />, iconActive: <CreateIconActive />, path: '/#' },

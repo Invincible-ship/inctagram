@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import OutlineBell from '../../../../public/icons/bell-outline.svg'
-import Logo from '../../../../public/icons/logo.svg'
+import OutlineBell from '@/shared/assets/icons/bell-outline.svg'
+import Logo from '@/shared/assets/icons/logo.svg'
 import { SuspenseLangSwitcher } from '@/features/LangSwitcher'
 import cls from './Header.module.scss'
 import { LanguageIds } from '@/shared/config/i18n/types'
