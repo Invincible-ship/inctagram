@@ -9,4 +9,3 @@ export const StyleDecorator = (StoryComponent: StoryFn) => {
     </div>
   )
 }
-

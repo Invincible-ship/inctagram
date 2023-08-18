@@ -1,14 +1,7 @@
 import { AuthRefreshResponse } from '@/shared/api/types'
-import {
-  LOCAL_STORAGE_LANGUAGE_ID_KEY,
-  LOCAL_STORAGE_TOKEN_KEY,
-} from '../const/localStorage'
+import { LOCAL_STORAGE_LANGUAGE_ID_KEY, LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type {
-  BaseQueryFn,
-  FetchArgs,
-  FetchBaseQueryError,
-} from '@reduxjs/toolkit/query'
+import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { USER_TAG } from '@/shared/const/rtk'
 
 const baseQuery = fetchBaseQuery({
@@ -29,6 +22,7 @@ const baseQuery = fetchBaseQuery({
   },
 })
 
+<<<<<<< HEAD
 const baseQueryWithReauth: BaseQueryFn<
     string | FetchArgs,
     unknown,
@@ -48,6 +42,22 @@ const baseQueryWithReauth: BaseQueryFn<
           LOCAL_STORAGE_TOKEN_KEY,
           refreshResult.data.accessToken,
       )
+=======
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+  args,
+  api,
+  extraOptions,
+) => {
+  let result = await baseQuery(args, api, extraOptions)
+
+  if (result.error && result.error.status === 401) {
+    const refreshResult = (await baseQuery('/refresh-token', api, extraOptions)) as {
+      data: AuthRefreshResponse
+    }
+
+    if (refreshResult.data) {
+      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, refreshResult.data.accessToken)
+>>>>>>> 5b4f6b4c5d550a4335c15f9906fca772382a237b
       result = await baseQuery(args, api, extraOptions)
     } else {
       // api.dispatch(signoutThunk())

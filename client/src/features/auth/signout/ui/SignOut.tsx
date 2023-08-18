@@ -1,13 +1,13 @@
-"use client"
+'use client'
 
-import { signoutThunk } from "../model/signout"
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch/useAppDispatch"
-import { useContext, useState } from "react"
-import { SignOutModal } from "./SignOutModal/SignOutModal"
-import { useClientTranslation } from "@/shared/config/i18n/client"
-import { Namespaces } from "@/shared/config/i18n/types"
-import { LanguageContext } from "@/providers/LanguageProvider/LanguageProvider"
-import { SignOutButton } from "./SignOutButton/SignOutButton"
+import { signoutThunk } from '../model/signout'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { useContext, useState } from 'react'
+import { SignOutModal } from './SignOutModal/SignOutModal'
+import { useClientTranslation } from '@/shared/config/i18n/client'
+import { Namespaces } from '@/shared/config/i18n/types'
+import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { SignOutButton } from './SignOutButton/SignOutButton'
 
 export const SignOut = () => {
   const lngId = useContext(LanguageContext)

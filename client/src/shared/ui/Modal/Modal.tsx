@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { FC, ReactNode } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -9,9 +9,9 @@ import CloseIcon from '@/shared/assets/icons/close.svg'
 import cls from './Modal.module.scss'
 
 type ModalProps = {
-  className?: string,
-  children?: ReactNode,
-  isOpen?: boolean,
+  className?: string
+  children?: ReactNode
+  isOpen?: boolean
   onClose?: () => void
 }
 
@@ -23,29 +23,27 @@ export const Modal = (props: ModalProps) => {
   const { isClosing, close } = useModal({
     animationDelay: ANIMATION_DELAY,
     onClose,
-    isOpen
+    isOpen,
   })
 
   const mods = {
     [cls.opened]: isOpen,
-    [cls.isClosing]: isClosing
+    [cls.isClosing]: isClosing,
   }
 
   return (
     <Portal>
       <div className={classNames(cls.Modal, mods, [className])}>
         <Overlay onClick={close} />
-        <div className={cls.content}>
-          {children}
-        </div>
+        <div className={cls.content}>{children}</div>
       </div>
     </Portal>
   )
 }
 
 type ModalHeaderProps = {
-  children: ReactNode,
-  close: () => void,
+  children: ReactNode
+  close: () => void
 }
 
 //eslint-disable-next-line
@@ -62,9 +60,5 @@ Modal.Header = ({ children, close }: ModalHeaderProps) => {
 
 //eslint-disable-next-line
 Modal.Body = ({ children }: { children: ReactNode }) => {
-  return (
-    <div className={cls.body}>
-      {children}
-    </div>
-  )
+  return <div className={cls.body}>{children}</div>
 }

@@ -4,7 +4,7 @@ export type AuthRefreshResponse = {
 
 export type ErrorResponse = {
   errors: FieldErrors
-} 
+}
 
 type FieldErrors = {
   message: string
