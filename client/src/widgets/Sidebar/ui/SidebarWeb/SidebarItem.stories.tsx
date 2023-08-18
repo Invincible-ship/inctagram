@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { SidebarItem } from './Sidebar.Item'
+import { SidebarItem } from './SidebarItem'
 import HomeIcon from '../../../../../public/icons/home-outline.svg'
 import HomeIconActive from '../../../../../public/icons/home-active.svg'
 import CreateIcon from '../../../../../public/icons/create-outline.svg'
@@ -18,7 +18,7 @@ import LogOutIcon from '../../../../../public/icons/log-out.svg'
 import LogOutIconActive from '../../../../../public/icons/log-out-active.svg'
 
 const meta: Meta<typeof SidebarItem> = {
-  title: 'WIDGETS/SideBar/Item',
+  title: 'WIDGETS/SideBar/Items',
   tags: ['autodocs'],
   component: SidebarItem,
   args: {

@@ -1,11 +1,11 @@
 import { LanguageParams } from '@/shared/config/i18n/types'
-import { SidebarList } from '@/widgets/Sidebar'
+import { Sidebar } from '@/widgets/Sidebar'
 import React from 'react'
 
 const Page = () => {
   return (
     <>
-      <SidebarList />
+      <Sidebar />
     </>
   )
 }

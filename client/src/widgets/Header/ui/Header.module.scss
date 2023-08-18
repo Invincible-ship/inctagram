@@ -23,6 +23,12 @@
         display: inline-flex;
         align-items: center;
       }
+      .dropdown {
+        display: none;
+        @media (max-width: 768px) {
+          display: inline-block;
+        }
+      }
     }
   }
 }

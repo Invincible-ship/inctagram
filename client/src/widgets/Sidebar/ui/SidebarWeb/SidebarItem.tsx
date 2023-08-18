@@ -6,7 +6,7 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 
-type SidebarItemProps = {
+export type SidebarItemProps = {
   text: string
   icon: ReactNode
   iconActive?: ReactNode

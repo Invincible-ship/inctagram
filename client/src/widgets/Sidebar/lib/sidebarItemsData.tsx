@@ -17,7 +17,7 @@ import LogOutIconActive from '../../../../public/icons/log-out-active.svg'
 import SettingsIcon from '../../../../public/icons/settings-outline.svg'
 import SettingsIconActive from '../../../../public/icons/settings-active.svg'
 
-export const mobileMenuItems = [
+export const dropdownMenuItems = [
   { text: 'settings', icon: <SettingsIcon />, iconActive: <SettingsIconActive />, path: '/#' },
   {
     text: 'statistics',
@@ -28,7 +28,14 @@ export const mobileMenuItems = [
   { text: 'favorites', icon: <FavoritesIcon />, iconActive: <FavoritesIconActive />, path: '/#' },
   { text: 'logOut', icon: <LogOutIcon />, iconActive: <LogOutIconActive />, path: '/#' },
 ]
-export const mainItems = [
+export const mobileFooterItems = [
+  { icon: <HomeIcon />, iconActive: <HomeIconActive />, path: '/#' },
+  { icon: <CreateIcon />, iconActive: <CreateIconActive />, path: '/#' },
+  { icon: <ProfileIcon />, iconActive: <ProfileIconActive />, path: '/#' },
+  { icon: <MessengerIcon />, iconActive: <MessengerIconActive />, path: '/#' },
+  { icon: <SearchIcon />, iconActive: <SearchIconActive />, path: '/#' },
+]
+export const upBlockItems = [
   { text: 'home', icon: <HomeIcon />, iconActive: <HomeIconActive />, path: '/#' },
   { text: 'create', icon: <CreateIcon />, iconActive: <CreateIconActive />, path: '/#' },
   { text: 'profile', icon: <ProfileIcon />, iconActive: <ProfileIconActive />, path: '/#' },
@@ -44,6 +51,6 @@ export const midleBlockItems = [
   },
   { text: 'favorites', icon: <FavoritesIcon />, iconActive: <FavoritesIconActive />, path: '/#' },
 ]
-export const footerItems = [
+export const logoutBlockItems = [
   { text: 'logOut', icon: <LogOutIcon />, iconActive: <LogOutIconActive />, path: '/#' },
 ]

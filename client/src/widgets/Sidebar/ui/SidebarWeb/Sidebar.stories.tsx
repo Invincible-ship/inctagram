@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { SidebarList } from './Sidebar.List'
+import { Sidebar } from './Sidebar'
 
-const meta: Meta<typeof SidebarList> = {
-  title: 'WIDGETS/SideBar/List',
+const meta: Meta<typeof Sidebar> = {
+  title: 'WIDGETS/SideBar',
   tags: ['autodocs'],
-  component: SidebarList,
+  component: Sidebar,
   decorators: [
     Story => (
       <div style={{ height: '100vh' }}>
@@ -15,6 +15,6 @@ const meta: Meta<typeof SidebarList> = {
   ],
 }
 export default meta
-type Story = StoryObj<typeof SidebarList>
+type Story = StoryObj<typeof Sidebar>
 
-export const Sidebar: Story = {}
+export const SidebarDefault: Story = {}

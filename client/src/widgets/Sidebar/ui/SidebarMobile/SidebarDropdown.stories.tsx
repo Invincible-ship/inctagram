@@ -6,6 +6,13 @@ const meta: Meta<typeof SidebarDropdown> = {
   tags: ['autodocs'],
   component: SidebarDropdown,
   args: {},
+  decorators: [
+    Story => (
+      <div style={{ float: 'right' }}>
+        <Story />
+      </div>
+    ),
+  ],
 }
 
 export default meta

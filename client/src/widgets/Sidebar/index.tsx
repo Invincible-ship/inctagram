@@ -1,1 +1,1 @@
-export { SidebarList } from './ui/SidebarWeb/Sidebar.List'
+export { Sidebar } from './ui/SidebarWeb/Sidebar'

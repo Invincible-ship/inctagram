@@ -11,6 +11,13 @@ const meta: Meta<typeof DropdownMenu> = {
   tags: ['autodocs'],
   component: DropdownMenu,
   args: {},
+  decorators: [
+    Story => (
+      <div style={{ float: 'right' }}>
+        <Story />
+      </div>
+    ),
+  ],
 }
 
 export default meta
@@ -23,6 +30,6 @@ export const Default: Story = {
       { text: 'settings', icon: <SettingsIcon />, iconActive: <SettingsIconActive />, path: '/#' },
       { text: 'logOut', icon: <LogOutIcon />, iconActive: <LogOutIconActive />, path: '/#' },
     ],
-    t: () => 'tranlation text',
+    t: () => 'menu item text',
   },
 }
