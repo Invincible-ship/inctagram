@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic"
+import dynamic from 'next/dynamic'
 
 const SignIn = dynamic(() => import('@/features/auth/signIn'), { ssr: false })
 // import SignIn from "@/features/auth/signIn"
@@ -10,4 +10,3 @@ export const SignInPage = () => {
     </div>
   )
 }
-
