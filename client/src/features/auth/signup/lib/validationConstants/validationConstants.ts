@@ -29,9 +29,7 @@ export const formSchema = (t: TFunction<string, undefined>) =>
         .min(1, { message: t(passwordRequired) })
         .min(6, { message: t(passwordMinLength) })
         .max(20, { message: t(passwordMaxLength) }),
-      passwordConfirmation: z
-        .string()
-        .min(1, { message: t(passwordConfirmationRequired) }),
+      passwordConfirmation: z.string().min(1, { message: t(passwordConfirmationRequired) }),
     })
     .refine(data => data.password === data.passwordConfirmation, {
       path: ['passwordConfirmation'],

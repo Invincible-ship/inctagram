@@ -31,6 +31,9 @@
 # local env files
 /client/.env*.local
 
+# storybook
+/client/storybook-build
+/client/build-storybook.log
 
 # vercel
 /client/.vercel

@@ -9,6 +9,8 @@
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "test:unit": "jest --config ./config/jest/jest.config.mjs",
+    "test:ui": "npx chromatic",
+    "test:ui:ok": "npx chromatic --auto-accept-changes",
     "storybook": "storybook dev -p 6006 -c ./config/storybook",
     "build-storybook": "storybook build -c ./config/storybook"
   },
@@ -27,6 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "accept-language": "^3.0.18",
     "axios": "^1.4.0",
+    "chromatic": "^6.22.0",
     "encoding": "^0.1.13",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
@@ -60,7 +63,12 @@
     "@storybook/nextjs": "^7.0.24",
     "@storybook/react": "^7.0.24",
     "@storybook/testing-library": "^0.0.14-next.2",
+<<<<<<< HEAD
     "@types/react-google-recaptcha": "^2.1.5",
+=======
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+>>>>>>> 5b4f6b4c5d550a4335c15f9906fca772382a237b
     "eslint-plugin-storybook": "^0.6.12",
     "prettier": "^3.0.0",
     "storybook": "^7.0.24",
