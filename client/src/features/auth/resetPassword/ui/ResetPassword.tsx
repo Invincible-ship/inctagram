@@ -22,7 +22,7 @@ type ResetPassword = {
 
 export const ResetPassword: FC<ResetPassword> = ({lng}) => {
     const [resetPassword, { isLoading }] = useResetPasswordMutation()
-    const {t} = useClientTranslation(lng, 'resetPage')
+    const {t} = useClientTranslation("", 'resetPage')
     // const dispatch = useAppDispatch()
     const schema = formSchema(t)
 
