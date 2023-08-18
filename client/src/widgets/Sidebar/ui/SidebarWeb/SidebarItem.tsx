@@ -1,6 +1,6 @@
 'use client'
 import { FC, ReactNode } from 'react'
-import s from './sideBar.module.scss'
+import s from './sideBarItem.module.scss'
 import Link from 'next/link'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useClientTranslation } from '@/shared/config/i18n/client'

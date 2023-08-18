@@ -61,6 +61,7 @@ export const Sidebar = () => {
   )
 }
 
+//eslint-disable-next-line
 Sidebar.UpBlock = ({ mainActiveIndex, handleMainItemClick }: UpBlockAndFooterProps) => {
   return (
     <ul className={s.mainBlock}>
@@ -80,7 +81,7 @@ Sidebar.UpBlock = ({ mainActiveIndex, handleMainItemClick }: UpBlockAndFooterPro
     </ul>
   )
 }
-
+//eslint-disable-next-line
 Sidebar.MidleBlock = ({ midleBlockActiveIndex, handleMidleBlockItemClick }: MidleBlockProps) => {
   return (
     <ul className={s.midleBlock}>
@@ -99,7 +100,7 @@ Sidebar.MidleBlock = ({ midleBlockActiveIndex, handleMidleBlockItemClick }: Midl
     </ul>
   )
 }
-
+//eslint-disable-next-line
 Sidebar.LogoutBlock = ({ logoutActiveIndex, handleLogoutItemClick }: LogoutBlockrProps) => {
   return (
     <ul className={s.logout}>
@@ -118,7 +119,7 @@ Sidebar.LogoutBlock = ({ logoutActiveIndex, handleLogoutItemClick }: LogoutBlock
     </ul>
   )
 }
-
+//eslint-disable-next-line
 Sidebar.MobileFooter = ({ mainActiveIndex, handleMainItemClick }: UpBlockAndFooterProps) => {
   return (
     <>
@@ -126,6 +127,7 @@ Sidebar.MobileFooter = ({ mainActiveIndex, handleMainItemClick }: UpBlockAndFoot
         {mobileFooterItems.map((i, index) => {
           return (
             <SidebarFooterItem
+              key={index}
               icon={mainActiveIndex === index ? i.iconActive : i.icon}
               path={i.path}
               isActive={mainActiveIndex === index}
