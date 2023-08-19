@@ -5,9 +5,9 @@ export enum LanguageIds {
 
 export enum Namespaces {
   DEFAULT = 'translation',
-  SIGNUP = 'signup',
+  SIGNUP = 'signUp',
   SIGNOUT = 'signout',
-  SIGNIN = 'signin',
+  SIGNIN = 'signIn',
 }
 
 export type LanguageParams = { lng: LanguageIds }
