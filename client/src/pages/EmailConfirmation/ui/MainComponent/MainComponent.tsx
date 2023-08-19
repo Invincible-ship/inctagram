@@ -1,32 +1,24 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import s from './emailConfirmation.module.scss'
-import { Header } from './MainComponent.Header'
-import { TextContent } from './MainComponent.Body'
-import { ImageComponent } from './MainComponent.Image'
-import { ImageResendLink } from './ImageResendLink'
-import { ImageCongratulation } from './ImageCongratulation'
-import { ButtonComponent } from './MainComponent.Button'
+import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 
 export const MainComponent: FC<MainComponentProps> = ({
-  status,
-  email,
   title,
   text,
   buttonText,
   action,
+  icon,
+  t,
 }) => {
   return (
     <>
       <div className={s.emailConfiramtion}>
         <div className={s.wrapper}>
           <div className={s.body}>
-            <Header title={title} />
-            <TextContent text={text} />
-            <ImageComponent>
-              {email && <ImageResendLink />}
-              {status && <ImageCongratulation />}
-            </ImageComponent>
-            <ButtonComponent action={action} buttonText={buttonText} />
+            <Header title={t(title)} />
+            <TextContent text={t(text)} />
+            <ImageComponent icon={icon} />
+            <ButtonComponent action={action} buttonText={t(buttonText)} />
           </div>
         </div>
       </div>
@@ -41,4 +33,56 @@ type MainComponentProps = {
   text: string
   buttonText: string
   action: () => void
+  icon: ReactNode
+  t: (str: string) => string
+}
+
+type HeaderProps = {
+  title: string
+}
+const Header = ({ title }: HeaderProps) => {
+  return (
+    <>
+      <div className={s.title}>
+        <h3>{title}</h3>
+      </div>
+    </>
+  )
+}
+
+type TextContentProps = {
+  text: string
+}
+const TextContent = ({ text }: TextContentProps) => {
+  return (
+    <div className={s.content}>
+      <p>{text}</p>
+    </div>
+  )
+}
+
+type ImageComponentProps = {
+  icon: ReactNode
+}
+const ImageComponent: FC<ImageComponentProps> = ({ icon }) => {
+  return (
+    <>
+      <div className={s.image}>{icon}</div>
+    </>
+  )
+}
+
+type ButtonComponentProps = {
+  action: () => void
+  buttonText: string
+}
+
+const ButtonComponent: FC<ButtonComponentProps> = ({ action, buttonText }) => {
+  return (
+    <div className={s.buttons}>
+      <Button onClick={action} className={s.btn} theme={ButtonTheme.DEFAULT}>
+        {buttonText}
+      </Button>
+    </div>
+  )
 }

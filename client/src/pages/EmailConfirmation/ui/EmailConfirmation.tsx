@@ -13,7 +13,6 @@ import {
   EMAIL_WAS_USED,
   ERROR_MODAL_TEXT,
   ERROR_MODAL_TITLE,
-  LANGUAGE_DATABASE,
   LOGIN_PATH,
   MODAL_TEXT,
   MODAL_TITLE,
@@ -24,9 +23,12 @@ import {
   RESEND_LINK_TITLE,
   SUCCESS,
 } from '../lib/constants'
+import { Namespaces } from '@/shared/config/i18n/types'
+import ImageCongratulation from './../../../../public/icons/congratulation.svg'
+import ImageResendLink from './../../../../public/icons/resendLink.svg'
 
 export const EmailConfirmation: FC<LngProps> = ({ lng }) => {
-  const { t } = useClientTranslation('', LANGUAGE_DATABASE)
+  const { t } = useClientTranslation('', Namespaces.EMAIL_CONFIRMATION)
   const router = useRouter()
   const search = useSearchParams()
   const [status, setStatus] = useState<string>()
@@ -69,11 +71,12 @@ export const EmailConfirmation: FC<LngProps> = ({ lng }) => {
     return (
       <>
         <MainComponent
-          status={status}
+          t={t}
+          icon={<ImageCongratulation />}
           action={goToLogin}
-          title={t(CONGRATULATION_TITLE)}
-          text={t(CONGRATULATION_TEXT)}
-          buttonText={t(CONGRATULATION_BUTTON_TEXT)}
+          title={CONGRATULATION_TITLE}
+          text={CONGRATULATION_TEXT}
+          buttonText={CONGRATULATION_BUTTON_TEXT}
         />
         {status === EMAIL_WAS_USED && (
           <ModalWindow
@@ -90,11 +93,12 @@ export const EmailConfirmation: FC<LngProps> = ({ lng }) => {
     return (
       <>
         <MainComponent
-          email={email}
+          t={t}
+          icon={<ImageResendLink />}
           action={resendLink}
-          title={t(RESEND_LINK_TITLE)}
-          text={t(RESEND_LINK_TEXT)}
-          buttonText={t(RESEND_LINK_BUTTON_TEXT)}
+          title={RESEND_LINK_TITLE}
+          text={RESEND_LINK_TEXT}
+          buttonText={RESEND_LINK_BUTTON_TEXT}
         />
         {isSuccess && (
           <ModalWindow

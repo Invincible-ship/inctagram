@@ -3,7 +3,6 @@ export const EMAIL_WAS_USED = 'confirm'
 //====================================
 export const LOGIN_PATH = '/login'
 //====================================
-export const LANGUAGE_DATABASE = 'emailConfiramtion'
 export const CONGRATULATION_TITLE = 'congratulation.title'
 export const CONGRATULATION_TEXT = 'congratulation.text'
 export const CONGRATULATION_BUTTON_TEXT = 'congratulation.buttonText'

@@ -2,6 +2,7 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import { MainComponent } from './MainComponent'
+import ImageCongratulation from './../../../../../public/icons/congratulation.svg'
 
 describe('EmailConfirmation', () => {
   const mockProps = {
@@ -10,6 +11,7 @@ describe('EmailConfirmation', () => {
     buttonText: 'Go to Login',
     action: jest.fn(),
     status: 'some status',
+    icon: <ImageCongratulation data-testid="testid img" />,
   }
 
   it('renders the component with correct props', () => {
@@ -25,7 +27,7 @@ describe('EmailConfirmation', () => {
     expect(mockProps.action).toHaveBeenCalledTimes(1)
   })
   it('renders svg-image', () => {
-    const { getByRole } = render(<MainComponent {...mockProps} />)
-    expect(getByRole('img')).toBeInTheDocument()
+    const { getByTestId } = render(<MainComponent {...mockProps} />)
+    expect(getByTestId('testid img')).toBeInTheDocument()
   })
 })
