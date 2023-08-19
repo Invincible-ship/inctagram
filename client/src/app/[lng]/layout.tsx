@@ -6,10 +6,8 @@ import { LanguageParams } from '@/shared/config/i18n/types'
 import { Header } from '@/widgets/Header'
 import '@/shared/styles/index.scss'
 import '@/shared/styles/variables/common.scss'
-import { StoreProvider } from '@/providers/StoreProvider'
 import Loading from './loading'
 import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
-import { InitializeUser } from '@/providers/InitializeUser/InitializeUser'
 
 const inter = Inter({
   weight: ['400', '500', '700', '900'],
@@ -37,14 +35,10 @@ const RootLayout = async ({
       <head />
       <body className="app">
         <LanguageProvider lngId={lngId}>
-          <StoreProvider>
-            <InitializeUser>
-              <Suspense fallback={<Loading />}>
-                <Header />
-                {children}
-              </Suspense>
-            </InitializeUser>
-          </StoreProvider>
+          <Suspense fallback={<Loading />}>
+            <Header />
+            {children}
+          </Suspense>
         </LanguageProvider>
       </body>
     </html>
