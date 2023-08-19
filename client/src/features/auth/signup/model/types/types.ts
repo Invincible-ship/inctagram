@@ -11,6 +11,10 @@ export type RegisterResponseType = {
   createdAt: string
 }
 
+export type ISignUpSchema = {
+  isLoading: boolean
+}
+
 // ResendLink API types
 export type ResendLinkParamsType = {
   email: string

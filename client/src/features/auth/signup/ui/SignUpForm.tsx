@@ -7,19 +7,14 @@ import { Button } from '@/shared/ui/Button/Button'
 import '@/shared/styles/variables/common/_form.scss'
 
 export type SignUpFormProps = {
-  onSubmit: FormEventHandler<HTMLFormElement> | undefined;
-  isLoading: boolean;
-  t: (key: string) => string;
-  errors: Record<string, any>;
-  register: any;
-};
+  onSubmit: FormEventHandler<HTMLFormElement> | undefined
+  isLoading: boolean
+  t: (key: string) => string
+  errors: Record<string, any>
+  register: any
+}
 
-export const SignUpForm: FC<SignUpFormProps> = ({
-  onSubmit,
-  t,
-  errors,
-  register,
-}) => {
+export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const toggleShowPassword = () => {

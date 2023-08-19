@@ -1,44 +1,41 @@
-import { Button, ButtonTheme } from "@/shared/ui/Button/Button"
-import { Modal } from "@/shared/ui/Modal/Modal"
-import { FC } from "react"
+import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
+import { Modal } from '@/shared/ui/Modal/Modal'
+import { FC } from 'react'
+import Link from 'next/link'
+import { TFunction } from 'i18next'
+import { useSelector } from 'react-redux'
+import { emailSelector } from '@/entities/User/model/selectors/selectors'
 import cls from './SignOutModal.module.scss'
-import Link from "next/link"
-import { useClientTranslation } from "@/shared/config/i18n/client"
 
 type SignOutModalProps = {
-  lngId: string,
-  isOpen: boolean,
-  onClose: () => void,
+  isOpen: boolean
+  onClose: () => void
   signOut: () => void
+  t: TFunction<string, undefined>
 }
 
-export const SignOutModal: FC<SignOutModalProps> = (
-  { isOpen, onClose, signOut, lngId }
-) => {
-  const { t } = useClientTranslation(lngId, 'signout')
+export const SignOutModal: FC<SignOutModalProps> = ({ isOpen, onClose, signOut, t }) => {
+  const email = useSelector(emailSelector)
 
   return (
-    <Modal
-      className={cls.signoutModal}
-      isOpen={isOpen}
-      onClose={onClose}
-    >
-      <p>Are you shure?</p>
-      <Link href="/" replace>
-        <Button 
-          theme={ButtonTheme.DEFAULT}
-          onClick={signOut}
-        >
-          Yes
-        </Button>
-      </Link>
-      <Button 
-        theme={ButtonTheme.SECONDARY}
-        onClick={onClose}
-      >
-        No
-      </Button>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal.Header close={onClose}>{t('signout')}</Modal.Header>
+      <Modal.Body>
+        {/* FIXME: remove test email text */}
+        <p className={cls.text}>
+          {t('logout-text')} <b>&quot;{email ?? 'test@gmail.com'}</b>&quot;?
+        </p>
+        <div className={cls.btns}>
+          <Link href="/" replace>
+            <Button className={cls.btn} theme={ButtonTheme.OUTLINED} onClick={signOut}>
+              {t('yes')}
+            </Button>
+          </Link>
+          <Button className={cls.btn} theme={ButtonTheme.DEFAULT} onClick={onClose}>
+            {t('no')}
+          </Button>
+        </div>
+      </Modal.Body>
     </Modal>
   )
 }
- 

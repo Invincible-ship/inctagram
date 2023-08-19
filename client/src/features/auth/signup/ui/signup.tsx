@@ -1,38 +1,42 @@
 'use client'
-import { FC, useEffect, useState } from 'react'
+// import {useContext} from 'react'
+import { useEffect, useState } from 'react'
 import { SignUpForm } from './SignUpForm'
-import { SocialButtons } from '@/features/auth/signup/ui/SocialButtons'
+import { SocialButtons } from './SocialButtons'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import style from './signup.module.scss'
-import {
-  formSchema,
-  FormSchemaType,
-} from '@/features/auth/signup/lib/validationConstants/validationConstants'
+import { FormSchemaType, formSchema } from '../lib/validationConstants/validationConstants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
-import { signupThunk } from '@/features/auth/signup/model/signup'
+import { signupThunk } from '../model/signup'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { isLoadingSelector } from '../model/selectors/selectors'
+// import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { Namespaces } from '@/shared/config/i18n/types'
 import { ModalWindow } from './modalWindow/ModalWindow'
 
 const signUpModaTitle = 'signUpModal.title'
 const signUpModaText = 'signUpModal.text'
 
-export const SignUp = ({ lng }) => {
-  const isLoading = useSelector(state => state.signup.isLoading)
+export const SignUp = () => {
+  // const lngId = useContext(LanguageContext)
+  const isLoading = useSelector(isLoadingSelector)
   const dispatch = useAppDispatch()
-  const { t } = useClientTranslation('', 'signUp')
+  const { t } = useClientTranslation('', Namespaces.SIGNUP)
   const schema = formSchema(t)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
   } = useForm<FormSchemaType>({
+    reValidateMode: 'onBlur',
     resolver: zodResolver(schema),
   })
 
@@ -75,7 +79,7 @@ export const SignUp = ({ lng }) => {
           errors={errors}
           register={register}
         />
-        <span className={`info b-title bt14  align-center semibold`}>
+        <span className={'info b-title bt14  align-center semibold'}>
           {t('doYouHaveAnAccount')}
         </span>
         <Link
@@ -84,7 +88,7 @@ export const SignUp = ({ lng }) => {
         >
           <span>{t('signIn')}</span>
         </Link>
-        {isOpen && Object.keys(errors).length === 0 && lng && (
+        {isOpen && Object.keys(errors).length === 0 && (
           <ModalWindow
             text={t(signUpModaText)}
             title={t(signUpModaTitle)}

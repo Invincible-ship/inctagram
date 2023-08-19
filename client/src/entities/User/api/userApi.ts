@@ -25,7 +25,7 @@ export const userApi = rtkApi.injectEndpoints({
     signup: build.mutation<RegisterResponseType, RegisterParamsType>({
       query: data => ({
         method: 'POST',
-        url: `auth/registration`,
+        url: 'auth/registration',
         body: data,
       }),
     }),

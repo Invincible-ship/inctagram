@@ -2,20 +2,22 @@
   "extends": [
     "next",
     "plugin:storybook/recommended",
-    "plugin:storybook/recommended",
     "prettier"
   ],
   "plugins": [
     "react",
     "@typescript-eslint",
     "i18next",
-    "react-hooks"
+    "react-hooks",
+    "eslint-plugin-prettier"
   ],
   "rules": {
+    "prettier/prettier": "error",
     "semi": [
       2,
       "never"
     ],
+    "quotes": [2, "single"],
     "react/jsx-indent": [
       2,
       2,
