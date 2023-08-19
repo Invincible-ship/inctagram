@@ -1,26 +1,46 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { IUserSchema } from '../types/types'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { IUser, IUserSchema } from '../types/types'
 import { signInThunk } from '@/features/auth/signIn/model/signInThunk'
+import { initAuthData } from '../../services/initAuthData'
+import { LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 
 const initialState: IUserSchema = {
   _inited: false,
+  isLoading: false,
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setAuthData: (state, action) => {},
     clearAuthData: state => {
       state.authData = undefined
+      state._inited = false
+      localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY)
+      localStorage.removeItem(LOCAL_STORAGE_USER_ID_KEY)
     },
   },
   extraReducers: builder => {
-    builder.addCase(signInThunk.fulfilled, (state: IUserSchema, action) => {
-      state.authData = { isAuthorized: true, ...action.payload.user }
-    })
+    builder.addCase(signInThunk.fulfilled, (state, action) => {
+      state.authData = action.payload.user
+    }),
+      builder.addCase(initAuthData.pending, state => {
+        state.isLoading = true
+      }),
+      builder.addCase(
+        initAuthData.fulfilled,
+        (state, { payload }: PayloadAction<IUser | undefined>) => {
+          state.isLoading = false
+          state._inited = true
+          state.authData = payload
+        },
+      ),
+      builder.addCase(initAuthData.rejected, state => {
+        state.isLoading = false
+        state._inited = true
+      })
   },
 })
 
 export const userReducer = userSlice.reducer
-export const { setAuthData, clearAuthData } = userSlice.actions
+export const { clearAuthData } = userSlice.actions

@@ -7,7 +7,6 @@ import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 export const signoutThunk = createAsyncThunk<void, void, ThunkConfig<string>>(
   'auth/logout',
   async (_, { dispatch }) => {
-    localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY)
     dispatch(clearAuthData())
 
     try {

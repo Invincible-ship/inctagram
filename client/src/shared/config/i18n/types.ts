@@ -5,7 +5,7 @@ export enum LanguageIds {
 
 export enum Namespaces {
   DEFAULT = 'translation',
-  SIGNUP = 'signUp',
+  SIGNUP = 'signup',
   SIGNOUT = 'signout',
   SIGNIN = 'signin',
 }
