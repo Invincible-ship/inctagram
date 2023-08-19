@@ -14,4 +14,5 @@ export type IUser = {
 export type IUserSchema = {
   authData?: IUser
   _inited: boolean
+  isLoading: boolean
 }

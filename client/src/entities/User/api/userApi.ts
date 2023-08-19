@@ -28,8 +28,8 @@ export const userApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: [USER_TAG],
     }),
-    me: build.query<IUser, string>({
-      query: id => `user/${id}`,
+    me: build.query<IUser, void>({
+      query: () => 'user/me',
     }),
   }),
 })

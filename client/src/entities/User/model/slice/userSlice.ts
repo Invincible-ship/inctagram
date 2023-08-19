@@ -6,6 +6,7 @@ import { LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_USER_ID_KEY } from '@/shared/con
 
 const initialState: IUserSchema = {
   _inited: false,
+  isLoading: false,
 }
 
 const userSlice = createSlice({
@@ -14,6 +15,7 @@ const userSlice = createSlice({
   reducers: {
     clearAuthData: state => {
       state.authData = undefined
+      state._inited = false
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY)
       localStorage.removeItem(LOCAL_STORAGE_USER_ID_KEY)
     },
@@ -22,14 +24,19 @@ const userSlice = createSlice({
     builder.addCase(signInThunk.fulfilled, (state, action) => {
       state.authData = action.payload.user
     }),
+      builder.addCase(initAuthData.pending, state => {
+        state.isLoading = true
+      }),
       builder.addCase(
         initAuthData.fulfilled,
         (state, { payload }: PayloadAction<IUser | undefined>) => {
+          state.isLoading = false
           state._inited = true
           state.authData = payload
         },
       ),
       builder.addCase(initAuthData.rejected, state => {
+        state.isLoading = false
         state._inited = true
       })
   },

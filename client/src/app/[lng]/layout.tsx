@@ -37,14 +37,10 @@ const RootLayout = async ({
       <head />
       <body className="app">
         <LanguageProvider lngId={lngId}>
-          <StoreProvider>
-            <InitializeUser>
-              <Suspense fallback={<Loading />}>
-                <Header />
-                {children}
-              </Suspense>
-            </InitializeUser>
-          </StoreProvider>
+          <Suspense fallback={<Loading />}>
+            <Header />
+            {children}
+          </Suspense>
         </LanguageProvider>
       </body>
     </html>

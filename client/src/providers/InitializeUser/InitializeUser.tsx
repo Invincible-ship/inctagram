@@ -11,9 +11,9 @@ export const InitializeUser = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!inited) {
-      dispatch(initAuthData)
+      dispatch(initAuthData())
     }
-  }, [inited, dispatch])
+  }, [dispatch, inited])
 
   return children
 }

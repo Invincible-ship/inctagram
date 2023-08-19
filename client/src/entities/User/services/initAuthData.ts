@@ -10,13 +10,17 @@ export const initAuthData = createAsyncThunk<IUser | undefined, void, ThunkConfi
   async (_, thunkApi) => {
     const { dispatch, rejectWithValue } = thunkApi
 
+    console.log('Start init data')
+
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)
     const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY) as string
 
-    if (!token || !userId) rejectWithValue('User unauthorized')
+    if (!token || !userId) {
+      return rejectWithValue('User unauthorized')
+    }
 
     try {
-      const response = await dispatch(getUserDataByIdQuery(userId)).unwrap()
+      const response = await dispatch(getUserDataByIdQuery()).unwrap()
 
       return response
     } catch (err) {

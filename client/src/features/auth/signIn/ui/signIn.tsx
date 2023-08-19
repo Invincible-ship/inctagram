@@ -21,8 +21,10 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 // import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { errorSelector, isLoadingSelector } from '../model/selectors/selectors'
+import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
+import { Routes } from '@/shared/types/routes'
 
-export const SignIn: FC = () => {
+const SignIn: FC = () => {
   // const lngId = useContext(LanguageContext)
   const { t } = useClientTranslation('', Namespaces.SIGNIN)
   const schema = formSchema(t)
@@ -60,7 +62,7 @@ export const SignIn: FC = () => {
         />
         <span className={'info b-title bt16 align-center'}>{t('dontHaveAnAccount')}?</span>
         <Link
-          href={'/auth/registration'}
+          href={Routes.SIGNUP}
           className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
         >
           <span>{t('signUp')}</span>
@@ -69,3 +71,5 @@ export const SignIn: FC = () => {
     </div>
   )
 }
+
+export const SignInWithAuth = withAuth(SignIn, { routeRole: 'auth' })
