@@ -22,31 +22,10 @@ const baseQuery = fetchBaseQuery({
   },
 })
 
-<<<<<<< HEAD
-const baseQueryWithReauth: BaseQueryFn<
-    string | FetchArgs,
-    unknown,
-    FetchBaseQueryError
-    > = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions)
-
-  if (result.error && result.error.status === 401) {
-    const refreshResult = (await baseQuery(
-        '/refresh-token',
-        api,
-        extraOptions,
-    )) as { data: AuthRefreshResponse }
-
-    if (refreshResult.data) {
-      localStorage.setItem(
-          LOCAL_STORAGE_TOKEN_KEY,
-          refreshResult.data.accessToken,
-      )
-=======
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-  args,
-  api,
-  extraOptions,
+    args,
+    api,
+    extraOptions,
 ) => {
   let result = await baseQuery(args, api, extraOptions)
 
@@ -57,7 +36,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
     if (refreshResult.data) {
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, refreshResult.data.accessToken)
->>>>>>> 5b4f6b4c5d550a4335c15f9906fca772382a237b
       result = await baseQuery(args, api, extraOptions)
     } else {
       // api.dispatch(signoutThunk())
