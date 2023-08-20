@@ -142,13 +142,16 @@ Sidebar.MobileFooter = ({ mainActiveIndex, handleMainItemClick }: UpBlockAndFoot
 
 type UpBlockAndFooterProps = {
   mainActiveIndex: number | null
+  //eslint-disable-next-line
   handleMainItemClick: (index: number) => void
 }
 type MidleBlockProps = {
   midleBlockActiveIndex: number | null
+  //eslint-disable-next-line
   handleMidleBlockItemClick: (index: number) => void
 }
 type LogoutBlockrProps = {
   logoutActiveIndex: number | null
+  //eslint-disable-next-line
   handleLogoutItemClick: (index: number) => void
 }
