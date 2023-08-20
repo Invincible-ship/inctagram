@@ -7,7 +7,7 @@ export enum Namespaces {
   DEFAULT = 'translation',
   SIGNUP = 'signUp',
   SIGNOUT = 'signout',
-  SIGNIN = 'signin',
+  SIGNIN = 'signIn',
   SIDEBAR = 'sidebar',
 }
 

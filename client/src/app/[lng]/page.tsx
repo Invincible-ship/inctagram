@@ -1,5 +1,6 @@
-import { LanguageParams } from '@/shared/config/i18n/types'
-import { Sidebar } from '@/widgets/Sidebar'
+'use client'
+
+import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import React from 'react'
 
 const Page = () => {
@@ -10,4 +11,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default withAuth(Page, { routeRole: 'all' })

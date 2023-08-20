@@ -1,26 +1,4 @@
 {
-  "greeting": "Привет Мир!",
-  "signUp": {
-    "signUp": "Зарегистрироваться",
-    "userName": "Имя пользователя",
-    "email": "Email",
-    "password": "Пароль",
-    "errors": {
-      "userNameRequired": "Имя пользователя обязательно",
-      "userNameMaxLength": "Максимальная длина имени пользователя - 30 символов",
-      "emailInvalid": "Неверный формат email",
-      "emailRequired": "Email обязателен",
-      "passwordRequired": "Пароль обязателен",
-      "passwordMinLength": "Минимальная длина пароля - 6 символов",
-      "passwordMaxLength": "Максимальная длина пароля - 20 символов",
-      "passwordConfirmationRequired": "Подтверждение пароля обязательно",
-      "passwordsDoNotMatch": "Пароли не совпадают"
-    },
-    "passwordConfirmation": "Подтверждение пароля",
-    "forgotPassword": "Забыли пароль",
-    "doYouHaveAnAccount": "Уже есть аккаунт?",
-    "signIn": "Войти"
-  },
   "input": {
     "title": "Заголовок",
     "error": "Произошла ошибка"

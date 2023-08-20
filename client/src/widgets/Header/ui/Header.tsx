@@ -5,7 +5,7 @@ import { SuspenseLangSwitcher } from '@/features/LangSwitcher'
 import cls from './Header.module.scss'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { SidebarDropdown } from '@/widgets/Sidebar/ui/SidebarMobile/SidebarDropdown'
-// import { SignOut } from "@/features/auth/signout"
+// import { SignOut } from '@/features/auth/signout'
 
 type HeaderProps = {
   lngId?: LanguageIds

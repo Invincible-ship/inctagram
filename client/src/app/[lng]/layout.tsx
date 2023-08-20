@@ -6,7 +6,6 @@ import { LanguageParams } from '@/shared/config/i18n/types'
 import { Header } from '@/widgets/Header'
 import '@/shared/styles/index.scss'
 import '@/shared/styles/variables/common.scss'
-import { StoreProvider } from '@/providers/StoreProvider'
 import Loading from './loading'
 import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
 import { Sidebar } from '@/widgets/Sidebar'
@@ -37,15 +36,13 @@ const RootLayout = async ({
       <head />
       <body className="app">
         <LanguageProvider lngId={lngId}>
-          <StoreProvider>
-            <Suspense fallback={<Loading />}>
-              <Header />
-              <main className="main">
-                <Sidebar />
-                <section className="section">{children}</section>
-              </main>
-            </Suspense>
-          </StoreProvider>
+          <Suspense fallback={<Loading />}>
+            <Header />
+            <main className="main">
+              <Sidebar />
+              <section className="section">{children}</section>
+            </main>
+          </Suspense>
         </LanguageProvider>
       </body>
     </html>
