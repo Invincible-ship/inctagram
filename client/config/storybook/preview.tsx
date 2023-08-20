@@ -28,7 +28,7 @@ i18n.on('languageChanged', locale => {
 
 // Wrap your stories in the I18nextProvider component
 //! Story, context needs types ================
-const i18nextStoryDecorator = (Story: any, context: any) => {
+const I18nextStoryDecorator = (Story: any, context: any) => {
   const { locale } = context.globals
 
   // When the locale global changes
@@ -49,7 +49,7 @@ const i18nextStoryDecorator = (Story: any, context: any) => {
 }
 
 // export decorators for storybook to wrap your stories in
-export const decorators = [i18nextStoryDecorator]
+export const decorators = [I18nextStoryDecorator]
 
 const preview: Preview = {
   parameters: {
