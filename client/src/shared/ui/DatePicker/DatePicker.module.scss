@@ -1,0 +1,64 @@
+/* DatePicker.module.scss */
+
+.datePickerWrapper {
+  position: relative;
+}
+
+.customInputWrapper {
+  position: relative;
+}
+
+.dateInput {
+  color: #fff;
+  border: 1px solid #333;
+  padding: 8px 32px 8px 8px;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+  :active{
+    border-radius: 2px;
+    border: 1px solid var(--dark-color-300);
+    background: var(--dark-color-500);
+  }
+}
+
+.datePickerIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.datePickerCalendar {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 10px;
+}
+/* DatePicker.module.scss */
+
+.customHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.navigationButtons {
+  display: flex;
+  align-items: center;
+}
+
+.navigationButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  color: #fff;
+  border-radius: 24px;
+  background: var(--dark-100, #4C4C4C);
+  outline: none;
+  margin-left: 10px; /* Добавьте отступ между кнопками */
+}

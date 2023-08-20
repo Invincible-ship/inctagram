@@ -3,7 +3,7 @@
 
 //common
 @import "./variables/global.scss", "./variables/mixins.scss", "./variables/common.scss";
-
+@import "../../shared/ui/DatePicker/datepicker-styles.scss";
 // blocks/common
 @import "../ui/Input/Input.module", "../ui/Button/Button.module";
 
@@ -11,3 +11,4 @@
 
 // features
 @import "../../features/auth/signup/ui/signup.module";
+@import "../../features/profile/myprofile/ui/myprofile.module";

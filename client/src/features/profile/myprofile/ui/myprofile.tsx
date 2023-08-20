@@ -1,3 +1,4 @@
+"use client"
 import s from './myprofile.module.scss'
 import Avatar from "@/shared/ui/Avatar/Avatar"
 import {Button, ButtonTheme} from "@/shared/ui/Button/Button"
@@ -6,8 +7,11 @@ import "@/shared/styles/variables/common/_form.scss"
 import Link from "next/link"
 import ImageComponent from "@/shared/ui/ImageComponent/ImageComponent"
 import man from "@/shared/assets/images/man.png"
+import {useRouter} from "next/navigation"
+import '@/shared/styles/variables/common.scss'
 
 export const MyProfile = () => {
+    const router = useRouter()
     const imageSources = [man, man, man, man]
     return (
         <div className={s.container}>
@@ -27,7 +31,7 @@ export const MyProfile = () => {
                         <div>
                             <div className={`${s.wrapper} ${s.centered}`}>
                                 <div className={s.urlProfile}>URLProfile</div>
-                                <Button theme={ButtonTheme.SECONDARY} style={{width: '123px'}}>Profile settings</Button>
+                                <Button theme={ButtonTheme.SECONDARY} onClick={() => router.push('/profile/createprofile')}>Profile settings</Button>
                             </div>
                             <div className={s.followStatsContainer}>
                                 <div className={s.followStat}>
