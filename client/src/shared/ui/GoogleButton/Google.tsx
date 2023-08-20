@@ -1,14 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 const Google = () => {
   return (
-    <svg
-      width="36"
-      height="36"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_3663_9513)">
         <path
           d="M7.8993 14.6468C9.29818 10.4079 13.2817 7.36364 18 7.36364C20.5364 7.36364 22.8273 8.26364 24.6273 9.73636L29.8636 4.5C26.6727 1.71818 22.5818 0 18 0C10.9051 0 4.79662 4.04745 1.85999 9.97504L7.8993 14.6468Z"
@@ -33,7 +27,7 @@ const Google = () => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
 
-export default Google;
+export default Google

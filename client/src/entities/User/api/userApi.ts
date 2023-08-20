@@ -1,10 +1,8 @@
-import { rtkApi } from "@/shared/api/rtkApi"
-import { USER_TAG } from "@/shared/const/rtk"
-import {LoginRequestType, LoginResponseType} from "@/features/auth/signIn/model/types/types"
-import {
-  RegisterParamsType,
-  RegisterResponseType,
-} from '@/features/auth/signup/model/types/types';
+import { rtkApi } from '@/shared/api/rtkApi'
+import { USER_TAG } from '@/shared/const/rtk'
+import { LoginRequestType, LoginResponseType } from '@/features/auth/signIn/model/types/types'
+import { RegisterParamsType, RegisterResponseType } from '@/features/auth/signup/model/types/types'
+import { IUser } from '@/entities/User/model/types/types'
 
 export const userApi = rtkApi.injectEndpoints({
   endpoints: build => ({
@@ -18,17 +16,22 @@ export const userApi = rtkApi.injectEndpoints({
     signup: build.mutation<RegisterResponseType, RegisterParamsType>({
       query: data => ({
         method: 'POST',
-        url: `auth/registration`,
+        url: 'auth/registration',
         body: data,
       }),
     }),
     signIn: build.mutation<LoginResponseType, LoginRequestType>({
-      query: (data) => ({
+      query: data => ({
         url: 'auth/login',
         method: 'POST',
-        body: data
+        body: data,
       }),
       invalidatesTags: [USER_TAG],
-    })
+    }),
+    me: build.query<IUser, void>({
+      query: () => 'user/me',
+    }),
   }),
-});
+})
+
+export const getUserDataByIdQuery = userApi.endpoints.me.initiate

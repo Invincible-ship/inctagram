@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button, ButtonTheme } from "./Button"
+import { Button, ButtonTheme } from './Button'
 
 const meta: Meta<typeof Button> = {
-  title: "shared/Button",
+  title: 'shared/Button',
   component: Button,
 }
 
 export default meta
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof Button>
 
 export const Default: Story = {
   render: () => <Button theme={ButtonTheme.DEFAULT}>Button</Button>,
