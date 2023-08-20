@@ -9,6 +9,7 @@ import '@/shared/styles/variables/common.scss'
 import { StoreProvider } from '@/providers/StoreProvider'
 import Loading from './loading'
 import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
+import { Sidebar } from '@/widgets/Sidebar'
 
 const inter = Inter({
   weight: ['400', '500', '700', '900'],
@@ -39,7 +40,10 @@ const RootLayout = async ({
           <StoreProvider>
             <Suspense fallback={<Loading />}>
               <Header />
-              {children}
+              <main className="main">
+                <Sidebar />
+                <section className="section">{children}</section>
+              </main>
             </Suspense>
           </StoreProvider>
         </LanguageProvider>

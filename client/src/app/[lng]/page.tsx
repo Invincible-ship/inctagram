@@ -5,7 +5,7 @@ import React from 'react'
 const Page = () => {
   return (
     <>
-      <Sidebar />
+      <div>hello world</div>
     </>
   )
 }

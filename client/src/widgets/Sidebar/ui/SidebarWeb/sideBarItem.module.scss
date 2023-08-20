@@ -1,5 +1,6 @@
 .item {
   list-style-type: none;
+  width: 100%;
 }
 
 .link {
@@ -15,7 +16,7 @@
   &:focus-visible {
     outline: none;
     border-radius: 2px;
-    border: 2px solid var(--accent-color-700);
+    outline: 2px solid var(--accent-color-700);
   }
   &[disabled='true'] {
     color: var(--dark-color-100);
