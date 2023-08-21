@@ -1,4 +1,4 @@
-import { getUserDataByIdQuery } from '../api/userApi'
+import { getUserDataByTokenQuery } from '../api/userApi'
 import { IUser } from '../model/types/types'
 import { ThunkConfig } from '@/providers/StoreProvider'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
@@ -20,7 +20,7 @@ export const initAuthData = createAsyncThunk<IUser | undefined, void, ThunkConfi
     }
 
     try {
-      const response = await dispatch(getUserDataByIdQuery()).unwrap()
+      const response = await dispatch(getUserDataByTokenQuery()).unwrap()
 
       return response
     } catch (err) {
