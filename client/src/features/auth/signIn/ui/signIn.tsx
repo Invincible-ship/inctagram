@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import Link from 'next/link'
 import style from '@/features/auth/signup/ui/signup.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
@@ -18,7 +18,7 @@ import { SignInForm } from './SignInForm'
 import { useSelector } from 'react-redux'
 import { signInThunk } from '../model/signInThunk'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+// import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { Routes } from '@/shared/types/routes'
@@ -26,9 +26,9 @@ import { getIsLoading } from '../model/selectors/getIsLoading'
 import { getError } from '../model/selectors/getError'
 
 export const SignIn: FC = () => {
-  const lngId = useContext(LanguageContext)
+  // const lngId = useContext(LanguageContext)
   // FIXME: correct translation with lngId so avoid only CSR rendering
-  const { t } = useClientTranslation(lngId, Namespaces.SIGNIN)
+  const { t } = useClientTranslation('', Namespaces.SIGNIN)
   const schema = formSchema(t)
   const isLoading = useSelector(getIsLoading)
   const error = useSelector(getError)
@@ -64,7 +64,7 @@ export const SignIn: FC = () => {
         />
         <span className={'info b-title bt16 align-center'}>{t('dontHaveAnAccount')}?</span>
         <Link
-          href={'registration'}
+          href={Routes.SIGNUP}
           className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
         >
           <span>{t('signUp')}</span>

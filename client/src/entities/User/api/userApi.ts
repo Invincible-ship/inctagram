@@ -34,4 +34,4 @@ export const userApi = rtkApi.injectEndpoints({
   }),
 })
 
-export const getUserDataByTokenQuery = userApi.endpoints.me.initiate
+export const getUserDataByIdQuery = userApi.endpoints.me.initiate

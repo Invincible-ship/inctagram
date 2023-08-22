@@ -1,15 +1,13 @@
-'use client'
-
 import { ReactNode, Suspense } from 'react'
+import { languages } from '@/shared/config/i18n/settings'
 import { dir } from 'i18next'
 import { Inter } from 'next/font/google'
-import { LanguageIds } from '@/shared/config/i18n/types'
+import { LanguageParams } from '@/shared/config/i18n/types'
 import { Header } from '@/widgets/Header'
 import '@/shared/styles/index.scss'
 import '@/shared/styles/variables/common.scss'
 import Loading from './loading'
 import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
-import { useParams } from 'next/navigation'
 import { Sidebar } from '@/widgets/Sidebar'
 
 const inter = Inter({
@@ -17,14 +15,27 @@ const inter = Inter({
   subsets: ['latin', 'cyrillic'],
 })
 
-const RootLayout = ({ children }: { children: ReactNode }) => {
-  const { lng: lngId } = useParams()
+export const metadata = {
+  title: 'Inctagram | Social Media Service',
+  description: 'Chat and share ',
+}
 
+export async function generateStaticParams() {
+  return languages.map(lngId => ({ lngId }))
+}
+
+const RootLayout = async ({
+  children,
+  params: { lng: lngId },
+}: {
+  children: ReactNode
+  params: LanguageParams
+}) => {
   return (
     <html lang={lngId} dir={dir(lngId)} className={inter.className}>
       <head />
       <body className="app">
-        <LanguageProvider lngId={lngId as LanguageIds}>
+        <LanguageProvider lngId={lngId}>
           <Suspense fallback={<Loading />}>
             <Header />
             <main className="main">
