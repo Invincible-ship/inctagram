@@ -35,24 +35,7 @@ export const ResetPassword = () => {
     resolver: zodResolver(schema),
   })
 
-  const onSubmit: SubmitHandler<FormSchemaType> = async data => {
-    try {
-      // @ts-ignore
-      await ResetPassword(data).unwrap()
-    } catch (error) {
-      // @ts-ignore
-      if (error.data && error.data.errors) {
-        for (const err of error.data.errors) {
-          setError(err.field, {
-            type: 'server',
-            message: err.message,
-          })
-        }
-      } else {
-        console.error(error)
-      }
-    }
-  }
+  const onSubmit: SubmitHandler<FormSchemaType> = async data => {}
 
   if (isLoading) {
     return <Preloader />

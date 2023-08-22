@@ -7,7 +7,7 @@ import '@/shared/styles/variables/common/_form.scss'
 import Link from 'next/link'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import ReCAPTCHA from 'react-google-recaptcha'
-import {Routes} from "@/shared/types/routes";
+import { Routes } from '@/shared/types/routes'
 
 export type ForgotPasswordFormProps = {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined
@@ -19,7 +19,6 @@ export type ForgotPasswordFormProps = {
   isActive: boolean
   setIsActive: boolean
   recaptcha_response: string
-  token: string
 }
 
 // function onChange(token) {
@@ -34,7 +33,6 @@ export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
   isActive,
   recaptcha_response,
   verifyCaptcha,
-  token,
 }) => {
   return (
     <form className={'form-style'} onSubmit={onSubmit}>
@@ -56,7 +54,7 @@ export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
       <Button type="submit" className={'styled-btn styled-btn-1'}>
         {t('sendLink')}
       </Button>
-      <Link href={Routes.SIGNIN} className="b-title bt16 semibold link-registration align-center">
+      <Link href={Routes.SIGNIN} className="b-title bt16 semibold link-forgot align-center">
         <span>{t('BackToSignIn')}</span>
       </Link>
 

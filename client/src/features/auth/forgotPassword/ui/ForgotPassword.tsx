@@ -32,10 +32,9 @@ export const ForgotPassword = () => {
   })
 
   const [isActive, setIsActive] = useState(false)
-  // @ts-ignore
-  const verifyCaptcha = token => {
+  const verifyCaptcha = (token: string) => {
     recaptcha_response = token
-    // @ts-ignore
+    //@ts-ignore
     document.getElementById('g-recaptcha-error').innerHTML = ''
   }
 
@@ -43,7 +42,7 @@ export const ForgotPassword = () => {
 
   const onSubmit: SubmitHandler<FormSchemaType> = async data => {
     if (recaptcha_response.length == 0) {
-      // @ts-ignore
+      //@ts-ignore
       document.getElementById('g-recaptcha-error').innerHTML =
         '<span style="color:red;">This field is required.</span>'
       return false
@@ -60,7 +59,6 @@ export const ForgotPassword = () => {
     <div className={'form'}>
       <div className="form-wrapper auth-form">
         <div className={'title b-title bt26 semibold align-center'}>{t('mainTitle')}</div>
-        {/*@ts-ignore*/}
         <ForgotPasswordForm
           onSubmit={handleSubmit(onSubmit)}
           verifyCaptcha={verifyCaptcha}

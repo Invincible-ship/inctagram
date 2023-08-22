@@ -50,7 +50,7 @@ export const ResetPasswordForm: FC<resetPasswordFormProps> = ({
         error={errors.passwordConfirmation}
       />
       <span className={'info b-title bt14  align-start semibold'}>{t('infoReset')}</span>
-      <Button type="submit" className={'styled-btn styled-btn-1'}>
+      <Button type="submit" className={'styled-btn styled-btn-1 reset-btn'}>
         {t('CreateNewPasswordReset')}
       </Button>
     </form>

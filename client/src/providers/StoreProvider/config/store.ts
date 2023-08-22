@@ -5,6 +5,8 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
 import { userReducer } from '@/entities/User'
 import { signInReducer } from '@/features/auth/signIn'
 import { signupReducer } from '@/features/auth/signup'
+import { resetPasswordReducer } from '@/features/auth/resetPassword'
+import { forgotPasswordReducer } from '@/features/auth/forgotPassword'
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducer: ReducersMapObject<StateSchema> = {
@@ -13,6 +15,8 @@ export function createReduxStore(initialState?: StateSchema) {
     user: userReducer,
     signIn: signInReducer,
     signup: signupReducer,
+    resetPassword: resetPasswordReducer,
+    forgotPassword: forgotPasswordReducer,
   }
 
   const extraArg: ThunkExtraArg = {

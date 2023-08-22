@@ -11,8 +11,8 @@ const slice = createSlice({
   name: 'signIn',
   initialState,
   reducers: {
-    setDisableError(state) {
-      state.error = false
+    dummyReducer: state => {
+      return
     },
   },
   extraReducers: builder => {
@@ -31,4 +31,5 @@ const slice = createSlice({
 })
 
 export const signInReducer = slice.reducer
+//@ts-ignore
 export const { setDisableError } = slice.actions

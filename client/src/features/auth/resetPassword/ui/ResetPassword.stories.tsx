@@ -1,7 +1,7 @@
 import React from 'react'
 import { Meta, StoryObj } from '@storybook/react'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
-import { ResetPassword } from '@/features/auth/resetPassword'
+import { ResetPassword } from './ResetPassword'
 
 const meta: Meta<typeof ResetPassword> = {
   title: 'Components/ResetPassword',
