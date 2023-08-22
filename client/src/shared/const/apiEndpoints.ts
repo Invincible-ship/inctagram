@@ -1,0 +1,6 @@
+export const SIGN_OUT_ENDPOINT = 'auth/logout'
+export const SIGN_UP_ENDPOINT = 'auth/registration'
+export const SIGN_IN_ENDPOINT = 'auth/login'
+export const ME_ENDPOINT = 'user/me'
+export const SIGN_IN_WITH_GOOGLE = 'auth/google-registration'
+export const GOOGLE_ENDPOINT = 'https://accounts.google.com/o/oauth2/v2/auth'
