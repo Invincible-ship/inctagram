@@ -1,5 +1,5 @@
 'use client'
-// import {useContext} from 'react'
+import { useContext } from 'react'
 import { SignUpForm } from './SignUpForm'
 import { SocialButtons } from './SocialButtons'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -14,18 +14,16 @@ import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { signupThunk } from '../model/signup'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-// import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
-import { Routes } from '@/shared/types/routes'
 import { getIsLoading } from '../model/selectors/getIsLoading'
 
 export const SignUp = () => {
-  // const lngId = useContext(LanguageContext)
+  const lngId = useContext(LanguageContext)
   const isLoading = useSelector(getIsLoading)
   const dispatch = useAppDispatch()
-  // FIXME: correct translation with lngId so avoid only CSR rendering
-  const { t } = useClientTranslation('', Namespaces.SIGNUP)
+  const { t } = useClientTranslation(lngId, Namespaces.SIGNUP)
   const schema = formSchema(t)
 
   const {
@@ -62,7 +60,7 @@ export const SignUp = () => {
           {t('doYouHaveAnAccount')}
         </span>
         <Link
-          href={Routes.SIGNIN}
+          href={'login'}
           className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
         >
           <span>{t('signIn')}</span>
