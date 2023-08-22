@@ -1,7 +1,25 @@
 @import "../mixins";
 
+.field.input-field {
+  width: 100%;
+}
+.signup_passwordWrapper__Byu65{
+  width: 100%;
+}
+
+.signup_eye__PsHhz {
+  top:74% !important;
+}
+
+.Input_inputWrapper__Wdr2V {
+  margin-top: 25px !important;
+}
 
 .form-style {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   .f-item {
     position: relative;
     display: flex;

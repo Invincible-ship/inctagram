@@ -3,6 +3,8 @@ import { AxiosInstance } from 'axios'
 import { ISignUpSchema } from '@/features/auth/signup'
 import { IUserSchema } from '@/entities/User'
 import { ISignInSchema } from '@/features/auth/signIn'
+import { ForgotPasswordSchema } from '@/features/auth/forgotPassword'
+import { ResetPasswordSchema } from '@/features/auth/resetPassword/model/types/types'
 
 export type StateSchema = {
   // Остальные типы ваших редьюсеров
@@ -10,6 +12,8 @@ export type StateSchema = {
   user: IUserSchema
   signIn: ISignInSchema
   signup: ISignUpSchema
+  forgotPassword: ForgotPasswordSchema
+  resetPassword: ResetPasswordSchema
 }
 
 export type ThunkExtraArg = {

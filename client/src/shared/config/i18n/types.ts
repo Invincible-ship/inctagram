@@ -8,6 +8,7 @@ export enum Namespaces {
   SIGNUP = 'signUp',
   SIGNOUT = 'signout',
   SIGNIN = 'signIn',
+  REQOVERY = 'reqovery',
 }
 
 export type LanguageParams = { lng: LanguageIds }

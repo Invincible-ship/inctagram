@@ -8,6 +8,7 @@ import { setDisableError } from '@/features/auth/signIn/model/slice/signInSlice'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { Routes } from '@/shared/types/routes';
 
 export type SignInFormProps = {
   errorLogin?: string
@@ -50,7 +51,7 @@ export const SignInForm: FC<SignInFormProps> = ({ onSubmit, t, errors, register,
       />
       <div className={s.error}>{errorLogin}</div>
       <div className={s.forgotPassword}>
-        <Link className={s.forgotPasswordLink} href={'/forgotPassword'}>
+        <Link className={s.forgotPasswordLink} href={Routes.FORGOTPASSWORD}>
           {t('forgotPassword')}
         </Link>
       </div>
