@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkclient=self.webpackChunkclient||[]).push([[779],{"./public/locales/en/signout.json":module=>{module.exports=JSON.parse('{"signout":"Log Out","logout-text":"Are you really want to log out of your account","yes":"Yes","no":"No"}')}}]);

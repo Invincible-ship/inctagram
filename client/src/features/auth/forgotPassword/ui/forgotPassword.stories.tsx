@@ -12,14 +12,6 @@ const meta: Meta<typeof ForgotPassword> = {
 export default meta
 type Story = StoryObj<typeof ForgotPassword>
 
-export const Default: Story = {
-  render: () => <ForgotPassword />,
-}
-
-export const Loading: Story = {
-  render: () => <ForgotPassword />,
-}
-
-export const Error: Story = {
+export const ForgotPasswordComponent: Story = {
   render: () => <ForgotPassword />,
 }

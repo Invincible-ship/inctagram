@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkclient=self.webpackChunkclient||[]).push([[447],{"./public/locales/en/translation.json":module=>{module.exports=JSON.parse('{"input":{"title":"Title","error":"Error occurred"}}')}}]);

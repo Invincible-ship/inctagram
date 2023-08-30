@@ -41,7 +41,7 @@ export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
         type={'email'}
         placeholder={t('email')}
         title={t('email')}
-        register={...register('email')}
+        register={register('email')}
         error={errors.email}
       />
 
