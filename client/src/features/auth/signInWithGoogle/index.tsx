@@ -1,2 +1,1 @@
-export { signInWithGoogle } from './model/signInWithGoogle'
-export { GoogleButton } from './ui/GoogleButton'
+export { GoogleButton } from './ui/GoogleButton/GoogleButton'

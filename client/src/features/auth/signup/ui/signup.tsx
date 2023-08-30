@@ -18,6 +18,7 @@ import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { getIsLoading } from '../model/selectors/getIsLoading'
+import { Routes } from '@/shared/types/routes'
 
 export const SignUp = () => {
   const lngId = useContext(LanguageContext)
@@ -60,7 +61,7 @@ export const SignUp = () => {
           {t('doYouHaveAnAccount')}
         </span>
         <Link
-          href={'login'}
+          href={`/${lngId}${Routes.SIGNIN}`}
           className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
         >
           <span>{t('signIn')}</span>
