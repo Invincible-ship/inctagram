@@ -33,7 +33,7 @@ export const ResetPasswordForm: FC<resetPasswordFormProps> = ({
     <form className={'form-style'} onSubmit={onSubmit}>
       <PasswordWrapper
         id={'password'}
-        placeholder={t('inputTitleNewPassword')}
+        placeholder={'******************'}
         type={showPassword ? 'text' : 'password'}
         title={t('inputTitleNewPassword')}
         register={register('password')}
@@ -42,7 +42,7 @@ export const ResetPasswordForm: FC<resetPasswordFormProps> = ({
       />
       <PasswordWrapper
         id={'passwordConfirmation'}
-        placeholder={t('inputTitleConfirmPassword')}
+        placeholder={'******************'}
         type={showConfirmPassword ? 'text' : 'password'}
         title={t('inputTitleConfirmPassword')}
         register={register('passwordConfirmation')}
