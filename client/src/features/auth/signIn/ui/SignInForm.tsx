@@ -8,7 +8,7 @@ import { setDisableError } from '@/features/auth/signIn/model/slice/signInSlice'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { Routes } from '@/shared/types/routes';
+import { Routes } from '@/shared/types/routes'
 
 export type SignInFormProps = {
   errorLogin?: string
