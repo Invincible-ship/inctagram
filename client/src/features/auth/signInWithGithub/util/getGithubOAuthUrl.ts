@@ -1,10 +1,14 @@
-import { GITHUB_ENDPOINT, SIGN_IN_WITH_GITHUB } from '@/shared/const/apiEndpoints'
+import { LanguageIds } from '@/shared/config/i18n/types'
+import { GITHUB_ENDPOINT } from '@/shared/const/apiEndpoints'
+import { Routes } from '@/shared/types/routes'
 
-export const getGithubOAuthUrl = (): string => {
-  const redirect_uri = `${process.env.NEXT_PUBLIC_API}${SIGN_IN_WITH_GITHUB}`
+export const getGithubOAuthUrl = (lngId: LanguageIds): string => {
+  const baseClientUrl = __IS_DEV__
+    ? process.env.NEXT_PUBLIC_DEVELOPMENT_CLIENT_URL
+    : process.env.NEXT_PUBLIC_PRODUCTION_CLIENT_URL
+
+  const redirect_uri = `${baseClientUrl}${lngId}/${Routes.GITHUB_CLIENT}`
   const client_id = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID as string
-
-  console.log(redirect_uri)
 
   const qs = new URLSearchParams({
     client_id,

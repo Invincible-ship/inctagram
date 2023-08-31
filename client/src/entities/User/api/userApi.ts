@@ -6,11 +6,13 @@ import { IUser } from '@/entities/User/model/types/types'
 import {
   ME_ENDPOINT,
   SIGN_IN_ENDPOINT,
+  SIGN_IN_WITH_GITHUB_ENDPOINT,
   SIGN_IN_WITH_GOOGLE_ENDPOINT,
   SIGN_OUT_ENDPOINT,
   SIGN_UP_ENDPOINT,
 } from '@/shared/const/apiEndpoints'
 import { TGoogleLoginResponse } from '@/features/auth/signInWithGoogle/model/types'
+import { TGithubLoginResponse } from '@/features/auth/signInWithGithub'
 
 export const userApi = rtkApi.injectEndpoints({
   endpoints: build => ({
@@ -42,6 +44,12 @@ export const userApi = rtkApi.injectEndpoints({
         body: code,
       }),
     }),
+    signInWithGithub: build.query<TGithubLoginResponse, string>({
+      query: code => ({
+        url: SIGN_IN_WITH_GITHUB_ENDPOINT,
+        body: code,
+      }),
+    }),
     me: build.query<IUser, void>({
       query: () => ME_ENDPOINT,
       providesTags: [USER_TAG],
@@ -51,3 +59,4 @@ export const userApi = rtkApi.injectEndpoints({
 
 export const getUserDataByTokenQuery = userApi.endpoints.me.initiate
 export const getUserDataByGoogleQuery = userApi.endpoints.signInWithGoogle.initiate
+export const getUserDataByGithubQuery = userApi.endpoints.signInWithGithub.initiate
