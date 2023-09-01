@@ -41,13 +41,13 @@ export const userApi = rtkApi.injectEndpoints({
     signInWithGoogle: build.query<TGoogleLoginResponse, string>({
       query: code => ({
         url: SIGN_IN_WITH_GOOGLE_ENDPOINT,
-        body: code,
+        params: { code },
       }),
     }),
     signInWithGithub: build.query<TGithubLoginResponse, string>({
       query: code => ({
         url: SIGN_IN_WITH_GITHUB_ENDPOINT,
-        body: code,
+        params: { code },
       }),
     }),
     me: build.query<IUser, void>({
