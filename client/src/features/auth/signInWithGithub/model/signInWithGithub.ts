@@ -9,7 +9,7 @@ import { redirect } from 'next/navigation'
 
 export const signInWithGithub = createAsyncThunk<void, TGithubLoginBody, ThunkConfig<string>>(
   'auth/signInWithGithub',
-  async ({ code, lngId }, { dispatch, rejectWithValue }) => {
+  async ({ code, lngId, router }, { dispatch, rejectWithValue }) => {
     try {
       const response = await dispatch(getUserDataByGithubQuery(code)).unwrap()
 
@@ -21,11 +21,12 @@ export const signInWithGithub = createAsyncThunk<void, TGithubLoginBody, ThunkCo
           : redirect(`${lngId}${Routes.PROFILE}`, RedirectType.replace)
       }
     } catch (err) {
-      console.warn('Error in github authorization request!')
+      console.warn(err)
 
       if (isFetchBaseQueryError(err)) {
         if (err.status == 400) {
-          redirect(`/${lngId}${Routes.MERGE}`, RedirectType.replace)
+          // redirect(`/${lngId}${Routes.MERGE}`, RedirectType.replace)
+          return router.replace(`/${lngId}${Routes.MERGE}`)
         }
       }
 

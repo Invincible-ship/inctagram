@@ -1,8 +1,9 @@
 'use client'
 
-import Github from '@/shared/assets/icons/github.svg'
+import githubSrc from '@/shared/assets/icons/github.svg?url'
 import cls from './GithubButton.module.scss'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getGithubOAuthUrl } from '../util/getGithubOAuthUrl'
 import { useContext } from 'react'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
@@ -13,7 +14,7 @@ export const GithubButton = () => {
 
   return (
     <Link href={getGithubOAuthUrl(lngId)} className={cls['icon-wrapper']}>
-      <Github />
+      <Image src={githubSrc} alt="github icon" />
     </Link>
   )
 }

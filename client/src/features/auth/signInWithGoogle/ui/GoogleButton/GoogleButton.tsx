@@ -1,6 +1,7 @@
 'use client'
 
-import Google from '@/shared/assets/icons/google.svg'
+import googleUrl from '@/shared/assets/icons/google.svg?url'
+import Image from 'next/image'
 import cls from './GoogleButton.module.scss'
 import { getGoogleOAuthUrl } from '../../util/getGoogleOAuthUrl'
 import Link from 'next/link'
@@ -13,7 +14,8 @@ export const GoogleButton = () => {
 
   return (
     <Link href={getGoogleOAuthUrl(lngId)} className={cls['icon-wrapper']}>
-      <Google />
+      {/* <Google /> */}
+      <Image src={googleUrl} alt="google icon" />
     </Link>
   )
 }

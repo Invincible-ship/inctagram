@@ -9,7 +9,9 @@ import { redirect } from 'next/navigation'
 
 export const signInWithGoogle = createAsyncThunk<void, TGoogleLoginBody, ThunkConfig<string>>(
   'auth/signInWithGoogle',
-  async ({ code, lngId }, { dispatch, rejectWithValue }) => {
+  async ({ code, lngId, router }, { dispatch, rejectWithValue }) => {
+    console.log('Code: ', code)
+
     try {
       const response = await dispatch(getUserDataByGoogleQuery(code)).unwrap()
 
@@ -21,11 +23,12 @@ export const signInWithGoogle = createAsyncThunk<void, TGoogleLoginBody, ThunkCo
           : redirect(`${lngId}${Routes.PROFILE}`, RedirectType.replace)
       }
     } catch (err) {
-      console.warn('Error in google authorization request!')
+      console.warn(err)
 
       if (isFetchBaseQueryError(err)) {
         if (err.status == 400) {
-          redirect(`/${lngId}${Routes.MERGE}`, RedirectType.replace)
+          // redirect(`/${lngId}${Routes.MERGE}`, RedirectType.replace)
+          return router.replace(`/${lngId}${Routes.MERGE}`)
         }
       }
 
