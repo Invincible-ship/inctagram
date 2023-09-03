@@ -16,6 +16,7 @@ export const signInWithGoogle = createAsyncThunk<void, TGoogleLoginBody, ThunkCo
       const response = await dispatch(getUserDataByGoogleQuery(code)).unwrap()
 
       if (response) {
+        console.log('Sign in with google response: ', response)
         dispatch(setAuthData(response))
 
         response.isAuth
