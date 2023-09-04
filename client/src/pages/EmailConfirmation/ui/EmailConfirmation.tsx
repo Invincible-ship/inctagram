@@ -71,7 +71,7 @@ export const EmailConfirmation: FC<LngProps> = ({ lng }) => {
     return (
       <>
         <MainComponent
-          t={t}
+          namespaces={Namespaces.EMAIL_CONFIRMATION}
           icon={<ImageCongratulation />}
           action={goToLogin}
           title={CONGRATULATION_TITLE}
@@ -93,7 +93,7 @@ export const EmailConfirmation: FC<LngProps> = ({ lng }) => {
     return (
       <>
         <MainComponent
-          t={t}
+          namespaces={Namespaces.EMAIL_CONFIRMATION}
           icon={<ImageResendLink />}
           action={resendLink}
           title={RESEND_LINK_TITLE}

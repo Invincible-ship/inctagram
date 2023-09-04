@@ -1,6 +1,8 @@
+'use client'
 import { FC, ReactNode } from 'react'
 import s from './emailConfirmation.module.scss'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
+import { useClientTranslation } from '@/shared/config/i18n/client'
 
 export const MainComponent: FC<MainComponentProps> = ({
   title,
@@ -8,8 +10,9 @@ export const MainComponent: FC<MainComponentProps> = ({
   buttonText,
   action,
   icon,
-  t,
+  namespaces,
 }) => {
+  const { t } = useClientTranslation('', namespaces)
   return (
     <>
       <div className={s.emailConfiramtion}>
@@ -34,7 +37,7 @@ type MainComponentProps = {
   buttonText: string
   action: () => void
   icon: ReactNode
-  t: (str: string) => string
+  namespaces: string
 }
 
 type HeaderProps = {

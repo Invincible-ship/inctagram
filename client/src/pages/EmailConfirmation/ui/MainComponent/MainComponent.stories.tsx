@@ -6,47 +6,26 @@ import ImageCongratulation from './../../../../../public/icons/congratulation.sv
 import ImageResendLink from './../../../../../public/icons/resendLink.svg'
 
 const meta = {
-  title: 'PAGES/emailConfirmation/Congratulation_&_ResendLink',
+  title: 'PAGES/emailConfirmation',
   component: MainComponent,
   tags: ['autodocs'],
   args: {
-    title: 'Some Title',
-    text: 'Some text',
-    buttonText: 'Some buttonText',
+    namespaces: 'emailConfiramtion',
     action: action('on button click'),
   },
   argTypes: {
     action: { action: 'clicked' },
-    status: {
-      options: ['Some status', undefined],
-      control: { type: 'select' },
-    },
-    email: {
-      options: ['example@gmail.com', undefined],
-      control: { type: 'radio' },
-    },
   },
 } satisfies Meta<typeof MainComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-//export const Default = {
-//args: {},
-//  play: async ({ canvasElement }) => {
-//    const canvas = within(canvasElement)
-
-//    const button = canvas.getByRole('button')
-//    await userEvent.click(button)
-//  },
-//} satisfies Story
-
 export const Congratulation = {
   args: {
-    t: (str: string) => str,
     title: 'congratulation.title',
-    text: 'Your email has been confirmed',
-    buttonText: 'Sign In',
+    text: 'congratulation.text',
+    buttonText: 'congratulation.buttonText',
     icon: <ImageCongratulation />,
   },
   play: async ({ canvasElement }) => {
@@ -59,11 +38,9 @@ export const Congratulation = {
 
 export const ResendLink = {
   args: {
-    t: (str: string) => str,
-    email: 'example@gmail.com',
-    title: 'Email verification link expired',
-    text: 'Looks like the verification link has expired. Not to worry, we can send the link again',
-    buttonText: 'Resend verification link',
+    title: 'resendLink.title',
+    text: 'resendLink.text',
+    buttonText: 'resendLink.buttonText',
     icon: <ImageResendLink />,
   },
   play: async ({ canvasElement }) => {
