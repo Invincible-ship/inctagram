@@ -1,5 +1,5 @@
 'use client'
-// import {useContext} from 'react'
+import { useContext } from 'react'
 import { useEffect, useState } from 'react'
 import { SignUpForm } from './SignUpForm'
 import { SocialButtons } from './SocialButtons'
@@ -15,19 +15,20 @@ import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { signupThunk } from '../model/signup'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { isLoadingSelector } from '../model/selectors/selectors'
-// import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { Namespaces } from '@/shared/config/i18n/types'
+import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
+import { getIsLoading } from '../model/selectors/getIsLoading'
 import { ModalWindow } from './modalWindow/ModalWindow'
 
 const signUpModaTitle = 'signUpModal.title'
 const signUpModaText = 'signUpModal.text'
 
 export const SignUp = () => {
-  // const lngId = useContext(LanguageContext)
-  const isLoading = useSelector(isLoadingSelector)
+  const lngId = useContext(LanguageContext)
+  const isLoading = useSelector(getIsLoading)
   const dispatch = useAppDispatch()
-  const { t } = useClientTranslation('', Namespaces.SIGNUP)
+  const { t } = useClientTranslation(lngId, Namespaces.SIGNUP)
   const schema = formSchema(t)
 
   const {
@@ -83,7 +84,7 @@ export const SignUp = () => {
           {t('doYouHaveAnAccount')}
         </span>
         <Link
-          href={'/signIn'}
+          href={'login'}
           className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
         >
           <span>{t('signIn')}</span>
@@ -101,3 +102,5 @@ export const SignUp = () => {
     </div>
   )
 }
+
+export const SignUpWithAuth = withAuth(SignUp, { routeRole: 'auth' })

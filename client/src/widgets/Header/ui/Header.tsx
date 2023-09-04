@@ -4,7 +4,7 @@ import Logo from '@/shared/assets/icons/logo.svg'
 import { SuspenseLangSwitcher } from '@/features/LangSwitcher'
 import cls from './Header.module.scss'
 import { LanguageIds } from '@/shared/config/i18n/types'
-// import { SignOut } from "@/features/auth/signout"
+// import { SignOut } from '@/features/auth/signout'
 
 type HeaderProps = {
   lngId?: LanguageIds

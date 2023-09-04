@@ -4,7 +4,7 @@ import { FC } from 'react'
 import Link from 'next/link'
 import { TFunction } from 'i18next'
 import { useSelector } from 'react-redux'
-import { emailSelector } from '@/entities/User/model/selectors/selectors'
+import { getUserEmail } from '@/entities/User'
 import cls from './SignOutModal.module.scss'
 
 type SignOutModalProps = {
@@ -15,7 +15,7 @@ type SignOutModalProps = {
 }
 
 export const SignOutModal: FC<SignOutModalProps> = ({ isOpen, onClose, signOut, t }) => {
-  const email = useSelector(emailSelector)
+  const email = useSelector(getUserEmail)
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

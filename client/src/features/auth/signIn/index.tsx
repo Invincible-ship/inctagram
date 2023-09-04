@@ -1,5 +1,5 @@
-import { SignIn } from './ui/signIn'
+import { SignInWithAuth } from './ui/signIn'
 export type { ISignInSchema } from './model/types/types'
 export { signInReducer } from './model/slice/signInSlice'
 
-export default SignIn
+export default SignInWithAuth

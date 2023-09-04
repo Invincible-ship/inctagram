@@ -4,7 +4,7 @@ import { initReactI18next, useTranslation as useTranslationOrg } from 'react-i18
 import resourcesToBackend from 'i18next-resources-to-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { getOptions, languages } from './settings'
-import { LanguageIds } from './types'
+import { LanguageIds, Namespaces } from './types'
 
 const runsOnServerSide = typeof window === 'undefined'
 
@@ -28,7 +28,7 @@ i18next
 
 export function useClientTranslation(
   lng: LanguageIds | '' = '',
-  ns: string = 'translation',
+  ns: Namespaces = Namespaces.DEFAULT,
   options: Record<string, any> = {},
 ) {
   const ret = useTranslationOrg(ns, options)
