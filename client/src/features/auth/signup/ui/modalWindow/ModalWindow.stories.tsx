@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { ModalWindow } from './ModalWindow'
+//import { ModalWindow } from './ModalWindow'
 
 const meta = {
   component: ModalWindow,

@@ -20,6 +20,7 @@ import { Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { getIsLoading } from '../model/selectors/getIsLoading'
 import { ModalWindow } from './modalWindow/ModalWindow'
+//import { ModalWindow } from './modalWindow/ModalWindow'
 
 const signUpModaTitle = 'signUpModal.title'
 const signUpModaText = 'signUpModal.text'

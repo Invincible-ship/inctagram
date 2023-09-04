@@ -2,8 +2,7 @@
 import { FC } from 'react'
 import s from './modalWindow.module.scss'
 import { Modal } from '@/shared/ui/Modal/Modal'
-import { Header } from './ModalWindow.Header'
-import { Body } from './ModalWindow.Body'
+import { Button } from '@/shared/ui/Button/Button'
 
 export type ModalWindowPropsType = {
   onClose: () => void
@@ -22,13 +21,20 @@ export const ModalWindow: FC<ModalWindowPropsType> = ({
 }) => {
   return (
     <>
-      <Modal onClose={onClose} isOpen={isOpen}>
-        <div className={s.wrapper}>
-          <div className={s.body}>
-            <Header onClose={onClose} title={title} />
-            <Body onClose={onClose} text={text} userEmail={userEmail} />
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal.Header close={onClose}>{title}</Modal.Header>
+        <Modal.Body>
+          <div className={s.content}>
+            <p className={s.text}>
+              {text} {userEmail}
+            </p>
+            <div className={s.buttonContainer}>
+              <Button onClick={onClose} type="button" className={s.button}>
+                OK
+              </Button>
+            </div>
           </div>
-        </div>
+        </Modal.Body>
       </Modal>
     </>
   )
