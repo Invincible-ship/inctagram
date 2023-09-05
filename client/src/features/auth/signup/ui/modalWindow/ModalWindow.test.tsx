@@ -16,11 +16,18 @@ describe('ModalWindow', () => {
     render(<ModalWindow {...ModalWindowMockProps} />)
   })
 
-  it('renders modal with correct title and text', () => {
-    const { getByText, getByRole } = render(<ModalWindow {...ModalWindowMockProps} />)
+  it('does not render modal when isOpen is false', () => {
+    render(<ModalWindow {...ModalWindowMockProps} isOpen={false} />)
+    expect(screen.queryByText('Congratulations!')).not.toBeInTheDocument()
+    expect(screen.queryByText('You have successfully signed up.')).not.toBeInTheDocument()
+  })
+
+  it('renders modal with correct title, text and svg-image', () => {
+    const { getByText, getByRole, getByTestId } = render(<ModalWindow {...ModalWindowMockProps} />)
     expect(getByText('Modal Title')).toBeInTheDocument()
     expect(getByText('Modal Text test@example.com')).toBeInTheDocument()
     expect(getByRole('button')).toBeInTheDocument()
+    expect(getByTestId('svgCloseIcon')).toBeInTheDocument()
   })
 
   it('renders modal if userEmail={undefined}', () => {
@@ -28,21 +35,17 @@ describe('ModalWindow', () => {
     expect(getByText('Modal Text')).toBeInTheDocument()
   })
 
-  it('calls onClose when the modal is closed', () => {
+  it('calls onClose on a button', () => {
     const { getByRole } = render(<ModalWindow {...ModalWindowMockProps} />)
     const button = getByRole('button')
     fireEvent.click(button)
     expect(ModalWindowMockProps.onClose).toHaveBeenCalled()
   })
 
-  it('does not render modal when isOpen is false', () => {
-    render(<ModalWindow {...ModalWindowMockProps} isOpen={false} />)
-    expect(screen.queryByText('Congratulations!')).not.toBeInTheDocument()
-    expect(screen.queryByText('You have successfully signed up.')).not.toBeInTheDocument()
-  })
-
-  it('renders svg-image', () => {
+  it('calls onClose on an icon', () => {
     const { getByTestId } = render(<ModalWindow {...ModalWindowMockProps} />)
-    expect(getByTestId('svgModalWindow')).toBeInTheDocument()
+    const iconSpan = getByTestId('svgSpan')
+    fireEvent.click(iconSpan)
+    expect(ModalWindowMockProps.onClose).toHaveBeenCalled()
   })
 })

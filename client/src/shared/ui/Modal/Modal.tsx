@@ -51,8 +51,8 @@ Modal.Header = ({ children, close }: ModalHeaderProps) => {
   return (
     <div className={cls.header}>
       <h2 className={cls.title}>{children}</h2>
-      <span className={cls.close} onClick={close}>
-        <CloseIcon />
+      <span data-testid="svgSpan" className={cls.close} onClick={close}>
+        <CloseIcon data-testid="svgCloseIcon" />
       </span>
     </div>
   )
