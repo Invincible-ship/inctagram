@@ -64,7 +64,7 @@ export const SignIn: FC = () => {
         />
         <span className={'info b-title bt16 align-center'}>{t('dontHaveAnAccount')}?</span>
         <Link
-          href={Routes.SIGNUP}
+          href={`/${lngId}${Routes.SIGNUP}`}
           className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
         >
           <span>{t('signUp')}</span>

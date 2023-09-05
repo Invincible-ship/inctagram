@@ -61,7 +61,7 @@ export const SignUp = () => {
           {t('doYouHaveAnAccount')}
         </span>
         <Link
-          href={Routes.SIGNIN}
+          href={`/${lngId}${Routes.SIGNIN}`}
           className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
         >
           <span>{t('signIn')}</span>

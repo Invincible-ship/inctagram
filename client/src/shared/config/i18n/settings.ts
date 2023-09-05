@@ -1,7 +1,7 @@
 import { LanguageIds } from '@/shared/config/i18n/types'
 
-export const fallbackLng = LanguageIds.EN
-export const languages: LanguageIds[] = [fallbackLng, LanguageIds.RU]
+export const fallbackLng = LanguageIds.RU
+export const languages: LanguageIds[] = [fallbackLng, LanguageIds.EN]
 export const defaultNS = 'translation'
 
 export function getOptions(lng: LanguageIds | '' = fallbackLng, ns = defaultNS) {
