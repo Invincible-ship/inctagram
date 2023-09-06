@@ -1,5 +1,10 @@
 'use client'
 
-import { SignInWithGithubPage } from '@/_pages/SignInWithGithubPage/SignInWithGithubPage'
+import { SignInWithThirdPartyServicesPage } from '@/_pages/SignInWithThirdPartyServicesPage/SignInWithThirdPartyServicesPage'
+import { ThirdPartyOauthServices } from '@/shared/types/thirdPartyOauthServices'
 
-export default SignInWithGithubPage
+const Page = () => {
+  return <SignInWithThirdPartyServicesPage oauth={ThirdPartyOauthServices.GITHUB} />
+}
+
+export default Page

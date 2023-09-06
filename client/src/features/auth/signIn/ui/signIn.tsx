@@ -12,7 +12,6 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
 // ТАК ДЕЛАТЬ НЕЛЬЗЯ: если какой-то UI принадлежит одному и более модулю, то его стоит вынести в shared слой
-import { SocialButtons } from '@/features/auth/signup/ui/SocialButtons'
 import { formSchema, FormSchemaType } from '../lib/validationConstants/validationConstants'
 import { SignInForm } from './SignInForm'
 import { useSelector } from 'react-redux'
@@ -24,6 +23,7 @@ import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { Routes } from '@/shared/types/routes'
 import { getIsLoading } from '../model/selectors/getIsLoading'
 import { getError } from '../model/selectors/getError'
+import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
 
 export const SignIn: FC = () => {
   const lngId = useContext(LanguageContext)
@@ -54,7 +54,7 @@ export const SignIn: FC = () => {
     <div className={'form registration' + ' ' + `${s.wrapper}`}>
       <div className="form-wrapper auth-form">
         <div className={'title b-title bt26 semibold align-center'}>{t('signIn')}</div>
-        <SocialButtons />
+        <ThirdPartyOAuthButtons />
         <SignInForm
           t={t}
           errors={errors}

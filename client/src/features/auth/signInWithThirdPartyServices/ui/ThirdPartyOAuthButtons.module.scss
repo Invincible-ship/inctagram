@@ -1,0 +1,12 @@
+.iconWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  padding: 13px;
+}
+
+.img-wrapper {
+  cursor: pointer;
+}

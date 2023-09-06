@@ -5,8 +5,10 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolk
 import { USER_TAG } from '@/shared/const/rtk'
 import { REFRESH_TOKEN_ENDPOINT } from '@/shared/const/apiEndpoints'
 
+const baseUrl = __IS_DEV__ ? process.env.NEXT_PUBLIC_LOCALHOST_API : process.env.NEXT_PUBLIC_API
+
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_API,
+  baseUrl,
   prepareHeaders: headers => {
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)
     const languageId = localStorage.getItem(LOCAL_STORAGE_LANGUAGE_ID_KEY)
@@ -21,6 +23,7 @@ const baseQuery = fetchBaseQuery({
 
     return headers
   },
+  credentials: 'include',
 })
 
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (

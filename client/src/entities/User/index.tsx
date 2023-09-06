@@ -2,7 +2,8 @@ export { clearAuthData, setAuthData, userReducer } from './model/slice/userSlice
 export {
   userApi,
   getUserDataByTokenQuery,
-  getUserDataByGoogleQuery,
+  useSignInWithGoogleQuery,
+  useSignInWithGithubQuery,
   getUserDataByGithubQuery,
 } from './api/userApi'
 export { initAuthData } from './services/initAuthData'
