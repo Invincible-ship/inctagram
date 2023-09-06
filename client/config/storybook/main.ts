@@ -16,19 +16,15 @@ const config: StorybookConfig = {
     autodocs: 'tag',
   },
   webpackFinal: (config: Configuration) => {
-    config!.module!.rules = config!.module!.rules!.map(
+    // @ts-ignore
+    const fileLoaderRule = config.module.rules.find(
       // @ts-ignore
-      (rule: RuleSetRule) => {
-        if (/svg/.test(rule.test as string)) {
-          return { ...rule, exclude: /\.svg$/i }
-        }
+      (rule: RuleSetRule) => /svg/.test(rule.test as string),
+    ) as RuleSetRule
 
-        return rule
-      },
-    )
-
-    config!.module!.rules.push(
+    config!.module!.rules!.push(
       {
+        ...fileLoaderRule,
         test: /\.svg$/i,
         resourceQuery: /url/, // *.svg?url
       },
@@ -39,6 +35,8 @@ const config: StorybookConfig = {
         use: ['@svgr/webpack'],
       },
     )
+
+    fileLoaderRule!.exclude = /\.svg$/i
 
     config!.plugins!.push(
       new DefinePlugin({
