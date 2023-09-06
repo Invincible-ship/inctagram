@@ -1,5 +1,10 @@
-export { clearAuthData, userReducer } from './model/slice/userSlice'
-export { userApi, getUserDataByTokenQuery } from './api/userApi'
+export { clearAuthData, setAuthData, userReducer } from './model/slice/userSlice'
+export {
+  userApi,
+  getUserDataByTokenQuery,
+  getUserDataByGoogleQuery,
+  getUserDataByGithubQuery,
+} from './api/userApi'
 export { initAuthData } from './services/initAuthData'
 export { getUserEmail } from './model/selectors/getUserEmail'
 export { getUserAuthData } from './model/selectors/getUserAuthData'
