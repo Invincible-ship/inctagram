@@ -1,4 +1,4 @@
-import { InitializeUser } from '@/providers/InitializeUser/InitializeUser'
+import { SessionProvider } from '@/providers/SessionProvider/SessionProvider'
 import { StoreProvider } from '@/providers/StoreProvider'
 import { ReactNode } from 'react'
 
@@ -10,7 +10,7 @@ export const metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <StoreProvider>
-      <InitializeUser>{children}</InitializeUser>
+      <SessionProvider>{children}</SessionProvider>
     </StoreProvider>
   )
 }

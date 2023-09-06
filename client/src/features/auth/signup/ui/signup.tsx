@@ -1,7 +1,6 @@
 'use client'
 import { useContext } from 'react'
 import { SignUpForm } from './SignUpForm'
-import { SocialButtons } from './SocialButtons'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import '@/shared/styles/variables/common/_form.scss'
@@ -18,6 +17,8 @@ import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { getIsLoading } from '../model/selectors/getIsLoading'
+import { Routes } from '@/shared/types/routes'
+import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
 
 export const SignUp = () => {
   const lngId = useContext(LanguageContext)
@@ -48,7 +49,7 @@ export const SignUp = () => {
     <div className={'form registration'}>
       <div className="form-wrapper auth-form">
         <div className={'title b-title bt26 semibold align-center'}>{t('signUp')}</div>
-        <SocialButtons />
+        <ThirdPartyOAuthButtons />
         <SignUpForm
           onSubmit={handleSubmit(onSubmit)}
           isLoading={isLoading}
@@ -60,7 +61,7 @@ export const SignUp = () => {
           {t('doYouHaveAnAccount')}
         </span>
         <Link
-          href={'login'}
+          href={`/${lngId}${Routes.SIGNIN}`}
           className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
         >
           <span>{t('signIn')}</span>

@@ -3,9 +3,12 @@ import { LOCAL_STORAGE_LANGUAGE_ID_KEY, LOCAL_STORAGE_TOKEN_KEY } from '../const
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { USER_TAG } from '@/shared/const/rtk'
+import { REFRESH_TOKEN_ENDPOINT } from '@/shared/const/apiEndpoints'
+
+const baseUrl = __IS_DEV__ ? process.env.NEXT_PUBLIC_LOCALHOST_API : process.env.NEXT_PUBLIC_API
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_API,
+  baseUrl,
   prepareHeaders: headers => {
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)
     const languageId = localStorage.getItem(LOCAL_STORAGE_LANGUAGE_ID_KEY)
@@ -20,6 +23,7 @@ const baseQuery = fetchBaseQuery({
 
     return headers
   },
+  credentials: 'include',
 })
 
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
@@ -30,7 +34,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   let result = await baseQuery(args, api, extraOptions)
 
   if (result.error && result.error.status === 401) {
-    const refreshResult = (await baseQuery('/refresh-token', api, extraOptions)) as {
+    const refreshResult = (await baseQuery(REFRESH_TOKEN_ENDPOINT, api, extraOptions)) as {
       data: AuthRefreshResponse
     }
 
