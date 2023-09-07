@@ -17,5 +17,10 @@
   "passwordConfirmation": "Password Confirmation",
   "forgotPassword": "Forgot Password",
   "doYouHaveAnAccount": "Do you have an account",
-  "signIn": "Sign In"
+  "signIn": "Sign In",
+  "modal": {
+    "title": "Email sent",
+    "text": "We have sent a link to confirm your email to",
+    "ok": "OK"
+  }
 }
