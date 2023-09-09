@@ -40,8 +40,8 @@ export const SignUp = () => {
     resolver: zodResolver(schema),
   })
 
-  const onSubmit: SubmitHandler<FormSchemaType> = async data => {
-    await dispatch(signupThunk({ body: data, setError, lngId }))
+  const onSubmit: SubmitHandler<FormSchemaType> = data => {
+    dispatch(signupThunk({ body: data, setError, lngId }))
     setEmail(data.email)
     setIsSignUpModalOpen(true)
   }

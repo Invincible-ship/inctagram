@@ -17,9 +17,9 @@ type SignupThunkPayload = {
 
 export const signupThunk = createAsyncThunk<void, SignupThunkPayload, ThunkConfig<string>>(
   'auth/signup',
-  async ({ body, setError, lngId }, thunkAPI) => {
+  async ({ body, setError, lngId }, { dispatch, rejectWithValue }) => {
     try {
-      await thunkAPI.dispatch(userApi.endpoints.signup.initiate(body)).unwrap()
+      await dispatch(userApi.endpoints.signup.initiate(body)).unwrap()
     } catch (error) {
       if (isFetchBaseQueryError(error)) {
         if (error.status == 400) {
@@ -36,7 +36,7 @@ export const signupThunk = createAsyncThunk<void, SignupThunkPayload, ThunkConfi
         }
       }
 
-      return thunkAPI.rejectWithValue('Unknown error')
+      return rejectWithValue('Unknown error')
     }
   },
 )

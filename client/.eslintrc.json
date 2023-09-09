@@ -73,7 +73,7 @@
     "max-len": [
       2,
       {
-        "code": 120,
+        "code": 100,
         "ignoreComments": true,
         "ignoreStrings": true
       }
@@ -92,7 +92,8 @@
   "overrides": [
     {
       "files": [
-        "**/src/**/*.{test,stories}.{ts,tsx}"
+        "**/src/**/*.{test,stories}.{ts,tsx}",
+        "**/src/shared/ui/MyImage/*.ts"
       ],
       "rules": {
         "i18next/no-literal-string": "off",
