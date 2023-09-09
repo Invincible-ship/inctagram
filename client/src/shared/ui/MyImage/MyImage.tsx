@@ -42,7 +42,7 @@ export const MyImage: FC<MyImageProps> = props => {
         fill
         sizes={sizes}
         style={style}
-        placeholder={placeholder && defaultPlaceholder}
+        placeholder={placeholder || defaultPlaceholder}
       />
     </div>
   )
