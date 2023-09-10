@@ -50,6 +50,8 @@ export const SignUp = () => {
     return <Preloader />
   }
 
+  // TODO: add 400 status error handler to say user link has already sent to email
+
   return (
     <>
       <div className={'form registration'}>

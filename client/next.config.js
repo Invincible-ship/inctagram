@@ -34,27 +34,27 @@ const nextConfig = {
 
     return config
   },
-  // headers: async () => {
-  //   return [
-  //     {
-  //       source: '/:lng*',
-  //       headers: [
-  //         {
-  //           key: 'Access-Control-Allow-Origin',
-  //           value: '*'
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Methods',
-  //           value: 'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Headers',
-  //           value: 'X-Requested-With, content-type, Authorization'
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
+  headers: async () => {
+    return [
+      {
+        source: '/:lng*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'X-Requested-With, content-type, Authorization'
+          }
+        ]
+      }
+    ]
+  }
 };
 
 module.exports = nextConfig;
