@@ -31,19 +31,7 @@ export const SignInWithThirdPartyServicesPage: FC<SignInWithThirdPartyServicesPa
     if (isSuccess) {
       const { isAuth, accessToken, user } = signInOAuthResponse
 
-      // FIXME: remove mock user data when backend will implement, it should be:
-      // dispatch(setAuthData({ accessToken, user }))
-      dispatch(
-        setAuthData({
-          accessToken,
-          user: user || {
-            id: '1',
-            userName: 'slava123',
-            email: 'test@email.com',
-            createdAt: '2023',
-          },
-        }),
-      )
+      dispatch(setAuthData({ accessToken, user }))
 
       isAuth ? redirect(`/${lngId}${Routes.MAIN}`) : redirect(`/${lngId}${Routes.PROFILE}`)
     }

@@ -5,21 +5,25 @@ import { userApi } from '@/entities/User'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { UseFormSetError } from 'react-hook-form'
 import { isHookFormError } from '@/shared/api/isHookFormError'
+import { redirect } from 'next/navigation'
+import { LanguageIds } from '@/shared/config/i18n/types'
+import { Routes } from '@/shared/types/routes'
 
 type SignupThunkPayload = {
   body: RegisterParamsType
   setError: UseFormSetError<RegisterParamsType>
+  lngId: LanguageIds
 }
 
 export const signupThunk = createAsyncThunk<void, SignupThunkPayload, ThunkConfig<string>>(
   'auth/signup',
-  async ({ body, setError }, thunkAPI) => {
+  async ({ body, setError, lngId }, { dispatch, rejectWithValue }) => {
     try {
-      await thunkAPI.dispatch(userApi.endpoints.signup.initiate(body)).unwrap()
+      await dispatch(userApi.endpoints.signup.initiate(body)).unwrap()
     } catch (error) {
       if (isFetchBaseQueryError(error)) {
-        if (typeof error.data === 'string') {
-          throw new Error(error.data)
+        if (error.status == 400) {
+          redirect(`/${lngId}${Routes.MERGE}`)
         }
       }
 
@@ -32,7 +36,7 @@ export const signupThunk = createAsyncThunk<void, SignupThunkPayload, ThunkConfi
         }
       }
 
-      return thunkAPI.rejectWithValue('Unknown error')
+      return rejectWithValue('Unknown error')
     }
   },
 )
