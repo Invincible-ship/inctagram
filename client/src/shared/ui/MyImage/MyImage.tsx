@@ -3,46 +3,52 @@ import type { ImageProps } from 'next/image'
 import { CSSProperties, FC } from 'react'
 import cls from './MyImage.module.scss'
 import { toBase64 } from '@/shared/utils/toBase64'
-import { shimmer } from '@/shared/ui/MyImage/utils'
+import { shimmer, normalizeImageProps } from './utils'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 const defaultStyles: CSSProperties = {
   objectFit: 'cover',
+  height: 'auto',
 }
 
-type MyImageProps = {
+export type MyImageProps = {
+  src: string
   className?: string
-  wWidth?: number
-  wHeight?: number
+  wrapperWidth?: number
+  wrapperHeight?: number
   ar?: string
 } & ImageProps
 
 export const MyImage: FC<MyImageProps> = props => {
   const {
     className,
+    src,
     sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
     style = defaultStyles,
-    wWidth,
-    wHeight,
-    ar = '16/9',
+    wrapperWidth,
+    wrapperHeight,
+    ar,
     alt,
-    placeholder,
   } = props
 
-  const defaultPlaceholder = `data:image/svg+xml;base64,${toBase64(shimmer(wWidth, wHeight))}`
+  const shimmerUrl = `data:image/svg+xml;base64,${toBase64(shimmer(wrapperWidth, wrapperHeight))}`
+
+  const normalizedImageProps = normalizeImageProps(props)
 
   return (
     <div
       className={classNames(cls.wrapper, {}, [className])}
-      style={{ maxWidth: wWidth, aspectRatio: ar }}
+      style={{ maxWidth: wrapperWidth, height: wrapperHeight, aspectRatio: ar }}
     >
       <Image
-        {...props}
+        {...normalizedImageProps}
+        src={src}
+        width={wrapperWidth}
         alt={alt}
-        fill
         sizes={sizes}
         style={style}
-        placeholder={placeholder || defaultPlaceholder}
+        // TODO: implement shimmer animation effect
+        placeholder="blur"
       />
     </div>
   )

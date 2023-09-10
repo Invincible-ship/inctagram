@@ -1,0 +1,17 @@
+{
+  "invalid": {
+    "title": "Email verification link expired",
+    "text": "Looks like the verification link has expired. Not to worry, we can send the link again",
+    "button-text": "Resend verification link"
+  },
+  "success": {
+    "title": "Congratulations!",
+    "text": "Your email has been confirmed",
+    "button-text": "Sign In"
+  },
+  "confirm": {
+    "title": "Congratulations!",
+    "text": "Your email has already been confirmed previously",
+    "button-text": "Sign In"
+  }
+}

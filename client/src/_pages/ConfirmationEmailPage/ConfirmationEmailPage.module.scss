@@ -1,0 +1,25 @@
+.page {
+  text-align: center;
+  max-width: 435px;
+  padding-top: 35px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.paddingText {
+  margin-bottom: 25px;
+}
+
+.btn {
+  min-width: 182px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    order: 4;
+  }
+}

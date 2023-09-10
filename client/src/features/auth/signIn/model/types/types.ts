@@ -1,3 +1,5 @@
+import { IUser } from '@/entities/User'
+
 export type LoginRequestType = {
   email: string
   password: string
@@ -5,12 +7,7 @@ export type LoginRequestType = {
 
 export type LoginResponseType = {
   accessToken: string
-  user: {
-    id: string
-    userName: string
-    email: string
-    createdAt: string
-  }
+  user: IUser
 }
 
 export type ISignInSchema = {
