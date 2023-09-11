@@ -5,8 +5,7 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolk
 import { USER_TAG } from '@/shared/const/rtk'
 import { REFRESH_TOKEN_ENDPOINT } from '@/shared/const/apiEndpoints'
 
-// const baseUrl = __IS_DEV__ ? process.env.NEXT_PUBLIC_LOCALHOST_API : process.env.NEXT_PUBLIC_API
-const baseUrl = process.env.NEXT_PUBLIC_LOCALHOST_API
+const baseUrl = __IS_DEV__ ? process.env.NEXT_PUBLIC_LOCALHOST_API : process.env.NEXT_PUBLIC_API
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
