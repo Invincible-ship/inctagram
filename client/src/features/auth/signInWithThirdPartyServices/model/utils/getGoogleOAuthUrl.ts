@@ -3,6 +3,7 @@ import { GOOGLE_ENDPOINT } from '@/shared/const/apiEndpoints'
 import { Routes } from '@/shared/types/routes'
 
 export const getGoogleOAuthUrl = (lngId: LanguageIds): string => {
+  // change env vars in prod
   const baseClientUrl = __IS_DEV__
     ? process.env.NEXT_PUBLIC_DEVELOPMENT_CLIENT_URL
     : process.env.NEXT_PUBLIC_PRODUCTION_CLIENT_URL
