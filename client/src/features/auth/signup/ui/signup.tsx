@@ -9,7 +9,6 @@ import style from './signup.module.scss'
 import { FormSchemaType, formSchema } from '../lib/validationConstants/validationConstants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { signupThunk } from '../model/signup'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
@@ -17,15 +16,16 @@ import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { getIsLoading } from '../model/selectors/getIsLoading'
+import { getIsSignUpModalOpen } from '../model/selectors/getIsSignUpModalOpen'
 import { Routes } from '@/shared/types/routes'
 import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
 import { SignUpModal } from './SignUpModal'
 
 export const SignUp = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
   const isLoading = useSelector(getIsLoading)
+  const isSignUpModalOpen = useSelector(getIsSignUpModalOpen)
   const dispatch = useAppDispatch()
   const { t } = useClientTranslation(lngId, Namespaces.SIGNUP)
   const schema = formSchema(t)
@@ -43,13 +43,7 @@ export const SignUp = () => {
   const onSubmit: SubmitHandler<FormSchemaType> = data => {
     dispatch(signupThunk({ body: data, setError, lngId }))
     setEmail(data.email)
-    setIsSignUpModalOpen(true)
   }
-
-  if (isLoading) {
-    return <Preloader />
-  }
-
   // TODO: add 400 status error handler to say user link has already sent to email
 
   return (
@@ -76,12 +70,7 @@ export const SignUp = () => {
           </Link>
         </div>
       </div>
-      <SignUpModal
-        email={email}
-        isSignUpModalOpen={isSignUpModalOpen}
-        setIsSignUpModalOpen={setIsSignUpModalOpen}
-        t={t}
-      />
+      <SignUpModal email={email} isSignUpModalOpen={isSignUpModalOpen} t={t} />
     </>
   )
 }

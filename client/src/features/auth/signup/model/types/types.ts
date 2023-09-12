@@ -12,4 +12,5 @@ export type RegisterResponseType = {
 }
 export type ISignUpSchema = {
   isLoading: boolean
+  isSignUpModalOpen: boolean
 }
