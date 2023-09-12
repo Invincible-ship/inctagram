@@ -3,8 +3,8 @@ import type { ImageProps } from 'next/image'
 import { CSSProperties, FC } from 'react'
 import cls from './MyImage.module.scss'
 import { toBase64 } from '@/shared/utils/toBase64'
-import { shimmer, normalizeImageProps } from './utils'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { shimmer } from './utils'
 
 const defaultStyles: CSSProperties = {
   objectFit: 'cover',
@@ -28,12 +28,11 @@ export const MyImage: FC<MyImageProps> = props => {
     wrapperWidth,
     wrapperHeight,
     ar,
-    alt,
+    alt = '',
+    ...rest
   } = props
 
   const shimmerUrl = `data:image/svg+xml;base64,${toBase64(shimmer(wrapperWidth, wrapperHeight))}`
-
-  const normalizedImageProps = normalizeImageProps(props)
 
   return (
     <div
@@ -41,10 +40,10 @@ export const MyImage: FC<MyImageProps> = props => {
       style={{ maxWidth: wrapperWidth, height: wrapperHeight, aspectRatio: ar }}
     >
       <Image
-        {...normalizedImageProps}
+        {...rest}
+        alt={alt}
         src={src}
         width={wrapperWidth}
-        alt={alt}
         sizes={sizes}
         style={style}
         // TODO: implement shimmer animation effect

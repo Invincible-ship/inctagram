@@ -1,4 +1,8 @@
 .Button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
   font-weight: 600;
   padding: 6px 24px;
   border-radius: 2px;
@@ -7,6 +11,10 @@
   transition:
     background-color 0.2s linear,
     color 0.2s linear;
+  
+    &[disabled] {
+      cursor: not-allowed;
+    }
 }
 
 .primary {
@@ -28,7 +36,7 @@
     color: var(--primary-text-color);
   }
 
-  &[disabled="true"] {
+  &[disabled] {
     background-color: var(--accent-color-900);
     color: var(--light-color-900);
   }
@@ -52,7 +60,7 @@
     color: var(--primary-text-color);
   }
 
-  &[disabled="true"] {
+  &[disabled] {
     background-color: var(--dark-color-500);
     color: var(--light-color-900);
   }
@@ -78,7 +86,7 @@
     border: 2px solid var(--accent-color-700);
   }
 
-  &[disabled="true"] {
+  &[disabled] {
     color: var(--accent-color-900);
     border: 1px solid var(--accent-color-900);
   }
@@ -102,7 +110,28 @@
     border: 2px solid var(--accent-color-700);
   }
 
-  &[disabled="true"] {
+  &[disabled] {
     color: var(--accent-color-900);
+  }
+}
+
+svg.primary {
+  pointer-events: none;
+  background-color: transparent;
+
+  &.primary {
+    fill: var(--light-color-900);
+  }
+
+  &.secondary {
+    fill: var(--light-color-900);
+  }
+
+  &.outlined {
+    fill: var(--accent-color-900);
+  }
+
+  &.text {
+    fill: var(--accent-color-900);
   }
 }

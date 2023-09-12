@@ -10,15 +10,13 @@ import s from './signIn.module.scss'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Preloader } from '@/shared/ui/Preloader/Preloader'
-// ТАК ДЕЛАТЬ НЕЛЬЗЯ: если какой-то UI принадлежит одному и более модулю, то его стоит вынести в shared слой
 import { formSchema, FormSchemaType } from '../lib/validationConstants/validationConstants'
 import { SignInForm } from './SignInForm'
 import { useSelector } from 'react-redux'
 import { signInThunk } from '../model/signInThunk'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
-import { Namespaces } from '@/shared/config/i18n/types'
+import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { Routes } from '@/shared/types/routes'
 import { getIsLoading } from '../model/selectors/getIsLoading'
@@ -26,8 +24,7 @@ import { getError } from '../model/selectors/getError'
 import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
 
 export const SignIn: FC = () => {
-  const lngId = useContext(LanguageContext)
-  // FIXME: correct translation with lngId so avoid only CSR rendering
+  const lngId = useContext(LanguageContext) as LanguageIds
   const { t } = useClientTranslation(lngId, Namespaces.SIGNIN)
   const schema = formSchema(t)
   const isLoading = useSelector(getIsLoading)
@@ -46,10 +43,6 @@ export const SignIn: FC = () => {
     dispatch(signInThunk(data))
   }
 
-  if (isLoading) {
-    return <Preloader />
-  }
-
   return (
     <div className={'form registration' + ' ' + `${s.wrapper}`}>
       <div className="form-wrapper auth-form">
@@ -57,6 +50,7 @@ export const SignIn: FC = () => {
         <ThirdPartyOAuthButtons />
         <SignInForm
           t={t}
+          isLoading={isLoading}
           errors={errors}
           register={register}
           onSubmit={handleSubmit(onSubmit)}

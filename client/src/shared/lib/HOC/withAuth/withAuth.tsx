@@ -3,7 +3,7 @@
 
 import { getIsLoading, getIsUserInited, getUserAuthData } from '@/entities/User'
 import { WithAuthOptions } from './routes'
-import { ComponentType, useContext, useEffect } from 'react'
+import { ComponentType, useContext, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { redirect } from 'next/navigation'
 import { RedirectType } from 'next/dist/client/components/redirect'
@@ -11,6 +11,7 @@ import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { Routes } from '@/shared/types/routes'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { LanguageIds } from '@/shared/config/i18n/types'
+import { LOCAL_STORAGE_IS_FIRST_AUTHORIZED } from '@/shared/const/localStorage'
 
 export function withAuth<T extends JSX.IntrinsicAttributes = JSX.IntrinsicAttributes>(
   Component: ComponentType<T>,
@@ -23,6 +24,13 @@ export function withAuth<T extends JSX.IntrinsicAttributes = JSX.IntrinsicAttrib
     const isLoading = useSelector(getIsLoading)
     const inited = useSelector(getIsUserInited)
     const userAuthData = useSelector(getUserAuthData)
+    const isFirstAuthorizedRef = useRef()
+
+    if (typeof window !== 'undefined') {
+      isFirstAuthorizedRef.current = 
+        JSON.parse(localStorage.getItem(LOCAL_STORAGE_IS_FIRST_AUTHORIZED) as string)
+    }
+
     console.log({
       inited,
       isLoading,
@@ -37,6 +45,10 @@ export function withAuth<T extends JSX.IntrinsicAttributes = JSX.IntrinsicAttrib
           } 
         } else {
             if (routeRole === 'auth') {
+              if (isFirstAuthorizedRef.current) {
+                localStorage.setItem(LOCAL_STORAGE_IS_FIRST_AUTHORIZED, JSON.stringify(false))
+                redirect(redirectTo || `/${lngId}${Routes.PROFILE}`, RedirectType.replace)
+              }
               redirect(redirectTo || `/${lngId}${Routes.MAIN}`, RedirectType.replace)
             }
         }
