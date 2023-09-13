@@ -29,7 +29,7 @@ export const SignInWithThirdPartyServicesPage: FC<SignInWithThirdPartyServicesPa
 
   const checkOAuth = useCallback(() => {
     if (isSuccess) {
-      const { isAuth, accessToken, user } = signInOAuthResponse
+      const { isAuth = false, accessToken, user } = signInOAuthResponse
 
       dispatch(setAuthData({ accessToken, user }))
 
