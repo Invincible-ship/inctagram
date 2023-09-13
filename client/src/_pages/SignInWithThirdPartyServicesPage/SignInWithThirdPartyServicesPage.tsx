@@ -29,6 +29,7 @@ export const SignInWithThirdPartyServicesPage: FC<SignInWithThirdPartyServicesPa
 
   const checkOAuth = useCallback(() => {
     if (isSuccess) {
+      console.log('SignIn with google response: ', signInOAuthResponse)
       const { isAuth = false, accessToken, user } = signInOAuthResponse
 
       dispatch(setAuthData({ accessToken, user }))
