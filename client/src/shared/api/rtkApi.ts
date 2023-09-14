@@ -34,9 +34,12 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   let result = await baseQuery(args, api, extraOptions)
 
   if (result.error && result.error.status === 401) {
+    console.log('401 error: ', JSON.stringify(result.error, null, 2))
+
     const refreshResult = (await baseQuery(REFRESH_TOKEN_ENDPOINT, api, extraOptions)) as {
       data: AuthRefreshResponse
     }
+    console.log('Refresh token result: ', JSON.stringify(refreshResult, null, 2))
 
     if (refreshResult.data) {
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, refreshResult.data.accessToken)
