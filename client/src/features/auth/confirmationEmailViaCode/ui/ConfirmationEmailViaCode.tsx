@@ -12,15 +12,11 @@ export const ConfirmationEmailViaCode = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
   const searchParams = useSearchParams()
   const code = searchParams.get('confirmationCode') as string
-  console.log('Confirmation code: ', code)
   const router = useRouter()
 
-  const { data, isSuccess, isError, error } = useConfirmationEmailViaCodeQuery(code)
-  console.log('Response confirmation email data: ', data)
+  const { data, isLoading } = useConfirmationEmailViaCodeQuery(code)
 
-  if (isError) console.log('Confiramtion registration error: ', JSON.stringify(error))
-
-  if (!isSuccess) return <Preloader />
+  if (isLoading) return <Preloader />
 
   return router.replace(
     `/${lngId}${Routes.CONFIRMATION_EMAIL}?status=${data?.status}${
