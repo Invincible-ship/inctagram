@@ -15,10 +15,10 @@ export const ConfirmationEmailViaCode = () => {
   console.log('Confirmation code: ', code)
   const router = useRouter()
 
-  const { data, isLoading } = useConfirmationEmailViaCodeQuery(code)
+  const { data, isSuccess } = useConfirmationEmailViaCodeQuery(code)
   console.log('Response confirmation email data: ', data)
 
-  if (isLoading) return <Preloader />
+  if (!isSuccess) return <Preloader />
 
   return router.replace(
     `/${lngId}${Routes.CONFIRMATION_EMAIL}?status=${data?.status}${
