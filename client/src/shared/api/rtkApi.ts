@@ -26,13 +26,14 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
 })
 
-const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError & { originalStatus: boolean }> = async (
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
   args,
   api,
   extraOptions,
 ) => {
   let result = await baseQuery(args, api, extraOptions)
   console.log('RTK api result: ', JSON.stringify(result, null, 2))
+  console.log('RTK api error: ', JSON.stringify(result.error, null, 2))
 
   if (result.error && result.error.originalStatus === 401) {
     console.log('401 error: ', JSON.stringify(result.error, null, 2))
