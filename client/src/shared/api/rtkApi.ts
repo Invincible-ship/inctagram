@@ -26,7 +26,7 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
 })
 
-const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError & { originalStatus: boolean }> = async (
   args,
   api,
   extraOptions,
