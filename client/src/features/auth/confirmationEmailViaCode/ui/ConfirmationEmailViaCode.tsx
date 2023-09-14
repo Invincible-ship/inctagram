@@ -15,8 +15,10 @@ export const ConfirmationEmailViaCode = () => {
   console.log('Confirmation code: ', code)
   const router = useRouter()
 
-  const { data, isSuccess } = useConfirmationEmailViaCodeQuery(code)
+  const { data, isSuccess, isError, error } = useConfirmationEmailViaCodeQuery(code)
   console.log('Response confirmation email data: ', data)
+
+  if (isError) console.log('Confiramtion registration error: ', JSON.stringify(error))
 
   if (!isSuccess) return <Preloader />
 
