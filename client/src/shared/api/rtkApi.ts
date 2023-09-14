@@ -35,7 +35,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   console.log('RTK api result: ', JSON.stringify(result, null, 2))
   console.log('RTK api error: ', JSON.stringify(result.error, null, 2))
 
-  if (result.error && result.error.originalStatus === 401) {
+  if (result.error && result.error.status === 401) {
     console.log('401 error: ', JSON.stringify(result.error, null, 2))
 
     const refreshResult = (await baseQuery(REFRESH_TOKEN_ENDPOINT, api, extraOptions)) as {
