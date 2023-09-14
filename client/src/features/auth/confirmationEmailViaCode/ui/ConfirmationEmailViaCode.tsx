@@ -12,6 +12,7 @@ export const ConfirmationEmailViaCode = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
   const searchParams = useSearchParams()
   const code = searchParams.get('confirmationCode') as string
+  console.log('Confirmation code: ', code)
   const router = useRouter()
 
   const { data, isLoading } = useConfirmationEmailViaCodeQuery(code)
