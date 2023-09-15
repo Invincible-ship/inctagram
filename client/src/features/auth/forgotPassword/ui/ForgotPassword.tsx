@@ -12,13 +12,13 @@ import { ForgotPasswordForm } from './ForgotPasswordForm'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { formSchema, FormSchemaType } from '../lib/validationConstants/validationConstants'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
-import { Namespaces } from '@/shared/config/i18n/types'
+import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 // import { useSelector } from 'react-redux'
 // import { getIsLoading } from '../model/selectors/getIsLoading'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { useForgotPasswordMutation } from '@/entities/User/api/userApi'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useHistory } from 'react-router-dom'
+import { ConfirmationEmailButton } from '@/features/auth/confirmationEmailViaCode'
+import cls from '@/_pages/ConfirmationEmailPage/ConfirmationEmailPage.module.scss'
 
 export const ForgotPassword = props => {
   const lngId = useContext(LanguageContext)
@@ -33,7 +33,6 @@ export const ForgotPassword = props => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [recaptchaError, setRecaptchaError] = useState('')
   // const navigate = useNavigate()
-  const history = useHistory()
 
   const handleOpenModal = () => {
     setIsModalOpen(true)
@@ -117,9 +116,7 @@ export const ForgotPassword = props => {
           setIsActive
         />
       </div>
-
     </div>
-
   )
 }
 

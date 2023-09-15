@@ -1,1 +1,0 @@
-export { AvatarUpload } from "./ui/avatarUpload"
