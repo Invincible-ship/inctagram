@@ -2,6 +2,7 @@
 
 # dependencies
 /client/node_modules
+/client/storybook-static
 /client/.pnp
 /client.pnp.js
 

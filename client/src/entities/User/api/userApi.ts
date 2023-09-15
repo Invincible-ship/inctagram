@@ -4,7 +4,9 @@ import { LoginRequestType, LoginResponseType } from '@/features/auth/signIn/mode
 import { RegisterParamsType, RegisterResponseType } from '@/features/auth/signup/model/types/types'
 import { IUser } from '@/entities/User/model/types/types'
 import {
+  FORGOT_PASSWORD_ENDPOINT,
   ME_ENDPOINT,
+  RESET_PASSWORD_ENDPOINT,
   RESEND_LINK_ENDPOINT,
   SIGN_IN_ENDPOINT,
   SIGN_IN_WITH_GITHUB_ENDPOINT,
@@ -37,14 +39,14 @@ export const userApi = rtkApi.injectEndpoints({
     forgotPassword: build.mutation<ForgotResponseType, ForgotParamsType>({
       query: data => ({
         method: 'POST',
-        url: 'auth/forgot-password',
+        url: FORGOT_PASSWORD_ENDPOINT,
         body: data,
       }),
     }),
     resetPassword: build.mutation<ForgotResponseType, ForgotParamsType>({
       query: data => ({
         method: 'POST',
-        url: 'auth/reset-password',
+        url: RESET_PASSWORD_ENDPOINT,
         body: data,
       }),
     }),
@@ -98,6 +100,7 @@ export const userApi = rtkApi.injectEndpoints({
   }),
 })
 
+export const useForgotPasswordMutation = userApi
 export const getUserDataByTokenQuery = userApi.endpoints.me.initiate
 export const getUserDataByGithubQuery = userApi.endpoints.signInWithGithub.initiate
 export const {

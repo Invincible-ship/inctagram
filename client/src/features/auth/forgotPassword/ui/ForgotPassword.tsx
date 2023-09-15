@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC, useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './forgotPassword.scss'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
@@ -13,15 +13,35 @@ import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { formSchema, FormSchemaType } from '../lib/validationConstants/validationConstants'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { Namespaces } from '@/shared/config/i18n/types'
-import { useSelector } from 'react-redux'
-import { getIsLoading } from '@/features/auth/signup/model/selectors/getIsLoading'
+// import { useSelector } from 'react-redux'
+// import { getIsLoading } from '../model/selectors/getIsLoading'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
+import { useForgotPasswordMutation } from '@/entities/User/api/userApi'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useHistory } from 'react-router-dom'
 
-export const ForgotPassword = () => {
+export const ForgotPassword = props => {
   const lngId = useContext(LanguageContext)
-  const isLoading = useSelector(getIsLoading)
-  const { t } = useClientTranslation('', Namespaces.REQOVERY)
+  // const isLoading = useSelector(getIsLoading)
+  const { t } = useClientTranslation(lngId, Namespaces.RECOVERY)
   const schema = formSchema(t)
+  let [recaptchaResponse, setRecaptchaResponse] = useState(false)
+  const [isActive, setIsActive] = useState(false)
+  const [email, setEmail] = useState('')
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data, isLoading, isError } = useForgotPasswordMutation
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [recaptchaError, setRecaptchaError] = useState('')
+  // const navigate = useNavigate()
+  const history = useHistory()
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
 
   const {
     register,
@@ -31,26 +51,44 @@ export const ForgotPassword = () => {
     resolver: zodResolver(schema),
   })
 
-  const [isActive, setIsActive] = useState(false)
-  const verifyCaptcha = (token: string) => {
-    recaptcha_response = token
-    //@ts-ignore
-    document.getElementById('g-recaptcha-error').innerHTML = ''
+  const verifyCaptcha = response => {
+    setRecaptchaResponse(true)
   }
 
-  let recaptcha_response = ''
+  const getEmail = event => {
+    console.log(event)
+    setEmail(event.target.value)
+  }
+  useEffect(() => {
+    if (data) {
+      if (data.exists) {
+        // Показать сообщение о том, что email существует в базе данных.
+        console.log('Email существует в базе данных')
+      } else {
+        // Показать сообщение о том, что email не существует в базе данных.
+        console.log('Email не существует в базе данных')
+      }
+    }
+  }, [data])
 
-  const onSubmit: SubmitHandler<FormSchemaType> = async data => {
-    if (recaptcha_response.length == 0) {
-      //@ts-ignore
-      document.getElementById('g-recaptcha-error').innerHTML =
-        '<span style="color:red;">This field is required.</span>'
-      return false
-    } else {
+  const onSubmit: SubmitHandler<FormSchemaType> = async () => {
+    if (recaptchaResponse) {
+      handleOpenModal()
+      // try {
+      //   await isSuccess
+      //   handleOpenModal()
+      //   console.log('success')
+      //   history.push(`/${lngId}${Routes.SIGNIN}`)
+      // } catch (isError) {
+      //   console.log('error')
+      // }
       setIsActive(true)
-      return true
+      setRecaptchaError('')
+    } else {
+      setRecaptchaError(t('recaptureError'))
     }
   }
+
   if (isLoading) {
     return <Preloader />
   }
@@ -64,14 +102,24 @@ export const ForgotPassword = () => {
           verifyCaptcha={verifyCaptcha}
           isLoading={isLoading}
           isActive={isActive}
-          recaptcha_response={recaptcha_response}
+          recaptcha_response={setRecaptchaResponse}
+          lngId={lngId}
+          getEmail={getEmail}
+          setEmail={setEmail}
+          email={email}
+          isModalOpen={isModalOpen}
+          recaptchaError={recaptchaError}
+          handleCloseModal={handleCloseModal}
+          isError={isError}
           t={t}
           errors={errors}
           register={register}
           setIsActive
         />
       </div>
+
     </div>
+
   )
 }
 

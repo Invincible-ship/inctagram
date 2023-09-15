@@ -16,3 +16,8 @@ export type IUserSchema = {
   _inited: boolean
   isLoading: boolean
 }
+
+export interface GenericResponse {
+  status: string
+  message: string
+}

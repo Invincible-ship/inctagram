@@ -8,7 +8,7 @@ export enum Namespaces {
   SIGNUP = 'signUp',
   SIGNOUT = 'signout',
   SIGNIN = 'signIn',
-  REQOVERY = 'reqovery',
+  RECOVERY = 'recovery',
   CONFIRMATION_EMAIL = 'confirmationEmail',
 }
 

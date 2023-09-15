@@ -8,6 +8,10 @@ import Link from 'next/link'
 import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 
+// import { AvatarUploadPage } from '@/_pages/avatarUpload'
+//
+// export default AvatarUploadPage
+
 const Page = () => {
   const lngId = useContext(LanguageContext)
   const userData = useSelector(getUserAuthData)

@@ -6,8 +6,6 @@
   "BackToSignIn": "Страница Входа",
   "sentByEmail": "Ссылка отправлена по электронной почте. Если вы не получили ссылку, запросите повторную отправку письма",
   "validate": {
-    "userNameRequired": "Имя пользователя обязательно",
-    "userNameMaxLength": "Максимальная длина имени пользователя - 30 символов",
     "emailInvalid": "Неверный формат email",
     "emailRequired": "Email обязателен",
     "passwordRequired": "Пароль обязателен",
@@ -22,5 +20,6 @@
   "inputTitleNewPassword": "Новый пароль",
   "inputTitleConfirmPassword": "Повторение пароля",
 
-  "errorEmail": "Некорректный email"
+  "errorEmail": "Некорректный email",
+  "recaptureError": "Подтвердите, что вы не робот"
 }

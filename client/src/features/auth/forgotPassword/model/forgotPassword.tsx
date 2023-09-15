@@ -15,4 +15,4 @@ export const forgotPasswordThunk = createAsyncThunk<
   void,
   ForgotPasswordThunkPayload,
   ThunkConfig<string>
->('auth/forgot-password', async ({ body, setError }, thunkAPI) => {})
+>('FORGOT_PASSWORD_ENDPOINT', async ({ body, setError }, thunkAPI) => {})

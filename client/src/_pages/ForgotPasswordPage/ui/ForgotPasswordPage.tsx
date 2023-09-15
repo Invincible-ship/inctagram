@@ -1,7 +1,4 @@
-import dynamic from 'next/dynamic'
-import React from 'react'
-
-const ForgotPassword = dynamic(() => import('@/features/auth/forgotPassword'), { ssr: false })
+import ForgotPassword from '@/features/auth/forgotPassword'
 
 export const ForgotPasswordPage = () => {
   return (

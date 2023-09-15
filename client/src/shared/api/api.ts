@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { LOCAL_STORAGE_LANGUAGE_ID_KEY, LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage'
-import { AuthRefreshResponse } from './types'
+import { AuthRefreshResponse, GenericResponse } from './types'
 
 export const $api = axios.create({
   withCredentials: true,

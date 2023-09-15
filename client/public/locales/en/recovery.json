@@ -6,8 +6,6 @@
   "BackToSignIn": "Back to Sign In",
   "sentByEmail": "The link has been sent by email. If you don’t receive an email send link again",
   "validate": {
-    "userNameRequired": "Username is required",
-    "userNameMaxLength": "Username must be less than or equal to 30 characters",
     "emailInvalid": "Invalid email format",
     "emailRequired": "Email is required",
     "passwordRequired": "Password is required",
@@ -23,5 +21,6 @@
   "inputTitleNewPassword": "New password",
   "inputTitleConfirmPassword": "Password confirmation",
 
-  "errorEmail": "invalid email"
+  "errorEmail": "invalid email",
+  "recaptureError": "Confirm that you are not a robot"
 }

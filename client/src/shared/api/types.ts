@@ -10,3 +10,8 @@ type FieldErrors = {
   message: string
   field: string
 }
+
+export interface GenericResponse {
+  status: string
+  message: string
+}
