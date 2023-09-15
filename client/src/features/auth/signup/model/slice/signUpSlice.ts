@@ -1,17 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { signupThunk } from '@/features/auth/signup/model/signup'
 import { ISignUpSchema } from '../types/types'
 
 const initialState: ISignUpSchema = {
   isLoading: false,
+  isSignUpModalOpen: false,
 }
 
-const slice = createSlice({
+const signUpSlice = createSlice({
   name: 'signup',
   initialState,
   reducers: {
     dummyReducer: state => {
       return
+    },
+    setIsSignUpModalOpen: (state, { payload }: PayloadAction<boolean>) => {
+      state.isSignUpModalOpen = payload
     },
   },
   extraReducers: builder => {
@@ -21,12 +25,15 @@ const slice = createSlice({
 
     builder.addCase(signupThunk.fulfilled, state => {
       state.isLoading = false
+      state.isSignUpModalOpen = true
     })
 
     builder.addCase(signupThunk.rejected, state => {
       state.isLoading = false
+      state.isSignUpModalOpen = true
     })
   },
 })
 
-export const signupReducer = slice.reducer
+export const signupReducer = signUpSlice.reducer
+export const { setIsSignUpModalOpen } = signUpSlice.actions

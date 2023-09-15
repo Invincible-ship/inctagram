@@ -21,7 +21,6 @@ const userSlice = createSlice({
     },
     clearAuthData: state => {
       state.authData = undefined
-      state._inited = false
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY)
       localStorage.removeItem(LOCAL_STORAGE_USER_ID_KEY)
     },

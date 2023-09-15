@@ -14,11 +14,19 @@ export type SignInFormProps = {
   errorLogin?: string
   onSubmit: FormEventHandler<HTMLFormElement> | undefined
   t: (key: string) => string
+  isLoading: boolean
   errors: Record<string, any>
   register: any
 }
 
-export const SignInForm: FC<SignInFormProps> = ({ onSubmit, t, errors, register, errorLogin }) => {
+export const SignInForm: FC<SignInFormProps> = ({
+  onSubmit,
+  t,
+  errors,
+  register,
+  errorLogin,
+  isLoading,
+}) => {
   const dispatch = useAppDispatch()
   const [showPassword, setShowPassword] = useState(false)
   const toggleShowPassword = () => {
@@ -55,7 +63,12 @@ export const SignInForm: FC<SignInFormProps> = ({ onSubmit, t, errors, register,
           {t('forgotPassword')}
         </Link>
       </div>
-      <Button type="submit" className={'styled-btn styled-btn-1'}>
+      <Button
+        type="submit"
+        className={'styled-btn styled-btn-1'}
+        isLoading={isLoading}
+        disabled={isLoading}
+      >
         {t('signIn')}
       </Button>
     </form>

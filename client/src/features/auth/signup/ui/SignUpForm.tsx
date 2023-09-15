@@ -14,7 +14,7 @@ export type SignUpFormProps = {
   register: any
 }
 
-export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register }) => {
+export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register, isLoading }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const toggleShowPassword = () => {
@@ -65,7 +65,12 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register 
         error={errors.passwordConfirmation}
         data-testid="password-confirmation-input"
       />
-      <Button type="submit" className={'styled-btn styled-btn-1'}>
+      <Button
+        type="submit"
+        className={'styled-btn styled-btn-1'}
+        isLoading={isLoading}
+        disabled={isLoading}
+      >
         {t('signUp')}
       </Button>
     </form>

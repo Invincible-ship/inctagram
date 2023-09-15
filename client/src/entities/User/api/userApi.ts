@@ -5,11 +5,13 @@ import { RegisterParamsType, RegisterResponseType } from '@/features/auth/signup
 import { IUser } from '@/entities/User/model/types/types'
 import {
   ME_ENDPOINT,
+  RESEND_LINK_ENDPOINT,
   SIGN_IN_ENDPOINT,
   SIGN_IN_WITH_GITHUB_ENDPOINT,
   SIGN_IN_WITH_GOOGLE_ENDPOINT,
   SIGN_OUT_ENDPOINT,
   SIGN_UP_ENDPOINT,
+  CONFIRMATION_REGISTRATION,
 } from '@/shared/const/apiEndpoints'
 import { TGoogleLoginResponse } from '@/features/auth/signInWithGoogle/model/types'
 import { TGithubLoginResponse } from '@/features/auth/signInWithGithub'
@@ -17,6 +19,11 @@ import {
   ForgotParamsType,
   ForgotResponseType,
 } from '@/features/auth/forgotPassword/model/types/types'
+import { TOAuthLoginResponse } from '@/features/auth/signInWithThirdPartyServices'
+import {
+  TConfirmationEmailViaCodeRequest,
+  TConfirmationEmailViaCodeResponse,
+} from '@/features/auth/confirmationEmailViaCode'
 
 export const userApi = rtkApi.injectEndpoints({
   endpoints: build => ({
@@ -48,6 +55,22 @@ export const userApi = rtkApi.injectEndpoints({
         body: data,
       }),
     }),
+    confirmationEmailViaCode: build.query<
+      TConfirmationEmailViaCodeResponse,
+      TConfirmationEmailViaCodeRequest
+    >({
+      query: confirmationCode => ({
+        url: CONFIRMATION_REGISTRATION,
+        params: { confirmationCode },
+      }),
+    }),
+    resendLink: build.mutation<void, { email: string }>({
+      query: data => ({
+        url: RESEND_LINK_ENDPOINT,
+        method: 'POST',
+        body: data,
+      }),
+    }),
     signIn: build.mutation<LoginResponseType, LoginRequestType>({
       query: data => ({
         url: SIGN_IN_ENDPOINT,
@@ -56,13 +79,13 @@ export const userApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: [USER_TAG],
     }),
-    signInWithGoogle: build.query<TGoogleLoginResponse, string>({
+    signInWithGoogle: build.query<TOAuthLoginResponse, string>({
       query: code => ({
         url: SIGN_IN_WITH_GOOGLE_ENDPOINT,
         params: { code },
       }),
     }),
-    signInWithGithub: build.query<TGithubLoginResponse, string>({
+    signInWithGithub: build.query<TOAuthLoginResponse, string>({
       query: code => ({
         url: SIGN_IN_WITH_GITHUB_ENDPOINT,
         params: { code },
@@ -76,5 +99,10 @@ export const userApi = rtkApi.injectEndpoints({
 })
 
 export const getUserDataByTokenQuery = userApi.endpoints.me.initiate
-export const getUserDataByGoogleQuery = userApi.endpoints.signInWithGoogle.initiate
 export const getUserDataByGithubQuery = userApi.endpoints.signInWithGithub.initiate
+export const {
+  useSignInWithGoogleQuery,
+  useSignInWithGithubQuery,
+  useResendLinkMutation,
+  useConfirmationEmailViaCodeQuery,
+} = userApi

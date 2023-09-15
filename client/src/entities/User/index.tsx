@@ -2,8 +2,11 @@ export { clearAuthData, setAuthData, userReducer } from './model/slice/userSlice
 export {
   userApi,
   getUserDataByTokenQuery,
-  getUserDataByGoogleQuery,
+  useSignInWithGoogleQuery,
+  useSignInWithGithubQuery,
   getUserDataByGithubQuery,
+  useResendLinkMutation,
+  useConfirmationEmailViaCodeQuery,
 } from './api/userApi'
 export { initAuthData } from './services/initAuthData'
 export { getUserEmail } from './model/selectors/getUserEmail'

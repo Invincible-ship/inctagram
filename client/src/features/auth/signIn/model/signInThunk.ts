@@ -1,14 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { setAuthData, userApi } from '@/entities/User'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
-import { LoginRequestType } from '@/features/auth/signIn/model/types/types'
+import { LoginRequestType } from './types/types'
 import { ThunkConfig } from '@/providers/StoreProvider'
 
 export const signInThunk = createAsyncThunk<void, LoginRequestType, ThunkConfig<string>>(
   'auth/login',
-  async (body, { dispatch }) => {
+  async ({ email, password }, { dispatch }) => {
     try {
-      const response = await dispatch(userApi.endpoints.signIn.initiate(body)).unwrap()
+      const response = await dispatch(
+        userApi.endpoints.signIn.initiate({ email, password }),
+      ).unwrap()
 
       if (response) {
         dispatch(setAuthData(response))

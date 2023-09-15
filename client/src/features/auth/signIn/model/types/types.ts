@@ -1,3 +1,7 @@
+import { IUser } from '@/entities/User'
+import { LanguageIds } from '@/shared/config/i18n/types'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
+
 export type LoginRequestType = {
   email: string
   password: string
@@ -5,12 +9,7 @@ export type LoginRequestType = {
 
 export type LoginResponseType = {
   accessToken: string
-  user: {
-    id: string
-    userName: string
-    email: string
-    createdAt: string
-  }
+  user: IUser
 }
 
 export type ISignInSchema = {
