@@ -17,10 +17,10 @@ import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 // import { getIsLoading } from '../model/selectors/getIsLoading'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { useForgotPasswordMutation } from '@/entities/User/api/userApi'
-import { ConfirmationEmailButton } from '@/features/auth/confirmationEmailViaCode'
-import cls from '@/_pages/ConfirmationEmailPage/ConfirmationEmailPage.module.scss'
+import { useRouter } from 'next/navigation'
+import { Routes } from '@/shared/types/routes'
 
-export const ForgotPassword = props => {
+export const ForgotPassword = () => {
   const lngId = useContext(LanguageContext)
   // const isLoading = useSelector(getIsLoading)
   const { t } = useClientTranslation(lngId, Namespaces.RECOVERY)
@@ -32,7 +32,7 @@ export const ForgotPassword = props => {
   const { data, isLoading, isError } = useForgotPasswordMutation
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [recaptchaError, setRecaptchaError] = useState('')
-  // const navigate = useNavigate()
+  const router = useRouter()
 
   const handleOpenModal = () => {
     setIsModalOpen(true)
@@ -56,33 +56,17 @@ export const ForgotPassword = props => {
 
   const getEmail = event => {
     console.log(event)
-    setEmail(event.target.value)
+    setEmail(event)
   }
-  useEffect(() => {
-    if (data) {
-      if (data.exists) {
-        // Показать сообщение о том, что email существует в базе данных.
-        console.log('Email существует в базе данных')
-      } else {
-        // Показать сообщение о том, что email не существует в базе данных.
-        console.log('Email не существует в базе данных')
-      }
-    }
-  }, [data])
 
   const onSubmit: SubmitHandler<FormSchemaType> = async () => {
-    if (recaptchaResponse) {
+    if (recaptchaResponse && data.exists) {
       handleOpenModal()
-      // try {
-      //   await isSuccess
-      //   handleOpenModal()
-      //   console.log('success')
-      //   history.push(`/${lngId}${Routes.SIGNIN}`)
-      // } catch (isError) {
-      //   console.log('error')
-      // }
       setIsActive(true)
       setRecaptchaError('')
+      setTimeout(() => {
+        router.replace(`/${lngId}${Routes.SIGNIN}`)
+      }, 5000)
     } else {
       setRecaptchaError(t('recaptureError'))
     }

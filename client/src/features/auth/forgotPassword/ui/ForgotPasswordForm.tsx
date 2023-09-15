@@ -33,8 +33,6 @@ export type ForgotPasswordFormProps = {
   email: string
 }
 
-
-
 export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
   onSubmit,
   t,
@@ -53,9 +51,6 @@ export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
   getEmail,
   email,
 }) => {
-  function onChange(value) {
-    console.log('email:', value)
-  }
   return (
     <>
       <form className={'form-style'} onSubmit={onSubmit}>
@@ -69,7 +64,6 @@ export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
-
         <span className={'info b-title bt14 semibold'}>{t('info')}</span>
 
         <span className="sentByEmail" style={{ display: isActive ? ' ' : 'none' }}>
