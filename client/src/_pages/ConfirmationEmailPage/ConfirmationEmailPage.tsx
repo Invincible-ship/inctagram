@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
 import { useServerTranslation } from '@/shared/config/i18n/server'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
