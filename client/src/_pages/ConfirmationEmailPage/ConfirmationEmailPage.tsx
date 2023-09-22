@@ -26,6 +26,8 @@ export const ConfirmationEmailPage = async ({ searchParams }: { searchParams: Se
     [cls.paddingText]: status != 'invalid',
   }
 
+  console.log('Language: ', lngId)
+
   return (
     <main className={cls.page}>
       <h2>{t(`${status}.title`)}</h2>

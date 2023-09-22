@@ -24,6 +24,8 @@ export const ConfirmationEmailButton: FC<ConfirmationEmailButtonProps> = props =
   const [resendLink] = useResendLinkMutation()
   const router = useRouter()
 
+  console.log('Language: ', lngId)
+
   if (status !== 'invalid' && !localStorage.getItem(LOCAL_STORAGE_IS_FIRST_AUTHORIZED)) {
     localStorage.setItem(LOCAL_STORAGE_IS_FIRST_AUTHORIZED, JSON.stringify(true))
   }
