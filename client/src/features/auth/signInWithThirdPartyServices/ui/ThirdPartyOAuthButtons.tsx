@@ -1,5 +1,5 @@
-import googleUrl from '@/shared/assets/icons/google.svg?url'
-import githubUrl from '@/shared/assets/icons/github.svg?url'
+import Google from '@/shared/assets/icons/google.svg'
+import Github from '@/shared/assets/icons/github.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useContext } from 'react'
@@ -10,8 +10,8 @@ import { getGithubOAuthUrl } from '../model/utils/getGithubOAuthUrl'
 import cls from './ThirdPartyOAuthButtons.module.scss'
 
 const oauthButtons = [
-  { src: googleUrl, hrefFn: getGoogleOAuthUrl, alt: 'google icon' },
-  { src: githubUrl, hrefFn: getGithubOAuthUrl, alt: 'github icon' },
+  { icon: <Google />, hrefFn: getGoogleOAuthUrl, alt: 'google icon' },
+  { icon: <Github />, hrefFn: getGithubOAuthUrl, alt: 'github icon' },
 ]
 
 export const ThirdPartyOAuthButtons = () => {
@@ -19,9 +19,9 @@ export const ThirdPartyOAuthButtons = () => {
 
   return (
     <div className={cls.iconWrapper}>
-      {oauthButtons.map(({ hrefFn, src, alt }) => (
+      {oauthButtons.map(({ hrefFn, icon, alt }) => (
         <Link key={alt} href={hrefFn(lngId)} className={cls['img-wrapper']}>
-          <Image src={src} alt={alt} />
+          {icon}
         </Link>
       ))}
     </div>

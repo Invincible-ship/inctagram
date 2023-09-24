@@ -22,13 +22,15 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang={lngId} dir={dir(lngId)} className={inter.className}>
       <head />
-      <body className="app">
-        <LanguageProvider lngId={lngId as LanguageIds}>
-          <Suspense fallback={<Loading />}>
-            <Header />
-            {children}
-          </Suspense>
-        </LanguageProvider>
+      <body>
+        <div className="app">
+          <LanguageProvider lngId={lngId as LanguageIds}>
+            <Suspense fallback={<Loading />}>
+              <Header />
+              {children}
+            </Suspense>
+          </LanguageProvider>
+        </div>
       </body>
     </html>
   )

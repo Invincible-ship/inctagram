@@ -36,6 +36,7 @@ export const MyImage: FC<MyImageProps> = props => {
 
   return (
     <div
+      data-testid="image-wrapper"
       className={classNames(cls.wrapper, {}, [className])}
       style={{ maxWidth: wrapperWidth, height: wrapperHeight, aspectRatio: ar }}
     >
