@@ -1,6 +1,5 @@
-export const dynamic = 'force-dynamic'
+'use client'
 
-import { useServerTranslation } from '@/shared/config/i18n/server'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { MyImage } from '@/shared/ui/MyImage/MyImage'
@@ -10,29 +9,34 @@ import {
 } from '@/features/auth/confirmationEmailViaCode'
 import cls from './ConfirmationEmailPage.module.scss'
 import { getImageProps } from './utils/getImageProps'
+import { useSearchParams } from 'next/navigation'
+import { useClientTranslation } from '@/shared/config/i18n/client'
 
-type SearchParams = {
-  status: CONFIRMATION_STATUS
-  email?: string
-  lng: LanguageIds
-}
+export const ConfirmationEmailPage = () => {
+  const searchParams = useSearchParams()
 
-export const ConfirmationEmailPage = async ({ searchParams }: { searchParams: SearchParams }) => {
-  const { status, email, lng: lngId } = searchParams
-  const { t } = await useServerTranslation(lngId, Namespaces.CONFIRMATION_EMAIL)
+  const status = searchParams.get('status') as CONFIRMATION_STATUS
+  const email = searchParams.get('email') as string | undefined
+  const lngId = searchParams.get('lng') as LanguageIds
+
+  const { t } = useClientTranslation(lngId, Namespaces.CONFIRMATION_EMAIL)
 
   const { src, alt, wrapperWidth } = getImageProps(status)
   const mods = {
     [cls.paddingText]: status != 'invalid',
   }
 
-  console.log('Language: ', lngId)
-
   return (
     <main className={cls.page}>
       <h2>{t(`${status}.title`)}</h2>
       <p className={classNames(cls.text, mods)}>{t(`${status}.text`)}</p>
-      <ConfirmationEmailButton className={cls.btn} status={status} lngId={lngId} email={email} />
+      <ConfirmationEmailButton
+        className={cls.btn}
+        status={status}
+        t={t}
+        lngId={lngId}
+        email={email}
+      />
       <MyImage src={src as string} wrapperWidth={wrapperWidth} alt={alt} />
     </main>
   )

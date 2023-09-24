@@ -56,6 +56,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       result = await baseQuery(args, api, extraOptions)
     } else {
       api.dispatch(signoutThunk())
+      console.warn(result.error)
     }
   }
 

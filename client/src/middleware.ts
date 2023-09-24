@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import acceptLanguage from 'accept-language'
 import { fallbackLng, languages } from '@/shared/config/i18n/settings'
+import { Routes } from '@/shared/types/routes'
+import { encodeSearchParams } from '@/shared/utils/encodeSearchParams'
 
 acceptLanguage.languages(languages)
 
