@@ -55,7 +55,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, refreshResult.data.accessToken)
       result = await baseQuery(args, api, extraOptions)
     } else {
-      api.dispatch(signoutThunk())
+      // api.dispatch(signoutThunk())
       console.warn(result.error)
     }
   }
