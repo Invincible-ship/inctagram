@@ -21,7 +21,7 @@ type ConfirmationEmailButtonProps = {
 
 export const ConfirmationEmailButton: FC<ConfirmationEmailButtonProps> = props => {
   const { email, t, status, lngId, className } = props
-  const [resendLink] = useResendLinkMutation()
+  const [resendLink, { isLoading }] = useResendLinkMutation()
   const router = useRouter()
 
   if (status !== 'invalid' && !localStorage.getItem(LOCAL_STORAGE_IS_FIRST_AUTHORIZED)) {
@@ -39,6 +39,8 @@ export const ConfirmationEmailButton: FC<ConfirmationEmailButtonProps> = props =
       className={className}
       theme={ButtonTheme.DEFAULT}
       onClick={onClick}
+      isLoading={isLoading}
+      disabled={isLoading}
       style={{ marginBottom: '50px' }}
     >
       {t(`${status}.button-text`)}
