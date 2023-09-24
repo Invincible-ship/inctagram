@@ -21,6 +21,6 @@ export const ConfirmationEmailViaCode = () => {
   return router.replace(
     `/${lngId}${Routes.CONFIRMATION_EMAIL}?status=${data?.status}${
       data?.email ? `&email=${data?.email}` : ''
-    }&lng=${lngId}`,
+    }`,
   )
 }

@@ -11,13 +11,15 @@ import cls from './ConfirmationEmailPage.module.scss'
 import { getImageProps } from './utils/getImageProps'
 import { useSearchParams } from 'next/navigation'
 import { useClientTranslation } from '@/shared/config/i18n/client'
+import { useContext } from 'react'
+import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 
 export const ConfirmationEmailPage = () => {
+  const lngId = useContext(LanguageContext) as LanguageIds
   const searchParams = useSearchParams()
 
   const status = searchParams.get('status') as CONFIRMATION_STATUS
   const email = searchParams.get('email') as string | undefined
-  const lngId = searchParams.get('lng') as LanguageIds
 
   const { t } = useClientTranslation(lngId, Namespaces.CONFIRMATION_EMAIL)
 
