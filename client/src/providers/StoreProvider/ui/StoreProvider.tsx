@@ -4,7 +4,6 @@ import { FC, ReactNode } from 'react'
 import { StateSchema } from '../config/StateSchema'
 import { Provider } from 'react-redux'
 import { createReduxStore } from '../config/store'
-import { DeepPartial } from '@reduxjs/toolkit'
 
 type StoreProviderProps = {
   initialState?: DeepPartial<StateSchema>
