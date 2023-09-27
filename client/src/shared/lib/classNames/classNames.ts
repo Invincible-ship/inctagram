@@ -1,3 +1,5 @@
+export type Mods = Record<string, boolean | undefined>
+
 export const classNames = (
   cls: string = '',
   mods: Record<string, boolean | undefined> = {},
