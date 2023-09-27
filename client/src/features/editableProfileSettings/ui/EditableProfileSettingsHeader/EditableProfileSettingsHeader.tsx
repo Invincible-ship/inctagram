@@ -1,19 +1,31 @@
-import { FC, memo } from 'react'
-import { ProfileSettingTab, ProfileSettingValue } from '../../model/types'
+import { memo, useContext, useMemo } from 'react'
+import { ProfileSettingsTab, ProfileSettingValue } from '../../model/types'
+import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { useClientTranslation } from '@/shared/config/i18n/client'
+import { Namespaces } from '@/shared/config/i18n/types'
+import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 
 type EditableProfileSettingsHeaderProps = {
-  currentTabValue: ProfileSettingValue
-  handleTabClick: (tab: ProfileSettingTab) => void
+  tabValue: ProfileSettingValue
+  handleTabClick: (tab: Tab<ProfileSettingValue>) => void
 }
 
-export const EditableProfileSettingsHeader: FC<EditableProfileSettingsHeaderProps> = memo(
-  ({ currentTabValue, handleTabClick }) => {
-    return (
-      <>
-        <h1>Profile Settings Header</h1>
-        <div onClick={e => {}}></div>
-      </>
+export const EditableProfileSettingsHeader = memo(
+  ({ tabValue, handleTabClick }: EditableProfileSettingsHeaderProps) => {
+    const lngId = useContext(LanguageContext)
+    const { t } = useClientTranslation(lngId, Namespaces.PROFILE_SETTINGS)
+
+    const tabs: ProfileSettingsTab[] = useMemo(
+      () => [
+        { value: ProfileSettingValue.GENERAL_INFO, content: t('tabs.general-info') },
+        { value: ProfileSettingValue.DEVICES, content: t('tabs.devices') },
+        { value: ProfileSettingValue.ACCOUNT_MANAGMENT, content: t('tabs.account-managment') },
+        { value: ProfileSettingValue.PAYMENTS, content: t('tabs.payments') },
+      ],
+      [t],
     )
+
+    return <Tabs tabs={tabs} value={tabValue} onTabClick={handleTabClick} />
   },
 )
 

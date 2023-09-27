@@ -9,6 +9,7 @@ export enum Namespaces {
   SIGNOUT = 'signout',
   SIGNIN = 'signIn',
   CONFIRMATION_EMAIL = 'confirmationEmail',
+  PROFILE_SETTINGS = 'profile-settings',
 }
 
 export type LanguageParams = { lng: LanguageIds }

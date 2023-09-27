@@ -2,8 +2,10 @@ import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigati
 import { EditableProfileSettingsHeader } from '../EditableProfileSettingsHeader/EditableProfileSettingsHeader'
 import cls from './EditableProfileSettings.module.scss'
 import { EditableProfileGeneralInfo } from '../EditableProfileGeneralInfo/EditableProfileGeneralInfo'
-import { useCallback } from 'react'
-import { ProfileSettingTab, ProfileSettingValue } from '../../model/types'
+import { FC, useCallback } from 'react'
+import { ProfileSettingsTab, ProfileSettingValue } from '../../model/types'
+import { VStack } from '@/shared/ui/Stack'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 const mapProfileSettings = {
   [ProfileSettingValue.GENERAL_INFO]: <EditableProfileGeneralInfo />,
@@ -12,7 +14,11 @@ const mapProfileSettings = {
   [ProfileSettingValue.PAYMENTS]: <>Payments</>,
 }
 
-export const EditableProfileSettings = () => {
+type EditableProfileSettingsProps = {
+  className?: string
+}
+
+export const EditableProfileSettings: FC<EditableProfileSettingsProps> = ({ className }) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -24,18 +30,15 @@ export const EditableProfileSettings = () => {
     redirect(`${pathname}?${editableSearchParams.toString()}`)
   }
 
-  const handleTabClick = useCallback((tab: ProfileSettingTab) => {
+  const handleTabClick = useCallback((tab: ProfileSettingsTab) => {
     editableSearchParams.set('setting', tab.value)
     router.push(`${pathname}?${editableSearchParams.toString()}`)
   }, [])
 
   return (
-    <div className={cls.ProfileSettings}>
-      <EditableProfileSettingsHeader
-        currentTabValue={currentTabValue}
-        handleTabClick={handleTabClick}
-      />
-      <section>{mapProfileSettings[currentTabValue]}</section>
-    </div>
+    <VStack gap="24" max className={classNames(cls.ProfileSettings, {}, [className])}>
+      <EditableProfileSettingsHeader tabValue={currentTabValue} handleTabClick={handleTabClick} />
+      {mapProfileSettings[currentTabValue]}
+    </VStack>
   )
 }

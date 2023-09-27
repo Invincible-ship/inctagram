@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export enum ProfileSettingValue {
   GENERAL_INFO = 'general-info',
   DEVICES = 'devices',
@@ -5,7 +7,7 @@ export enum ProfileSettingValue {
   PAYMENTS = 'payments',
 }
 
-export type ProfileSettingTab = {
+export type ProfileSettingsTab = {
   value: ProfileSettingValue
-  content: string
+  content: ReactNode
 }
