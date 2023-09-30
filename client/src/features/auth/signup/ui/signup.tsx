@@ -44,7 +44,7 @@ export const SignUp = () => {
     dispatch(signupThunk({ body: data, setError, lngId }))
     setEmail(data.email)
   }
-  // TODO: add 400 status error handler to say user link has already sent to email
+  // TODO: add 400 status error handler to say user that link has already sent to email
 
   return (
     <>

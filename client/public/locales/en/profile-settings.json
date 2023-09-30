@@ -4,5 +4,33 @@
     "devices": "Devices",
     "account-managment": "Account Managment",
     "payments": "Payments"
+  },
+  "general-info": {
+    "errors": {
+      "username": {
+        "symbols": "This field can only contain the following characters 0-9; A-Z; a-z; _ ; -",
+        "min": "This field must contain at least 6 characters",
+        "max": "This field must contain no more than 30 characters"
+      },
+      "firstName": {
+        "symbols": "This field can only contain the following characters A-Z; a-z; А-Я; а-я",
+        "min": "This field must contain at least 1 characters",
+        "max": "This field must contain no more than 50 characters"
+      },
+      "lastName": {
+        "symbols": "This field can only contain the following characters A-Z; a-z; А-Я; а-я",
+        "min": "This field must contain at least 1 characters",
+        "max": "This field must contain no more than 50 characters"
+      },
+      "birthday": "A user under 13 cannot create a profile",
+      "aboutMe": {
+        "max": "This field must contain no more than 200 characters"
+      }
+    },
+    "userName": "Username",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "birthday": "Date of birth",
+    "aboutMe": "About Me"
   }
 }

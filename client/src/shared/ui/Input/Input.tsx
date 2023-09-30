@@ -8,6 +8,8 @@ import React, {
 } from 'react'
 import s from './Input.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
+import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 type DefaultInputPropsType = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
@@ -17,25 +19,27 @@ type DefaultInputPropsType = DetailedHTMLProps<
 type InputPropsType = Omit<DefaultInputPropsType, 'type'> & {
   onChangeText?: (value: string) => void
   onEnter?: () => void
-  error?: { message?: ReactNode }
+  error?: FieldError
   spanClassName?: string
   type?: string
   title?: string
+  full?: boolean
 }
 
 const Input = forwardRef<HTMLInputElement, InputPropsType>(
   (
     {
+      key,
       onChange,
       onChangeText,
       onKeyPress,
       onEnter,
       error,
       className,
-      spanClassName,
       id,
       type,
       title,
+      full,
 
       ...restProps
     },
@@ -53,8 +57,16 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
         onEnter() // то вызвать его
     }
 
+    const wrapperMods = {
+      [s.full]: full,
+    }
+
+    const inputMods = {
+      [s.errorInput]: !!error?.message,
+    }
+
     return (
-      <div className={s.inputWrapper}>
+      <div key={key} className={classNames(s.inputWrapper, wrapperMods)}>
         <div>{title}</div>
         <input
           ref={ref}
@@ -62,7 +74,7 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
           type={type ? type : 'text'}
           onChange={onChangeCallback}
           onKeyPress={onKeyPressCallback}
-          className={`${s.styledInput} ${error?.message ? s.errorInput : ''}`}
+          className={classNames(s.styledInput, inputMods, [className])}
           {...restProps}
           data-testid="input"
         />

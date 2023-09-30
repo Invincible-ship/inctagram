@@ -9,6 +9,14 @@
   gap: 9px;
   font-weight: 400;
 
+  &.full {
+    width: 100%;
+
+    .styledInput {
+      min-width: 100%;
+    }
+  }
+
   .styledInput {
     outline: none;
     min-width: 279px;

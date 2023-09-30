@@ -1,9 +1,11 @@
+'use client'
+
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { EditableProfileSettingsHeader } from '../EditableProfileSettingsHeader/EditableProfileSettingsHeader'
 import cls from './EditableProfileSettings.module.scss'
 import { EditableProfileGeneralInfo } from '../EditableProfileGeneralInfo/EditableProfileGeneralInfo'
 import { FC, useCallback } from 'react'
-import { ProfileSettingsTab, ProfileSettingValue } from '../../model/types'
+import { ProfileSettingsTab, ProfileSettingValue } from '../../model/types/types'
 import { VStack } from '@/shared/ui/Stack'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
