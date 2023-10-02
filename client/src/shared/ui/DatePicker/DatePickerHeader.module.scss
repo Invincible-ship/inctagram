@@ -1,0 +1,24 @@
+.datePickerHeader {
+  margin-bottom: 12px;
+
+  .currentMonthAndYear {
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--light-color-100);
+    flex-grow: 1;
+    text-align: left;
+    padding-left: 7px;
+  }
+  
+  .btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    background-color: var(--dark-color-100);
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+}
+

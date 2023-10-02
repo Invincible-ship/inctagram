@@ -20,15 +20,19 @@ export const EditableProfileGeneralInfo = () => {
   const profileGeneralInfoData = useSelector(getProfileGeneralInfo)
 
   const {
+    control,
     register,
     reset,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm<TGeneralInfo>({
     resolver: zodResolver(GeneralInfoSchema),
     mode: 'onBlur',
     defaultValues: profileGeneralInfoData,
   })
+
+  console.log('Dirty form fields: ', dirtyFields)
+  console.log('Form errors: ', errors)
 
   useEffect(() => {
     reset(profileGeneralInfoData)
@@ -43,6 +47,7 @@ export const EditableProfileGeneralInfo = () => {
   return (
     profileGeneralInfoData && (
       <ProfileGeneralInfo
+        control={control}
         handleSubmit={submitWithReactHookForm}
         errors={errors}
         register={register}

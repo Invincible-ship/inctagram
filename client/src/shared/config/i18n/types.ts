@@ -10,6 +10,7 @@ export enum Namespaces {
   SIGNIN = 'signIn',
   CONFIRMATION_EMAIL = 'confirmationEmail',
   PROFILE_SETTINGS = 'profile-settings',
+  DATE_PICKER = 'date-picker',
 }
 
 export type LanguageParams = { lng: LanguageIds }

@@ -23,17 +23,26 @@ export const generalInfoSchemaFn = (t: TFunction<string, undefined>) =>
         .max(50, t('general-info.errors.lastName.max'))
         .regex(/^[A-Za-zА-Яа-я]+$/, t('general-info.errors.lastName.symbols'))
         .trim(),
-      birthday: z.date().min(new Date('01-01-1950Z')).min(new Date('01-01-2100Z')).optional(),
+      birthday: z.coerce
+        .date()
+        .min(new Date('01-01-1950Z'))
+        .max(new Date('01-01-2100Z'))
+        .optional(),
       city: z.string().optional(),
       aboutMe: z.string().max(200, t('general-info.errors.aboutMe.max')).optional(),
     })
+    .partial()
     .refine(
-      obj =>
-        typeof obj.birthday != 'undefined' &&
-        Date.now() - obj.birthday.getDate() > 13 * 365 * 24 * 60 * 60 * 1000,
+      obj => {
+        console.log('Refine: ', obj)
+        return (
+          typeof obj.birthday != 'undefined' &&
+          Date.now() - obj.birthday.getTime() > 13 * 365 * 24 * 60 * 60 * 1000
+        )
+      },
       {
         path: ['birthday'],
-        message: t('general-info.errors.birtday'),
+        message: t('general-info.errors.birthday'),
       },
     )
 
