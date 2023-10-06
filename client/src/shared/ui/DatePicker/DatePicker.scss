@@ -7,6 +7,7 @@
 .react-datepicker-wrapper.error {
   .react-datepicker__input-container {
     input {
+      color: var(--danger-color-500) !important;
       border: 1px solid var(--danger-color-500);
     }
   }

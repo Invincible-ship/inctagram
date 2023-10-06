@@ -14,5 +14,6 @@
     "dec": "December"
   },
   "placeholder": "mm.dd.yyyy",
-  "placeholder-range": "mm.dd.yyyy - mm.dd.yyyy"
+  "placeholder-range": "mm.dd.yyyy - mm.dd.yyyy",
+  "privacy-policy": "Privacy Policy"
 }

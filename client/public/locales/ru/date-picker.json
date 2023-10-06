@@ -14,5 +14,6 @@
     "dec": "Декабрь"
   },
   "placeholder": "мм.дд.гггг",
-  "placeholder-range": "мм.дд.гггг - мм.дд.гггг"
+  "placeholder-range": "мм.дд.гггг - мм.дд.гггг",
+  "privacy-policy": "Политика конфиденциальности"
 }

@@ -19,11 +19,10 @@ export const Header: FC<HeaderProps> = () => {
         </div>
         <div className={cls.right}>
           {/*FIXME: implement notifications */}
-          <span>
+          <span className={cls.notificationsIcon}>
             <OutlineBell />
           </span>
           <SuspenseLangSwitcher />
-          {/* <SignOut /> */}
         </div>
       </div>
     </header>

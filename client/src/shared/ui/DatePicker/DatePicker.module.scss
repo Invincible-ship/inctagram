@@ -5,10 +5,16 @@
   color: var(--light-color-900);
   margin-top: 15px;
 
+  .birthdayErrorLink {
+    color: var(--danger-color-500);
+    text-decoration: underline;
+  }
+
   .datePickerError {
     color: var(--danger-color-500);
   }
 }
+
 
 .max {
   width: 100%;

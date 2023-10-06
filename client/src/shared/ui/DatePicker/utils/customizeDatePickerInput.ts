@@ -18,6 +18,7 @@ export function customizeDatePickerInput({
   value,
 }: Params) {
   let calendarIconObj = defaultCalendarIconObj
+
   const $datePickerWrapper = document.querySelector('.react-datepicker-wrapper') as HTMLDivElement
   const $datePickerInput = document.querySelector(
     '.react-datepicker__input-container input',

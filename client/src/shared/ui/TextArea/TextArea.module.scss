@@ -14,7 +14,7 @@
     outline: none;
     padding: 0 10px;
     border: 1px solid var(--dark-color-100);
-    color: var(--light-color-900);
+    color: var(--light-color-100);
     background: transparent;
     border-radius: 2px;
     font-size: 16px;
@@ -28,11 +28,10 @@
     }
 
     &:hover {
-      color: var(--light-color-900);
+      border: 1px solid var(--light-color-900);
     }
 
     &:focus {
-      color: var(--light-color-900);
       border-radius: 2px;
       border: 1px solid var(--accent-color-700);
     }

@@ -1,0 +1,55 @@
+.SelectTrigger {
+  padding: 6px 12px;
+  border: 1px solid var(--dark-color-100);
+  border-radius: none;
+  color: var(--primary-text-color);
+  background-color: var(--dark-color-700);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+
+  &[data-state="open"] {
+    .SelectIcon {
+      transform: rotate(180deg);
+    }
+  }
+
+  .SelectIcon {
+    display: flex;
+    align-items: center;
+    transition: transform 0.15s ease-in;
+
+    svg g path {
+      fill: var(--light-color-100);
+    }
+  }
+}
+
+.SelectContent {
+  width: var(--radix-select-trigger-width);
+  overflow: hidden;
+  background-color: var(--dark-color-700);
+  border: 1px solid var(--dark-color-100);
+  z-index: var(--modal-z-index);
+}
+
+.SelectItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--dark-color-100);
+  }
+
+  &[data-highlighted] {
+    outline: none;
+  }
+
+  .CheckIcon {
+    fill: var(--light-color-100);
+  }
+}

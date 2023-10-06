@@ -10,7 +10,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSelector } from 'react-redux'
 import { getProfileGeneralInfo } from '../../model/selectors/getProfileGeneralInfo'
-import { getUserAuthData } from '@/entities/User'
 
 export const EditableProfileGeneralInfo = () => {
   const lngId = useContext(LanguageContext)
@@ -27,7 +26,7 @@ export const EditableProfileGeneralInfo = () => {
     formState: { errors, dirtyFields },
   } = useForm<TGeneralInfo>({
     resolver: zodResolver(GeneralInfoSchema),
-    mode: 'onBlur',
+    mode: 'all',
     defaultValues: profileGeneralInfoData,
   })
 
