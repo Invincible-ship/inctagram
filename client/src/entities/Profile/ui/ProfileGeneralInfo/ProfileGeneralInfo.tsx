@@ -8,6 +8,7 @@ import { Control, FieldErrors, UseFormRegister } from 'react-hook-form'
 import cls from './ProfileGeneralInfo.module.scss'
 import { TextArea } from '@/shared/ui/TextArea/TextArea'
 import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
+import { CitySelect } from '@/entities/Profile/ui/ProfileGeneralInfo/CitySelect'
 
 type ProfileGeneralInfoProps = {
   control: Control<TGeneralInfo>
@@ -46,7 +47,13 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
                   />
                 )
               case 'city':
-                return <h1>City select</h1>
+                return (
+                  <CitySelect
+                    title={t(`general-info.${normalizedValue}`)}
+                    placeholder={t(`general-info.${normalizedValue}`)}
+                    max
+                  />
+                )
               case 'aboutMe':
                 return (
                   <TextArea

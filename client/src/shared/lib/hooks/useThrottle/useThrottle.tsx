@@ -1,17 +1,40 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-export const useThrottle = (cb: (...args: any[]) => void, delay: number = 500) => {
-  const timerRef = useRef<boolean>(false)
+// export function useThrottle<T>(value: T, interval = 500): T {
+//   const [throttledValue, setThrottledValue] = useState<T>(value)
+//   const lastExecuted = useRef<number>(Date.now())
+
+//   useEffect(() => {
+//     if (Date.now() >= lastExecuted.current + interval) {
+//       lastExecuted.current = Date.now()
+//       setThrottledValue(value)
+//     } else {
+//       const timerId = setTimeout(() => {
+//         lastExecuted.current = Date.now()
+//         setThrottledValue(value)
+//       }, interval)
+
+//       return () => clearTimeout(timerId)
+//     }
+//   }, [value, interval])
+
+//   return throttledValue
+// }
+
+export function useThrottle(callback: (...args: any[]) => void, delay: number) {
+  const throttleRef = useRef(false)
 
   return useCallback(
     (...args: any[]) => {
-      if (!timerRef.current) {
-        cb(...args)
-        timerRef.current = true
-      }
+      if (!throttleRef.current) {
+        callback(...args)
+        throttleRef.current = true
 
-      setTimeout(() => (timerRef.current = false), delay)
+        setTimeout(() => {
+          throttleRef.current = false
+        }, delay)
+      }
     },
-    [cb, delay],
+    [callback, delay],
   )
 }

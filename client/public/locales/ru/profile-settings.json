@@ -31,6 +31,7 @@
     "firstName": "Имя",
     "lastName": "Фамилия",
     "birthday": "Дата рождения",
+    "city": "Город",
     "aboutMe": "Обо мне"
   }
 }
