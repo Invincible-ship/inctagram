@@ -11,10 +11,14 @@
   transition:
     background-color 0.2s linear,
     color 0.2s linear;
+
+  &.full {
+    width: 100%;
+  }
   
-    &[disabled] {
-      cursor: not-allowed;
-    }
+  &[disabled] {
+    cursor: not-allowed;
+  }
 }
 
 .primary {

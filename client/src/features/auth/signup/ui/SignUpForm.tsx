@@ -5,6 +5,8 @@ import { InputField } from '@/shared/ui/InputField/InputField'
 import { PasswordWrapper } from '@/shared/ui/PasswordWrapper/PasswordWrapper'
 import { Button } from '@/shared/ui/Button/Button'
 import '@/shared/styles/variables/common/_form.scss'
+import cls from './signup.module.scss'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 export type SignUpFormProps = {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined
@@ -26,7 +28,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register,
   }
 
   return (
-    <form onSubmit={onSubmit} className={'form-style'}>
+    <form onSubmit={onSubmit} className={classNames('form-style', {}, [cls.form])}>
       <InputField
         id={'userName'}
         type={'text'}

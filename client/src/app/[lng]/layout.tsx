@@ -10,9 +10,10 @@ import '@/shared/styles/variables/common.scss'
 import Loading from './loading'
 import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
 import { useParams } from 'next/navigation'
+import { Toaster } from '@/shared/ui/Toaster/Toaster'
 
 const inter = Inter({
-  weight: ['400', '500', '700', '900'],
+  weight: ['400', '500', '600', '700', '900'],
   subsets: ['latin', 'cyrillic'],
 })
 
@@ -28,6 +29,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
             <Suspense fallback={<Loading />}>
               <Header />
               {children}
+              <Toaster />
             </Suspense>
           </LanguageProvider>
         </div>

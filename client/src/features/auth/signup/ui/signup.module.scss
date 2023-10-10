@@ -1,3 +1,10 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 11px;
+}
+
 .info {
   margin-bottom: 7px;
 }
@@ -45,3 +52,5 @@
   gap: 60px;
   padding: 13px;
 }
+
+

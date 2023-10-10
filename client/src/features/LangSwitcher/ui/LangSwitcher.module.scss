@@ -1,58 +1,9 @@
 .trigger {
   width: 170px;
-  padding: 6px 12px;
-  border: 1px solid var(--dark-color-100);
-  border-radius: none;
-  color: var(--primary-text-color);
-  background-color: var(--dark-color-700);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-
-  &[data-state="open"] {
-    .lng-icon {
-      transform: rotate(180deg);
-    }
-  }
-
-  .lng-icon {
-    display: flex;
-    align-items: center;
-    transition: transform 0.15s ease-in;
-
-    svg g path {
-      fill: var(--light-color-100);
-    }
-  }
 }
 
-.content {
-  width: var(--radix-select-trigger-width);
-  overflow: hidden;
-  background-color: var(--dark-color-700);
-  border: 1px solid var(--dark-color-100);
-
-  .item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 6px 12px;
-    padding-right: 16px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--dark-color-100);
-    }
-
-    &[data-highlighted] {
-      outline: none;
-    }
-
-    .check-icon {
-      fill: var(--light-color-100);
-    }
-  }
+.item {
+  padding-right: 16px;
 }
 
 .value {
@@ -63,5 +14,20 @@
   span {
     display: flex;
     align-items: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .trigger {
+    width: max-content;
+    border: 0;
+  }
+  .content {
+    border: 0;
+  }
+  .value {
+    span.lngName {
+      display: none; 
+    }
   }
 }

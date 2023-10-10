@@ -1,0 +1,20 @@
+.datePickerField {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--light-color-900);
+
+  .birthdayErrorLink {
+    color: var(--danger-color-500);
+    text-decoration: underline;
+  }
+
+  .datePickerError {
+    color: var(--danger-color-500);
+  }
+}
+
+
+.max {
+  width: 100%;
+}

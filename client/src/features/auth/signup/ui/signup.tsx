@@ -44,7 +44,7 @@ export const SignUp = () => {
     dispatch(signupThunk({ body: data, setError, lngId }))
     setEmail(data.email)
   }
-  // TODO: add 400 status error handler to say user link has already sent to email
+  // TODO: add 400 status error handler to say user that link has already sent to email
 
   return (
     <>
@@ -59,7 +59,7 @@ export const SignUp = () => {
             errors={errors}
             register={register}
           />
-          <span className={'info b-title bt14  align-center semibold'}>
+          <span style={{ marginBottom: 12 }} className={'info b-title bt14  align-center semibold'}>
             {t('doYouHaveAnAccount')}
           </span>
           <Link
