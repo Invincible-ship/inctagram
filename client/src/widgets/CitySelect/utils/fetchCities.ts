@@ -9,7 +9,7 @@ export const fetchCities = async (cityValue: string): Promise<string[] | [] | un
     })
 
     const citiesResponse = await axios.get(
-      process.env.NEXT_PUBLIC_GOOGLE_MAPS_AUTOCOMPLETE_URL as string,
+      process.env.NEXT_PUBLIC_GOOGLE_MAPS_AUTOCOMPLETE_URL_WITH_CORS as string,
       {
         params: citiesParams,
       },
