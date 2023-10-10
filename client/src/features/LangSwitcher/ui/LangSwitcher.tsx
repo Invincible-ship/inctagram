@@ -50,6 +50,7 @@ const LangSwitcher = () => {
 
   return (
     <Select
+      testId="lang-switcher"
       onValueChange={onChange}
       triggerClassName={cls.trigger}
       contentClassName={cls.content}

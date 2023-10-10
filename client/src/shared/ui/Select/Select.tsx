@@ -19,6 +19,7 @@ type SelectProps = {
   disabled?: boolean
   required?: boolean
   position?: 'item-aligned' | 'popper'
+  testId?: string
   defaultSelectedItem?: ReactNode
   placeholderText?: ReactNode
   triggerClassName?: string
@@ -38,6 +39,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
       arrowDownIconClassName,
       contentClassName,
       position = 'popper',
+      testId,
       defaultSelectedItem,
       ...rest
     },
@@ -47,6 +49,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
       <SelectPrimitive.Root value={value} {...rest}>
         <SelectPrimitive.Trigger
           ref={forwardedRef}
+          data-testid={testId}
           className={classNames(cls.SelectTrigger, {}, [triggerClassName])}
         >
           <SelectPrimitive.Value
