@@ -30,7 +30,7 @@ export const Error: Story = {
       onKeyPress={action('onKeyPress')}
       onEnter={action('onEnter')}
       title="Email"
-      error={{ message: 'required' }}
+      error={{ type: '', message: 'required' }}
       className={s.errorInput}
     />
   ),
