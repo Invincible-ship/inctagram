@@ -8,6 +8,7 @@ import { setDisableError } from '@/features/auth/signIn/model/slice/signInSlice'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 export type SignInFormProps = {
   errorLogin?: string
@@ -37,7 +38,11 @@ export const SignInForm: FC<SignInFormProps> = ({
   }
 
   return (
-    <form onSubmit={onSubmit} className={'form-style'} onClick={disableError}>
+    <form
+      onSubmit={onSubmit}
+      className={classNames('form-style', {}, [s.form])}
+      onClick={disableError}
+    >
       <InputField
         id={'email'}
         type={'email'}
@@ -65,6 +70,7 @@ export const SignInForm: FC<SignInFormProps> = ({
       <Button
         type="submit"
         className={'styled-btn styled-btn-1'}
+        style={{ marginTop: 0 }}
         isLoading={isLoading}
         disabled={isLoading}
       >

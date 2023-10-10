@@ -56,7 +56,9 @@ export const SignIn: FC = () => {
           onSubmit={handleSubmit(onSubmit)}
           errorLogin={error ? t('errorLogin') : ''}
         />
-        <span className={'info b-title bt16 align-center'}>{t('dontHaveAnAccount')}?</span>
+        <span className={'info b-title bt16 align-center'} style={{ marginBottom: 12 }}>
+          {t('dontHaveAnAccount')}?
+        </span>
         <Link
           href={`/${lngId}${Routes.SIGNUP}`}
           className={`b-title bt16 semibold ${style.linkRegistration} align-center`}

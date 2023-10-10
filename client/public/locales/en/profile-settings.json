@@ -25,13 +25,17 @@
       "birthday": "A user under 13 cannot create a profile",
       "aboutMe": {
         "max": "This field must contain no more than 200 characters"
-      }
+      },
+      "update": "Failed to update profile information. Try again later"
     },
     "userName": "Username",
     "firstName": "First Name",
     "lastName": "Last Name",
     "birthday": "Date of birth",
     "city": "City",
-    "aboutMe": "About Me"
+    "aboutMe": "About Me",
+    "privacy-policy": "Privacy Policy",
+    "update-success": "Profile information successfully updated",
+    "button": "Save Changes"
   }
 }

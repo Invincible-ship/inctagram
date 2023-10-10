@@ -11,7 +11,7 @@ import defaultCalendarIconObj from '@/shared/assets/icons/calendar-default.svg?u
 import errorCalendarIconObj from '@/shared/assets/icons/calendar-error.svg?url'
 import cls from './DatePicker.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { customizeDatePickerInput } from '@/shared/ui/DatePicker/utils/customizeDatePickerInput'
+import { customizeDatePickerInput } from './utils/customizeDatePickerInput'
 import { Control, Controller, FieldError } from 'react-hook-form'
 import Link from 'next/link'
 
@@ -63,7 +63,6 @@ export const DatePicker: FC<DatePickerProps> = ({
     <Controller
       control={control}
       name={value}
-      key={value}
       render={({ field: { onChange, onBlur } }) => {
         const handleChange = (value: Value | RangeValue) => {
           if (value instanceof Array) {
@@ -77,7 +76,7 @@ export const DatePicker: FC<DatePickerProps> = ({
           onChange(value)
         }
 
-        const birthdaError = (
+        const birthdayError = (
           <>
             {error?.message}.{' '}
             <Link className={cls.birthdayErrorLink} href="#" target="_blank">
@@ -102,7 +101,7 @@ export const DatePicker: FC<DatePickerProps> = ({
             />
             {error && (
               <span className={cls.datePickerError}>
-                {error.type == 'too_big' ? birthdaError : error.message}
+                {error.type == 'too_big' ? birthdayError : error.message}
               </span>
             )}
           </div>

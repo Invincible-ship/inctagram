@@ -5,15 +5,15 @@ import { EditableProfileSettingsHeader } from '../EditableProfileSettingsHeader/
 import cls from './EditableProfileSettings.module.scss'
 import { EditableProfileGeneralInfo } from '../EditableProfileGeneralInfo/EditableProfileGeneralInfo'
 import { FC, useCallback } from 'react'
-import { ProfileSettingsTab, ProfileSettingValue } from '../../model/types/types'
+import { ProfileSettingsTab, ProfileSettingValue } from '@/entities/Profile'
 import { VStack } from '@/shared/ui/Stack'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 const mapProfileSettings = {
   [ProfileSettingValue.GENERAL_INFO]: <EditableProfileGeneralInfo />,
-  [ProfileSettingValue.DEVICES]: <>Devices</>,
-  [ProfileSettingValue.ACCOUNT_MANAGMENT]: <>Account Managment</>,
-  [ProfileSettingValue.PAYMENTS]: <>Payments</>,
+  [ProfileSettingValue.DEVICES]: <h1>Devices</h1>,
+  [ProfileSettingValue.ACCOUNT_MANAGMENT]: <h1>Account Managment</h1>,
+  [ProfileSettingValue.PAYMENTS]: <h1>Payments</h1>,
 }
 
 type EditableProfileSettingsProps = {

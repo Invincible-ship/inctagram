@@ -8,7 +8,7 @@ import React, {
 } from 'react'
 import s from './Input.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
-import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form'
+import { FieldError } from 'react-hook-form'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 type DefaultInputPropsType = DetailedHTMLProps<
@@ -16,12 +16,11 @@ type DefaultInputPropsType = DetailedHTMLProps<
   HTMLInputElement
 >
 
-type InputPropsType = Omit<DefaultInputPropsType, 'type'> & {
+type InputPropsType = DefaultInputPropsType & {
   onChangeText?: (value: string) => void
   onEnter?: () => void
   error?: FieldError
   spanClassName?: string
-  type?: string
   title?: string
   full?: boolean
 }
@@ -29,7 +28,6 @@ type InputPropsType = Omit<DefaultInputPropsType, 'type'> & {
 const Input = forwardRef<HTMLInputElement, InputPropsType>(
   (
     {
-      key,
       onChange,
       onChangeText,
       onKeyPress,
@@ -66,8 +64,8 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
     }
 
     return (
-      <div key={key} className={classNames(s.inputWrapper, wrapperMods)}>
-        <div>{title}</div>
+      <div className={classNames(s.inputWrapper, wrapperMods)}>
+        <label htmlFor={id}>{title}</label>
         <input
           ref={ref}
           id={id}

@@ -14,6 +14,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
   theme?: ButtonTheme
   isLoading?: boolean
+  full?: boolean
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -21,13 +22,18 @@ export const Button: FC<ButtonProps> = ({
   theme = ButtonTheme.DEFAULT,
   isLoading,
   children,
+  full,
   ...rest
 }) => {
+  const mods = {
+    [cls.full]: full,
+  }
+
   return (
     <button
       data-testid="test"
       type="button"
-      className={classNames(cls.Button, {}, [className, cls[theme]])}
+      className={classNames(cls.Button, mods, [className, cls[theme]])}
       {...rest}
     >
       {isLoading && <Spinner className={cls[theme]} />}

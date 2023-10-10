@@ -1,57 +1,22 @@
+.ProfileGeneralInfo {
+  position: relative;
+  padding-bottom: 26px;
+}
+
 .form {
   flex-grow: 1;
-}
-
-.textAreaWrapper {
   width: 100%;
 
-  label {
-    font-size: 14px;
-    color: var(--light-color-900);
-  }
-
-  .textArea {
-    resize: vertical;
-    width: inherit;
-    min-height: 84px;
-    max-height: 200px;
-    outline: none;
-    padding: 0 10px;
-    border: 1px solid var(--dark-color-100);
-    color: var(--light-color-900);
-    background: transparent;
-    border-radius: 2px;
-    font-size: 16px;
-    font-family: Inter, sans-serif;
-    line-height: 24px;
-
-    &:active {
-      border-radius: 2px;
-      border: 1px solid var(--light-color-500);
-      background: var(--dark-color-500);
-    }
-
-    &:hover {
-      color: var(--light-color-900);
-    }
-
-    &:focus {
-      color: var(--light-color-900);
-      border-radius: 2px;
-      border: 1px solid var(--accent-color-700);
-    }
-
-    &.errorTextArea {
-      border-radius: 2px;
-      border: 1px solid var(--danger-500, #cc1439) !important;
-    }
-  }
-
-  .textAreaError {
-    font-size: 14px;
-    color: var(--danger-color-500);
-    font-weight: 400;
-    line-height: 24px;
+  .submitButton {
+    align-self: flex-end;
+    margin-top: 24px;
   }
 }
 
+.underline {
+  position: absolute;
+  bottom: 86px;
+  width: 100%;
+  height: 1px;
+  background-color: var(--dark-color-300);
+}

@@ -1,5 +1,5 @@
 import { HStack } from '@/shared/ui/Stack'
-import { FC, ReactElement, ReactNode, useContext, useMemo } from 'react'
+import { ReactNode, useMemo } from 'react'
 import { ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import ArrowLeft from '@/shared/assets/icons/arrow-left.svg'
 import ArrowRight from '@/shared/assets/icons/arrow-right.svg'
@@ -14,9 +14,11 @@ export const DatePickerHeader = ({
   prevMonthButtonDisabled,
   nextMonthButtonDisabled,
   t,
-}: ReactDatePickerCustomHeaderProps & { t: TFunction<Namespaces, undefined> }): ReactNode => {
-  const currentMonth = date.getMonth()
-  const currentYear = date.getFullYear()
+}: Partial<ReactDatePickerCustomHeaderProps> & {
+  t: TFunction<Namespaces, undefined>
+}): ReactNode => {
+  const currentMonth = date?.getMonth() as number
+  const currentYear = date?.getFullYear()
 
   const mapMonthIndexToName: Record<number, string> = useMemo(() => {
     return {

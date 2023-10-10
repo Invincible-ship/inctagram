@@ -1,6 +1,4 @@
-import { TFunction } from 'i18next'
 import { ReactNode } from 'react'
-import { z } from 'zod'
 
 export enum ProfileSettingValue {
   GENERAL_INFO = 'general-info',

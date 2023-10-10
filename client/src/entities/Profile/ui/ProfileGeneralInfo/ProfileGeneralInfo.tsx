@@ -1,20 +1,26 @@
 import { TGeneralInfo } from '@/features/editableProfileSettings/model/types/generalInfo'
 import { Namespaces } from '@/shared/config/i18n/types'
 import Input from '@/shared/ui/Input/Input'
-import { HStack, VStack } from '@/shared/ui/Stack'
+import { Flex, HStack, VStack } from '@/shared/ui/Stack'
 import { TFunction } from 'i18next'
 import { FC } from 'react'
-import { Control, FieldErrors, UseFormRegister } from 'react-hook-form'
+import { Control, FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 import cls from './ProfileGeneralInfo.module.scss'
 import { TextArea } from '@/shared/ui/TextArea/TextArea'
-import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
-import { CitySelect } from '@/entities/Profile/ui/ProfileGeneralInfo/CitySelect'
+import { DatePicker } from '@/widgets/DatePicker/DatePicker'
+import { CitySelect } from '@/widgets/CitySelect/CitySelect'
+import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
+import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 
 type ProfileGeneralInfoProps = {
   control: Control<TGeneralInfo>
   handleSubmit: () => void
   errors: FieldErrors<TGeneralInfo>
   register: UseFormRegister<TGeneralInfo>
+  setValue: UseFormSetValue<TGeneralInfo>
+  isDirtyFields: boolean
+  isFieldsValid: boolean
+  isLoading?: boolean
   fieldsValues: TGeneralInfo
   t: TFunction<Namespaces, undefined>
 }
@@ -24,11 +30,19 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
   handleSubmit,
   errors,
   register,
+  setValue,
+  isDirtyFields,
+  isFieldsValid,
+  isLoading,
   fieldsValues,
   t,
 }) => {
+  const matches = useMediaQuery('(max-width: 768px)')
+  const direction = matches ? 'column' : 'row'
+  const align = direction == 'column' ? 'center' : 'start'
+
   return (
-    <HStack gap="8" max>
+    <Flex className={cls.ProfileGeneralInfo} direction={direction} align={align} gap="8" max>
       <h1>Avatar field</h1>
       <form onSubmit={handleSubmit} className={cls.form}>
         <VStack gap="24" max>
@@ -39,6 +53,7 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
               case 'birthday':
                 return (
                   <DatePicker
+                    key={normalizedValue}
                     control={control}
                     value={normalizedValue}
                     title={t(`general-info.${normalizedValue}`)}
@@ -49,6 +64,9 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
               case 'city':
                 return (
                   <CitySelect
+                    registerValue={normalizedValue}
+                    setRegisterValue={setValue}
+                    key={normalizedValue}
                     title={t(`general-info.${normalizedValue}`)}
                     placeholder={t(`general-info.${normalizedValue}`)}
                     max
@@ -77,8 +95,20 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
                 )
             }
           })}
+
+          <Button
+            className={cls.submitButton}
+            type="submit"
+            theme={ButtonTheme.DEFAULT}
+            disabled={!isDirtyFields || isLoading}
+            isLoading={isLoading}
+            full={matches}
+          >
+            {t('general-info.button')}
+          </Button>
         </VStack>
       </form>
-    </HStack>
+      <span className={cls.underline}></span>
+    </Flex>
   )
 }

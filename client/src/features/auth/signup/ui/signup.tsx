@@ -59,7 +59,7 @@ export const SignUp = () => {
             errors={errors}
             register={register}
           />
-          <span className={'info b-title bt14  align-center semibold'}>
+          <span style={{ marginBottom: 12 }} className={'info b-title bt14  align-center semibold'}>
             {t('doYouHaveAnAccount')}
           </span>
           <Link

@@ -1,9 +1,10 @@
 import { memo, useContext, useMemo } from 'react'
-import { ProfileSettingsTab, ProfileSettingValue } from '../../model/types/types'
+import { ProfileSettingsTab, ProfileSettingValue } from '@/entities/Profile'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
+import cls from './EditableProfileSettingsHeader.module.scss'
 
 type EditableProfileSettingsHeaderProps = {
   tabValue: ProfileSettingValue
@@ -25,7 +26,7 @@ export const EditableProfileSettingsHeader = memo(
       [t],
     )
 
-    return <Tabs tabs={tabs} value={tabValue} onTabClick={handleTabClick} />
+    return <Tabs className={cls.tabs} tabs={tabs} value={tabValue} onTabClick={handleTabClick} />
   },
 )
 

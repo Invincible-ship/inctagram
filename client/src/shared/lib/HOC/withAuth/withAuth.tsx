@@ -47,7 +47,7 @@ export function withAuth<T extends JSX.IntrinsicAttributes = JSX.IntrinsicAttrib
             if (routeRole === 'auth') {
               if (isFirstAuthorizedRef.current) {
                 localStorage.setItem(LOCAL_STORAGE_IS_FIRST_AUTHORIZED, JSON.stringify(false))
-                redirect(redirectTo || `/${lngId}${Routes.PROFILE}/${userAuthData.id}`, RedirectType.replace)
+                redirect(redirectTo || `/${lngId}${Routes.PROFILE}/${userAuthData.id}/edit`, RedirectType.replace)
               }
               redirect(redirectTo || `/${lngId}${Routes.MAIN}`, RedirectType.replace)
             }

@@ -1,59 +1,58 @@
 import Input from '@/shared/ui/Input/Input'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import cls from './CitySelect.module.scss'
-import axios from 'axios'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce/useDebounce'
+import { FieldValues, Path, PathValue, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import { fetchCities } from './utils/fetchCities'
 
-type CitySelectProps = {
+type CitySelectProps<T extends FieldValues> = {
+  register?: UseFormRegister<T>
+  registerValue?: Path<T>
+  setRegisterValue?: UseFormSetValue<T>
   className?: string
   title?: string
   placeholder?: string
   max?: boolean
 }
 
-const DEBOUNCE_DELAY = 700
+const DEBOUNCE_DELAY = 300
 
-export const CitySelect: FC<CitySelectProps> = ({ className, title, placeholder, max }) => {
+export const CitySelect = <T extends FieldValues>({
+  className,
+  registerValue,
+  setRegisterValue,
+  title,
+  placeholder,
+  max,
+}: CitySelectProps<T>) => {
   const [inputValue, setInputValue] = useState<string>('')
   const [cities, setCities] = useState<string[] | []>([])
 
-  const handleInputChange = async (value: string) => {
-    setInputValue(value)
+  const handleInputChange = async (inputValue: string) => {
+    setInputValue(inputValue)
 
-    debouncedSetNewCities(value)
+    setRegisterCityValue('')
+
+    debouncedSetNewCities(inputValue)
   }
 
   const handleCityClick = (cityName: string) => () => {
     setInputValue(cityName)
+
+    setRegisterCityValue(cityName)
+
     setCities([])
   }
 
-  const setNewCities = async (value: string) => {
-    try {
-      const citiesParams = new URLSearchParams({
-        input: value,
-        types: '(cities)',
-        key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
-      })
+  const setRegisterCityValue = (value: string | null | undefined) => {
+    if (setRegisterValue && registerValue)
+      setRegisterValue(registerValue, value as PathValue<T, Path<T>>)
+  }
 
-      const citiesResponse = await axios.get(
-        process.env.NEXT_PUBLIC_GOOGLE_MAPS_AUTOCOMPLETE_URL as string,
-        {
-          params: citiesParams,
-        },
-      )
-
-      const newCities = citiesResponse?.data?.predictions
-        ? citiesResponse.data.predictions.map((citiesInfo: any) => citiesInfo?.description)
-        : []
-
-      setCities(newCities)
-    } catch (err) {
-      if (err instanceof Error) {
-        console.warn(err)
-      }
-    }
+  const setNewCities = async (cityValue: string) => {
+    const newCities = await fetchCities(cityValue)
+    newCities ? setCities(newCities) : setCities([])
   }
 
   const debouncedSetNewCities = useDebounce(setNewCities, DEBOUNCE_DELAY)
@@ -66,6 +65,7 @@ export const CitySelect: FC<CitySelectProps> = ({ className, title, placeholder,
     <div className={classNames(cls.CitySelect, mods, [className])}>
       <Input
         id={title}
+        name={registerValue}
         value={inputValue}
         onChangeText={handleInputChange}
         title={title}
@@ -73,8 +73,8 @@ export const CitySelect: FC<CitySelectProps> = ({ className, title, placeholder,
         full={max}
       />
       <div className={cls.citiesList}>
-        {cities &&
-          cities?.map(cityName => {
+        {cities.length > 0 &&
+          cities.map(cityName => {
             return (
               <p key={cityName} className={cls.cityItem} onClick={handleCityClick(cityName)}>
                 {cityName}

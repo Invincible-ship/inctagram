@@ -1,5 +1,3 @@
-'use client'
+import ProfileSettingsPage from '@/_pages/ProfileSettingsPage/ProfileSettingsPage'
 
-import { EditableProfileSettings } from '@/features/editableProfileSettings/ui/EditableProfileSettings/EditableProfileSettings'
-
-export default EditableProfileSettings
+export default ProfileSettingsPage

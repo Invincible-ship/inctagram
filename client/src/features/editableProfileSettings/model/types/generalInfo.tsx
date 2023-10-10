@@ -2,8 +2,8 @@ import { TFunction } from 'i18next'
 import { z } from 'zod'
 
 // General Info schema and type
-export const generalInfoSchemaFn = (t: TFunction<string, undefined>) =>
-  z.object({
+export const generalInfoSchemaFn = (t: TFunction<string, undefined>) => {
+  return z.object({
     userName: z
       .string()
       .min(6, t('general-info.errors.username.min'))
@@ -30,5 +30,6 @@ export const generalInfoSchemaFn = (t: TFunction<string, undefined>) =>
     city: z.string().optional(),
     aboutMe: z.string().max(200, t('general-info.errors.aboutMe.max')).optional(),
   })
+}
 
 export type TGeneralInfo = z.infer<ReturnType<typeof generalInfoSchemaFn>>

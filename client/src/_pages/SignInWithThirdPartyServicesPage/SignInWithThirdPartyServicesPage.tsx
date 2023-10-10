@@ -36,7 +36,7 @@ export const SignInWithThirdPartyServicesPage: FC<SignInWithThirdPartyServicesPa
 
       isAuth
         ? redirect(`/${lngId}${Routes.MAIN}`)
-        : redirect(`/${lngId}${Routes.PROFILE}/${user.id}`)
+        : redirect(`/${lngId}${Routes.PROFILE}/${user.id}/edit`)
     }
 
     if (error && 'status' in error && error.status == 400) {

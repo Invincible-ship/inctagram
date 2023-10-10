@@ -14,8 +14,10 @@ export function calculateActiveTabPosition() {
   if (!$activeTab) leftPositionActiveTab = 0
 
   const tabsRect = $tabs.getBoundingClientRect()
+  const tabsScrollX = $tabs.scrollLeft
   const activeTabRect = $activeTab?.getBoundingClientRect()
-  leftPositionActiveTab = activeTabRect?.left - tabsRect?.left
+
+  leftPositionActiveTab = activeTabRect?.left - tabsRect?.left + tabsScrollX
 
   const widthActiveTab = activeTabRect?.width as number
 

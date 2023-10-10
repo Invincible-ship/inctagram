@@ -29,6 +29,10 @@ export const Tabs = memo((props: TabsProps) => {
 
   useLayoutEffect(() => {
     calculateActiveTabPosition()
+
+    window.addEventListener('resize', calculateActiveTabPosition)
+
+    return () => removeEventListener('resize', calculateActiveTabPosition)
   })
 
   return (
@@ -52,15 +56,13 @@ export const Tabs = memo((props: TabsProps) => {
             className={classNames(cls.Tab, tabMods)}
           >
             {tab.content}
+            {direction === 'row' && <span className={cls.underline}></span>}
           </div>
         )
       })}
 
       {direction === 'row' && (
-        <>
-          <span className={cls.underline}></span>
-          <span data-name="active-underline" className={cls.activeUnderline}></span>
-        </>
+        <span data-name="active-underline" className={cls.activeUnderline}></span>
       )}
     </Flex>
   )
