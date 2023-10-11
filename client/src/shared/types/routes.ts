@@ -7,6 +7,9 @@ export enum Routes {
   MERGE = '/auth/merge',
   GOOGLE_CLIENT = '/auth/oauth-google-client',
   GITHUB_CLIENT = '/auth/oauth-github-client',
+  TERMS_OF_SERVICE = '/auth/terms-of-service',
+  PRIVACY_POLICY = '/auth/privacy-policy',
   // user routes
   PROFILE = '/profile',
+
 }

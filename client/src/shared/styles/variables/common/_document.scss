@@ -1,0 +1,14 @@
+.document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .document-content {
+    width: 80%;
+    text-align: center;
+
+    h1 {
+      margin-bottom: 20px;
+    }
+  }
+}

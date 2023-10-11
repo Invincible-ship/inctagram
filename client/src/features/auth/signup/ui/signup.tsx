@@ -1,6 +1,6 @@
 'use client'
 import { useContext, useState } from 'react'
-import { SignUpForm } from './SignUpForm'
+import { SignUpForm } from 'src/features/auth/signup/ui/signUpForm/SignUpForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import '@/shared/styles/variables/common/_form.scss'
@@ -19,7 +19,7 @@ import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { getIsLoading } from '../model/selectors/getIsLoading'
 import { Routes } from '@/shared/types/routes'
 import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
-import { SignUpModal } from './SignUpModal'
+import { SignUpModal } from 'src/features/auth/signup/ui/signUpModal/SignUpModal'
 
 export const SignUp = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
@@ -64,8 +64,9 @@ export const SignUp = () => {
             t={t}
             errors={errors}
             register={register}
+            lngId={lngId}
           />
-          <span className={'info b-title bt14  align-center semibold'}>
+          <span className={'info b-title bt16 align-center semibold'}>
             {t('doYouHaveAnAccount')}
           </span>
           <Link

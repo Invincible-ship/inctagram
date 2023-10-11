@@ -22,5 +22,12 @@
     "title": "Email sent",
     "text": "We have sent a link to confirm your email to",
     "ok": "OK"
+  },
+  "agree": {
+    "iAgreeTo": "I agree to the ",
+    "termsOfService": "Terms of Service",
+    "and": "and ",
+    "privacyPolicy": "Privacy Policy",
+    "backToSignUp": "Back to sign up"
   }
 }
