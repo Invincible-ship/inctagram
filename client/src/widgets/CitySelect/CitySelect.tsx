@@ -52,7 +52,7 @@ export const CitySelect = <T extends FieldValues>({
 
   const setNewCities = async (cityValue: string) => {
     const newCities = await fetchCities(cityValue)
-    newCities ? setCities(newCities) : setCities([])
+    setCities(newCities || [])
   }
 
   const debouncedSetNewCities = useDebounce(setNewCities, DEBOUNCE_DELAY)

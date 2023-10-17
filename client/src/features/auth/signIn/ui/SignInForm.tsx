@@ -61,7 +61,6 @@ export const SignInForm: FC<SignInFormProps> = ({
         register={register('password')}
         error={errors.password}
       />
-      <div className={s.error}>{errorLogin}</div>
       <div className={s.forgotPassword}>
         <Link className={s.forgotPasswordLink} href={'/forgotPassword'}>
           {t('forgotPassword')}

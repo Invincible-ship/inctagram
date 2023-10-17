@@ -14,10 +14,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setAuthData: (state, { payload }: PayloadAction<LoginResponseType>) => {
-      state.authData = payload.user
-      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, payload.accessToken)
-      localStorage.setItem(LOCAL_STORAGE_USER_ID_KEY, payload.user.id)
+    setAuthData: (state, { payload }: PayloadAction<IUser>) => {
+      state.authData = payload
+      localStorage.setItem(LOCAL_STORAGE_USER_ID_KEY, JSON.stringify(payload.userId))
     },
     clearAuthData: state => {
       state.authData = undefined
@@ -38,6 +37,7 @@ const userSlice = createSlice({
         },
       ),
       builder.addCase(initAuthData.rejected, state => {
+        state.authData = undefined
         state.isLoading = false
         state._inited = true
       })

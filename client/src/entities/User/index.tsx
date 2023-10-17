@@ -6,7 +6,9 @@ export {
   useSignInWithGithubQuery,
   getUserDataByGithubQuery,
   useResendLinkMutation,
-  useConfirmationEmailViaCodeQuery,
+  useConfirmationEmailViaCodeMutation,
+  useMeLazyQuery,
+  useMeQuery,
 } from './api/userApi'
 export { initAuthData } from './services/initAuthData'
 export { getUserEmail } from './model/selectors/getUserEmail'

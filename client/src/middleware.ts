@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import acceptLanguage from 'accept-language'
 import { fallbackLng, languages } from '@/shared/config/i18n/settings'
-import { Routes } from '@/shared/types/routes'
-import { encodeSearchParams } from '@/shared/utils/encodeSearchParams'
 
 acceptLanguage.languages(languages)
 
@@ -24,7 +22,13 @@ export function middleware(req: NextRequest) {
     !languages.some(loc => req.nextUrl.pathname.startsWith(`/${loc}`)) &&
     !req.nextUrl.pathname.startsWith('/_next')
   ) {
-    return NextResponse.redirect(new URL(`/${lng}${req.nextUrl.pathname}`, req.url))
+    const searchParams = req.nextUrl.searchParams
+    return NextResponse.redirect(
+      new URL(
+        `/${lng}${req.nextUrl.pathname}${!!searchParams ? `?${searchParams.toString()}` : ''}`,
+        req.url,
+      ),
+    )
   }
 
   if (req.headers.has('referer')) {

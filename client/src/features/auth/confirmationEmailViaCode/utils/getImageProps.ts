@@ -1,5 +1,5 @@
-import successSrc from '../../../../public/images/confirmation-success.png'
-import invalidSrc from '../../../../public/images/confirmation-invalid.png'
+import successSrc from '../../../../../public/images/confirmation-success.png'
+import invalidSrc from '../../../../../public/images/confirmation-invalid.png'
 import { CONFIRMATION_STATUS } from '@/features/auth/confirmationEmailViaCode'
 import { StaticImageData } from 'next/image'
 

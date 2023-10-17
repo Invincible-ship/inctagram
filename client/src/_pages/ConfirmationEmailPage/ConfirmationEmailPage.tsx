@@ -1,45 +1,32 @@
 'use client'
 
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
-import { classNames } from '@/shared/lib/classNames/classNames'
-import { MyImage } from '@/shared/ui/MyImage/MyImage'
 import {
   CONFIRMATION_STATUS,
-  ConfirmationEmailButton,
+  ConfirmationEmailViaCode,
 } from '@/features/auth/confirmationEmailViaCode'
-import cls from './ConfirmationEmailPage.module.scss'
-import { getImageProps } from './utils/getImageProps'
 import { useSearchParams } from 'next/navigation'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import { useContext } from 'react'
+import { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { useConfirmationEmailViaCodeMutation } from '@/entities/User'
+import { Preloader } from '@/shared/ui/Preloader/Preloader'
 
 export const ConfirmationEmailPage = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
-  const searchParams = useSearchParams()
-
-  const status = searchParams.get('status') as CONFIRMATION_STATUS
-  const email = searchParams.get('email') as string | undefined
-
   const { t } = useClientTranslation(lngId, Namespaces.CONFIRMATION_EMAIL)
+  const searchParams = useSearchParams()
+  const confirmationCode = searchParams.get('code') as string
+  const email = searchParams.get('email') as string
 
-  const { src, alt, wrapperWidth } = getImageProps(status)
-  const mods = {
-    [cls.paddingText]: status != 'invalid',
-  }
+  const [confirmEmailViaCode, { isSuccess, isUninitialized }] =
+    useConfirmationEmailViaCodeMutation()
 
-  return (
-    <main className={cls.page}>
-      <h2>{t(`${status}.title`)}</h2>
-      <p className={classNames(cls.text, mods)}>{t(`${status}.text`)}</p>
-      <ConfirmationEmailButton
-        className={cls.btn}
-        status={status}
-        t={t}
-        lngId={lngId}
-        email={email}
-      />
-      <MyImage src={src as string} wrapperWidth={wrapperWidth} alt={alt} />
-    </main>
-  )
+  useEffect(() => {
+    confirmEmailViaCode({ confirmationCode })
+  }, [confirmEmailViaCode, confirmationCode])
+
+  if (isUninitialized) return <Preloader />
+
+  return <ConfirmationEmailViaCode isSuccess={isSuccess} t={t} lngId={lngId} email={email} />
 }

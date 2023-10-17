@@ -41,10 +41,10 @@ export const SignUp = () => {
   })
 
   const onSubmit: SubmitHandler<FormSchemaType> = data => {
-    dispatch(signupThunk({ body: data, setError, lngId }))
+    const body = { ...data, passwordConfirmation: undefined }
+    dispatch(signupThunk({ body, setError }))
     setEmail(data.email)
   }
-  // TODO: add 400 status error handler to say user that link has already sent to email
 
   return (
     <>

@@ -1,6 +1,7 @@
 'use client'
 
 import { getUserAuthData } from '@/entities/User'
+import { SignOut } from '@/features/auth/signout'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { Routes } from '@/shared/types/routes'
@@ -21,6 +22,7 @@ const Page = () => {
         <p>User Data: </p>
         <pre>{JSON.stringify(userData, null, 2)}</pre>
       </div>
+      <SignOut />
     </div>
   )
 }

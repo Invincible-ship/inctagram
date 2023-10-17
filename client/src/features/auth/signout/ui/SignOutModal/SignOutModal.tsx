@@ -26,11 +26,9 @@ export const SignOutModal: FC<SignOutModalProps> = ({ isOpen, onClose, signOut, 
           {t('logout-text')} <b>&quot;{email ?? 'test@gmail.com'}</b>&quot;?
         </p>
         <div className={cls.btns}>
-          <Link href="/" replace>
-            <Button className={cls.btn} theme={ButtonTheme.OUTLINED} onClick={signOut}>
-              {t('yes')}
-            </Button>
-          </Link>
+          <Button className={cls.btn} theme={ButtonTheme.OUTLINED} onClick={signOut}>
+            {t('yes')}
+          </Button>
           <Button className={cls.btn} theme={ButtonTheme.DEFAULT} onClick={onClose}>
             {t('no')}
           </Button>
