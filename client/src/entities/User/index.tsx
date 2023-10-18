@@ -2,9 +2,7 @@ export { clearAuthData, setAuthData, userReducer } from './model/slice/userSlice
 export {
   userApi,
   getUserDataByTokenQuery,
-  useSignInWithGoogleQuery,
-  useSignInWithGithubQuery,
-  getUserDataByGithubQuery,
+  getAccessTokenByGoogleMutation,
   useResendLinkMutation,
   useConfirmationEmailViaCodeMutation,
   useMeLazyQuery,

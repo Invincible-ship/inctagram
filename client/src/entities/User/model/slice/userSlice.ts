@@ -1,9 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { IUser, IUserSchema } from '../types/types'
-import { signInThunk } from '@/features/auth/signIn/model/signInThunk'
 import { initAuthData } from '../../services/initAuthData'
 import { LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
-import { LoginResponseType } from '@/features/auth/signIn/model/types/types'
 
 const initialState: IUserSchema = {
   _inited: false,

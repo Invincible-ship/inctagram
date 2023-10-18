@@ -60,16 +60,10 @@ export const userApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: [USER_TAG],
     }),
+    // TODO: migrate signInWithGoogle to new backend api
     signInWithGoogle: build.query<TOAuthLoginResponse, string>({
       query: code => ({
         url: SIGN_IN_WITH_GOOGLE_ENDPOINT,
-        params: { code },
-      }),
-    }),
-    // signInWithGithub migrated
-    signInWithGithub: build.query<TOAuthLoginResponse, string>({
-      query: code => ({
-        url: SIGN_IN_WITH_GITHUB_ENDPOINT,
         params: { code },
       }),
     }),
@@ -82,12 +76,6 @@ export const userApi = rtkApi.injectEndpoints({
 })
 
 export const getUserDataByTokenQuery = userApi.endpoints.me.initiate
-export const getUserDataByGithubQuery = userApi.endpoints.signInWithGithub.initiate
 export const useMeLazyQuery = userApi.endpoints.me.useLazyQuery
-export const {
-  useSignInWithGoogleQuery,
-  useSignInWithGithubQuery,
-  useResendLinkMutation,
-  useConfirmationEmailViaCodeMutation,
-  useMeQuery,
-} = userApi
+export const getAccessTokenByGoogleMutation = userApi.endpoints.signInWithGoogle.initiate
+export const { useResendLinkMutation, useConfirmationEmailViaCodeMutation, useMeQuery } = userApi

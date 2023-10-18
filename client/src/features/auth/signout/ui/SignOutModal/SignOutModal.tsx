@@ -1,7 +1,6 @@
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { FC } from 'react'
-import Link from 'next/link'
 import { TFunction } from 'i18next'
 import { useSelector } from 'react-redux'
 import { getUserEmail } from '@/entities/User'

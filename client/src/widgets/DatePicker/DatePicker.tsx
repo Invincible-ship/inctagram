@@ -23,6 +23,8 @@ type DatePickerProps = {
   range?: boolean
   max?: boolean
   width?: number
+  minDate?: Date
+  maxDate?: Date
 }
 
 type Value = Date | null
@@ -36,6 +38,8 @@ export const DatePicker: FC<DatePickerProps> = ({
   control,
   value,
   title,
+  minDate,
+  maxDate,
 }) => {
   const [startDate, setStartDate] = useState<Value>(null)
   const [endDate, setEndDate] = useState<Value>(null)
@@ -91,12 +95,15 @@ export const DatePicker: FC<DatePickerProps> = ({
             <DatePickerInstance
               // @ts-ignore
               renderCustomHeader={params => <DatePickerHeader t={t} {...params} />}
+              dateFormat="dd.mm.yyyy"
               selected={startDate}
               onChange={handleChange}
               onBlur={onBlur}
               selectsRange={range}
               startDate={range ? startDate : undefined}
               endDate={range ? endDate : undefined}
+              minDate={minDate}
+              maxDate={maxDate}
               placeholderText={placeholderText}
             />
             {error && (

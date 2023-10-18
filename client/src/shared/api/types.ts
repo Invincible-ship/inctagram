@@ -2,7 +2,7 @@ export type AuthRefreshResponse = {
   accessToken: string
 }
 
-type FieldError = {
+export type FieldError = {
   message: string
   field: string
 }
