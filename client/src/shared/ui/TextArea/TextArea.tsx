@@ -23,7 +23,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       <div className={cls.textAreaWrapper}>
         <label htmlFor={id}>{title}</label>
         <textarea id={id} ref={ref} className={classNames(cls.textArea, mods)} {...rest} />
-        {error && <span className={cls.textAreaError}>{error.message}</span>}
+        {!!error && <span className={cls.textAreaError}>{error.message}</span>}
       </div>
     )
   },

@@ -7,4 +7,6 @@ const ProfileSettingsPage = () => {
   return <EditableProfileSettings />
 }
 
-export default withAuth(ProfileSettingsPage, { routeRole: 'all' })
+export default ProfileSettingsPage
+
+// export default withAuth(ProfileSettingsPage, { routeRole: 'all' })

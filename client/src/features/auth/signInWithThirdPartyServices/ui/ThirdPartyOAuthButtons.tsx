@@ -9,19 +9,21 @@ import { getGithubOAuthUrl } from '../model/utils/getGithubOAuthUrl'
 import { useGoogleLogin } from '@react-oauth/google'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { signInWithGoogleThunk } from '../model/signInWithGoogleThunk'
+import { useRouter } from 'next/navigation'
 
 export const ThirdPartyOAuthButtons = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
   const dispatch = useAppDispatch()
+  const router = useRouter()
 
-  const handleGoogleClick = useGoogleLogin({
-    onSuccess: ({ code }) => dispatch(signInWithGoogleThunk(code)),
+  const signInWithGoogle = useGoogleLogin({
+    onSuccess: ({ code }) => dispatch(signInWithGoogleThunk({ code, router })),
     flow: 'auth-code',
   })
 
   return (
     <div className={cls.iconWrapper}>
-      <div className={cls['image-wrapper']} onClick={handleGoogleClick}>
+      <div className={cls['img-wrapper']} onClick={signInWithGoogle}>
         <Google />
       </div>
       <Link href={getGithubOAuthUrl(lngId)} className={cls['img-wrapper']}>

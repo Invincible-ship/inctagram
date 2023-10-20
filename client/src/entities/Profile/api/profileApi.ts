@@ -5,17 +5,20 @@ import { PROFILE_TAG, USER_TAG } from '@/shared/const/rtk'
 
 export const profileApi = rtkApi.injectEndpoints({
   endpoints: build => ({
-    getProfileData: build.query<IProfile, number | undefined>({
-      query: id => `${PROFILE_ENDPOINT}${id ? `/${id}` : ''}`,
+    getProfileDataById: build.query<IProfile, number>({
+      query: id => `${PROFILE_ENDPOINT}/${id}`,
       providesTags: (result, error, id) => [{ type: PROFILE_TAG, id }],
     }),
-    updateProfile: build.mutation<IProfile, Partial<IProfile>>({
+    updateProfile: build.mutation<IProfile, Omit<Partial<IProfile>, 'id'>>({
       query: profileData => ({
         method: 'PUT',
         url: PROFILE_ENDPOINT,
         body: profileData,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: PROFILE_TAG, id }],
+      invalidatesTags: result => {
+        const id = result?.id
+        return [{ type: PROFILE_TAG, id }, PROFILE_TAG]
+      },
     }),
     // for testing
     deleteProfile: build.mutation<void, void>({
@@ -27,3 +30,7 @@ export const profileApi = rtkApi.injectEndpoints({
     }),
   }),
 })
+
+export const getProfileDataByIdQuery = profileApi.endpoints.getProfileDataById.initiate
+export const { useGetProfileDataByIdQuery, useUpdateProfileMutation, useDeleteProfileMutation } =
+  profileApi

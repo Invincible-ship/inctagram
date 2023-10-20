@@ -6,7 +6,6 @@ export const RESEND_LINK_ENDPOINT = '/api/v1/auth/registration-email-resending'
 export const SIGN_IN_ENDPOINT = '/api/v1/auth/login'
 export const ME_ENDPOINT = '/api/v1/auth/me'
 export const SIGN_IN_WITH_GOOGLE_ENDPOINT = '/api/v1/auth/google/login'
-export const GOOGLE_ENDPOINT = 'https://accounts.google.com/o/oauth2/v2/auth'
 export const SIGN_IN_WITH_GITHUB_ENDPOINT = '/api/v1/auth/github/login'
 export const UPDATE_TOKENS_ENDPOINT = '/api/v1/auth/update-tokens'
 

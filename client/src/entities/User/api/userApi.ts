@@ -61,10 +61,11 @@ export const userApi = rtkApi.injectEndpoints({
       invalidatesTags: [USER_TAG],
     }),
     // TODO: migrate signInWithGoogle to new backend api
-    signInWithGoogle: build.query<TOAuthLoginResponse, string>({
+    signInWithGoogle: build.mutation<TOAuthLoginResponse, string>({
       query: code => ({
+        method: 'POST',
         url: SIGN_IN_WITH_GOOGLE_ENDPOINT,
-        params: { code },
+        body: { code },
       }),
     }),
     // me migrated

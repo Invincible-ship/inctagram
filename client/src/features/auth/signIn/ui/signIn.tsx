@@ -22,6 +22,7 @@ import { Routes } from '@/shared/types/routes'
 import { getIsLoading } from '../model/selectors/getIsLoading'
 import { getError } from '../model/selectors/getError'
 import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
+import { useRouter } from 'next/navigation'
 
 export const SignIn: FC = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
@@ -30,6 +31,7 @@ export const SignIn: FC = () => {
   const isLoading = useSelector(getIsLoading)
   const error = useSelector(getError)
   const dispatch = useAppDispatch()
+  const router = useRouter()
 
   const {
     register,
@@ -40,7 +42,7 @@ export const SignIn: FC = () => {
   })
 
   const onSubmit: SubmitHandler<FormSchemaType> = data => {
-    dispatch(signInThunk(data))
+    dispatch(signInThunk({ ...data, router }))
   }
 
   return (

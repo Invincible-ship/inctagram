@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useContext, useLayoutEffect, useState } from 'react'
+import { FC, useContext, useEffect, useLayoutEffect, useState } from 'react'
 import DatePickerInstance from 'react-datepicker'
 import './DatePicker.scss'
 import { DatePickerHeader } from './DatePickerHeader'
@@ -17,7 +17,7 @@ import Link from 'next/link'
 
 type DatePickerProps = {
   control: Control<any>
-  value: string
+  name: string
   error?: FieldError
   title?: string
   range?: boolean
@@ -36,7 +36,7 @@ export const DatePicker: FC<DatePickerProps> = ({
   range,
   error,
   control,
-  value,
+  name,
   title,
   minDate,
   maxDate,
@@ -53,9 +53,9 @@ export const DatePicker: FC<DatePickerProps> = ({
       max,
       width,
       error,
-      value,
+      name,
     })
-  }, [max, width, error, value])
+  }, [max, width, error, name])
 
   const placeholderText = range ? t('placeholder-range') : t('placeholder')
 
@@ -66,15 +66,15 @@ export const DatePicker: FC<DatePickerProps> = ({
   return (
     <Controller
       control={control}
-      name={value}
-      render={({ field: { onChange, onBlur } }) => {
+      name={name}
+      render={({ field: { onChange, onBlur, value: formValue } }) => {
+        const selectedValue = Array.isArray(formValue) ? formValue[0] : formValue
+
         const handleChange = (value: Value | RangeValue) => {
           if (value instanceof Array) {
             const [start, end] = value
             setStartDate(start)
             setEndDate(end)
-          } else {
-            setStartDate(value)
           }
 
           onChange(value)
@@ -91,12 +91,12 @@ export const DatePicker: FC<DatePickerProps> = ({
 
         return (
           <div className={classNames(cls.datePickerField, mods)}>
-            <label htmlFor={value}>{title}</label>
+            <label htmlFor={name}>{title}</label>
             <DatePickerInstance
               // @ts-ignore
               renderCustomHeader={params => <DatePickerHeader t={t} {...params} />}
-              dateFormat="dd.mm.yyyy"
-              selected={startDate}
+              dateFormat="dd.MM.yyyy"
+              selected={selectedValue}
               onChange={handleChange}
               onBlur={onBlur}
               selectsRange={range}

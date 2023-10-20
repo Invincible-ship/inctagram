@@ -1,10 +1,16 @@
 import { TGeneralInfo } from '@/features/editableProfileSettings/model/types/generalInfo'
 import { Namespaces } from '@/shared/config/i18n/types'
 import Input from '@/shared/ui/Input/Input'
-import { Flex, HStack, VStack } from '@/shared/ui/Stack'
+import { Flex, VStack } from '@/shared/ui/Stack'
 import { TFunction } from 'i18next'
 import { FC } from 'react'
-import { Control, FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import {
+  Control,
+  FieldErrors,
+  UseFormGetValues,
+  UseFormRegister,
+  UseFormSetValue,
+} from 'react-hook-form'
 import cls from './ProfileGeneralInfo.module.scss'
 import { TextArea } from '@/shared/ui/TextArea/TextArea'
 import { DatePicker } from '@/widgets/DatePicker/DatePicker'
@@ -17,7 +23,6 @@ type ProfileGeneralInfoProps = {
   handleSubmit: () => void
   errors: FieldErrors<TGeneralInfo>
   register: UseFormRegister<TGeneralInfo>
-  setValue: UseFormSetValue<TGeneralInfo>
   isDirtyFields: boolean
   isFieldsValid: boolean
   isLoading?: boolean
@@ -30,7 +35,6 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
   handleSubmit,
   errors,
   register,
-  setValue,
   isDirtyFields,
   isFieldsValid,
   isLoading,
@@ -41,6 +45,7 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
   const direction = matches ? 'column' : 'row'
   const align = direction == 'column' ? 'center' : 'start'
 
+  console.log('RENDER PROFILE_GENERAL_INFO')
   return (
     <Flex className={cls.ProfileGeneralInfo} direction={direction} align={align} gap="8" max>
       <h1>Avatar field</h1>
@@ -49,13 +54,13 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
           {Object.keys(fieldsValues).map(value => {
             const normalizedValue = value as keyof TGeneralInfo
 
-            switch (value) {
-              case 'birthday':
+            switch (normalizedValue) {
+              case 'dateOfBirth':
                 return (
                   <DatePicker
                     key={normalizedValue}
                     control={control}
-                    value={normalizedValue}
+                    name={normalizedValue}
                     title={t(`general-info.${normalizedValue}`)}
                     error={errors?.[normalizedValue]}
                     max
@@ -64,11 +69,10 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
               case 'city':
                 return (
                   <CitySelect
-                    registerValue={normalizedValue}
-                    setRegisterValue={setValue}
+                    control={control}
+                    name={normalizedValue}
                     key={normalizedValue}
                     title={t(`general-info.${normalizedValue}`)}
-                    placeholder={t(`general-info.${normalizedValue}`)}
                     max
                   />
                 )
@@ -79,6 +83,7 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
                     id={normalizedValue}
                     key={normalizedValue}
                     title={t(`general-info.${normalizedValue}`)}
+                    error={errors?.[normalizedValue]}
                     {...register(normalizedValue)}
                   />
                 )

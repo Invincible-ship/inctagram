@@ -3,7 +3,7 @@ import { FieldError } from 'react-hook-form'
 type Params = {
   defaultCalendarIconObj: any
   errorCalendarIconObj: any
-  value: string
+  name: string
   error?: FieldError
   max?: boolean
   width?: number
@@ -15,7 +15,7 @@ export function customizeDatePickerInput({
   max,
   width,
   error,
-  value,
+  name,
 }: Params) {
   let calendarIconObj = defaultCalendarIconObj
 
@@ -24,7 +24,7 @@ export function customizeDatePickerInput({
     '.react-datepicker__input-container input',
   ) as HTMLInputElement
 
-  $datePickerInput.id = value
+  $datePickerInput.id = name
 
   if (error) {
     $datePickerWrapper.classList.add('error')

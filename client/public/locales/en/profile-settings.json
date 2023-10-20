@@ -22,7 +22,7 @@
         "min": "This field must contain at least 1 characters",
         "max": "This field must contain no more than 50 characters"
       },
-      "birthday": "A user under 13 cannot create a profile",
+      "dateOfBirth": "A user under 13 cannot create a profile",
       "aboutMe": {
         "max": "This field must contain no more than 200 characters"
       },
@@ -31,7 +31,7 @@
     "userName": "Username",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "birthday": "Date of birth",
+    "dateOfBirth": "Date of birth",
     "city": "City",
     "aboutMe": "About Me",
     "privacy-policy": "Privacy Policy",

@@ -6,28 +6,28 @@ import { ThunkConfig } from '@/providers/StoreProvider'
 import { LOCAL_STORAGE_TOKEN_KEY } from '@/shared/const/localStorage'
 import { ApiError } from '@/shared/api/types'
 import toast from 'react-hot-toast'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
 
-export const signInThunk = createAsyncThunk<void, LoginRequestType, ThunkConfig<string>>(
-  'auth/login',
-  async (requestData, { dispatch }) => {
-    try {
-      const accessTokenResponse = await dispatch(
-        userApi.endpoints.signIn.initiate(requestData),
-      ).unwrap()
+export const signInThunk = createAsyncThunk<
+  void,
+  LoginRequestType & { router: AppRouterInstance },
+  ThunkConfig<string>
+>('auth/login', async ({ email, password, router }, { dispatch }) => {
+  try {
+    const accessTokenResponse = await dispatch(
+      userApi.endpoints.signIn.initiate({ email, password }),
+    ).unwrap()
 
-      if (accessTokenResponse) {
-        localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, accessTokenResponse.accessToken)
-      }
+    if (accessTokenResponse) {
+      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, accessTokenResponse.accessToken)
 
-      const user = await dispatch(userApi.endpoints.me.initiate()).unwrap()
-
-      if (user) dispatch(setAuthData(user))
-    } catch (error) {
-      if (isFetchBaseQueryError(error)) {
-        const apiError = error.data as ApiError
-        toast.error(apiError.error)
-      }
-      throw new Error('Unknown error')
+      return router.refresh()
     }
-  },
-)
+  } catch (error) {
+    if (isFetchBaseQueryError(error)) {
+      const apiError = error.data as ApiError
+      toast.error(apiError.error)
+    }
+    throw new Error('Unknown error')
+  }
+})

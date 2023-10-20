@@ -20,13 +20,14 @@ const inter = Inter({
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   const { lng: lngId } = useParams()
+  const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string
 
   return (
     <html lang={lngId} dir={dir(lngId)} className={inter.className}>
       <head />
       <body>
         <div className="app">
-          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}>
+          <GoogleOAuthProvider clientId={googleClientId}>
             <LanguageProvider lngId={lngId as LanguageIds}>
               <Suspense fallback={<Loading />}>
                 <Header />
