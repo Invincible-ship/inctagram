@@ -18,7 +18,7 @@ type Story = StoryObj<typeof SignUp>
 
 export const Default: Story = {
   render: () => (
-    <GoogleOAuthProvider clientId="">
+    <GoogleOAuthProvider clientId="storybook_test">
       <SignUp />
     </GoogleOAuthProvider>
   ),
@@ -26,7 +26,7 @@ export const Default: Story = {
 
 export const Loading: Story = {
   render: () => (
-    <GoogleOAuthProvider clientId="">
+    <GoogleOAuthProvider clientId="storybook_test">
       <SignUp />
     </GoogleOAuthProvider>
   ),
@@ -34,7 +34,7 @@ export const Loading: Story = {
 
 export const Error: Story = {
   render: () => (
-    <GoogleOAuthProvider clientId="">
+    <GoogleOAuthProvider clientId="storybook_test">
       <SignUp />
     </GoogleOAuthProvider>
   ),

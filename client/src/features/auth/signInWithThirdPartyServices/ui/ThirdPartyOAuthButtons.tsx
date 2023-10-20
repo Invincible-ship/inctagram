@@ -26,7 +26,7 @@ export const ThirdPartyOAuthButtons = () => {
       <div className={cls['img-wrapper']} onClick={signInWithGoogle}>
         <Google />
       </div>
-      <Link href={getGithubOAuthUrl(lngId)} className={cls['img-wrapper']}>
+      <Link href={getGithubOAuthUrl()} className={cls['img-wrapper']}>
         <Github />
       </Link>
     </div>

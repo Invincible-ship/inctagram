@@ -15,7 +15,7 @@ type Story = StoryObj<typeof SignIn>
 
 export const SignInComponent: Story = {
   render: () => (
-    <GoogleOAuthProvider clientId="">
+    <GoogleOAuthProvider clientId="storybook_test">
       <SignIn />
     </GoogleOAuthProvider>
   ),

@@ -15,6 +15,7 @@ type Story = StoryObj<typeof Input>
 export const Default: Story = {
   render: () => (
     <Input
+      id="storybook_test"
       onChange={action('onChange')}
       onKeyPress={action('onKeyPress')}
       onEnter={action('onEnter')}
@@ -26,6 +27,7 @@ export const Default: Story = {
 export const Error: Story = {
   render: () => (
     <Input
+      id="storybook_test"
       onChange={action('onChange')}
       onKeyPress={action('onKeyPress')}
       onEnter={action('onEnter')}
