@@ -11,6 +11,7 @@ import Loading from './loading'
 import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
 import { useParams } from 'next/navigation'
 import { Toaster } from '@/shared/ui/Toaster/Toaster'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 const inter = Inter({
   weight: ['400', '500', '600', '700', '900'],
@@ -19,19 +20,22 @@ const inter = Inter({
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   const { lng: lngId } = useParams()
+  const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string
 
   return (
     <html lang={lngId} dir={dir(lngId)} className={inter.className}>
       <head />
       <body>
         <div className="app">
-          <LanguageProvider lngId={lngId as LanguageIds}>
-            <Suspense fallback={<Loading />}>
-              <Header />
-              {children}
-              <Toaster />
-            </Suspense>
-          </LanguageProvider>
+          <GoogleOAuthProvider clientId={googleClientId}>
+            <LanguageProvider lngId={lngId as LanguageIds}>
+              <Suspense fallback={<Loading />}>
+                <Header />
+                {children}
+                <Toaster />
+              </Suspense>
+            </LanguageProvider>
+          </GoogleOAuthProvider>
         </div>
       </body>
     </html>

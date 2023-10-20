@@ -13,7 +13,7 @@
     "nov": "Ноябрь",
     "dec": "Декабрь"
   },
-  "placeholder": "мм.дд.гггг",
-  "placeholder-range": "мм.дд.гггг - мм.дд.гггг",
+  "placeholder": "дд.мм.гггг",
+  "placeholder-range": "дд.мм.гггг - дд.мм.гггг",
   "privacy-policy": "Политика конфиденциальности"
 }

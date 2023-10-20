@@ -1,13 +1,22 @@
-import { ReactNode } from 'react'
-
-export enum ProfileSettingValue {
-  GENERAL_INFO = 'general-info',
-  DEVICES = 'devices',
-  ACCOUNT_MANAGMENT = 'account-managment',
-  PAYMENTS = 'payments',
+export type IAvatar = {
+  url: string
+  width: number
+  height: number
+  fileSize: number
 }
 
-export type ProfileSettingsTab = {
-  value: ProfileSettingValue
-  content: ReactNode
+export type IProfile = {
+  id: number
+  userName: string
+  firstName: string | null
+  lastName: string | null
+  city: string | null
+  dateOfBirth: Date | null
+  aboutMe: string | null
+  avatars: IAvatar[]
+}
+
+export type IProfileSchema = {
+  profileData?: IProfile
+  readonly: boolean
 }

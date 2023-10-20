@@ -1,9 +1,9 @@
 /* eslint-disable */
 'use client'
 
-import { getIsLoading, getIsUserInited, getUserAuthData } from '@/entities/User'
+import { getIsLoading, getIsUserInited, getUserAuthData, setAuthData, useMeQuery } from '@/entities/User'
 import { WithAuthOptions } from './routes'
-import { ComponentType, useContext, useEffect, useRef, useState } from 'react'
+import { ComponentType, useContext, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { redirect } from 'next/navigation'
 import { RedirectType } from 'next/dist/client/components/redirect'
@@ -12,19 +12,21 @@ import { Routes } from '@/shared/types/routes'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { LOCAL_STORAGE_IS_FIRST_AUTHORIZED } from '@/shared/const/localStorage'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 
 export function withAuth<T extends JSX.IntrinsicAttributes = JSX.IntrinsicAttributes>(
   Component: ComponentType<T>,
-  config: WithAuthOptions
+  options: WithAuthOptions
 ) {
-  const { routeRole, userRole = '', redirectTo = '' } = config
+  const { routeRole, userRole = '', redirectTo = '' } = options
   
   const ComponentWithAtuh = (props: Omit<T, keyof JSX.IntrinsicAttributes>) => {
     const lngId = useContext(LanguageContext) as LanguageIds
     const isLoading = useSelector(getIsLoading)
     const inited = useSelector(getIsUserInited)
-    const userAuthData = useSelector(getUserAuthData)
+    const reduxUserData = useSelector(getUserAuthData)
     const isFirstAuthorizedRef = useRef()
+    const dispatch = useAppDispatch()
 
     if (typeof window !== 'undefined') {
       isFirstAuthorizedRef.current = 
@@ -34,12 +36,12 @@ export function withAuth<T extends JSX.IntrinsicAttributes = JSX.IntrinsicAttrib
     console.log({
       inited,
       isLoading,
-      userAuthData
+      reduxUserData
     })
 
     useEffect(() => {
       if (!isLoading && inited) {
-        if (!userAuthData) {
+        if (!reduxUserData) {
           if (routeRole !== 'optional' && routeRole !== 'auth') {
             redirect(redirectTo || `/${lngId}${Routes.SIGNIN}`, RedirectType.replace)
           } 
@@ -47,16 +49,16 @@ export function withAuth<T extends JSX.IntrinsicAttributes = JSX.IntrinsicAttrib
             if (routeRole === 'auth') {
               if (isFirstAuthorizedRef.current) {
                 localStorage.setItem(LOCAL_STORAGE_IS_FIRST_AUTHORIZED, JSON.stringify(false))
-                redirect(redirectTo || `/${lngId}${Routes.PROFILE}/${userAuthData.id}/edit`, RedirectType.replace)
+                redirect(redirectTo || `/${lngId}${Routes.PROFILE}/${reduxUserData.userName}/edit`, RedirectType.replace)
               }
               redirect(redirectTo || `/${lngId}${Routes.MAIN}`, RedirectType.replace)
             }
         }
       }
-    }, [inited, userAuthData, routeRole, isLoading])
+    }, [inited, reduxUserData, routeRole, isLoading])
 
     if (
-      (isLoading || !userAuthData || !inited) &&
+      (isLoading || !reduxUserData || !inited) &&
       routeRole !== 'auth' &&
       routeRole !== 'optional'
     ) {

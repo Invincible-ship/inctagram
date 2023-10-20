@@ -1,5 +1,5 @@
 import { memo, useContext, useMemo } from 'react'
-import { ProfileSettingsTab, ProfileSettingValue } from '@/entities/Profile'
+import { ProfileSettingsTab, ProfileSettingValue } from '../../model/types/types'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'

@@ -1,4 +1,10 @@
 export { ProfileGeneralInfo } from './ui/ProfileGeneralInfo/ProfileGeneralInfo'
-export { useUpdateProfileGeneralInfoMutation } from './api/profileApi'
-export type { ProfileSettingsTab } from './model/types/types'
-export { ProfileSettingValue } from './model/types/types'
+export { profileReducer, setProfileData, clearProfileData } from './model/slice/profileSlice'
+export { getProfileData } from './model/selectors/getProfileData'
+export {
+  useGetProfileDataByIdQuery,
+  useUpdateProfileMutation,
+  useDeleteProfileMutation,
+  getProfileDataByIdQuery,
+} from './api/profileApi'
+export type { IAvatar, IProfile, IProfileSchema } from './model/types/types'

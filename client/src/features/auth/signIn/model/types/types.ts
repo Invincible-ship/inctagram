@@ -9,7 +9,6 @@ export type LoginRequestType = {
 
 export type LoginResponseType = {
   accessToken: string
-  user: IUser
 }
 
 export type ISignInSchema = {

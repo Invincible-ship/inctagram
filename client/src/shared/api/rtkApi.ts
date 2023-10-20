@@ -2,8 +2,8 @@ import { AuthRefreshResponse } from '@/shared/api/types'
 import { LOCAL_STORAGE_LANGUAGE_ID_KEY, LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
-import { USER_TAG } from '@/shared/const/rtk'
-import { REFRESH_TOKEN_ENDPOINT } from '@/shared/const/apiEndpoints'
+import { PROFILE_TAG, USER_TAG } from '@/shared/const/rtk'
+import { UPDATE_TOKENS_ENDPOINT } from '@/shared/const/apiEndpoints'
 import { signoutThunk } from '@/features/auth/signout'
 
 // const baseUrl = __IS_DEV__ ? process.env.NEXT_PUBLIC_LOCALHOST_API : process.env.NEXT_PUBLIC_API
@@ -41,14 +41,14 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     console.log('RTK api error status: ', JSON.stringify(result.error?.status, null, 2))
   }
 
-  if (
-    result.error &&
-    result.error.status === 'PARSING_ERROR' &&
-    result.error.originalStatus == 401
-  ) {
+  if (result.error && result.error.status === 401) {
     __IS_DEV__ && console.log('401 error: ', JSON.stringify(result.error, null, 2))
 
-    const refreshResult = (await baseQuery(REFRESH_TOKEN_ENDPOINT, api, extraOptions)) as {
+    const refreshResult = (await baseQuery(
+      { method: 'POST', url: UPDATE_TOKENS_ENDPOINT },
+      api,
+      extraOptions,
+    )) as {
       data: AuthRefreshResponse
     }
     __IS_DEV__ && console.log('Refresh token result: ', JSON.stringify(refreshResult, null, 2))
@@ -57,7 +57,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, refreshResult.data.accessToken)
       result = await baseQuery(args, api, extraOptions)
     } else {
-      // api.dispatch(signoutThunk())
+      // if (api) api.dispatch(signoutThunk())
       console.warn(result.error)
     }
   }
@@ -66,7 +66,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 }
 
 export const rtkApi = createApi({
-  tagTypes: [USER_TAG],
+  tagTypes: [USER_TAG, PROFILE_TAG],
   reducerPath: 'api',
   baseQuery: baseQueryWithReauth,
   endpoints: build => ({}),

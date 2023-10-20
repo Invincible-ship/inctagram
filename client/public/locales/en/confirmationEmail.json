@@ -13,5 +13,6 @@
     "title": "Congratulations!",
     "text": "Your email has already been confirmed previously",
     "button-text": "Sign In"
-  }
+  },
+  "resend-success": "A new confirmation link has been successfully sent to your email"
 }

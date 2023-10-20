@@ -22,13 +22,17 @@ export const generalInfoSchemaFn = (t: TFunction<string, undefined>) => {
       .max(50, t('general-info.errors.lastName.max'))
       .regex(/^[A-Za-zА-Яа-я]+$/, t('general-info.errors.lastName.symbols'))
       .trim(),
-    birthday: z.coerce
+    dateOfBirth: z.coerce
       .date()
       .min(new Date('01-01-1910Z'))
-      .max(new Date(Date.now() - 13 * 365 * 24 * 60 * 60 * 1000), t('general-info.errors.birthday'))
+      .max(
+        new Date(Date.now() - 13 * 365 * 24 * 60 * 60 * 1000),
+        t('general-info.errors.dateOfBirth'),
+      )
+      .nullable()
       .optional(),
-    city: z.string().optional(),
-    aboutMe: z.string().max(200, t('general-info.errors.aboutMe.max')).optional(),
+    city: z.string().nullable().optional(),
+    aboutMe: z.string().max(200, t('general-info.errors.aboutMe.max')).nullable().optional(),
   })
 }
 
