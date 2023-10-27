@@ -1,2 +1,4 @@
 export { ThirdPartyOAuthButtons } from './ui/ThirdPartyOAuthButtons'
-export type { TOAuthLoginResponse } from './model/types'
+export type { TOAuthLoginResponse, ISignInWithGoogleSchema } from './model/types/types'
+export { signInWithGoogleReducer } from './model/slice/signInWithGoogleSlice'
+export { getIsLoading as getIsSignInWithGoogleLoading } from './model/selectors/getIsLoading'

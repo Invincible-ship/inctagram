@@ -31,7 +31,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
             <LanguageProvider lngId={lngId as LanguageIds}>
               <Suspense fallback={<Loading />}>
                 <Header />
-                {children}
+                <div className="app-container">{children}</div>
                 <Toaster />
               </Suspense>
             </LanguageProvider>

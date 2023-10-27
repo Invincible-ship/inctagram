@@ -19,16 +19,19 @@ import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { Routes } from '@/shared/types/routes'
-import { getIsLoading } from '../model/selectors/getIsLoading'
+import { getIsLoading as getIsSignInWithEmailLoading } from '../model/selectors/getIsLoading'
+import { getIsSignInWithGoogleLoading } from '@/features/auth/signInWithThirdPartyServices'
 import { getError } from '../model/selectors/getError'
 import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
 import { useRouter } from 'next/navigation'
+import { Preloader } from '@/shared/ui/Preloader/Preloader'
 
 export const SignIn: FC = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
   const { t } = useClientTranslation(lngId, Namespaces.SIGNIN)
   const schema = formSchema(t)
-  const isLoading = useSelector(getIsLoading)
+  const isSignInWithEmailLoading = useSelector(getIsSignInWithEmailLoading)
+  const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
   const error = useSelector(getError)
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -45,6 +48,8 @@ export const SignIn: FC = () => {
     dispatch(signInThunk({ ...data, router }))
   }
 
+  if (isSignInWithGoogleLoading) return <Preloader />
+
   return (
     <div className={'form registration' + ' ' + `${s.wrapper}`}>
       <div className="form-wrapper auth-form">
@@ -52,7 +57,7 @@ export const SignIn: FC = () => {
         <ThirdPartyOAuthButtons />
         <SignInForm
           t={t}
-          isLoading={isLoading}
+          isLoading={isSignInWithEmailLoading}
           errors={errors}
           register={register}
           onSubmit={handleSubmit(onSubmit)}

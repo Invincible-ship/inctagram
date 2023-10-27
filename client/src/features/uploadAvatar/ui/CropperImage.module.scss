@@ -1,0 +1,7 @@
+.btn {
+  align-self: flex-end;
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
+}

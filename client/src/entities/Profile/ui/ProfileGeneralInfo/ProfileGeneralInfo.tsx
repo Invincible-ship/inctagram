@@ -1,22 +1,17 @@
-import { TGeneralInfo } from '@/features/editableProfileSettings/model/types/generalInfo'
+import { TGeneralInfo } from '@/features/editableProfileGeneralInfo'
 import { Namespaces } from '@/shared/config/i18n/types'
 import Input from '@/shared/ui/Input/Input'
-import { Flex, VStack } from '@/shared/ui/Stack'
+import { Flex, HStack, VStack } from '@/shared/ui/Stack'
 import { TFunction } from 'i18next'
 import { FC } from 'react'
-import {
-  Control,
-  FieldErrors,
-  UseFormGetValues,
-  UseFormRegister,
-  UseFormSetValue,
-} from 'react-hook-form'
+import { Control, FieldErrors, UseFormRegister } from 'react-hook-form'
 import cls from './ProfileGeneralInfo.module.scss'
 import { TextArea } from '@/shared/ui/TextArea/TextArea'
 import { DatePicker } from '@/widgets/DatePicker/DatePicker'
 import { CitySelect } from '@/widgets/CitySelect/CitySelect'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
+import { UploadAvatar } from '@/features/uploadAvatar'
 
 type ProfileGeneralInfoProps = {
   control: Control<TGeneralInfo>
@@ -45,10 +40,9 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
   const direction = matches ? 'column' : 'row'
   const align = direction == 'column' ? 'center' : 'start'
 
-  console.log('RENDER PROFILE_GENERAL_INFO')
   return (
-    <Flex className={cls.ProfileGeneralInfo} direction={direction} align={align} gap="8" max>
-      <h1>Avatar field</h1>
+    <Flex className={cls.ProfileGeneralInfo} direction={direction} align={align} gap="36" max>
+      <UploadAvatar t={t} />
       <form onSubmit={handleSubmit} className={cls.form}>
         <VStack gap="24" max>
           {Object.keys(fieldsValues).map(value => {
@@ -91,6 +85,7 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
                 return (
                   <Input
                     full
+                    required
                     id={normalizedValue}
                     key={normalizedValue}
                     title={t(`general-info.${normalizedValue}`)}
@@ -105,7 +100,7 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
             className={cls.submitButton}
             type="submit"
             theme={ButtonTheme.DEFAULT}
-            disabled={!isDirtyFields || isLoading}
+            disabled={!isDirtyFields || !isFieldsValid || isLoading}
             isLoading={isLoading}
             full={matches}
           >
@@ -113,7 +108,7 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
           </Button>
         </VStack>
       </form>
-      <span className={cls.underline}></span>
+      {!matches && <span className={cls.underline}></span>}
     </Flex>
   )
 }

@@ -11,3 +11,5 @@ export const UPDATE_TOKENS_ENDPOINT = '/api/v1/auth/update-tokens'
 
 // PROFILE ENDPOINTS
 export const PROFILE_ENDPOINT = '/api/v1/users/profile'
+export const PROFILE_AVATARS_ENDPOINT = '/api/v1/users/profile/avatar'
+export const DELETE_PROFILE_AVATARS_ENDPOINT = '/api/v1/users/profile/avatar'
