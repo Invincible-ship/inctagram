@@ -36,7 +36,7 @@ export const Button: FC<ButtonProps> = ({
       className={classNames(cls.Button, mods, [className, cls[theme]])}
       {...rest}
     >
-      {isLoading && <Spinner className={cls[theme]} />}
+      {isLoading && <Spinner id={cls[theme]} />}
       {children}
     </button>
   )

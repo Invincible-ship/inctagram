@@ -1,5 +1,5 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { DetailedHTMLProps, FC, TextareaHTMLAttributes, forwardRef } from 'react'
+import { DetailedHTMLProps, TextareaHTMLAttributes, forwardRef } from 'react'
 import { FieldError } from 'react-hook-form'
 import cls from './TextArea.module.scss'
 

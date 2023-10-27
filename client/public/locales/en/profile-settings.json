@@ -28,6 +28,22 @@
       },
       "update": "Failed to update profile information. Try again later"
     },
+    "upload-modal": {
+      "title": "Add a Profile Photo",
+      "btn": "Select from Computer",
+      "cropper-btn": "Save",
+      "errors": {
+        "size": "Error! Photo size must be less than 1,5 MB!"
+      }
+    },
+    "delete-modal": {
+      "title": "Delete Photo",
+      "text": "Are you sure you want to delete the photo?",
+      "btns": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
     "userName": "Username",
     "firstName": "First Name",
     "lastName": "Last Name",
@@ -36,6 +52,7 @@
     "aboutMe": "About Me",
     "privacy-policy": "Privacy Policy",
     "update-success": "Profile information successfully updated",
-    "button": "Save Changes"
+    "button": "Save Changes",
+    "avatar-btn": "Add a profile photo"
   }
 }

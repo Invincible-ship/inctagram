@@ -1,5 +1,5 @@
 import { Flex, FlexDirection } from '@/shared/ui/Stack/Flex/Flex'
-import { ReactNode, memo, useCallback, useEffect, useLayoutEffect } from 'react'
+import { ReactNode, memo, useCallback, useLayoutEffect } from 'react'
 import cls from './Tabs.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { calculateActiveTabPosition } from './utils/calculateActiveTabPosition'

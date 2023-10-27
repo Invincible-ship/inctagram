@@ -7,19 +7,19 @@ const propsMap = {
   valid: {
     src: successSrc,
     alt: 'Success confirmation email image',
-    wrapperWidth: 432,
+    width: 432,
   },
   inValid: {
     src: invalidSrc,
     alt: 'Invalid confirmation email image',
-    wrapperWidth: 473,
+    width: 473,
   },
 }
 
 type ImageProps = {
   src: string | StaticImageData
   alt: string
-  wrapperWidth: number
+  width: number
 }
 
 export const getImageProps = (status: CONFIRMATION_STATUS): ImageProps => {
@@ -28,6 +28,6 @@ export const getImageProps = (status: CONFIRMATION_STATUS): ImageProps => {
   return {
     src: propsMap[state].src,
     alt: propsMap[state].alt,
-    wrapperWidth: propsMap[state].wrapperWidth,
+    width: propsMap[state].width,
   }
 }

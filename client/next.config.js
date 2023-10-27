@@ -34,27 +34,16 @@ const nextConfig = {
 
     return config
   },
-  // headers: async () => {
-  //   return [
-  //     {
-  //       source: '/:lng*',
-  //       headers: [
-  //         {
-  //           key: 'Access-Control-Allow-Origin',
-  //           value: '*'
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Methods',
-  //           value: 'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Headers',
-  //           value: 'X-Requested-With, content-type, Authorization'
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'storage.yandexcloud.net',
+        port: '',
+        pathname: '/users-inctagram/users/**',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

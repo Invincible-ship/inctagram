@@ -1,10 +1,15 @@
-import { IProfile } from '../model/types/types'
+import { IAvatar, IProfile } from '../model/types/types'
 import { rtkApi } from '@/shared/api/rtkApi'
-import { PROFILE_ENDPOINT } from '@/shared/const/apiEndpoints'
+import {
+  DELETE_PROFILE_AVATARS_ENDPOINT,
+  PROFILE_AVATARS_ENDPOINT,
+  PROFILE_ENDPOINT,
+} from '@/shared/const/apiEndpoints'
 import { PROFILE_TAG, USER_TAG } from '@/shared/const/rtk'
 
 export const profileApi = rtkApi.injectEndpoints({
   endpoints: build => ({
+    // Profile info
     getProfileDataById: build.query<IProfile, number>({
       query: id => `${PROFILE_ENDPOINT}/${id}`,
       providesTags: (result, error, id) => [{ type: PROFILE_TAG, id }],
@@ -15,12 +20,28 @@ export const profileApi = rtkApi.injectEndpoints({
         url: PROFILE_ENDPOINT,
         body: profileData,
       }),
-      invalidatesTags: result => {
-        const id = result?.id
-        return [{ type: PROFILE_TAG, id }, PROFILE_TAG]
-      },
+      invalidatesTags: result => [{ type: PROFILE_TAG, id: result?.id }, PROFILE_TAG],
     }),
-    // for testing
+    // Profile avatars
+    updateProfileAvatars: build.mutation<
+      { avatars: IAvatar[] },
+      { formData: FormData; id: string }
+    >({
+      query: ({ formData }) => ({
+        method: 'POST',
+        url: PROFILE_AVATARS_ENDPOINT,
+        body: formData,
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: PROFILE_TAG, id: arg.id }],
+    }),
+    deleteProfileAvatars: build.mutation<void, string>({
+      query: id => ({
+        method: 'DELETE',
+        url: DELETE_PROFILE_AVATARS_ENDPOINT,
+      }),
+      invalidatesTags: (result, error, id) => [{ type: PROFILE_TAG, id }],
+    }),
+    // For testing
     deleteProfile: build.mutation<void, void>({
       query: () => ({
         method: 'DELETE',
@@ -32,5 +53,10 @@ export const profileApi = rtkApi.injectEndpoints({
 })
 
 export const getProfileDataByIdQuery = profileApi.endpoints.getProfileDataById.initiate
-export const { useGetProfileDataByIdQuery, useUpdateProfileMutation, useDeleteProfileMutation } =
-  profileApi
+export const {
+  useGetProfileDataByIdQuery,
+  useUpdateProfileMutation,
+  useDeleteProfileMutation,
+  useUpdateProfileAvatarsMutation,
+  useDeleteProfileAvatarsMutation,
+} = profileApi

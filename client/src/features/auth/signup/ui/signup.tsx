@@ -15,16 +15,21 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
-import { getIsLoading } from '../model/selectors/getIsLoading'
+import { getIsLoading as getIsSignUpLoading } from '../model/selectors/getIsLoading'
 import { getIsSignUpModalOpen } from '../model/selectors/getIsSignUpModalOpen'
 import { Routes } from '@/shared/types/routes'
-import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
+import {
+  ThirdPartyOAuthButtons,
+  getIsSignInWithGoogleLoading,
+} from '@/features/auth/signInWithThirdPartyServices'
 import { SignUpModal } from './SignUpModal'
+import { Preloader } from '@/shared/ui/Preloader/Preloader'
 
 export const SignUp = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
   const [email, setEmail] = useState<string>('')
-  const isLoading = useSelector(getIsLoading)
+  const isSignUpLoading = useSelector(getIsSignUpLoading)
+  const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
   const isSignUpModalOpen = useSelector(getIsSignUpModalOpen)
   const dispatch = useAppDispatch()
   const { t } = useClientTranslation(lngId, Namespaces.SIGNUP)
@@ -46,6 +51,8 @@ export const SignUp = () => {
     setEmail(data.email)
   }
 
+  if (isSignInWithGoogleLoading) return <Preloader />
+
   return (
     <>
       <div className={'form registration'}>
@@ -54,7 +61,7 @@ export const SignUp = () => {
           <ThirdPartyOAuthButtons />
           <SignUpForm
             onSubmit={handleSubmit(onSubmit)}
-            isLoading={isLoading}
+            isLoading={isSignUpLoading}
             t={t}
             errors={errors}
             register={register}

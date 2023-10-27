@@ -4,7 +4,6 @@ import React, {
   forwardRef,
   InputHTMLAttributes,
   KeyboardEvent,
-  ReactNode,
 } from 'react'
 import s from './Input.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
@@ -38,6 +37,7 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
       type,
       title,
       full,
+      required,
 
       ...restProps
     },
@@ -65,7 +65,15 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
 
     return (
       <div className={classNames(s.inputWrapper, wrapperMods)}>
-        <label htmlFor={id}>{title}</label>
+        <label htmlFor={id}>
+          {title}
+          {required && (
+            <span className={s.error} style={{ position: 'static' }}>
+              {' '}
+              *
+            </span>
+          )}
+        </label>
         <input
           ref={ref}
           id={id}

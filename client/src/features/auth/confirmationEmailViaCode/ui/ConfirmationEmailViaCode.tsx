@@ -22,7 +22,7 @@ export const ConfirmationEmailViaCode: FC<ConfirmationEmailViaCodeProps> = ({
 }) => {
   const status: CONFIRMATION_STATUS = isSuccess ? 'success' : 'invalid'
 
-  const { src, alt, wrapperWidth } = getImageProps(status)
+  const { src, alt, width } = getImageProps(status)
   const mods = {
     [cls.paddingText]: status != 'invalid',
   }
@@ -38,7 +38,7 @@ export const ConfirmationEmailViaCode: FC<ConfirmationEmailViaCodeProps> = ({
         lngId={lngId}
         email={email}
       />
-      <MyImage src={src as string} wrapperWidth={wrapperWidth} alt={alt} />
+      <MyImage src={src as string} width={width} alt={alt} />
     </main>
   )
 }

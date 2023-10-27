@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { FC, useContext, useLayoutEffect, useState } from 'react'
 import DatePickerInstance from 'react-datepicker'
 import './DatePicker.scss'
 import { DatePickerHeader } from './DatePickerHeader'

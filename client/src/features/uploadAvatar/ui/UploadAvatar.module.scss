@@ -1,0 +1,31 @@
+.avatarField {
+  flex-shrink: 0;
+  flex-basis: 200px;
+
+  @media (max-width: 426px) {
+    width: 100%;
+  }
+
+  .avatarWrapper {
+    position: relative;
+
+    .deleteBtn {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      width: 36px;
+      height: 36px;
+      background-color: var(--dark-color-700);
+      border-radius: 50%;
+      right: 6px;
+      top: 6px;
+      cursor: pointer;
+    }
+  }
+
+  .btn {
+    @media (max-width: 426px) {
+      width: 100%;
+    }
+  }
+}
