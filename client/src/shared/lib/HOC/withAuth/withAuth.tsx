@@ -14,17 +14,13 @@ import { LanguageIds } from '@/shared/config/i18n/types'
 import { LOCAL_STORAGE_IS_FIRST_AUTHORIZED } from '@/shared/const/localStorage'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 
-type ExtraInfoType = {
-  user: string
-}
-
 export function withAuth(
   Component: FC<any>,
   options: WithAuthOptions
 ) {
   const { routeRole, userRole = '', redirectTo = '' } = options
   
-  const ComponentWithAtuh = (props: FC<any>) => {
+  const ComponentWithAtuh = (props: any) => {
     const lngId = useContext(LanguageContext) as LanguageIds
     const isLoading = useSelector(getIsLoading)
     const inited = useSelector(getIsUserInited)
