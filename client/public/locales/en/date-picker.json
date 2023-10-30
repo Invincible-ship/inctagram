@@ -1,0 +1,19 @@
+{
+  "months": {
+    "jan": "January",
+    "feb": "February",
+    "mar": "March",
+    "apr": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "aug": "August",
+    "sept": "September",
+    "oct": "October",
+    "nov": "November",
+    "dec": "December"
+  },
+  "placeholder": "dd.mm.yyyy",
+  "placeholder-range": "dd.mm.yyyy - dd.mm.yyyy",
+  "privacy-policy": "Privacy Policy"
+}

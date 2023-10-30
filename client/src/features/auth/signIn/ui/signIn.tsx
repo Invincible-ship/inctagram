@@ -10,29 +10,31 @@ import s from './signIn.module.scss'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Preloader } from '@/shared/ui/Preloader/Preloader'
-// ТАК ДЕЛАТЬ НЕЛЬЗЯ: если какой-то UI принадлежит одному и более модулю, то его стоит вынести в shared слой
 import { formSchema, FormSchemaType } from '../lib/validationConstants/validationConstants'
 import { SignInForm } from './SignInForm'
 import { useSelector } from 'react-redux'
 import { signInThunk } from '../model/signInThunk'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
-import { Namespaces } from '@/shared/config/i18n/types'
+import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { Routes } from '@/shared/types/routes'
-import { getIsLoading } from '../model/selectors/getIsLoading'
+import { getIsLoading as getIsSignInWithEmailLoading } from '../model/selectors/getIsLoading'
+import { getIsSignInWithGoogleLoading } from '@/features/auth/signInWithThirdPartyServices'
 import { getError } from '../model/selectors/getError'
 import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
+import { useRouter } from 'next/navigation'
+import { Preloader } from '@/shared/ui/Preloader/Preloader'
 
 export const SignIn: FC = () => {
-  const lngId = useContext(LanguageContext)
-  // FIXME: correct translation with lngId so avoid only CSR rendering
+  const lngId = useContext(LanguageContext) as LanguageIds
   const { t } = useClientTranslation(lngId, Namespaces.SIGNIN)
   const schema = formSchema(t)
-  const isLoading = useSelector(getIsLoading)
+  const isSignInWithEmailLoading = useSelector(getIsSignInWithEmailLoading)
+  const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
   const error = useSelector(getError)
   const dispatch = useAppDispatch()
+  const router = useRouter()
 
   const {
     register,
@@ -43,12 +45,10 @@ export const SignIn: FC = () => {
   })
 
   const onSubmit: SubmitHandler<FormSchemaType> = data => {
-    dispatch(signInThunk(data))
+    dispatch(signInThunk({ ...data, router }))
   }
 
-  if (isLoading) {
-    return <Preloader />
-  }
+  if (isSignInWithGoogleLoading) return <Preloader />
 
   return (
     <div className={'form registration' + ' ' + `${s.wrapper}`}>
@@ -57,12 +57,15 @@ export const SignIn: FC = () => {
         <ThirdPartyOAuthButtons />
         <SignInForm
           t={t}
+          isLoading={isSignInWithEmailLoading}
           errors={errors}
           register={register}
           onSubmit={handleSubmit(onSubmit)}
           errorLogin={error ? t('errorLogin') : ''}
         />
-        <span className={'info b-title bt16 align-center'}>{t('dontHaveAnAccount')}?</span>
+        <span className={'info b-title bt16 align-center'} style={{ marginBottom: 12 }}>
+          {t('dontHaveAnAccount')}?
+        </span>
         <Link
           href={`/${lngId}${Routes.SIGNUP}`}
           className={`b-title bt16 semibold ${style.linkRegistration} align-center`}

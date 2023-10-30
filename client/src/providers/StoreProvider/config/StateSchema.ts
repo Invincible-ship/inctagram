@@ -3,13 +3,17 @@ import { AxiosInstance } from 'axios'
 import { ISignUpSchema } from '@/features/auth/signup'
 import { IUserSchema } from '@/entities/User'
 import { ISignInSchema } from '@/features/auth/signIn'
+import { IProfileSchema } from '@/entities/Profile'
+import { ISignInWithGoogleSchema } from '@/features/auth/signInWithThirdPartyServices'
 
 export type StateSchema = {
   // Остальные типы ваших редьюсеров
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
   user: IUserSchema
+  profile: IProfileSchema
   signIn: ISignInSchema
   signup: ISignUpSchema
+  signInWithGoogle: ISignInWithGoogleSchema
 }
 
 export type ThunkExtraArg = {

@@ -1,10 +1,12 @@
 // SignUpForm.tsx
 'use client'
-import {FC, FormEventHandler, useEffect, useState} from 'react'
-import {InputField} from '@/shared/ui/InputField/InputField'
-import {PasswordWrapper} from '@/shared/ui/PasswordWrapper/PasswordWrapper'
-import {Button} from '@/shared/ui/Button/Button'
+import { FC, FormEventHandler, useState, useEffect } from 'react'
+import { InputField } from '@/shared/ui/InputField/InputField'
+import { PasswordWrapper } from '@/shared/ui/PasswordWrapper/PasswordWrapper'
+import { Button } from '@/shared/ui/Button/Button'
 import '@/shared/styles/variables/common/_form.scss'
+import cls from './signup.module.scss'
+import { classNames } from '@/shared/lib/classNames/classNames'
 import {LanguageIds} from "@/shared/config/i18n/types";
 import {AgreeBlock} from "@/features/auth/signup/ui/agreeBlock/AgreeBlock";
 
@@ -18,7 +20,7 @@ export type SignUpFormProps = {
 
 }
 
-export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register, lngId }) => {
+export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register, isLoading, lngId }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const toggleShowPassword = () => {
@@ -50,7 +52,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register,
   }
 
   return (
-    <form onSubmit={onSubmit} className={'form-style'}>
+    <form onSubmit={onSubmit} className={classNames('form-style', {}, [cls.form])}>
       <InputField
         id={'userName'}
         type={'text'}
@@ -90,7 +92,12 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register,
         data-testid="password-confirmation-input"
       />
       <AgreeBlock lngId={lngId} t={t} checkboxHandler={checkboxHandler}/>
-      <Button type="submit" className={`styled-btn styled-btn-1`} disabled={disabled}>
+      <Button
+        type="submit"
+        className={'styled-btn styled-btn-1'}
+        isLoading={isLoading}
+        disabled={isLoading}
+      >
         {t('signUp')}
       </Button>
     </form>

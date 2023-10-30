@@ -4,7 +4,9 @@ import Logo from '@/shared/assets/icons/logo.svg'
 import { SuspenseLangSwitcher } from '@/features/LangSwitcher'
 import cls from './Header.module.scss'
 import { LanguageIds } from '@/shared/config/i18n/types'
-// import { SignOut } from '@/features/auth/signout'
+import { HStack } from '@/shared/ui/Stack'
+import { Routes } from '@/shared/types/routes'
+import Link from 'next/link'
 
 type HeaderProps = {
   lngId?: LanguageIds
@@ -12,20 +14,20 @@ type HeaderProps = {
 
 export const Header: FC<HeaderProps> = () => {
   return (
-    <header data-testid="header" className={cls.header}>
-      <div className={cls.headerContainer}>
-        <div className={cls.logo}>
-          <Logo />
-        </div>
-        <div className={cls.right}>
-          {/*FIXME: implement notifications */}
-          <span>
+    <header className={cls.headerWrapper}>
+      <HStack className={cls.header} justify="between" align="center">
+        <HStack align="center">
+          <Link href={Routes.MAIN}>
+            <Logo />
+          </Link>
+        </HStack>
+        <HStack align="center" gap="36">
+          <HStack align="center">
             <OutlineBell />
-          </span>
+          </HStack>
           <SuspenseLangSwitcher />
-          {/* <SignOut /> */}
-        </div>
-      </div>
+        </HStack>
+      </HStack>
     </header>
   )
 }

@@ -1,28 +1,12 @@
-.header {
+.headerWrapper {
   border-bottom: solid 1px var(--dark-color-300);
+  padding: 0 60px;
 
-  .headerContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  @media (max-width: 1330px) {
+    padding: 0 15px;
+  }
+
+  .header {
     height: 60px;
-    margin: 0 60px 0 60px;
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .right {
-      display: flex;
-      align-items: center;
-      gap: 48px;
-
-      span {
-        display: inline-flex;
-        align-items: center;
-      }
-    }
   }
 }

@@ -1,15 +1,8 @@
-export type RegisterParamsType = {
-  userName: string
-  email: string
-  password: string
-  passwordConfirmation: string
-}
-export type RegisterResponseType = {
-  id: string
-  userName: string
-  email: string
-  createdAt: string
-}
+import { FormSchemaType } from '../../lib/validationConstants/validationConstants'
+
+export type RegisterParamsType = Omit<FormSchemaType, 'passwordConfirmation'>
+
 export type ISignUpSchema = {
   isLoading: boolean
+  isSignUpModalOpen: boolean
 }

@@ -17,7 +17,7 @@ describe('Input component', () => {
   })
 
   test('displays error message when error prop is provided', () => {
-    const error = { message: 'Required field' }
+    const error = { message: 'Required field', type: '' }
     const { getByText } = render(<Input error={error} />)
     const errorMessage = getByText(error.message)
     expect(errorMessage).toBeInTheDocument()

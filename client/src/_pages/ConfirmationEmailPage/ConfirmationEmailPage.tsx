@@ -1,40 +1,29 @@
-import { useServerTranslation } from '@/shared/config/i18n/server'
+'use client'
+
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
-import { classNames } from '@/shared/lib/classNames/classNames'
-import { MyImage } from '@/shared/ui/MyImage/MyImage'
-import {
-  CONFIRMATION_STATUS,
-  ConfirmationEmailButton,
-} from '@/features/auth/confirmationEmailViaCode'
-import cls from './ConfirmationEmailPage.module.scss'
-import { getImageProps } from './utils/getImageProps'
+import { ConfirmationEmailViaCode } from '@/features/auth/confirmationEmailViaCode'
+import { useSearchParams } from 'next/navigation'
+import { useClientTranslation } from '@/shared/config/i18n/client'
+import { useContext, useEffect } from 'react'
+import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { useConfirmationEmailViaCodeMutation } from '@/entities/User'
+import { Preloader } from '@/shared/ui/Preloader/Preloader'
 
-type SearchParams = {
-  status: CONFIRMATION_STATUS
-  email?: string
-  lng: string
-}
+export const ConfirmationEmailPage = () => {
+  const lngId = useContext(LanguageContext) as LanguageIds
+  const { t } = useClientTranslation(lngId, Namespaces.CONFIRMATION_EMAIL)
+  const searchParams = useSearchParams()
+  const confirmationCode = searchParams.get('code') as string
+  const email = searchParams.get('email') as string
 
-export const ConfirmationEmailPage = async ({ searchParams }: { searchParams: SearchParams }) => {
-  const { status, email, lng: lngId } = searchParams
-  const { t } = await useServerTranslation(lngId as LanguageIds, Namespaces.CONFIRMATION_EMAIL)
+  const [confirmEmailViaCode, { isSuccess, isUninitialized }] =
+    useConfirmationEmailViaCodeMutation()
 
-  const { src, alt, wrapperWidth } = getImageProps(status)
-  const mods = {
-    [cls.paddingText]: status != 'invalid',
-  }
+  useEffect(() => {
+    confirmEmailViaCode({ confirmationCode })
+  }, [confirmEmailViaCode, confirmationCode])
 
-  return (
-    <main className={cls.page}>
-      <h2>{t(`${status}.title`)}</h2>
-      <p className={classNames(cls.text, mods)}>{t(`${status}.text`)}</p>
-      <ConfirmationEmailButton
-        className={cls.btn}
-        status={status}
-        lngId={lngId as LanguageIds}
-        email={email}
-      />
-      <MyImage src={src as string} wrapperWidth={wrapperWidth} alt={alt} />
-    </main>
-  )
+  if (isUninitialized) return <Preloader />
+
+  return <ConfirmationEmailViaCode isSuccess={isSuccess} t={t} lngId={lngId} email={email} />
 }

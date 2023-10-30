@@ -1,8 +1,8 @@
 import { ThunkConfig } from '@/providers/StoreProvider'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { clearAuthData, userApi } from '@/entities/User'
-import { LOCAL_STORAGE_TOKEN_KEY } from '@/shared/const/localStorage'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
+import { ApiError } from '@/shared/api/types'
 
 export const signoutThunk = createAsyncThunk<void, void, ThunkConfig<string>>(
   'auth/logout',
@@ -13,9 +13,12 @@ export const signoutThunk = createAsyncThunk<void, void, ThunkConfig<string>>(
       await dispatch(userApi.endpoints.signout.initiate()).unwrap()
     } catch (error) {
       if (isFetchBaseQueryError(error)) {
-        if (typeof error.data === 'string') {
-          throw new Error(error.data)
+        const apiError = error.data as ApiError
+
+        if (Array.isArray(apiError.messages)) {
+          apiError.messages.forEach(({ message }) => console.warn(message))
         }
+        console.warn(apiError.messages)
       }
 
       throw new Error('Unknown error')

@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useMemo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 import { Portal } from '../Portal/Portal'
@@ -13,18 +13,22 @@ type ModalProps = {
   children?: ReactNode
   isOpen?: boolean
   onClose?: () => void
+  width?: number | string
 }
 
 const ANIMATION_DELAY = 200
 
 export const Modal = (props: ModalProps) => {
-  const { children, className, isOpen, onClose } = props
+  const { children, className, isOpen, onClose, width } = props
 
   const { isClosing, close } = useModal({
     animationDelay: ANIMATION_DELAY,
     onClose,
     isOpen,
   })
+  const styles = {
+    flexBasis: width,
+  }
 
   const mods = {
     [cls.opened]: isOpen,
@@ -35,7 +39,9 @@ export const Modal = (props: ModalProps) => {
     <Portal>
       <div className={classNames(cls.Modal, mods, [className])}>
         <Overlay onClick={close} />
-        <div className={cls.content}>{children}</div>
+        <div className={cls.content} style={styles}>
+          {children}
+        </div>
       </div>
     </Portal>
   )
@@ -44,10 +50,12 @@ export const Modal = (props: ModalProps) => {
 type ModalHeaderProps = {
   children: ReactNode
   close: () => void
+  width?: number | string
 }
 
 //eslint-disable-next-line
-Modal.Header = ({ children, close }: ModalHeaderProps) => {
+Modal.Header = ({ children, close, width }: ModalHeaderProps) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   return (
     <div className={cls.header}>
       <h2 className={cls.title}>{children}</h2>

@@ -9,7 +9,7 @@ const createJestConfig = nextJest({
 /** @type {import('jest').Config} */
 const customJestConfig = {
   globals: {
-    IS_DEV: true,
+    __IS_DEV__: true,
   },
   clearMocks: true,
   testEnvironment: 'jest-environment-jsdom',

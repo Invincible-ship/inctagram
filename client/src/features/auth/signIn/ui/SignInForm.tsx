@@ -8,16 +8,25 @@ import { setDisableError } from '@/features/auth/signIn/model/slice/signInSlice'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 export type SignInFormProps = {
   errorLogin?: string
   onSubmit: FormEventHandler<HTMLFormElement> | undefined
   t: (key: string) => string
+  isLoading: boolean
   errors: Record<string, any>
   register: any
 }
 
-export const SignInForm: FC<SignInFormProps> = ({ onSubmit, t, errors, register, errorLogin }) => {
+export const SignInForm: FC<SignInFormProps> = ({
+  onSubmit,
+  t,
+  errors,
+  register,
+  errorLogin,
+  isLoading,
+}) => {
   const dispatch = useAppDispatch()
   const [showPassword, setShowPassword] = useState(false)
   const toggleShowPassword = () => {
@@ -29,7 +38,11 @@ export const SignInForm: FC<SignInFormProps> = ({ onSubmit, t, errors, register,
   }
 
   return (
-    <form onSubmit={onSubmit} className={'form-style'} onClick={disableError}>
+    <form
+      onSubmit={onSubmit}
+      className={classNames('form-style', {}, [s.form])}
+      onClick={disableError}
+    >
       <InputField
         id={'email'}
         type={'email'}
@@ -48,13 +61,18 @@ export const SignInForm: FC<SignInFormProps> = ({ onSubmit, t, errors, register,
         register={register('password')}
         error={errors.password}
       />
-      <div className={s.error}>{errorLogin}</div>
       <div className={s.forgotPassword}>
         <Link className={s.forgotPasswordLink} href={'/forgotPassword'}>
           {t('forgotPassword')}
         </Link>
       </div>
-      <Button type="submit" className={'styled-btn styled-btn-1'}>
+      <Button
+        type="submit"
+        className={'styled-btn styled-btn-1'}
+        style={{ marginTop: 0 }}
+        isLoading={isLoading}
+        disabled={isLoading}
+      >
         {t('signIn')}
       </Button>
     </form>

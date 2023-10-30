@@ -3,7 +3,9 @@
 //@import "variables/common";
 
 .app {
-  .content {
-    padding: 20px 0;
+  .app-container {
+    max-width: 1330px;
+    padding: 0 15px;
+    margin: 0 auto;
   }
 }

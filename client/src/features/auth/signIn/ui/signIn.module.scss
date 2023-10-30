@@ -5,16 +5,19 @@
 .forgotPassword {
   font-size: 14px;
   line-height: 24px;
-  float: right;
+  align-self: flex-end;
+  margin-top: 12px;
 
   .forgotPasswordLink {
     color: var(--light-color-900);
   }
+}
 
-  &:not(:last-child),
-  &:not(:first-child) {
-    margin: 30px 0 0 0;
-  }
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 11px;
 }
 
 .signInButton {

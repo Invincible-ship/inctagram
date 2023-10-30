@@ -1,3 +1,4 @@
+import { setAuthData } from '@/entities/User/model/slice/userSlice'
 import { getUserDataByTokenQuery } from '../api/userApi'
 import { IUser } from '../model/types/types'
 import { ThunkConfig } from '@/providers/StoreProvider'
@@ -13,16 +14,17 @@ export const initAuthData = createAsyncThunk<IUser | undefined, void, ThunkConfi
     console.log('Start init data')
 
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)
-    const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY) as string
 
-    if (!token || !userId) {
+    if (!token) {
       return rejectWithValue('User unauthorized')
     }
 
     try {
-      const response = await dispatch(getUserDataByTokenQuery()).unwrap()
+      const user = await dispatch(getUserDataByTokenQuery()).unwrap()
 
-      return response
+      localStorage.setItem(LOCAL_STORAGE_USER_ID_KEY, JSON.stringify(user.userId))
+
+      return user
     } catch (err) {
       if (isFetchBaseQueryError(err)) {
         if (typeof err.data == 'string') {

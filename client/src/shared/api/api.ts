@@ -2,9 +2,11 @@ import axios from 'axios'
 import { LOCAL_STORAGE_LANGUAGE_ID_KEY, LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage'
 import { AuthRefreshResponse } from './types'
 
+const baseURL = __IS_DEV__ ? process.env.NEXT_PUBLIC_LOCALHOST_API : process.env.NEXT_PUBLIC_API
+
 export const $api = axios.create({
   withCredentials: true,
-  baseURL: process.env.NEXT_PUBLIC_API,
+  baseURL,
 })
 
 $api.interceptors.request.use(config => {
@@ -32,10 +34,9 @@ $api.interceptors.response.use(
       originalRequest._isRetry = true
 
       try {
-        const response = await axios.get<AuthRefreshResponse>(
-          `${process.env.__API__}/refresh-token`,
-          { withCredentials: true },
-        )
+        const response = await axios.get<AuthRefreshResponse>(`${baseURL}/refresh-token`, {
+          withCredentials: true,
+        })
 
         localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)
         return $api.request(originalRequest)

@@ -5,14 +5,18 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
 import { userReducer } from '@/entities/User'
 import { signInReducer } from '@/features/auth/signIn'
 import { signupReducer } from '@/features/auth/signup'
+import { profileReducer } from '@/entities/Profile'
+import { signInWithGoogleReducer } from '@/features/auth/signInWithThirdPartyServices'
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducer: ReducersMapObject<StateSchema> = {
     // Ваши остальные редьюсеры
     [rtkApi.reducerPath]: rtkApi.reducer,
     user: userReducer,
+    profile: profileReducer,
     signIn: signInReducer,
     signup: signupReducer,
+    signInWithGoogle: signInWithGoogleReducer,
   }
 
   const extraArg: ThunkExtraArg = {

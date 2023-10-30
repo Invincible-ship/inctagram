@@ -1,6 +1,6 @@
 'use client'
 import { useContext, useState } from 'react'
-import { SignUpForm } from 'src/features/auth/signup/ui/signUpForm/SignUpForm'
+import { SignUpForm } from './SignUpForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import '@/shared/styles/variables/common/_form.scss'
@@ -9,23 +9,28 @@ import style from './signup.module.scss'
 import { FormSchemaType, formSchema } from '../lib/validationConstants/validationConstants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { signupThunk } from '../model/signup'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
-import { getIsLoading } from '../model/selectors/getIsLoading'
+import { getIsLoading as getIsSignUpLoading } from '../model/selectors/getIsLoading'
+import { getIsSignUpModalOpen } from '../model/selectors/getIsSignUpModalOpen'
 import { Routes } from '@/shared/types/routes'
-import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
-import { SignUpModal } from 'src/features/auth/signup/ui/signUpModal/SignUpModal'
+import {
+  ThirdPartyOAuthButtons,
+  getIsSignInWithGoogleLoading,
+} from '@/features/auth/signInWithThirdPartyServices'
+import { SignUpModal } from './SignUpModal'
+import { Preloader } from '@/shared/ui/Preloader/Preloader'
 
 export const SignUp = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
-  const isLoading = useSelector(getIsLoading)
+  const isSignUpLoading = useSelector(getIsSignUpLoading)
+  const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
+  const isSignUpModalOpen = useSelector(getIsSignUpModalOpen)
   const dispatch = useAppDispatch()
   const { t } = useClientTranslation(lngId, Namespaces.SIGNUP)
   const schema = formSchema(t)
@@ -41,16 +46,12 @@ export const SignUp = () => {
   })
 
   const onSubmit: SubmitHandler<FormSchemaType> = data => {
-    dispatch(signupThunk({ body: data, setError, lngId }))
+    const body = { ...data, passwordConfirmation: undefined }
+    dispatch(signupThunk({ body, setError }))
     setEmail(data.email)
-    setIsSignUpModalOpen(true)
   }
 
-  if (isLoading) {
-    return <Preloader />
-  }
-
-  // TODO: add 400 status error handler to say user link has already sent to email
+  if (isSignInWithGoogleLoading) return <Preloader />
 
   return (
     <>
@@ -60,11 +61,10 @@ export const SignUp = () => {
           <ThirdPartyOAuthButtons />
           <SignUpForm
             onSubmit={handleSubmit(onSubmit)}
-            isLoading={isLoading}
+            isLoading={isSignUpLoading}
             t={t}
             errors={errors}
             register={register}
-            lngId={lngId}
           />
           <span className={'info b-title bt16 align-center semibold'}>
             {t('doYouHaveAnAccount')}
@@ -77,12 +77,7 @@ export const SignUp = () => {
           </Link>
         </div>
       </div>
-      <SignUpModal
-        email={email}
-        isSignUpModalOpen={isSignUpModalOpen}
-        setIsSignUpModalOpen={setIsSignUpModalOpen}
-        t={t}
-      />
+      <SignUpModal email={email} isSignUpModalOpen={isSignUpModalOpen} t={t} />
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 import { USER_TAG } from '@/shared/const/rtk'
 import { LoginRequestType, LoginResponseType } from '@/features/auth/signIn/model/types/types'
-import { RegisterParamsType, RegisterResponseType } from '@/features/auth/signup/model/types/types'
+import { RegisterParamsType } from '@/features/auth/signup/model/types/types'
 import { IUser } from '@/entities/User/model/types/types'
 import {
   ME_ENDPOINT,
@@ -14,13 +14,12 @@ import {
   CONFIRMATION_REGISTRATION,
 } from '@/shared/const/apiEndpoints'
 import { TOAuthLoginResponse } from '@/features/auth/signInWithThirdPartyServices'
-import {
-  TConfirmationEmailViaCodeRequest,
-  TConfirmationEmailViaCodeResponse,
-} from '@/features/auth/confirmationEmailViaCode'
+import { TConfirmationEmailViaCodeRequest } from '@/features/auth/confirmationEmailViaCode'
+import { TResendLinkBody } from '@/features/auth/confirmationEmailViaCode/model/types'
 
 export const userApi = rtkApi.injectEndpoints({
   endpoints: build => ({
+    // signout migrated
     signout: build.mutation<void, void>({
       query: () => ({
         url: SIGN_OUT_ENDPOINT,
@@ -28,29 +27,31 @@ export const userApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: [USER_TAG],
     }),
-    signup: build.mutation<RegisterResponseType, RegisterParamsType>({
+    // SignUp migrated
+    signup: build.mutation<void, RegisterParamsType>({
       query: data => ({
         method: 'POST',
         url: SIGN_UP_ENDPOINT,
         body: data,
       }),
     }),
-    confirmationEmailViaCode: build.query<
-      TConfirmationEmailViaCodeResponse,
-      TConfirmationEmailViaCodeRequest
-    >({
-      query: confirmationCode => ({
+    // confirmationEmailViaCode migrated
+    confirmationEmailViaCode: build.mutation<void, TConfirmationEmailViaCodeRequest>({
+      query: body => ({
+        method: 'POST',
         url: CONFIRMATION_REGISTRATION,
-        params: { confirmationCode },
+        body,
       }),
     }),
-    resendLink: build.mutation<void, { email: string }>({
+    // resendLink migrated
+    resendLink: build.mutation<void, TResendLinkBody>({
       query: data => ({
         url: RESEND_LINK_ENDPOINT,
         method: 'POST',
         body: data,
       }),
     }),
+    // signIn migrated
     signIn: build.mutation<LoginResponseType, LoginRequestType>({
       query: data => ({
         url: SIGN_IN_ENDPOINT,
@@ -59,18 +60,15 @@ export const userApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: [USER_TAG],
     }),
-    signInWithGoogle: build.query<TOAuthLoginResponse, string>({
+    // TODO: migrate signInWithGoogle to new backend api
+    signInWithGoogle: build.mutation<TOAuthLoginResponse, string>({
       query: code => ({
+        method: 'POST',
         url: SIGN_IN_WITH_GOOGLE_ENDPOINT,
-        params: { code },
+        body: { code },
       }),
     }),
-    signInWithGithub: build.query<TOAuthLoginResponse, string>({
-      query: code => ({
-        url: SIGN_IN_WITH_GITHUB_ENDPOINT,
-        params: { code },
-      }),
-    }),
+    // me migrated
     me: build.query<IUser, void>({
       query: () => ME_ENDPOINT,
       providesTags: [USER_TAG],
@@ -79,10 +77,6 @@ export const userApi = rtkApi.injectEndpoints({
 })
 
 export const getUserDataByTokenQuery = userApi.endpoints.me.initiate
-export const getUserDataByGithubQuery = userApi.endpoints.signInWithGithub.initiate
-export const {
-  useSignInWithGoogleQuery,
-  useSignInWithGithubQuery,
-  useResendLinkMutation,
-  useConfirmationEmailViaCodeQuery,
-} = userApi
+export const useMeLazyQuery = userApi.endpoints.me.useLazyQuery
+export const getAccessTokenByGoogleMutation = userApi.endpoints.signInWithGoogle.initiate
+export const { useResendLinkMutation, useConfirmationEmailViaCodeMutation, useMeQuery } = userApi

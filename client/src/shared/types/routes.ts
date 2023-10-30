@@ -3,13 +3,11 @@ export enum Routes {
   // auth routes
   SIGNIN = '/auth/login',
   SIGNUP = '/auth/registration',
-  CONFIRMATION_EMAIL = '/auth/registration/confirmation-email',
+  REGISTRATION_CONFIRMATION = '/auth/registration-confirmation',
   MERGE = '/auth/merge',
-  GOOGLE_CLIENT = '/auth/oauth-google-client',
-  GITHUB_CLIENT = '/auth/oauth-github-client',
+  GOOGLE_CLIENT = '/google',
   TERMS_OF_SERVICE = '/auth/terms-of-service',
   PRIVACY_POLICY = '/auth/privacy-policy',
   // user routes
   PROFILE = '/profile',
-
 }

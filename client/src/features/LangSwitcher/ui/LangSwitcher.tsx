@@ -1,20 +1,14 @@
 'use client'
 
-import * as Select from '@radix-ui/react-select'
-import ArrowDown from '@/shared/assets/icons/arrow-down.svg'
 import FlagRU from '@/shared/assets/icons/ru-flag.svg'
 import FlagUK from '@/shared/assets/icons/uk-flag.svg'
-import CheckIcon from '@/shared/assets/icons/check.svg'
 import { languages } from '@/shared/config/i18n/settings'
 import { ReactNode, Suspense, useContext, useMemo, useState } from 'react'
 import { usePathname, useSearchParams, redirect } from 'next/navigation'
 import cls from './LangSwitcher.module.scss'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
-
-// type LangSwitcherProps = {
-//   initialLngId: LanguageIds;
-// };
+import { Select, SelectItem } from '@/shared/ui/Select/Select'
 
 type TLanguageOption = {
   id: LanguageIds
@@ -29,7 +23,7 @@ const languagesOptions: TLanguageOption[] = languages.map(lng => {
     case 'ru':
       return { id: LanguageIds.RU, lng: 'Russian', icon: <FlagRU /> }
     default:
-      return { id: LanguageIds.EN, lng: 'English', icon: <FlagUK /> }
+      return { id: LanguageIds.RU, lng: 'Russian', icon: <FlagRU /> }
   }
 })
 
@@ -52,37 +46,29 @@ const LangSwitcher = () => {
     redirect(newPathname)
   }
 
-  return (
-    <Select.Root onValueChange={onChange}>
-      <Select.Trigger className={cls.trigger} data-testid="lang-switcher">
-        <Select.Value>
-          <Option option={selectedLanguage} />
-        </Select.Value>
-        <Select.Icon className={cls['lng-icon']}>
-          <ArrowDown />
-        </Select.Icon>
-      </Select.Trigger>
+  const defaultSelectedItem = <Option option={selectedLanguage} />
 
-      <Select.Content className={cls.content} position="popper">
-        <Select.Viewport>
-          {languagesOptions.map(option => (
-            <Select.Item key={option.id} value={option.id} className={cls.item}>
-              <Option option={option} />
-              <Select.ItemIndicator className={cls.indicator}>
-                <CheckIcon className={cls['check-icon']} />
-              </Select.ItemIndicator>
-            </Select.Item>
-          ))}
-        </Select.Viewport>
-      </Select.Content>
-    </Select.Root>
+  return (
+    <Select
+      testId="lang-switcher"
+      onValueChange={onChange}
+      triggerClassName={cls.trigger}
+      contentClassName={cls.content}
+      defaultSelectedItem={defaultSelectedItem}
+    >
+      {languagesOptions.map(option => (
+        <SelectItem key={option.id} value={option.id} className={cls.item}>
+          <Option option={option} />
+        </SelectItem>
+      ))}
+    </Select>
   )
 }
 
 const Option = ({ option }: { option: TLanguageOption }) => (
   <div className={cls.value}>
     <span>{option?.icon}</span>
-    {option?.lng}
+    <span className={cls.lngName}>{option?.lng}</span>
   </div>
 )
 

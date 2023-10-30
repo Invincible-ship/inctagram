@@ -1,21 +1,16 @@
-import Image from 'next/image'
+import NextImage from 'next/image'
 import type { ImageProps } from 'next/image'
-import { CSSProperties, FC } from 'react'
+import { CSSProperties, FC, ReactElement, useLayoutEffect, useState } from 'react'
 import cls from './MyImage.module.scss'
-import { toBase64 } from '@/shared/utils/toBase64'
-import { shimmer, normalizeImageProps } from './utils'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 const defaultStyles: CSSProperties = {
   objectFit: 'cover',
-  height: 'auto',
 }
 
 export type MyImageProps = {
-  src: string
-  className?: string
-  wrapperWidth?: number
-  wrapperHeight?: number
+  fallback?: ReactElement
+  errorFallback?: ReactElement
   ar?: string
 } & ImageProps
 
@@ -23,32 +18,51 @@ export const MyImage: FC<MyImageProps> = props => {
   const {
     className,
     src,
+    fallback,
+    errorFallback,
     sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
-    style = defaultStyles,
-    wrapperWidth,
-    wrapperHeight,
+    style,
+    width,
+    height,
     ar,
-    alt,
+    alt = 'image',
+    ...rest
   } = props
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isHasError, setIsHasError] = useState<boolean>(false)
 
-  const shimmerUrl = `data:image/svg+xml;base64,${toBase64(shimmer(wrapperWidth, wrapperHeight))}`
+  useLayoutEffect(() => {
+    const img = new Image()
+    // @ts-ignore
+    img.src = src ?? ''
+    img.onload = () => {
+      setIsLoading(false)
+    }
+    img.onerror = () => {
+      setIsLoading(false)
+      setIsHasError(true)
+    }
+  }, [src])
 
-  const normalizedImageProps = normalizeImageProps(props)
+  if (isLoading) return fallback
+
+  if (isHasError) return errorFallback
+
+  // const shimmerUrl = `data:image/svg+xml;base64,${toBase64(shimmer(wrapperWidth, wrapperHeight))}`
 
   return (
     <div
+      data-testid="image-wrapper"
       className={classNames(cls.wrapper, {}, [className])}
-      style={{ maxWidth: wrapperWidth, height: wrapperHeight, aspectRatio: ar }}
+      style={{ width: width, height: height, aspectRatio: ar }}
     >
-      <Image
-        {...normalizedImageProps}
-        src={src}
-        width={wrapperWidth}
+      <NextImage
+        {...rest}
+        src={src || ''}
         alt={alt}
+        fill
         sizes={sizes}
-        style={style}
-        // TODO: implement shimmer animation effect
-        placeholder="blur"
+        style={{ ...defaultStyles, ...style }}
       />
     </div>
   )

@@ -1,29 +1,28 @@
-import googleUrl from '@/shared/assets/icons/google.svg?url'
-import githubUrl from '@/shared/assets/icons/github.svg?url'
-import Image from 'next/image'
+import Google from '@/shared/assets/icons/google.svg'
+import Github from '@/shared/assets/icons/github.svg'
 import Link from 'next/link'
-import { useContext } from 'react'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
-import { LanguageIds } from '@/shared/config/i18n/types'
-import { getGoogleOAuthUrl } from '../model/utils/getGoogleOAuthUrl'
-import { getGithubOAuthUrl } from '../model/utils/getGithubOAuthUrl'
 import cls from './ThirdPartyOAuthButtons.module.scss'
-
-const oauthButtons = [
-  { src: googleUrl, hrefFn: getGoogleOAuthUrl, alt: 'google icon' },
-  { src: githubUrl, hrefFn: getGithubOAuthUrl, alt: 'github icon' },
-]
+import { getGithubOAuthUrl } from '../model/utils/getGithubOAuthUrl'
+import { useGoogleLogin } from '@react-oauth/google'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { signInWithGoogleThunk } from '../model/signInWithGoogleThunk'
 
 export const ThirdPartyOAuthButtons = () => {
-  const lngId = useContext(LanguageContext) as LanguageIds
+  const dispatch = useAppDispatch()
+
+  const signInWithGoogle = useGoogleLogin({
+    onSuccess: ({ code }) => dispatch(signInWithGoogleThunk(code)),
+    flow: 'auth-code',
+  })
 
   return (
     <div className={cls.iconWrapper}>
-      {oauthButtons.map(({ hrefFn, src, alt }) => (
-        <Link key={alt} href={hrefFn(lngId)} className={cls['img-wrapper']}>
-          <Image src={src} alt={alt} />
-        </Link>
-      ))}
+      <div className={cls['img-wrapper']} onClick={signInWithGoogle}>
+        <Google />
+      </div>
+      <Link href={getGithubOAuthUrl()} className={cls['img-wrapper']}>
+        <Github />
+      </Link>
     </div>
   )
 }
