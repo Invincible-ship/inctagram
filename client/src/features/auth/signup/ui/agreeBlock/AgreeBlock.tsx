@@ -8,26 +8,24 @@ import {Checkbox} from "@/shared/ui/Checkbox/Checkbox";
 type Props = {
 	lngId: LanguageIds
 	t: (key: string) => string
-	checkboxHandler: (checked: boolean) => void
+	setCheckedAgree: (checkedAgree: boolean) => void
+	checkedAgree: boolean
 }
 
 
-export const AgreeBlock: FC<Props> = ({lngId, t, checkboxHandler}) => {
+export const AgreeBlock: FC<Props> = ({lngId, t, setCheckedAgree, checkedAgree}) => {
 
-	const handleAgree = (check: boolean) => {
-		checkboxHandler(check);
-	};
 
-	return <div className={`b-title bt12 light align-center ${style.agreeBlock}`}>
-		<Checkbox handleAgree={handleAgree}/>
-		{t('agree.iAgreeTo')} &nbsp;
+	return <div className={`b-title bt12 light ${style.agreeBlock}`}>
+		<Checkbox handleAgree={setCheckedAgree} checkedAgree={checkedAgree}/>
+			<span>{t('agree.iAgreeTo')} &nbsp;</span>
 		<Link
 			href={`/${lngId}${Routes.TERMS_OF_SERVICE}`}
 			className={`b-title bt12 light ${style.linkRegistration}`}
 		>
 			<span>{t('agree.termsOfService')}</span>
 		</Link>
-		&nbsp; {t('agree.and')} &nbsp;
+		<span>&nbsp; {t('agree.and')} &nbsp;</span>
 		<Link
 			href={`/${lngId}${Routes.PRIVACY_POLICY}`}
 			className={`b-title bt12 light ${style.linkRegistration}`}

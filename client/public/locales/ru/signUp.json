@@ -5,14 +5,16 @@
   "password": "Пароль",
   "validate": {
     "userNameRequired": "Имя пользователя обязательно",
-    "userNameMaxLength": "Максимальная длина имени пользователя - 30 символов",
-    "emailInvalid": "Неверный формат email",
+    "userNameMinLength": "Минимальное количество символов 6",
+    "userNameMaxLength": "Максимальное количество символов 30",
+    "emailInvalid": "Электронная почта должна соответствовать формату example@example.com.",
     "emailRequired": "Email обязателен",
     "passwordRequired": "Пароль обязателен",
-    "passwordMinLength": "Минимальная длина пароля - 6 символов",
-    "passwordMaxLength": "Максимальная длина пароля - 20 символов",
+    "passwordMinLength": "Минимальное количество символов 6",
+    "passwordMaxLength": "Максимальное количество символов 20",
     "passwordConfirmationRequired": "Подтверждение пароля обязательно",
-    "passwordsDoNotMatch": "Пароли не совпадают"
+    "passwordsDoNotMatch": "Пароли должны совпадать",
+    "passwordMustContain": "Пароль должен содержать: a-z, A-Z, ! \", # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~"
   },
   "passwordConfirmation": "Подтверждение пароля",
   "forgotPassword": "Забыли пароль",
@@ -24,9 +26,9 @@
     "ok": "ОК"
   },
   "agree": {
-    "iAgreeTo": "Я согласен с ",
-    "termsOfService": "условиями обслуживания",
-    "and": "и ",
+    "iAgreeTo": "Я согласен с",
+    "termsOfService": "условиями",
+    "and": "и",
     "privacyPolicy": "политикой конфиденциальности",
     "backToSignUp": "Вернуться к регистрации"
   }

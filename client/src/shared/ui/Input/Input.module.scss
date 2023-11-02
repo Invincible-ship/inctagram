@@ -34,7 +34,7 @@
     line-height: 24px;
 
     &:active {
-      border-radius: 2px;
+      //border-radius: 2px;
       border: 1px solid var(--light-color-500);
       background: var(--dark-color-500);
     }
@@ -44,15 +44,19 @@
     }
 
     &:focus {
-      border-radius: 2px;
+      //border-radius: 2px;
       border: 1px solid var(--accent-color-700);
     }
 
     &.errorInput {
-      border-radius: 2px;
+      //border-radius: 2px;
       border: 1px solid var(--danger-500, #cc1439) !important;
     }
   }
+}
+
+.errorBlock {
+  height: 25px;
 }
 
 .error {
@@ -60,5 +64,5 @@
   font-size: 14px;
   color: var(--danger-color-500);
   font-weight: 400;
-  line-height: 24px;
+  //line-height: 24px;
 }

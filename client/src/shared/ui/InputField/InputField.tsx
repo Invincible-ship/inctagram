@@ -1,10 +1,9 @@
 import Input from '@/shared/ui/Input/Input'
-import { FC } from 'react'
+import {FC} from 'react'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
-import { FieldError, FieldErrorsImpl } from 'react-hook-form'
-import { Merge } from 'type-fest'
+import {FieldError} from 'react-hook-form'
 
 type InputFieldProps = {
   id: string
@@ -13,7 +12,8 @@ type InputFieldProps = {
   placeholder: string
   title: string
   register: any
-  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
+  error: FieldError
+  handleOnBlur?: () => void
 }
 
 export const InputField: FC<InputFieldProps> = ({
@@ -24,7 +24,12 @@ export const InputField: FC<InputFieldProps> = ({
   title,
   register,
   error,
+  handleOnBlur
 }) => {
+
+  const onBlur = () => {
+    handleOnBlur && handleOnBlur()
+  }
   return (
     <div className={'field input-field'}>
       <Input
@@ -34,6 +39,7 @@ export const InputField: FC<InputFieldProps> = ({
         placeholder={placeholder}
         title={title}
         error={error}
+        onBlur={onBlur}
         {...register}
       />
     </div>

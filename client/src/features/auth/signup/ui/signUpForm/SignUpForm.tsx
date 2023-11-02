@@ -1,12 +1,12 @@
 // SignUpForm.tsx
 'use client'
-import { FC, FormEventHandler, useState, useEffect } from 'react'
-import { InputField } from '@/shared/ui/InputField/InputField'
-import { PasswordWrapper } from '@/shared/ui/PasswordWrapper/PasswordWrapper'
-import { Button } from '@/shared/ui/Button/Button'
+import React, {FC, FormEventHandler, useState} from 'react'
+import {InputField} from '@/shared/ui/InputField/InputField'
+import {PasswordWrapper} from '@/shared/ui/PasswordWrapper/PasswordWrapper'
+import {Button} from '@/shared/ui/Button/Button'
 import '@/shared/styles/variables/common/_form.scss'
-import cls from './signup.module.scss'
-import { classNames } from '@/shared/lib/classNames/classNames'
+import cls from '../signup.module.scss'
+import {classNames} from '@/shared/lib/classNames/classNames'
 import {LanguageIds} from "@/shared/config/i18n/types";
 import {AgreeBlock} from "@/features/auth/signup/ui/agreeBlock/AgreeBlock";
 
@@ -17,39 +17,22 @@ export type SignUpFormProps = {
   errors: Record<string, any>
   register: any
   lngId: LanguageIds
-
+  isValid: boolean
+  setCheckedAgree: (checkedAgree: boolean) => void
+  checkedAgree: boolean
 }
 
-export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register, isLoading, lngId }) => {
+export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register, isLoading, lngId, isValid, setCheckedAgree, checkedAgree }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const toggleShowPassword = () => {
     setShowPassword(!showPassword)
   }
-  const [disabled, setDisabled] = useState(true)
-  const [checkedCheckbox, setCheckedCheckbox] = useState(false)
-
-  const checkboxHandler = (check: boolean) => {
-    setCheckedCheckbox(check)
-    if (checkedCheckbox) {
-      setDisabled(true)
-    } else setDisabled(false)
-  }
-
-  useEffect(() => {
-    if (Object.keys(errors).length === 0) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [errors]);
-
-  console.log(Object.keys(errors).length == 0)
-  console.log(errors)
 
   const toggleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword)
   }
+
 
   return (
     <form onSubmit={onSubmit} className={classNames('form-style', {}, [cls.form])}>
@@ -64,7 +47,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register,
       />
       <InputField
         id={'email'}
-        type={'email'}
+        type={'text'}
         placeholder={t('email')}
         title={t('email')}
         register={register('email')}
@@ -91,12 +74,12 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register,
         error={errors.passwordConfirmation}
         data-testid="password-confirmation-input"
       />
-      <AgreeBlock lngId={lngId} t={t} checkboxHandler={checkboxHandler}/>
+      <AgreeBlock lngId={lngId} t={t} setCheckedAgree={setCheckedAgree} checkedAgree={checkedAgree}/>
       <Button
         type="submit"
         className={'styled-btn styled-btn-1'}
         isLoading={isLoading}
-        disabled={isLoading}
+        disabled={isLoading || !isValid || !checkedAgree}
       >
         {t('signUp')}
       </Button>
