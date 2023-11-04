@@ -19,12 +19,13 @@ import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { Routes } from '@/shared/types/routes'
-import { getIsLoading as getIsSignInWithEmailLoading } from '../model/selectors/getIsLoading'
+import { getIsLoading as getIsSignInLoading } from '../model/selectors/getIsLoading'
 import { getIsSignInWithGoogleLoading } from '@/features/auth/signInWithThirdPartyServices'
 import { getError } from '../model/selectors/getError'
 import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
 import { useRouter } from 'next/navigation'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
+import {getIsSignInWithEmailLoading} from "@/features/auth/signIn";
 
 export const SignIn: FC = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
@@ -32,6 +33,7 @@ export const SignIn: FC = () => {
   const schema = formSchema(t)
   const isSignInWithEmailLoading = useSelector(getIsSignInWithEmailLoading)
   const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
+  const isSignInLoading = useSelector(getIsSignInLoading)
   const error = useSelector(getError)
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -39,13 +41,15 @@ export const SignIn: FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
+    setError,
   } = useForm<FormSchemaType>({
+    mode: 'onBlur',
     resolver: zodResolver(schema),
   })
 
   const onSubmit: SubmitHandler<FormSchemaType> = data => {
-    dispatch(signInThunk({ ...data, router }))
+    dispatch(signInThunk({ body: data, router, setError }))
   }
 
   if (isSignInWithGoogleLoading) return <Preloader />
@@ -57,11 +61,12 @@ export const SignIn: FC = () => {
         <ThirdPartyOAuthButtons />
         <SignInForm
           t={t}
-          isLoading={isSignInWithEmailLoading}
+          isLoading={isSignInLoading}
           errors={errors}
           register={register}
           onSubmit={handleSubmit(onSubmit)}
           errorLogin={error ? t('errorLogin') : ''}
+          isValid={isValid}
         />
         <span className={'info b-title bt16 align-center'} style={{ marginBottom: 12 }}>
           {t('dontHaveAnAccount')}?
