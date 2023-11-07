@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC, useContext } from 'react'
+import React, { FC, Suspense, useContext } from 'react'
 import Link from 'next/link'
 import style from '@/features/auth/signup/ui/signup.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
@@ -29,7 +29,7 @@ import {getIsSignInWithEmailLoading} from "@/features/auth/signIn";
 
 export const SignIn: FC = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
-  const { t } = useClientTranslation(lngId, Namespaces.SIGNIN)
+  const { t } = useClientTranslation(Namespaces.SIGNIN)
   const schema = formSchema(t)
   const isSignInWithEmailLoading = useSelector(getIsSignInWithEmailLoading)
   const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
@@ -55,7 +55,7 @@ export const SignIn: FC = () => {
   if (isSignInWithGoogleLoading) return <Preloader />
 
   return (
-    <div className={'form registration' + ' ' + `${s.wrapper}`}>
+    <div className={'form registration'}>
       <div className="form-wrapper auth-form">
         <div className={'title b-title bt26 semibold align-center'}>{t('signIn')}</div>
         <ThirdPartyOAuthButtons />

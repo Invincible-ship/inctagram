@@ -1,10 +1,9 @@
 'use client'
 
-import { FC, useContext, useLayoutEffect, useState } from 'react'
+import { FC, useLayoutEffect, useState } from 'react'
 import DatePickerInstance from 'react-datepicker'
 import './DatePicker.scss'
 import { DatePickerHeader } from './DatePickerHeader'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import defaultCalendarIconObj from '@/shared/assets/icons/calendar-default.svg?url'
@@ -43,8 +42,7 @@ export const DatePicker: FC<DatePickerProps> = ({
 }) => {
   const [startDate, setStartDate] = useState<Value>(null)
   const [endDate, setEndDate] = useState<Value>(null)
-  const lngId = useContext(LanguageContext)
-  const { t } = useClientTranslation(lngId, Namespaces.DATE_PICKER)
+  const { t } = useClientTranslation(Namespaces.DATE_PICKER)
 
   useLayoutEffect(() => {
     customizeDatePickerInput({

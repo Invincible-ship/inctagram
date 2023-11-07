@@ -2,14 +2,13 @@
 
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { EditableProfileGeneralInfo } from '@/features/editableProfileGeneralInfo'
-import { FC, Suspense, memo, useCallback, useContext, useMemo } from 'react'
+import { Suspense, memo, useCallback, useMemo } from 'react'
 import { Flex, VStack } from '@/shared/ui/Stack'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ProfileSettingValue, ProfileSettingsTab } from '@/features/editableProfileGeneralInfo'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import cls from './ProfileSettingsPage.module.scss'
@@ -66,20 +65,41 @@ type ProfileSettingsHeaderProps = {
 }
 
 const ProfileSettingsHeader = memo(({ tabValue, handleTabClick }: ProfileSettingsHeaderProps) => {
-  const lngId = useContext(LanguageContext)
-  const { t } = useClientTranslation(lngId, Namespaces.PROFILE_SETTINGS)
+  const { t } = useClientTranslation(Namespaces.PROFILE_SETTINGS)
 
   const tabs: ProfileSettingsTab[] = useMemo(
     () => [
-      { value: ProfileSettingValue.GENERAL_INFO, content: t('tabs.general-info') },
-      { value: ProfileSettingValue.DEVICES, content: t('tabs.devices') },
-      { value: ProfileSettingValue.ACCOUNT_MANAGMENT, content: t('tabs.account-managment') },
-      { value: ProfileSettingValue.PAYMENTS, content: t('tabs.payments') },
+      {
+        value: ProfileSettingValue.GENERAL_INFO,
+        content: <span className={cls.item}>{t('tabs.general-info')}</span>,
+      },
+      {
+        value: ProfileSettingValue.DEVICES,
+        content: <span className={cls.item}>{t('tabs.devices')}</span>,
+      },
+      {
+        value: ProfileSettingValue.ACCOUNT_MANAGMENT,
+        content: <span className={cls.item}>{t('tabs.account-managment')}</span>,
+      },
+      {
+        value: ProfileSettingValue.PAYMENTS,
+        content: <span className={cls.item}>{t('tabs.payments')}</span>,
+      },
     ],
     [t],
   )
 
-  return <Tabs className={cls.tabs} tabs={tabs} value={tabValue} onTabClick={handleTabClick} />
+  return (
+    <Tabs
+      className={cls.tabs}
+      tabs={tabs}
+      value={tabValue}
+      onTabClick={handleTabClick}
+      justifyChild="center"
+      withUnderline
+      name="header"
+    />
+  )
 })
 
 ProfileSettingsHeader.displayName = 'ProfileSettingsHeader'

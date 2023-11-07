@@ -14,11 +14,11 @@ const preview: Preview = {
     nextjs: {
       appDirectory: true,
     },
-    decorators: [
-      (Story: StoryFn) => StyleDecorator(Story),
-      (Story: StoryFn) => StoreDecorator(Story),
-    ],
   },
+  decorators: [
+    (Story: StoryFn) => StyleDecorator(Story),
+    (Story: StoryFn) => StoreDecorator(Story),
+  ],
 }
 
 export default preview

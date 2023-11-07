@@ -1,26 +1,29 @@
 'use client'
-import {useContext, useState} from 'react'
-import {SubmitHandler, useForm} from 'react-hook-form'
-import {useClientTranslation} from '@/shared/config/i18n/client'
+import { useContext, useState } from 'react'
+import { SignUpForm } from './SignUpForm'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useClientTranslation } from '@/shared/config/i18n/client'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import style from './signup.module.scss'
-import {formSchema, FormSchemaType} from '../lib/validationConstants/validationConstants'
-import {zodResolver} from '@hookform/resolvers/zod'
+import { FormSchemaType, formSchema } from '../lib/validationConstants/validationConstants'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import {signupThunk} from '../model/signup'
-import {useSelector} from 'react-redux'
-import {useAppDispatch} from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import {LanguageContext} from '@/providers/LanguageProvider/LanguageProvider'
-import {LanguageIds, Namespaces} from '@/shared/config/i18n/types'
-import {withAuth} from '@/shared/lib/HOC/withAuth/withAuth'
-import {getIsLoading as getIsSignUpLoading} from '../model/selectors/getIsLoading'
-import {getIsSignUpModalOpen} from '../model/selectors/getIsSignUpModalOpen'
-import {Routes} from '@/shared/types/routes'
-import {getIsSignInWithGoogleLoading, ThirdPartyOAuthButtons,} from '@/features/auth/signInWithThirdPartyServices'
-import {Preloader} from '@/shared/ui/Preloader/Preloader'
-import {SignUpForm} from "@/features/auth/signup/ui/signUpForm/SignUpForm";
-import {SignUpModal} from "@/features/auth/signup/ui/signUpModal/SignUpModal";
+import { signupThunk } from '../model/signup'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
+import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
+import { getIsLoading as getIsSignUpLoading } from '../model/selectors/getIsLoading'
+import { getIsSignUpModalOpen } from '../model/selectors/getIsSignUpModalOpen'
+import { Routes } from '@/shared/types/routes'
+import {
+  ThirdPartyOAuthButtons,
+  getIsSignInWithGoogleLoading,
+} from '@/features/auth/signInWithThirdPartyServices'
+import { SignUpModal } from './SignUpModal'
+import { Preloader } from '@/shared/ui/Preloader/Preloader'
 
 export const SignUp = () => {
 	const lngId = useContext(LanguageContext) as LanguageIds

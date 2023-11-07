@@ -12,6 +12,8 @@ export enum Namespaces {
   PROFILE_SETTINGS = 'profile-settings',
   DATE_PICKER = 'date-picker',
   CITY_SELECT = 'city-select',
+  SIDEBAR = 'sidebar',
+  HEADER = 'header',
 }
 
 export type LanguageParams = { lng: LanguageIds }

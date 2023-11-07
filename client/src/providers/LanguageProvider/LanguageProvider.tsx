@@ -1,7 +1,7 @@
 'use client'
 
 import { LanguageIds } from '@/shared/config/i18n/types'
-import { ReactNode, createContext, useMemo } from 'react'
+import { ReactNode, createContext } from 'react'
 
 type LanguageProviderProps = {
   lngId: LanguageIds
@@ -11,7 +11,5 @@ type LanguageProviderProps = {
 export const LanguageContext = createContext<LanguageIds | ''>('')
 
 export const LanguageProvider = ({ lngId, children }: LanguageProviderProps) => {
-  const value = useMemo(() => lngId, [lngId])
-
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
+  return <LanguageContext.Provider value={lngId}>{children}</LanguageContext.Provider>
 }
