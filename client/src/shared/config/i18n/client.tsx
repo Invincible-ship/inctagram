@@ -27,10 +27,10 @@ i18next
   })
 
 export function useClientTranslation(
-  lng: LanguageIds | '' = '',
   ns: Namespaces = Namespaces.DEFAULT,
   options: Record<string, any> = {},
 ) {
+  const lng = ''
   const ret = useTranslationOrg(ns, options)
   const { i18n } = ret
   if (runsOnServerSide && i18n.resolvedLanguage !== lng) {

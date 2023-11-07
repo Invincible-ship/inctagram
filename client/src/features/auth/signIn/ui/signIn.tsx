@@ -28,7 +28,7 @@ import { Preloader } from '@/shared/ui/Preloader/Preloader'
 
 export const SignIn: FC = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
-  const { t } = useClientTranslation('', Namespaces.SIGNIN)
+  const { t } = useClientTranslation(Namespaces.SIGNIN)
   const schema = formSchema(t)
   const isSignInWithEmailLoading = useSelector(getIsSignInWithEmailLoading)
   const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)

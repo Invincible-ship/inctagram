@@ -15,7 +15,7 @@ import { AppLayout } from '@/shared/ui/Layouts/AppLayout'
 
 const inter: NextFont = Inter({
   weight: ['400', '500', '600', '700', '900'],
-  subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
+  subsets: ['latin', 'cyrillic'],
 })
 
 const RootLayout = ({ children }: { children: ReactNode }) => {

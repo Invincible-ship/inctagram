@@ -1,7 +1,7 @@
-import cls from './DottedIconMenu.module.scss'
+import cls from './DottedMenuIcon.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
-export const DottedIconMenu = ({ isActive }: { isActive?: boolean }) => {
+export const DottedMenuIcon = ({ isActive }: { isActive?: boolean }) => {
   const mods = {
     [cls.active]: isActive,
   }

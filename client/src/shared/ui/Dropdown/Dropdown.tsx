@@ -50,6 +50,7 @@ export const DropdownMenuItem: FC<DropdownMenuPrimitive.DropdownMenuItemProps> =
 }) => (
   <DropdownMenuPrimitive.Item className={classNames(cls.DropdownItem, {}, [className])} {...rest} />
 )
+
 export const DropdownMenuGroup = DropdownMenuPrimitive.Group
 
 export const DropdownMenuCheckboxItem = React.forwardRef<

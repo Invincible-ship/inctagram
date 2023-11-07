@@ -1,5 +1,5 @@
 import { Namespaces } from '@/shared/config/i18n/types'
-import { DottedIconMenu } from '@/shared/ui/DottedIconMenu/DottedIconMenu'
+import { DottedMenuIcon } from '@/shared/ui/DottedMenuIcon/DottedMenuIcon'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +22,7 @@ import { useClientTranslation } from '@/shared/config/i18n/client'
 export const HeaderMenu = () => {
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false)
   const lngId = useContext(LanguageContext)
-  const { t } = useClientTranslation(lngId, Namespaces.HEADER)
+  const { t } = useClientTranslation(Namespaces.HEADER)
   const userId = useSelector(getUserId)
   const router = useRouter()
 
@@ -60,7 +60,7 @@ export const HeaderMenu = () => {
   return (
     <DropdownMenu onOpenChange={handleMenuStateChange}>
       <DropdownMenuTrigger>
-        <DottedIconMenu isActive={isMenuActive} />
+        <DottedMenuIcon isActive={isMenuActive} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <VStack gap="12">

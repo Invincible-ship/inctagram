@@ -5,13 +5,11 @@ import OutlineBell from '@/shared/assets/icons/bell-outline.svg'
 import Logo from '@/shared/assets/icons/logo.svg'
 import { SuspenseLangSwitcher } from '@/features/LangSwitcher'
 import cls from './Header.module.scss'
-import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { HStack } from '@/shared/ui/Stack'
 import { Routes } from '@/shared/types/routes'
 import Link from 'next/link'
 import { HeaderMenu } from './HeaderMenu'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
-import { useClientTranslation } from '@/shared/config/i18n/client'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 
 type HeaderProps = {

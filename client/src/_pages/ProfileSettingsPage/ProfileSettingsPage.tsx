@@ -2,14 +2,13 @@
 
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { EditableProfileGeneralInfo } from '@/features/editableProfileGeneralInfo'
-import { Suspense, memo, useCallback, useContext, useMemo } from 'react'
+import { Suspense, memo, useCallback, useMemo } from 'react'
 import { Flex, VStack } from '@/shared/ui/Stack'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ProfileSettingValue, ProfileSettingsTab } from '@/features/editableProfileGeneralInfo'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import cls from './ProfileSettingsPage.module.scss'
@@ -66,8 +65,7 @@ type ProfileSettingsHeaderProps = {
 }
 
 const ProfileSettingsHeader = memo(({ tabValue, handleTabClick }: ProfileSettingsHeaderProps) => {
-  const lngId = useContext(LanguageContext)
-  const { t } = useClientTranslation('', Namespaces.PROFILE_SETTINGS)
+  const { t } = useClientTranslation(Namespaces.PROFILE_SETTINGS)
 
   const tabs: ProfileSettingsTab[] = useMemo(
     () => [

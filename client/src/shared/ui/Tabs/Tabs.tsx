@@ -1,5 +1,5 @@
 import { Flex, FlexJustify, FlexProps } from '@/shared/ui/Stack/Flex/Flex'
-import { ReactNode, Suspense, memo, useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { ReactNode, memo, useCallback, useLayoutEffect } from 'react'
 import cls from './Tabs.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { calculateActiveTabPosition } from './utils/calculateActiveTabPosition'
@@ -20,7 +20,7 @@ type TabsProps = {
   name?: string
 } & Pick<FlexProps, 'align' | 'gap' | 'direction' | 'justify'>
 
-export const Tabs = (props: TabsProps) => {
+export const Tabs = memo((props: TabsProps) => {
   const {
     direction = 'row',
     gap,
@@ -33,8 +33,6 @@ export const Tabs = (props: TabsProps) => {
     withUnderline,
     name,
   } = props
-
-  const [_, forceRerender] = useState()
 
   const handleClick = useCallback(
     (tab: Tab<any>) => {
@@ -53,10 +51,6 @@ export const Tabs = (props: TabsProps) => {
     window.addEventListener('resize', handleResizeWindow)
     return () => removeEventListener('resize', handleResizeWindow)
   }, [withUnderline, value, name])
-
-  useEffect(() => {
-    forceRerender(undefined)
-  })
 
   return (
     <Flex
@@ -89,6 +83,6 @@ export const Tabs = (props: TabsProps) => {
       {withUnderline && <span data-name="active-underline" className={cls.activeUnderline}></span>}
     </Flex>
   )
-}
+})
 
 Tabs.displayName = 'Tabs'

@@ -1,7 +1,7 @@
 'use client'
 
 import { LanguageIds } from '@/shared/config/i18n/types'
-import { ReactNode, createContext, useMemo } from 'react'
+import { ReactNode, createContext } from 'react'
 
 type LanguageProviderProps = {
   lngId: LanguageIds
