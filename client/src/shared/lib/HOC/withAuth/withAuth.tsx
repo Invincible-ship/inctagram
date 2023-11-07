@@ -3,7 +3,7 @@
 
 import { getIsLoading, getIsUserInited, getUserAuthData } from '@/entities/User'
 import { UserRole, WithAuthOptions } from './routes'
-import { ComponentType, FC, FunctionComponent, useContext, useEffect, useRef } from 'react'
+import { FC, useContext, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { redirect, usePathname } from 'next/navigation'
 import { RedirectType } from 'next/dist/client/components/redirect'
@@ -61,7 +61,8 @@ export function withAuth(
 
             // Подрузамевается, что в приватных роутах, доступных только текущему пользователю, в pathname всегда присутствует userId
             if (userRole == UserRole.ADMIN) {
-              if (pathname.substring(reduxUserData.userId)) 
+              console.log({ pathname, userId: reduxUserData.userId })
+              if (!(`${pathname}/`.includes(`/${reduxUserData.userId}/`))) 
                 redirect(redirectTo || `/${lngId}${Routes.MAIN}`, RedirectType.replace)
             }
         }

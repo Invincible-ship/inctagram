@@ -51,8 +51,9 @@
 .preloader-wrapper {
     position: absolute;
     top: 60px;
-    width: 170%;
+    width: 195%;
     transform: translateX(-50%);
+    z-index: 1100;
 }
 
 .loader {

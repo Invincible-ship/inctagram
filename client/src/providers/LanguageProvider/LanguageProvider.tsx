@@ -11,7 +11,5 @@ type LanguageProviderProps = {
 export const LanguageContext = createContext<LanguageIds | ''>('')
 
 export const LanguageProvider = ({ lngId, children }: LanguageProviderProps) => {
-  const value = useMemo(() => lngId, [lngId])
-
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
+  return <LanguageContext.Provider value={lngId}>{children}</LanguageContext.Provider>
 }

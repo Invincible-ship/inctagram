@@ -1,12 +1,19 @@
 .headerWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--dark-color-700);
   border-bottom: solid 1px var(--dark-color-300);
-  padding: 0 60px;
-
-  @media (max-width: 1330px) {
-    padding: 0 15px;
-  }
+  z-index: 1001;
 
   .header {
-    height: 60px;
+    width: 100%;
+    height: var(--header-height);
+    padding-left: 16px;
+
+    @media (max-width: 769px) {
+      padding-left: 0;
+    }
   }
 }

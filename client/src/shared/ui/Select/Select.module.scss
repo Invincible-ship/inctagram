@@ -31,7 +31,7 @@
   overflow: hidden;
   background-color: var(--dark-color-700);
   border: 1px solid var(--dark-color-100);
-  z-index: var(--modal-z-index);
+  z-index: 1100;
 }
 
 .SelectItem {

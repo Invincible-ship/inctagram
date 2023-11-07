@@ -2,10 +2,57 @@
 @import "reset";
 //@import "variables/common";
 
+@media (min-width: 950px) {
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--dark-color-100);
+    border-radius: 4px;
+    cursor: pointer;
+  
+    &:hover {
+      background: var(--dark-color-300);
+    }
+  }
+}
+
 .app {
+  .blank-header {
+    width: 100%;
+    height: var(--header-height);
+  }
+
   .app-container {
-    max-width: 1330px;
-    padding: 0 15px;
+    max-width: 1360px;
+    width: 100%;
+    padding: 0 30px;
     margin: 0 auto;
+
+    @media (max-width: 769px) {
+      padding: 0 15px;
+    }
+  }
+
+  .page-container {
+    padding: 36px 0;
+
+    @media (max-width: 769px) {
+      padding: 24px 0;
+    }
+
+    &.padding {
+      padding-left: calc(var(--sidebar-width) + 30px);
+
+      @media (max-width: 769px) {
+        margin-bottom: var(--mobile-sidebar-height);
+        padding-left: 0;
+      }
+    }
   }
 }

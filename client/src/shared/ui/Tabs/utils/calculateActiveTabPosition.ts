@@ -1,20 +1,20 @@
 // @ts-nocheck
 
-export function calculateActiveTabPosition() {
+export function calculateActiveTabPosition(name?: string) {
   if (typeof window == 'undefined') return
 
   // define elements
-  const $tabs = document.querySelector('[data-name="tabs"]') as Element
+  const $tabs = document.querySelector(`[data-name="tabs-${name}"]`) as Element
   const $activeUnderline = document.querySelector('[data-name="active-underline"') as Element
 
   // define active tab and calculate active underline position
   let leftPositionActiveTab
 
-  const $activeTab = document.querySelector('[data-selected=true]')
+  const $activeTab = $tabs?.querySelector('[data-selected=true]')
   if (!$activeTab) leftPositionActiveTab = 0
 
-  const tabsRect = $tabs.getBoundingClientRect()
-  const tabsScrollX = $tabs.scrollLeft
+  const tabsRect = $tabs?.getBoundingClientRect()
+  const tabsScrollX = $tabs?.scrollLeft
   const activeTabRect = $activeTab?.getBoundingClientRect()
 
   leftPositionActiveTab = activeTabRect?.left - tabsRect?.left + tabsScrollX
