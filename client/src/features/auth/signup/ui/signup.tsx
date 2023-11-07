@@ -32,7 +32,7 @@ export const SignUp = () => {
   const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
   const isSignUpModalOpen = useSelector(getIsSignUpModalOpen)
   const dispatch = useAppDispatch()
-  const { t } = useClientTranslation(lngId, Namespaces.SIGNUP)
+  const { t } = useClientTranslation(Namespaces.SIGNUP)
   const schema = formSchema(t)
 
   const {

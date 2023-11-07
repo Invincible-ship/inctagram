@@ -1,19 +1,19 @@
 'use client'
 
-import { ReactNode, Suspense } from 'react'
+import { ReactNode } from 'react'
 import { dir } from 'i18next'
 import { Inter } from 'next/font/google'
 import { LanguageIds } from '@/shared/config/i18n/types'
-import { Header } from '@/widgets/Header'
 import '@/shared/styles/index.scss'
 import '@/shared/styles/variables/common.scss'
 import Loading from './loading'
 import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
 import { useParams } from 'next/navigation'
-import { Toaster } from '@/shared/ui/Toaster/Toaster'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import { NextFont } from 'next/dist/compiled/@next/font'
+import { AppLayout } from '@/shared/ui/Layouts/AppLayout'
 
-const inter = Inter({
+const inter: NextFont = Inter({
   weight: ['400', '500', '600', '700', '900'],
   subsets: ['latin', 'cyrillic'],
 })
@@ -29,11 +29,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <div className="app">
           <GoogleOAuthProvider clientId={googleClientId}>
             <LanguageProvider lngId={lngId as LanguageIds}>
-              <Suspense fallback={<Loading />}>
-                <Header />
-                <div className="app-container">{children}</div>
-                <Toaster />
-              </Suspense>
+              <AppLayout Fallback={Loading}>{children}</AppLayout>
             </LanguageProvider>
           </GoogleOAuthProvider>
         </div>

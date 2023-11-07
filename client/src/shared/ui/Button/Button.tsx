@@ -33,7 +33,7 @@ export const Button: FC<ButtonProps> = ({
     <button
       data-testid="test"
       type="button"
-      className={classNames(cls.Button, mods, [className, cls[theme]])}
+      className={classNames(cls.Button, mods, [cls[theme], className])}
       {...rest}
     >
       {isLoading && <Spinner id={cls[theme]} />}

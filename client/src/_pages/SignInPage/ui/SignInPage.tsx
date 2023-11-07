@@ -1,4 +1,5 @@
 import SignIn from '@/features/auth/signIn'
+import { Suspense } from 'react'
 
 export const SignInPage = () => {
   return (

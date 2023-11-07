@@ -24,8 +24,7 @@ const defaultGeneralInfoValues: TGeneralInfo = {
 }
 
 export const EditableProfileGeneralInfo = () => {
-  const lngId = useContext(LanguageContext)
-  const { t } = useClientTranslation(lngId, Namespaces.PROFILE_SETTINGS)
+  const { t } = useClientTranslation(Namespaces.PROFILE_SETTINGS)
   const GeneralInfoSchema = generalInfoSchemaFn(t)
   const dispatch = useAppDispatch()
   const userId = useSelector(getUserId)

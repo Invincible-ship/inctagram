@@ -36,7 +36,7 @@ export const ProfileGeneralInfo: FC<ProfileGeneralInfoProps> = ({
   fieldsValues,
   t,
 }) => {
-  const matches = useMediaQuery('(max-width: 768px)')
+  const matches = useMediaQuery('(max-width: 960px)')
   const direction = matches ? 'column' : 'row'
   const align = direction == 'column' ? 'center' : 'start'
 

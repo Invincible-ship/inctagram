@@ -1,13 +1,11 @@
 .ProfileSettings {
-  padding: 36px 0px 36px 15px; 
-
-  @media screen and (max-width: 768px) {
-    padding: 24px 0px;
+  .item {
+    padding: 8px 16px;
   }
 }
 
 .tabs {
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 960px) {
     overflow-x: scroll;
   }
 }
