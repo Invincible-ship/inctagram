@@ -1,9 +1,9 @@
-import PrivacyPolicy from "@/features/auth/privacyPolicy";
+import PrivacyPolicy from '@/features/auth/privacyPolicy'
 
 export const PrivacyPolicyPage = () => {
-	return (
-		<div className={'content'}>
-			<PrivacyPolicy />
-		</div>
-	)
+  return (
+    <div className={'content'}>
+      <PrivacyPolicy />
+    </div>
+  )
 }

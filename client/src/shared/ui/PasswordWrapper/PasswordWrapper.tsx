@@ -1,5 +1,5 @@
-import {FieldError} from 'react-hook-form'
-import {FC} from 'react'
+import { FieldError } from 'react-hook-form'
+import { FC } from 'react'
 import Input from '@/shared/ui/Input/Input'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'

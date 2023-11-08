@@ -1,1 +1,1 @@
-export {TermsOfServicePage} from './ui/TermsOfServicePage'
+export { TermsOfServicePage } from './ui/TermsOfServicePage'

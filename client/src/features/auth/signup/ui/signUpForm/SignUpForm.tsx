@@ -1,14 +1,14 @@
 // SignUpForm.tsx
 'use client'
-import React, {FC, FormEventHandler, useState} from 'react'
-import {InputField} from '@/shared/ui/InputField/InputField'
-import {PasswordWrapper} from '@/shared/ui/PasswordWrapper/PasswordWrapper'
-import {Button} from '@/shared/ui/Button/Button'
+import React, { FC, FormEventHandler, useState } from 'react'
+import { InputField } from '@/shared/ui/InputField/InputField'
+import { PasswordWrapper } from '@/shared/ui/PasswordWrapper/PasswordWrapper'
+import { Button } from '@/shared/ui/Button/Button'
 import '@/shared/styles/variables/common/_form.scss'
 import cls from '../signup.module.scss'
-import {classNames} from '@/shared/lib/classNames/classNames'
-import {LanguageIds} from "@/shared/config/i18n/types";
-import {AgreeBlock} from "@/features/auth/signup/ui/agreeBlock/AgreeBlock";
+import { classNames } from '@/shared/lib/classNames/classNames'
+import { LanguageIds } from '@/shared/config/i18n/types'
+import { AgreeBlock } from '@/features/auth/signup/ui/agreeBlock/AgreeBlock'
 
 export type SignUpFormProps = {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined
@@ -22,7 +22,17 @@ export type SignUpFormProps = {
   checkedAgree: boolean
 }
 
-export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register, isLoading, lngId, isValid, setCheckedAgree, checkedAgree }) => {
+export const SignUpForm: FC<SignUpFormProps> = ({
+  onSubmit,
+  t,
+  errors,
+  register,
+  isLoading,
+  lngId,
+  isValid,
+  setCheckedAgree,
+  checkedAgree,
+}) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const toggleShowPassword = () => {
@@ -32,7 +42,6 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register,
   const toggleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword)
   }
-
 
   return (
     <form onSubmit={onSubmit} className={classNames('form-style', {}, [cls.form])}>
@@ -74,7 +83,12 @@ export const SignUpForm: FC<SignUpFormProps> = ({ onSubmit, t, errors, register,
         error={errors.passwordConfirmation}
         data-testid="password-confirmation-input"
       />
-      <AgreeBlock lngId={lngId} t={t} setCheckedAgree={setCheckedAgree} checkedAgree={checkedAgree}/>
+      <AgreeBlock
+        lngId={lngId}
+        t={t}
+        setCheckedAgree={setCheckedAgree}
+        checkedAgree={checkedAgree}
+      />
       <Button
         type="submit"
         className={'styled-btn styled-btn-1'}

@@ -17,6 +17,7 @@ export type SignInFormProps = {
   isLoading: boolean
   errors: Record<string, any>
   register: any
+  isValid: boolean
 }
 
 export const SignInForm: FC<SignInFormProps> = ({
@@ -26,6 +27,7 @@ export const SignInForm: FC<SignInFormProps> = ({
   register,
   errorLogin,
   isLoading,
+  isValid,
 }) => {
   const dispatch = useAppDispatch()
   const [showPassword, setShowPassword] = useState(false)
@@ -34,7 +36,7 @@ export const SignInForm: FC<SignInFormProps> = ({
   }
 
   const disableError = () => {
-    dispatch(setDisableError())
+    dispatch(setDisableError(false))
   }
 
   return (
@@ -45,7 +47,7 @@ export const SignInForm: FC<SignInFormProps> = ({
     >
       <InputField
         id={'email'}
-        type={'email'}
+        type={'text'}
         placeholder={'Epam@epam.com'}
         title={t('email')}
         register={register('email')}
@@ -59,7 +61,7 @@ export const SignInForm: FC<SignInFormProps> = ({
         title={t('password')}
         toggleShowPassword={toggleShowPassword}
         register={register('password')}
-        error={errors.password}
+        error={errors.password ? errors.password : { message: errorLogin }}
       />
       <div className={s.forgotPassword}>
         <Link className={s.forgotPasswordLink} href={'/forgotPassword'}>
@@ -69,9 +71,8 @@ export const SignInForm: FC<SignInFormProps> = ({
       <Button
         type="submit"
         className={'styled-btn styled-btn-1'}
-        style={{ marginTop: 0 }}
         isLoading={isLoading}
-        disabled={isLoading}
+        disabled={isLoading || !isValid}
       >
         {t('signIn')}
       </Button>
