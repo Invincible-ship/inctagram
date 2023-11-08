@@ -40,8 +40,13 @@
   --secondary-text-color: var(--dark-color-100);
 
   // z - indexes
-  --modal-z-index: 1000;
+  --modal-z-index: 10000;
   --overlay-z-index: 100;
+
+  // sizes
+  --header-height: 60px;
+  --sidebar-width: 220px;
+  --mobile-sidebar-height: 60px;
 }
 .dotted-background {
   background-image: -webkit-repeating-radial-gradient(

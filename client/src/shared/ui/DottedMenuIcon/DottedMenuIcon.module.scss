@@ -1,0 +1,22 @@
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 24px;
+  height: 24px;
+  background-color: var(--dark-color-700);
+  cursor: pointer;
+
+  .dot {
+    width: 4px;
+    height: 4px;
+    background-color: var(--light-color-100);
+    border-radius: 50%;
+    transition: background-color .15s ease-in;
+  }
+
+  &.active .dot {
+    background-color: var(--accent-color-500);
+  }
+}

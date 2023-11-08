@@ -11,7 +11,7 @@ import { Preloader } from '@/shared/ui/Preloader/Preloader'
 
 export const ConfirmationEmailPage = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
-  const { t } = useClientTranslation(lngId, Namespaces.CONFIRMATION_EMAIL)
+  const { t } = useClientTranslation(Namespaces.CONFIRMATION_EMAIL)
   const searchParams = useSearchParams()
   const confirmationCode = searchParams.get('code') as string
   const email = searchParams.get('email') as string

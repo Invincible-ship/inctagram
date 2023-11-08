@@ -20,9 +20,8 @@ export const SignOutModal: FC<SignOutModalProps> = ({ isOpen, onClose, signOut, 
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.Header close={onClose}>{t('signout')}</Modal.Header>
       <Modal.Body>
-        {/* FIXME: remove test email text */}
         <p className={cls.text}>
-          {t('logout-text')} <b>&quot;{email ?? 'test@gmail.com'}</b>&quot;?
+          {t('logout-text')} <b>&quot;{email}</b>&quot;?
         </p>
         <div className={cls.btns}>
           <Button className={cls.btn} theme={ButtonTheme.OUTLINED} onClick={signOut}>

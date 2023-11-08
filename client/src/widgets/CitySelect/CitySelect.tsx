@@ -1,13 +1,12 @@
 /* eslint-disable */
 
 import Input from '@/shared/ui/Input/Input'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import cls from './CitySelect.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce/useDebounce'
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 import { fetchCities } from './utils/fetchCities'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 
@@ -37,8 +36,7 @@ export const CitySelect = <T extends FieldValues>({
       render={({ field: { onChange, value: formValue } }) => {
         const [inputValue, setInputValue] = useState<string>('')
         const [cities, setCities] = useState<string[] | []>([])
-        const lngId = useContext(LanguageContext)
-        const { t } = useClientTranslation(lngId, Namespaces.CITY_SELECT)
+        const { t } = useClientTranslation(Namespaces.CITY_SELECT)
 
         if (!inputValue && formValue) setInputValue(formValue)
 

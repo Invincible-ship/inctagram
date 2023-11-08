@@ -1,4 +1,4 @@
-import { Flex, FlexDirection } from '@/shared/ui/Stack/Flex/Flex'
+import { Flex, FlexJustify, FlexProps } from '@/shared/ui/Stack/Flex/Flex'
 import { ReactNode, memo, useCallback, useLayoutEffect } from 'react'
 import cls from './Tabs.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -11,14 +11,28 @@ export type Tab<T> = {
 
 type TabsProps = {
   className?: string
-  direction?: FlexDirection
   tabs: Tab<any>[]
   value: string
   onTabClick: (tab: Tab<any>) => void
-}
+  textColor?: string
+  justifyChild?: FlexJustify
+  withUnderline?: boolean
+  name?: string
+} & Pick<FlexProps, 'align' | 'gap' | 'direction' | 'justify'>
 
 export const Tabs = memo((props: TabsProps) => {
-  const { direction = 'row', className, tabs, value, onTabClick } = props
+  const {
+    direction = 'row',
+    gap,
+    justifyChild,
+    className,
+    tabs,
+    value,
+    textColor,
+    onTabClick,
+    withUnderline,
+    name,
+  } = props
 
   const handleClick = useCallback(
     (tab: Tab<any>) => {
@@ -28,17 +42,21 @@ export const Tabs = memo((props: TabsProps) => {
   )
 
   useLayoutEffect(() => {
-    calculateActiveTabPosition()
+    if (!withUnderline) return
 
-    window.addEventListener('resize', calculateActiveTabPosition)
+    calculateActiveTabPosition(name)
 
-    return () => removeEventListener('resize', calculateActiveTabPosition)
-  })
+    const handleResizeWindow = () => calculateActiveTabPosition(name)
+
+    window.addEventListener('resize', handleResizeWindow)
+    return () => removeEventListener('resize', handleResizeWindow)
+  }, [withUnderline, value, name])
 
   return (
     <Flex
-      data-name="tabs"
+      data-name={`tabs-${name}`}
       direction={direction}
+      gap={gap}
       max
       className={classNames(cls.Tabs, {}, [className])}
     >
@@ -54,16 +72,15 @@ export const Tabs = memo((props: TabsProps) => {
             data-selected={isSelected}
             onClick={handleClick(tab)}
             className={classNames(cls.Tab, tabMods)}
+            style={{ color: !isSelected ? textColor : undefined, justifyContent: justifyChild }}
           >
             {tab.content}
-            {direction === 'row' && <span className={cls.underline}></span>}
+            {withUnderline && <span className={cls.underline}></span>}
           </div>
         )
       })}
 
-      {direction === 'row' && (
-        <span data-name="active-underline" className={cls.activeUnderline}></span>
-      )}
+      {withUnderline && <span data-name="active-underline" className={cls.activeUnderline}></span>}
     </Flex>
   )
 })
