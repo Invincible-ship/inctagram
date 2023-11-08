@@ -1,30 +1,29 @@
 'use client'
 
-import React, { FC, Suspense, useContext } from 'react'
+import React, {FC, useContext} from 'react'
 import Link from 'next/link'
 import style from '@/features/auth/signup/ui/signup.module.scss'
+import s from './signIn.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
-import s from './signIn.module.scss'
-import { useClientTranslation } from '@/shared/config/i18n/client'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { formSchema, FormSchemaType } from '../lib/validationConstants/validationConstants'
-import { SignInForm } from './SignInForm'
-import { useSelector } from 'react-redux'
-import { signInThunk } from '../model/signInThunk'
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
-import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
-import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
-import { Routes } from '@/shared/types/routes'
-import { getIsLoading as getIsSignInLoading } from '../model/selectors/getIsLoading'
-import { getIsSignInWithGoogleLoading } from '@/features/auth/signInWithThirdPartyServices'
-import { getError } from '../model/selectors/getError'
-import { ThirdPartyOAuthButtons } from '@/features/auth/signInWithThirdPartyServices'
-import { useRouter } from 'next/navigation'
-import { Preloader } from '@/shared/ui/Preloader/Preloader'
+import {useClientTranslation} from '@/shared/config/i18n/client'
+import {SubmitHandler, useForm} from 'react-hook-form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {formSchema, FormSchemaType} from '../lib/validationConstants/validationConstants'
+import {SignInForm} from './SignInForm'
+import {useSelector} from 'react-redux'
+import {signInThunk} from '../model/signInThunk'
+import {useAppDispatch} from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import {LanguageContext} from '@/providers/LanguageProvider/LanguageProvider'
+import {LanguageIds, Namespaces} from '@/shared/config/i18n/types'
+import {withAuth} from '@/shared/lib/HOC/withAuth/withAuth'
+import {Routes} from '@/shared/types/routes'
+import {getIsLoading as getIsSignInLoading} from '../model/selectors/getIsLoading'
+import {getIsSignInWithGoogleLoading, ThirdPartyOAuthButtons} from '@/features/auth/signInWithThirdPartyServices'
+import {getError} from '../model/selectors/getError'
+import {useRouter} from 'next/navigation'
+import {Preloader} from '@/shared/ui/Preloader/Preloader'
 import {getIsSignInWithEmailLoading} from "@/features/auth/signIn";
 
 export const SignIn: FC = () => {
@@ -68,7 +67,7 @@ export const SignIn: FC = () => {
           errorLogin={error ? t('errorLogin') : ''}
           isValid={isValid}
         />
-        <span className={'info b-title bt16 align-center'} style={{ marginBottom: 12 }}>
+        <span className={`info b-title bt16 align-center ${s.dontHaveAnAccount}`}>
           {t('dontHaveAnAccount')}?
         </span>
         <Link

@@ -1,3 +1,3 @@
-import {TermsOfService} from './ui/termsOfService'
+import { TermsOfService } from './ui/termsOfService'
 
 export default TermsOfService

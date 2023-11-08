@@ -1,9 +1,9 @@
 import Input from '@/shared/ui/Input/Input'
-import {FC} from 'react'
+import { FC } from 'react'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
-import {FieldError} from 'react-hook-form'
+import { FieldError } from 'react-hook-form'
 
 type InputFieldProps = {
   id: string
@@ -24,9 +24,8 @@ export const InputField: FC<InputFieldProps> = ({
   title,
   register,
   error,
-  handleOnBlur
+  handleOnBlur,
 }) => {
-
   const onBlur = () => {
     handleOnBlur && handleOnBlur()
   }
