@@ -1,1 +1,3 @@
-export { TermsOfServicePage } from './ui/TermsOfServicePage'
+import TermsOfServicePage from './ui/TermsOfServicePage'
+
+export default TermsOfServicePage

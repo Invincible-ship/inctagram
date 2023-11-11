@@ -13,7 +13,6 @@ type InputFieldProps = {
   title: string
   register: any
   error: FieldError
-  handleOnBlur?: () => void
 }
 
 export const InputField: FC<InputFieldProps> = ({
@@ -24,11 +23,7 @@ export const InputField: FC<InputFieldProps> = ({
   title,
   register,
   error,
-  handleOnBlur,
 }) => {
-  const onBlur = () => {
-    handleOnBlur && handleOnBlur()
-  }
   return (
     <div className={'field input-field'}>
       <Input
@@ -38,7 +33,6 @@ export const InputField: FC<InputFieldProps> = ({
         placeholder={placeholder}
         title={title}
         error={error}
-        onBlur={onBlur}
         {...register}
       />
     </div>

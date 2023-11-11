@@ -10,7 +10,7 @@ import '@/shared/styles/variables/common/_document.scss'
 
 export const PrivacyPolicy = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
-  const { t } = useClientTranslation(Namespaces.SIGNUP)
+  const { t } = useClientTranslation(lngId, Namespaces.SIGNUP)
   return (
     <div className={'document'}>
       <BackTo title={t('agree.backToSignUp')} link={Routes.SIGNUP} lngId={lngId} />

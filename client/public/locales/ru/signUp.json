@@ -27,9 +27,9 @@
   },
   "agree": {
     "iAgreeTo": "Я согласен с",
-    "termsOfService": "условиями",
+    "termsOfService": "Условия использования",
     "and": "и",
-    "privacyPolicy": "политикой конфиденциальности",
+    "privacyPolicy": "Политика конфиденциальности",
     "backToSignUp": "Вернуться к регистрации"
   }
 }

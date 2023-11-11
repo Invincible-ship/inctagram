@@ -13,6 +13,7 @@ type Props = {
 }
 
 export const AgreeBlock: FC<Props> = ({ lngId, t, setCheckedAgree, checkedAgree }) => {
+  console.log(lngId)
   return (
     <div className={`b-title bt12 light ${style.agreeBlock}`}>
       <Checkbox handleAgree={setCheckedAgree} checkedAgree={checkedAgree} />

@@ -1,4 +1,3 @@
-// SignUpForm.tsx
 'use client'
 import React, { FC, FormEventHandler, useState } from 'react'
 import { InputField } from '@/shared/ui/InputField/InputField'

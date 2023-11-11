@@ -1,1 +1,3 @@
-export { PrivacyPolicyPage } from './ui/PrivacyPolicyPage'
+import PrivacyPolicyPage from './ui/PrivacyPolicyPage'
+
+export default PrivacyPolicyPage

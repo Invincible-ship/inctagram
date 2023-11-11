@@ -6,8 +6,8 @@ export enum Routes {
   REGISTRATION_CONFIRMATION = '/auth/registration-confirmation',
   MERGE = '/auth/merge',
   GOOGLE_CLIENT = '/google',
-  TERMS_OF_SERVICE = '/auth/terms-of-service',
-  PRIVACY_POLICY = '/auth/privacy-policy',
   // user routes
   PROFILE = '/profile',
+  TERMS_OF_SERVICE = '/terms-of-service',
+  PRIVACY_POLICY = '/privacy-policy',
 }
