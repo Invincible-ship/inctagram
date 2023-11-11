@@ -6,7 +6,7 @@ import '@/shared/styles/variables/common/_document.scss'
 import s from '@/_pages/TermsOfServicePage/ui/TermsOfServicePage.module.scss'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import ArrowBack from '@/shared/assets/icons/arrow-back.svg'
-import {useRouter} from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 const PrivacyPolicyPage = () => {
   const router = useRouter()

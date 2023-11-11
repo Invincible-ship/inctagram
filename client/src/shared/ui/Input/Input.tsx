@@ -1,8 +1,4 @@
-import React, {
-  DetailedHTMLProps,
-  forwardRef,
-  InputHTMLAttributes,
-} from 'react'
+import React, { DetailedHTMLProps, forwardRef, InputHTMLAttributes } from 'react'
 import s from './Input.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
 import { FieldError } from 'react-hook-form'
@@ -21,18 +17,7 @@ type InputPropsType = DefaultInputPropsType & {
 }
 
 const Input = forwardRef<HTMLInputElement, InputPropsType>(
-  (
-    {
-      error,
-      className,
-      id,
-      type,
-      title,
-      full,
-      ...restProps
-    },
-    ref,
-  ) => {
+  ({ error, className, id, type, title, full, ...restProps }, ref) => {
     const wrapperMods = {
       [s.full]: full,
     }
@@ -43,9 +28,7 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
 
     return (
       <div className={classNames(s.inputWrapper, wrapperMods)}>
-        <label htmlFor={id}>
-          {title}
-        </label>
+        <label htmlFor={id}>{title}</label>
         <input
           ref={ref}
           id={id}
