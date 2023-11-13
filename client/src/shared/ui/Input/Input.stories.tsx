@@ -1,5 +1,5 @@
 import type { Meta, StoryFn, StoryObj } from '@storybook/react'
-import Input from './Input'
+import { Input } from './Input'
 import { action } from '@storybook/addon-actions'
 import s from './Input.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
