@@ -6,6 +6,7 @@ const passwordReq = 'errors.passwordRequired'
 const invalidEmail = 'errors.emailInvalid'
 const passwordMinLength = 'errors.passwordMinLength'
 const passwordMaxLength = 'errors.passwordMaxLength'
+const passwordMustContain = 'errors.passwordMustContain'
 
 export type FormSchemaType = z.infer<ReturnType<typeof formSchema>>
 
@@ -19,5 +20,8 @@ export const formSchema = (t: TFunction<string, undefined>) =>
       .string()
       .min(1, { message: t(passwordReq) })
       .min(6, { message: t(passwordMinLength) })
-      .max(20, { message: t(passwordMaxLength) }),
+      .max(20, { message: t(passwordMaxLength) })
+      .regex(/^(?=.*[A-Za-z])(?=.*[! "#$%&'()*+,-./:;<=>?@[\]^_`{|}~])/, {
+        message: t(passwordMustContain),
+      }),
   })

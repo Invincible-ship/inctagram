@@ -1,7 +1,7 @@
 /* eslint-disable */
 
-import Input from '@/shared/ui/Input/Input'
-import { useState } from 'react'
+import { Input } from '@/shared/ui/Input/Input'
+import { ChangeEvent, useState } from 'react'
 import cls from './CitySelect.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce/useDebounce'
@@ -40,9 +40,11 @@ export const CitySelect = <T extends FieldValues>({
 
         if (!inputValue && formValue) setInputValue(formValue)
 
-        const handleInputChange = async (inputValue: string) => {
-          if (!inputValue.length) onChange(null)
-          setInputValue(inputValue)
+        const handleInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
+          const { value } = e.target
+          if (!value.length) onChange(null)
+
+          setInputValue(value)
 
           debouncedSetNewCities(inputValue)
         }
@@ -71,7 +73,7 @@ export const CitySelect = <T extends FieldValues>({
               id={title}
               name={name}
               value={inputValue}
-              onChangeText={handleInputChange}
+              onChange={handleInputChange}
               title={title}
               placeholder={placeholder || t('placeholder')}
               full={max}

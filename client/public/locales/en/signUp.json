@@ -5,14 +5,16 @@
   "password": "Password",
   "validate": {
     "userNameRequired": "Username is required",
-    "userNameMaxLength": "Username must be less than or equal to 30 characters",
-    "emailInvalid": "Invalid email format",
+    "userNameMinLength": "Minimum number of characters 6",
+    "userNameMaxLength": "Maximum number of characters 30",
+    "emailInvalid": "The email must match the format example@example.com",
     "emailRequired": "Email is required",
     "passwordRequired": "Password is required",
-    "passwordMinLength": "Password must have at least 6 characters",
-    "passwordMaxLength": "Password must be less than or equal to 20 characters",
+    "passwordMinLength": "Minimum number of characters 6",
+    "passwordMaxLength": "Maximum number of characters 20",
     "passwordConfirmationRequired": "Password confirmation is required",
-    "passwordsDoNotMatch": "Passwords do not match"
+    "passwordsDoNotMatch": "The passwords must match",
+    "passwordMustContain": "Password must contain: a-z, A-Z,  ! \", # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~"
   },
   "passwordConfirmation": "Password Confirmation",
   "forgotPassword": "Forgot Password",
@@ -22,5 +24,12 @@
     "title": "Email sent",
     "text": "We have sent a link to confirm your email to",
     "ok": "OK"
+  },
+  "agree": {
+    "iAgreeTo": "I agree to the",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy",
+    "backToSignUp": "Back to sign up"
   }
 }

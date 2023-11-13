@@ -1,33 +1,41 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { setAuthData, userApi } from '@/entities/User'
+import { userApi } from '@/entities/User'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { LoginRequestType } from './types/types'
 import { ThunkConfig } from '@/providers/StoreProvider'
 import { LOCAL_STORAGE_TOKEN_KEY } from '@/shared/const/localStorage'
 import { ApiError } from '@/shared/api/types'
-import toast from 'react-hot-toast'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
+import { UseFormSetError } from 'react-hook-form'
+
+type SignInThunkPayload = {
+  body: LoginRequestType
+  setError: UseFormSetError<LoginRequestType>
+}
 
 export const signInThunk = createAsyncThunk<
   void,
-  LoginRequestType & { router: AppRouterInstance },
+  SignInThunkPayload & { router: AppRouterInstance },
   ThunkConfig<string>
->('auth/login', async ({ email, password, router }, { dispatch }) => {
+>('auth/login', async ({ body, router, setError }, { dispatch, rejectWithValue }) => {
   try {
-    const accessTokenResponse = await dispatch(
-      userApi.endpoints.signIn.initiate({ email, password }),
-    ).unwrap()
-
+    const accessTokenResponse = await dispatch(userApi.endpoints.signIn.initiate(body)).unwrap()
     if (accessTokenResponse) {
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, accessTokenResponse.accessToken)
-
       return router.refresh()
     }
   } catch (error) {
     if (isFetchBaseQueryError(error)) {
       const apiError = error.data as ApiError
-      toast.error(apiError.error)
+      if (Array.isArray(apiError.messages)) {
+        apiError.messages.forEach(err =>
+          setError(err.field as keyof LoginRequestType, {
+            type: 'server',
+            message: err.message,
+          }),
+        )
+      }
     }
-    throw new Error('Unknown error')
+    return rejectWithValue('Unknown error')
   }
 })
