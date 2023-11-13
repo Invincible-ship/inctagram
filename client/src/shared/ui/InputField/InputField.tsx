@@ -3,8 +3,7 @@ import { FC } from 'react'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
-import { FieldError, FieldErrorsImpl } from 'react-hook-form'
-import { Merge } from 'type-fest'
+import { FieldError } from 'react-hook-form'
 
 type InputFieldProps = {
   id: string
@@ -13,7 +12,7 @@ type InputFieldProps = {
   placeholder: string
   title: string
   register: any
-  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
+  error: FieldError
 }
 
 export const InputField: FC<InputFieldProps> = ({

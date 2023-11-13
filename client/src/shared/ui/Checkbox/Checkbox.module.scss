@@ -1,0 +1,26 @@
+
+.customCheckbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.checkboxLabel {
+  display: flex;
+  margin: 0 5px 0 0;
+  cursor: pointer;
+}
+
+.checkboxLabel::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-color: var(--light-color-100);
+  border-radius: 3px;
+
+}
+
+.customCheckbox:checked + .checkboxLabel::before {
+  background-image: url('../../../shared/assets/icons/check.svg');
+}

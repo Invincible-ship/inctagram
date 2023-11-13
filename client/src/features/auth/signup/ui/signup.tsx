@@ -1,6 +1,5 @@
 'use client'
 import { useContext, useState } from 'react'
-import { SignUpForm } from './SignUpForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import '@/shared/styles/variables/common/_form.scss'
@@ -22,8 +21,9 @@ import {
   ThirdPartyOAuthButtons,
   getIsSignInWithGoogleLoading,
 } from '@/features/auth/signInWithThirdPartyServices'
-import { SignUpModal } from './SignUpModal'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
+import { SignUpModal } from '@/features/auth/signup/ui/signUpModal/SignUpModal'
+import { SignUpForm } from '@/features/auth/signup/ui/signUpForm/SignUpForm'
 
 export const SignUp = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
@@ -34,21 +34,24 @@ export const SignUp = () => {
   const dispatch = useAppDispatch()
   const { t } = useClientTranslation(Namespaces.SIGNUP)
   const schema = formSchema(t)
+  const [checkedAgree, setCheckedAgree] = useState(false)
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     setError,
   } = useForm<FormSchemaType>({
-    reValidateMode: 'onSubmit',
+    mode: 'onBlur',
     resolver: zodResolver(schema),
   })
 
   const onSubmit: SubmitHandler<FormSchemaType> = data => {
-    const body = { ...data, passwordConfirmation: undefined }
-    dispatch(signupThunk({ body, setError }))
-    setEmail(data.email)
+    if (isValid && checkedAgree) {
+      const body = { ...data, passwordConfirmation: undefined }
+      dispatch(signupThunk({ body, setError }))
+      setEmail(data.email)
+    }
   }
 
   if (isSignInWithGoogleLoading) return <Preloader />
@@ -60,13 +63,17 @@ export const SignUp = () => {
           <div className={'title b-title bt26 semibold align-center'}>{t('signUp')}</div>
           <ThirdPartyOAuthButtons />
           <SignUpForm
+            lngId={lngId}
             onSubmit={handleSubmit(onSubmit)}
             isLoading={isSignUpLoading}
             t={t}
             errors={errors}
             register={register}
+            isValid={isValid}
+            setCheckedAgree={setCheckedAgree}
+            checkedAgree={checkedAgree}
           />
-          <span style={{ marginBottom: 12 }} className={'info b-title bt14  align-center semibold'}>
+          <span className={'info b-title bt16 align-center semibold'}>
             {t('doYouHaveAnAccount')}
           </span>
           <Link

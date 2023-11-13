@@ -5,7 +5,7 @@ import { TFunction } from 'i18next'
 import { FC } from 'react'
 import cls from './SignUpModal.module.scss'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { setIsSignUpModalOpen } from '../model/slice/signUpSlice'
+import { setIsSignUpModalOpen } from '@/features/auth/signup/model/slice/signUpSlice'
 
 type SignUpModalProps = {
   email: string

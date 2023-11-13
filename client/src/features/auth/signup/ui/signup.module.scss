@@ -12,6 +12,7 @@
 .linkRegistration {
   color: var(--accent-color-500);
   text-decoration: none;
+  white-space: nowrap;
 
   &:hover {
     text-decoration: underline;
@@ -38,7 +39,7 @@
   display: inline-block;
   position: absolute;
   right: 0;
-  top: 65%;
+  top: 50%;
   transform: translateY(-50%) translateX(-50%);
   font-size: 22px;
   cursor: pointer;
@@ -53,4 +54,16 @@
   padding: 13px;
 }
 
+.agreeBlock {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
 
+  span {
+    white-space: nowrap;
+  }
+}
