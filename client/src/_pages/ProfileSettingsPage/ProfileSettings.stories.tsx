@@ -4,7 +4,6 @@ import { ProfileSettingsPage } from './ProfileSettingsPage'
 import { PageDecorator } from '@/shared/config/storybook/PageDecorator/PageDecorator'
 import { StateSchema, mockedReduxData } from '@/providers/StoreProvider'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
-import { withQuery } from '@storybook/addon-queryparams'
 import { ProfileSettingValue } from '@/features/editableProfileGeneralInfo'
 
 const mockData: DeepPartial<StateSchema> = {
@@ -27,7 +26,6 @@ const meta: Meta<typeof ProfileSettingsPage> = {
   decorators: [
     (Story: StoryFn) => PageDecorator(Story),
     (Story: StoryFn) => StoreDecorator(Story, mockData),
-    withQuery,
   ],
   component: ProfileSettingsPage,
 }
@@ -35,26 +33,18 @@ const meta: Meta<typeof ProfileSettingsPage> = {
 export default meta
 type Story = StoryObj<typeof ProfileSettingsPage>
 
-const ProfilePageWithSP = () => {
-  const urlParams = new URLSearchParams(document.location.search)
-  const tabValue = urlParams.get('setting') as ProfileSettingValue
-
-  return <ProfileSettingsPage initialTabValue={tabValue} />
+export const GeneralInfo: Story = {
+  render: () => <ProfileSettingsPage initialTabValue={ProfileSettingValue.GENERAL_INFO} />,
 }
 
-const StoryComponent = (settingValue: ProfileSettingValue): Story => ({
-  parameters: {
-    query: {
-      setting: settingValue,
-    },
-  },
-  render: () => <ProfilePageWithSP />,
-})
+export const Devices: Story = {
+  render: () => <ProfileSettingsPage initialTabValue={ProfileSettingValue.DEVICES} />,
+}
 
-export const GeneralInfo = StoryComponent(ProfileSettingValue.GENERAL_INFO)
+export const AccountManagment: Story = {
+  render: () => <ProfileSettingsPage initialTabValue={ProfileSettingValue.ACCOUNT_MANAGMENT} />,
+}
 
-export const Devices = StoryComponent(ProfileSettingValue.DEVICES)
-
-export const AccountManagment = StoryComponent(ProfileSettingValue.ACCOUNT_MANAGMENT)
-
-export const Payments = StoryComponent(ProfileSettingValue.PAYMENTS)
+export const Payments: Story = {
+  render: () => <ProfileSettingsPage initialTabValue={ProfileSettingValue.PAYMENTS} />,
+}
