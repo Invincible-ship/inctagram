@@ -1,10 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryFn, StoryObj } from '@storybook/react'
 
 import { Button, ButtonTheme } from './Button'
+import { SharedDecorator } from '@/shared/config/storybook/SharedDecorator/SharedDecorator'
 
 const meta: Meta<typeof Button> = {
   title: 'shared/Button',
   component: Button,
+  decorators: [(Story: StoryFn) => SharedDecorator(Story)],
 }
 
 export default meta

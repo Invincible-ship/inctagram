@@ -17,6 +17,10 @@ type DeepPartial<T> = T extends object
     }
   : T
 
+interface AppCustomEvent<E = Event, T = Element> extends Omit<E, 'target'> {
+  target: Pick<E, 'target'> & T
+}
+
 declare const __IS_DEV__: boolean
 
 declare module '*.png'

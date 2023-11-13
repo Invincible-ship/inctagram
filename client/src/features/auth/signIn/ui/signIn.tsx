@@ -1,12 +1,11 @@
 'use client'
 
-import React, { FC, Suspense, useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import Link from 'next/link'
 import style from '@/features/auth/signup/ui/signup.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
-import s from './signIn.module.scss'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'

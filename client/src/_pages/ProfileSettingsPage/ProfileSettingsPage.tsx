@@ -17,6 +17,7 @@ import { UserRole } from '@/shared/lib/HOC/withAuth/routes'
 
 type ProfileSettingsPageProps = {
   className?: string
+  initialTabValue?: ProfileSettingValue
 }
 
 const mapProfileSettings = {
@@ -26,12 +27,13 @@ const mapProfileSettings = {
   [ProfileSettingValue.PAYMENTS]: <h1>Payments</h1>,
 }
 
-const ProfileSettingsPage = ({ className }: ProfileSettingsPageProps) => {
+export const ProfileSettingsPage = ({ className, initialTabValue }: ProfileSettingsPageProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const editableSearchParams = new URLSearchParams(Array.from(searchParams.entries()))
-  const currentTabValue = editableSearchParams.get('setting') as ProfileSettingValue
+  const currentTabValue =
+    (editableSearchParams.get('setting') as ProfileSettingValue) || initialTabValue
 
   if (!currentTabValue) {
     editableSearchParams.set('setting', ProfileSettingValue.GENERAL_INFO)

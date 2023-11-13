@@ -1,6 +1,8 @@
 import type { Preview, StoryFn } from '@storybook/react'
 import { StyleDecorator } from '@/shared/config/storybook/StyleDecorator/StyleDecorator'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
+import { LanguageDecorator } from '@/shared/config/storybook/LanguageDecorator/LanguageDecorator'
+import { mockedReduxData } from '@/providers/StoreProvider'
 
 const preview: Preview = {
   parameters: {
@@ -17,7 +19,8 @@ const preview: Preview = {
   },
   decorators: [
     (Story: StoryFn) => StyleDecorator(Story),
-    (Story: StoryFn) => StoreDecorator(Story),
+    (Story: StoryFn) => StoreDecorator(Story, { user: mockedReduxData.user }),
+    (Story: StoryFn) => LanguageDecorator(Story),
   ],
 }
 

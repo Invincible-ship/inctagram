@@ -62,7 +62,7 @@ export const HeaderMenu = () => {
       <DropdownMenuTrigger>
         <DottedMenuIcon isActive={isMenuActive} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent sticky="always">
         <VStack gap="12">
           {menuItems.map(({ href, text, icon }) => (
             <DropdownMenuItem key={text} onSelect={() => router.push(href)}>

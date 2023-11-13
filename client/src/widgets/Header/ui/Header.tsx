@@ -25,12 +25,12 @@ export const Header: FC<HeaderProps> = ({ isAuthorized }) => {
       <div className="app-container">
         <HStack className={cls.header} justify="between" align="center">
           <HStack align="center">
-            <Link href={`${lngId}${Routes.MAIN}`}>
+            <Link href={`/${lngId}${Routes.MAIN}`}>
               <Logo />
             </Link>
           </HStack>
           <HStack align="center" gap={!matched ? '36' : '12'}>
-            {!matched && !isAuthorized && (
+            {!matched && isAuthorized && (
               <HStack align="center">
                 <OutlineBell />
               </HStack>

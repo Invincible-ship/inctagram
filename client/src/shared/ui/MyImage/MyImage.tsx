@@ -1,5 +1,5 @@
 import NextImage from 'next/image'
-import type { ImageProps } from 'next/image'
+import type { ImageProps, StaticImageData } from 'next/image'
 import { CSSProperties, FC, ReactElement, useLayoutEffect, useState } from 'react'
 import cls from './MyImage.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -33,8 +33,7 @@ export const MyImage: FC<MyImageProps> = props => {
 
   useLayoutEffect(() => {
     const img = new Image()
-    // @ts-ignore
-    img.src = src ?? ''
+    img.src = typeof src != 'string' ? (src as StaticImageData).src : src ?? ''
     img.onload = () => {
       setIsLoading(false)
     }
@@ -43,6 +42,9 @@ export const MyImage: FC<MyImageProps> = props => {
       setIsHasError(true)
     }
   }, [src])
+
+  console.log('Is loading: ', isLoading)
+  console.log('Is error: ', isHasError)
 
   if (isLoading) return fallback
 
@@ -54,7 +56,7 @@ export const MyImage: FC<MyImageProps> = props => {
     <div
       data-testid="image-wrapper"
       className={classNames(cls.wrapper, {}, [className])}
-      style={{ width: width, height: height, aspectRatio: ar }}
+      style={{ maxWidth: width, width: '100%', height: height, aspectRatio: ar }}
     >
       <NextImage
         {...rest}

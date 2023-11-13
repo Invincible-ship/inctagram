@@ -7,6 +7,7 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    '@storybook/addon-queryparams',
   ],
   framework: {
     name: '@storybook/nextjs',
@@ -15,6 +16,7 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
+  staticDirs: ['../../public'],
   webpackFinal: (config: Configuration) => {
     // @ts-ignore
     const fileLoaderRule = config.module.rules.find(
