@@ -6,14 +6,24 @@ import cls from './Avatar.module.scss'
 import { HStack } from '@/shared/ui/Stack'
 import DefaultAvatar from '@/shared/assets/icons/person.svg'
 
+export enum AvatarSize {
+  SMALL = 45,
+  MEDIUM = 192,
+}
+
 type AvatarProps = {
   className?: string
   src?: string
-  size?: number
+  size?: AvatarSize
   alt?: string
 }
 
-export const Avatar: FC<AvatarProps> = ({ src, className, size = 45, alt = 'avatar' }) => {
+export const Avatar: FC<AvatarProps> = ({
+  src,
+  className,
+  size = AvatarSize.SMALL,
+  alt = 'avatar',
+}) => {
   const styles: CSSProperties = {
     objectFit: 'contain',
   }

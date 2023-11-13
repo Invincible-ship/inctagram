@@ -1,5 +1,5 @@
 import { Namespaces } from '@/shared/config/i18n/types'
-import { Avatar } from '@/shared/ui/Avatar/Avatar'
+import { Avatar, AvatarSize } from '@/shared/ui/Avatar/Avatar'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { TFunction } from 'i18next'
@@ -40,7 +40,7 @@ export const UploadAvatar: FC<UploadAvatarProps> = ({ t }) => {
       <VStack gap="24" className={cls.avatarField}>
         <HStack align="center" justify="center" max>
           <div className={cls.avatarWrapper}>
-            <Avatar src={avatar?.url} size={avatar?.width || 192} />
+            <Avatar src={avatar?.url} size={avatar?.width || AvatarSize.MEDIUM} />
             {avatar && (
               <span className={cls.deleteBtn} onClick={handleDeleteButtonClick} role="button">
                 <DeleteAvatarIcon />

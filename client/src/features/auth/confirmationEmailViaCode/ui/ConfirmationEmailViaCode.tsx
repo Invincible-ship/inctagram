@@ -6,6 +6,7 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { TFunction } from 'i18next'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { MyImage } from '@/shared/ui/MyImage/MyImage'
+import { StaticImageData } from 'next/image'
 
 type ConfirmationEmailViaCodeProps = {
   isSuccess: boolean
@@ -22,10 +23,12 @@ export const ConfirmationEmailViaCode: FC<ConfirmationEmailViaCodeProps> = ({
 }) => {
   const status: CONFIRMATION_STATUS = isSuccess ? 'success' : 'invalid'
 
-  const { src, alt, width } = getImageProps(status)
+  const { src, alt } = getImageProps(status)
   const mods = {
     [cls.paddingText]: status != 'invalid',
   }
+
+  console.log('Image src: ', src)
 
   return (
     <main className={cls.page}>
@@ -38,7 +41,7 @@ export const ConfirmationEmailViaCode: FC<ConfirmationEmailViaCodeProps> = ({
         lngId={lngId}
         email={email}
       />
-      <MyImage src={src as string} width={width} alt={alt} />
+      <MyImage src={src.src} width={src.width} height={src.height} alt={alt} />
     </main>
   )
 }

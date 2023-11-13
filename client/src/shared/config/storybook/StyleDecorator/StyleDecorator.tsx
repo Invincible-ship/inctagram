@@ -11,11 +11,7 @@ const inter = Inter({
 export const StyleDecorator = (StoryComponent: StoryFn) => {
   return (
     <div className={`app ${inter.className}`}>
-      <div className="app-container">
-        <div className="page-container">
-          <StoryComponent />
-        </div>
-      </div>
+      <StoryComponent />
     </div>
   )
 }
