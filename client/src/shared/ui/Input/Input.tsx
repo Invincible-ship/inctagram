@@ -13,7 +13,6 @@ type InputPropsType = DefaultInputPropsType & {
   error?: FieldError
   title?: string
   full?: boolean
-  name: string
 }
 
 const Input = forwardRef<HTMLInputElement, InputPropsType>(

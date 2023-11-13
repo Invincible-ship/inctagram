@@ -18,7 +18,6 @@ export const Default: Story = {
       id="storybook_test"
       onChange={action('onChange')}
       onKeyPress={action('onKeyPress')}
-      onEnter={action('onEnter')}
       title="Email"
     />
   ),
@@ -30,7 +29,6 @@ export const Error: Story = {
       id="storybook_test"
       onChange={action('onChange')}
       onKeyPress={action('onKeyPress')}
-      onEnter={action('onEnter')}
       title="Email"
       error={{ type: '', message: 'required' }}
       className={s.errorInput}

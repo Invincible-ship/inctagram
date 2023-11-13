@@ -36,7 +36,7 @@ export const SignInForm: FC<SignInFormProps> = ({
   }
 
   const disableError = () => {
-    dispatch(setDisableError(false))
+    dispatch(setDisableError())
   }
 
   return (
