@@ -64,6 +64,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({
       />
       <PasswordWrapper
         id={'password'}
+        role="password"
         placeholder={t('password')}
         type={showPassword ? 'text' : 'password'}
         title={t('password')}
@@ -73,7 +74,8 @@ export const SignUpForm: FC<SignUpFormProps> = ({
         data-testid="password-input"
       />
       <PasswordWrapper
-        id={'passwordConfirmation'}
+        id="passwordConfirmation"
+        role="password"
         placeholder={t('passwordConfirmation')}
         type={showConfirmPassword ? 'text' : 'password'}
         title={t('passwordConfirmation')}

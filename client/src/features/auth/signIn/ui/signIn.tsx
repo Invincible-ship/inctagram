@@ -19,7 +19,7 @@ import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { Routes } from '@/shared/types/routes'
-import { getIsLoading as getIsSignInLoading } from '../model/selectors/getIsLoading'
+import { getIsLoading as getIsSignInWithEmailLoading } from '../model/selectors/getIsLoading'
 import {
   getIsSignInWithGoogleLoading,
   ThirdPartyOAuthButtons,
@@ -27,7 +27,6 @@ import {
 import { getError } from '../model/selectors/getError'
 import { useRouter } from 'next/navigation'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
-import { getIsSignInWithEmailLoading } from '@/features/auth/signIn'
 
 export const SignIn: FC = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
@@ -35,7 +34,6 @@ export const SignIn: FC = () => {
   const schema = formSchema(t)
   const isSignInWithEmailLoading = useSelector(getIsSignInWithEmailLoading)
   const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
-  const isSignInLoading = useSelector(getIsSignInLoading)
   const error = useSelector(getError)
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -63,7 +61,7 @@ export const SignIn: FC = () => {
         <ThirdPartyOAuthButtons />
         <SignInForm
           t={t}
-          isLoading={isSignInLoading}
+          isLoading={isSignInWithEmailLoading}
           errors={errors}
           register={register}
           onSubmit={handleSubmit(onSubmit)}

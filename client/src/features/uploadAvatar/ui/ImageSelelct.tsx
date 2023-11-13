@@ -1,6 +1,6 @@
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-import Input from '@/shared/ui/Input/Input'
+import { Input } from '@/shared/ui/Input/Input'
 import { HStack } from '@/shared/ui/Stack'
 import { TFunction } from 'i18next'
 import { ChangeEventHandler, RefObject, forwardRef } from 'react'

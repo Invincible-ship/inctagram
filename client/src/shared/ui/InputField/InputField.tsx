@@ -1,4 +1,4 @@
-import Input from '@/shared/ui/Input/Input'
+import { Input } from '@/shared/ui/Input/Input'
 import { FC } from 'react'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'

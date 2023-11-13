@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import Input from '@/shared/ui/Input/Input'
+import { Input } from '@/shared/ui/Input/Input'
 import { ChangeEvent, useState } from 'react'
 import cls from './CitySelect.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
