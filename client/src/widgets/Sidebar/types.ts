@@ -15,7 +15,7 @@ export enum SidebarValues {
 export type SidebarItem = {
   value: SidebarValues
   text: string
-  href: Routes | `${Routes}${string}` | '#'
+  href: Routes | `${Routes}${string}` | `?${string}` | '#'
   Icon: FC
 }
 

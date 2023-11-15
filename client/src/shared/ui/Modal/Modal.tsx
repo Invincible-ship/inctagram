@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, ReactNode, useMemo } from 'react'
+import { ReactNode, memo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 import { Portal } from '../Portal/Portal'
@@ -26,6 +26,7 @@ export const Modal = (props: ModalProps) => {
     onClose,
     isOpen,
   })
+
   const styles = {
     flexBasis: width,
   }
@@ -46,6 +47,8 @@ export const Modal = (props: ModalProps) => {
     </Portal>
   )
 }
+
+Modal.displayName = 'Modal'
 
 type ModalHeaderProps = {
   children: ReactNode

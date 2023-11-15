@@ -8,7 +8,7 @@ import SearchIcon from '@/shared/assets/icons/search.svg'
 import TrendingIcon from '@/shared/assets/icons/trending-up.svg'
 import BookmarkIcon from '@/shared/assets/icons/bookmark.svg'
 import { TFunction } from 'i18next'
-import { Namespaces } from '@/shared/config/i18n/types'
+import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 
 export const getSidebarItems = (
   userId: string,
@@ -16,8 +16,18 @@ export const getSidebarItems = (
 ): TSidebarItemsSchema => {
   return {
     major: [
-      { value: SidebarValues.HOME, text: t('home'), href: Routes.MAIN, Icon: HomeIcon },
-      { value: SidebarValues.CREATE, text: t('create'), href: '#', Icon: CreateIcon },
+      {
+        value: SidebarValues.HOME,
+        text: t('home'),
+        href: `${Routes.MAIN}`,
+        Icon: HomeIcon,
+      },
+      {
+        value: SidebarValues.CREATE,
+        text: t('create'),
+        href: '?createPost=true',
+        Icon: CreateIcon,
+      },
       {
         value: SidebarValues.PROFILE,
         text: t('profile'),

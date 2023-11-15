@@ -7,6 +7,7 @@ import { signInReducer } from '@/features/auth/signIn'
 import { signupReducer } from '@/features/auth/signup'
 import { profileReducer } from '@/entities/Profile'
 import { signInWithGoogleReducer } from '@/features/auth/signInWithThirdPartyServices'
+import { createPostReducer } from '@/features/createPost'
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducer: ReducersMapObject<StateSchema> = {
@@ -17,6 +18,7 @@ export function createReduxStore(initialState?: StateSchema) {
     signIn: signInReducer,
     signup: signupReducer,
     signInWithGoogle: signInWithGoogleReducer,
+    createPost: createPostReducer,
   }
 
   const extraArg: ThunkExtraArg = {

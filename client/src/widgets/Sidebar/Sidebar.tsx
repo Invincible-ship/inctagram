@@ -8,10 +8,12 @@ import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 import Link from 'next/link'
 import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import { Namespaces } from '@/shared/config/i18n/types'
+import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { SignOut } from '@/features/auth/signout'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { getSidebarItems } from './utils/getSidebarItems'
+import { CreatePost } from '@/features/createPost/ui/CreatePost/CreatePost'
+import { useSearchParams } from 'next/navigation'
 
 export type SidebarItemProps = {
   text: string
@@ -30,6 +32,7 @@ export const SidebarItem: FC<SidebarItemProps> = ({ text, href, Icon, className 
 )
 
 export const Sidebar = () => {
+  const editableSearchParams = new URLSearchParams(Array.from(useSearchParams()))
   const [value, setValue] = useState<SidebarValues>(SidebarValues.HOME)
   const lngId = useContext(LanguageContext)
   const { t } = useClientTranslation(Namespaces.SIDEBAR)
@@ -43,15 +46,27 @@ export const Sidebar = () => {
   const getTabs = (items: TSidebarItemsSchema, type: keyof TSidebarItemsSchema): TSidebarTab[] =>
     items[type].map(({ value, text, href, Icon }) => ({
       value,
-      content: (
-        <SidebarItem
-          key={value}
-          text={text}
-          href={`/${lngId}${href}`}
-          className={value}
-          Icon={Icon}
-        />
-      ),
+      content:
+        value != SidebarValues.CREATE ? (
+          <SidebarItem
+            key={value}
+            text={text}
+            href={`/${lngId}${href}`}
+            className={value}
+            Icon={Icon}
+          />
+        ) : (
+          <>
+            <SidebarItem
+              key={value}
+              text={text}
+              href={`${href}&${editableSearchParams.toString()}`}
+              className={value}
+              Icon={Icon}
+            />
+            <CreatePost />
+          </>
+        ),
     }))
 
   const { majorTabs, additionalTabs } = useMemo(() => {
