@@ -1,3 +1,3 @@
 import { StateSchema } from '@/providers/StoreProvider'
 
-export const getMaxStep = (state: StateSchema) => state.createPost.postData.maxStep
+export const getMaxStep = (state: StateSchema) => state.createPost.maxStep

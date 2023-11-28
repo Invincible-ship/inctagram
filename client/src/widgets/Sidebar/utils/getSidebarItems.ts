@@ -8,7 +8,7 @@ import SearchIcon from '@/shared/assets/icons/search.svg'
 import TrendingIcon from '@/shared/assets/icons/trending-up.svg'
 import BookmarkIcon from '@/shared/assets/icons/bookmark.svg'
 import { TFunction } from 'i18next'
-import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
+import { Namespaces } from '@/shared/config/i18n/types'
 
 export const getSidebarItems = (
   userId: string,

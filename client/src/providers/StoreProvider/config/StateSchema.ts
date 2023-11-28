@@ -22,7 +22,7 @@ export type ThunkExtraArg = {
   api: AxiosInstance
 }
 
-export type ThunkConfig<T> = {
+export type ThunkConfig<T = any> = {
   rejectValue: T
   extra: ThunkExtraArg
   state: StateSchema

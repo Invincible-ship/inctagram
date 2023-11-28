@@ -28,11 +28,15 @@ export function createReduxStore(initialState?: StateSchema) {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: initialState,
-    devTools: Boolean(process.env.IS_DEV),
+    devTools: __IS_DEV__,
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
         thunk: {
           extraArgument: extraArg,
+        },
+        serializableCheck: {
+          ignoredPaths: ['createPost.postData.images.file'],
+          ignoredActions: ['createPost/addFileImage'],
         },
       }).concat(rtkApi.middleware),
   })

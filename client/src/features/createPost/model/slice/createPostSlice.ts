@@ -1,14 +1,14 @@
 import { uploadPostImagesThunk } from '@/features/createPost/model/services/uploadPostImages'
-import { ICreatePostSchema } from '../types/types'
+import { ICreatePostSchema, CreatePostImage } from '../types/types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { initCreatePostFeature } from '@/features/createPost/model/services/initCreatePostFeature'
 
 const initialState: ICreatePostSchema = {
   postData: {
-    maxStep: 4,
-    currentStep: 1,
     images: [],
   },
+  maxStep: 4,
+  currentStep: 1,
   isLoading: false,
   isUploadigPhotosLoading: false,
   errors: [],
@@ -19,16 +19,19 @@ export const createPostSlice = createSlice({
   initialState,
   reducers: {
     setCurrentStep: (state, { payload }: PayloadAction<number>) => {
-      state.postData.currentStep = payload
+      state.currentStep = payload
     },
     setPreviousStep: (state, { payload }: PayloadAction<number | undefined>) => {
-      state.postData.previousStep = payload
+      state.previousStep = payload
     },
     setNextStep: (state, { payload }: PayloadAction<number | undefined>) => {
-      state.postData.nextStep = payload
+      state.nextStep = payload
     },
-    setImage: (state, { payload }: PayloadAction<File>) => {
-      state.postData.images = [...state.postData.images, payload]
+    addPostImage: (state, { payload }: PayloadAction<CreatePostImage>) => {
+      state.postData.images = [payload, ...state.postData.images]
+    },
+    deletePostImage: (state, { payload }: PayloadAction<number>) => {
+      state.postData.images = state.postData.images.filter(({ id }) => id !== payload)
     },
   },
   extraReducers: builder => {
@@ -56,4 +59,5 @@ export const createPostSlice = createSlice({
 })
 
 export const { reducer } = createPostSlice
-export const { setCurrentStep, setPreviousStep, setNextStep } = createPostSlice.actions
+export const { setCurrentStep, setPreviousStep, setNextStep, addPostImage, deletePostImage } =
+  createPostSlice.actions

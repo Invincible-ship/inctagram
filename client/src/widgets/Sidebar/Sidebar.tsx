@@ -1,7 +1,7 @@
 import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { FC, useContext, useMemo, useState } from 'react'
-import { SidebarValues, TSidebarItemsSchema, TSidebarTab } from './types'
+import { SidebarValues } from './types'
 import cls from './Sidebar.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
@@ -12,8 +12,8 @@ import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { SignOut } from '@/features/auth/signout'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { getSidebarItems } from './utils/getSidebarItems'
-import { CreatePost } from '@/features/createPost/ui/CreatePost/CreatePost'
 import { useSearchParams } from 'next/navigation'
+import { getTabs } from './utils/getTabs'
 
 export type SidebarItemProps = {
   text: string
@@ -34,7 +34,7 @@ export const SidebarItem: FC<SidebarItemProps> = ({ text, href, Icon, className 
 export const Sidebar = () => {
   const editableSearchParams = new URLSearchParams(Array.from(useSearchParams()))
   const [value, setValue] = useState<SidebarValues>(SidebarValues.HOME)
-  const lngId = useContext(LanguageContext)
+  const lngId = useContext(LanguageContext) as LanguageIds
   const { t } = useClientTranslation(Namespaces.SIDEBAR)
   const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY) as string
   const matched = useMediaQuery('(max-width: 769px)')
@@ -43,37 +43,15 @@ export const Sidebar = () => {
 
   const onTabClick = (tab: Tab<SidebarValues>) => setValue(tab.value)
 
-  const getTabs = (items: TSidebarItemsSchema, type: keyof TSidebarItemsSchema): TSidebarTab[] =>
-    items[type].map(({ value, text, href, Icon }) => ({
-      value,
-      content:
-        value != SidebarValues.CREATE ? (
-          <SidebarItem
-            key={value}
-            text={text}
-            href={`/${lngId}${href}`}
-            className={value}
-            Icon={Icon}
-          />
-        ) : (
-          <>
-            <SidebarItem
-              key={value}
-              text={text}
-              href={`${href}&${editableSearchParams.toString()}`}
-              className={value}
-              Icon={Icon}
-            />
-            <CreatePost />
-          </>
-        ),
-    }))
-
   const { majorTabs, additionalTabs } = useMemo(() => {
     const sidebarItems = getSidebarItems(userId, t)
 
-    const majorTabs = getTabs(sidebarItems, 'major')
-    const additionalTabs = getTabs(sidebarItems, 'additional')
+    const majorTabs = getTabs(sidebarItems, {
+      type: 'major',
+      lngId,
+      searchParams: editableSearchParams,
+    })
+    const additionalTabs = getTabs(sidebarItems, { type: 'additional', lngId })
 
     return { majorTabs, additionalTabs }
   }, [userId, lngId, t])

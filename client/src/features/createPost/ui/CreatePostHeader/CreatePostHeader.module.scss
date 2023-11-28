@@ -1,0 +1,13 @@
+.header {
+  padding: 18px 0 18px 24px;
+  background-color: var(--dark-color-300);
+  border-bottom: 1px solid var(--dark-color-100);
+
+  .title {
+    transform: translateX(12px);
+  }
+
+  .icon {
+    cursor: pointer
+  }
+}

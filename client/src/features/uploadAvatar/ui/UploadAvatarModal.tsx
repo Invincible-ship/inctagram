@@ -1,7 +1,15 @@
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { TFunction } from 'i18next'
-import { ChangeEventHandler, Dispatch, FC, RefObject, SetStateAction, useRef } from 'react'
+import {
+  ChangeEventHandler,
+  Dispatch,
+  FC,
+  MutableRefObject,
+  RefObject,
+  SetStateAction,
+  useRef,
+} from 'react'
 import cls from './UploadAvatarModal.module.scss'
 import { VStack } from '@/shared/ui/Stack'
 import { ImageSelect } from './ImageSelelct'
@@ -12,13 +20,13 @@ import toast from 'react-hot-toast'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { setProfileAvatars, useUpdateProfileAvatarsMutation } from '@/entities/Profile'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
 
 type UploadAvatarModalProps = {
   isOpen: boolean
   onClose: () => void
   t: TFunction<Namespaces, undefined>
-  toastSizeErrorId: string | undefined
-  setToastSizeErrorId: Dispatch<SetStateAction<string | undefined>>
+  toastSizeErrorIdRef: MutableRefObject<string | undefined>
   uploaded: string | undefined
   setUploaded: Dispatch<SetStateAction<string | undefined>>
 }
@@ -27,8 +35,7 @@ export const UploadAvatarModal: FC<UploadAvatarModalProps> = ({
   isOpen,
   onClose,
   t,
-  toastSizeErrorId,
-  setToastSizeErrorId,
+  toastSizeErrorIdRef,
   uploaded,
   setUploaded,
 }) => {
@@ -39,20 +46,15 @@ export const UploadAvatarModal: FC<UploadAvatarModalProps> = ({
 
   const [updateAvatars, { isLoading }] = useUpdateProfileAvatarsMutation()
 
-  const onFileInputChange: ChangeEventHandler<HTMLInputElement> = async e => {
-    const file = e?.target?.files?.[0]
-
-    if (!file) return
-
-    // More than 1,5 Mb: 1 Mb equal 1048576 bytes
-    if (file.size > 1048576 * 1.5)
-      return setToastSizeErrorId(
-        toast.error(t('general-info.upload-modal.errors.size'), { duration: Infinity }),
-      )
-
-    toast.remove(toastSizeErrorId)
+  const handleImage = (file: File) => {
+    toast.remove(toastSizeErrorIdRef.current)
     file2Base64(file).then(base64 => setUploaded(base64))
   }
+
+  const handleImageSizeError = () =>
+    (toastSizeErrorIdRef.current = toast.error(t('general-info.upload-modal.errors.size'), {
+      duration: Infinity,
+    }))
 
   const uploadAvatars = async (blob: Blob) => {
     const formData = new FormData()
@@ -89,7 +91,11 @@ export const UploadAvatarModal: FC<UploadAvatarModalProps> = ({
             t={t}
           />
         ) : (
-          <ImageSelect ref={fileRef} onFileInputChange={onFileInputChange} t={t} />
+          <ImageSelect
+            ref={fileRef}
+            onFileInputChange={handleDownloadedImage(handleImage, handleImageSizeError)}
+            t={t}
+          />
         )}
       </VStack>
     </Modal>
