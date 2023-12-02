@@ -2,6 +2,11 @@
 @import "reset";
 //@import "variables/common";
 
+// swiper/react
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
+
 @media (min-width: 950px) {
   ::-webkit-scrollbar {
     width: 7px;

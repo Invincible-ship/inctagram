@@ -28,3 +28,5 @@ export type ComponentCommonProps = {
   onClose: () => void
   toastSizeErrorIdRef: MutableRefObject<string | undefined>
 }
+
+export type OrientationValue = 'original' | 'square' | 'narrow' | 'wide'

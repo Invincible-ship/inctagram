@@ -6,6 +6,11 @@
     transform: scale(var(--scale));
   }
 
+  .overlay {
+    position: absolute;
+    inset: 0;
+  }
+
   .iconWrapper {
     position: absolute;
     bottom: 12px;
@@ -16,6 +21,7 @@
     opacity: 0.8;
     cursor: pointer;
     transition: opacity, fill .2s linear;
+    z-index: var(--modal-z-index);
 
     &.scale {
       left: 70px;
@@ -105,8 +111,44 @@
     padding: 12px;
     border-radius: 2px;
 
+    .smallImageContainer {
+      max-width: 356px;
+      padding: 0;
+      overflow-x: scroll;
+
+      &::-webkit-scrollbar {
+        height: 3px;
+        width: 100%;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--light-color-900);
+        border-radius: 1px;
+        cursor: pointer;
+      
+        &:hover {
+          background: var(--light-color-500);
+        }
+      }
+    }
+
+    .addAnotherImageIcon {
+      transition: fill .2s linear;
+
+      &:hover {
+        svg g path {
+          fill: var(--light-color-900);
+        }
+      }
+    }
+
     .smallImage {
       position: relative;
+      cursor: pointer;
 
       .closeIconWrapper {
         position: absolute;

@@ -28,7 +28,7 @@ export const createPostSlice = createSlice({
       state.nextStep = payload
     },
     addPostImage: (state, { payload }: PayloadAction<CreatePostImage>) => {
-      state.postData.images = [payload, ...state.postData.images]
+      state.postData.images = [...state.postData.images, payload]
     },
     deletePostImage: (state, { payload }: PayloadAction<number>) => {
       state.postData.images = state.postData.images.filter(({ id }) => id !== payload)

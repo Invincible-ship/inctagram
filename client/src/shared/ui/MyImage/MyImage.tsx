@@ -10,10 +10,9 @@ import {
   useState,
 } from 'react'
 import cls from './MyImage.module.scss'
-import { classNames } from '@/shared/lib/classNames/classNames'
 
 const defaultStyles: CSSProperties = {
-  objectFit: 'cover',
+  objectFit: 'contain',
 }
 
 export type MyImageProps = {
@@ -69,9 +68,9 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>((props, forwar
       data-testid="image-wrapper"
       className={cls.wrapper}
       style={{
-        maxWidth: width || intrinsicWidthRef.current,
-        width: '100%',
-        height: height || intrinsicHeightRef.current,
+        maxWidth: width,
+        width: width && '100%',
+        height: height,
         aspectRatio: ar || `${intrinsicWidthRef.current} / ${intrinsicHeightRef.current}`,
       }}
     >
