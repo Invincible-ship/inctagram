@@ -1,9 +1,13 @@
-import { MutableRefObject } from 'react'
+import { ImageVariant } from '@/shared/ui/MyImage/MyImage'
+import { CSSProperties, MutableRefObject } from 'react'
 
 export type CreatePostImage = {
   id: number
   src: string
   file: File
+  styles?: CSSProperties
+  orientation?: ImageVariant
+  scale?: number
 }
 
 export type PostData = {
@@ -25,8 +29,5 @@ export type ICreatePostSchema = {
 }
 
 export type ComponentCommonProps = {
-  onClose: () => void
   toastSizeErrorIdRef: MutableRefObject<string | undefined>
 }
-
-export type OrientationValue = 'original' | 'square' | 'narrow' | 'wide'

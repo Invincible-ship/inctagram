@@ -1,5 +1,4 @@
-import { CreatePostHeader } from '../CreatePostHeader/CreatePostHeader'
-import { MyImage } from '@/shared/ui/MyImage/MyImage'
+import { ImageVariant, MyImage } from '@/shared/ui/MyImage/MyImage'
 import { useSelector } from 'react-redux'
 import cls from './CroppingImage.module.scss'
 import {
@@ -11,10 +10,12 @@ import {
   SetStateAction,
   memo,
   useCallback,
-  useEffect,
   useRef,
   useState,
   MouseEventHandler,
+  useMemo,
+  CSSProperties,
+  useEffect,
 } from 'react'
 import ScaleIcon from '@/shared/assets/icons/maximize-outline.svg'
 import ExpandIcon from '@/shared/assets/icons/expand-outline.svg'
@@ -24,10 +25,15 @@ import AddAnotherImageIcon from '@/shared/assets/icons/plus-circle-outline.svg'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { deletePostImage, setCurrentStep } from '../../model/slice/createPostSlice'
+import {
+  deletePostImage,
+  setCurrentStep,
+  setPostImageOrientation,
+  setPostImageScale,
+} from '../../model/slice/createPostSlice'
 import { getAllSteps } from '../../model/selectors/getAllSteps'
 import { getPostImages } from '../../model/selectors/getPostImages'
-import { ComponentCommonProps, CreatePostImage, OrientationValue } from '../../model/types/types'
+import { ComponentCommonProps, CreatePostImage } from '../../model/types/types'
 import toast from 'react-hot-toast'
 import { addCreatePostImageService } from '../../model/services/addCreatePostImageService'
 import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
@@ -35,7 +41,6 @@ import { Input } from '@/shared/ui/Input/Input'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import './swiper.scss'
-import { ImageOrientation } from '../../model/lib/croppingImage/ImageOrientation'
 import { CroppingImageToolValue } from '@/features/createPost/model/consts/croppingImage'
 
 export const CroppingImage: FC<ComponentCommonProps> = ({ toastSizeErrorIdRef }) => {
@@ -43,7 +48,6 @@ export const CroppingImage: FC<ComponentCommonProps> = ({ toastSizeErrorIdRef })
 
   return (
     <div className={cls.CroppingImage}>
-      <CreatePostHeader title="Cropping" />
       <Swiper
         modules={[Navigation, Pagination]}
         slidesPerView={1}
@@ -52,10 +56,14 @@ export const CroppingImage: FC<ComponentCommonProps> = ({ toastSizeErrorIdRef })
         pagination={{ clickable: true }}
         style={{ width: 490 }}
       >
-        {images.map(({ src }) => {
+        {images.map(image => {
           return (
-            <SwiperSlide key={src}>
-              <ImageWithTools src={src} images={images} toastSizeErrorIdRef={toastSizeErrorIdRef} />
+            <SwiperSlide key={image.src}>
+              <ImageWithTools
+                image={image}
+                images={images}
+                toastSizeErrorIdRef={toastSizeErrorIdRef}
+              />
             </SwiperSlide>
           )
         })}
@@ -65,7 +73,7 @@ export const CroppingImage: FC<ComponentCommonProps> = ({ toastSizeErrorIdRef })
 }
 
 type ImageWithToolsProps = {
-  src: string
+  image: CreatePostImage
   images: CreatePostImage[] | []
   toastSizeErrorIdRef: MutableRefObject<string | undefined>
 }
@@ -75,9 +83,9 @@ type TCroppingImageTool = {
   ToolComponent: FC<ImageToolProps>
 }
 
-const ImageWithTools: FC<ImageWithToolsProps> = ({ src, images, toastSizeErrorIdRef }) => {
-  const imageRef = useRef() as MutableRefObject<HTMLImageElement>
+const ImageWithTools: FC<ImageWithToolsProps> = memo(({ image, images, toastSizeErrorIdRef }) => {
   const [activeTool, setActiveTool] = useState<CroppingImageToolValue | null>(null)
+  const { scale, orientation, src } = image
 
   const handleIconClick = useCallback(
     (value: CroppingImageToolValue): MouseEventHandler<HTMLDivElement> =>
@@ -92,15 +100,19 @@ const ImageWithTools: FC<ImageWithToolsProps> = ({ src, images, toastSizeErrorId
     { value: CroppingImageToolValue.ADD_ANOTHER_IMAGE, ToolComponent: AddAnotherImageTool },
   ]
 
+  const styles = useMemo(() => ({ scale }), [scale])
+
   return (
     <>
       <MyImage
+        variant={orientation}
         className={cls.image}
-        ref={imageRef}
         src={src}
-        alt="Post Image"
+        alt="Create Post Image"
         width={490}
         height={490}
+        quality={50}
+        style={styles}
       />
       <div className={cls.overlay} onClick={() => setActiveTool(null)}></div>
 
@@ -116,9 +128,9 @@ const ImageWithTools: FC<ImageWithToolsProps> = ({ src, images, toastSizeErrorId
             key={value}
             isActive={isActive}
             mods={mods}
-            imageRef={imageRef}
             handleIconClick={handleIconClick(value)}
             images={images}
+            image={image}
             toastSizeErrorIdRef={toastSizeErrorIdRef}
             setActiveTool={setActiveTool}
           />
@@ -126,30 +138,29 @@ const ImageWithTools: FC<ImageWithToolsProps> = ({ src, images, toastSizeErrorId
       })}
     </>
   )
-}
+})
+
+ImageWithTools.displayName = 'ImageWithTools'
 
 type ImageToolProps = {
   isActive: boolean
   mods: {
     [x: string]: boolean
   }
-  imageRef: MutableRefObject<HTMLImageElement | undefined>
   handleIconClick: MouseEventHandler<HTMLDivElement>
   images: CreatePostImage[] | []
+  image: CreatePostImage
   toastSizeErrorIdRef: MutableRefObject<string | undefined>
   setActiveTool: Dispatch<SetStateAction<CroppingImageToolValue | null>>
 }
 
-const ScaleImageTool: FC<ImageToolProps> = memo(({ imageRef, isActive, mods, handleIconClick }) => {
-  const [rangeValue, setRangeValue] = useState<number>(100)
+const ScaleImageTool: FC<ImageToolProps> = memo(({ image, isActive, mods, handleIconClick }) => {
+  const dispatch = useAppDispatch()
+  const { id, scale } = image
 
   const handleRangeValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = +e.target.value
-    setRangeValue(value)
-
-    if (imageRef.current) {
-      imageRef.current.style.setProperty('--scale', `${value / 100}`)
-    }
+    const scale = +e.target.value / 100
+    dispatch(setPostImageScale({ id, scale }))
   }
 
   return (
@@ -166,7 +177,7 @@ const ScaleImageTool: FC<ImageToolProps> = memo(({ imageRef, isActive, mods, han
         <HStack align="center" className={cls.ranger}>
           <input
             type="range"
-            value={rangeValue}
+            value={scale && scale * 100}
             onChange={handleRangeValueChange}
             min={100}
             max={200}
@@ -179,36 +190,30 @@ const ScaleImageTool: FC<ImageToolProps> = memo(({ imageRef, isActive, mods, han
 
 ScaleImageTool.displayName = 'ScaleImageTool'
 
-type ImageOrientationItems = {
-  value: OrientationValue
+type ImageOrientationItem = {
+  value: ImageVariant
   text: string
   icon: ReactNode
 }
 
 const ImageOrientationTool: FC<ImageToolProps> = memo(
-  ({ imageRef, isActive, mods, handleIconClick }) => {
-    const [orientation, setOrientation] = useState<OrientationValue>('original')
-    const imageOrientataionRef = useRef(null) as MutableRefObject<ImageOrientation | null>
+  ({ image, isActive, mods, handleIconClick }) => {
+    const dispatch = useAppDispatch()
+    const { id, orientation } = image
 
-    useEffect(() => {
-      if (imageRef.current) imageOrientataionRef.current = new ImageOrientation(imageRef.current)
-    }, [imageRef.current])
-
-    const imageOrientationItems: ImageOrientationItems[] = [
+    const imageOrientationItems: ImageOrientationItem[] = [
       {
-        value: 'original',
+        value: ImageVariant.ORIGINAL,
         text: 'Original',
         icon: <ImageIcon style={{ marginRight: '-3px' }} />,
       },
-      { value: 'square', text: '1:1', icon: <OrientationIcon width={18} height={18} /> },
-      { value: 'narrow', text: '4:5', icon: <OrientationIcon width={18} height={26} /> },
-      { value: 'wide', text: '16:9', icon: <OrientationIcon width={26} height={20} /> },
+      { value: ImageVariant.SQUARE, text: '1:1', icon: <OrientationIcon width={18} height={18} /> },
+      { value: ImageVariant.NARROW, text: '4:5', icon: <OrientationIcon width={18} height={26} /> },
+      { value: ImageVariant.WIDE, text: '16:9', icon: <OrientationIcon width={26} height={20} /> },
     ]
 
-    const handleOrientationClick = (orientation: OrientationValue) => () => {
-      setOrientation(orientation)
-
-      imageOrientataionRef.current && imageOrientataionRef.current.setOrientation(orientation)
+    const handleOrientationClick = (orientation: ImageVariant) => () => {
+      dispatch(setPostImageOrientation({ id, orientation }))
     }
 
     return (
@@ -273,11 +278,15 @@ const AddAnotherImageTool: FC<ImageToolProps> = memo(
     const dispatch = useAppDispatch()
     const swiper = useSwiper()
 
+    useEffect(() => {
+      swiper.slideTo(images.length)
+    }, [images.length])
+
     const handleSelectImageClick = () => {
       fileRef?.current?.click()
     }
 
-    const moveToNewSlide = (index: number) => () => {
+    const moveToAnotherSlide = (index: number) => () => {
       setActiveTool(null)
       swiper.slideTo(index)
     }
@@ -293,9 +302,6 @@ const AddAnotherImageTool: FC<ImageToolProps> = memo(
       dispatch(addCreatePostImageService({ file }))
 
       setActiveTool(null)
-      setTimeout(() => {
-        swiper.slideTo(images.length)
-      }, 200)
     }
 
     const handleImageSizeError = () =>
@@ -317,9 +323,17 @@ const AddAnotherImageTool: FC<ImageToolProps> = memo(
               {images?.map(({ src, id }, index) => {
                 const isLastImage = images.length == 1
 
+                const mods = {
+                  [cls.activeSmallImage]: index == swiper.activeIndex,
+                }
+
                 return (
-                  <HStack key={id} className={cls.smallImage} onClick={moveToNewSlide(index)}>
-                    <MyImage src={src} width={80} height={80} alt="Post Image" />
+                  <HStack
+                    key={id}
+                    className={classNames(cls.smallImage, mods)}
+                    onClick={moveToAnotherSlide(index)}
+                  >
+                    <MyImage src={src} width={80} height={80} quality={50} alt="Post Image" />
                     <HStack
                       className={cls.closeIconWrapper}
                       role="button"

@@ -9,6 +9,7 @@ import {
   RefAttributes,
   Suspense,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -19,6 +20,10 @@ import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { CroppingImage } from '../CroppingImage/CroppingImage'
 import { ComponentCommonProps } from '../../model/types/types'
+import { useClientTranslation } from '@/shared/config/i18n/client'
+import { Namespaces } from '@/shared/config/i18n/types'
+import { getTitle } from '../../model/utils/getTitle'
+import { CreatePostHeader } from '../CreatePostHeader/CreatePostHeader'
 
 const mapStepToValue: Record<number, CreatePostStep> = {
   1: CreatePostStep.SELECT,
@@ -47,6 +52,7 @@ export const CreatePost = () => {
   const [isCloseModalOpen, setIsCloseModalOpen] = useState<boolean>(false)
   const currentStep = useSelector(getCurrentStep)
   const dispatch = useAppDispatch()
+  const { t } = useClientTranslation(Namespaces.CREATE_POST)
 
   useEffect(() => {
     dispatch(initCreatePostFeature())
@@ -68,16 +74,16 @@ export const CreatePost = () => {
     setIsCloseModalOpen(false)
   }
 
+  const title = useMemo(() => getTitle(currentStep, t), [currentStep, t])
+
   const CurrentStepComponent = mapValueToComponent[mapStepToValue[currentStep]]
 
   return (
     <>
       <Modal isOpen={isCreatePostModalOpen} onClose={handleCreatePostModalClose} width={490}>
+        <CreatePostHeader title={title} onClose={handleCreatePostModalClose} />
         <Suspense fallback={<CreatePostSkeleton />}>
-          <CurrentStepComponent
-            toastSizeErrorIdRef={toastSizeErrorIdRef}
-            onClose={handleCreatePostModalClose}
-          />
+          <CurrentStepComponent toastSizeErrorIdRef={toastSizeErrorIdRef} />
         </Suspense>
       </Modal>
       <CloseModal isOpen={isCloseModalOpen} onClose={handleCloseModalClose} />

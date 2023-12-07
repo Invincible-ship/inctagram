@@ -1,21 +1,18 @@
 import NextImage from 'next/image'
 import type { ImageProps, StaticImageData } from 'next/image'
-import {
-  CSSProperties,
-  FC,
-  ReactElement,
-  forwardRef,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react'
+import { CSSProperties, ReactElement, forwardRef, useLayoutEffect, useRef, useState } from 'react'
 import cls from './MyImage.module.scss'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
-const defaultStyles: CSSProperties = {
-  objectFit: 'contain',
+export enum ImageVariant {
+  ORIGINAL = 'original',
+  SQUARE = 'square',
+  NARROW = 'narrow',
+  WIDE = 'wide',
 }
 
 export type MyImageProps = {
+  variant?: ImageVariant
   fallback?: ReactElement
   errorFallback?: ReactElement
   ar?: string
@@ -23,6 +20,7 @@ export type MyImageProps = {
 
 export const MyImage = forwardRef<HTMLImageElement, MyImageProps>((props, forwardRef) => {
   const {
+    variant = ImageVariant.ORIGINAL,
     className,
     src,
     fallback,
@@ -76,12 +74,13 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>((props, forwar
     >
       <NextImage
         ref={forwardRef}
-        className={className}
+        className={classNames(cls.NextImage, {}, [cls[variant], className])}
         src={src || ''}
+        width={0}
+        height={0}
         alt={alt}
-        fill
         sizes={sizes}
-        style={{ ...defaultStyles, ...style }}
+        style={style}
         {...rest}
       />
     </div>

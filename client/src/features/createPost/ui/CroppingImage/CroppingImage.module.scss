@@ -112,7 +112,7 @@
     border-radius: 2px;
 
     .smallImageContainer {
-      max-width: 356px;
+      max-width: 360px;
       padding: 0;
       overflow-x: scroll;
 
@@ -149,6 +149,10 @@
     .smallImage {
       position: relative;
       cursor: pointer;
+
+      &.activeSmallImage {
+        border: 2px solid var(--accent-color-500);
+      }
 
       .closeIconWrapper {
         position: absolute;

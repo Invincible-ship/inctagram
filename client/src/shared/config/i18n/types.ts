@@ -14,6 +14,7 @@ export enum Namespaces {
   CITY_SELECT = 'city-select',
   SIDEBAR = 'sidebar',
   HEADER = 'header',
+  CREATE_POST = 'create-post',
 }
 
 export type LanguageParams = { lng: LanguageIds }

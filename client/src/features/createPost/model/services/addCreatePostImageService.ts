@@ -1,5 +1,6 @@
 import { addPostImage, setCurrentStep } from '../slice/createPostSlice'
 import { ThunkConfig } from '@/providers/StoreProvider'
+import { ImageVariant } from '@/shared/ui/MyImage/MyImage'
 import { file2Base64 } from '@/shared/utils/file2Base64'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
@@ -11,7 +12,7 @@ export const addCreatePostImageService = createAsyncThunk<
   const id = Date.now()
 
   const src = await file2Base64(file)
-  dispatch(addPostImage({ file, id, src }))
+  dispatch(addPostImage({ file, id, src, orientation: ImageVariant.ORIGINAL, scale: 1 }))
 
   nextStep && dispatch(setCurrentStep(nextStep))
 })

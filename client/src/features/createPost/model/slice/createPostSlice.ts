@@ -2,6 +2,7 @@ import { uploadPostImagesThunk } from '@/features/createPost/model/services/uplo
 import { ICreatePostSchema, CreatePostImage } from '../types/types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { initCreatePostFeature } from '@/features/createPost/model/services/initCreatePostFeature'
+import { ImageVariant } from '@/shared/ui/MyImage/MyImage'
 
 const initialState: ICreatePostSchema = {
   postData: {
@@ -30,9 +31,19 @@ export const createPostSlice = createSlice({
     addPostImage: (state, { payload }: PayloadAction<CreatePostImage>) => {
       state.postData.images = [...state.postData.images, payload]
     },
+    setPostImageOrientation: (
+      state,
+      { payload }: PayloadAction<{ id: number; orientation: ImageVariant }>,
+    ) => {
+      state.postData.images.find(({ id }) => id == payload.id)!.orientation = payload.orientation
+    },
+    setPostImageScale: (state, { payload }: PayloadAction<{ id: number; scale: number }>) => {
+      state.postData.images.find(({ id }) => id == payload.id)!.scale = payload.scale
+    },
     deletePostImage: (state, { payload }: PayloadAction<number>) => {
       state.postData.images = state.postData.images.filter(({ id }) => id !== payload)
     },
+    resetCreatePostState: () => initialState,
   },
   extraReducers: builder => {
     builder.addCase(uploadPostImagesThunk.pending, state => {
@@ -59,5 +70,13 @@ export const createPostSlice = createSlice({
 })
 
 export const { reducer } = createPostSlice
-export const { setCurrentStep, setPreviousStep, setNextStep, addPostImage, deletePostImage } =
-  createPostSlice.actions
+export const {
+  setCurrentStep,
+  setPreviousStep,
+  setNextStep,
+  addPostImage,
+  deletePostImage,
+  setPostImageOrientation,
+  setPostImageScale,
+  resetCreatePostState,
+} = createPostSlice.actions

@@ -16,7 +16,6 @@ import { addCreatePostImageService } from '../../model/services/addCreatePostIma
 type SelectImageProps = {}
 
 export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
-  onClose,
   toastSizeErrorIdRef,
 }) => {
   const fileRef = useRef() as MutableRefObject<HTMLInputElement>
@@ -38,7 +37,6 @@ export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
 
   return (
     <>
-      <Modal.Header close={onClose}>Add Photo</Modal.Header>
       <Modal.Body className={cls.content}>
         <VStack align="center" gap="36">
           <HStack className={cls.imgPlaceholder} align="center" justify="center">
