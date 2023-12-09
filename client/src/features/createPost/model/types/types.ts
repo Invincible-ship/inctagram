@@ -1,4 +1,4 @@
-import { ImageVariant } from '@/shared/ui/MyImage/MyImage'
+import { ImageFilter, ImageVariant } from '@/shared/ui/MyImage/MyImage'
 import { CSSProperties, MutableRefObject } from 'react'
 
 export type CreatePostImage = {
@@ -7,7 +7,9 @@ export type CreatePostImage = {
   file: File
   styles?: CSSProperties
   orientation?: ImageVariant
+  filter?: ImageFilter
   scale?: number
+  isActive?: boolean
 }
 
 export type PostData = {

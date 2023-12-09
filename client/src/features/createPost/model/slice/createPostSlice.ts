@@ -2,7 +2,7 @@ import { uploadPostImagesThunk } from '@/features/createPost/model/services/uplo
 import { ICreatePostSchema, CreatePostImage } from '../types/types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { initCreatePostFeature } from '@/features/createPost/model/services/initCreatePostFeature'
-import { ImageVariant } from '@/shared/ui/MyImage/MyImage'
+import { ImageFilter, ImageVariant } from '@/shared/ui/MyImage/MyImage'
 
 const initialState: ICreatePostSchema = {
   postData: {
@@ -39,6 +39,16 @@ export const createPostSlice = createSlice({
     },
     setPostImageScale: (state, { payload }: PayloadAction<{ id: number; scale: number }>) => {
       state.postData.images.find(({ id }) => id == payload.id)!.scale = payload.scale
+    },
+    setPostImageFilter: (
+      state,
+      { payload }: PayloadAction<{ id: number; filter: ImageFilter }>,
+    ) => {
+      state.postData.images.find(({ id }) => id == payload.id)!.filter = payload.filter
+    },
+    setIsPostImageActive: (state, { payload: id }: PayloadAction<number>) => {
+      state.postData.images.map(image => ({ ...image, isActive: false }))
+      state.postData.images.find(({ id: imageId }) => imageId == id)!.isActive = true
     },
     deletePostImage: (state, { payload }: PayloadAction<number>) => {
       state.postData.images = state.postData.images.filter(({ id }) => id !== payload)
@@ -77,6 +87,8 @@ export const {
   addPostImage,
   deletePostImage,
   setPostImageOrientation,
+  setPostImageFilter,
   setPostImageScale,
+  setIsPostImageActive,
   resetCreatePostState,
 } = createPostSlice.actions

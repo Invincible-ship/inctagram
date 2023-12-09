@@ -3,10 +3,139 @@
   overflow: hidden;
   height: auto;
 
+  // filters config
+  &.square {
+    &::before, &::after {
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &.wide {
+    &::before, &::after {
+      inset: 21.875% 0 0 0;
+      width: 100%;
+      height: 56.25%;
+    }
+  }
+
+  &.narrow {
+    &::before, &::after {
+      inset: 0 0 0 10%;
+      width: 80%;
+      height: 100%;
+    }
+  }
+
+  &::before, &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &::before {
+    z-index: 2;
+  }
+
+  &::after {
+    z-index: 3;
+  }
+
+  // filters
+  &.clarendon {
+    -webkit-filter: contrast(120%) saturate(125%);
+    filter: contrast(120%) saturate(125%);
+
+    &::before {
+      mix-blend-mode: overlay;
+      background: rgba(127, 187, 227, 0.2);
+    }
+  }
+
+  &.lark {
+    -webkit-filter: contrast(.9);
+    filter: contrast(.9);
+
+    &::before {
+      background: #22253f;
+      mix-blend-mode: color-dodge;
+    }
+
+    &::after {
+      background: rgba(242,242,242,.8);
+      mix-blend-mode: darken;
+    }
+  }
+
+  &.gingham {
+    -webkit-filter: brightness(1.05) hue-rotate(-10deg);
+    filter: brightness(1.05) hue-rotate(-10deg);
+
+    &::after {
+      background: #e6e6fa;
+      mix-blend-mode: soft-light;
+    }
+  }
+
+  &.moon {
+    -webkit-filter: grayscale(1) contrast(1.1) brightness(1.1);
+    filter: grayscale(1) contrast(1.1) brightness(1.1);
+
+    &::before {
+      background: #a0a0a0;
+      mix-blend-mode: soft-light;
+    }
+
+    &::after {
+      background: #383838;
+      mix-blend-mode: lighten;
+    }
+  }
+
+  &.aden {
+    -webkit-filter: none!important;
+    filter: none!important;
+
+    &::after {
+      background: -webkit-linear-gradient(left,rgba(66,10,14,.2),transparent);
+      background: linear-gradient(to right,rgba(66,10,14,.2),transparent);
+      mix-blend-mode: darken;
+    }
+  }
+
+  &.brannan {
+    -webkit-filter: sepia(.5) contrast(1.4);
+    filter: sepia(.5) contrast(1.4);
+
+    &::after {
+      background-color: rgba(161,44,199,.31);
+      mix-blend-mode: lighten;
+    }
+  }
+
+  &.inkwell {
+    -webkit-filter: sepia(.3) contrast(1.1) brightness(1.1) grayscale(1);
+    filter: sepia(.3) contrast(1.1) brightness(1.1) grayscale(1);
+  }
+
+  &.reyes {
+    -webkit-filter: sepia(.22) brightness(1.1) contrast(.85) saturate(.75);
+    filter: sepia(.22) brightness(1.1) contrast(.85) saturate(.75);
+
+    &::after {
+      background: #efcdad;
+      opacity: .5;
+      mix-blend-mode: soft-light;
+    }
+  }
+
   .NextImage {
     position: absolute;
     color: transparent;
 
+    // image variants
     &.original {
       inset: 0;
       width: 100%;

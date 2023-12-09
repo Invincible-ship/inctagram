@@ -17,7 +17,7 @@
   transition: transform .2s;
   z-index: var(--modal-z-index);
 
-  @media (max-width: 769px) {
+  @media (max-width: 1650px) {
     max-width: 95%;
   }
 }

@@ -24,6 +24,7 @@ import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { getTitle } from '../../model/utils/getTitle'
 import { CreatePostHeader } from '../CreatePostHeader/CreatePostHeader'
+import { FilteringImage } from '../FilteringImage/FilteringImage'
 
 const mapStepToValue: Record<number, CreatePostStep> = {
   1: CreatePostStep.SELECT,
@@ -39,7 +40,7 @@ const mapValueToComponent: Record<
 > = {
   [CreatePostStep.SELECT]: SelectImage,
   [CreatePostStep.EDIT]: CroppingImage,
-  [CreatePostStep.FILTER]: () => <h1>Choose image filter</h1>,
+  [CreatePostStep.FILTER]: FilteringImage,
   [CreatePostStep.PUBLISH]: () => <h1>Publish post</h1>,
 }
 

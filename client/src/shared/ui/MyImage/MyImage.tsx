@@ -1,8 +1,20 @@
 import NextImage from 'next/image'
 import type { ImageProps, StaticImageData } from 'next/image'
-import { CSSProperties, ReactElement, forwardRef, useLayoutEffect, useRef, useState } from 'react'
+import { ReactElement, forwardRef, useLayoutEffect, useRef, useState } from 'react'
 import cls from './MyImage.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
+
+export enum ImageFilter {
+  NORMAL = 'noraml',
+  CLARENDON = 'clarendon',
+  LARK = 'lark',
+  GINGHAM = 'gingham',
+  MOON = 'moon',
+  ADEN = 'aden',
+  BRANNAN = 'brannan',
+  INKWELL = 'inkwell',
+  REYES = 'reyes',
+}
 
 export enum ImageVariant {
   ORIGINAL = 'original',
@@ -12,7 +24,10 @@ export enum ImageVariant {
 }
 
 export type MyImageProps = {
+  wrapperClassName?: string
   variant?: ImageVariant
+  filter?: ImageFilter
+  scale?: number
   fallback?: ReactElement
   errorFallback?: ReactElement
   ar?: string
@@ -20,7 +35,10 @@ export type MyImageProps = {
 
 export const MyImage = forwardRef<HTMLImageElement, MyImageProps>((props, forwardRef) => {
   const {
+    wrapperClassName,
     variant = ImageVariant.ORIGINAL,
+    filter = ImageFilter.NORMAL,
+    scale,
     className,
     src,
     fallback,
@@ -42,8 +60,8 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>((props, forwar
     const img = new Image()
     img.src = typeof src != 'string' ? (src as StaticImageData).src : src ?? ''
     img.onload = function () {
-      const width = (this as HTMLImageElement).width
-      const height = (this as HTMLImageElement).height
+      const self = this as HTMLImageElement
+      const { width, height } = self
 
       intrinsicWidthRef.current = width
       intrinsicHeightRef.current = height
@@ -64,7 +82,7 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>((props, forwar
   return (
     <div
       data-testid="image-wrapper"
-      className={cls.wrapper}
+      className={classNames(cls.wrapper, {}, [cls[variant], cls[filter], wrapperClassName])}
       style={{
         maxWidth: width,
         width: width && '100%',
@@ -80,7 +98,7 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>((props, forwar
         height={0}
         alt={alt}
         sizes={sizes}
-        style={style}
+        style={{ scale: scale || '', ...style }}
         {...rest}
       />
     </div>

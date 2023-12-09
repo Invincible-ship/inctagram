@@ -14,7 +14,6 @@ import {
   useState,
   MouseEventHandler,
   useMemo,
-  CSSProperties,
   useEffect,
 } from 'react'
 import ScaleIcon from '@/shared/assets/icons/maximize-outline.svg'
@@ -40,7 +39,6 @@ import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
 import { Input } from '@/shared/ui/Input/Input'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
-import './swiper.scss'
 import { CroppingImageToolValue } from '@/features/createPost/model/consts/croppingImage'
 
 export const CroppingImage: FC<ComponentCommonProps> = ({ toastSizeErrorIdRef }) => {
