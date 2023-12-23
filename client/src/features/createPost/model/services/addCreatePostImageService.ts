@@ -11,7 +11,9 @@ export const addCreatePostImageService = createAsyncThunk<
 >('createPost/handleImageChange', async ({ file, nextStep }, { dispatch }) => {
   const id = Date.now()
 
-  const src = await file2Base64(file)
+  // const src = await file2Base64(file)
+  const src = URL.createObjectURL(file)
+
   dispatch(
     addPostImage({
       file,
@@ -20,7 +22,6 @@ export const addCreatePostImageService = createAsyncThunk<
       orientation: ImageVariant.ORIGINAL,
       filter: ImageFilter.NORMAL,
       scale: 1,
-      isActive: false,
     }),
   )
 

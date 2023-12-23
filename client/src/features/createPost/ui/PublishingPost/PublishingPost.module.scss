@@ -1,0 +1,27 @@
+.PublishingPost {
+  width: 980px;
+
+  .imageContainer, .postInfoContainer {
+    flex: 0 0 490px;
+  }
+
+  .postInfoForm {
+    width: 100%;
+
+    .postInfoContainer {
+      padding: 24px;
+      overflow: hidden;
+  
+      .textarea {
+        height: 120px;
+      }
+  
+      .underline {
+        width: calc(100% + 48px);
+        height: 1px;
+        margin-left: -24px;
+        background-color: var(--dark-color-100);
+      }
+    }
+  }
+}

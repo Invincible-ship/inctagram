@@ -1,3 +1,4 @@
-import { StateSchema } from '@/providers/StoreProvider'
+import { getPostData } from './getPostData'
+import { createSelector } from '@reduxjs/toolkit'
 
-export const getPostImages = (state: StateSchema) => state.createPost.postData.images
+export const getPostImages = createSelector(getPostData, postData => postData.images)

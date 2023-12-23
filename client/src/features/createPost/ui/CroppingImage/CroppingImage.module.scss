@@ -1,11 +1,6 @@
 .CroppingImage {
   position: relative;
 
-  .image {
-    --scale: 1;
-    transform: scale(var(--scale));
-  }
-
   .overlay {
     position: absolute;
     inset: 0;
@@ -148,6 +143,7 @@
 
     .smallImage {
       position: relative;
+      width: 80px;
       cursor: pointer;
 
       &.activeSmallImage {

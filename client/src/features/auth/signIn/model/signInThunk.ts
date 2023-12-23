@@ -20,6 +20,7 @@ export const signInThunk = createAsyncThunk<
 >('auth/login', async ({ body, router, setError }, { dispatch, rejectWithValue }) => {
   try {
     const accessTokenResponse = await dispatch(userApi.endpoints.signIn.initiate(body)).unwrap()
+
     if (accessTokenResponse) {
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, accessTokenResponse.accessToken)
       return router.refresh()

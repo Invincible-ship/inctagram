@@ -9,7 +9,6 @@ export type CreatePostImage = {
   orientation?: ImageVariant
   filter?: ImageFilter
   scale?: number
-  isActive?: boolean
 }
 
 export type PostData = {
@@ -24,7 +23,6 @@ export type ICreatePostSchema = {
   currentStep: number
   previousStep?: number
   nextStep?: number
-  isUploadigPhotosLoading: boolean
   isLoading: boolean
   errors: string[]
   draft?: Omit<ICreatePostSchema, 'draft'>

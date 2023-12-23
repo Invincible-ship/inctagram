@@ -40,6 +40,9 @@ import { Input } from '@/shared/ui/Input/Input'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import { CroppingImageToolValue } from '@/features/createPost/model/consts/croppingImage'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
+import { useClientTranslation } from '@/shared/config/i18n/client'
+import { Namespaces } from '@/shared/config/i18n/types'
 
 export const CroppingImage: FC<ComponentCommonProps> = ({ toastSizeErrorIdRef }) => {
   const images = useSelector(getPostImages)
@@ -83,7 +86,7 @@ type TCroppingImageTool = {
 
 const ImageWithTools: FC<ImageWithToolsProps> = memo(({ image, images, toastSizeErrorIdRef }) => {
   const [activeTool, setActiveTool] = useState<CroppingImageToolValue | null>(null)
-  const { scale, orientation, src } = image
+  const { scale, orientation, filter, src } = image
 
   const handleIconClick = useCallback(
     (value: CroppingImageToolValue): MouseEventHandler<HTMLDivElement> =>
@@ -98,19 +101,18 @@ const ImageWithTools: FC<ImageWithToolsProps> = memo(({ image, images, toastSize
     { value: CroppingImageToolValue.ADD_ANOTHER_IMAGE, ToolComponent: AddAnotherImageTool },
   ]
 
-  const styles = useMemo(() => ({ scale }), [scale])
-
   return (
     <>
       <MyImage
         variant={orientation}
-        className={cls.image}
+        filter={filter}
+        scale={scale}
         src={src}
         alt="Create Post Image"
         width={490}
         height={490}
         quality={50}
-        style={styles}
+        fallback={<Skeleton width={490} height={490} />}
       />
       <div className={cls.overlay} onClick={() => setActiveTool(null)}></div>
 
@@ -196,13 +198,14 @@ type ImageOrientationItem = {
 
 const ImageOrientationTool: FC<ImageToolProps> = memo(
   ({ image, isActive, mods, handleIconClick }) => {
+    const { t } = useClientTranslation(Namespaces.CREATE_POST)
     const dispatch = useAppDispatch()
     const { id, orientation } = image
 
     const imageOrientationItems: ImageOrientationItem[] = [
       {
         value: ImageVariant.ORIGINAL,
-        text: 'Original',
+        text: t('image-cropping.orientation.original'),
         icon: <ImageIcon style={{ marginRight: '-3px' }} />,
       },
       { value: ImageVariant.SQUARE, text: '1:1', icon: <OrientationIcon width={18} height={18} /> },
@@ -331,7 +334,14 @@ const AddAnotherImageTool: FC<ImageToolProps> = memo(
                     className={classNames(cls.smallImage, mods)}
                     onClick={moveToAnotherSlide(index)}
                   >
-                    <MyImage src={src} width={80} height={80} quality={50} alt="Post Image" />
+                    <MyImage
+                      src={src}
+                      width={80}
+                      height={80}
+                      quality={50}
+                      alt="Post Image"
+                      fallback={<Skeleton width={80} height={80} />}
+                    />
                     <HStack
                       className={cls.closeIconWrapper}
                       role="button"

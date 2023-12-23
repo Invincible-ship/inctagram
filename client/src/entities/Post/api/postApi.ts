@@ -65,10 +65,11 @@ export const postApi = rtkApi.injectEndpoints({
       }),
     }),
     createPost: build.mutation<IPost, UploadPostRequestParams>({
-      query: params => ({
+      query: body => ({
+        contentType: 'application/json',
         method: 'POST',
         url: CREATE_POST_ENDPOINT,
-        body: params,
+        body,
       }),
       invalidatesTags: () => [{ type: POST_TAG, id: 'LIST' }],
     }),
@@ -99,6 +100,7 @@ export const postApi = rtkApi.injectEndpoints({
 
 export const fetchPostById = postApi.endpoints.fetchPostById.initiate
 export const uploadPostImages = postApi.endpoints.uploadPostImages.initiate
+export const createPost = postApi.endpoints.createPost.initiate
 export const {
   useFetchPostByIdQuery,
   useFetchAllPostsQuery,

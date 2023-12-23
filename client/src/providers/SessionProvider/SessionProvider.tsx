@@ -1,5 +1,6 @@
 'use client'
 
+import { initProfileDataThunk } from '@/entities/Profile'
 import { getIsUserInited, initAuthData } from '@/entities/User'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { ReactNode, useEffect } from 'react'
@@ -10,9 +11,14 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (!inited) {
-      dispatch(initAuthData())
+    const initializeUser = async () => {
+      if (!inited) {
+        await dispatch(initAuthData())
+        dispatch(initProfileDataThunk())
+      }
     }
+
+    initializeUser()
   }, [dispatch, inited])
 
   return children

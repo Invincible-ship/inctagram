@@ -1,11 +1,12 @@
 export { fetchPostById } from './api/postApi'
-export type { PostImage, IPost } from './model/types/types'
+export type { PostImage, IPost, UploadPostRequestParams } from './model/types/types'
 export {
   useFetchPostByIdQuery,
   useFetchAllPostsQuery,
   useFetchPostsByUserIdQuery,
-  useUploadPostImageMutation,
   useCreatePostMutation,
   useDeletePostImageMutation,
   useDeletePostMutation,
+  uploadPostImages,
+  createPost,
 } from './api/postApi'

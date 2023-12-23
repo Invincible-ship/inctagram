@@ -30,7 +30,7 @@ export type AllPostsRequestParams = {
 
 export type UploadPostRequestParams = {
   description: string
-  childrenMetadata: {
+  childrenMetadata: Array<{
     uploadId: string
-  }
+  }>
 }

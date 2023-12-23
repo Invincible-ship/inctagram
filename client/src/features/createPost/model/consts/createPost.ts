@@ -4,3 +4,5 @@ export enum CreatePostStep {
   FILTER = 'image-filtering',
   PUBLISH = 'post-publishing',
 }
+
+export const FORM_DATA_FILE = 'file'

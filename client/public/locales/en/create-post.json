@@ -1,0 +1,40 @@
+{
+  "next-btn": "Next",
+  "publish-btn": "Publish",
+  "image-selecting": {
+    "title": "Add Photo",
+    "select-btn": "Select from Device",
+    "draft-btn": "Open Draft"
+  },
+  "image-cropping": {
+    "title": "Cropping",
+    "orientation": {
+      "original": "Original"
+    }
+  },
+  "image-filtering": {
+    "title": "Filters",
+    "filters": {
+      "normal": "Normal",
+      "clarendon": "Clarendon",
+      "lark": "Lark",
+      "gingham": "Gingham",
+      "moon": "Moon",
+      "aden": "Aden",
+      "brannan": "Brannan",
+      "inkwell": "Inkwell",
+      "reyes": "Reyes"
+    }
+  },
+  "post-publishing": {
+    "title": "Publication",
+    "textarea-label": "Add publication description"
+  },
+  "close-modal": {
+    "title": "Close",
+    "paragraph-1": "Do you really want to close the creation of a publication?",
+    "paragraph-2": "If you close everything will be deleted",
+    "discard-btn": "Discard",
+    "save-btn": "Save draft"
+  }
+}

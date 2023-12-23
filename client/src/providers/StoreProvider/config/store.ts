@@ -35,8 +35,12 @@ export function createReduxStore(initialState?: StateSchema) {
           extraArgument: extraArg,
         },
         serializableCheck: {
-          ignoredPaths: ['createPost.postData.images.file'],
-          ignoredActions: ['createPost/addFileImage'],
+          ignoredPaths: [
+            'profile.profileData.dateOfBirth',
+            'createPost.postData.images',
+            'payload.file',
+          ],
+          ignoredActions: ['createPost', 'createPost/addPostImage'],
         },
       }).concat(rtkApi.middleware),
   })

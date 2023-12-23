@@ -10,17 +10,21 @@ import { PROFILE_TAG, USER_TAG } from '@/shared/const/rtk'
 export const profileApi = rtkApi.injectEndpoints({
   endpoints: build => ({
     // Profile info
-    getProfileDataById: build.query<IProfile, number>({
-      query: id => `${PROFILE_ENDPOINT}/${id}`,
+    getProfileData: build.query<IProfile, number>({
+      query: () => PROFILE_ENDPOINT,
       providesTags: (result, error, id) => [{ type: PROFILE_TAG, id }],
     }),
-    updateProfile: build.mutation<IProfile, Omit<Partial<IProfile>, 'id'>>({
-      query: profileData => ({
-        method: 'PUT',
-        url: PROFILE_ENDPOINT,
-        body: profileData,
-      }),
-      invalidatesTags: result => [{ type: PROFILE_TAG, id: result?.id }, PROFILE_TAG],
+    updateProfile: build.mutation<void, Partial<IProfile>>({
+      query: newProfileInfoWithId => {
+        const { id, ...body } = newProfileInfoWithId
+
+        return {
+          method: 'PUT',
+          url: PROFILE_ENDPOINT,
+          body,
+        }
+      },
+      invalidatesTags: (result, error, body) => [{ type: PROFILE_TAG, id: body?.id }, PROFILE_TAG],
     }),
     // Profile avatars
     updateProfileAvatars: build.mutation<
@@ -52,9 +56,12 @@ export const profileApi = rtkApi.injectEndpoints({
   }),
 })
 
-export const getProfileDataByIdQuery = profileApi.endpoints.getProfileDataById.initiate
+export const getProfileDataQuery = profileApi.endpoints.getProfileData.initiate
+export const updateProfileFulfilledMatcher = profileApi.endpoints.updateProfile.matchFulfilled
+export const updateProfileAvatarsFulfilledMatcher =
+  profileApi.endpoints.updateProfileAvatars.matchFulfilled
 export const {
-  useGetProfileDataByIdQuery,
+  useGetProfileDataQuery,
   useUpdateProfileMutation,
   useDeleteProfileMutation,
   useUpdateProfileAvatarsMutation,

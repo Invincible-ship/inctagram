@@ -1,5 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { IAvatar, IProfile, IProfileSchema } from '../types/types'
+import {
+  updateProfileAvatarsFulfilledMatcher,
+  updateProfileFulfilledMatcher,
+} from '../../api/profileApi'
 
 const initialState: IProfileSchema = {
   readonly: true,
@@ -19,7 +23,17 @@ const profileSlice = createSlice({
       state.profileData = undefined
     },
   },
-  extraReducers: builder => {},
+  extraReducers: builder => {
+    builder.addMatcher(updateProfileFulfilledMatcher, (state, { meta }) => {
+      if (state.profileData) {
+        state.profileData = { ...state.profileData, ...meta.arg.originalArgs }
+      }
+    })
+
+    builder.addMatcher(updateProfileAvatarsFulfilledMatcher, (state, action) => {
+      state.profileData!.avatars = action.payload.avatars
+    })
+  },
 })
 
 export const profileReducer = profileSlice.reducer

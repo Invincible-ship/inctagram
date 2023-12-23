@@ -1,7 +1,6 @@
 import { SelectImage } from '../SelectImage/SelectImage'
 import { CreatePostStep } from '../../model/consts/createPost'
 import { getCurrentStep } from '../../model/selectors/getCurrentStep'
-import { initCreatePostFeature } from '../../model/services/initCreatePostFeature'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import {
   FC,
@@ -25,6 +24,14 @@ import { Namespaces } from '@/shared/config/i18n/types'
 import { getTitle } from '../../model/utils/getTitle'
 import { CreatePostHeader } from '../CreatePostHeader/CreatePostHeader'
 import { FilteringImage } from '../FilteringImage/FilteringImage'
+import { PublishingPost } from '../PublishingPost/PublishingPost'
+import { setProfileData, useGetProfileDataQuery } from '@/entities/Profile'
+import { getUserId } from '@/entities/User'
+import './canvas.scss'
+import { getCreatePostErorrs } from '../../model/selectors/getCreatePostErorrs'
+import toast from 'react-hot-toast'
+import { resetCreatePostState, setCreatePostErrors } from '../../model/slice/createPostSlice'
+import { publishPostThunk } from '@/features/createPost/model/services/publishPostThunk'
 
 const mapStepToValue: Record<number, CreatePostStep> = {
   1: CreatePostStep.SELECT,
@@ -41,7 +48,7 @@ const mapValueToComponent: Record<
   [CreatePostStep.SELECT]: SelectImage,
   [CreatePostStep.EDIT]: CroppingImage,
   [CreatePostStep.FILTER]: FilteringImage,
-  [CreatePostStep.PUBLISH]: () => <h1>Publish post</h1>,
+  [CreatePostStep.PUBLISH]: PublishingPost,
 }
 
 export const CreatePost = () => {
@@ -49,30 +56,36 @@ export const CreatePost = () => {
   const editableSearchParams = new URLSearchParams(Array.from(useSearchParams()))
   const isPostCreating = !!editableSearchParams.get('createPost')
   const toastSizeErrorIdRef = useRef<string>()
-  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState<boolean>(false)
   const [isCloseModalOpen, setIsCloseModalOpen] = useState<boolean>(false)
   const currentStep = useSelector(getCurrentStep)
+  const errors = useSelector(getCreatePostErorrs)
   const dispatch = useAppDispatch()
   const { t } = useClientTranslation(Namespaces.CREATE_POST)
 
-  useEffect(() => {
-    dispatch(initCreatePostFeature())
-  }, [])
-
-  useEffect(() => {
-    setIsCreatePostModalOpen(isPostCreating)
-  }, [isPostCreating])
+  const closeCreatePostModal = () => {
+    editableSearchParams.delete('createPost')
+    router.push(`?${editableSearchParams.toString()}`)
+  }
 
   const handleCreatePostModalClose = () => {
-    editableSearchParams.delete('createPost')
-
     mapStepToValue[currentStep] != CreatePostStep.SELECT
       ? setIsCloseModalOpen(true)
-      : (setIsCreatePostModalOpen(false), router.push(`?${editableSearchParams.toString()}`))
+      : closeCreatePostModal()
   }
 
   const handleCloseModalClose = () => {
     setIsCloseModalOpen(false)
+  }
+
+  const publishPost = async () => {
+    await dispatch(publishPostThunk())
+
+    if (errors.length) return errors.forEach(error => toast.error(`<Server>: ${error}`))
+
+    toast.success('Post has been succesfully created!')
+
+    closeCreatePostModal()
+    dispatch(resetCreatePostState())
   }
 
   const title = useMemo(() => getTitle(currentStep, t), [currentStep, t])
@@ -81,13 +94,21 @@ export const CreatePost = () => {
 
   return (
     <>
-      <Modal isOpen={isCreatePostModalOpen} onClose={handleCreatePostModalClose} width={490}>
-        <CreatePostHeader title={title} onClose={handleCreatePostModalClose} />
+      <Modal isOpen={isPostCreating} onClose={handleCreatePostModalClose} width={490}>
+        <CreatePostHeader
+          title={title}
+          onClose={handleCreatePostModalClose}
+          publishPost={publishPost}
+        />
         <Suspense fallback={<CreatePostSkeleton />}>
           <CurrentStepComponent toastSizeErrorIdRef={toastSizeErrorIdRef} />
         </Suspense>
       </Modal>
-      <CloseModal isOpen={isCloseModalOpen} onClose={handleCloseModalClose} />
+      <CloseModal
+        isOpen={isCloseModalOpen}
+        onClose={handleCloseModalClose}
+        closeCreatePostModal={closeCreatePostModal}
+      />
     </>
   )
 }

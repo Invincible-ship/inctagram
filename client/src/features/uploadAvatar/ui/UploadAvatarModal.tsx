@@ -61,9 +61,8 @@ export const UploadAvatarModal: FC<UploadAvatarModalProps> = ({
     formData.append('file', blob)
 
     try {
-      const avatarsData = await updateAvatars({ formData, id: userId }).unwrap()
+      await updateAvatars({ formData, id: userId }).unwrap()
 
-      dispatch(setProfileAvatars(avatarsData.avatars))
       onClose()
     } catch (err) {
       toast.error('Something went wrong, please try again...')

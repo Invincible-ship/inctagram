@@ -1,7 +1,6 @@
-import { uploadPostImagesThunk } from '@/features/createPost/model/services/uploadPostImages'
+import { publishPostThunk } from '@/features/createPost/model/services/publishPostThunk'
 import { ICreatePostSchema, CreatePostImage } from '../types/types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { initCreatePostFeature } from '@/features/createPost/model/services/initCreatePostFeature'
 import { ImageFilter, ImageVariant } from '@/shared/ui/MyImage/MyImage'
 
 const initialState: ICreatePostSchema = {
@@ -11,7 +10,6 @@ const initialState: ICreatePostSchema = {
   maxStep: 4,
   currentStep: 1,
   isLoading: false,
-  isUploadigPhotosLoading: false,
   errors: [],
 }
 
@@ -19,6 +17,7 @@ export const createPostSlice = createSlice({
   name: 'createPost',
   initialState,
   reducers: {
+    // Manage create post steps
     setCurrentStep: (state, { payload }: PayloadAction<number>) => {
       state.currentStep = payload
     },
@@ -28,9 +27,14 @@ export const createPostSlice = createSlice({
     setNextStep: (state, { payload }: PayloadAction<number | undefined>) => {
       state.nextStep = payload
     },
+    // adding/deleting create post image
     addPostImage: (state, { payload }: PayloadAction<CreatePostImage>) => {
       state.postData.images = [...state.postData.images, payload]
     },
+    deletePostImage: (state, { payload }: PayloadAction<number>) => {
+      state.postData.images = state.postData.images.filter(({ id }) => id !== payload)
+    },
+    // setting cropping image feutures
     setPostImageOrientation: (
       state,
       { payload }: PayloadAction<{ id: number; orientation: ImageVariant }>,
@@ -40,41 +44,37 @@ export const createPostSlice = createSlice({
     setPostImageScale: (state, { payload }: PayloadAction<{ id: number; scale: number }>) => {
       state.postData.images.find(({ id }) => id == payload.id)!.scale = payload.scale
     },
+    // setting filtering image feuture
     setPostImageFilter: (
       state,
       { payload }: PayloadAction<{ id: number; filter: ImageFilter }>,
     ) => {
       state.postData.images.find(({ id }) => id == payload.id)!.filter = payload.filter
     },
-    setIsPostImageActive: (state, { payload: id }: PayloadAction<number>) => {
-      state.postData.images.map(image => ({ ...image, isActive: false }))
-      state.postData.images.find(({ id: imageId }) => imageId == id)!.isActive = true
+    // setting post description
+    setPostDescription: (state, { payload }: PayloadAction<string>) => {
+      state.postData.description = payload
     },
-    deletePostImage: (state, { payload }: PayloadAction<number>) => {
-      state.postData.images = state.postData.images.filter(({ id }) => id !== payload)
+    // setting create post errors
+    setCreatePostErrors: (state, { payload }: PayloadAction<string[]>) => {
+      state.errors = payload
     },
+    // reset state
     resetCreatePostState: () => initialState,
   },
   extraReducers: builder => {
-    builder.addCase(uploadPostImagesThunk.pending, state => {
-      state.isUploadigPhotosLoading = true
-    }),
-      builder.addCase(uploadPostImagesThunk.fulfilled, (state, { payload }) => {
-        state.isUploadigPhotosLoading = false
-        state.postData.uploadId = payload?.[0].uploadId || ''
-      }),
-      builder.addCase(uploadPostImagesThunk.rejected, (state, { payload }) => {
-        state.isUploadigPhotosLoading = false
-        if (payload) state.errors = [...state.errors, ...payload]
-      }),
-      builder.addCase(initCreatePostFeature.pending, state => {
+    builder
+      .addCase(publishPostThunk.pending, state => {
         state.isLoading = true
-      }),
-      builder.addCase(initCreatePostFeature.fulfilled, state => {
+      })
+      .addCase(publishPostThunk.fulfilled, state => {
         state.isLoading = false
-      }),
-      builder.addCase(initCreatePostFeature.rejected, state => {
-        state.isLoading = true
+        state.errors = []
+        state.postData.images.forEach(({ src }) => URL.revokeObjectURL(src))
+      })
+      .addCase(publishPostThunk.rejected, (state, { payload }) => {
+        state.isLoading = false
+        if (payload) state.errors = payload
       })
   },
 })
@@ -89,6 +89,7 @@ export const {
   setPostImageOrientation,
   setPostImageFilter,
   setPostImageScale,
-  setIsPostImageActive,
+  setPostDescription,
+  setCreatePostErrors,
   resetCreatePostState,
 } = createPostSlice.actions

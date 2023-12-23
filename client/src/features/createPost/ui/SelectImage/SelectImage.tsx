@@ -1,6 +1,6 @@
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { HStack, VStack } from '@/shared/ui/Stack'
-import { FC, MutableRefObject, forwardRef, useId, useRef } from 'react'
+import { FC, MutableRefObject, useRef } from 'react'
 import cls from './SelectImage.module.scss'
 import ImageIcon from '@/shared/assets/icons/image-outline.svg'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
@@ -12,12 +12,15 @@ import { useSelector } from 'react-redux'
 import { ComponentCommonProps } from '../../model/types/types'
 import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
 import { addCreatePostImageService } from '../../model/services/addCreatePostImageService'
+import { useClientTranslation } from '@/shared/config/i18n/client'
+import { Namespaces } from '@/shared/config/i18n/types'
 
 type SelectImageProps = {}
 
 export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
   toastSizeErrorIdRef,
 }) => {
+  const { t } = useClientTranslation(Namespaces.CREATE_POST)
   const fileRef = useRef() as MutableRefObject<HTMLInputElement>
   const dispatch = useAppDispatch()
   const { nextStep } = useSelector(getAllSteps)
@@ -51,10 +54,10 @@ export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
               accept="image/png,image/jpeg"
             />
             <Button theme={ButtonTheme.DEFAULT} onClick={handleSelectImageClick} full>
-              Select from Computer
+              {t('image-selecting.select-btn')}
             </Button>
             <Button theme={ButtonTheme.OUTLINED} full>
-              Open Draft
+              {t('image-selecting.draft-btn')}
             </Button>
           </VStack>
         </VStack>

@@ -1,10 +1,10 @@
-import { setAuthData } from '@/entities/User/model/slice/userSlice'
 import { getUserDataByTokenQuery } from '../api/userApi'
 import { IUser } from '../model/types/types'
 import { ThunkConfig } from '@/providers/StoreProvider'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { getProfileDataThunk } from '@/entities/Profile'
 
 export const initAuthData = createAsyncThunk<IUser | undefined, void, ThunkConfig<string>>(
   'user/initUserData',

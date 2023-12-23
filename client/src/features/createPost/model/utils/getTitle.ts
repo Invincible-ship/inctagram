@@ -3,10 +3,10 @@ import { TFunction } from 'i18next'
 
 export const getTitle = (step: number, t: TFunction<Namespaces, undefined>): string => {
   const titles: Record<number, string> = {
-    1: t('select'),
-    2: t('cropping'),
-    3: t('filtering'),
-    4: t('publish'),
+    1: t('image-selecting.title'),
+    2: t('image-cropping.title'),
+    3: t('image-filtering.title'),
+    4: t('post-publishing.title'),
   }
 
   return titles[step]
