@@ -1,6 +1,11 @@
 {
   "next-btn": "Next",
   "publish-btn": "Publish",
+  "toasts": {
+    "success": "Post has been successfully created!",
+    "draft": "The draft was successfully saved!",
+    "sizeError": "Error! Photo size must be less than 10 MB!"
+  },
   "image-selecting": {
     "title": "Add Photo",
     "select-btn": "Select from Device",

@@ -7,13 +7,15 @@ import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
 import toast from 'react-hot-toast'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { getAllSteps } from '@/features/createPost/model/selectors/getAllSteps'
+import { getAllSteps } from '../../model/selectors/getAllSteps'
 import { useSelector } from 'react-redux'
 import { ComponentCommonProps } from '../../model/types/types'
 import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
 import { addCreatePostImageService } from '../../model/services/addCreatePostImageService'
+import { openDraftAC } from '../../model/slice/createPostSlice'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
+import { getDraft } from '../../model/selectors/getDraft'
 
 type SelectImageProps = {}
 
@@ -24,10 +26,13 @@ export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
   const fileRef = useRef() as MutableRefObject<HTMLInputElement>
   const dispatch = useAppDispatch()
   const { nextStep } = useSelector(getAllSteps)
+  const draft = useSelector(getDraft)
 
   const handleSelectImageClick = () => {
     fileRef?.current?.click()
   }
+
+  const openDraft = () => dispatch(openDraftAC())
 
   const addCreatePostImage = (file: File) => {
     toast.remove(toastSizeErrorIdRef.current)
@@ -36,7 +41,7 @@ export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
   }
 
   const handleImageSizeError = () =>
-    (toastSizeErrorIdRef.current = toast.error('Size error', { duration: Infinity }))
+    (toastSizeErrorIdRef.current = toast.error(t('toasts.sizeError'), { duration: Infinity }))
 
   return (
     <>
@@ -56,9 +61,11 @@ export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
             <Button theme={ButtonTheme.DEFAULT} onClick={handleSelectImageClick} full>
               {t('image-selecting.select-btn')}
             </Button>
-            <Button theme={ButtonTheme.OUTLINED} full>
-              {t('image-selecting.draft-btn')}
-            </Button>
+            {draft && (
+              <Button theme={ButtonTheme.OUTLINED} onClick={openDraft} full>
+                {t('image-selecting.draft-btn')}
+              </Button>
+            )}
           </VStack>
         </VStack>
       </Modal.Body>

@@ -36,7 +36,7 @@ export const publishPostThunk = createAsyncThunk<void, void, ThunkConfig<string[
 
       await dispatch(createPost(postData)).unwrap()
     } catch (err) {
-      console.log('Error has occured')
+      console.warn('Error has occured')
       if (isFetchBaseQueryError(err)) {
         const apiError = err.data as ApiError
 

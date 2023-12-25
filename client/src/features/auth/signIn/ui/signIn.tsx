@@ -27,7 +27,6 @@ import {
 import { getError } from '../model/selectors/getError'
 import { useRouter } from 'next/navigation'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
-import { getProfileDataThunk } from '@/entities/Profile'
 
 export const SignIn: FC = () => {
   const lngId = useContext(LanguageContext) as LanguageIds

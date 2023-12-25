@@ -63,6 +63,7 @@ export const CreatePost = () => {
   const { t } = useClientTranslation(Namespaces.CREATE_POST)
 
   const closeCreatePostModal = () => {
+    toast.remove(toastSizeErrorIdRef.current)
     editableSearchParams.delete('createPost')
     router.push(`?${editableSearchParams.toString()}`)
   }
@@ -82,7 +83,7 @@ export const CreatePost = () => {
 
     if (errors.length) return errors.forEach(error => toast.error(`<Server>: ${error}`))
 
-    toast.success('Post has been succesfully created!')
+    toast.success(t('toasts.sizeError'))
 
     closeCreatePostModal()
     dispatch(resetCreatePostState())
@@ -100,9 +101,7 @@ export const CreatePost = () => {
           onClose={handleCreatePostModalClose}
           publishPost={publishPost}
         />
-        <Suspense fallback={<CreatePostSkeleton />}>
-          <CurrentStepComponent toastSizeErrorIdRef={toastSizeErrorIdRef} />
-        </Suspense>
+        <CurrentStepComponent toastSizeErrorIdRef={toastSizeErrorIdRef} />
       </Modal>
       <CloseModal
         isOpen={isCloseModalOpen}
@@ -111,8 +110,4 @@ export const CreatePost = () => {
       />
     </>
   )
-}
-
-const CreatePostSkeleton = () => {
-  return <Skeleton width="100%" height={50} />
 }

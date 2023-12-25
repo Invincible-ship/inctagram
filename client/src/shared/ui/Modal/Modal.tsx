@@ -1,6 +1,6 @@
 'use client'
 
-import { CSSProperties, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 import { Portal } from '../Portal/Portal'

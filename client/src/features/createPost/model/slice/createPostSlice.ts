@@ -59,8 +59,14 @@ export const createPostSlice = createSlice({
     setCreatePostErrors: (state, { payload }: PayloadAction<string[]>) => {
       state.errors = payload
     },
+    // save/open draft
+    saveDraft: state => {
+      const { draft, ...rest } = state
+      state.draft = { ...rest }
+    },
+    openDraftAC: ({ draft }) => draft || initialState,
     // reset state
-    resetCreatePostState: () => initialState,
+    resetCreatePostState: ({ draft }) => ({ ...initialState, draft }),
   },
   extraReducers: builder => {
     builder
@@ -91,5 +97,7 @@ export const {
   setPostImageScale,
   setPostDescription,
   setCreatePostErrors,
+  saveDraft,
+  openDraftAC,
   resetCreatePostState,
 } = createPostSlice.actions

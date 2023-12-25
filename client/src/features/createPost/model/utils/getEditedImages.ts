@@ -14,7 +14,7 @@ type Filter = {
 }
 
 const filters: Record<ImageFilter, Filter> = {
-  noraml: {
+  normal: {
     major: '',
     additional: [],
   },

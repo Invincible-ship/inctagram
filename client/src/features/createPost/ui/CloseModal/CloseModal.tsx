@@ -1,4 +1,4 @@
-import { resetCreatePostState } from '../../model/slice/createPostSlice'
+import { resetCreatePostState, saveDraft } from '../../model/slice/createPostSlice'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
@@ -6,6 +6,7 @@ import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import React, { FC, memo } from 'react'
+import toast from 'react-hot-toast'
 
 type ButtonRole = 'discard' | 'save'
 
@@ -22,7 +23,11 @@ const CloseModal: FC<CloseModalProps> = memo(({ isOpen, onClose, closeCreatePost
   const handleClick = (role: ButtonRole) => () => {
     onClose()
     closeCreatePostModal()
-    role == 'discard' && dispatch(resetCreatePostState())
+    if (role == 'save') {
+      dispatch(saveDraft())
+      toast.success(t('toasts.draft'))
+    }
+    dispatch(resetCreatePostState())
   }
 
   return (

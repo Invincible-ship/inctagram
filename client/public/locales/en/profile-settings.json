@@ -33,7 +33,7 @@
       "btn": "Select from Computer",
       "cropper-btn": "Save",
       "errors": {
-        "size": "Error! Photo size must be less than 1,5 MB!"
+        "size": "Error! Photo size must be less than 10 MB!"
       }
     },
     "delete-modal": {

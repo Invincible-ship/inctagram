@@ -13,6 +13,7 @@ import { Namespaces } from '@/shared/config/i18n/types'
 export const getSidebarItems = (
   userId: string,
   t: TFunction<Namespaces, undefined>,
+  searchParams?: URLSearchParams,
 ): TSidebarItemsSchema => {
   return {
     major: [
@@ -25,7 +26,7 @@ export const getSidebarItems = (
       {
         value: SidebarValues.CREATE,
         text: t('create'),
-        href: '?createPost=true',
+        href: `?createPost=true${searchParams?.size ? `&${searchParams?.toString()}` : ''}`,
         Icon: CreateIcon,
       },
       {

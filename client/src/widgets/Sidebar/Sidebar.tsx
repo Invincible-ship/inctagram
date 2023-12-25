@@ -44,17 +44,16 @@ export const Sidebar = () => {
   const onTabClick = (tab: Tab<SidebarValues>) => setValue(tab.value)
 
   const { majorTabs, additionalTabs } = useMemo(() => {
-    const sidebarItems = getSidebarItems(userId, t)
+    const sidebarItems = getSidebarItems(userId, t, editableSearchParams)
 
     const majorTabs = getTabs(sidebarItems, {
       type: 'major',
       lngId,
-      searchParams: editableSearchParams,
     })
     const additionalTabs = getTabs(sidebarItems, { type: 'additional', lngId })
 
     return { majorTabs, additionalTabs }
-  }, [userId, lngId, t])
+  }, [userId, lngId, t, editableSearchParams])
 
   return (
     <div className={cls.SidebarWrapper}>
