@@ -1,0 +1,167 @@
+.CroppingImage {
+  position: relative;
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  .iconWrapper {
+    position: absolute;
+    bottom: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 2px;
+    background-color: var(--dark-color-500);
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity, fill .2s linear;
+    z-index: var(--modal-z-index);
+
+    &.scale {
+      left: 70px;
+    }
+
+    &.orientation {
+      left: 12px;
+    }
+
+    &.anotherImage {
+      right: 12px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.active {
+      svg g path {
+          fill: var(--accent-color-500);
+        }
+    }
+  }
+
+  .ranger {
+    position: absolute;
+    bottom: 50px;
+    left: 70px;
+    background-color: rgba(23, 23, 23, 0.8);
+    width: 125px;
+    padding: 12px;
+    border-radius: 2px;
+
+    input {
+      width: 100px;
+    }
+  }
+
+  .imageOrientationContainer {
+    position: absolute;
+    left: 12px;
+    bottom: 50px;
+    width: 156px;
+    color: var(--light-color-900);
+    padding: 10px 12px;
+    background-color: rgba(23, 23, 23, 0.8);
+    transition: color .2s linear;
+
+    .imageOrientationItem {
+      cursor: pointer;
+
+      svg g path {
+        fill: var(--light-color-900);
+      }
+
+      .orientationIcon {
+        background-color: transparent;
+        border: 2px solid var(--light-color-900);
+        border-radius: 3px;
+      }
+
+      &.orientationActive {
+        color: var(--primary-text-color);
+
+        svg g path {
+          fill: var(--light-color-100);
+        }
+
+        .orientationIcon {
+          border: 2px solid var(--light-color-100);
+        }
+      }
+    }
+
+    .orientationIcon {
+      background-color: transparent;
+      border: 2px solid var(--light-color-900);
+      border-radius: 3px;
+    }
+  }
+
+  .addAnotherImageContainer {
+    position: absolute;
+    bottom: 50px;
+    right: 12px;
+    background-color: rgba(23, 23, 23, 0.8);
+    padding: 12px;
+    border-radius: 2px;
+
+    .smallImageContainer {
+      max-width: 360px;
+      padding: 0;
+      overflow-x: scroll;
+
+      &::-webkit-scrollbar {
+        height: 3px;
+        width: 100%;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--light-color-900);
+        border-radius: 1px;
+        cursor: pointer;
+      
+        &:hover {
+          background: var(--light-color-500);
+        }
+      }
+    }
+
+    .addAnotherImageIcon {
+      transition: fill .2s linear;
+
+      &:hover {
+        svg g path {
+          fill: var(--light-color-900);
+        }
+      }
+    }
+
+    .smallImage {
+      position: relative;
+      width: 80px;
+      cursor: pointer;
+
+      &.activeSmallImage {
+        border: 2px solid var(--accent-color-500);
+      }
+
+      .closeIconWrapper {
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        width: 12px;
+        height: 12px;
+        background-color: var(--dark-color-500);
+        opacity: 0.8;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+

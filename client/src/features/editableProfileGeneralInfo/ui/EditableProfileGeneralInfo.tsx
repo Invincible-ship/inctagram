@@ -1,18 +1,15 @@
 'use client'
 
-import { IProfile, ProfileGeneralInfo, useUpdateProfileMutation } from '@/entities/Profile'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { ProfileGeneralInfo, useUpdateProfileMutation } from '@/entities/Profile'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { generalInfoSchemaFn, TGeneralInfo } from '../model/types/generalInfo'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSelector } from 'react-redux'
 import { getProfileGeneralInfo } from '../model/selectors/getProfileGeneralInfo'
 import toast from 'react-hot-toast'
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { getProfileDataThunk } from '../model/getProfileDataThunk'
 import { getUserId } from '@/entities/User'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
@@ -26,13 +23,11 @@ const defaultGeneralInfoValues: TGeneralInfo = {
 export const EditableProfileGeneralInfo = () => {
   const { t } = useClientTranslation(Namespaces.PROFILE_SETTINGS)
   const GeneralInfoSchema = generalInfoSchemaFn(t)
-  const dispatch = useAppDispatch()
   const userId = useSelector(getUserId)
+  const profileGeneralInfoData = useSelector(getProfileGeneralInfo)
 
   const [updateProfileData, { isError, isSuccess, isLoading, error, reset: resetMutation }] =
     useUpdateProfileMutation()
-
-  const profileGeneralInfoData = useSelector(getProfileGeneralInfo)
 
   const {
     control,
@@ -66,16 +61,12 @@ export const EditableProfileGeneralInfo = () => {
     if (isSuccess || isError) resetMutation()
   }, [isSuccess, isError, error])
 
-  useEffect(() => {
-    if (userId) dispatch(getProfileDataThunk(userId))
-  }, [userId, dispatch])
-
   const onSubmit = async (profileData: TGeneralInfo) => {
     const normalizedProfileData = !profileData.aboutMe
       ? { ...profileData, aboutMe: null }
       : profileData
 
-    await updateProfileData(normalizedProfileData as Omit<Partial<IProfile>, 'id'>)
+    await updateProfileData({ ...normalizedProfileData, id: userId })
 
     resetForm(undefined, { keepValues: true, keepErrors: true })
   }

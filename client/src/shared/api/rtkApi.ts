@@ -2,7 +2,7 @@ import { AuthRefreshResponse } from '@/shared/api/types'
 import { LOCAL_STORAGE_LANGUAGE_ID_KEY, LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
-import { PROFILE_TAG, USER_TAG } from '@/shared/const/rtk'
+import { POST_TAG, PROFILE_TAG, USER_TAG } from '@/shared/const/rtk'
 import { UPDATE_TOKENS_ENDPOINT } from '@/shared/const/apiEndpoints'
 import { signoutThunk } from '@/features/auth/signout'
 
@@ -66,7 +66,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 }
 
 export const rtkApi = createApi({
-  tagTypes: [USER_TAG, PROFILE_TAG],
+  tagTypes: [USER_TAG, PROFILE_TAG, POST_TAG],
   reducerPath: 'api',
   baseQuery: baseQueryWithReauth,
   endpoints: build => ({}),

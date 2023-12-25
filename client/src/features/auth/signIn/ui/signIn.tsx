@@ -48,8 +48,8 @@ export const SignIn: FC = () => {
     resolver: zodResolver(schema),
   })
 
-  const onSubmit: SubmitHandler<FormSchemaType> = data => {
-    dispatch(signInThunk({ body: data, router, setError }))
+  const onSubmit: SubmitHandler<FormSchemaType> = async data => {
+    await dispatch(signInThunk({ body: data, router, setError }))
   }
 
   if (isSignInWithGoogleLoading) return <Preloader />

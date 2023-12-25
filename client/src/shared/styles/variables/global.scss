@@ -34,13 +34,13 @@
   --light-color-300: #f7fbff;
   --light-color-500: #edf3fa;
   --light-color-700: #d5dae0;
-  --light-color-900: #bdc1c7;
+  --light-color-900: #8d9094;
 
   --primary-text-color: var(--light-color-100);
   --secondary-text-color: var(--dark-color-100);
 
   // z - indexes
-  --modal-z-index: 10000;
+  --modal-z-index: 1001;
   --overlay-z-index: 100;
 
   // sizes
@@ -48,6 +48,7 @@
   --sidebar-width: 220px;
   --mobile-sidebar-height: 60px;
 }
+
 .dotted-background {
   background-image: -webkit-repeating-radial-gradient(
     center center,

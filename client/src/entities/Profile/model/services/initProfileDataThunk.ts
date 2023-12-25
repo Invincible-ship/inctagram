@@ -1,20 +1,24 @@
-import { getProfileDataByIdQuery } from '@/entities/Profile'
+import { IProfile, getProfileDataQuery } from '@/entities/Profile'
 import { setProfileData } from '@/entities/Profile'
+import { getUserId } from '@/entities/User'
 import { ThunkConfig } from '@/providers/StoreProvider'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError, FieldError } from '@/shared/api/types'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-export const getProfileDataThunk = createAsyncThunk<
+export const initProfileDataThunk = createAsyncThunk<
+  IProfile | undefined,
   void,
-  number,
   ThunkConfig<string | FieldError[]>
->('profile/getProfileData', async (id, { dispatch, rejectWithValue }) => {
-  try {
-    const profileData = await dispatch(getProfileDataByIdQuery(id)).unwrap()
-    console.log('getProfileDataThunk response: ', profileData)
+>('profile/getProfileData', async (_, { dispatch, rejectWithValue, getState }) => {
+  const id = getUserId(getState())
 
-    if (profileData) dispatch(setProfileData(profileData))
+  try {
+    if (id) {
+      const profileData = await dispatch(getProfileDataQuery(id)).unwrap()
+
+      dispatch(setProfileData(profileData))
+    }
   } catch (err) {
     if (isFetchBaseQueryError(err)) {
       const apiError = err.data as ApiError

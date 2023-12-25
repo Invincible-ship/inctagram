@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC } from 'react'
+import { ButtonHTMLAttributes, FC, MouseEvent } from 'react'
 import Spinner from '@/shared/assets/icons/spinner.svg'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import cls from './Button.module.scss'
@@ -23,10 +23,16 @@ export const Button: FC<ButtonProps> = ({
   isLoading,
   children,
   full,
+  onClick,
   ...rest
 }) => {
   const mods = {
     [cls.full]: full,
+  }
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    onClick?.(e)
+    ;(e.target as HTMLButtonElement).blur()
   }
 
   return (
@@ -34,6 +40,7 @@ export const Button: FC<ButtonProps> = ({
       data-testid="test"
       type="button"
       className={classNames(cls.Button, mods, [cls[theme], className])}
+      onClick={handleClick}
       {...rest}
     >
       {isLoading && <Spinner id={cls[theme]} />}

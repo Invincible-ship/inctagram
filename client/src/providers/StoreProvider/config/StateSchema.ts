@@ -5,6 +5,7 @@ import { IUserSchema } from '@/entities/User'
 import { ISignInSchema } from '@/features/auth/signIn'
 import { IProfileSchema } from '@/entities/Profile'
 import { ISignInWithGoogleSchema } from '@/features/auth/signInWithThirdPartyServices'
+import { ICreatePostSchema } from '@/features/createPost'
 
 export type StateSchema = {
   // Остальные типы ваших редьюсеров
@@ -14,13 +15,14 @@ export type StateSchema = {
   signIn: ISignInSchema
   signup: ISignUpSchema
   signInWithGoogle: ISignInWithGoogleSchema
+  createPost: ICreatePostSchema
 }
 
 export type ThunkExtraArg = {
   api: AxiosInstance
 }
 
-export type ThunkConfig<T> = {
+export type ThunkConfig<T = any> = {
   rejectValue: T
   extra: ThunkExtraArg
   state: StateSchema

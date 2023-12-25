@@ -1,13 +1,13 @@
 import { AvatarSize } from '@/shared/ui/Avatar/Avatar'
 import { getProfileData } from './getProfileData'
-import { createDraftSafeSelector } from '@reduxjs/toolkit'
+import { createSelector } from '@reduxjs/toolkit'
 
-export const getAll = createDraftSafeSelector(getProfileData, profile => profile?.avatars)
+export const getAll = createSelector(getProfileData, profile => profile?.avatars)
 
-export const getMedium = createDraftSafeSelector(getAll, avatars => {
+export const getMedium = createSelector(getAll, avatars => {
   if (avatars) return avatars.find(avatar => avatar.width == AvatarSize.MEDIUM)
 })
 
-export const getSmall = createDraftSafeSelector(getAll, avatars => {
+export const getSmall = createSelector(getAll, avatars => {
   if (avatars) return avatars.find(avatar => avatar.width == AvatarSize.SMALL)
 })

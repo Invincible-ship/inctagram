@@ -1,0 +1,26 @@
+.FilteringImage {
+  width: 980px;
+
+  .imageContainer, .filtersContainer {
+    flex: 0 0 490px;
+  }
+  
+  .filtersContainer {
+    padding: 20px;
+
+    .imageWithFilter {
+      width: 102px;
+      cursor: pointer;
+
+      &.active {
+        .imageWrapper {
+          outline: 2px solid var(--accent-color-500);
+        }
+
+        span {
+          color: var(--accent-color-500);
+        }
+      }
+    }
+  }
+}

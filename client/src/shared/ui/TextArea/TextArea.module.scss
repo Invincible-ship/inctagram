@@ -41,6 +41,11 @@
     }
   }
 
+  .counter {
+    font-size: 12px;
+    color: var(--light-color-900);
+  }
+
   .textAreaError {
     font-size: 14px;
     color: var(--danger-color-500);

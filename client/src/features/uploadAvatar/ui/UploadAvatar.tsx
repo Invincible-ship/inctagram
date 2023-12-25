@@ -4,7 +4,7 @@ import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { TFunction } from 'i18next'
 import cls from './UploadAvatar.module.scss'
-import { FC, useState } from 'react'
+import { FC, useRef, useState } from 'react'
 import { UploadAvatarModal } from './UploadAvatarModal'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
@@ -20,14 +20,14 @@ export const UploadAvatar: FC<UploadAvatarProps> = ({ t }) => {
   const [isUploadAvatarModalOpen, setIsUploadAvatarModalOpen] = useState<boolean>(false)
   const [isDeleteAvatarModalOpen, setIsDeleteAvatarModalOpen] = useState<boolean>(false)
   const [uploaded, setUploaded] = useState(undefined as string | undefined)
-  const [toastSizeErrorId, setToastSizeErrorId] = useState<string>()
+  const toastSizeErrorIdRef = useRef<string>()
   const avatar = useSelector(ProfileAvatars.getMedium)
 
   const handleUploadButtonClick = () => setIsUploadAvatarModalOpen(true)
   const handleDeleteButtonClick = () => setIsDeleteAvatarModalOpen(true)
 
   const closeUploadAvatarModal = () => {
-    toast.remove(toastSizeErrorId)
+    toast.remove(toastSizeErrorIdRef.current)
     setUploaded(undefined)
     setIsUploadAvatarModalOpen(false)
   }
@@ -60,8 +60,7 @@ export const UploadAvatar: FC<UploadAvatarProps> = ({ t }) => {
       <UploadAvatarModal
         uploaded={uploaded}
         setUploaded={setUploaded}
-        toastSizeErrorId={toastSizeErrorId}
-        setToastSizeErrorId={setToastSizeErrorId}
+        toastSizeErrorIdRef={toastSizeErrorIdRef}
         isOpen={isUploadAvatarModalOpen}
         onClose={closeUploadAvatarModal}
         t={t}

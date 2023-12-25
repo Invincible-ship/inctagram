@@ -1,4 +1,3 @@
-import { setAuthData } from '@/entities/User/model/slice/userSlice'
 import { getUserDataByTokenQuery } from '../api/userApi'
 import { IUser } from '../model/types/types'
 import { ThunkConfig } from '@/providers/StoreProvider'

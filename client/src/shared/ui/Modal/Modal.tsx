@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, ReactNode, useMemo } from 'react'
+import { ReactNode } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 import { Portal } from '../Portal/Portal'
@@ -26,9 +26,6 @@ export const Modal = (props: ModalProps) => {
     onClose,
     isOpen,
   })
-  const styles = {
-    flexBasis: width,
-  }
 
   const mods = {
     [cls.opened]: isOpen,
@@ -39,13 +36,13 @@ export const Modal = (props: ModalProps) => {
     <Portal>
       <div className={classNames(cls.Modal, mods, [className])}>
         <Overlay onClick={close} />
-        <div className={cls.content} style={styles}>
-          {children}
-        </div>
+        <div className={cls.content}>{children}</div>
       </div>
     </Portal>
   )
 }
+
+Modal.displayName = 'Modal'
 
 type ModalHeaderProps = {
   children: ReactNode
@@ -67,6 +64,6 @@ Modal.Header = ({ children, close, width }: ModalHeaderProps) => {
 }
 
 //eslint-disable-next-line
-Modal.Body = ({ children }: { children: ReactNode }) => {
-  return <div className={cls.body}>{children}</div>
+Modal.Body = ({ children, className }: { children: ReactNode, className?: string }) => {
+  return <div className={classNames(cls.body, {}, [className])}>{children}</div>
 }

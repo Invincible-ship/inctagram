@@ -1,0 +1,45 @@
+{
+  "next-btn": "Дальше",
+  "publish-btn": "Опубликовать",
+  "toasts": {
+    "success": "Пост успешно создан!",
+    "draft": "Черновик был успешно сохранен!",
+    "sizeError": "Ошибка! Размер фотографии должен быть меньше 10 МБ!"
+  },
+  "image-selecting": {
+    "title": "Добавить Фотографию",
+    "select-btn": "Выбрать с Устройства",
+    "draft-btn": "Открыть Черновик"
+  },
+  "image-cropping": {
+    "title": "Обрезка",
+    "orientation": {
+      "original": "Оригинал"
+    }
+  },
+  "image-filtering": {
+    "title": "Фильтры",
+    "filters": {
+      "normal": "Normal",
+      "clarendon": "Clarendon",
+      "lark": "Lark",
+      "gingham": "Gingham",
+      "moon": "Moon",
+      "aden": "Aden",
+      "brannan": "Brannan",
+      "inkwell": "Inkwell",
+      "reyes": "Reyes"
+    }
+  },
+  "post-publishing": {
+    "title": "Публикация",
+    "textarea-label": "Добавить описание к публикации"
+  },
+  "close-modal": {
+    "title": "Закрыть",
+    "paragraph-1": "Вы действительно хотите закрыть создание публикации?",
+    "paragraph-2": "Если закрыть, все будет удалено",
+    "discard-btn": "Сбросить",
+    "save-btn": "Сохранить черновик"
+  }
+}

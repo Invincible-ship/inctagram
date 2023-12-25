@@ -6,6 +6,7 @@ import { FC, ReactNode, Suspense, useMemo } from 'react'
 import { Toaster } from '@/shared/ui/Toaster/Toaster'
 import { useSelector } from 'react-redux'
 import { LanguageIds } from '@/shared/config/i18n/types'
+import { CreatePost } from '@/features/createPost'
 
 type AppLayoutProps = {
   children: ReactNode
@@ -27,7 +28,12 @@ export const AppLayout: FC<AppLayoutProps> = ({ children, Fallback }) => {
       <Header isAuthorized={isAuthorized} />
       <div className="blank-header"></div>
       <div className="app-container">
-        {isAuthorized && <Sidebar />}
+        {isAuthorized && (
+          <>
+            <Sidebar />
+            <CreatePost />
+          </>
+        )}
         <div className={classNames('page-container', pageContainerMods)}>
           <Suspense fallback={<Fallback />}>{children}</Suspense>
         </div>
