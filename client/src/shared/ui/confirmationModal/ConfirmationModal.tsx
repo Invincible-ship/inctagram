@@ -4,30 +4,24 @@ import { Modal } from '@/shared/ui/Modal/Modal'
 import { TFunction } from 'i18next'
 import { FC } from 'react'
 import cls from './SignUpModal.module.scss'
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { setIsSignUpModalOpen } from '@/features/auth/signup/model/slice/signUpSlice'
 
 type SignUpModalProps = {
   email: string
   isSignUpModalOpen: boolean
   t: TFunction<Namespaces, undefined>
+  setIsAuthModalOpen: () => void
 }
-
-export const SignUpModal: FC<SignUpModalProps> = props => {
-  const { email, isSignUpModalOpen, t } = props
-  const dispatch = useAppDispatch()
-
-  const onClose = () => dispatch(setIsSignUpModalOpen(false))
-
+export const ConfirmationModal: FC<SignUpModalProps> = props => {
+  const { email, isSignUpModalOpen, t, setIsAuthModalOpen } = props
   return (
-    <Modal onClose={onClose} isOpen={isSignUpModalOpen}>
-      <Modal.Header close={onClose}>{t('modal.title')}</Modal.Header>
+    <Modal onClose={setIsAuthModalOpen} isOpen={isSignUpModalOpen}>
+      <Modal.Header close={setIsAuthModalOpen}>{t('modal.title')}</Modal.Header>
       <Modal.Body>
         <div className={cls.content}>
           <p>
             {t('modal.text')} {` ${email}`}
           </p>
-          <Button className={cls.btn} theme={ButtonTheme.DEFAULT} onClick={onClose}>
+          <Button className={cls.btn} theme={ButtonTheme.DEFAULT} onClick={setIsAuthModalOpen}>
             {t('modal.ok')}
           </Button>
         </div>
