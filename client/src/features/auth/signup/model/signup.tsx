@@ -29,7 +29,6 @@ export const signupThunk = createAsyncThunk<void, SignupThunkPayload, ThunkConfi
           )
         }
       }
-
       return rejectWithValue('Unknown error')
     }
   },

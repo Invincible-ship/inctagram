@@ -35,7 +35,7 @@ export const CreateNewPassword = ({ code }: Props) => {
       errors: { password, confirmPassword },
     },
   } = useForm<FormSchemaType>({
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(schema),
   })
   const onSubmit: SubmitHandler<FormSchemaType> = async data => {

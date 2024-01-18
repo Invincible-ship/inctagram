@@ -64,6 +64,6 @@ Modal.Header = ({ children, close, width }: ModalHeaderProps) => {
 }
 
 //eslint-disable-next-line
-Modal.Body = ({ children, className }: { children: ReactNode, className?: string }) => {
+Modal.Body = ({ children, className }: { children: ReactNode; className?: string }) => {
   return <div className={classNames(cls.body, {}, [className])}>{children}</div>
 }

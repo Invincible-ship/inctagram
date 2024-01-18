@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Routes } from '@/shared/types/routes'
 import { useRef, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { ConfirmationModal } from '@/shared/ui/confirmationModal/ConfirmationModal'
+import { ConfirmationModal } from '@/features/auth/ui/ConfirmationModal/ConfirmationModal'
 import {
   ForgotPasswordFormSchema,
   FormSchemaType,
@@ -18,9 +18,10 @@ import { Card } from '@/shared/ui/Card/Card'
 import s from './forgotPassword.module.scss'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { ForgotPasswordForm } from '@/features/auth/forgotPassword/ui/forgotPasswordForm/forgotPasswordForm'
+import { ForgotPasswordForm } from './forgotPasswordForm/forgotPasswordForm'
 import { useForgotPasswordMutation } from '@/entities/User/api/userApi'
-import { ReCaptcha } from '@/shared/ui/ReCaptcha/ReCaptcha'
+import { ReCaptcha } from '@/features/auth/forgotPassword/ui/ReCaptcha/ReCaptcha'
+import { HStack } from '@/shared/ui/Stack'
 
 type Props = {
   t: TFunction<Namespaces, undefined>
@@ -41,7 +42,7 @@ export const ForgotPassword = ({ t, lngId }: Props) => {
     setError,
     reset,
   } = useForm<FormSchemaType>({
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(schema),
   })
   const onSubmit: SubmitHandler<FormSchemaType> = async ({ email, recaptcha }) => {
@@ -64,7 +65,7 @@ export const ForgotPassword = ({ t, lngId }: Props) => {
     recaptchaRef.current?.reset()
   }
   return (
-    <Card t={t} title={'forgotPassword'}>
+    <Card t={t} title="forgotPassword">
       <form onSubmit={handleSubmit(onSubmit)} className={'form-style'}>
         <ForgotPasswordForm
           errors={errors}
@@ -74,12 +75,12 @@ export const ForgotPassword = ({ t, lngId }: Props) => {
           email={email}
           isLoading={isLoading}
         />
-        <div className={s.linkBox}>
+        <HStack justify="center">
           <Link className={s.link} href={`/${lngId}${Routes.SIGNIN}`}>
             {t('backToSignIn')}
           </Link>
-        </div>
-        <ReCaptcha errors={errors} t={t} ref={recaptchaRef} control={control} theme={'dark'} />
+        </HStack>
+        <ReCaptcha errors={errors} t={t} ref={recaptchaRef} control={control} theme="dark" />
         <ConfirmationModal
           t={t}
           email={email}

@@ -3,7 +3,7 @@ import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { TFunction } from 'i18next'
 import { FC } from 'react'
-import cls from './SignUpModal.module.scss'
+import cls from './ConfirmationModal.module.scss'
 
 type SignUpModalProps = {
   email: string

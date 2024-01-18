@@ -4,7 +4,8 @@ import { Namespaces } from '@/shared/config/i18n/types'
 import s from './ReCaptcha.module.scss'
 import { Control, Controller, FieldErrors } from 'react-hook-form'
 import { forwardRef, memo } from 'react'
-import { FormSchemaType } from '@/features/auth/forgotPassword'
+import { FormSchemaType } from '@/features/auth/forgotPassword/lib/validationConstants/validationConstants'
+import { HStack } from '@/shared/ui/Stack'
 
 const reCaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
 
@@ -20,7 +21,7 @@ export const ReCaptcha = memo(
     const error = errors && errors.recaptcha
     const captchaBlock = error ? s.error : ''
     return (
-      <div className={s.mainBlock}>
+      <HStack justify="center">
         <div className={captchaBlock}>
           <Controller
             control={control}
@@ -38,7 +39,7 @@ export const ReCaptcha = memo(
           />
           {error && <div className={s.errorText}>{t('notARobot')}</div>}
         </div>
-      </div>
+      </HStack>
     )
   }),
 )

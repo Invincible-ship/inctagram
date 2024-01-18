@@ -22,7 +22,7 @@ import {
   getIsSignInWithGoogleLoading,
 } from '@/features/auth/signInWithThirdPartyServices'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
-import { ConfirmationModal } from '@/shared/ui/confirmationModal/ConfirmationModal'
+import { ConfirmationModal } from '@/features/auth/ui/ConfirmationModal/ConfirmationModal'
 import { SignUpForm } from '@/features/auth/signup/ui/signUpForm/SignUpForm'
 import { setIsSignUpModalOpen } from '@/features/auth/signup/model/slice/signUpSlice'
 
