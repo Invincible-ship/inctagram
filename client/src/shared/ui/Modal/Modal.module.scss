@@ -39,7 +39,7 @@
 }
 
 .header {
-  width: -webkit-fill-available;
+  //width: -webkit-fill-available;
   padding: 12px 24px;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@
 }
 
 .body {
-  width: -webkit-fill-available;
+  //width: -webkit-fill-available;
   padding: 24px;
 
   @media (max-width: 769px) {
