@@ -8,6 +8,8 @@ export const ME_ENDPOINT = '/api/v1/auth/me'
 export const SIGN_IN_WITH_GOOGLE_ENDPOINT = '/api/v1/auth/google/login'
 export const SIGN_IN_WITH_GITHUB_ENDPOINT = '/api/v1/auth/github/login'
 export const UPDATE_TOKENS_ENDPOINT = '/api/v1/auth/update-tokens'
+export const FORGOT_PASSWORD_ENDPOINT = '/api/v1/auth/password-recovery'
+export const CREATE_NEW_PASSWORD_ENDPOINT = '/api/v1/auth/new-password'
 
 // PROFILE ENDPOINTS
 export const PROFILE_ENDPOINT = '/api/v1/users/profile'

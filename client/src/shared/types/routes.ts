@@ -3,6 +3,7 @@ export enum Routes {
   // auth routes
   SIGNIN = '/auth/login',
   SIGNUP = '/auth/registration',
+  FORGOTPASSWORD = '/auth/forgot-password',
   REGISTRATION_CONFIRMATION = '/auth/registration-confirmation',
   MERGE = '/auth/merge',
   GOOGLE_CLIENT = '/google',

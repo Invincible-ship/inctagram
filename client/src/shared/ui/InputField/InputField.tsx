@@ -8,11 +8,12 @@ import { FieldError } from 'react-hook-form'
 type InputFieldProps = {
   id: string
   type: string
-  className?: 'input'
+  className?: string
   placeholder: string
   title: string
-  register: any
-  error: FieldError
+  register?: any
+  error?: FieldError
+  full?: boolean
 }
 
 export const InputField: FC<InputFieldProps> = ({
@@ -23,6 +24,7 @@ export const InputField: FC<InputFieldProps> = ({
   title,
   register,
   error,
+  full,
 }) => {
   return (
     <div className={'field input-field'}>
@@ -33,6 +35,7 @@ export const InputField: FC<InputFieldProps> = ({
         placeholder={placeholder}
         title={title}
         error={error}
+        full={full}
         {...register}
       />
     </div>

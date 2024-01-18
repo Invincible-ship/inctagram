@@ -22,8 +22,9 @@ import {
   getIsSignInWithGoogleLoading,
 } from '@/features/auth/signInWithThirdPartyServices'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
-import { SignUpModal } from '@/features/auth/signup/ui/signUpModal/SignUpModal'
+import { ConfirmationModal } from '@/features/auth/ui/ConfirmationModal/ConfirmationModal'
 import { SignUpForm } from '@/features/auth/signup/ui/signUpForm/SignUpForm'
+import { setIsSignUpModalOpen } from '@/features/auth/signup/model/slice/signUpSlice'
 
 export const SignUp = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
@@ -56,6 +57,7 @@ export const SignUp = () => {
 
   if (isSignInWithGoogleLoading) return <Preloader />
 
+  const onClose = () => dispatch(setIsSignUpModalOpen(false))
   return (
     <>
       <div className={'form registration'}>
@@ -84,7 +86,12 @@ export const SignUp = () => {
           </Link>
         </div>
       </div>
-      <SignUpModal email={email} isSignUpModalOpen={isSignUpModalOpen} t={t} />
+      <ConfirmationModal
+        setIsAuthModalOpen={onClose}
+        email={email}
+        isSignUpModalOpen={isSignUpModalOpen}
+        t={t}
+      />
     </>
   )
 }

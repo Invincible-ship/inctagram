@@ -7,18 +7,19 @@ import '@/shared/styles/variables/common/_buttons.scss'
 import cls from '@/features/auth/signup/ui/signup.module.scss'
 
 export type PasswordWrapperProps = {
+  full?: boolean
   id: string
   role?: AriaRole
-  className?: 'password'
+  className?: string
   placeholder: string
   type: string
   title: string
   register: any
-  error: FieldError
-  toggleShowPassword: () => void
+  error?: FieldError
 }
 
 export const PasswordWrapper: FC<PasswordWrapperProps> = ({
+  full,
   id,
   role,
   className,
@@ -27,11 +28,11 @@ export const PasswordWrapper: FC<PasswordWrapperProps> = ({
   title,
   register,
   error,
-  toggleShowPassword,
 }) => {
   return (
     <div className={cls.passwordWrapper}>
       <Input
+        full={full}
         id={id}
         role={role}
         className={className}
@@ -39,7 +40,6 @@ export const PasswordWrapper: FC<PasswordWrapperProps> = ({
         type={type}
         title={title}
         error={error}
-        toggleShowPassword={toggleShowPassword}
         {...register}
       />
     </div>

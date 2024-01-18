@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, forwardRef, InputHTMLAttributes, AriaRole } from 'react'
+import React, { DetailedHTMLProps, forwardRef, InputHTMLAttributes, useState } from 'react'
 import s from './Input.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
 import { FieldError } from 'react-hook-form'
@@ -14,28 +14,29 @@ type InputPropsType = DefaultInputPropsType & {
   error?: FieldError
   title?: string
   full?: boolean
-  toggleShowPassword?: () => void
 }
 
 export const Input = forwardRef<HTMLInputElement, InputPropsType>(
-  ({ error, className, id, type, title, full, toggleShowPassword, role, ...restProps }, ref) => {
+  ({ error, className, id, type, title, full, role, ...restProps }, ref) => {
+    const [valueType, setValueType] = useState(type)
     const wrapperMods = {
       [s.full]: full,
     }
-
     const inputMods = {
       [s.errorInput]: !!error?.message,
     }
-
+    const toggleShowPassword = () => {
+      setValueType(prevState => (prevState === 'text' ? 'password' : 'text'))
+    }
     return (
-      <div className={classNames(s.inputWrapper, wrapperMods)}>
+      <div className={classNames(s.inputWrapper, wrapperMods, [className])}>
         <label htmlFor={id}>{title}</label>
         <input
           ref={ref}
           id={id}
           role={role}
-          type={type ? type : 'text'}
-          className={classNames(s.styledInput, inputMods, [className])}
+          type={valueType}
+          className={classNames(s.styledInput, inputMods)}
           {...restProps}
           data-testid="input"
         />

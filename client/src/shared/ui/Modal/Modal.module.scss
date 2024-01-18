@@ -13,8 +13,8 @@
   max-width: 60%;
   background-color: var(--dark-color-300);
   border: 1px solid var(--dark-color-100);
-  transform: scale(.5);
-  transition: transform .2s;
+  transform: scale(0.5);
+  transition: transform 0.2s;
   z-index: var(--modal-z-index);
 
   @media (max-width: 1650px) {
@@ -28,18 +28,18 @@
   z-index: var(--modal-z-index);
 
   .content {
-      transform: scale(1);
+    transform: scale(1);
   }
 }
 
 .isClosing {
   .content {
-      transform: scale(0.2);
+    transform: scale(0.2);
   }
 }
 
 .header {
-  width: -webkit-fill-available;
+  //width: -webkit-fill-available;
   padding: 12px 24px;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@
 }
 
 .body {
-  width: -webkit-fill-available;;
+  //width: -webkit-fill-available;
   padding: 24px;
 
   @media (max-width: 769px) {

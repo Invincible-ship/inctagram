@@ -32,16 +32,6 @@ export const SignUpForm: FC<SignUpFormProps> = ({
   setCheckedAgree,
   checkedAgree,
 }) => {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword)
-  }
-
-  const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword)
-  }
-
   return (
     <form onSubmit={onSubmit} className={classNames('form-style', {}, [cls.form])}>
       <InputField
@@ -66,10 +56,9 @@ export const SignUpForm: FC<SignUpFormProps> = ({
         id={'password'}
         role="password"
         placeholder={t('password')}
-        type={showPassword ? 'text' : 'password'}
+        type={'password'}
         title={t('password')}
         register={register('password')}
-        toggleShowPassword={toggleShowPassword}
         error={errors.password}
         data-testid="password-input"
       />
@@ -77,10 +66,9 @@ export const SignUpForm: FC<SignUpFormProps> = ({
         id="passwordConfirmation"
         role="password"
         placeholder={t('passwordConfirmation')}
-        type={showConfirmPassword ? 'text' : 'password'}
+        type={'password'}
         title={t('passwordConfirmation')}
         register={register('passwordConfirmation')}
-        toggleShowPassword={toggleShowConfirmPassword}
         error={errors.passwordConfirmation}
         data-testid="password-confirmation-input"
       />
