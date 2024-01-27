@@ -1,3 +1,3 @@
-export default function Profile() {
-  return <h1>Profile Page</h1>
-}
+import ProfilePage from '@/_pages/ProfilePage/ui/ProfilePage/ProfilePage'
+
+export default ProfilePage

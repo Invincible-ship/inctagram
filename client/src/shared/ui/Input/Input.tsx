@@ -17,39 +17,56 @@ type InputPropsType = DefaultInputPropsType & {
   toggleShowPassword?: () => void
 }
 
-export const Input = forwardRef<HTMLInputElement, InputPropsType>(
-  ({ error, className, id, type, title, full, toggleShowPassword, role, ...restProps }, ref) => {
-    const wrapperMods = {
-      [s.full]: full,
-    }
+export const Input = forwardRef<HTMLInputElement, InputPropsType>((props, ref) => {
+  const {
+    error,
+    className,
+    id,
+    type,
+    title,
+    full,
+    required,
+    toggleShowPassword,
+    role,
+    ...restProps
+  } = props
 
-    const inputMods = {
-      [s.errorInput]: !!error?.message,
-    }
+  const wrapperMods = {
+    [s.full]: full,
+  }
 
-    return (
-      <div className={classNames(s.inputWrapper, wrapperMods)}>
+  const inputMods = {
+    [s.errorInput]: !!error?.message,
+  }
+
+  const requiredContent = required ? <span className={s.requiredStar}>*</span> : ''
+
+  return (
+    <div className={classNames(s.inputWrapper, wrapperMods)}>
+      <div className={s.label}>
         <label htmlFor={id}>{title}</label>
-        <input
-          ref={ref}
-          id={id}
-          role={role}
-          type={type ? type : 'text'}
-          className={classNames(s.styledInput, inputMods, [className])}
-          {...restProps}
-          data-testid="input"
-        />
-        {(type == 'password' || role == 'password') && (
-          <span className={s.eye} onClick={toggleShowPassword}>
-            <Eye />
-          </span>
-        )}
-        <div id={id ? id + '-span' : undefined} className={s.errorBlock}>
-          {error && <span className={`${s.error}`}>{error.message}</span>}
-        </div>
+        {requiredContent}
       </div>
-    )
-  },
-)
+      <input
+        ref={ref}
+        id={id}
+        role={role}
+        type={type ? type : 'text'}
+        required={required}
+        className={classNames(s.styledInput, inputMods, [className])}
+        {...restProps}
+        data-testid="input"
+      />
+      {(type == 'password' || role == 'password') && (
+        <span className={s.eye} onClick={toggleShowPassword}>
+          <Eye />
+        </span>
+      )}
+      <div id={id ? id + '-span' : undefined} className={s.errorBlock}>
+        {error && <span className={`${s.error}`}>{error.message}</span>}
+      </div>
+    </div>
+  )
+})
 
 Input.displayName = 'Input'

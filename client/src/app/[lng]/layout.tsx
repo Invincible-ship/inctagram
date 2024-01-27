@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { MutableRefObject, ReactNode, useRef, useState } from 'react'
 import { dir } from 'i18next'
 import { Inter } from 'next/font/google'
 import { LanguageIds } from '@/shared/config/i18n/types'

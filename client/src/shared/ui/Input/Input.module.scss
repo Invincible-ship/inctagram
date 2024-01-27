@@ -16,8 +16,15 @@
     }
   }
 
-  label {
-    display: block;
+  .label {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+
+    .requiredStar {
+      color: red;
+      font-size: 14px;
+    }
   }
 
   .styledInput {

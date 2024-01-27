@@ -101,6 +101,7 @@ export const postApi = rtkApi.injectEndpoints({
 export const fetchPostById = postApi.endpoints.fetchPostById.initiate
 export const uploadPostImages = postApi.endpoints.uploadPostImages.initiate
 export const createPost = postApi.endpoints.createPost.initiate
+export const createdPostMatcher = postApi.endpoints.createPost.matchFulfilled
 export const {
   useFetchPostByIdQuery,
   useFetchAllPostsQuery,

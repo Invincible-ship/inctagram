@@ -1,0 +1,18 @@
+.ProfileCard {
+  .username {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .infoContainer {
+    width: 395px;
+
+    .block {
+      font-size: 14px;
+
+      .amount {
+        font-weight: bold;
+      }
+    }
+  }
+}

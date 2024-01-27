@@ -1,5 +1,10 @@
+import { PostSortField } from '@/shared/const/postSortField'
 import { SortOrder } from '@/shared/types/sort'
-import { PostSortField } from '../consts/postConsts'
+
+export type PostOwner = {
+  firstName: string
+  lastName: string
+}
 
 export type PostImage = {
   url: string
@@ -11,12 +16,15 @@ export type PostImage = {
 
 export type IPost = {
   id: number
+  userName: string
   description: string
   location: string
   images: PostImage[]
   createdAt: string
   updatedAt: string
   ownerId: number
+  avatarOwner: string
+  owner: PostOwner
 }
 
 export type AllPostsRequestParams = {
