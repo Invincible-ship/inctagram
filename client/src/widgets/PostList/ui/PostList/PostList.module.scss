@@ -1,0 +1,16 @@
+.PostList {
+  .item {
+    transition: scale .35s ease, opacity .35s linear;
+
+    :hover {
+      opacity: 0.7;
+    }
+  }
+
+  &:has(.item:hover) {
+    .item:not(:hover) {
+      scale: .95;
+      opacity: 1;
+    }
+  }
+}

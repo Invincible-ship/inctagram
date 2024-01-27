@@ -21,6 +21,10 @@ interface AppCustomEvent<E = Event, T = Element> extends Omit<E, 'target'> {
   target: Pick<E, 'target'> & T
 }
 
+type OptionalRecord<K extends keyof any, T> = {
+  [P in K]?: T
+}
+
 declare const __IS_DEV__: boolean
 
 declare module '*.png'

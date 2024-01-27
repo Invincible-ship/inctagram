@@ -9,4 +9,5 @@ export {
   useDeletePostMutation,
   uploadPostImages,
   createPost,
+  createdPostMatcher,
 } from './api/postApi'
