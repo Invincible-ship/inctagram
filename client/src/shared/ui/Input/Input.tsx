@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, forwardRef, InputHTMLAttributes, AriaRole } from 'react'
+import React, { DetailedHTMLProps, forwardRef, InputHTMLAttributes, useState } from 'react'
 import s from './Input.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
 import { FieldError } from 'react-hook-form'
@@ -14,35 +14,27 @@ type InputPropsType = DefaultInputPropsType & {
   error?: FieldError
   title?: string
   full?: boolean
-  toggleShowPassword?: () => void
 }
 
 export const Input = forwardRef<HTMLInputElement, InputPropsType>((props, ref) => {
-  const {
-    error,
-    className,
-    id,
-    type,
-    title,
-    full,
-    required,
-    toggleShowPassword,
-    role,
-    ...restProps
-  } = props
+  const { error, className, id, type, title, full, required, role, ...restProps } = props
+  const [valueType, setValueType] = useState(type)
 
   const wrapperMods = {
     [s.full]: full,
   }
-
   const inputMods = {
     [s.errorInput]: !!error?.message,
+  }
+
+  const toggleShowPassword = () => {
+    setValueType(prevState => (prevState === 'text' ? 'password' : 'text'))
   }
 
   const requiredContent = required ? <span className={s.requiredStar}>*</span> : ''
 
   return (
-    <div className={classNames(s.inputWrapper, wrapperMods)}>
+    <div className={classNames(s.inputWrapper, wrapperMods, [className])}>
       <div className={s.label}>
         <label htmlFor={id}>{title}</label>
         {requiredContent}
@@ -51,9 +43,9 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>((props, ref) =
         ref={ref}
         id={id}
         role={role}
-        type={type ? type : 'text'}
+        type={valueType}
         required={required}
-        className={classNames(s.styledInput, inputMods, [className])}
+        className={classNames(s.styledInput, inputMods)}
         {...restProps}
         data-testid="input"
       />

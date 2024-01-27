@@ -1,8 +1,6 @@
-@import "../mixins";
-
+@import '../mixins';
 
 .form-style {
-
   .f-item {
     position: relative;
     display: flex;
@@ -33,12 +31,12 @@
     }
   }
 
-    .error-lbl {
-        position: absolute;
-        font-size: 11px;
-        color: var(--danger-color-500);
-        margin-top: 2px;
-    }
+  .error-lbl {
+    position: absolute;
+    font-size: 11px;
+    color: var(--danger-color-500);
+    margin-top: 2px;
+  }
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:active,
@@ -48,21 +46,21 @@
     -webkit-box-shadow: 0 0 0 1000px var(--dark-color-500) inset !important;
     -webkit-text-fill-color: var(--light-color-100) !important;
   }
-    input[type="text"],
-    input[type="tel"],
-    input[type="number"],
-    input[type="email"],
-    input[type="password"],
-    textarea {
-        width: 100%;
-        height: 45px;
-        outline: none;
-        padding: 0 10px;
-        border-radius: 2px;
-        background-color: transparent;
-        color: var(--light-color-100);
-        font-size: 16px;
-        outline: none;
+  input[type='text'],
+  input[type='tel'],
+  input[type='number'],
+  input[type='email'],
+  input[type='password'],
+  textarea {
+    width: 100%;
+    height: 45px;
+    outline: none;
+    padding: 0 10px;
+    border-radius: 2px;
+    background-color: transparent;
+    color: var(--light-color-100);
+    font-size: 16px;
+    outline: none;
 
     @include nbtbmb {
       font-size: 14px;
@@ -75,7 +73,7 @@
     &:hover {
       color: var(--light-color-900);
     }
-    &[disabled="true"] {
+    &[disabled='true'] {
       color: var(--dark-color-100);
       border: 1px solid var(--dark-color-100);
     }
@@ -85,58 +83,54 @@
       //border-radius: 2px;
       //border: 1px solid var(--accent-color-700);
 
-            @include placeholder {
-                color: var(--light-color-100);
-            }
-
-            ;
-        }
-
-        &.error {
-            border-color: var(--danger-color-500);
-            color: var(--danger-color-500);
-
-            @include placeholder {
-                color: rgba(var(--danger-color-500), 0.2);
-            }
-
-            ;
-        }
+      @include placeholder {
+        color: var(--light-color-100);
+      }
     }
 
-    textarea {
-        padding: 10px;
-        resize: none;
-        height: 120px;
+    &.error {
+      border-color: var(--danger-color-500);
+      color: var(--danger-color-500);
 
-        @include nbtbmb {
-            height: 120px;
-        }
+      @include placeholder {
+        color: rgba(var(--danger-color-500), 0.2);
+      }
     }
+  }
 
-    input[type=number]::-webkit-inner-adjust-hue-button,
-    input[type=number]::-webkit-outer-adjust-hue-button {
-        -webkit-appearance: none;
-        margin: 0;
+  textarea {
+    padding: 10px;
+    resize: none;
+    height: 120px;
+
+    @include nbtbmb {
+      height: 120px;
     }
+  }
+
+  //input[type='number']::-webkit-inner-adjust-hue-button,
+  //input[type='number']::-webkit-outer-adjust-hue-button {
+  //  -webkit-appearance: none;
+  //  margin: 0;
+  //}
 }
 
 .styled-checkbox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+  margin-bottom: 29px;
+
+  & label {
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    margin-top: 24px;
-    margin-bottom: 29px;
+  }
 
-    & label {
-        cursor: pointer;
-    }
-
-    & input[type='checkbox'] {
-        width: 18px;
-        height: 18px;
-        margin-right: 12px;
-    }
+  & input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+  }
 }
 
 .auth-form {
@@ -152,201 +146,201 @@
     -1px -1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   border: 1px solid var(--dark-color-300);
-  width: 420px;
+  width: 378px;
+
+  @include nb {
+    padding: 25px;
+  }
+
+  @include tb {
+    padding: 20px;
+  }
+
+  @include mb {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .title {
+    & + form {
+      margin-top: 35px;
+
+      @include nb {
+        margin-top: 30px;
+      }
+
+      @include tb {
+        margin-top: 20px;
+      }
+
+      @include mb {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .image {
+    display: flex;
+    justify-content: center;
+    max-height: 108px;
 
     @include nb {
-        padding: 25px;
+      max-height: 100px;
     }
 
     @include tb {
-        padding: 20px;
+      max-height: 90px;
     }
 
     @include mb {
-        width: 100%;
-        padding: 15px;
+      max-height: 80px;
     }
 
-    .title {
-        &+form {
-            margin-top: 35px;
-
-            @include nb {
-                margin-top: 30px;
-            }
-
-            @include tb {
-                margin-top: 20px;
-            }
-
-            @include mb {
-                margin-top: 15px;
-            }
-        }
+    &:not(:first-child) {
+      margin-top: 30px;
     }
 
-    .image {
-        display: flex;
-        justify-content: center;
-        max-height: 108px;
+    img {
+      height: 100%;
+    }
+  }
 
-        @include nb {
-            max-height: 100px;
-        }
+  .avatar-wrapper {
+    position: relative;
 
-        @include tb {
-            max-height: 90px;
+    &:not(:first-child) {
+      margin-top: 30px;
+
+      @include nb {
+        margin-top: 25px;
+      }
+
+      @include tb {
+        margin-top: 20px;
+      }
+
+      @include mb {
+        margin-top: 15px;
+      }
+    }
+
+    .avatar {
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 96px;
+        height: 96px;
+        object-fit: cover;
+        border-radius: 50%;
+
+        @include nbtb {
+          width: 86px;
+          height: 86px;
         }
 
         @include mb {
-            max-height: 80px;
+          width: 80px;
+          height: 80px;
         }
-
-        &:not(:first-child) {
-            margin-top: 30px;
-        }
-
-        img {
-            height: 100%;
-        }
+      }
     }
 
-    .avatar-wrapper {
-        position: relative;
+    .icon {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      right: 0;
+      bottom: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid red;
+      background: lighten(red, 20%);
+      @include animate;
 
-        &:not(:first-child) {
-            margin-top: 30px;
+      svg {
+        fill: white;
+      }
 
-            @include nb {
-                margin-top: 25px;
-            }
+      &:hover {
+        opacity: 0.9;
+      }
 
-            @include tb {
-                margin-top: 20px;
-            }
+      &:active {
+        background-color: darken(red, 20%);
+      }
+    }
+  }
 
-            @include mb {
-                margin-top: 15px;
-            }
-        }
+  .info {
+    &:not(:first-child) {
+      margin-top: 25px;
 
-        .avatar {
-            display: flex;
-            justify-content: center;
+      @include nb {
+        margin-top: 20px;
+      }
 
-            img {
-                width: 96px;
-                height: 96px;
-                object-fit: cover;
-                border-radius: 50%;
+      @include tbmb {
+        margin-top: 15px;
+      }
+    }
+  }
 
-                @include nbtb {
-                    width: 86px;
-                    height: 86px;
-                }
+  .styled-btn {
+    width: 100%;
 
-                @include mb {
-                    width: 80px;
-                    height: 80px;
-                }
-            }
-        }
+    &:not(:first-child) {
+      margin-top: 0;
 
-        .icon {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            right: 0;
-            bottom: 0;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 1px solid red;
-            background: lighten(red, 20%);
-            @include animate;
+      @include nb {
+        margin-top: 0;
+      }
 
-            svg {
-                fill: white;
-            }
+      @include tb {
+        margin-top: 0;
+      }
 
-            &:hover {
-                opacity: 0.9;
-            }
+      @include mb {
+        margin-top: 0;
+      }
+    }
+  }
 
-            &:active {
-                background-color: darken(red, 20%);
-            }
-        }
+  .bottom {
+    &:not(:first-child) {
+      margin-top: 30px;
+
+      @include nb {
+        margin-top: 25px;
+      }
+
+      @include tb {
+        margin-top: 20px;
+      }
+
+      @include mb {
+        margin-top: 15px;
+      }
     }
 
-    .info {
-        &:not(:first-child) {
-            margin-top: 25px;
-
-            @include nb {
-                margin-top: 20px;
-            }
-
-            @include tbmb {
-                margin-top: 15px;
-            }
-        }
+    .b-title {
+      & + .b-title {
+        margin-top: 10px;
+      }
     }
 
-    .styled-btn {
-        width: 100%;
+    a {
+      display: block;
+      text-decoration: none;
+      color: red;
+      @include animate;
 
-        &:not(:first-child) {
-            margin-top: 0;
-
-            @include nb {
-                margin-top: 0;
-            }
-
-            @include tb {
-                margin-top: 0;
-            }
-
-            @include mb {
-                margin-top: 0;
-            }
-        }
+      &:hover {
+        color: darken(red, 10%);
+      }
     }
-
-    .bottom {
-        &:not(:first-child) {
-            margin-top: 30px;
-
-            @include nb {
-                margin-top: 25px;
-            }
-
-            @include tb {
-                margin-top: 20px;
-            }
-
-            @include mb {
-                margin-top: 15px;
-            }
-        }
-
-        .b-title {
-            &+.b-title {
-                margin-top: 10px;
-            }
-        }
-
-        a {
-            display: block;
-            text-decoration: none;
-            color: red;
-            @include animate;
-
-            &:hover {
-                color: darken(red, 10%);
-            }
-        }
-    }
+  }
 }

@@ -12,6 +12,8 @@ import {
   SIGN_OUT_ENDPOINT,
   SIGN_UP_ENDPOINT,
   CONFIRMATION_REGISTRATION,
+  FORGOT_PASSWORD_ENDPOINT,
+  CREATE_NEW_PASSWORD_ENDPOINT,
 } from '@/shared/const/apiEndpoints'
 import { TOAuthLoginResponse } from '@/features/auth/signInWithThirdPartyServices'
 import { TConfirmationEmailViaCodeRequest } from '@/features/auth/confirmationEmailViaCode'
@@ -73,10 +75,45 @@ export const userApi = rtkApi.injectEndpoints({
       query: () => ME_ENDPOINT,
       providesTags: [USER_TAG],
     }),
+
+    forgotPassword: build.mutation<void, any>({
+      query: body => {
+        return {
+          method: 'POST',
+          url: FORGOT_PASSWORD_ENDPOINT,
+          body,
+        }
+      },
+    }),
+    createNewPassword: build.mutation<void, any>({
+      query: body => {
+        return {
+          method: 'POST',
+          url: CREATE_NEW_PASSWORD_ENDPOINT,
+          body,
+        }
+      },
+    }),
+    checkRecoveryCode: build.mutation<any, any>({
+      query: body => {
+        return {
+          method: 'POST',
+          url: '/api/v1/auth/check-recovery-code',
+          body,
+        }
+      },
+    }),
   }),
 })
 
 export const getUserDataByTokenQuery = userApi.endpoints.me.initiate
 export const useMeLazyQuery = userApi.endpoints.me.useLazyQuery
 export const getAccessTokenByGoogleMutation = userApi.endpoints.signInWithGoogle.initiate
-export const { useResendLinkMutation, useConfirmationEmailViaCodeMutation, useMeQuery } = userApi
+export const {
+  useCheckRecoveryCodeMutation,
+  useResendLinkMutation,
+  useConfirmationEmailViaCodeMutation,
+  useMeQuery,
+  useCreateNewPasswordMutation,
+  useForgotPasswordMutation,
+} = userApi

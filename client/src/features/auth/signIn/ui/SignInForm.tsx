@@ -3,14 +3,16 @@ import { PasswordWrapper } from '@/shared/ui/PasswordWrapper/PasswordWrapper'
 import s from '@/features/auth/signIn/ui/signIn.module.scss'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
-import React, { FC, FormEventHandler, useState } from 'react'
+import React, { FC, FormEventHandler } from 'react'
 import { setDisableError } from '@/features/auth/signIn/model/slice/signInSlice'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { Routes } from '@/shared/types/routes'
 
 export type SignInFormProps = {
+  lngId: any
   errorLogin?: string
   onSubmit: FormEventHandler<HTMLFormElement> | undefined
   t: (key: string) => string
@@ -21,6 +23,7 @@ export type SignInFormProps = {
 }
 
 export const SignInForm: FC<SignInFormProps> = ({
+  lngId,
   onSubmit,
   t,
   errors,
@@ -30,15 +33,9 @@ export const SignInForm: FC<SignInFormProps> = ({
   isValid,
 }) => {
   const dispatch = useAppDispatch()
-  const [showPassword, setShowPassword] = useState(false)
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword)
-  }
-
   const disableError = () => {
     dispatch(setDisableError())
   }
-
   return (
     <form
       onSubmit={onSubmit}
@@ -57,14 +54,13 @@ export const SignInForm: FC<SignInFormProps> = ({
         id="password"
         className={'password'}
         placeholder={'******************'}
-        type={showPassword ? 'text' : 'password'}
+        type={'password'}
         title={t('password')}
-        toggleShowPassword={toggleShowPassword}
         register={register('password')}
         error={errors.password ? errors.password : { message: errorLogin }}
       />
       <div className={s.forgotPassword}>
-        <Link className={s.forgotPasswordLink} href={'/forgotPassword'}>
+        <Link className={s.forgotPasswordLink} href={`/${lngId}${Routes.FORGOTPASSWORD}`}>
           {t('forgotPassword')}
         </Link>
       </div>

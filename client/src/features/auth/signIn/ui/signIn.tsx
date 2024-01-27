@@ -1,5 +1,4 @@
 'use client'
-
 import React, { FC, useContext } from 'react'
 import Link from 'next/link'
 import style from '@/features/auth/signup/ui/signup.module.scss'
@@ -27,6 +26,7 @@ import {
 import { getError } from '../model/selectors/getError'
 import { useRouter } from 'next/navigation'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
+import { Card } from '@/shared/ui/Card/Card'
 
 export const SignIn: FC = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
@@ -55,30 +55,28 @@ export const SignIn: FC = () => {
   if (isSignInWithGoogleLoading) return <Preloader />
 
   return (
-    <div className={'form registration'}>
-      <div className="form-wrapper auth-form">
-        <div className={'title b-title bt26 semibold align-center'}>{t('signIn')}</div>
-        <ThirdPartyOAuthButtons />
-        <SignInForm
-          t={t}
-          isLoading={isSignInWithEmailLoading}
-          errors={errors}
-          register={register}
-          onSubmit={handleSubmit(onSubmit)}
-          errorLogin={error ? t('errorLogin') : ''}
-          isValid={isValid}
-        />
-        <span className={`info b-title bt16 align-center ${s.dontHaveAnAccount}`}>
-          {t('dontHaveAnAccount')}?
-        </span>
-        <Link
-          href={`/${lngId}${Routes.SIGNUP}`}
-          className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
-        >
-          <span>{t('signUp')}</span>
-        </Link>
-      </div>
-    </div>
+    <Card t={t} title={'signIn'}>
+      <ThirdPartyOAuthButtons />
+      <SignInForm
+        lngId={lngId}
+        t={t}
+        isLoading={isSignInWithEmailLoading}
+        errors={errors}
+        register={register}
+        onSubmit={handleSubmit(onSubmit)}
+        errorLogin={error ? t('errorLogin') : ''}
+        isValid={isValid}
+      />
+      <span className={`info b-title bt16 align-center ${s.dontHaveAnAccount}`}>
+        {t('dontHaveAnAccount')}?
+      </span>
+      <Link
+        href={`/${lngId}${Routes.SIGNUP}`}
+        className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
+      >
+        <span>{t('signUp')}</span>
+      </Link>
+    </Card>
   )
 }
 

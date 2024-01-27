@@ -9,6 +9,8 @@ export enum Namespaces {
   SIGNUP = 'signUp',
   SIGNOUT = 'signout',
   SIGNIN = 'signIn',
+  FORGOTPASSWORD = 'forgot-password',
+  CREATENEWPASSWORD = 'recovery-password',
   CONFIRMATION_EMAIL = 'confirmationEmail',
   PROFILE_SETTINGS = 'profile-settings',
   PROFILE_PAGE = 'profile-page',

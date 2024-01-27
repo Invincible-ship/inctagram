@@ -12,11 +12,9 @@ export const base64ToFile = (base64String: string, filename: string): File => {
     for (let i = 0; i < slice.length; i++) {
       byteNumbers[i] = slice.charCodeAt(i)
     }
-
     const byteArray = new Uint8Array(byteNumbers)
     byteArrays.push(byteArray)
   }
-
   const blob = new Blob(byteArrays, { type: contentType })
   const file = new File([blob], filename)
 
