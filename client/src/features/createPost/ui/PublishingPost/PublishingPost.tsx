@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import cls from './PublishingPost.module.scss'
 import { Navigation, Pagination } from 'swiper/modules'
 import { MyImage } from '@/shared/ui/MyImage/MyImage'
-import { AvatarWithUsername } from '@/shared/ui/AvatarWithUsername'
+import { AvatarWithUsername } from '@/entities/Profile/ui/AvatarWithUsername'
 import { TextArea } from '@/shared/ui/TextArea/TextArea'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { ChangeEvent, useCallback } from 'react'
@@ -14,9 +14,11 @@ import { getPostDescription } from '../../model/selectors/getPostDescription'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
+import { IProfile, getProfileData } from '@/entities/Profile'
 
 export const PublishingPost = () => {
   const { t } = useClientTranslation(Namespaces.CREATE_POST)
+  const user = useSelector(getProfileData) as IProfile
   const images = useSelector(getPostImages)
   const description = useSelector(getPostDescription)
   const dispatch = useAppDispatch()
@@ -57,7 +59,7 @@ export const PublishingPost = () => {
       <form className={cls.postInfoForm}>
         <VStack className={cls.postInfoContainer} justify="start" max>
           <VStack className={cls.descriptionField} justify="start" gap="24" max>
-            <AvatarWithUsername />
+            <AvatarWithUsername user={user} />
             <TextArea
               className={cls.textarea}
               value={description}
