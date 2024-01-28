@@ -2,6 +2,10 @@
   .username {
     font-size: 20px;
     font-weight: bold;
+
+    @media (max-width: 769px) {
+      font-size: 16px;
+    }
   }
 
   .infoContainer {
@@ -9,10 +13,37 @@
 
     .block {
       font-size: 14px;
-
+  
+      @media (max-width: 769px) {
+        font-size: 12px
+      }
+  
       .amount {
         font-weight: bold;
       }
     }
+
+    @media (max-width: 769px) {
+      width: 100%;
+    }
+  }
+
+  
+
+  .aboutMe {
+    font-size: 16px;
+
+    @media (max-width: 769px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.Story {
+  padding-top: 30px;
+
+  & > div {
+    max-width: 1000px;
+    width: 100%;
   }
 }

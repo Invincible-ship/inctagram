@@ -8,7 +8,8 @@ import DefaultAvatar from '@/shared/assets/icons/person.svg'
 
 export enum AvatarSize {
   SMALL = 45,
-  MEDIUM = 192,
+  MEDIUM = 72,
+  LARGE = 192,
 }
 
 type AvatarProps = {
@@ -30,7 +31,7 @@ export const Avatar: FC<AvatarProps> = ({
 
   const sizes = useMemo(
     () =>
-      size == 192
+      size == AvatarSize.LARGE
         ? '(max-width: 768px) 50vw, (max-width: 1200px) 25vw, (max-width: 1920px) 10vw'
         : '(max-width: 768px) 25vw, (max-width: 1200px) 15vw, (max-width: 1920px) 5vw',
     [size],

@@ -6,15 +6,16 @@ import { postsAdapter } from '@/widgets/PostList/model/slice/postListSlice'
 import { PostListSchema } from '@/widgets/PostList/model/types/postListSchema'
 import { PostSortField } from '@/shared/const/postSortField'
 
-export const createMockedPostListData = (page: PostListPage, type: PostListCardType.IMAGE) =>
+type Options = {
+  page: PostListPage
+  type: PostListCardType
+  amount?: number
+}
+
+export const createMockedPostListData = ({ page, type, amount = 4 }: Options) =>
   postsAdapter.getInitialState<PostListSchema>({
-    ids: ['1', '2', '3', '4'],
-    entities: {
-      1: createMockedPostData(1),
-      2: createMockedPostData(2),
-      3: createMockedPostData(3),
-      4: createMockedPostData(4),
-    },
+    ids: Array.from({ length: amount }).map((_, idx) => ++idx),
+    entities: createEntities(amount),
     postListId: undefined,
     page,
     type,
@@ -27,8 +28,18 @@ export const createMockedPostListData = (page: PostListPage, type: PostListCardT
     hasMore: true,
   })
 
+const createEntities = (amount: number) => {
+  const entities: { [id: number]: IPost } = {}
+
+  Array.from({ length: amount }).forEach((_, idx) => {
+    entities[++idx] = createMockedPostData(++idx)
+  })
+
+  return entities
+}
+
 const createMockedPostData = (id: number): IPost => ({
-  id: 1,
+  id,
   userName: 'storybook',
   description: '',
   location: '',

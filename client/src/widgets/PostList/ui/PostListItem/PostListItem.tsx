@@ -26,7 +26,7 @@ export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) =
     return post.images.find(image => image.width == PREVIEW_IMAGE_WIDTH)
   }, [post])
 
-  if (!imagePreview) return <Skeleton width={259} height={259} />
+  if (!imagePreview) return <Skeleton width="100%" height="100%" />
 
   const imageTypeSizes = '(max-width: 768px) 33vw, 15vw'
 
@@ -43,10 +43,8 @@ export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) =
         <MyImage
           src={imagePreview.url}
           variant={ImageVariant.SQUARE}
-          width={259}
-          height={259}
           sizes={imageTypeSizes}
-          fallback={<Skeleton width={259} height={259} />}
+          fallback={<Skeleton width="100%" height="100%" />}
           alt="Post Image"
         />
       </Link>

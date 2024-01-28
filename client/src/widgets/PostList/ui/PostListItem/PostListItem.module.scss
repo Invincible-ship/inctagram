@@ -1,10 +1,12 @@
 .PostListItem {
   position: relative;
-  width: 259px;
-  height: 259px;
+  // flex-grow: 1;
+  flex-basis: calc(25% - 3px);
+  aspect-ratio: 1 / 1;
 
   .postLink {
     width: 100%;
+    aspect-ratio: 1 / 1;
   }
 
   .postInfo {
@@ -19,5 +21,9 @@
     .postInfo {
       opacity: 1;
     }
+  }
+
+  @media (max-width: 769px) {
+    flex-basis: calc(33.333% - 2px);
   }
 }

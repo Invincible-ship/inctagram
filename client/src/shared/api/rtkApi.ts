@@ -35,14 +35,14 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   extraOptions,
 ) => {
   let result = await baseQuery(args, api, extraOptions)
-  // if (__IS_DEV__) {
-  //   console.log('RTK api result: ', JSON.stringify(result, null, 2))
-  //   console.log('RTK api error: ', JSON.stringify(result.error, null, 2))
-  //   console.log('RTK api error status: ', JSON.stringify(result.error?.status, null, 2))
-  // }
+  if (__IS_DEV__) {
+    console.log('RTK api result: ', JSON.stringify(result, null, 2))
+    console.log('RTK api error: ', JSON.stringify(result.error, null, 2))
+    console.log('RTK api error status: ', JSON.stringify(result.error?.status, null, 2))
+  }
 
   if (result.error && result.error.status === 401) {
-    // __IS_DEV__ && console.log('401 error: ', JSON.stringify(result.error, null, 2))
+    __IS_DEV__ && console.log('401 error: ', JSON.stringify(result.error, null, 2))
 
     const refreshResult = (await baseQuery(
       { method: 'POST', url: UPDATE_TOKENS_ENDPOINT },
@@ -51,7 +51,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     )) as {
       data: AuthRefreshResponse
     }
-    // __IS_DEV__ && console.log('Refresh token result: ', JSON.stringify(refreshResult, null, 2))
+    __IS_DEV__ && console.log('Refresh token result: ', JSON.stringify(refreshResult, null, 2))
 
     if (refreshResult.data) {
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, refreshResult.data.accessToken)

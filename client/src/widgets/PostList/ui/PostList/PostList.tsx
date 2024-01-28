@@ -6,8 +6,14 @@ import { useSelector } from 'react-redux'
 import { PostListItem } from '../PostListItem/PostListItem'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import cls from './PostList.module.scss'
+import { FC } from 'react'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
-export const PostList = () => {
+type PostListProps = {
+  className?: string
+}
+
+export const PostList: FC<PostListProps> = ({ className }) => {
   const posts = useSelector(getPosts.selectAll)
   const type = useSelector(getPostListType)
   const limit = useSelector(getLimit)
@@ -16,7 +22,14 @@ export const PostList = () => {
   const align = type == PostListCardType.EXTENDED ? 'center' : 'start'
 
   return (
-    <Flex className={cls.PostList} direction={direction} align={align} gap="4" wrap="wrap">
+    <Flex
+      className={classNames(cls.PostList, {}, [className])}
+      direction={direction}
+      align={align}
+      gap="4"
+      wrap="wrap"
+      max
+    >
       {posts.map(post => {
         return <PostListItem key={post.id} post={post} type={type} className={cls.item} />
       })}
@@ -32,5 +45,5 @@ const getSkeletons = (length: number, type: PostListCardType) =>
       return <>Extended Skeleton Component</>
     }
 
-    return <Skeleton key={idx} width={259} height={259} />
+    return <Skeleton key={idx} className={cls.skeleton} />
   })
