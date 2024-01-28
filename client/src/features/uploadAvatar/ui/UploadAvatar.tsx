@@ -21,7 +21,7 @@ export const UploadAvatar: FC<UploadAvatarProps> = ({ t }) => {
   const [isDeleteAvatarModalOpen, setIsDeleteAvatarModalOpen] = useState<boolean>(false)
   const [uploaded, setUploaded] = useState(undefined as string | undefined)
   const toastSizeErrorIdRef = useRef<string>()
-  const avatar = useSelector(ProfileAvatars.getMedium)
+  const avatar = useSelector(ProfileAvatars.getLarge)
 
   const handleUploadButtonClick = () => setIsUploadAvatarModalOpen(true)
   const handleDeleteButtonClick = () => setIsDeleteAvatarModalOpen(true)
@@ -40,7 +40,7 @@ export const UploadAvatar: FC<UploadAvatarProps> = ({ t }) => {
       <VStack gap="24" className={cls.avatarField}>
         <HStack align="center" justify="center" max>
           <div className={cls.avatarWrapper}>
-            <Avatar src={avatar?.url} size={AvatarSize.MEDIUM} />
+            <Avatar src={avatar?.url} size={AvatarSize.LARGE} />
             {avatar && (
               <span className={cls.deleteBtn} onClick={handleDeleteButtonClick} role="button">
                 <DeleteAvatarIcon />

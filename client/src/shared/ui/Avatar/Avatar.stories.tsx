@@ -27,10 +27,18 @@ export const WithoutPhotoMedium: Story = {
   render: () => <AvatarStory size={AvatarSize.MEDIUM} />,
 }
 
+export const WithoutPhotoLarge: Story = {
+  render: () => <AvatarStory size={AvatarSize.LARGE} />,
+}
+
 export const Small: Story = {
   render: () => <AvatarStory src={avatarImage.src} size={AvatarSize.SMALL} />,
 }
 
 export const Medium: Story = {
   render: () => <AvatarStory src={avatarImage.src} size={AvatarSize.MEDIUM} />,
+}
+
+export const Large: Story = {
+  render: () => <AvatarStory src={avatarImage.src} size={AvatarSize.LARGE} />,
 }
