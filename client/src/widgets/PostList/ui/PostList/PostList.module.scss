@@ -1,9 +1,15 @@
 .PostList {
+  gap: 4px;
+
   .item {
     transition: scale .35s ease, opacity .35s linear;
 
     :hover {
       opacity: 0.7;
+
+      @media (max-width: 769px) {
+        opacity: 1;
+      }
     }
   }
 
@@ -14,8 +20,12 @@
 
   &:has(.item:hover) {
     .item:not(:hover) {
-      scale: .95;
+      scale: .985;
       opacity: 1;
+
+      @media (max-width: 769px) {
+        scale: 1;
+      }
     }
   }
 
@@ -23,7 +33,7 @@
     gap: 2px;
 
     .skeleton {
-      flex-basis: 32.75%;
+      flex-basis: calc(33.333% - 2px);
     }
   }
 }
