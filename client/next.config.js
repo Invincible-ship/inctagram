@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 
 // const isDev = process.env.NODE_ENV === 'development'
 
@@ -6,16 +6,13 @@ const nextConfig = {
   webpack(config, { webpack, dev }) {
     const plugins = [
       new webpack.DefinePlugin({
-        __IS_DEV__: JSON.stringify(dev)
-      })
+        __IS_DEV__: JSON.stringify(dev),
+      }),
     ]
     config.plugins.push(...plugins)
-    
 
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.('.svg'),
-    )
-    
+    const fileLoaderRule = config.module.rules.find(rule => rule.test?.test?.('.svg'))
+
     config.module.rules.push(
       {
         ...fileLoaderRule,
@@ -29,7 +26,7 @@ const nextConfig = {
         use: ['@svgr/webpack'],
       },
     )
-      
+
     fileLoaderRule.exclude = /\.svg$/i
 
     return config
@@ -44,6 +41,6 @@ const nextConfig = {
       },
     ],
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

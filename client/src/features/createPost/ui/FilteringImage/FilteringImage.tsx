@@ -13,6 +13,12 @@ import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { Swiper as TSwiper } from 'swiper/types'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
+import { CreatePostImage } from '@/features/createPost/model/types/types'
+
+export const getImageAlt = (filter?: ImageFilter) =>
+  filter
+    ? `Create Post Image With ${filter[0].toUpperCase() + filter.slice(1)} Filter`
+    : 'Create Post Image'
 
 export const FilteringImage = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0)
@@ -28,44 +34,11 @@ export const FilteringImage = () => {
   const setImageFilter = (id: number, filter: ImageFilter) => () => {
     dispatch(setPostImageFilter({ id, filter }))
   }
-
   const onSlideChange = ({ activeIndex }: TSwiper) => setCurrentSlide(activeIndex)
-
-  const getImageAlt = (filter?: ImageFilter) =>
-    filter
-      ? `Create Post Image With ${filter[0].toUpperCase() + filter.slice(1)} Filter`
-      : 'Create Post Image'
 
   return (
     <HStack className={cls.FilteringImage} justify="start">
-      <Swiper
-        className={cls.imageContainer}
-        onSlideChange={onSlideChange}
-        modules={[Navigation, Pagination]}
-        slidesPerView={1}
-        centeredSlides={true}
-        navigation
-        pagination={{ clickable: true }}
-        style={{ width: 490 }}
-      >
-        {images.map(({ src, orientation, scale, filter }) => (
-          <SwiperSlide key={src}>
-            <HStack max>
-              <MyImage
-                wrapperClassName="original-image-filter-rect"
-                src={src}
-                variant={orientation}
-                filter={filter}
-                scale={scale}
-                alt={getImageAlt(filter)}
-                width={490}
-                height={490}
-                fallback={<Skeleton width={490} height={490} />}
-              />
-            </HStack>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <ImageSwiper onSlideChange={onSlideChange} images={images} />
       <HStack className={cls.filtersContainer} justify="center" wrap="wrap" gap="24">
         {filters.map(filter => {
           const mods = {
@@ -99,5 +72,45 @@ export const FilteringImage = () => {
         })}
       </HStack>
     </HStack>
+  )
+}
+
+type Props = {
+  images: CreatePostImage[] | []
+  onSlideChange?: ({ activeIndex }: TSwiper) => void
+}
+export const ImageSwiper = ({ images, onSlideChange }: Props) => {
+  debugger
+  return (
+    <Swiper
+      className={cls.imageContainer}
+      onSlideChange={onSlideChange}
+      modules={[Navigation, Pagination]}
+      slidesPerView={1}
+      centeredSlides={true}
+      navigation
+      pagination={{ clickable: true }}
+      style={{ width: 490 }}
+    >
+      {images.map(({ src, orientation, scale, filter }) => {
+        return (
+          <SwiperSlide key={src}>
+            <HStack max>
+              <MyImage
+                wrapperClassName="original-image-filter-rect"
+                src={src}
+                variant={orientation}
+                filter={filter}
+                scale={scale}
+                alt={getImageAlt(filter)}
+                width={490}
+                height={490}
+                fallback={<Skeleton width={490} height={490} />}
+              />
+            </HStack>
+          </SwiperSlide>
+        )
+      })}
+    </Swiper>
   )
 }

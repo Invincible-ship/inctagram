@@ -1,0 +1,80 @@
+button {
+  all: unset;
+}
+
+//PostDetails
+
+
+.buttonClose {
+  cursor: pointer;
+  position: absolute;
+  top: -35px;
+  right: -30px;
+}
+
+
+//PostOptionsDropdown
+
+.MenuContent {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 0 15px;
+  gap: 10px;
+}
+
+
+//PostHeader
+
+.headerBlock {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 1px solid #4C4C4C;
+  padding: 15px 20px;
+
+  .profileInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .name {
+      font-size: 15px;
+    }
+  }
+}
+
+.imageAvatar {
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.noBorder {
+  border: none;
+}
+
+
+//Publication
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.publicationBlock {
+  width: 100%;
+  margin: 0 22px 0 22px;
+}
+
+.textArea {
+  height: 114px;
+}
+
+.button {
+  margin-top: 190px;
+}
+
+
