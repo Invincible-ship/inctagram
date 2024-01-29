@@ -24,3 +24,7 @@ export const UPLOAD_POST_IMAGE_ENDPOINT = '/api/v1/posts/image'
 export const CREATE_POST_ENDPOINT = '/api/v1/posts'
 export const DELETE_POST_IMAGE_ENDPOINT = '/api/v1/posts/image'
 export const DELETE_POST_ENDPOINT = '/api/v1/posts'
+
+// VIEWER ENDPOINTS
+export const GET_PUBLIC_USER_PROFILE = '/api/v1/public-user/profile'
+export const GET_POSTS_BY_PROFILE_ID = '/api/v1/public-posts/user'

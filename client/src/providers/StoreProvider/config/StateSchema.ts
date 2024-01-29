@@ -6,6 +6,8 @@ import { ISignInSchema } from '@/features/auth/signIn'
 import { IProfileSchema } from '@/entities/Profile'
 import { ISignInWithGoogleSchema } from '@/features/auth/signInWithThirdPartyServices'
 import { ICreatePostSchema } from '@/features/createPost'
+import { PostListSchema } from '@/widgets/PostList'
+import { UISchema } from '@/features/UI'
 
 export type StateSchema = {
   // Остальные типы ваших редьюсеров
@@ -16,6 +18,8 @@ export type StateSchema = {
   signup: ISignUpSchema
   signInWithGoogle: ISignInWithGoogleSchema
   createPost: ICreatePostSchema
+  postList: PostListSchema
+  ui: UISchema
 }
 
 export type ThunkExtraArg = {

@@ -1,0 +1,29 @@
+.PostListItem {
+  position: relative;
+  // flex-grow: 1;
+  flex-basis: calc(25% - 3px);
+  aspect-ratio: 1 / 1;
+
+  .postLink {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
+  .postInfo {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .2s linear;
+    pointer-events: none;
+  }
+
+  &:hover {
+    .postInfo {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 769px) {
+    flex-basis: calc(33.333% - 2px);
+  }
+}

@@ -5,6 +5,7 @@ export enum LanguageIds {
 
 export enum Namespaces {
   DEFAULT = 'translation',
+  // pages
   SIGNUP = 'signUp',
   SIGNOUT = 'signout',
   SIGNIN = 'signIn',
@@ -12,6 +13,8 @@ export enum Namespaces {
   CREATENEWPASSWORD = 'recovery-password',
   CONFIRMATION_EMAIL = 'confirmationEmail',
   PROFILE_SETTINGS = 'profile-settings',
+  PROFILE_PAGE = 'profile-page',
+  // widgets
   DATE_PICKER = 'date-picker',
   CITY_SELECT = 'city-select',
   SIDEBAR = 'sidebar',

@@ -34,6 +34,8 @@ export enum ImageVariant {
 }
 
 export type MyImageProps = {
+  width?: string | number
+  height?: string | number
   wrapperClassName?: string
   variant?: ImageVariant
   filter?: ImageFilter
@@ -41,7 +43,7 @@ export type MyImageProps = {
   fallback?: ReactElement
   errorFallback?: ReactElement
   ar?: string
-} & ImageProps
+} & Omit<ImageProps, 'width' | 'height'>
 
 export const MyImage = memo(
   forwardRef<HTMLImageElement, MyImageProps>((props, forwardRef) => {
@@ -56,8 +58,8 @@ export const MyImage = memo(
       errorFallback,
       sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
       style,
-      width,
-      height,
+      width = '100%',
+      height = '100%',
       ar,
       alt = 'image',
       ...rest

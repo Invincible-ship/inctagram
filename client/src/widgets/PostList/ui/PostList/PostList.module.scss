@@ -1,0 +1,35 @@
+.PostList {
+  .item {
+    transition: scale .35s ease, opacity .35s linear;
+
+    :hover {
+      opacity: 0.7;
+    }
+  }
+
+  .skeleton {
+    flex-basis: 24.65%;
+    aspect-ratio: 1 / 1;
+  }
+
+  &:has(.item:hover) {
+    .item:not(:hover) {
+      scale: .95;
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 769px) {
+    gap: 2px;
+
+    .skeleton {
+      flex-basis: 32.75%;
+    }
+  }
+}
+
+.Story {
+  .postList {
+    width: 768px;
+  }
+}
