@@ -24,6 +24,7 @@ export const PostList: FC<PostListProps> = ({ className }) => {
 
   return (
     <Flex
+      data-testid="post-list"
       className={classNames(cls.PostList, {}, [className])}
       direction={direction}
       align={align}

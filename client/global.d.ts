@@ -26,6 +26,7 @@ type OptionalRecord<K extends keyof any, T> = {
 }
 
 declare const __IS_DEV__: boolean
+declare const __PROJECT__: 'frontend' | 'jest' | 'storybook'
 
 declare module '*.png'
 declare module '*.jpg'

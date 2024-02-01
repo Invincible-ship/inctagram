@@ -32,7 +32,9 @@ export const ProfileCard: FC<ProfileCardProps> = memo(
       if (owner)
         return !mobile ? (
           <Link href={`/${lngId}${Routes.PROFILE}/${profile?.id}/edit`}>
-            <Button theme={ButtonTheme.SECONDARY}>{t('profile.settings')}</Button>
+            <Button data-testid="settings-btn" theme={ButtonTheme.SECONDARY}>
+              {t('profile.settings')}
+            </Button>
           </Link>
         ) : null
 
@@ -74,7 +76,7 @@ export const ProfileCard: FC<ProfileCardProps> = memo(
     if (mobile) {
       return (
         profile && (
-          <VStack className={cls.ProfileCard} gap="16" max>
+          <VStack data-testid="profile-card" className={cls.ProfileCard} gap="16" max>
             <VStack gap="4" max>
               <HStack gap="36" align="center" max>
                 <HStack>
@@ -95,7 +97,7 @@ export const ProfileCard: FC<ProfileCardProps> = memo(
 
     return (
       profile && (
-        <HStack className={cls.ProfileCard} gap="36" max>
+        <HStack data-testid="profile-card" className={cls.ProfileCard} gap="36" max>
           <HStack>
             <Avatar src={avatar?.url} size={AvatarSize.LARGE} />
           </HStack>
@@ -117,7 +119,7 @@ ProfileCard.displayName = 'ProfileCard'
 
 const ProfileSkeleton = ({ mobile }: { mobile?: boolean }) =>
   !mobile ? (
-    <HStack gap="36" max>
+    <HStack data-testid="profile-skeleton" gap="36" max>
       <HStack>
         <Skeleton width={192} height={192} border="50%" />
       </HStack>
