@@ -10,6 +10,7 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   globals: {
     __IS_DEV__: true,
+    __PROJECT__: 'jest'
   },
   clearMocks: true,
   testEnvironment: 'jest-environment-jsdom',
@@ -30,7 +31,7 @@ const jestConfig = async () => {
     ...nextJestConfig,
     moduleNameMapper: {
       // Workaround to put our SVG mock first
-      '\\.svg$': '<rootDir>/config/jest/jestEmptyComponent.tsx',
+      '\\.svg(\\?url)?$': '<rootDir>/config/jest/jestEmptyComponent.tsx',
       ...nextJestConfig.moduleNameMapper,
     },
   }
