@@ -1,7 +1,6 @@
 'use client'
 import React, { FC, useContext } from 'react'
 import Link from 'next/link'
-import style from '@/features/auth/signup/ui/signup.module.scss'
 import s from './signIn.module.scss'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
@@ -27,6 +26,12 @@ import { getError } from '../model/selectors/getError'
 import { useRouter } from 'next/navigation'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { Card } from '@/shared/ui/Card/Card'
+import { ErrorModal } from '../../ui/ErrorModal/ErrorModal'
+import { setErrorType, setIsErrorModalOpen } from '../model/slice/signInSlice'
+import { ErrorType } from '../model/types/types'
+import { getErrorType } from '../model/selectors/getErrorType'
+import { getIsErrorModalOpen } from '../model/selectors/getIsErrorModalOpen'
+import { getInternetConnection } from '@/shared/utils/getInternetConnection'
 
 export const SignIn: FC = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
@@ -34,6 +39,8 @@ export const SignIn: FC = () => {
   const schema = formSchema(t)
   const isSignInWithEmailLoading = useSelector(getIsSignInWithEmailLoading)
   const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
+  const errorType = useSelector(getErrorType)
+  const isErrorModalOpen = useSelector(getIsErrorModalOpen)
   const error = useSelector(getError)
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -49,8 +56,18 @@ export const SignIn: FC = () => {
   })
 
   const onSubmit: SubmitHandler<FormSchemaType> = async data => {
+    const connection = getInternetConnection()
+    if (!connection) return setInternetError(true, 'internet')
+
     await dispatch(signInThunk({ body: data, router, setError }))
   }
+
+  const setInternetError = (open: boolean, type?: ErrorType) => {
+    dispatch(setErrorType(type))
+    dispatch(setIsErrorModalOpen(open))
+  }
+
+  const errorModalOnClose = () => setInternetError(false)
 
   if (isSignInWithGoogleLoading) return <Preloader />
 
@@ -72,10 +89,16 @@ export const SignIn: FC = () => {
       </span>
       <Link
         href={`/${lngId}${Routes.SIGNUP}`}
-        className={`b-title bt16 semibold ${style.linkRegistration} align-center`}
+        className={`b-title bt16 semibold ${s.linkRegistration} align-center`}
       >
         <span>{t('signUp')}</span>
       </Link>
+      <ErrorModal
+        t={t}
+        isOpen={isErrorModalOpen}
+        onClose={errorModalOnClose}
+        errorType={errorType}
+      />
     </Card>
   )
 }

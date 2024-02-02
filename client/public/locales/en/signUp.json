@@ -23,7 +23,13 @@
   "modal": {
     "title": "Email sent",
     "text": "We have sent a link to confirm your email to",
-    "ok": "OK"
+    "ok": "OK",
+    "error": {
+      "title": "Error has occured",
+      "internet": "Failed to send a request to register an account in the system, there is no Internet connection",
+      "existedEmail": "An account with the same email \"{{email}}\" already exists",
+      "ok": "OK"
+    }
   },
   "agree": {
     "iAgreeTo": "I agree to the",

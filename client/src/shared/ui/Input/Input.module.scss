@@ -61,6 +61,32 @@
     position: absolute;
     right: 14px;
     top: 35px;
+    cursor: pointer;
+
+    path[data-tag="path"] {
+      transform-origin: 0 0;
+      transition: scale .2s ease;
+    }
+
+    &[data-open="true"] {
+      path[data-state="close"] {
+        scale: 0;
+      }
+
+      path[data-state="open"] {
+        scale: 1;
+      }
+    }
+
+    &[data-open="false"] {
+      path[data-state="open"] {
+        scale: 0;
+      }
+
+      path[data-state="close"] {
+        scale: 1;
+      }
+    }
   }
 }
 
