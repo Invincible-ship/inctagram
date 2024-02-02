@@ -11,7 +11,7 @@
     "emailInvalid": "The email must match the format example@example.com",
     "passwordMinLength": "Minimum number of characters 6",
     "passwordMaxLength": "Maximum number of characters 20",
-    "passwordMustContain": "Password must contain: a-z, A-Z,  ! \", # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~"
+    "passwordMustContain": "Password must contain: 0-9; A-Z; a-z; ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _`{ | } ~"
   },
   "modal": {
     "error": {
