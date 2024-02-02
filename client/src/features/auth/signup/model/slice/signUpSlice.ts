@@ -1,8 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { signupThunk } from '@/features/auth/signup/model/signup'
+import { signupThunk } from '../signup'
 import { ErrorType, ISignUpSchema } from '../types/types'
+import { FormSchemaType } from '../../lib/validationConstants/validationConstants'
 
 const initialState: ISignUpSchema = {
+  defaultValues: undefined,
   errorType: undefined,
   isLoading: false,
   isConfirmationModalOpen: false,
@@ -21,6 +23,9 @@ const signUpSlice = createSlice({
     },
     setErrorType: (state, { payload }: PayloadAction<ErrorType | undefined>) => {
       state.errorType = payload
+    },
+    setDefaultFormValues: (state, { payload }: PayloadAction<FormSchemaType>) => {
+      state.defaultValues = payload
     },
   },
   extraReducers: builder => {
@@ -41,4 +46,9 @@ const signUpSlice = createSlice({
 })
 
 export const signupReducer = signUpSlice.reducer
-export const { setIsConfirmationModalOpen, setIsErrorModalOpen, setErrorType } = signUpSlice.actions
+export const {
+  setIsConfirmationModalOpen,
+  setIsErrorModalOpen,
+  setErrorType,
+  setDefaultFormValues,
+} = signUpSlice.actions

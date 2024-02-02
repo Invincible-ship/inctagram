@@ -1,5 +1,5 @@
 'use client'
-import React, { FC, FormEventHandler, useState } from 'react'
+import React, { FC, FormEventHandler } from 'react'
 import { InputField } from '@/shared/ui/InputField/InputField'
 import { PasswordWrapper } from '@/shared/ui/PasswordWrapper/PasswordWrapper'
 import { Button } from '@/shared/ui/Button/Button'
@@ -7,7 +7,9 @@ import '@/shared/styles/variables/common/_form.scss'
 import cls from '../signup.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { LanguageIds } from '@/shared/config/i18n/types'
-import { AgreeBlock } from '@/features/auth/signup/ui/agreeBlock/AgreeBlock'
+import { AgreeBlock } from '../agreeBlock/AgreeBlock'
+import { FormSchemaType } from '../../lib/validationConstants/validationConstants'
+import { UseFormGetValues } from 'react-hook-form'
 
 export type SignUpFormProps = {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined
@@ -19,6 +21,7 @@ export type SignUpFormProps = {
   isValid: boolean
   setCheckedAgree: (checkedAgree: boolean) => void
   checkedAgree: boolean
+  getValues: UseFormGetValues<FormSchemaType>
 }
 
 export const SignUpForm: FC<SignUpFormProps> = ({
@@ -31,6 +34,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({
   isValid,
   setCheckedAgree,
   checkedAgree,
+  getValues,
 }) => {
   return (
     <form onSubmit={onSubmit} className={classNames('form-style', {}, [cls.form])}>
@@ -77,6 +81,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({
         t={t}
         setCheckedAgree={setCheckedAgree}
         checkedAgree={checkedAgree}
+        getValues={getValues}
       />
       <Button
         type="submit"

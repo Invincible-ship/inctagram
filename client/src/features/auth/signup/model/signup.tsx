@@ -3,20 +3,23 @@ import { RegisterParamsType } from './types/types'
 import { ThunkConfig } from '@/providers/StoreProvider'
 import { userApi } from '@/entities/User'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
-import { UseFormSetError } from 'react-hook-form'
+import { UseFormReset, UseFormSetError } from 'react-hook-form'
 import { ApiError } from '@/shared/api/types'
 import { setErrorType, setIsErrorModalOpen } from './slice/signUpSlice'
+import { FormSchemaType } from '../lib/validationConstants/validationConstants'
 
 type SignupThunkPayload = {
   body: RegisterParamsType
-  setError: UseFormSetError<RegisterParamsType>
+  setError: UseFormSetError<FormSchemaType>
+  resetForm: UseFormReset<FormSchemaType>
 }
 
 export const signupThunk = createAsyncThunk<void, SignupThunkPayload, ThunkConfig<string>>(
   'auth/signup',
-  async ({ body, setError }, { dispatch, rejectWithValue }) => {
+  async ({ body, setError, resetForm }, { dispatch, rejectWithValue }) => {
     try {
       await dispatch(userApi.endpoints.signup.initiate(body)).unwrap()
+      resetForm()
     } catch (error) {
       if (isFetchBaseQueryError(error)) {
         const apiError = error.data as ApiError

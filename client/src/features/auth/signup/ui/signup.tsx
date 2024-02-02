@@ -34,10 +34,12 @@ import { ErrorModal } from '../../ui/ErrorModal/ErrorModal'
 import { getErrorType } from '../model/selectors/getErrorType'
 import { ErrorType } from '../model/types/types'
 import { getInternetConnection } from '@/shared/utils/getInternetConnection'
+import { getDefaultValues } from '../model/selectors/getDefaultValues'
 
 export const SignUp = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
   const [email, setEmail] = useState<string>('')
+  const defaultValues = useSelector(getDefaultValues)
   const isSignUpLoading = useSelector(getIsSignUpLoading)
   const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
   const isConfirmationModalOpen = useSelector(getIsConfirmationModalOpen)
@@ -50,10 +52,13 @@ export const SignUp = () => {
 
   const {
     register,
+    reset: resetForm,
     handleSubmit,
     formState: { errors, isValid },
+    getValues,
     setError,
   } = useForm<FormSchemaType>({
+    defaultValues,
     mode: 'onBlur',
     resolver: zodResolver(schema),
   })
@@ -64,7 +69,7 @@ export const SignUp = () => {
 
     if (isValid && checkedAgree) {
       const body = { ...data, passwordConfirmation: undefined }
-      dispatch(signupThunk({ body, setError }))
+      dispatch(signupThunk({ body, setError, resetForm }))
       setEmail(data.email)
     }
   }
@@ -95,6 +100,7 @@ export const SignUp = () => {
             isValid={isValid}
             setCheckedAgree={setCheckedAgree}
             checkedAgree={checkedAgree}
+            getValues={getValues}
           />
           <span className={'info b-title bt16 align-center semibold'}>
             {t('doYouHaveAnAccount')}
