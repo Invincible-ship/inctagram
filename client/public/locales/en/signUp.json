@@ -7,6 +7,7 @@
     "userNameRequired": "Username is required",
     "userNameMinLength": "Minimum number of characters 6",
     "userNameMaxLength": "Maximum number of characters 30",
+    "userNameCanContain": "Username can only contain the following characters 0-9; A-Z; a-z; _ ; -",
     "emailInvalid": "The email must match the format example@example.com",
     "emailRequired": "Email is required",
     "passwordRequired": "Password is required",
@@ -14,7 +15,7 @@
     "passwordMaxLength": "Maximum number of characters 20",
     "passwordConfirmationRequired": "Password confirmation is required",
     "passwordsDoNotMatch": "The passwords must match",
-    "passwordMustContain": "Password must contain: a-z, A-Z,  ! \", # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~"
+    "passwordMustContain": "Password must contain: 0-9; a-z; A-Z; ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~"
   },
   "passwordConfirmation": "Password Confirmation",
   "forgotPassword": "Forgot Password",
