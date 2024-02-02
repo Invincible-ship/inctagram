@@ -10,6 +10,7 @@ import { FC } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 type PostListProps = {
+  mobile?: boolean
   className?: string
 }
 
@@ -23,10 +24,10 @@ export const PostList: FC<PostListProps> = ({ className }) => {
 
   return (
     <Flex
+      data-testid="post-list"
       className={classNames(cls.PostList, {}, [className])}
       direction={direction}
       align={align}
-      gap="4"
       wrap="wrap"
       max
     >

@@ -87,7 +87,8 @@
     "react-hooks/rules-of-hooks": "error"
   },
   "globals": {
-    "__IS_DEV__": true
+    "__IS_DEV__": true,
+    "__PROJECT__": true
   },
   "overrides": [
     {

@@ -7,6 +7,7 @@ const nextConfig = {
     const plugins = [
       new webpack.DefinePlugin({
         __IS_DEV__: JSON.stringify(dev),
+        __PROJECT__: JSON.stringify('frontend'),
       }),
     ]
     config.plugins.push(...plugins)
@@ -41,6 +42,7 @@ const nextConfig = {
       },
     ],
   },
+  transpilePackages: ['swiper'],
 }
 
 module.exports = nextConfig

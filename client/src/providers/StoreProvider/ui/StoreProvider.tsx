@@ -8,10 +8,11 @@ import { createReduxStore } from '../config/store'
 type StoreProviderProps = {
   initialState?: DeepPartial<StateSchema>
   children?: ReactNode
+  initialStore?: ReturnType<typeof createReduxStore>
 }
 
-export const StoreProvider: FC<StoreProviderProps> = ({ initialState, children }) => {
-  const store = createReduxStore(initialState as StateSchema)
+export const StoreProvider: FC<StoreProviderProps> = ({ initialState, children, initialStore }) => {
+  const store = initialStore || createReduxStore(initialState as StateSchema)
 
   return <Provider store={store}>{children}</Provider>
 }

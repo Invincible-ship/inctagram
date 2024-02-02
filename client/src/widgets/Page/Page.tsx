@@ -1,7 +1,7 @@
 'use client'
 
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { FC, MutableRefObject, ReactNode, useEffect, useRef } from 'react'
+import { FC, MutableRefObject, ReactNode, useRef } from 'react'
 import cls from './Page.module.scss'
 import { useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll/useInfiniteScroll'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -10,6 +10,7 @@ import { StateSchema } from '@/providers/StoreProvider'
 import { getScrollPositionByPath, setScrollPositionForPath } from '@/features/UI'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { useThrottle } from '@/shared/lib/hooks/useThrottle/useThrottle'
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect'
 
 type PageProps = {
   children: ReactNode
@@ -39,7 +40,7 @@ export const Page: FC<PageProps> = ({
     callback: onScrollEnd,
   })
 
-  useEffect(() => {
+  useInitialEffect(() => {
     window.scrollTo({ top: scrollPosition })
 
     window.addEventListener('scroll', onScroll)

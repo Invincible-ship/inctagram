@@ -38,7 +38,7 @@ export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) =
   }
 
   return (
-    <HStack className={classNames(cls.PostListItem, {}, [className])}>
+    <HStack data-id={post.id} className={classNames(cls.PostListItem, {}, [className])}>
       <Link href={`?${searchParams.toString()}`} className={cls.postLink}>
         <MyImage
           src={imagePreview.url}

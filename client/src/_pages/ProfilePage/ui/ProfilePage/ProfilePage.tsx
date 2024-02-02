@@ -47,7 +47,7 @@ export const ProfilePage = () => {
 
   return (
     <Page isTriggerActive={hasMore} onScrollEnd={onScrollEnd}>
-      <VStack gap={gap} max>
+      <VStack data-testid="profile-page" gap={gap} max>
         <ProfileCard
           t={t}
           owner={owner}

@@ -20,6 +20,10 @@
   &:hover {
     .postInfo {
       opacity: 1;
+
+      @media (max-width: 769px) {
+        opacity: 0;
+      }
     }
   }
 
