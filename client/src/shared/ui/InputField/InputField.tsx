@@ -1,9 +1,10 @@
 import { Input } from '@/shared/ui/Input/Input'
-import { FC } from 'react'
+import { ChangeEvent, FC } from 'react'
 import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import { FieldError } from 'react-hook-form'
+import { checkWhitespace } from '@/shared/utils/checkWhitespace'
 
 type InputFieldProps = {
   id: string
@@ -36,6 +37,7 @@ export const InputField: FC<InputFieldProps> = ({
         title={title}
         error={error}
         full={full}
+        withoutWhitespace
         {...register}
       />
     </div>
