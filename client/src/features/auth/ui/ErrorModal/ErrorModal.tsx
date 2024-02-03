@@ -6,6 +6,7 @@ import { FC } from 'react'
 import cls from './ErrorModal.module.scss'
 
 type ErrorModalProps = {
+  username?: string
   email?: string
   errorType?: string
   isOpen: boolean
@@ -13,13 +14,25 @@ type ErrorModalProps = {
   onClose: () => void
 }
 export const ErrorModal: FC<ErrorModalProps> = props => {
-  const { errorType = '', isOpen, t, onClose, email } = props
+  const { errorType = '', isOpen, t, onClose, email, username } = props
+
+  const errorContent = () => {
+    switch (errorType) {
+      case 'existedEmail':
+        return t(`modal.error.${errorType}`, { email })
+      case 'existedUsername':
+        return t(`modal.error.${errorType}`, { username })
+      default:
+        return t(`modal.error.${errorType}`)
+    }
+  }
+
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
       <Modal.Header close={onClose}>{t('modal.error.title')}</Modal.Header>
       <Modal.Body>
         <div className={cls.content}>
-          <p>{email ? t(`modal.error.${errorType}`, { email }) : t(`modal.error.${errorType}`)}</p>
+          <p>{errorContent()}</p>
           <Button className={cls.btn} theme={ButtonTheme.DEFAULT} onClick={onClose}>
             {t('modal.error.ok')}
           </Button>

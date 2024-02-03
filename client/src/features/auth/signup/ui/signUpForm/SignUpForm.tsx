@@ -9,13 +9,13 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { AgreeBlock } from '../agreeBlock/AgreeBlock'
 import { FormSchemaType } from '../../lib/validationConstants/validationConstants'
-import { UseFormGetValues } from 'react-hook-form'
+import { FieldErrors, UseFormGetValues } from 'react-hook-form'
 
 export type SignUpFormProps = {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined
   isLoading: boolean
   t: (key: string) => string
-  errors: Record<string, any>
+  errors: FieldErrors<FormSchemaType>
   register: any
   lngId: LanguageIds
   isValid: boolean

@@ -41,14 +41,13 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>((props, ref) =
   const [valueType, setValueType] = useState(type)
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!withoutWhitespace) return onChange?.(e)
-
     const val = e.target.value
 
-    if (checkWhitespace(val)) {
+    if (withoutWhitespace && checkWhitespace(val)) {
       e.target.value = val.slice(0, val.length - 1)
-      onChange?.(e)
     }
+
+    onChange?.(e)
   }
 
   const wrapperMods = {

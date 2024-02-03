@@ -39,6 +39,7 @@ import { getDefaultValues } from '../model/selectors/getDefaultValues'
 export const SignUp = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
   const [email, setEmail] = useState<string>('')
+  const [username, setUsername] = useState<string>('')
   const defaultValues = useSelector(getDefaultValues)
   const isSignUpLoading = useSelector(getIsSignUpLoading)
   const isSignInWithGoogleLoading = useSelector(getIsSignInWithGoogleLoading)
@@ -65,16 +66,20 @@ export const SignUp = () => {
 
   const onSubmit: SubmitHandler<FormSchemaType> = data => {
     const connection = getInternetConnection()
-    if (!connection) return setInternetError(true, 'internet')
+    if (!connection) return setModalError(true, 'internet')
 
     if (isValid && checkedAgree) {
-      const body = { ...data, passwordConfirmation: undefined }
-      dispatch(signupThunk({ body, setError, resetForm }))
-      setEmail(data.email)
+      const { passwordConfirmation, ...body } = data
+      const { userName, email } = body
+      const thunkProps = { body, setError, setModalError, resetForm }
+
+      dispatch(signupThunk(thunkProps))
+      setEmail(email)
+      setUsername(userName)
     }
   }
 
-  const setInternetError = (open: boolean, type?: ErrorType) => {
+  const setModalError = (open: boolean, type?: ErrorType) => {
     dispatch(setErrorType(type))
     dispatch(setIsErrorModalOpen(open))
   }
@@ -82,7 +87,7 @@ export const SignUp = () => {
   if (isSignInWithGoogleLoading) return <Preloader />
 
   const confirmationModalOnClose = () => dispatch(setIsConfirmationModalOpen(false))
-  const errorModalOnClose = () => setInternetError(false)
+  const errorModalOnClose = () => setModalError(false)
 
   return (
     <>
@@ -122,6 +127,7 @@ export const SignUp = () => {
       {errorType && (
         <ErrorModal
           email={email}
+          username={username}
           onClose={errorModalOnClose}
           errorType={errorType}
           isOpen={isErrorModalOpen}

@@ -2,7 +2,7 @@ import { FormSchemaType } from '../../lib/validationConstants/validationConstant
 
 export type RegisterParamsType = Omit<FormSchemaType, 'passwordConfirmation'>
 
-export type ErrorType = 'internet' | 'existedEmail'
+export type ErrorType = 'internet' | 'existedEmail' | 'existedUsername'
 
 export type ISignUpSchema = {
   defaultValues?: FormSchemaType

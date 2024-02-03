@@ -4,7 +4,6 @@ import '@/shared/styles/variables/common/_form.scss'
 import '@/shared/styles/variables/common/_b-titles.scss'
 import '@/shared/styles/variables/common/_buttons.scss'
 import { FieldError } from 'react-hook-form'
-import { checkWhitespace } from '@/shared/utils/checkWhitespace'
 
 type InputFieldProps = {
   id: string
