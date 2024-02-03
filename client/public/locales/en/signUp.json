@@ -29,6 +29,7 @@
       "title": "Error has occured",
       "internet": "Failed to send a request to register an account in the system, there is no Internet connection",
       "existedEmail": "An account with the same email \"{{email}}\" already exists",
+      "existedUsername": "An account with the same username \"{{username}}\" already exists",
       "ok": "OK"
     }
   },
