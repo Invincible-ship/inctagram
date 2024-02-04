@@ -21,7 +21,11 @@ export const formSchema = (t: TFunction<string, undefined>) =>
       .min(1, { message: t(passwordReq) })
       .min(6, { message: t(passwordMinLength) })
       .max(20, { message: t(passwordMaxLength) })
-      .regex(/^(?=.*[A-Za-z])(?=.*[! "#$%&'()*+,-./:;<=>?@[\]^_`{|}~])/, {
-        message: t(passwordMustContain),
-      }),
+      .regex(
+        // eslint-disable-next-line max-len
+        /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~])[A-Za-z0-9!"#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]+$/,
+        {
+          message: t(passwordMustContain),
+        },
+      ),
   })

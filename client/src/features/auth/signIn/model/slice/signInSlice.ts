@@ -1,8 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { signInThunk } from '@/features/auth/signIn/model/signInThunk'
-import { ISignInSchema } from '../types/types'
+import { ErrorType, ISignInSchema } from '../types/types'
 
 const initialState: ISignInSchema = {
+  errorType: undefined,
+  isErrorModalOpen: false,
   isLoading: false,
   error: false,
 }
@@ -13,6 +15,12 @@ const slice = createSlice({
   reducers: {
     setDisableError(state) {
       state.error = false
+    },
+    setIsErrorModalOpen: (state, { payload }: PayloadAction<boolean>) => {
+      state.isErrorModalOpen = payload
+    },
+    setErrorType: (state, { payload }: PayloadAction<ErrorType | undefined>) => {
+      state.errorType = payload
     },
   },
   extraReducers: builder => {
@@ -31,4 +39,4 @@ const slice = createSlice({
 })
 
 export const signInReducer = slice.reducer
-export const { setDisableError } = slice.actions
+export const { setDisableError, setIsErrorModalOpen, setErrorType } = slice.actions

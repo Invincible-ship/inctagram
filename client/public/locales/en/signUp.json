@@ -7,6 +7,7 @@
     "userNameRequired": "Username is required",
     "userNameMinLength": "Minimum number of characters 6",
     "userNameMaxLength": "Maximum number of characters 30",
+    "userNameCanContain": "Username can only contain the following characters 0-9; A-Z; a-z; _ ; -",
     "emailInvalid": "The email must match the format example@example.com",
     "emailRequired": "Email is required",
     "passwordRequired": "Password is required",
@@ -14,7 +15,7 @@
     "passwordMaxLength": "Maximum number of characters 20",
     "passwordConfirmationRequired": "Password confirmation is required",
     "passwordsDoNotMatch": "The passwords must match",
-    "passwordMustContain": "Password must contain: a-z, A-Z,  ! \", # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~"
+    "passwordMustContain": "Password must contain: 0-9; a-z; A-Z; ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~"
   },
   "passwordConfirmation": "Password Confirmation",
   "forgotPassword": "Forgot Password",
@@ -23,7 +24,14 @@
   "modal": {
     "title": "Email sent",
     "text": "We have sent a link to confirm your email to",
-    "ok": "OK"
+    "ok": "OK",
+    "error": {
+      "title": "Error has occured",
+      "internet": "Failed to send a request to register an account in the system, there is no Internet connection",
+      "existedEmail": "An account with the same email \"{{email}}\" already exists",
+      "existedUsername": "An account with the same username \"{{username}}\" already exists",
+      "ok": "OK"
+    }
   },
   "agree": {
     "iAgreeTo": "I agree to the",

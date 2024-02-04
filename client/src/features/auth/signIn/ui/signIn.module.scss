@@ -24,6 +24,16 @@
   margin-bottom: 12px;
 }
 
+.linkRegistration {
+  color: var(--accent-color-500);
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .error {
   position: absolute;
   font-size: 14px;

@@ -1,0 +1,17 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 370px;
+}
+
+.btn {
+  width: min-content;
+  padding: 6px 36px;
+  align-self: self-end;
+
+  @media screen and (max-width: 769px) {
+    width: 100%;
+    align-self: center;
+  }
+}

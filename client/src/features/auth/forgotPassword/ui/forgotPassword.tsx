@@ -81,12 +81,7 @@ export const ForgotPassword = ({ t, lngId }: Props) => {
           </Link>
         </HStack>
         <ReCaptcha errors={errors} t={t} ref={recaptchaRef} control={control} theme="dark" />
-        <ConfirmationModal
-          t={t}
-          email={email}
-          isSignUpModalOpen={isOpen}
-          setIsAuthModalOpen={onClose}
-        />
+        <ConfirmationModal t={t} email={email} isOpen={isOpen} onClose={onClose} />
       </form>
     </Card>
   )

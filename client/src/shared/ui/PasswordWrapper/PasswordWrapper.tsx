@@ -40,6 +40,7 @@ export const PasswordWrapper: FC<PasswordWrapperProps> = ({
         type={type}
         title={title}
         error={error}
+        withoutWhitespace
         {...register}
       />
     </div>
