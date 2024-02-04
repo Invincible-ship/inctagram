@@ -32,7 +32,7 @@
   }
 }
 
-.isClosing {
+.isClosing:not(.withoutAnimation) {
   .content {
     transform: scale(0.2);
   }
