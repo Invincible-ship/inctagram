@@ -2,20 +2,10 @@ import { SelectImage } from '../SelectImage/SelectImage'
 import { CreatePostStep } from '../../model/consts/createPost'
 import { getCurrentStep } from '../../model/selectors/getCurrentStep'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import {
-  FC,
-  ForwardRefExoticComponent,
-  RefAttributes,
-  Suspense,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { FC, ForwardRefExoticComponent, RefAttributes, useMemo, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import CloseModal from '@/features/createPost/ui/CloseModal/CloseModal'
-import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { CroppingImage } from '../CroppingImage/CroppingImage'
 import { ComponentCommonProps } from '../../model/types/types'
@@ -25,8 +15,6 @@ import { getTitle } from '../../model/utils/getTitle'
 import { CreatePostHeader } from '../CreatePostHeader/CreatePostHeader'
 import { FilteringImage } from '../FilteringImage/FilteringImage'
 import { PublishingPost } from '../PublishingPost/PublishingPost'
-import { setProfileData, useGetProfileDataQuery } from '@/entities/Profile'
-import { getUserId } from '@/entities/User'
 import './canvas.scss'
 import { getCreatePostErorrs } from '../../model/selectors/getCreatePostErorrs'
 import toast from 'react-hot-toast'
@@ -95,7 +83,7 @@ export const CreatePost = () => {
 
   return (
     <>
-      <Modal isOpen={isPostCreating} onClose={handleCreatePostModalClose} width={490}>
+      <Modal isOpen={isPostCreating} onClose={handleCreatePostModalClose} withoutAnimation>
         <CreatePostHeader
           title={title}
           onClose={handleCreatePostModalClose}

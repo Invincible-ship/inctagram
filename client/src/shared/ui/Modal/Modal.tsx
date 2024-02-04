@@ -13,13 +13,14 @@ type ModalProps = {
   children?: ReactNode
   isOpen?: boolean
   onClose?: () => void
+  withoutAnimation?: boolean
   width?: number | string
 }
 
 const ANIMATION_DELAY = 200
 
 export const Modal = (props: ModalProps) => {
-  const { children, className, isOpen, onClose, width } = props
+  const { children, className, isOpen, onClose, withoutAnimation } = props
 
   const { isClosing, close } = useModal({
     animationDelay: ANIMATION_DELAY,
@@ -30,6 +31,7 @@ export const Modal = (props: ModalProps) => {
   const mods = {
     [cls.opened]: isOpen,
     [cls.isClosing]: isClosing,
+    [cls.withoutAnimation]: withoutAnimation,
   }
 
   return (
