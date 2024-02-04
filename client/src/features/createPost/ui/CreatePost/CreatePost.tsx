@@ -18,7 +18,7 @@ import { PublishingPost } from '../PublishingPost/PublishingPost'
 import './canvas.scss'
 import { getCreatePostErorrs } from '../../model/selectors/getCreatePostErorrs'
 import toast from 'react-hot-toast'
-import { resetCreatePostState, setCreatePostErrors } from '../../model/slice/createPostSlice'
+import { resetCreatePostState } from '../../model/slice/createPostSlice'
 import { publishPostThunk } from '@/features/createPost/model/services/publishPostThunk'
 
 const mapStepToValue: Record<number, CreatePostStep> = {
@@ -57,9 +57,11 @@ export const CreatePost = () => {
   }
 
   const handleCreatePostModalClose = () => {
-    mapStepToValue[currentStep] != CreatePostStep.SELECT
-      ? setIsCloseModalOpen(true)
-      : closeCreatePostModal()
+    if (mapStepToValue[currentStep] != CreatePostStep.SELECT) {
+      return setIsCloseModalOpen(true)
+    }
+
+    closeCreatePostModal()
   }
 
   const handleCloseModalClose = () => {

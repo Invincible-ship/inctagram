@@ -26,6 +26,7 @@ export const Modal = (props: ModalProps) => {
     animationDelay: ANIMATION_DELAY,
     onClose,
     isOpen,
+    withoutAnimation,
   })
 
   const mods = {
