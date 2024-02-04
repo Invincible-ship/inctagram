@@ -12,6 +12,7 @@ import {
   UPLOAD_POST_IMAGE_ENDPOINT,
   CREATE_POST_ENDPOINT,
   DELETE_POST_IMAGE_ENDPOINT,
+  DELETE_POST_ENDPOINT,
 } from '@/shared/const/apiEndpoints'
 import { POST_TAG } from '@/shared/const/rtk'
 
@@ -74,10 +75,11 @@ export const postApi = rtkApi.injectEndpoints({
       invalidatesTags: () => [{ type: POST_TAG, id: 'LIST' }],
     }),
     // updating posts
-    updatePostById: build.mutation<void, number>({
-      query: id => ({
+    updatePostById: build.mutation<void, any>({
+      query: body => ({
         method: 'PUT',
-        url: `${CREATE_POST_ENDPOINT}/${id}`,
+        url: `${CREATE_POST_ENDPOINT}/${body.id}`,
+        body,
       }),
       invalidatesTags: (result, error, id) => [{ type: POST_TAG, id }],
     }),
@@ -91,7 +93,7 @@ export const postApi = rtkApi.injectEndpoints({
     deletePost: build.mutation<void, number>({
       query: id => ({
         method: 'DELETE',
-        url: `${DELETE_POST_IMAGE_ENDPOINT}/${id}`,
+        url: `${DELETE_POST_ENDPOINT}/${id}`,
       }),
       invalidatesTags: (result, error, id) => [{ type: POST_TAG, id }],
     }),
@@ -102,10 +104,12 @@ export const fetchPostById = postApi.endpoints.fetchPostById.initiate
 export const uploadPostImages = postApi.endpoints.uploadPostImages.initiate
 export const createPost = postApi.endpoints.createPost.initiate
 export const createdPostMatcher = postApi.endpoints.createPost.matchFulfilled
+export const deletePostMatcher = postApi.endpoints.deletePost.matchFulfilled
 export const {
   useFetchPostByIdQuery,
   useFetchAllPostsQuery,
   useFetchPostsByUserIdQuery,
+  useUpdatePostByIdMutation,
   useUploadPostImagesMutation,
   useCreatePostMutation,
   useDeletePostImageMutation,

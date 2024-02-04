@@ -1,95 +1,89 @@
 'use client'
-import cls from '@/features/createPost/ui/FilteringImage/FilteringImage.module.scss'
 import { HStack } from '@/shared/ui/Stack'
-import React, { useState } from 'react'
 import { Modal } from '@/shared/ui/Modal/Modal'
-import { Publication } from '@/widgets/PostDetails/ui/Publication/Publication'
-import { ImageSwiper } from '@/features/createPost/ui/FilteringImage/FilteringImage'
+import { Publication } from '../Publication/Publication'
 import CloseIcon from '@/shared/assets/icons/close.svg'
-import s from './PostDetails.module.scss'
-import { PostHeader } from '@/widgets/PostDetails/ui/PostHeader/PostHeader'
-import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-
-const images: any[] = [
-  {
-    filter: 'normal',
-    id: 1706002415714,
-    orientation: 'original',
-    scale: 1,
-    src: 'https://www.ixbt.com/img/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg',
-  },
-  {
-    filter: 'normal',
-    id: 1706002415715,
-    orientation: 'original',
-    scale: 1,
-    src: 'https://www.ixbt.com/img/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg',
-  },
-]
+import s from '../PostDetails.module.scss'
+import { PostHeader } from '../PostHeader/PostHeader'
+import { IPost } from '@/entities/Post'
+import { PostConfirmationModal } from './PostConfirmationModal/PostConfirmationModal'
+import { ImageSwiper } from './ImageSwiper/ImageSwiper'
+import { usePostDetails } from '../model/hooks/usePostDetails'
+import { useClientTranslation } from '@/shared/config/i18n/client'
+import { Namespaces } from '@/shared/config/i18n/types'
 
 type Props = {
   isOpen: boolean
   onClose: () => void
+  post: IPost
 }
-export const PostDetails = ({ isOpen, onClose }: Props) => {
-  const [editMode, setEditMode] = useState(false)
-  const [isOpenConfirmationModal, setIsOpenModalConfirmationModal] = useState(false)
-  const onCloseHandler = () => {
-    editMode ? setIsOpenModalConfirmationModal(true) : onClose()
-  }
-  const setIsOpenModalConfirmationModalHandler = () => {}
+export const PostDetails = ({ isOpen, onClose, post }: Props) => {
+  const { t } = useClientTranslation(Namespaces.POST_DETAILS)
+  const { avatarOwner, images, description, id, userName } = post
+  const {
+    isLoading,
+    editMode,
+    setEditMode,
+    isOpenConfirmationModal,
+    isOpenDeleteModal,
+    setIsOpenDeleteModal,
+    handleCloseConfirmationModal,
+    handleOpenConfirmationModal,
+    handleCloseDeleteModal,
+    onClickCloseHandler,
+    onClickDeleteHandler,
+    onCloseHandler,
+    textValue,
+    setTextValue,
+  } = usePostDetails({ onClose, id, description })
+
   return (
-    <Modal isOpen={isOpen} onClose={onCloseHandler}>
-      {editMode && (
-        <Modal.Header
-          close={() => {
-            setIsOpenModalConfirmationModal(true)
-          }}
-        >
-          Edit Post
-        </Modal.Header>
-      )}
+    <Modal className={s.modal} isOpen={isOpen} onClose={onCloseHandler}>
+      {editMode && <Modal.Header close={handleOpenConfirmationModal}>{t('editPost')}</Modal.Header>}
       {!editMode && (
         <button type="button" className={s.buttonClose} onClick={onCloseHandler}>
           <CloseIcon />
         </button>
       )}
-      <HStack className={cls.FilteringImage} justify="start">
+      <HStack className={s.mainBlock} justify="start">
         <ImageSwiper images={images} />
-        <HStack className={s.post} wrap="wrap" justify={'center'}>
-          <PostHeader editMode={editMode} setEditMode={setEditMode} />
-          <Publication setEditMode={setEditMode} editMode={editMode} />
+        <HStack wrap="wrap" justify={'center'}>
+          <PostHeader
+            userName={userName}
+            setIsOpenDeleteModal={setIsOpenDeleteModal}
+            avatar={avatarOwner}
+            editMode={editMode}
+            setEditMode={setEditMode}
+          />
+          <Publication
+            textValue={textValue}
+            setTextValue={setTextValue}
+            userName={userName}
+            description={description}
+            id={id}
+            avatar={avatarOwner}
+            setEditMode={setEditMode}
+            editMode={editMode}
+          />
         </HStack>
+        <PostConfirmationModal
+          t={t}
+          isOpen={isOpenConfirmationModal}
+          handleClose={handleCloseConfirmationModal}
+          onClick={onClickCloseHandler}
+          title={t('modal.closeTitle')}
+          text={t('modal.closeText')}
+        />
+        <PostConfirmationModal
+          t={t}
+          isLoading={isLoading}
+          isOpen={isOpenDeleteModal}
+          handleClose={handleCloseDeleteModal}
+          onClick={onClickDeleteHandler}
+          title={t('modal.deleteTitle')}
+          text={t('modal.deleteText')}
+        />
       </HStack>
-      <Modal
-        onClose={() => setIsOpenModalConfirmationModal(false)}
-        isOpen={isOpenConfirmationModal}
-      >
-        <Modal.Header close={() => setIsOpenModalConfirmationModal(false)}>
-          {'modal.title'}
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            <span>Are you sure you want to delete this post?</span>
-            <Button
-              theme={ButtonTheme.DEFAULT}
-              onClick={() => {
-                onClose()
-                setIsOpenModalConfirmationModal(false)
-                setEditMode(false)
-              }}
-            >
-              Yes
-            </Button>
-            <Button
-              theme={ButtonTheme.DEFAULT}
-              onClick={() => setIsOpenModalConfirmationModal(false)}
-            >
-              No
-            </Button>
-          </div>
-        </Modal.Body>
-      </Modal>
     </Modal>
   )
 }

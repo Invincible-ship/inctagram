@@ -3,6 +3,7 @@ import { getPosts } from '@/widgets/PostList'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { POST_DETAILS_ID } from '@/widgets/PostList'
 import { StateSchema } from '@/providers/StoreProvider'
+import { PostDetails } from '@/widgets/PostDetails/ui/PostDetails'
 
 export const PostDetailsWrapper = () => {
   const router = useRouter()
@@ -16,5 +17,5 @@ export const PostDetailsWrapper = () => {
   }
 
   // TODO: add PostDetails component
-  return post && <></>
+  return post && <PostDetails isOpen={!!post.id} post={post} onClose={onClose} />
 }
