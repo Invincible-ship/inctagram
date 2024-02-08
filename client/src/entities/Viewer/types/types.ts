@@ -10,12 +10,17 @@ export type IViewer = {
   avatars: IAvatar[]
 }
 
-export type GetPostsByProfileIdRequestParams = {
-  profileId: string
+type BaseRequestParams = {
   lastPostId?: number
   order: SortOrder
   sort: PostSortField
   limit: number
+}
+
+export type AllPostsRequestParams = BaseRequestParams
+
+export type PublicPostsByIdRequestParams = BaseRequestParams & {
+  profileId: string
 }
 
 export type PostListResponse = {

@@ -1,37 +1,25 @@
-'use client'
+import { PostListResponse } from '@/entities/Viewer'
+import { GET_ALL_POSTS } from '@/shared/const/apiEndpoints'
+import { PostSortField } from '@/shared/const/postSortField'
+import HomePage from '@/_pages/HomePage/HomePage'
 
-import { getUserAuthData } from '@/entities/User'
-import { SignOut } from '@/features/auth/signout'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
-import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
-import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
-import { Routes } from '@/shared/types/routes'
-import { Button } from '@/shared/ui/Button/Button'
-import { HStack, VStack } from '@/shared/ui/Stack'
-import Link from 'next/link'
-import React, { useContext } from 'react'
-import { useSelector } from 'react-redux'
+const baseUrl = process.env.NEXT_PUBLIC_API
 
-const Page = () => {
-  const lngId = useContext(LanguageContext)
-  const userData = useSelector(getUserAuthData)
-  const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY)
+const qp = new URLSearchParams({
+  pageSize: '5',
+  sortBy: PostSortField.CREATED,
+  sortDirection: 'desc',
+})
 
-  return (
-    <VStack gap="24">
-      <h1>Home page</h1>
-      <HStack gap="24" max>
-        <Link href={`/${lngId}${Routes.PROFILE}/${userId}/edit?setting=general-info`}>
-          <Button>Edit Profile</Button>
-        </Link>
-        <SignOut />
-      </HStack>
-      <div>
-        <p>User Data: </p>
-        <pre>{JSON.stringify(userData, null, 2)}</pre>
-      </div>
-    </VStack>
-  )
+const ServerHomePage = async () => {
+  const response = await fetch(`${baseUrl}${GET_ALL_POSTS}?${qp.toString()}`, {
+    next: {
+      revalidate: 60,
+    },
+  })
+  const postsData: PostListResponse = await response.json()
+
+  return <HomePage postsData={postsData} />
 }
 
-export default withAuth(Page, { routeRole: 'all' })
+export default ServerHomePage

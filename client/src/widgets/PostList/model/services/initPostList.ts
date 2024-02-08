@@ -16,7 +16,8 @@ export const initPostList = createAsyncThunk<
 >('postList/initPostList', ({ page, currentId }, { dispatch, getState }) => {
   const prevId = getPostListId(getState())
 
-  if (prevId == currentId) return
+  // prevent reseting state if the same profile page
+  if (currentId != undefined && prevId == currentId) return
 
   dispatch(resetPostListState())
   if (currentId) dispatch(setPostListId(currentId))

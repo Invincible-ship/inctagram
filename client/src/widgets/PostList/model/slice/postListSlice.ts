@@ -1,12 +1,20 @@
-import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import {
+  PayloadAction,
+  createAction,
+  createEntityAdapter,
+  createSlice,
+  Action,
+} from '@reduxjs/toolkit'
 import { PostListSchema } from '../types/postListSchema'
 import { IPost, createdPostMatcher } from '@/entities/Post'
 import { StateSchema } from '@/providers/StoreProvider'
 import { PostSortField } from '@/shared/const/postSortField'
 import { fetchPostsByProfileId } from '../services/fetchPostsByProfileId'
+import { fetchAllPosts } from '../services/fetchAllPosts'
 import { PostListPage } from '../consts/postListPage'
 import { PostListCardType } from '../consts/postListCardType'
 import { initPostList } from '../services/initPostList'
+import { PostListResponse } from '@/entities/Viewer'
 
 const stringToDateTime = (s: string) => new Date(s).getTime()
 
@@ -19,12 +27,23 @@ export const getPosts = postsAdapter.getSelectors<StateSchema>(state => {
   return state.postList || postsAdapter.getInitialState()
 })
 
+export const setPostsFromServer = createAction<PostListResponse>('set-posts-from-server')
+
+const postsPending = (action: Action<unknown>) =>
+  fetchPostsByProfileId.pending.match(action) || fetchAllPosts.pending.match(action)
+const postsFulfilled = (action: Action<unknown>) =>
+  fetchPostsByProfileId.fulfilled.match(action) ||
+  fetchAllPosts.fulfilled.match(action) ||
+  setPostsFromServer.match(action)
+const postsRejected = (action: Action<unknown>) =>
+  fetchPostsByProfileId.rejected.match(action) || fetchAllPosts.rejected.match(action)
+
 const initialState = postsAdapter.getInitialState<PostListSchema>({
   ids: [],
   entities: {},
   postListId: undefined,
   page: PostListPage.HOME,
-  type: PostListCardType.IMAGE,
+  type: PostListCardType.EXTENDED,
   isLoading: false,
   error: undefined,
   sort: 'desc',
@@ -53,16 +72,16 @@ export const postListSlice = createSlice({
 
         state.page = page
 
-        const type = page == PostListPage.HOME ? PostListCardType.EXTENDED : PostListCardType.IMAGE
-        state.type = type
+        // const type = page == PostListPage.HOME ? PostListCardType.EXTENDED : PostListCardType.IMAGE
+        state.type = PostListCardType.IMAGE
 
-        const limit = type == PostListCardType.IMAGE ? 8 : 5
-        state.limit = limit
+        // const limit = type == PostListCardType.IMAGE ? 8 : 5
+        state.limit = 8
       })
-      .addCase(fetchPostsByProfileId.pending, state => {
+      .addMatcher(postsPending, state => {
         state.isLoading = true
       })
-      .addCase(fetchPostsByProfileId.fulfilled, (state, { payload: postsData }) => {
+      .addMatcher(postsFulfilled, (state, { payload: postsData }) => {
         state.isLoading = false
 
         const { items: posts } = postsData
@@ -73,7 +92,7 @@ export const postListSlice = createSlice({
 
         postsAdapter.addMany(state, posts)
       })
-      .addCase(fetchPostsByProfileId.rejected, (state, error) => {
+      .addMatcher(postsRejected, (state, error) => {
         state.isLoading = false
         state.error = error.payload
       })
