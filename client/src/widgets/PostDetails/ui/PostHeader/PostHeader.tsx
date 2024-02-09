@@ -1,18 +1,20 @@
 import Image from 'next/image'
 import { PostOptionsDropdown } from './PostOptionsDropdown/PostOptionsDropdown'
-import s from '../PostDetails.module.scss'
+import s from './PostHeader.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { HStack } from '@/shared/ui/Stack'
+import { useSelector } from 'react-redux'
+import { StateSchema } from '@/providers/StoreProvider'
 
 type Props = {
-  editMode: boolean
-  setEditMode: (mode: boolean) => void
   avatar: string
   setIsOpenDeleteModal: (open: boolean) => void
   userName: string
+  description: string
 }
 export const PostHeader = (props: Props) => {
-  const { avatar, editMode, setEditMode, setIsOpenDeleteModal, userName } = props
+  const { avatar, setIsOpenDeleteModal, userName, description } = props
+  const editMode = useSelector((state: StateSchema) => state.postDetails.editMode)
   const mods = { [s.noBorder]: editMode }
   const headerClass = classNames(s.headerBlock, mods, [])
   return (
@@ -23,8 +25,8 @@ export const PostHeader = (props: Props) => {
       </HStack>
       {!editMode && (
         <PostOptionsDropdown
+          description={description}
           setIsOpenDeleteModal={setIsOpenDeleteModal}
-          setEditMode={setEditMode}
         />
       )}
     </header>

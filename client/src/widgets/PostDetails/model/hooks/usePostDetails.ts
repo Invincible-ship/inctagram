@@ -3,6 +3,10 @@ import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
 import toast from 'react-hot-toast'
 import { useDeletePostMutation } from '@/entities/Post'
+import { useSelector } from 'react-redux'
+import { StateSchema } from '@/providers/StoreProvider'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { setEditMode } from '@/widgets/PostDetails/model/slice/postDetailsSlice'
 
 type Args = {
   onClose: () => void
@@ -10,17 +14,28 @@ type Args = {
   description: string
 }
 export const usePostDetails = ({ onClose, id, description }: Args) => {
-  const [editMode, setEditMode] = useState(false)
+  const dispatch = useAppDispatch()
+  const textValue = useSelector((state: StateSchema) => state.postDetails.textValue)
+  const editMode = useSelector((state: StateSchema) => state.postDetails.editMode)
   const [isOpenConfirmationModal, setIsOpenConfirmationModal] = useState(false)
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false)
-  const [textValue, setTextValue] = useState(description)
   const [remove, { isLoading }] = useDeletePostMutation()
 
   const handleOpenConfirmationModal = () => {
-    description !== textValue ? setIsOpenConfirmationModal(true) : onClose()
+    if (description !== textValue) {
+      setIsOpenConfirmationModal(true)
+    } else {
+      onClose()
+      dispatch(setEditMode(false))
+    }
   }
   const onCloseHandler = () => {
-    editMode ? handleOpenConfirmationModal() : onClose()
+    if (editMode) {
+      handleOpenConfirmationModal()
+    } else {
+      onClose()
+      dispatch(setEditMode(false))
+    }
   }
   const handleCloseConfirmationModal = () => {
     setIsOpenConfirmationModal(false)
@@ -32,14 +47,14 @@ export const usePostDetails = ({ onClose, id, description }: Args) => {
   const onClickCloseHandler = () => {
     onClose()
     setIsOpenConfirmationModal(false)
-    setEditMode(false)
+    dispatch(setEditMode(false))
   }
   const onClickDeleteHandler = async () => {
     try {
       await remove(id)
       onClose()
       setIsOpenConfirmationModal(false)
-      setEditMode(false)
+      dispatch(setEditMode(false))
     } catch (error) {
       if (isFetchBaseQueryError(error)) {
         const apiError = error.data as ApiError
@@ -52,8 +67,6 @@ export const usePostDetails = ({ onClose, id, description }: Args) => {
 
   return {
     isLoading,
-    editMode,
-    setEditMode,
     isOpenConfirmationModal,
     isOpenDeleteModal,
     setIsOpenDeleteModal,
@@ -63,7 +76,5 @@ export const usePostDetails = ({ onClose, id, description }: Args) => {
     onClickCloseHandler,
     onClickDeleteHandler,
     onCloseHandler,
-    textValue,
-    setTextValue,
   }
 }

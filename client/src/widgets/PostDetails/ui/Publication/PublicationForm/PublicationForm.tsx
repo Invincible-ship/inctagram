@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEvent } from 'react'
-import s from '@/widgets/PostDetails/PostDetails.module.scss'
+import s from './PublicationForm.module.scss'
 import { TextArea } from '@/shared/ui/TextArea/TextArea'
 import { Button } from '@/shared/ui/Button/Button'
 import { useUpdatePostByIdMutation } from '@/entities/Post/api/postApi'
@@ -8,24 +8,24 @@ import { ApiError } from '@/shared/api/types'
 import toast from 'react-hot-toast'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { setEditMode, setTextValue } from '@/widgets/PostDetails/model/slice/postDetailsSlice'
 
 type Props = {
-  setEditMode: (mode: boolean) => void
   id: number
   description: string
   textValue: string
-  setTextValue: (text: string) => void
 }
 export const PublicationForm = (props: Props) => {
+  const dispatch = useAppDispatch()
   const { t } = useClientTranslation(Namespaces.POST_DETAILS)
-  const { setEditMode, id, description, textValue, setTextValue } = props
+  const { id, description, textValue } = props
   const [update, { isLoading }] = useUpdatePostByIdMutation()
   const onClickSaveChangesHandler = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     try {
       if (description !== textValue) await update({ description: textValue, id })
-      setTextValue(textValue)
-      setEditMode(false)
+      dispatch(setEditMode(false))
     } catch (error) {
       if (isFetchBaseQueryError(error)) {
         const apiError = error.data as ApiError
@@ -36,11 +36,11 @@ export const PublicationForm = (props: Props) => {
     }
   }
   const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setTextValue(event.target.value)
+    dispatch(setTextValue(event.target.value))
   }
 
   return (
-    <div className={s.publicationBlock}>
+    <div className={s.editModeBlock}>
       <form className={s.form}>
         <TextArea
           className={s.textArea}
@@ -50,7 +50,12 @@ export const PublicationForm = (props: Props) => {
           value={textValue}
           onChange={onChangeHandler}
         />
-        <Button isLoading={isLoading} type="submit" onClick={onClickSaveChangesHandler}>
+        <Button
+          disabled={isLoading}
+          isLoading={isLoading}
+          type="submit"
+          onClick={onClickSaveChangesHandler}
+        >
           {t('saveChanges')}
         </Button>
       </form>

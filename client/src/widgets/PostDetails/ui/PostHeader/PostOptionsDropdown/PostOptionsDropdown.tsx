@@ -5,25 +5,29 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/ui/Dropdown/Dropdown'
 import { DottedMenuIcon } from '@/shared/ui/DottedMenuIcon/DottedMenuIcon'
-import s from '../../PostDetails.module.scss'
+import s from './PostOptionsDropdown.module.scss'
 import EditIcon from '@/shared/assets/icons/edit-2-outline.svg'
 import DeleteIcon from '@/shared/assets/icons/trash-outline.svg'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { setEditMode, setTextValue } from '@/widgets/PostDetails/model/slice/postDetailsSlice'
 
 type Props = {
-  setEditMode: (editMode: boolean) => void
+  description: string
   setIsOpenDeleteModal: (open: boolean) => void
 }
-export const PostOptionsDropdown = ({ setEditMode, setIsOpenDeleteModal }: Props) => {
+export const PostOptionsDropdown = ({ setIsOpenDeleteModal, description }: Props) => {
+  const dispatch = useAppDispatch()
   const { t } = useClientTranslation(Namespaces.POST_DETAILS)
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const onClickDeletePost = () => {
     setIsOpenDeleteModal(true)
     setIsOpenMenu(false)
   }
-  const onClickEditPost = () => {
-    setEditMode(true)
+  const onClickActivateEditMode = () => {
+    dispatch(setEditMode(true))
+    dispatch(setTextValue(description))
   }
   return (
     <DropdownMenu open={isOpenMenu} onOpenChange={setIsOpenMenu}>
@@ -32,7 +36,7 @@ export const PostOptionsDropdown = ({ setEditMode, setIsOpenDeleteModal }: Props
       </DropdownMenuTrigger>
       <DropdownMenuContent sticky="always">
         <div className={s.MenuContent}>
-          <ButtonItem onClick={onClickEditPost} text={t('dropDown.editPost')}>
+          <ButtonItem onClick={onClickActivateEditMode} text={t('dropDown.editPost')}>
             <EditIcon />
           </ButtonItem>
           <ButtonItem onClick={onClickDeletePost} text={t('dropDown.deletePost')}>

@@ -1,0 +1,43 @@
+.itemDescription {
+  display: flex;
+  align-items: flex-start;
+  font-size: 14px;
+  margin: 15px 0 5px 0;
+  color: var(--light-color-100)
+}
+
+.imageAvatar {
+  margin: 6px 10px 0 0;
+  border-radius: 50%;
+}
+
+.commentBlock {
+  max-width: 385px;
+  word-wrap: break-word;
+}
+
+.itemName {
+  font-weight: 600;
+  margin-right: 4px;
+  line-height: 24px;
+  font-size: 14px;
+}
+
+.itemText {
+  line-height: 24px;
+  font-size: 14px;
+}
+
+.itemTimestamp {
+  color: var(--light-color-900);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.itemDescriptionChildren {
+  margin-top: 16px;
+}
+
+.fullText{
+  width: 100%;
+}

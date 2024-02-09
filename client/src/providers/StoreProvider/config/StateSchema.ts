@@ -8,6 +8,7 @@ import { ISignInWithGoogleSchema } from '@/features/auth/signInWithThirdPartySer
 import { ICreatePostSchema } from '@/features/createPost'
 import { PostListSchema } from '@/widgets/PostList'
 import { UISchema } from '@/features/UI'
+import { PostDetailsSchema } from '@/widgets/PostDetails/model/types/postDetailsSchema'
 
 export type StateSchema = {
   // Остальные типы ваших редьюсеров
@@ -19,6 +20,7 @@ export type StateSchema = {
   signInWithGoogle: ISignInWithGoogleSchema
   createPost: ICreatePostSchema
   postList: PostListSchema
+  postDetails: PostDetailsSchema
   ui: UISchema
 }
 

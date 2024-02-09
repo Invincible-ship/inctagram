@@ -1,0 +1,15 @@
+.editModeBlock {
+  width: 100%;
+  padding: 0 22px 0 22px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 200px;
+}
+
+.textArea {
+  height: 114px;
+}
