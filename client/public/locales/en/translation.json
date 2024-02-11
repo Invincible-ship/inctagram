@@ -2,5 +2,9 @@
   "input": {
     "title": "Title",
     "error": "Error occurred"
+  },
+  "pagination": {
+    "pages-amount-1": "Show",
+    "pages-amount-2": "on page"
   }
 }

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ReactNode } from 'react'
+import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import CheckIcon from '@/shared/assets/icons/check.svg'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -7,6 +7,7 @@ import cls from './Select.module.scss'
 
 type SelectProps = {
   children?: ReactNode
+  style?: CSSProperties
   value?: string
   defaultValue?: string
   onValueChange?(value: string): void
