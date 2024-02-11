@@ -1,4 +1,4 @@
-import { ItemsOnPage } from '@/shared/ui/Pagination/Pagination'
+import { ItemsOnPage } from '@/shared/ui/Pagination/ui/Pagination'
 import { useCallback, useState } from 'react'
 
 export const usePagination = () => {

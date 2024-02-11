@@ -92,13 +92,14 @@ export const Pagination: FC<PaginationProps> = memo(props => {
 
   return (
     <nav
+      tabIndex={1}
       role="navigation"
       aria-label="pagination"
       className={classNames(cls.Pagination, {}, [className])}
       {...rest}
     >
       <ul className={cls.paginationContent}>
-        <li className={classNames(cls.paginationItem, backItemMods)}>
+        <li tabIndex={1} className={classNames(cls.paginationItem, backItemMods)}>
           <button className={cls.backBtn} onClick={handleBackClick} disabled={isBackItemDisabled}>
             <BackIcon viewBox="0 0 24 24" width="16" height="16" />
           </button>
@@ -113,12 +114,17 @@ export const Pagination: FC<PaginationProps> = memo(props => {
           }
 
           return (
-            <li key={key} className={classNames(cls.paginationItem, mods)} onClick={onClick}>
+            <li
+              tabIndex={1}
+              key={key}
+              className={classNames(cls.paginationItem, mods)}
+              onClick={onClick}
+            >
               {page}
             </li>
           )
         })}
-        <li className={classNames(cls.paginationItem, nextItemMods)}>
+        <li tabIndex={1} className={classNames(cls.paginationItem, nextItemMods)}>
           <button className={cls.nextBtn} onClick={handleNextClick} disabled={isNextItemDisabled}>
             <NextIcon viewBox="0 0 24 24" width="16" height="16" />
           </button>

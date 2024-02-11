@@ -3,6 +3,10 @@
   color: var(--light-color-100);
   display: flex;
   gap: 24px;
+
+  &:focus {
+    outline: 2px solid var(--accent-color-700);
+  }
   
   .paginationContent {
     display: flex;
@@ -37,6 +41,15 @@
           fill: var(--dark-color-100);
           pointer-events: none;
         }
+      }
+
+      &:hover:not(&.active) {
+        background-color: var(--dark-color-300);
+        transition: background-color .2s linear;
+      }
+
+      &:focus-within {
+        outline: 2px solid var(--accent-color-700);
       }
 
       .backBtn, .nextBtn {
