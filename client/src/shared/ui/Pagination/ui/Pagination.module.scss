@@ -43,12 +43,12 @@
         }
       }
 
-      &:hover:not(&.active) {
+      &:hover:not(&.active, &.placeholder) {
         background-color: var(--dark-color-300);
         transition: background-color .2s linear;
       }
 
-      &:focus-within {
+      &:focus-visible {
         outline: 2px solid var(--accent-color-700);
       }
 

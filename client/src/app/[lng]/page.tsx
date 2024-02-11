@@ -10,7 +10,7 @@ import { Button } from '@/shared/ui/Button/Button'
 import { Pagination, usePagination } from '@/shared/ui/Pagination'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import Link from 'next/link'
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 
 const Page = () => {
