@@ -1,6 +1,6 @@
 import { Namespaces } from '@/shared/config/i18n/types'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { Modal } from '@/shared/ui/Modal/Modal'
+import { Modal, ModalBody, ModalHeader } from '@/shared/ui/Modal/Modal'
 import { TFunction } from 'i18next'
 import { FC } from 'react'
 import cls from './DeleteAvatarModal.module.scss'
@@ -33,8 +33,8 @@ export const DeleteAvatarModal: FC<DeleteAvatarModalProps> = ({ isOpen, onClose,
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={438}>
-      <Modal.Header close={onClose}>{t('general-info.delete-modal.title')}</Modal.Header>
-      <Modal.Body>
+      <ModalHeader close={onClose}>{t('general-info.delete-modal.title')}</ModalHeader>
+      <ModalBody>
         <VStack gap="36" align="stretch">
           <p className={cls.text}>{t('general-info.delete-modal.text')}</p>
           <HStack gap="24" justify="end" max>
@@ -52,7 +52,7 @@ export const DeleteAvatarModal: FC<DeleteAvatarModalProps> = ({ isOpen, onClose,
             </Button>
           </HStack>
         </VStack>
-      </Modal.Body>
+      </ModalBody>
     </Modal>
   )
 }

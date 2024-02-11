@@ -54,5 +54,31 @@
     "update-success": "Profile information successfully updated",
     "button": "Save Changes",
     "avatar-btn": "Add a profile photo"
+  },
+  "account-managment": {
+    "loader": {
+      "create": "Please wait. Redirecting to payment page...",
+      "cancel": "Please wait. Automatic subscription renewal is being cancelled..."
+    },
+    "auto-renewal": "Auto-Renewal",
+    "current-subscription": {
+      "title": "Current Subscription:",
+      "payment-date": "Date of payment",
+      "payment-next": "Next payment"
+    },
+    "select-account": {
+      "title": "Account Type:",
+      "personal": "Personal",
+      "business": "Business"
+    },
+    "select-plan": {
+      "title": "Change your subscription:",
+      "DAY": "${{amount}} per 1 Day",
+      "WEEKLY": "${{amount}} per 7 Day",
+      "MONTHLY": "${{amount}} per month"
+    },
+    "payments": {
+      "text": "Or"
+    }
   }
 }

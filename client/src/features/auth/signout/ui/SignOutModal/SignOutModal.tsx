@@ -1,5 +1,5 @@
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-import { Modal } from '@/shared/ui/Modal/Modal'
+import { Modal, ModalBody, ModalHeader } from '@/shared/ui/Modal/Modal'
 import { FC } from 'react'
 import { TFunction } from 'i18next'
 import { useSelector } from 'react-redux'
@@ -18,8 +18,8 @@ export const SignOutModal: FC<SignOutModalProps> = ({ isOpen, onClose, signOut, 
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <Modal.Header close={onClose}>{t('signout')}</Modal.Header>
-      <Modal.Body>
+      <ModalHeader close={onClose}>{t('signout')}</ModalHeader>
+      <ModalBody>
         <p className={cls.text}>
           {t('logout-text')} <b>&quot;{email}</b>&quot;?
         </p>
@@ -31,7 +31,7 @@ export const SignOutModal: FC<SignOutModalProps> = ({ isOpen, onClose, signOut, 
             {t('no')}
           </Button>
         </div>
-      </Modal.Body>
+      </ModalBody>
     </Modal>
   )
 }

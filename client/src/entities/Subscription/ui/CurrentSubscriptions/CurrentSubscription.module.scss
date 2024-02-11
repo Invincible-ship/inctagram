@@ -1,0 +1,21 @@
+.CurrentSubscription {
+  font-size: 14px;
+
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+
+    @media (max-width: 769px) {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+
+  .infoTitle {
+    color: var(--light-color-900);
+  }
+
+  .infoDate {
+    font-weight: 600;
+  }
+}

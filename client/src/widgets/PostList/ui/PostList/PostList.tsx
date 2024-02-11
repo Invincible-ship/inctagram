@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { PostListItem } from '../PostListItem/PostListItem'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import cls from './PostList.module.scss'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 type PostListProps = {
@@ -14,7 +14,7 @@ type PostListProps = {
   className?: string
 }
 
-export const PostList: FC<PostListProps> = ({ className }) => {
+export const PostList: FC<PostListProps> = memo(({ className }) => {
   const posts = useSelector(getPosts.selectAll)
   const type = useSelector(getPostListType)
   const limit = useSelector(getLimit)
@@ -37,7 +37,9 @@ export const PostList: FC<PostListProps> = ({ className }) => {
       {isLoading && getSkeletons(limit, type)}
     </Flex>
   )
-}
+})
+
+PostList.displayName = 'PostList'
 
 const getSkeletons = (length: number, type: PostListCardType) =>
   Array.from({ length }).map((_, idx) => {
