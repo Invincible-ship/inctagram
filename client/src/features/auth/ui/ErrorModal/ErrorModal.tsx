@@ -1,6 +1,6 @@
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-import { Modal } from '@/shared/ui/Modal/Modal'
+import { Modal, ModalBody, ModalHeader } from '@/shared/ui/Modal/Modal'
 import { TFunction } from 'i18next'
 import { FC } from 'react'
 import cls from './ErrorModal.module.scss'
@@ -29,15 +29,15 @@ export const ErrorModal: FC<ErrorModalProps> = props => {
 
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
-      <Modal.Header close={onClose}>{t('modal.error.title')}</Modal.Header>
-      <Modal.Body>
+      <ModalHeader close={onClose}>{t('modal.error.title')}</ModalHeader>
+      <ModalBody>
         <div className={cls.content}>
           <p>{errorContent()}</p>
           <Button className={cls.btn} theme={ButtonTheme.DEFAULT} onClick={onClose}>
             {t('modal.error.ok')}
           </Button>
         </div>
-      </Modal.Body>
+      </ModalBody>
     </Modal>
   )
 }

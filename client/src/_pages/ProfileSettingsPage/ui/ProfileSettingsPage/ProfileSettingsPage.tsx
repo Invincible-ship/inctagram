@@ -14,6 +14,7 @@ import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import cls from './ProfileSettingsPage.module.scss'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { UserRole } from '@/shared/lib/HOC/withAuth/routes'
+import { AccountManagement } from '@/_pages/ProfileSettingsPage/ui/AccountManagement/AccountManagement'
 
 type ProfileSettingsPageProps = {
   className?: string
@@ -23,7 +24,7 @@ type ProfileSettingsPageProps = {
 const mapProfileSettings = {
   [ProfileSettingValue.GENERAL_INFO]: <EditableProfileGeneralInfo />,
   [ProfileSettingValue.DEVICES]: <h1>Devices</h1>,
-  [ProfileSettingValue.ACCOUNT_MANAGMENT]: <h1>Account Managment</h1>,
+  [ProfileSettingValue.ACCOUNT_MANAGMENT]: <AccountManagement />,
   [ProfileSettingValue.PAYMENTS]: <h1>Payments</h1>,
 }
 

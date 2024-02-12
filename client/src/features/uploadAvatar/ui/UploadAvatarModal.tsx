@@ -1,15 +1,7 @@
 import { Namespaces } from '@/shared/config/i18n/types'
-import { Modal } from '@/shared/ui/Modal/Modal'
+import { Modal, ModalHeader } from '@/shared/ui/Modal/Modal'
 import { TFunction } from 'i18next'
-import {
-  ChangeEventHandler,
-  Dispatch,
-  FC,
-  MutableRefObject,
-  RefObject,
-  SetStateAction,
-  useRef,
-} from 'react'
+import { Dispatch, FC, MutableRefObject, RefObject, SetStateAction, useRef } from 'react'
 import cls from './UploadAvatarModal.module.scss'
 import { VStack } from '@/shared/ui/Stack'
 import { ImageSelect } from './ImageSelelct'
@@ -18,8 +10,7 @@ import { ReactCropperElement } from 'react-cropper'
 import { CropperImage } from './CropperImage'
 import toast from 'react-hot-toast'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
-import { setProfileAvatars, useUpdateProfileAvatarsMutation } from '@/entities/Profile'
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { useUpdateProfileAvatarsMutation } from '@/entities/Profile'
 import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
 
 type UploadAvatarModalProps = {
@@ -42,7 +33,6 @@ export const UploadAvatarModal: FC<UploadAvatarModalProps> = ({
   const fileRef = useRef<HTMLInputElement>() as RefObject<HTMLInputElement>
   const cropperRef = useRef<ReactCropperElement>() as RefObject<ReactCropperElement>
   const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY) as string
-  const dispatch = useAppDispatch()
 
   const [updateAvatars, { isLoading }] = useUpdateProfileAvatarsMutation()
 
@@ -79,7 +69,7 @@ export const UploadAvatarModal: FC<UploadAvatarModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={432}>
-      <Modal.Header close={onClose}>{t('general-info.upload-modal.title')}</Modal.Header>
+      <ModalHeader close={onClose}>{t('general-info.upload-modal.title')}</ModalHeader>
       <VStack className={cls.body} align="center" gap="24">
         {uploaded ? (
           <CropperImage

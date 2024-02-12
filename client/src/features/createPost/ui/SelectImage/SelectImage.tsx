@@ -1,4 +1,4 @@
-import { Modal } from '@/shared/ui/Modal/Modal'
+import { ModalBody } from '@/shared/ui/Modal/Modal'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { FC, MutableRefObject, useRef } from 'react'
 import cls from './SelectImage.module.scss'
@@ -45,7 +45,7 @@ export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
 
   return (
     <>
-      <Modal.Body className={cls.content}>
+      <ModalBody className={cls.content}>
         <VStack align="center" gap="36">
           <HStack className={cls.imgPlaceholder} align="center" justify="center">
             <ImageIcon width={36} height={36} viewBox="0 0 24 24" />
@@ -68,7 +68,7 @@ export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
             )}
           </VStack>
         </VStack>
-      </Modal.Body>
+      </ModalBody>
     </>
   )
 }

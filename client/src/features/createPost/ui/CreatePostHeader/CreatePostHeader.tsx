@@ -7,9 +7,8 @@ import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import cls from './CreatePostHeader.module.scss'
-import { Modal } from '@/shared/ui/Modal/Modal'
+import { ModalHeader } from '@/shared/ui/Modal/Modal'
 import { getIsLoading } from '../../model/selectors/getIsLoading'
-import { getCreatePostErorrs } from '../../model/selectors/getCreatePostErorrs'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 
@@ -54,6 +53,6 @@ export const CreatePostHeader: FC<CreatePostHeaderProps> = ({ title, onClose, pu
       </Button>
     </HStack>
   ) : (
-    <Modal.Header close={onClose}>{title}</Modal.Header>
+    <ModalHeader close={onClose}>{title}</ModalHeader>
   )
 }

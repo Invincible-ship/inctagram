@@ -2,7 +2,15 @@ import { SelectImage } from '../SelectImage/SelectImage'
 import { CreatePostStep } from '../../model/consts/createPost'
 import { getCurrentStep } from '../../model/selectors/getCurrentStep'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { FC, ForwardRefExoticComponent, RefAttributes, useMemo, useRef, useState } from 'react'
+import {
+  FC,
+  ForwardRefExoticComponent,
+  RefAttributes,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { useSelector } from 'react-redux'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import CloseModal from '@/features/createPost/ui/CloseModal/CloseModal'
@@ -56,19 +64,19 @@ export const CreatePost = () => {
     router.push(`?${editableSearchParams.toString()}`)
   }
 
-  const handleCreatePostModalClose = () => {
+  const handleCreatePostModalClose = useCallback(() => {
     if (mapStepToValue[currentStep] != CreatePostStep.SELECT) {
       return setIsCloseModalOpen(true)
     }
 
     closeCreatePostModal()
-  }
+  }, [currentStep])
 
   const handleCloseModalClose = () => {
     setIsCloseModalOpen(false)
   }
 
-  const publishPost = async () => {
+  const publishPost = useCallback(async () => {
     await dispatch(publishPostThunk())
 
     if (errors.length) return errors.forEach(error => toast.error(`<Server>: ${error}`))
@@ -77,7 +85,7 @@ export const CreatePost = () => {
 
     closeCreatePostModal()
     dispatch(resetCreatePostState())
-  }
+  }, [errors, dispatch, t])
 
   const title = useMemo(() => getTitle(currentStep, t), [currentStep, t])
 

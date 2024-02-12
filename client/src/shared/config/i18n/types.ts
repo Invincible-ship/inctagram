@@ -3,6 +3,11 @@ export enum LanguageIds {
   EN = 'en',
 }
 
+export enum Locales {
+  RU = 'ru-RU',
+  EN = 'en-US',
+}
+
 export enum Namespaces {
   DEFAULT = 'translation',
   // pages

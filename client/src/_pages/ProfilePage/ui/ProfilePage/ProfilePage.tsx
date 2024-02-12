@@ -19,7 +19,7 @@ import {
 } from '@/widgets/PostList'
 import { ProfileCard } from '@/widgets/ProfileCard'
 import { useParams } from 'next/navigation'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 
@@ -43,6 +43,8 @@ export const ProfilePage = () => {
     dispatch(fetchNextPosts(profileId))
   }, [dispatch, profileId])
 
+  const memoizedProfileData = useMemo(() => profileData, [profileData])
+
   const owner = +profileId === userId
 
   return (
@@ -51,7 +53,7 @@ export const ProfilePage = () => {
         <ProfileCard
           t={t}
           owner={owner}
-          profile={profileData}
+          profile={memoizedProfileData}
           isLoading={isProfileLoading}
           mobile={mobile}
         />

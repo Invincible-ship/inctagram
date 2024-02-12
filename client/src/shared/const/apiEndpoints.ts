@@ -28,3 +28,10 @@ export const DELETE_POST_ENDPOINT = '/api/v1/posts'
 // VIEWER ENDPOINTS
 export const GET_PUBLIC_USER_PROFILE = '/api/v1/public-user/profile'
 export const GET_POSTS_BY_PROFILE_ID = '/api/v1/public-posts/user'
+
+// SUBSCRIPTION ENDPOINTS
+export const GET_CURRENT_SUBSCRIPTIONS = '/api/v1/subscriptions/current-subscriptions'
+export const GET_SUBSCRIPTION_COST = '/api/v1/subscriptions/cost-of-subscriptions'
+export const GET_ALL_PAYMENTS = '/api/v1/subscriptions/my-payments'
+export const CREATE_SUBSCRIPTION = '/api/v1/subscriptions'
+export const CANCEL_AUTO_RENEWAL = '/api/v1/subscriptions/canceled-auto-renewal'

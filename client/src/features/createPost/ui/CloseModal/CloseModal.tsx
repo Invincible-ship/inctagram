@@ -3,7 +3,7 @@ import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-import { Modal } from '@/shared/ui/Modal/Modal'
+import { Modal, ModalBody, ModalHeader } from '@/shared/ui/Modal/Modal'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import React, { FC, memo } from 'react'
 import toast from 'react-hot-toast'
@@ -33,8 +33,8 @@ const CloseModal: FC<CloseModalProps> = memo(({ isOpen, onClose, closeCreatePost
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <Modal.Header close={onClose}>{t('close-modal.title')}</Modal.Header>
-      <Modal.Body>
+      <ModalHeader close={onClose}>{t('close-modal.title')}</ModalHeader>
+      <ModalBody>
         <VStack align="start" justify="start" gap="24">
           <VStack>
             <p>{t('close-modal.paragraph-1')}</p>
@@ -49,7 +49,7 @@ const CloseModal: FC<CloseModalProps> = memo(({ isOpen, onClose, closeCreatePost
             </Button>
           </HStack>
         </VStack>
-      </Modal.Body>
+      </ModalBody>
     </Modal>
   )
 })
