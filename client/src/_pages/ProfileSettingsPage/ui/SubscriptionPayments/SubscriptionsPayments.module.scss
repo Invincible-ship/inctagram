@@ -1,13 +1,8 @@
 .SubscriptionsPayments {
   position: relative;
-  min-height: 78.5vh;
+  min-height: 65vh;
 
-  .pagination {
-    left: 0;
-    bottom: 149px;
-
-    @media (max-width: 769px) {
-      bottom: 30px;
-    }
+  @media (max-width: 769px) {
+    min-height: 75vh;
   }
 }

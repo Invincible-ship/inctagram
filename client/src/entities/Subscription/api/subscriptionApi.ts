@@ -31,11 +31,16 @@ export const subscriptionApi = rtkApi.injectEndpoints({
     }),
     // mutations
     createSubscription: build.mutation<CreateSubscriptionResopnse, CreateSubscriptionRequest>({
-      query: body => ({
-        method: 'POST',
-        url: CREATE_SUBSCRIPTION,
-        body,
-      }),
+      query: options => {
+        const { params, ...body } = options
+
+        return {
+          method: 'POST',
+          url: CREATE_SUBSCRIPTION,
+          body,
+          params,
+        }
+      },
       invalidatesTags: [SUBSCRIPTION_TAG],
     }),
     cancelAutoRenewal: build.mutation<void, void>({

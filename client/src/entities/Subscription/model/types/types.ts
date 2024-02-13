@@ -1,3 +1,4 @@
+import { ReadonlyURLSearchParams } from 'next/navigation'
 import { PaymentMethodFiled } from '../consts/payment'
 import { SubscriptionTypeField } from '../consts/subscription'
 
@@ -39,6 +40,7 @@ export type CreateSubscriptionRequest = {
   paymentType: PaymentMethodFiled
   amount: number
   baseUrl: string
+  params?: ReadonlyURLSearchParams
 }
 
 export type CreateSubscriptionResopnse = {

@@ -6,8 +6,10 @@ import React, { memo, useMemo } from 'react'
 import cls from './SubscriptionsPayments.module.scss'
 import { stringToDateTime } from '@/shared/utils/stringToDateTime'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
+import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 
 export const SubscriptionsPayments = memo(() => {
+  const mobile = useMediaQuery('(max-width: 769px)')
   const { currentPage, itemsOnPage, onChangePage, onChangePageAmount } = usePagination()
 
   const { data: allPayments, isLoading } = useGetAllPaymentsQuery()
@@ -31,18 +33,14 @@ export const SubscriptionsPayments = memo(() => {
     return payments
   }, [currentPage, itemsOnPage, sortedPayments])
 
-  const paginationPosition =
-    currentPagePayments && currentPagePayments.length < 10 ? 'absolute' : 'static'
-
-  if (isLoading) return <SubscriptionsPaymentsSkeleton />
+  if (isLoading) return <SubscriptionsPaymentsSkeleton mobile={mobile} />
 
   return (
     allPayments && (
-      <VStack className={cls.SubscriptionsPayments} gap="36" max>
-        <PaymentsList payments={currentPagePayments} />
+      <VStack className={cls.SubscriptionsPayments} gap="36" justify="between" max>
+        <PaymentsList payments={currentPagePayments} mobile={mobile} />
         <Pagination
           className={cls.pagination}
-          style={{ position: paginationPosition }}
           itemsLength={allPayments.length}
           currentPage={currentPage}
           itemsOnPage={itemsOnPage}
@@ -54,7 +52,7 @@ export const SubscriptionsPayments = memo(() => {
   )
 })
 
-const SubscriptionsPaymentsSkeleton = (mobile?: boolean) =>
+const SubscriptionsPaymentsSkeleton = ({ mobile }: { mobile?: boolean }) =>
   mobile ? (
     <VStack gap="12" max>
       <Skeleton width="100%" height={200} border="10px" />

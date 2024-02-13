@@ -14,7 +14,7 @@ import { HStack, VStack } from '@/shared/ui/Stack'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import PayPalLogo from '@/shared/assets/icons/paypal-logo.svg'
 import StripeLogo from '@/shared/assets/icons/stripe-logo.svg'
-import { FullPageLoader } from '@/shared/ui/FullPageLoader/FullPageLoader'
+import { FullPageLoader, LoaderSize } from '@/shared/ui/FullPageLoader/FullPageLoader'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
@@ -58,13 +58,14 @@ export const ManageSubscriptions: FC<ManageSubscriptionsProps> = ({ isSubscripti
       ({ typeDescription }) => typeDescription == subscriptionPlan,
     ) as SubscriptionCost
     const { amount, typeDescription } = currentSubscription
-    const baseUrl = `${baseClientUrl}${pathname}?${searchParams.toString()}`
+    const baseUrl = `${baseClientUrl}${pathname}`
 
     const options = {
       paymentType,
       typeSubscription: typeDescription,
       amount,
       baseUrl,
+      params: searchParams,
     }
 
     const { url } = await createSubscriptionMutation(options).unwrap()

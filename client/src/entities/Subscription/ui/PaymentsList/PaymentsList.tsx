@@ -6,16 +6,14 @@ import PaymentCard from '@/entities/Subscription/ui/PaymentCard/PaymentCard'
 import { PaymentsListHeader } from '@/entities/Subscription/ui/PaymentsListHeader/PaymentsListHeader'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
-import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
-import { classNames } from '@/shared/lib/classNames/classNames'
 
 type PaymentsListProps = {
   payments?: SubscriptionPaymentType[]
+  mobile?: boolean
 }
 
-export const PaymentsList: FC<PaymentsListProps> = ({ payments }) => {
+export const PaymentsList: FC<PaymentsListProps> = ({ payments, mobile }) => {
   const { t } = useClientTranslation(Namespaces.PROFILE_SETTINGS)
-  const mobile = useMediaQuery('(max-width: 769px)')
 
   if (!payments) return <HStack max>You have no any paymnets!</HStack>
 

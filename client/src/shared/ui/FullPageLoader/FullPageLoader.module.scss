@@ -5,28 +5,75 @@
 
   .content {
     z-index: var(--modal-z-index);
+
+    &.small {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    &.medium {
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    &.large {
+      font-size: 36px;
+      font-weight: 600;
+    }
   }
 
   .loader {
-    width: 48px;
-    height: 48px;
     display: inline-block;
     position: relative;
-  
+
     &::after, &::before {
       content: '';  
       box-sizing: border-box;
-      width: 48px;
-      height: 48px;
       border-radius: 50%;
-      border: 2px solid var(--accent-color-500);
+      border-color: var(--accent-color-500);
+      border-style: solid;
       position: absolute;
       left: 0;
       top: 0;
       animation: animloader 2s linear infinite;
-  
-      &::after {
-        animation-delay: 1s;
+      z-index: var(--modal-z-index);
+    }
+    
+    &::after {
+      animation-delay: 1s;
+      animation-fill-mode: backwards;
+    }
+
+    &.small {
+      width: 72px;
+      height: 72px;
+
+      &::after, &::before {
+        width: 72px;
+        height: 72px;
+        border-width: 3px;
+      } 
+    }
+
+    &.medium {
+      width: 108px;
+      height: 108px;
+
+      &::after, &::before {
+        width: 108px;
+        height: 108px;
+        border-width: 5px;
+      }
+    }
+
+    &.large {
+      width: 162px;
+      height: 162px;
+
+      &::after, &::before {
+        width: 162px;
+        height: 162px;
+        border-width: 8px;
       }
     }
   }
