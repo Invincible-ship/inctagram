@@ -10,7 +10,7 @@ import { Namespaces } from '@/shared/config/i18n/types'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 
 type SelectSubscriptionPlanProps = {
-  plans: SubscriptionCost[]
+  plans: SubscriptionCost[] | undefined
   activePlan: SubscriptionTypeField
   setSubscriptionPlan: Dispatch<SetStateAction<SubscriptionTypeField>>
 }
@@ -28,6 +28,8 @@ export const SelectSubscriptionPlan: FC<SelectSubscriptionPlanProps> = memo(
       const { value, checked } = e.currentTarget
       checked && setSubscriptionPlan(value as SubscriptionTypeField)
     }
+
+    if (!plans) return
 
     return (
       <VStack className={cls.SelectSubscriptionPlan} gap={gap} max>

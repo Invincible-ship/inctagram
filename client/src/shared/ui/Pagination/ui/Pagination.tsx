@@ -16,6 +16,7 @@ type PaginationProps = ComponentProps<'nav'> & {
   onChangePageAmount?: (itemsOnPage: ItemsOnPage, newCurrentPage?: number) => void
   currentPage: number
   itemsOnPage: ItemsOnPage
+  invisible?: boolean
 }
 
 const PAGE_PLACEHOLDER = '...'
@@ -28,6 +29,7 @@ export const Pagination: FC<PaginationProps> = memo(props => {
     onChangePageAmount,
     itemsOnPage,
     currentPage,
+    invisible,
     className,
     ...rest
   } = props
@@ -89,6 +91,8 @@ export const Pagination: FC<PaginationProps> = memo(props => {
   const nextItemMods = {
     [cls.disabled]: isNextItemDisabled,
   }
+
+  if (invisible) return
 
   return (
     <nav

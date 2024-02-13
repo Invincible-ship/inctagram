@@ -1,3 +1,5 @@
+'use client'
+
 import { getUserAuthData } from '@/entities/User'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Header } from '@/widgets/Header'
@@ -26,7 +28,6 @@ export const AppLayout: FC<AppLayoutProps> = ({ children, Fallback }) => {
   return (
     <>
       <Header isAuthorized={isAuthorized} />
-      <div className="blank-header"></div>
       <div className="app-container">
         {isAuthorized && (
           <>

@@ -18,6 +18,7 @@ import { FullPageLoader } from '@/shared/ui/FullPageLoader/FullPageLoader'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 const baseClientUrl = __IS_DEV__
   ? (process.env.NEXT_PUBLIC_DEVELOPMENT_CLIENT_URL as string)
@@ -70,10 +71,13 @@ export const ManageSubscriptions: FC<ManageSubscriptionsProps> = ({ isSubscripti
     router.push(url)
   }
 
-  const memoizedPlans = useMemo(() => subscriptionsCost?.data, [subscriptionsCost])
+  const memoizedSubscriptionPlans = useMemo(() => subscriptionsCost?.data, [subscriptionsCost])
 
-  const isCostsLoaded = !isCostsLoading && subscriptionsCost?.data.length
   const isBusiness = accountType == AccountTypeField.BUSINESS
+
+  if (isCostsLoading) {
+    return <ManageSubscriptionsSkeleton />
+  }
 
   return (
     <VStack className={cls.ManageSubscriptions} gap="24" max>
@@ -82,10 +86,10 @@ export const ManageSubscriptions: FC<ManageSubscriptionsProps> = ({ isSubscripti
         setAccountType={setAccountType}
         isSubscriptionsExist={isSubscriptionsExist}
       />
-      {isCostsLoaded && isBusiness && (
+      {isBusiness && (
         <>
           <SelectSubscriptionPlan
-            plans={memoizedPlans!}
+            plans={memoizedSubscriptionPlans}
             activePlan={subscriptionPlan}
             setSubscriptionPlan={setSubscriptionPlan}
           />
@@ -110,3 +114,10 @@ export const ManageSubscriptions: FC<ManageSubscriptionsProps> = ({ isSubscripti
     </VStack>
   )
 }
+
+const ManageSubscriptionsSkeleton = () => (
+  <VStack gap="24">
+    <Skeleton width="100%" height={120} border="10px" />
+    <Skeleton width="100%" height={80} border="10px" />
+  </VStack>
+)

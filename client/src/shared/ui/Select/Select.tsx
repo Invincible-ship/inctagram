@@ -1,4 +1,11 @@
-import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react'
+import React, {
+  CSSProperties,
+  HTMLAttributes,
+  MutableRefObject,
+  ReactNode,
+  useEffect,
+  useRef,
+} from 'react'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import CheckIcon from '@/shared/assets/icons/check.svg'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -47,7 +54,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
     forwardedRef,
   ) => {
     return (
-      <SelectPrimitive.Root value={value} {...rest}>
+      <SelectPrimitive.Root {...rest}>
         <SelectPrimitive.Trigger
           ref={forwardedRef}
           data-testid={testId}

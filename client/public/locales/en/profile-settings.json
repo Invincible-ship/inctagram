@@ -80,5 +80,24 @@
     "payments": {
       "text": "Or"
     }
+  },
+  "payments": {
+    "titles": {
+      "payment-date": "Date of payment",
+      "subscription-end-date": "End date of subscription",
+      "price": "Price",
+      "subscription-type": "Subscription Type",
+      "payment-type": "Payment Type"
+    },
+    "subscription-types": {
+      "DAY": "1 day",
+      "WEEKLY": "7 days",
+      "MONTHLY": "1 mounth"
+    },
+    "payment-types": {
+      "STRIPE": "Stripe",
+      "PAYPAL": "PayPal",
+      "CREDIT_CARD": "Credit card"
+    }
   }
 }

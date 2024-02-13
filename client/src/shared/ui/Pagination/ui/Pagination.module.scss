@@ -2,6 +2,7 @@
   font-size: 14px;
   color: var(--light-color-100);
   display: flex;
+  flex-wrap: wrap;
   gap: 24px;
 
   &:focus {
@@ -24,6 +25,11 @@
       border-radius: 2px;
       cursor: pointer;
 
+      &:hover:not(&.active, &.placeholder, &.disabled) {
+        background-color: var(--dark-color-300);
+        transition: background-color .2s linear;
+      }
+
       &.active {
         background-color: var(--light-color-100);
         color: var(--dark-color-900);
@@ -41,11 +47,6 @@
           fill: var(--dark-color-100);
           pointer-events: none;
         }
-      }
-
-      &:hover:not(&.active, &.placeholder) {
-        background-color: var(--dark-color-300);
-        transition: background-color .2s linear;
       }
 
       &:focus-visible {
@@ -69,7 +70,6 @@
     gap: 8px;
 
     .selectTrigger {
-      display: inline-flex;
       gap: 2px;
       padding: 2px 6px;
       border-radius: 2px;
