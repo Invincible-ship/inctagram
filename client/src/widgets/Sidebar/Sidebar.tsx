@@ -32,7 +32,7 @@ export const SidebarItem: FC<SidebarItemProps> = ({ text, href, Icon, className 
 )
 
 export const Sidebar = () => {
-  const editableSearchParams = new URLSearchParams(Array.from(useSearchParams()))
+  const sp = useSearchParams()
   const [value, setValue] = useState<SidebarValues>(SidebarValues.HOME)
   const lngId = useContext(LanguageContext) as LanguageIds
   const { t } = useClientTranslation(Namespaces.SIDEBAR)
@@ -42,6 +42,8 @@ export const Sidebar = () => {
   const justify = direction == 'row' ? 'stretch' : 'start'
 
   const onTabClick = (tab: Tab<SidebarValues>) => setValue(tab.value)
+
+  const editableSearchParams = useMemo(() => new URLSearchParams(Array.from(sp)), [sp])
 
   const { majorTabs, additionalTabs } = useMemo(() => {
     const sidebarItems = getSidebarItems(userId, t, editableSearchParams)

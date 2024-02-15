@@ -45,6 +45,9 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    appDir: true
+  },
   transpilePackages: ['swiper']
 };
 

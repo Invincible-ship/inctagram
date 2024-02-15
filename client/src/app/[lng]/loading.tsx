@@ -1,8 +1,5 @@
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
-import { FC } from 'react'
 
-const Loading: FC = () => {
+export default function Loading() {
   return <Preloader />
 }
-
-export default Loading
