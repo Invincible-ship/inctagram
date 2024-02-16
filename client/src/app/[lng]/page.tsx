@@ -7,6 +7,7 @@ import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { Routes } from '@/shared/types/routes'
 import { Button } from '@/shared/ui/Button/Button'
+import { Pagination, usePagination } from '@/shared/ui/Pagination'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import Link from 'next/link'
 import React, { useContext } from 'react'
@@ -16,6 +17,7 @@ const Page = () => {
   const lngId = useContext(LanguageContext)
   const userData = useSelector(getUserAuthData)
   const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY)
+  const { currentPage, itemsOnPage, onChangePage, onChangePageAmount } = usePagination()
 
   return (
     <VStack gap="24">
@@ -30,6 +32,14 @@ const Page = () => {
         <p>User Data: </p>
         <pre>{JSON.stringify(userData, null, 2)}</pre>
       </div>
+
+      <Pagination
+        itemsLength={1678}
+        currentPage={currentPage}
+        itemsOnPage={itemsOnPage}
+        onChangePage={onChangePage}
+        onChangePageAmount={onChangePageAmount}
+      />
     </VStack>
   )
 }

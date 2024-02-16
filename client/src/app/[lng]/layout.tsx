@@ -1,17 +1,15 @@
-'use client'
-
-import { MutableRefObject, ReactNode, useRef, useState } from 'react'
+import { ReactNode, Suspense } from 'react'
 import { dir } from 'i18next'
 import { Inter } from 'next/font/google'
 import { LanguageIds } from '@/shared/config/i18n/types'
-import '@/shared/styles/index.scss'
-import '@/shared/styles/variables/common.scss'
 import Loading from './loading'
-import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
-import { useParams } from 'next/navigation'
-import { GoogleOAuthProvider } from '@react-oauth/google'
 import { NextFont } from 'next/dist/compiled/@next/font'
 import { AppLayout } from '@/shared/ui/Layouts/AppLayout'
+import { StoreProvider } from '@/providers/StoreProvider'
+import { SessionProvider } from '@/providers/SessionProvider/SessionProvider'
+import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
+import '@/shared/styles/index.scss'
+import { languages } from '@/shared/config/i18n/settings'
 
 const inter: NextFont = Inter({
   weight: ['400', '500', '600', '700', '900'],
@@ -19,23 +17,41 @@ const inter: NextFont = Inter({
   display: 'swap',
 })
 
-const RootLayout = ({ children }: { children: ReactNode }) => {
-  const { lng: lngId } = useParams()
-  const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string
+export const metadata = {
+  title: 'Inctagram | Social Media Service',
+  description: 'Chat and share!',
+}
 
+type RootLayoutProps = {
+  children: ReactNode
+  params: {
+    lng: LanguageIds
+  }
+}
+
+export const generateStaticParams = async () => {
+  return languages.map(lng => ({ lng }))
+}
+
+const RootLayout = ({ children, params: { lng } }: RootLayoutProps) => {
   return (
-    <html lang={lngId} dir={dir(lngId)} className={inter.className}>
+    <html lang={lng} dir={dir('ltr')} className={inter.className}>
       <head />
       <body>
         <div className="app">
-          <GoogleOAuthProvider clientId={googleClientId}>
-            <LanguageProvider lngId={lngId as LanguageIds}>
-              <AppLayout Fallback={Loading}>{children}</AppLayout>
-            </LanguageProvider>
-          </GoogleOAuthProvider>
+          <StoreProvider>
+            <SessionProvider>
+              <LanguageProvider lngId={lng}>
+                <AppLayout lngId={lng as LanguageIds}>
+                  <Suspense fallback={<Loading />}>{children}</Suspense>
+                </AppLayout>
+              </LanguageProvider>
+            </SessionProvider>
+          </StoreProvider>
         </div>
       </body>
     </html>
   )
 }
+
 export default RootLayout

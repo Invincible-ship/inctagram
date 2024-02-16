@@ -1,10 +1,7 @@
 'use client'
 
 import { PostDetailsWrapper } from '../PostDetailsWrapper/PostDetailsWrapper'
-import { getUserId, useMeLazyQuery } from '@/entities/User'
-import { useGetPublicUserProfileQuery } from '@/entities/Viewer'
-import { useClientTranslation } from '@/shared/config/i18n/client'
-import { Namespaces } from '@/shared/config/i18n/types'
+import { IViewer } from '@/entities/Viewer'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { Page } from '@/widgets/Page/Page'
@@ -19,20 +16,21 @@ import {
 } from '@/widgets/PostList'
 import { ProfileCard } from '@/widgets/ProfileCard'
 import { useParams } from 'next/navigation'
-import { useCallback, useEffect } from 'react'
+import { FC, useCallback, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
+import React from 'react'
 
-export const ProfilePage = () => {
-  const { t } = useClientTranslation(Namespaces.PROFILE_PAGE)
+type ProfilePageProps = {
+  profile?: IViewer
+}
+
+export const ProfilePage: FC<ProfilePageProps> = ({ profile }) => {
   const { id: profileId } = useParams()
-  const userId = useSelector(getUserId)
   const hasMore = useSelector(getHasMore)
   const mobile = useMediaQuery('(max-width: 769px)')
   const gap = !mobile ? '48' : '24'
   const dispatch = useAppDispatch()
-
-  const { data: profileData, isLoading: isProfileLoading } = useGetPublicUserProfileQuery(profileId)
 
   useEffect(() => {
     dispatch(initPostList({ page: PostListPage.PROFILE, currentId: profileId }))
@@ -43,18 +41,12 @@ export const ProfilePage = () => {
     dispatch(fetchNextPosts(profileId))
   }, [dispatch, profileId])
 
-  const owner = +profileId === userId
+  const memoizedProfile = useMemo(() => profile, [profile])
 
   return (
     <Page isTriggerActive={hasMore} onScrollEnd={onScrollEnd}>
       <VStack data-testid="profile-page" gap={gap} max>
-        <ProfileCard
-          t={t}
-          owner={owner}
-          profile={profileData}
-          isLoading={isProfileLoading}
-          mobile={mobile}
-        />
+        <ProfileCard profile={memoizedProfile} mobile={mobile} />
         <PostList />
         <PostDetailsWrapper />
       </VStack>
@@ -62,4 +54,4 @@ export const ProfilePage = () => {
   )
 }
 
-export default withAuth(ProfilePage, { routeRole: 'all' })
+export const ProfilePageClient = withAuth<ProfilePageProps>(ProfilePage, { routeRole: 'all' })

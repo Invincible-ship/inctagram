@@ -1,0 +1,47 @@
+.RadioButton {
+  .input[type="radio"] {
+    display: none;
+
+    &:checked + label {
+      .custom > .circle {
+        background-color: var(--light-color-100);
+      }
+    }
+  }
+
+  .label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .custom {
+    content: '';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--dark-color-500);
+    border: 2px solid var(--light-color-100);
+
+    .circle {
+      border-radius: 50%;
+      background-color: transparent;
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    color: var(--dark-color-100);
+
+    .custom {
+      border: 2px solid var(--dark-color-100);
+    }
+  }
+}

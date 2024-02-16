@@ -1,6 +1,6 @@
 @import "variables/global";
+@import "variables/common";
 @import "reset";
-//@import "variables/common";
 
 // swiper/react
 @import 'swiper/scss';
@@ -29,13 +29,10 @@
 }
 
 .app {
-  .blank-header {
-    width: 100%;
-    height: var(--header-height);
-  }
+  position: relative;
 
   .app-container {
-    max-width: 1360px;
+    max-width: var(--app-container-width);
     width: 100%;
     padding: 0 30px;
     margin: 0 auto;

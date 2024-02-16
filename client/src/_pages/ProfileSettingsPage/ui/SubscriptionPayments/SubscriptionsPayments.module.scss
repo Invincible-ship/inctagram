@@ -1,0 +1,8 @@
+.SubscriptionsPayments {
+  position: relative;
+  min-height: 65vh;
+
+  @media (max-width: 769px) {
+    min-height: 75vh;
+  }
+}

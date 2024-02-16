@@ -2,5 +2,9 @@
   "input": {
     "title": "Заголовок",
     "error": "Произошла ошибка"
+  },
+  "pagination": {
+    "pages-amount-1": "Показать",
+    "pages-amount-2": "на странице"
   }
 }

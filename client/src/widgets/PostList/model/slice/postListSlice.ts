@@ -7,8 +7,7 @@ import { fetchPostsByProfileId } from '../services/fetchPostsByProfileId'
 import { PostListPage } from '../consts/postListPage'
 import { PostListCardType } from '../consts/postListCardType'
 import { initPostList } from '../services/initPostList'
-
-const stringToDateTime = (s: string) => new Date(s).getTime()
+import { stringToDateTime } from '@/shared/utils/stringToDateTime'
 
 export const postsAdapter = createEntityAdapter<IPost>({
   selectId: post => post.id,

@@ -1,6 +1,6 @@
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-import { Modal } from '@/shared/ui/Modal/Modal'
+import { Modal, ModalBody, ModalHeader } from '@/shared/ui/Modal/Modal'
 import { TFunction } from 'i18next'
 import { FC } from 'react'
 import cls from './ConfirmationModal.module.scss'
@@ -15,8 +15,8 @@ export const ConfirmationModal: FC<SignUpModalProps> = props => {
   const { email, isOpen, t, onClose } = props
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
-      <Modal.Header close={onClose}>{t('modal.title')}</Modal.Header>
-      <Modal.Body>
+      <ModalHeader close={onClose}>{t('modal.title')}</ModalHeader>
+      <ModalBody>
         <div className={cls.content}>
           <p>
             {t('modal.text')} {` ${email}`}
@@ -25,7 +25,7 @@ export const ConfirmationModal: FC<SignUpModalProps> = props => {
             {t('modal.ok')}
           </Button>
         </div>
-      </Modal.Body>
+      </ModalBody>
     </Modal>
   )
 }

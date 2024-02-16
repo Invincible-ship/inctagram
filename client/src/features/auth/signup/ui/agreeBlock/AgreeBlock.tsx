@@ -23,7 +23,7 @@ export const AgreeBlock: FC<Props> = ({ lngId, t, setCheckedAgree, checkedAgree,
 
   return (
     <div className={`b-title bt12 light ${style.agreeBlock}`}>
-      <Checkbox handleAgree={setCheckedAgree} checkedAgree={checkedAgree} />
+      <Checkbox handleAgree={setCheckedAgree} checked={checkedAgree} />
       <span>{t('agree.iAgreeTo')} &nbsp;</span>
       <span onClick={saveFormValues}>
         <Link

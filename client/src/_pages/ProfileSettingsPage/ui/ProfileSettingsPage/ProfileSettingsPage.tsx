@@ -14,6 +14,8 @@ import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import cls from './ProfileSettingsPage.module.scss'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { UserRole } from '@/shared/lib/HOC/withAuth/routes'
+import { AccountManagement } from '@/_pages/ProfileSettingsPage/ui/AccountManagement/AccountManagement'
+import { SubscriptionsPayments } from '@/_pages/ProfileSettingsPage/ui/SubscriptionPayments/SubscriptionsPayments'
 
 type ProfileSettingsPageProps = {
   className?: string
@@ -23,15 +25,15 @@ type ProfileSettingsPageProps = {
 const mapProfileSettings = {
   [ProfileSettingValue.GENERAL_INFO]: <EditableProfileGeneralInfo />,
   [ProfileSettingValue.DEVICES]: <h1>Devices</h1>,
-  [ProfileSettingValue.ACCOUNT_MANAGMENT]: <h1>Account Managment</h1>,
-  [ProfileSettingValue.PAYMENTS]: <h1>Payments</h1>,
+  [ProfileSettingValue.ACCOUNT_MANAGMENT]: <AccountManagement />,
+  [ProfileSettingValue.PAYMENTS]: <SubscriptionsPayments />,
 }
 
 export const ProfileSettingsPage = ({ className, initialTabValue }: ProfileSettingsPageProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const editableSearchParams = new URLSearchParams(Array.from(searchParams.entries()))
+  const editableSearchParams = new URLSearchParams(Array.from(searchParams))
   const currentTabValue =
     (editableSearchParams.get('setting') as ProfileSettingValue) || initialTabValue
 
@@ -131,7 +133,7 @@ const ProfileSettingsSkeleton = ({ isWithAvatar }: { isWithAvatar: boolean }) =>
   )
 }
 
-export default withAuth(ProfileSettingsPage, {
+export default withAuth<ProfileSettingsPageProps>(ProfileSettingsPage, {
   routeRole: 'all',
   userRole: UserRole.ADMIN,
 })

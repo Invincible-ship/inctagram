@@ -2,11 +2,20 @@ import { SelectImage } from '../SelectImage/SelectImage'
 import { CreatePostStep } from '../../model/consts/createPost'
 import { getCurrentStep } from '../../model/selectors/getCurrentStep'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { FC, ForwardRefExoticComponent, RefAttributes, useMemo, useRef, useState } from 'react'
+import {
+  FC,
+  ForwardRefExoticComponent,
+  RefAttributes,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { useSelector } from 'react-redux'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import CloseModal from '@/features/createPost/ui/CloseModal/CloseModal'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { CroppingImage } from '../CroppingImage/CroppingImage'
 import { ComponentCommonProps } from '../../model/types/types'
 import { useClientTranslation } from '@/shared/config/i18n/client'
@@ -20,6 +29,8 @@ import { getCreatePostErorrs } from '../../model/selectors/getCreatePostErorrs'
 import toast from 'react-hot-toast'
 import { resetCreatePostState } from '../../model/slice/createPostSlice'
 import { publishPostThunk } from '@/features/createPost/model/services/publishPostThunk'
+import { NavigateOptions } from 'next/dist/shared/lib/app-router-context'
+import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
 
 const mapStepToValue: Record<number, CreatePostStep> = {
   1: CreatePostStep.SELECT,
@@ -41,8 +52,8 @@ const mapValueToComponent: Record<
 
 export const CreatePost = () => {
   const router = useRouter()
-  const editableSearchParams = new URLSearchParams(Array.from(useSearchParams()))
-  const isPostCreating = !!editableSearchParams.get('createPost')
+  const sp = useSearchParams()
+  const isPostCreating = !!sp.get('createPost')
   const toastSizeErrorIdRef = useRef<string>()
   const [isCloseModalOpen, setIsCloseModalOpen] = useState<boolean>(false)
   const currentStep = useSelector(getCurrentStep)
@@ -52,23 +63,23 @@ export const CreatePost = () => {
 
   const closeCreatePostModal = () => {
     toast.remove(toastSizeErrorIdRef.current)
-    editableSearchParams.delete('createPost')
-    router.push(`?${editableSearchParams.toString()}`)
+
+    router.back()
   }
 
-  const handleCreatePostModalClose = () => {
+  const handleCreatePostModalClose = useCallback(() => {
     if (mapStepToValue[currentStep] != CreatePostStep.SELECT) {
       return setIsCloseModalOpen(true)
     }
 
     closeCreatePostModal()
-  }
+  }, [currentStep])
 
   const handleCloseModalClose = () => {
     setIsCloseModalOpen(false)
   }
 
-  const publishPost = async () => {
+  const publishPost = useCallback(async () => {
     await dispatch(publishPostThunk())
 
     if (errors.length) return errors.forEach(error => toast.error(`<Server>: ${error}`))
@@ -77,7 +88,7 @@ export const CreatePost = () => {
 
     closeCreatePostModal()
     dispatch(resetCreatePostState())
-  }
+  }, [errors, dispatch, t])
 
   const title = useMemo(() => getTitle(currentStep, t), [currentStep, t])
 
