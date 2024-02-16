@@ -9,6 +9,7 @@ import { StoreProvider } from '@/providers/StoreProvider'
 import { SessionProvider } from '@/providers/SessionProvider/SessionProvider'
 import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
 import '@/shared/styles/index.scss'
+import { languages } from '@/shared/config/i18n/settings'
 
 const inter: NextFont = Inter({
   weight: ['400', '500', '600', '700', '900'],
@@ -26,6 +27,10 @@ type RootLayoutProps = {
   params: {
     lng: LanguageIds
   }
+}
+
+export const generateStaticParams = async () => {
+  return languages.map(lng => ({ lng }))
 }
 
 const RootLayout = ({ children, params: { lng } }: RootLayoutProps) => {

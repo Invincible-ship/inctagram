@@ -1,3 +1,5 @@
-import ProfileSettingsPage from '@/_pages/ProfileSettingsPage/ui/ProfileSettingsPage/ProfileSettingsPage'
+import ProfileSettingPage from '@/_pages/ProfileSettingsPage/ui/ProfileSettingsPage/ProfileSettingsPage'
 
-export default ProfileSettingsPage
+export default function Page() {
+  return <ProfileSettingPage />
+}

@@ -33,7 +33,7 @@ export const ProfileSettingsPage = ({ className, initialTabValue }: ProfileSetti
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const editableSearchParams = new URLSearchParams(Array.from(searchParams.entries()))
+  const editableSearchParams = new URLSearchParams(Array.from(searchParams))
   const currentTabValue =
     (editableSearchParams.get('setting') as ProfileSettingValue) || initialTabValue
 
@@ -133,7 +133,7 @@ const ProfileSettingsSkeleton = ({ isWithAvatar }: { isWithAvatar: boolean }) =>
   )
 }
 
-export default withAuth(ProfileSettingsPage, {
+export default withAuth<ProfileSettingsPageProps>(ProfileSettingsPage, {
   routeRole: 'all',
   userRole: UserRole.ADMIN,
 })

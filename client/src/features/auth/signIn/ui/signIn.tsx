@@ -20,7 +20,7 @@ import { Routes } from '@/shared/types/routes'
 import { getIsLoading as getIsSignInWithEmailLoading } from '../model/selectors/getIsLoading'
 import {
   getIsSignInWithGoogleLoading,
-  ThirdPartyOAuthButtons,
+  ThirdPartyOAuth,
 } from '@/features/auth/signInWithThirdPartyServices'
 import { getError } from '../model/selectors/getError'
 import { useRouter } from 'next/navigation'
@@ -73,7 +73,7 @@ export const SignIn: FC = () => {
 
   return (
     <Card t={t} title={'signIn'}>
-      <ThirdPartyOAuthButtons />
+      <ThirdPartyOAuth />
       <SignInForm
         lngId={lngId}
         t={t}

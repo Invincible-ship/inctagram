@@ -1,3 +1,5 @@
+'use client'
+
 import { ButtonHTMLAttributes, FC, MouseEvent } from 'react'
 import Spinner from '@/shared/assets/icons/spinner.svg'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -9,6 +11,8 @@ export enum ButtonTheme {
   OUTLINED = 'outlined',
   TEXT = 'text',
 }
+
+const ButtonThemeValues = Object.values(ButtonTheme)
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string

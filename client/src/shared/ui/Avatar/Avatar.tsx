@@ -1,3 +1,5 @@
+'use client'
+
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { MyImage } from '@/shared/ui/MyImage/MyImage'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'

@@ -17,7 +17,7 @@ export const SubscriptionsPayments = memo(() => {
   const sortedPayments = useMemo(() => {
     if (!allPayments || allPayments.length == 0) return
 
-    return allPayments.toSorted(
+    return [...allPayments].sort(
       (a, b) => stringToDateTime(b.dateOfPayment) - stringToDateTime(a.dateOfPayment),
     )
   }, [allPayments])

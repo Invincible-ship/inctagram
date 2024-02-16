@@ -18,7 +18,7 @@ const ProfileCardStory = ({ owner }: { owner: boolean }) => {
 
   return (
     <HStack className={cls.Story} justify="center" max>
-      <ProfileCard profile={mockedProfileData} t={t} isLoading={false} owner={owner} />
+      <ProfileCard profile={mockedProfileData} isLoading={false} />
     </HStack>
   )
 }

@@ -35,19 +35,13 @@ const mockedProfileData: IViewer = {
   avatars: [],
 }
 
-const ProfilePage: FC<{ owner: boolean }> = ({ owner }) => {
+const ProfilePageComponent = () => {
   const { t } = useClientTranslation(Namespaces.PROFILE_PAGE)
   const mobile = useMediaQuery('(max-width: 769px)')
 
   return (
     <VStack gap="48" max>
-      <ProfileCard
-        t={t}
-        owner={owner}
-        profile={mockedProfileData}
-        mobile={mobile}
-        isLoading={false}
-      />
+      <ProfileCard profile={mockedProfileData} mobile={mobile} isLoading={false} />
       <PostList />
       <PostDetailsWrapper />
     </VStack>
@@ -60,16 +54,12 @@ const meta: Meta<typeof ProfilePage> = {
     (Story: StoryFn) => PageDecorator(Story),
     (Story: StoryFn) => StoreDecorator(Story, mockedStoreData),
   ],
-  component: ProfilePage,
+  component: ProfilePageComponent,
 }
 
 export default meta
-type Story = StoryObj<typeof ProfilePage>
+type Story = StoryObj<typeof ProfilePageComponent>
 
-export const Owner: Story = {
-  render: () => <ProfilePage owner />,
-}
-
-export const Viewer: Story = {
-  render: () => <ProfilePage owner={false} />,
+export const ProfilePage: Story = {
+  render: () => <ProfilePageComponent />,
 }

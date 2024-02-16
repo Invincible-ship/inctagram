@@ -19,7 +19,7 @@ import { getIsConfirmationModalOpen } from '../model/selectors/getIsConfirmation
 import { getIsErrorModalOpen } from '../model/selectors/getIsErrorModalOpen'
 import { Routes } from '@/shared/types/routes'
 import {
-  ThirdPartyOAuthButtons,
+  ThirdPartyOAuth,
   getIsSignInWithGoogleLoading,
 } from '@/features/auth/signInWithThirdPartyServices'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
@@ -94,7 +94,7 @@ export const SignUp = () => {
       <div className={'form registration'}>
         <div className="form-wrapper auth-form">
           <div className={'title b-title bt26 semibold align-center'}>{t('signUp')}</div>
-          <ThirdPartyOAuthButtons />
+          <ThirdPartyOAuth />
           <SignUpForm
             lngId={lngId}
             onSubmit={handleSubmit(onSubmit)}
