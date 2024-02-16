@@ -16,7 +16,7 @@ type ProfilePageProps = {
   params: ProfilePageParams
 }
 
-const API = process.env.NEXT_PUBLIC_API
+const API = process.env.API
 const totalUsersCountEndpoint = `${API}${GET_USERS_TOTAL_COUNT}`
 const profileEndpoint = (id: string) => `${API}${GET_PUBLIC_USER_PROFILE}/${id}`
 
