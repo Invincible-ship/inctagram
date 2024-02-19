@@ -1,3 +1,4 @@
+import { AppRouterContext } from 'next/dist/shared/lib/app-router-context'
 import type { Preview, StoryFn } from '@storybook/react'
 import { StyleDecorator } from '@/shared/config/storybook/StyleDecorator/StyleDecorator'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
@@ -15,6 +16,9 @@ const preview: Preview = {
     },
     nextjs: {
       appDirectory: true,
+    },
+    nextRouter: {
+      Provider: AppRouterContext.Provider,
     },
   },
   decorators: [

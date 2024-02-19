@@ -5,7 +5,7 @@ import { IViewer } from '@/entities/Viewer'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { Page } from '@/widgets/Page/Page'
-import { VStack } from '@/shared/ui/Stack'
+import { HStack, VStack } from '@/shared/ui/Stack'
 import {
   PostList,
   PostListPage,
@@ -13,16 +13,18 @@ import {
   fetchNextPosts,
   initPostList,
   getHasMore,
+  PostListCardType,
+  getSkeletons,
 } from '@/widgets/PostList'
-import { ProfileCard } from '@/widgets/ProfileCard'
+import { ProfileCard, ProfileCardSkeleton } from '@/widgets/ProfileCard'
 import { useParams } from 'next/navigation'
-import { FC, useCallback, useEffect, useMemo } from 'react'
+import { FC, Suspense, useCallback, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 import React from 'react'
 
 type ProfilePageProps = {
-  profile?: IViewer
+  profile: IViewer
 }
 
 export const ProfilePage: FC<ProfilePageProps> = ({ profile }) => {
@@ -44,13 +46,35 @@ export const ProfilePage: FC<ProfilePageProps> = ({ profile }) => {
   const memoizedProfile = useMemo(() => profile, [profile])
 
   return (
-    <Page isTriggerActive={hasMore} onScrollEnd={onScrollEnd}>
-      <VStack data-testid="profile-page" gap={gap} max>
-        <ProfileCard profile={memoizedProfile} mobile={mobile} />
-        <PostList />
-        <PostDetailsWrapper />
-      </VStack>
-    </Page>
+    <Suspense fallback={<ProfilePageSkeleton mobile={mobile} postsLength={8} />}>
+      <Page isTriggerActive={hasMore} onScrollEnd={onScrollEnd}>
+        <VStack data-testid="profile-page" gap={gap} max>
+          <ProfileCard profile={memoizedProfile} mobile={mobile} />
+          <PostList />
+          <PostDetailsWrapper />
+        </VStack>
+      </Page>
+    </Suspense>
+  )
+}
+
+type ProfilePageSkeletonProps = {
+  mobile?: boolean
+  postCardType?: PostListCardType
+  postsLength?: number
+}
+
+const ProfilePageSkeleton: FC<ProfilePageSkeletonProps> = props => {
+  const { mobile, postCardType = PostListCardType.IMAGE, postsLength = 8 } = props
+  const gap = !mobile ? '48' : '24'
+
+  return (
+    <VStack gap={gap} max>
+      <ProfileCardSkeleton mobile={mobile} />
+      <HStack gap="4" wrap="wrap" max>
+        {getSkeletons(postsLength, postCardType)}
+      </HStack>
+    </VStack>
   )
 }
 

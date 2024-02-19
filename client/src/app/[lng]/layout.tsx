@@ -29,10 +29,6 @@ type RootLayoutProps = {
   }
 }
 
-export const generateStaticParams = async () => {
-  return languages.map(lng => ({ lng }))
-}
-
 const RootLayout = ({ children, params: { lng } }: RootLayoutProps) => {
   return (
     <html lang={lng} dir={dir('ltr')} className={inter.className}>

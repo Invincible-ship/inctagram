@@ -10,17 +10,15 @@ import { Namespaces } from '@/shared/config/i18n/types'
 import { ProfileCardFeautures } from '@/widgets/ProfileCard/ui/ProfileCardFeautures/ProfileCardFeautures'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 
-export const dynamic = 'force-dynamic'
-
 type ProfileCardProps = {
   mobile?: boolean
-  profile?: IViewer
+  profile: IViewer
   isLoading?: boolean
 }
 
 export const ProfileCard: FC<ProfileCardProps> = memo(({ profile, mobile, isLoading }) => {
   const { t } = useClientTranslation(Namespaces.PROFILE_PAGE)
-  const avatar = profile?.avatars.find(({ width }) => width == 192)
+  const avatar = profile.avatars.find(({ width }) => width == 192)
 
   const infoContainer = useMemo(() => {
     const align = mobile ? 'center' : 'start'
@@ -44,52 +42,48 @@ export const ProfileCard: FC<ProfileCardProps> = memo(({ profile, mobile, isLoad
     )
   }, [mobile, t])
 
-  if (isLoading) return <ProfileSkeleton mobile={mobile} />
+  if (isLoading) return <ProfileCardSkeleton mobile={mobile} />
 
   if (mobile) {
     return (
-      profile && (
-        <VStack data-testid="profile-card" className={cls.ProfileCard} gap="16" max>
-          <VStack gap="4" max>
-            <HStack gap="36" align="center" max>
-              <HStack>
-                <Avatar src={avatar?.url} size={72} />
-              </HStack>
-              {infoContainer}
+      <VStack data-testid="profile-card" className={cls.ProfileCard} gap="16" max>
+        <VStack gap="4" max>
+          <HStack gap="36" align="center" max>
+            <HStack>
+              <Avatar src={avatar?.url} size={72} />
             </HStack>
-            <HStack className={cls.username}>{profile.userName}</HStack>
-          </VStack>
-          <ProfileCardFeautures mobile={true} t={t} />
-          <HStack className={cls.aboutMe} max>
-            {profile.aboutMe}
+            {infoContainer}
           </HStack>
+          <HStack className={cls.username}>{profile.userName}</HStack>
         </VStack>
-      )
+        <ProfileCardFeautures mobile={true} t={t} />
+        <HStack className={cls.aboutMe} max>
+          {profile.aboutMe}
+        </HStack>
+      </VStack>
     )
   }
 
   return (
-    profile && (
-      <HStack data-testid="profile-card" className={cls.ProfileCard} gap="36" max>
-        <HStack>
-          <Avatar src={avatar?.url} size={192} />
-        </HStack>
-        <VStack gap="24" max>
-          <HStack justify="between" align="center" max>
-            <HStack className={cls.username}>{profile.userName}</HStack>
-            <ProfileCardFeautures mobile={false} t={t} />
-          </HStack>
-          {infoContainer}
-          <HStack className={cls.aboutMe}>{profile.aboutMe}</HStack>
-        </VStack>
+    <HStack data-testid="profile-card" className={cls.ProfileCard} gap="36" max>
+      <HStack>
+        <Avatar src={avatar?.url} size={192} />
       </HStack>
-    )
+      <VStack gap="24" max>
+        <HStack justify="between" align="center" max>
+          <HStack className={cls.username}>{profile.userName}</HStack>
+          <ProfileCardFeautures mobile={false} t={t} />
+        </HStack>
+        {infoContainer}
+        <HStack className={cls.aboutMe}>{profile.aboutMe}</HStack>
+      </VStack>
+    </HStack>
   )
 })
 
 ProfileCard.displayName = 'ProfileCard'
 
-const ProfileSkeleton = ({ mobile }: { mobile?: boolean }) =>
+export const ProfileCardSkeleton = ({ mobile }: { mobile?: boolean }) =>
   !mobile ? (
     <HStack data-testid="profile-skeleton" gap="36" max>
       <HStack>

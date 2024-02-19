@@ -1,8 +1,7 @@
 'use client'
 
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { EditableProfileGeneralInfo } from '@/features/editableProfileGeneralInfo'
-import { Suspense, memo, useCallback, useMemo } from 'react'
+import { Suspense, lazy, memo, useCallback, useMemo } from 'react'
 import { Flex, VStack } from '@/shared/ui/Stack'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ProfileSettingValue, ProfileSettingsTab } from '@/features/editableProfileGeneralInfo'
@@ -14,19 +13,33 @@ import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import cls from './ProfileSettingsPage.module.scss'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { UserRole } from '@/shared/lib/HOC/withAuth/routes'
-import { AccountManagement } from '@/_pages/ProfileSettingsPage/ui/AccountManagement/AccountManagement'
-import { SubscriptionsPayments } from '@/_pages/ProfileSettingsPage/ui/SubscriptionPayments/SubscriptionsPayments'
 
 type ProfileSettingsPageProps = {
   className?: string
   initialTabValue?: ProfileSettingValue
 }
 
+const EditableProfileGeneralInfo = lazy(() =>
+  import('@/features/editableProfileGeneralInfo').then(mod => ({
+    default: mod.EditableProfileGeneralInfo,
+  })),
+)
+const AccountManagement = lazy(() =>
+  import('../AccountManagement/AccountManagement').then(mod => ({
+    default: mod.AccountManagement,
+  })),
+)
+const SubscriptionsPayments = lazy(() =>
+  import('../SubscriptionPayments/SubscriptionsPayments').then(mod => ({
+    default: mod.SubscriptionsPayments,
+  })),
+)
+
 const mapProfileSettings = {
-  [ProfileSettingValue.GENERAL_INFO]: <EditableProfileGeneralInfo />,
-  [ProfileSettingValue.DEVICES]: <h1>Devices</h1>,
-  [ProfileSettingValue.ACCOUNT_MANAGMENT]: <AccountManagement />,
-  [ProfileSettingValue.PAYMENTS]: <SubscriptionsPayments />,
+  [ProfileSettingValue.GENERAL_INFO]: EditableProfileGeneralInfo,
+  [ProfileSettingValue.DEVICES]: () => <h1>Devices</h1>,
+  [ProfileSettingValue.ACCOUNT_MANAGMENT]: AccountManagement,
+  [ProfileSettingValue.PAYMENTS]: SubscriptionsPayments,
 }
 
 export const ProfileSettingsPage = ({ className, initialTabValue }: ProfileSettingsPageProps) => {
@@ -47,6 +60,8 @@ export const ProfileSettingsPage = ({ className, initialTabValue }: ProfileSetti
     router.push(`${pathname}?${editableSearchParams.toString()}`)
   }, [])
 
+  const CurrentTabComponent = mapProfileSettings[currentTabValue]
+
   return (
     <VStack gap="24" max className={classNames(cls.ProfileSettings, {}, [className])}>
       <ProfileSettingsHeader tabValue={currentTabValue} handleTabClick={handleTabClick} />
@@ -57,7 +72,7 @@ export const ProfileSettingsPage = ({ className, initialTabValue }: ProfileSetti
           />
         }
       >
-        {mapProfileSettings[currentTabValue]}
+        <CurrentTabComponent />
       </Suspense>
     </VStack>
   )

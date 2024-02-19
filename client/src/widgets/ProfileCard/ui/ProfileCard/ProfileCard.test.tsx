@@ -8,6 +8,7 @@ import { TFunction } from 'i18next'
 import { mockRouter, MemoryRouterProvider } from '@/shared/lib/tests/mockRouter/mockRouter'
 import { componentRender } from '@/shared/lib/tests/componentRender'
 import { Routes } from '@/shared/types/routes'
+import { IUser, IUserSchema } from '@/entities/User'
 
 const mockedProfile: IViewer = {
   id: 1,
@@ -16,20 +17,32 @@ const mockedProfile: IViewer = {
   aboutMe: 'About me',
 }
 
-const mockedT = jest.fn((s: string) => '') as unknown as TFunction<Namespaces, undefined>
+const mockedUser: (owner?: boolean) => DeepPartial<IUserSchema> = owner => ({
+  authData: {
+    userId: owner ? 1 : 0,
+  },
+})
+
+jest.mock('next/navigation', () => ({
+  useParams: jest.fn().mockImplementation(() => ({ id: '1' })),
+}))
+
+const renderProfileCard = ({ owner, mobile }: { owner?: boolean; mobile?: boolean }) => {
+  return componentRender(
+    <ProfileCard isLoading={false} profile={mockedProfile} mobile={mobile} />,
+    {
+      initialState: { user: mockedUser(owner) },
+      renderOptions: {
+        wrapper: MemoryRouterProvider,
+      },
+    },
+  )
+}
 
 describe('ProfileCard', () => {
   // eslint-disable-next-line prettier/prettier
   it('renders the viewer\'s profile card correctly', async () => {
-    render(
-      <ProfileCard
-        t={mockedT}
-        profile={mockedProfile}
-        owner={false}
-        isLoading={false}
-        mobile={false}
-      />,
-    )
+    renderProfileCard({ owner: false })
 
     expect(screen.getByText('John Doe')).toBeInTheDocument()
     expect(screen.getByText('About me')).toBeInTheDocument()
@@ -44,9 +57,7 @@ describe('ProfileCard', () => {
 
   // eslint-disable-next-line prettier/prettier
   it('renders the owner\'s profile card correctly', () => {
-    render(
-      <ProfileCard t={mockedT} profile={mockedProfile} owner isLoading={false} mobile={false} />,
-    )
+    renderProfileCard({ owner: true })
 
     expect(screen.getByText('John Doe')).toBeInTheDocument()
     expect(screen.getByText('About me')).toBeInTheDocument()
@@ -60,9 +71,7 @@ describe('ProfileCard', () => {
 
   // eslint-disable-next-line prettier/prettier
   it('renders the mobile version viewer\'s profile card correctly', () => {
-    render(
-      <ProfileCard t={mockedT} profile={mockedProfile} owner={false} isLoading={false} mobile />,
-    )
+    renderProfileCard({ owner: false, mobile: true })
 
     expect(screen.getByTestId('profile-card')).toHaveClass('directionColumn')
 
@@ -79,7 +88,7 @@ describe('ProfileCard', () => {
 
   // eslint-disable-next-line prettier/prettier
   it('renders the mobile version owner\'s profile card correctly', () => {
-    render(<ProfileCard t={mockedT} profile={mockedProfile} owner isLoading={false} mobile />)
+    renderProfileCard({ owner: true, mobile: true })
 
     expect(screen.getByTestId('profile-card')).toHaveClass('directionColumn')
 
@@ -94,18 +103,14 @@ describe('ProfileCard', () => {
   })
 
   it('renders the loading skeleton when isLoading is true', () => {
-    render(<ProfileCard t={mockedT} owner isLoading />)
+    render(<ProfileCard profile={mockedProfile} isLoading />)
 
     expect(screen.getByTestId('profile-skeleton')).toBeInTheDocument()
   })
 
   // eslint-disable-next-line prettier/prettier
   it('link to edit owner\'s profile should be correct', () => {
-    componentRender(<ProfileCard t={mockedT} isLoading={false} profile={mockedProfile} owner />, {
-      renderOptions: {
-        wrapper: MemoryRouterProvider,
-      },
-    })
+    renderProfileCard({ owner: true })
     const settingsBtn = screen.getByTestId('settings-btn')
 
     fireEvent.click(settingsBtn)
