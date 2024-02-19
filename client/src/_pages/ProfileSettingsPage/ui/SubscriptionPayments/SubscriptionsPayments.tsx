@@ -46,6 +46,7 @@ export const SubscriptionsPayments = memo(() => {
           itemsOnPage={itemsOnPage}
           onChangePage={onChangePage}
           onChangePageAmount={onChangePageAmount}
+          invisible={!allPayments?.length}
         />
       </VStack>
     )

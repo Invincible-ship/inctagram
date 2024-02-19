@@ -12,8 +12,8 @@ import toast from 'react-hot-toast'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { useUpdateProfileAvatarsMutation } from '@/entities/Profile'
 import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
-// import revalidateDataByPath from '@/shared/lib/serverActions/revalidateDataByPath'
-import { PROFILE_TAG } from '@/shared/const/rtk'
+import revalidateDataByPath from '@/shared/lib/serverActions/revalidateDataByPath'
+import { PROFILE_TAG, VIEWER_TAG } from '@/shared/const/rtk'
 
 type UploadAvatarModalProps = {
   isOpen: boolean
@@ -54,9 +54,9 @@ export const UploadAvatarModal: FC<UploadAvatarModalProps> = ({
 
     try {
       await updateAvatars({ formData, id: userId }).unwrap()
-      // revalidateDataByPath(PROFILE_TAG)
-
       onClose()
+
+      revalidateDataByPath(VIEWER_TAG)
     } catch (err) {
       toast.error('Something went wrong, please try again...')
       console.log('Upload avatar error: ', err)
