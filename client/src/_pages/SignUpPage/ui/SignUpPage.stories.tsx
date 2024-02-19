@@ -15,9 +15,5 @@ export default meta
 type Story = StoryObj<typeof SignUpPage>
 
 export const Page: Story = {
-  render: () => (
-    <GoogleOAuthProvider clientId="storybook_test">
-      <SignUpPage />
-    </GoogleOAuthProvider>
-  ),
+  render: () => <SignUpPage />,
 }

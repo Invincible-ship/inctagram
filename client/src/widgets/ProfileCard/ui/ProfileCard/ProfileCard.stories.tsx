@@ -14,7 +14,7 @@ const mockedProfileData: IViewer = {
   avatars: [],
 }
 
-const ProfileCardStory = ({ owner }: { owner: boolean }) => {
+const ProfileCardStory = () => {
   return (
     <HStack className={cls.Story} justify="center" max>
       <ProfileCard profile={mockedProfileData} isLoading={false} />
@@ -31,20 +31,17 @@ export default meta
 type Story = StoryObj<typeof ProfileCardStory>
 
 export const Owner: Story = {
-  render: () => <ProfileCardStory owner />,
+  render: () => <ProfileCardStory />,
   decorators: [(Story: StoryFn) => StoreDecorator(Story, { user: { authData: { userId: 1 } } })],
   parameters: {
-    nextRouter: {
-      pathname: '[lng]/profile/[id]',
-      asPath: 'en/profile/1',
-      query: {
-        lng: 'en',
-        id: '1',
+    nextjs: {
+      navigation: {
+        segments: [['id', '1']],
       },
     },
   },
 }
 
 export const Viewer: Story = {
-  render: () => <ProfileCardStory owner={false} />,
+  render: () => <ProfileCardStory />,
 }
