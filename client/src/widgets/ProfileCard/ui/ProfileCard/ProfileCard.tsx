@@ -49,9 +49,7 @@ export const ProfileCard: FC<ProfileCardProps> = memo(({ profile, mobile, isLoad
       <VStack data-testid="profile-card" className={cls.ProfileCard} gap="16" max>
         <VStack gap="4" max>
           <HStack gap="36" align="center" max>
-            <HStack>
-              <Avatar src={avatar?.url} size={72} />
-            </HStack>
+            <Avatar src={avatar?.url} size={72} />
             {infoContainer}
           </HStack>
           <HStack className={cls.username}>{profile.userName}</HStack>
@@ -66,9 +64,7 @@ export const ProfileCard: FC<ProfileCardProps> = memo(({ profile, mobile, isLoad
 
   return (
     <HStack data-testid="profile-card" className={cls.ProfileCard} gap="36" max>
-      <HStack>
-        <Avatar src={avatar?.url} size={192} />
-      </HStack>
+      <Avatar src={avatar?.url} size={192} />
       <VStack gap="24" max>
         <HStack justify="between" align="center" max>
           <HStack className={cls.username}>{profile.userName}</HStack>

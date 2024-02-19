@@ -146,7 +146,9 @@ export const MyImage = memo(
             onError={onError}
             {...rest}
           />
-          {isLoading && <Skeleton style={{ position: 'absolute', inset: 0, width, height }} />}
+          {isLoading && (
+            <Skeleton style={{ position: 'absolute', inset: 0 }} className={className} />
+          )}
         </div>
       </>
     )

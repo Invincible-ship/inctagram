@@ -28,7 +28,7 @@ export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) =
 
   if (!imagePreview) return <Skeleton width="100%" height="100%" />
 
-  const imageTypeSizes = '(max-width: 768px) 33vw, 15vw'
+  const imageTypeSizes = '(max-width: 768px) 50vw, 33vw'
 
   searchParams.set(POST_DETAILS_ID, String(post.id))
 

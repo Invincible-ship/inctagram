@@ -48,6 +48,7 @@ export const Avatar: FC<AvatarProps> = ({
       style={{
         width: size,
         height: size,
+        flexShrink: 0,
       }}
     >
       <DefaultAvatar className={cls.defaultAvatar} width={size} height={size} viewBox="0 0 24 24" />

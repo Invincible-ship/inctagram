@@ -2,7 +2,7 @@ import { ProfilePageClient } from '@/_pages/ProfilePage'
 import { IViewer } from '@/entities/Viewer'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { GET_PUBLIC_USER_PROFILE, GET_USERS_TOTAL_COUNT } from '@/shared/const/apiEndpoints'
-import { PROFILE_TAG, VIEWER_TAG } from '@/shared/const/rtk'
+import { VIEWER_TAG } from '@/shared/const/rtk'
 import { notFound } from 'next/navigation'
 
 type ProfilePageParams = {
