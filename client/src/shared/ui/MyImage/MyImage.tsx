@@ -1,18 +1,20 @@
 import NextImage from 'next/image'
-import type { ImageProps, StaticImageData } from 'next/image'
+import type { ImageProps } from 'next/image'
 import {
   CSSProperties,
   ReactElement,
+  SyntheticEvent,
   forwardRef,
   memo,
   useEffect,
-  useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
 import cls from './MyImage.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { getDynamicImageStyles } from './utils/getDynamicImageStyles'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 export enum ImageFilter {
   NORMAL = 'normal',
@@ -70,28 +72,6 @@ export const MyImage = memo(
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [isHasError, setIsHasError] = useState<boolean>(false)
 
-    useLayoutEffect(() => {
-      const img = new Image()
-      img.src = typeof src != 'string' ? (src as StaticImageData).src : src ?? ''
-      img.onload = function () {
-        const self = this as HTMLImageElement
-        const { width, height } = self
-
-        intrinsicWidthRef.current = width
-        intrinsicHeightRef.current = height
-
-        if (variant == ImageVariant.ORIGINAL && filter != ImageFilter.NORMAL) {
-          setDynamicImageStyles(getDynamicImageStyles(width, height))
-        }
-
-        setIsLoading(false)
-      }
-      img.onerror = () => {
-        setIsLoading(false)
-        setIsHasError(true)
-      }
-    }, [src])
-
     useEffect(() => {
       if (variant == ImageVariant.ORIGINAL && filter != ImageFilter.NORMAL) {
         setDynamicImageStyles(
@@ -100,16 +80,25 @@ export const MyImage = memo(
       }
     }, [variant, filter])
 
-    if (isLoading) return fallback
+    function onLoad(e: SyntheticEvent<HTMLImageElement>) {
+      const self = e.currentTarget
+      const { naturalWidth, naturalHeight } = self
 
-    if (isHasError) return errorFallback
+      intrinsicWidthRef.current = naturalWidth
+      intrinsicHeightRef.current = naturalHeight
 
-    const classes = [cls[variant], cls[filter], 'dynamic-image-styles', wrapperClassName]
+      if (variant == ImageVariant.ORIGINAL && filter != ImageFilter.NORMAL) {
+        setDynamicImageStyles(getDynamicImageStyles(naturalWidth, naturalHeight))
+      }
+    }
 
-    // const shimmerUrl = `data:image/svg+xml;base64,${toBase64(shimmer(wrapperWidth, wrapperHeight))}`
+    function onError() {
+      setIsLoading(false)
+      setIsHasError(true)
+    }
 
-    return (
-      <>
+    const dynamicStyles = useMemo(
+      () => (
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -122,7 +111,17 @@ export const MyImage = memo(
           `,
           }}
         ></style>
+      ),
+      [dynamicImageStyles, scale],
+    )
 
+    if (isHasError) return errorFallback
+
+    const classes = [cls[variant], cls[filter], 'dynamic-image-styles', wrapperClassName]
+
+    return (
+      <>
+        {dynamicStyles}
         <div
           data-testid="image-wrapper"
           className={classNames(cls.wrapper, {}, classes)}
@@ -142,8 +141,12 @@ export const MyImage = memo(
             alt={alt}
             sizes={sizes}
             style={{ scale: scale || '', ...style }}
+            onLoad={onLoad}
+            onLoadingComplete={() => setIsLoading(false)}
+            onError={onError}
             {...rest}
           />
+          {isLoading && <Skeleton style={{ position: 'absolute', inset: 0, width, height }} />}
         </div>
       </>
     )
