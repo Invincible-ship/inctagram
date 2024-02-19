@@ -9,7 +9,7 @@ import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { signInWithGoogleThunk } from '../model/signInWithGoogleThunk'
 
-const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string
+const googleClientId = (process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string) || ''
 
 const ThirdPartyOAuthButtons = () => {
   const dispatch = useAppDispatch()
