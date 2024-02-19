@@ -13,7 +13,7 @@ import toast from 'react-hot-toast'
 import { getUserId } from '@/entities/User'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
-import revalidateDataByPath from '@/shared/lib/serverActions/revalidateDataByPath'
+import { revalidateDataByPath } from '@/shared/lib/serverActions/revalidateDataByPath'
 import { VIEWER_TAG } from '@/shared/const/rtk'
 
 const defaultGeneralInfoValues: TGeneralInfo = {

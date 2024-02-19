@@ -2,6 +2,6 @@
 
 import { revalidatePath } from 'next/cache'
 
-export default async function revalidateDataByPath(path: string) {
+export async function revalidateDataByPath(path: string) {
   revalidatePath(path)
 }

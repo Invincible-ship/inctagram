@@ -23,6 +23,8 @@ export const ProfileCardFeautures: FC<ProfileCardFeauturesProps> = memo(({ mobil
   const { id: profileId } = useParams()
   const userId = useSelector(getUserId)
 
+  console.log('User id: ', userId, 'Profile id: ', profileId)
+
   const owner = useMemo(() => +profileId === userId, [profileId, userId])
 
   if (owner)

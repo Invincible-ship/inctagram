@@ -10,8 +10,6 @@ import { Namespaces } from '@/shared/config/i18n/types'
 import { ProfileCardFeautures } from '@/widgets/ProfileCard/ui/ProfileCardFeautures/ProfileCardFeautures'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 
-export const dynamic = 'force-dynamic'
-
 type ProfileCardProps = {
   mobile?: boolean
   profile: IViewer

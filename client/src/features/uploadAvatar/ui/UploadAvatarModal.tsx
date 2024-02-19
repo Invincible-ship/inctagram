@@ -12,7 +12,7 @@ import toast from 'react-hot-toast'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { useUpdateProfileAvatarsMutation } from '@/entities/Profile'
 import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
-import revalidateDataByPath from '@/shared/lib/serverActions/revalidateDataByPath'
+import { revalidateDataByPath } from '@/shared/lib/serverActions/revalidateDataByPath'
 import { PROFILE_TAG, VIEWER_TAG } from '@/shared/const/rtk'
 
 type UploadAvatarModalProps = {
