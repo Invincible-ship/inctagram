@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   color: var(--primary-text-color);
-  background-color: var(--dark-color-700);
+  background: none;
   border: none;
   cursor: pointer;
 
@@ -29,12 +29,15 @@
 .DropdownContent[data-side='top'] {
   animation-name: slideDownAndFade;
 }
+
 .DropdownContent[data-side='right'] {
   animation-name: slideLeftAndFade;
 }
+
 .DropdownContent[data-side='bottom'] {
   animation-name: slideUpAndFade;
 }
+
 .DropdownContent[data-side='left'] {
   animation-name: slideRightAndFade;
 }

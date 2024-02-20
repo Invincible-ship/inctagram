@@ -10,4 +10,5 @@ export {
   uploadPostImages,
   createPost,
   createdPostMatcher,
+  deletePostMatcher,
 } from './api/postApi'

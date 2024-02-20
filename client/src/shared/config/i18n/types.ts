@@ -25,6 +25,7 @@ export enum Namespaces {
   SIDEBAR = 'sidebar',
   HEADER = 'header',
   CREATE_POST = 'create-post',
+  POST_DETAILS = 'post-details',
 }
 
 export type LanguageParams = { lng: LanguageIds }

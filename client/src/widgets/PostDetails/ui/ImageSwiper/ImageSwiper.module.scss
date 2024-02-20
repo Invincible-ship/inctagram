@@ -1,0 +1,6 @@
+.imageContainer {
+  flex: 0 0 490px;
+  @media (max-width: 1024px) {
+    flex-shrink: 0.3;
+  }
+}

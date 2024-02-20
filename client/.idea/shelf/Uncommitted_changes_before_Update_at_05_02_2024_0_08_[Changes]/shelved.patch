@@ -1,0 +1,1499 @@
+Index: src/widgets/PostDetails/ui/PostDetails.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use client'\r\nimport cls from '@/features/createPost/ui/FilteringImage/FilteringImage.module.scss'\r\nimport { HStack } from '@/shared/ui/Stack'\r\nimport React, { useState } from 'react'\r\nimport { Modal } from '@/shared/ui/Modal/Modal'\r\nimport { Publication } from '@/widgets/PostDetails/ui/Publication/Publication'\r\nimport { ImageSwiper } from '@/features/createPost/ui/FilteringImage/FilteringImage'\r\nimport CloseIcon from '@/shared/assets/icons/close.svg'\r\nimport s from './PostDetails.module.scss'\r\nimport { PostHeader } from '@/widgets/PostDetails/ui/PostHeader/PostHeader'\r\nimport { Button, ButtonTheme } from '@/shared/ui/Button/Button'\r\n\r\nconst images: any[] = [\r\n  {\r\n    filter: 'normal',\r\n    id: 1706002415714,\r\n    orientation: 'original',\r\n    scale: 1,\r\n    src: 'https://www.ixbt.com/img/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg',\r\n  },\r\n  {\r\n    filter: 'normal',\r\n    id: 1706002415715,\r\n    orientation: 'original',\r\n    scale: 1,\r\n    src: 'https://www.ixbt.com/img/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg',\r\n  },\r\n]\r\n\r\ntype Props = {\r\n  isOpen: boolean\r\n  onClose: () => void\r\n}\r\nexport const PostDetails = ({ isOpen, onClose }: Props) => {\r\n  const [editMode, setEditMode] = useState(false)\r\n  const [isOpenConfirmationModal, setIsOpenModalConfirmationModal] = useState(false)\r\n  const onCloseHandler = () => {\r\n    editMode ? setIsOpenModalConfirmationModal(true) : onClose()\r\n  }\r\n  const setIsOpenModalConfirmationModalHandler = () => {}\r\n  return (\r\n    <Modal isOpen={isOpen} onClose={onCloseHandler}>\r\n      {editMode && (\r\n        <Modal.Header\r\n          close={() => {\r\n            setIsOpenModalConfirmationModal(true)\r\n          }}\r\n        >\r\n          Edit Post\r\n        </Modal.Header>\r\n      )}\r\n      {!editMode && (\r\n        <button type=\"button\" className={s.buttonClose} onClick={onCloseHandler}>\r\n          <CloseIcon />\r\n        </button>\r\n      )}\r\n      <HStack className={cls.FilteringImage} justify=\"start\">\r\n        <ImageSwiper images={images} />\r\n        <HStack className={s.post} wrap=\"wrap\" justify={'center'}>\r\n          <PostHeader editMode={editMode} setEditMode={setEditMode} />\r\n          <Publication setEditMode={setEditMode} editMode={editMode} />\r\n        </HStack>\r\n      </HStack>\r\n      <Modal\r\n        onClose={() => setIsOpenModalConfirmationModal(false)}\r\n        isOpen={isOpenConfirmationModal}\r\n      >\r\n        <Modal.Header close={() => setIsOpenModalConfirmationModal(false)}>\r\n          {'modal.title'}\r\n        </Modal.Header>\r\n        <Modal.Body>\r\n          <div>\r\n            <span>Are you sure you want to delete this post?</span>\r\n            <Button\r\n              theme={ButtonTheme.DEFAULT}\r\n              onClick={() => {\r\n                onClose()\r\n                setIsOpenModalConfirmationModal(false)\r\n                setEditMode(false)\r\n              }}\r\n            >\r\n              Yes\r\n            </Button>\r\n            <Button\r\n              theme={ButtonTheme.DEFAULT}\r\n              onClick={() => setIsOpenModalConfirmationModal(false)}\r\n            >\r\n              No\r\n            </Button>\r\n          </div>\r\n        </Modal.Body>\r\n      </Modal>\r\n    </Modal>\r\n  )\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/ui/PostDetails.tsx b/src/widgets/PostDetails/ui/PostDetails.tsx
+--- a/src/widgets/PostDetails/ui/PostDetails.tsx	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/widgets/PostDetails/ui/PostDetails.tsx	(date 1706967440426)
+@@ -1,95 +1,89 @@
+ 'use client'
+-import cls from '@/features/createPost/ui/FilteringImage/FilteringImage.module.scss'
+ import { HStack } from '@/shared/ui/Stack'
+-import React, { useState } from 'react'
+ import { Modal } from '@/shared/ui/Modal/Modal'
+-import { Publication } from '@/widgets/PostDetails/ui/Publication/Publication'
+-import { ImageSwiper } from '@/features/createPost/ui/FilteringImage/FilteringImage'
++import { Publication } from '../Publication/Publication'
+ import CloseIcon from '@/shared/assets/icons/close.svg'
+-import s from './PostDetails.module.scss'
+-import { PostHeader } from '@/widgets/PostDetails/ui/PostHeader/PostHeader'
+-import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
+-
+-const images: any[] = [
+-  {
+-    filter: 'normal',
+-    id: 1706002415714,
+-    orientation: 'original',
+-    scale: 1,
+-    src: 'https://www.ixbt.com/img/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg',
+-  },
+-  {
+-    filter: 'normal',
+-    id: 1706002415715,
+-    orientation: 'original',
+-    scale: 1,
+-    src: 'https://www.ixbt.com/img/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg',
+-  },
+-]
++import s from '../PostDetails.module.scss'
++import { PostHeader } from '../PostHeader/PostHeader'
++import { IPost } from '@/entities/Post'
++import { PostConfirmationModal } from './PostConfirmationModal/PostConfirmationModal'
++import { ImageSwiper } from './ImageSwiper/ImageSwiper'
++import { usePostDetails } from '../model/hooks/usePostDetails'
++import { useClientTranslation } from '@/shared/config/i18n/client'
++import { Namespaces } from '@/shared/config/i18n/types'
+ 
+ type Props = {
+   isOpen: boolean
+   onClose: () => void
++  post: IPost
+ }
+-export const PostDetails = ({ isOpen, onClose }: Props) => {
+-  const [editMode, setEditMode] = useState(false)
+-  const [isOpenConfirmationModal, setIsOpenModalConfirmationModal] = useState(false)
+-  const onCloseHandler = () => {
+-    editMode ? setIsOpenModalConfirmationModal(true) : onClose()
+-  }
+-  const setIsOpenModalConfirmationModalHandler = () => {}
++export const PostDetails = ({ isOpen, onClose, post }: Props) => {
++  const { t } = useClientTranslation(Namespaces.POST_DETAILS)
++  const { avatarOwner, images, description, id, userName } = post
++  const {
++    isLoading,
++    editMode,
++    setEditMode,
++    isOpenConfirmationModal,
++    isOpenDeleteModal,
++    setIsOpenDeleteModal,
++    handleCloseConfirmationModal,
++    handleOpenConfirmationModal,
++    handleCloseDeleteModal,
++    onClickCloseHandler,
++    onClickDeleteHandler,
++    onCloseHandler,
++    textValue,
++    setTextValue,
++  } = usePostDetails({ onClose, id, description })
++
+   return (
+-    <Modal isOpen={isOpen} onClose={onCloseHandler}>
+-      {editMode && (
+-        <Modal.Header
+-          close={() => {
+-            setIsOpenModalConfirmationModal(true)
+-          }}
+-        >
+-          Edit Post
+-        </Modal.Header>
+-      )}
++    <Modal className={s.modal} isOpen={isOpen} onClose={onCloseHandler}>
++      {editMode && <Modal.Header close={handleOpenConfirmationModal}>{t('editPost')}</Modal.Header>}
+       {!editMode && (
+         <button type="button" className={s.buttonClose} onClick={onCloseHandler}>
+           <CloseIcon />
+         </button>
+       )}
+-      <HStack className={cls.FilteringImage} justify="start">
++      <HStack className={s.mainBlock} justify="start">
+         <ImageSwiper images={images} />
+-        <HStack className={s.post} wrap="wrap" justify={'center'}>
+-          <PostHeader editMode={editMode} setEditMode={setEditMode} />
+-          <Publication setEditMode={setEditMode} editMode={editMode} />
++        <HStack wrap="wrap" justify={'center'}>
++          <PostHeader
++            userName={userName}
++            setIsOpenDeleteModal={setIsOpenDeleteModal}
++            avatar={avatarOwner}
++            editMode={editMode}
++            setEditMode={setEditMode}
++          />
++          <Publication
++            textValue={textValue}
++            setTextValue={setTextValue}
++            userName={userName}
++            description={description}
++            id={id}
++            avatar={avatarOwner}
++            setEditMode={setEditMode}
++            editMode={editMode}
++          />
+         </HStack>
+-      </HStack>
+-      <Modal
+-        onClose={() => setIsOpenModalConfirmationModal(false)}
+-        isOpen={isOpenConfirmationModal}
+-      >
+-        <Modal.Header close={() => setIsOpenModalConfirmationModal(false)}>
+-          {'modal.title'}
+-        </Modal.Header>
+-        <Modal.Body>
+-          <div>
+-            <span>Are you sure you want to delete this post?</span>
+-            <Button
+-              theme={ButtonTheme.DEFAULT}
+-              onClick={() => {
+-                onClose()
+-                setIsOpenModalConfirmationModal(false)
+-                setEditMode(false)
+-              }}
+-            >
+-              Yes
+-            </Button>
+-            <Button
+-              theme={ButtonTheme.DEFAULT}
+-              onClick={() => setIsOpenModalConfirmationModal(false)}
+-            >
+-              No
+-            </Button>
+-          </div>
+-        </Modal.Body>
+-      </Modal>
++        <PostConfirmationModal
++          t={t}
++          isOpen={isOpenConfirmationModal}
++          handleClose={handleCloseConfirmationModal}
++          onClick={onClickCloseHandler}
++          title={t('modal.closeTitle')}
++          text={t('modal.closeText')}
++        />
++        <PostConfirmationModal
++          t={t}
++          isLoading={isLoading}
++          isOpen={isOpenDeleteModal}
++          handleClose={handleCloseDeleteModal}
++          onClick={onClickDeleteHandler}
++          title={t('modal.deleteTitle')}
++          text={t('modal.deleteText')}
++        />
++      </HStack>
+     </Modal>
+   )
+ }
+Index: src/widgets/PostDetails/ui/PostDetails.stories.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/ui/PostDetails.stories.tsx b/src/widgets/PostDetails/PostDetails.stories.tsx
+rename from src/widgets/PostDetails/ui/PostDetails.stories.tsx
+rename to src/widgets/PostDetails/PostDetails.stories.tsx
+--- a/src/widgets/PostDetails/ui/PostDetails.stories.tsx	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/widgets/PostDetails/PostDetails.stories.tsx	(date 1706967440662)
+@@ -11,6 +11,14 @@
+ export default meta
+ type Story = StoryObj<typeof PostDetails>
+ 
++const url =
++  'https://www.ixbt.com/img/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg'
++const post = {
++  avatarOwner: url,
++  userName: 'Nikita',
++  description: 'Lorem ipsum dolor',
++  images: [{ url }, { url }],
++}
+ export const Page: Story = {
+   render: () => {
+     // eslint-disable-next-line react-hooks/rules-of-hooks
+@@ -23,7 +31,10 @@
+         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
+       >
+         <Button onClick={() => setIsOpen(true)}>Trigger</Button>
+-        <PostDetails onClose={handleClose} isOpen={isOpen} />
++        {
++          //@ts-ignore
++          <PostDetails post={post} onClose={handleClose} isOpen={isOpen} />
++        }
+       </div>
+     )
+   },
+Index: src/_pages/ProfilePage/ui/PostDetailsWrapper/PostDetailsWrapper.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { useSelector } from 'react-redux'\r\nimport { getPosts } from '@/widgets/PostList'\r\nimport { useRouter, useSearchParams } from 'next/navigation'\r\nimport { POST_DETAILS_ID } from '@/widgets/PostList'\r\nimport { StateSchema } from '@/providers/StoreProvider'\r\n\r\nexport const PostDetailsWrapper = () => {\r\n  const router = useRouter()\r\n  const searchParams = new URLSearchParams(Array.from(useSearchParams()))\r\n  const postId = searchParams.get(POST_DETAILS_ID) as string\r\n  const post = useSelector((state: StateSchema) => getPosts.selectById(state, postId))\r\n\r\n  const onClose = () => {\r\n    searchParams.delete(POST_DETAILS_ID)\r\n    router.push(`?${searchParams.toString()}`)\r\n  }\r\n\r\n  // TODO: add PostDetails component\r\n  return post && <></>\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/_pages/ProfilePage/ui/PostDetailsWrapper/PostDetailsWrapper.tsx b/src/_pages/ProfilePage/ui/PostDetailsWrapper/PostDetailsWrapper.tsx
+--- a/src/_pages/ProfilePage/ui/PostDetailsWrapper/PostDetailsWrapper.tsx	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/_pages/ProfilePage/ui/PostDetailsWrapper/PostDetailsWrapper.tsx	(date 1706967440479)
+@@ -3,6 +3,7 @@
+ import { useRouter, useSearchParams } from 'next/navigation'
+ import { POST_DETAILS_ID } from '@/widgets/PostList'
+ import { StateSchema } from '@/providers/StoreProvider'
++import { PostDetails } from '@/widgets/PostDetails/ui/PostDetails'
+ 
+ export const PostDetailsWrapper = () => {
+   const router = useRouter()
+@@ -16,5 +17,5 @@
+   }
+ 
+   // TODO: add PostDetails component
+-  return post && <></>
++  return post && <PostDetails isOpen={!!post.id} post={post} onClose={onClose} />
+ }
+Index: src/widgets/PostDetails/ui/PostHeader/PostOptionsDropdown/PostOptionsDropdown.tsx
+===================================================================
+diff --git a/src/widgets/PostDetails/ui/PostHeader/PostOptionsDropdown/PostOptionsDropdown.tsx b/src/widgets/PostDetails/ui/PostHeader/PostOptionsDropdown/PostOptionsDropdown.tsx
+deleted file mode 100644
+--- a/src/widgets/PostDetails/ui/PostHeader/PostOptionsDropdown/PostOptionsDropdown.tsx	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ /dev/null	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
+@@ -1,46 +0,0 @@
+-import React, { useState } from 'react'
+-import {
+-  DropdownMenu,
+-  DropdownMenuContent,
+-  DropdownMenuTrigger,
+-} from '@/shared/ui/Dropdown/Dropdown'
+-import { DottedMenuIcon } from '@/shared/ui/DottedMenuIcon/DottedMenuIcon'
+-import s from '@/widgets/PostDetails/ui/PostDetails.module.scss'
+-import EditIcon from '../../../../../shared/assets/icons/edit-2-outline.svg'
+-import DeleteIcon from '../../../../../shared/assets/icons/trash-outline.svg'
+-
+-type Props = {
+-  setEditMode: (editMode: boolean) => void
+-}
+-export const PostOptionsDropdown = ({ setEditMode }: Props) => {
+-  const [isOpenMenu, setIsOpenMenu] = useState(false)
+-  const onClickDeletePost = () => {}
+-  const onClickEditPost = () => {
+-    setEditMode(true)
+-  }
+-  return (
+-    <DropdownMenu open={isOpenMenu} onOpenChange={setIsOpenMenu}>
+-      <DropdownMenuTrigger>
+-        <DottedMenuIcon isActive={isOpenMenu} />
+-      </DropdownMenuTrigger>
+-      <DropdownMenuContent sticky="always">
+-        <div className={s.MenuContent}>
+-          <button
+-            onClick={onClickEditPost}
+-            style={{ display: 'flex', gap: '10px', fontSize: '14px', alignItems: 'center' }}
+-          >
+-            <EditIcon />
+-            <span>Edit Post</span>
+-          </button>
+-          <button
+-            onClick={onClickDeletePost}
+-            style={{ display: 'flex', gap: '10px', fontSize: '14px', alignItems: 'center' }}
+-          >
+-            <DeleteIcon />
+-            <span>Delete Post</span>
+-          </button>
+-        </div>
+-      </DropdownMenuContent>
+-    </DropdownMenu>
+-  )
+-}
+Index: src/widgets/PostDetails/ui/Publication/Publication.tsx
+===================================================================
+diff --git a/src/widgets/PostDetails/ui/Publication/Publication.tsx b/src/widgets/PostDetails/ui/Publication/Publication.tsx
+deleted file mode 100644
+--- a/src/widgets/PostDetails/ui/Publication/Publication.tsx	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ /dev/null	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
+@@ -1,122 +0,0 @@
+-import { TextArea } from '@/shared/ui/TextArea/TextArea'
+-import { Button } from '@/shared/ui/Button/Button'
+-import s from '../PostDetails.module.scss'
+-import { ChangeEvent, useState } from 'react'
+-import Image from 'next/image'
+-
+-const text =
+-  'Lorem ipsum dolor sit amet, consectetur adipiscing\n' +
+-  'elit, sed do eiusmod tempor incididunt ut labore et\n' +
+-  'dolore magna aliqua.'
+-
+-type PropsPublication = {
+-  editMode: boolean
+-  setEditMode: (mode: boolean) => void
+-}
+-export const Publication = ({ editMode, setEditMode }: PropsPublication) => {
+-  const [textValue, setTextValue] = useState(text)
+-  return (
+-    <div className={s.publicationBlock}>
+-      {editMode && (
+-        <PublicationForm
+-          setEditMode={setEditMode}
+-          textValue={textValue}
+-          setTextValue={setTextValue}
+-        />
+-      )}
+-      {!editMode && <PublicationDescription textValue={textValue} />}
+-    </div>
+-  )
+-}
+-
+-type PropsPublicationForm = {
+-  setTextValue: (textValue: string) => void
+-  setEditMode: (mode: boolean) => void
+-  textValue: string
+-}
+-export const PublicationForm = (props: PropsPublicationForm) => {
+-  const { textValue, setTextValue, setEditMode } = props
+-  const onClickSaveChangesHandler = () => {
+-    setTextValue(textValue)
+-    setEditMode(false)
+-  }
+-  const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+-    setTextValue(event.target.value)
+-  }
+-
+-  return (
+-    <form className={s.form}>
+-      <TextArea
+-        className={s.textArea}
+-        id="publication descriptions"
+-        title="Add publication descriptions"
+-        withCounter={true}
+-        value={textValue}
+-        onChange={onChangeHandler}
+-      />
+-      <Button className={s.button} type="submit" onClick={onClickSaveChangesHandler}>
+-        Save Changes
+-      </Button>
+-    </form>
+-  )
+-}
+-
+-const avatar =
+-  'https://www.ixbt.com/img/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg'
+-type PropsPublicationDescription = {
+-  textValue: string
+-}
+-export const PublicationDescription = ({ textValue }: PropsPublicationDescription) => {
+-  return (
+-    <>
+-      <div
+-        style={{
+-          display: 'flex',
+-          alignItems: 'flex-start',
+-          justifyContent: 'center',
+-          fontSize: '14px',
+-          margin: '15px 0 5px 0',
+-        }}
+-      >
+-        <Image className={s.imageAvatar} width={34} height={34} src={avatar} alt={'avatar'} />
+-        <div style={{ color: '#FFFFFF' }}>
+-          <span style={{ fontWeight: '600', marginRight: '4px' }}>{'URLProfiele'}</span>
+-          {textValue}
+-          <div style={{ color: '#8D9094', fontSize: '12px', marginTop: '5px' }}>2 hours ago</div>
+-        </div>
+-      </div>
+-      <div
+-        style={{
+-          display: 'flex',
+-          alignItems: 'flex-start',
+-          justifyContent: 'center',
+-          fontSize: '14px',
+-          margin: '15px 0 5px 0',
+-        }}
+-      >
+-        <Image className={s.imageAvatar} width={34} height={34} src={avatar} alt={'avatar'} />
+-        <div style={{ color: '#FFFFFF' }}>
+-          <span style={{ fontWeight: '600', marginRight: '4px' }}>{'URLProfiele'}</span>
+-          {textValue}
+-          <div style={{ color: '#8D9094', fontSize: '12px', marginTop: '5px' }}>2 hours ago</div>
+-        </div>
+-      </div>
+-      <div
+-        style={{
+-          display: 'flex',
+-          alignItems: 'flex-start',
+-          justifyContent: 'center',
+-          fontSize: '14px',
+-          margin: '15px 0 5px 0',
+-        }}
+-      >
+-        <Image className={s.imageAvatar} width={34} height={34} src={avatar} alt={'avatar'} />
+-        <div style={{ color: '#FFFFFF' }}>
+-          <span style={{ fontWeight: '600', marginRight: '4px' }}>{'URLProfiele'}</span>
+-          {textValue}
+-          <div style={{ color: '#8D9094', fontSize: '12px', marginTop: '5px' }}>2 hours ago</div>
+-        </div>
+-      </div>
+-    </>
+-  )
+-}
+Index: src/widgets/PostDetails/ui/PostHeader/PostHeader.tsx
+===================================================================
+diff --git a/src/widgets/PostDetails/ui/PostHeader/PostHeader.tsx b/src/widgets/PostDetails/ui/PostHeader/PostHeader.tsx
+deleted file mode 100644
+--- a/src/widgets/PostDetails/ui/PostHeader/PostHeader.tsx	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ /dev/null	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
+@@ -1,25 +0,0 @@
+-import Image from 'next/image'
+-import { PostOptionsDropdown } from '@/widgets/PostDetails/ui/PostHeader/PostOptionsDropdown/PostOptionsDropdown'
+-import s from '../PostDetails.module.scss'
+-import { classNames } from '@/shared/lib/classNames/classNames'
+-
+-const avatar =
+-  'https://www.ixbt.com/img/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg'
+-
+-type Props = {
+-  editMode: boolean
+-  setEditMode: (mode: boolean) => void
+-}
+-export const PostHeader = ({ editMode, setEditMode }: Props) => {
+-  const mods = { [s.noBorder]: editMode }
+-  const headerClass = classNames(s.headerBlock, mods, [])
+-  return (
+-    <header className={headerClass}>
+-      <div className={s.profileInfo}>
+-        <Image className={s.imageAvatar} width={34} height={34} src={avatar} alt={'avatar'} />
+-        <h3 className={s.name}>URLProfiele</h3>
+-      </div>
+-      {!editMode && <PostOptionsDropdown setEditMode={setEditMode} />}
+-    </header>
+-  )
+-}
+Index: src/entities/Post/api/postApi.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { rtkApi } from '@/shared/api/rtkApi'\r\nimport {\r\n  AllPostsRequestParams,\r\n  IPost,\r\n  PostImage,\r\n  UploadPostRequestParams,\r\n} from '../model/types/types'\r\nimport {\r\n  ALL_POSTS_ENDPOINT,\r\n  POST_BY_ID_ENDPOINT,\r\n  POST_BY_USER_ID_ENDPOINT,\r\n  UPLOAD_POST_IMAGE_ENDPOINT,\r\n  CREATE_POST_ENDPOINT,\r\n  DELETE_POST_IMAGE_ENDPOINT,\r\n} from '@/shared/const/apiEndpoints'\r\nimport { POST_TAG } from '@/shared/const/rtk'\r\n\r\nexport const postApi = rtkApi.injectEndpoints({\r\n  endpoints: build => ({\r\n    // fetchings posts\r\n    fetchPostById: build.query<IPost, number>({\r\n      query: id => `${POST_BY_ID_ENDPOINT}/{${id}}`,\r\n      providesTags: (result, error, id) => [{ type: POST_TAG, id }],\r\n    }),\r\n    fetchAllPosts: build.query<IPost[], AllPostsRequestParams>({\r\n      query: ({ idLastUploadedPost, params: { limit, sort, order } }) => ({\r\n        url: `${ALL_POSTS_ENDPOINT}/${idLastUploadedPost}`,\r\n        params: {\r\n          pageSize: limit,\r\n          sortBy: sort,\r\n          sortDirection: order,\r\n        },\r\n      }),\r\n      providesTags: (result, error, arg) =>\r\n        result\r\n          ? [\r\n              ...result.map(post => ({ type: POST_TAG, id: post.id }) as const),\r\n              { type: POST_TAG, id: 'LIST' },\r\n            ]\r\n          : [{ type: POST_TAG, id: 'LIST' }],\r\n    }),\r\n    fetchPostsByUserId: build.query<IPost[], AllPostsRequestParams>({\r\n      query: ({ idLastUploadedPost, params: { limit, sort, order } }) => ({\r\n        url: `${POST_BY_USER_ID_ENDPOINT}/${idLastUploadedPost}`,\r\n        params: {\r\n          pageSize: limit,\r\n          sortBy: sort,\r\n          sortDirection: order,\r\n        },\r\n      }),\r\n      providesTags: (result, error, arg) =>\r\n        result\r\n          ? [\r\n              ...result.map(post => ({ type: POST_TAG, id: post.id }) as const),\r\n              { type: POST_TAG, id: 'LIST' },\r\n            ]\r\n          : [{ type: POST_TAG, id: 'LIST' }],\r\n    }),\r\n    // uploading post's images and creating posts\r\n    uploadPostImages: build.mutation<{ images: PostImage[] }, FormData>({\r\n      query: formData => ({\r\n        method: 'POST',\r\n        url: UPLOAD_POST_IMAGE_ENDPOINT,\r\n        body: formData,\r\n      }),\r\n    }),\r\n    createPost: build.mutation<IPost, UploadPostRequestParams>({\r\n      query: body => ({\r\n        contentType: 'application/json',\r\n        method: 'POST',\r\n        url: CREATE_POST_ENDPOINT,\r\n        body,\r\n      }),\r\n      invalidatesTags: () => [{ type: POST_TAG, id: 'LIST' }],\r\n    }),\r\n    // updating posts\r\n    updatePostById: build.mutation<void, number>({\r\n      query: id => ({\r\n        method: 'PUT',\r\n        url: `${CREATE_POST_ENDPOINT}/${id}`,\r\n      }),\r\n      invalidatesTags: (result, error, id) => [{ type: POST_TAG, id }],\r\n    }),\r\n    // deleting post's images and posts\r\n    deletePostImage: build.mutation<void, string>({\r\n      query: id => ({\r\n        method: 'DELETE',\r\n        url: `${DELETE_POST_IMAGE_ENDPOINT}/${id}`,\r\n      }),\r\n    }),\r\n    deletePost: build.mutation<void, number>({\r\n      query: id => ({\r\n        method: 'DELETE',\r\n        url: `${DELETE_POST_IMAGE_ENDPOINT}/${id}`,\r\n      }),\r\n      invalidatesTags: (result, error, id) => [{ type: POST_TAG, id }],\r\n    }),\r\n  }),\r\n})\r\n\r\nexport const fetchPostById = postApi.endpoints.fetchPostById.initiate\r\nexport const uploadPostImages = postApi.endpoints.uploadPostImages.initiate\r\nexport const createPost = postApi.endpoints.createPost.initiate\r\nexport const createdPostMatcher = postApi.endpoints.createPost.matchFulfilled\r\nexport const {\r\n  useFetchPostByIdQuery,\r\n  useFetchAllPostsQuery,\r\n  useFetchPostsByUserIdQuery,\r\n  useUploadPostImagesMutation,\r\n  useCreatePostMutation,\r\n  useDeletePostImageMutation,\r\n  useDeletePostMutation,\r\n} = postApi\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/entities/Post/api/postApi.ts b/src/entities/Post/api/postApi.ts
+--- a/src/entities/Post/api/postApi.ts	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/entities/Post/api/postApi.ts	(date 1706967595531)
+@@ -12,6 +12,7 @@
+   UPLOAD_POST_IMAGE_ENDPOINT,
+   CREATE_POST_ENDPOINT,
+   DELETE_POST_IMAGE_ENDPOINT,
++  DELETE_POST_ENDPOINT,
+ } from '@/shared/const/apiEndpoints'
+ import { POST_TAG } from '@/shared/const/rtk'
+ 
+@@ -74,10 +75,11 @@
+       invalidatesTags: () => [{ type: POST_TAG, id: 'LIST' }],
+     }),
+     // updating posts
+-    updatePostById: build.mutation<void, number>({
+-      query: id => ({
++    updatePostById: build.mutation<void, any>({
++      query: body => ({
+         method: 'PUT',
+-        url: `${CREATE_POST_ENDPOINT}/${id}`,
++        url: `${CREATE_POST_ENDPOINT}/${body.id}`,
++        body,
+       }),
+       invalidatesTags: (result, error, id) => [{ type: POST_TAG, id }],
+     }),
+@@ -91,7 +93,7 @@
+     deletePost: build.mutation<void, number>({
+       query: id => ({
+         method: 'DELETE',
+-        url: `${DELETE_POST_IMAGE_ENDPOINT}/${id}`,
++        url: `${DELETE_POST_ENDPOINT}/${id}`,
+       }),
+       invalidatesTags: (result, error, id) => [{ type: POST_TAG, id }],
+     }),
+@@ -102,10 +104,12 @@
+ export const uploadPostImages = postApi.endpoints.uploadPostImages.initiate
+ export const createPost = postApi.endpoints.createPost.initiate
+ export const createdPostMatcher = postApi.endpoints.createPost.matchFulfilled
++export const deletePostMatcher = postApi.endpoints.deletePost.matchFulfilled
+ export const {
+   useFetchPostByIdQuery,
+   useFetchAllPostsQuery,
+   useFetchPostsByUserIdQuery,
++  useUpdatePostByIdMutation,
+   useUploadPostImagesMutation,
+   useCreatePostMutation,
+   useDeletePostImageMutation,
+Index: src/shared/config/i18n/types.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>export enum LanguageIds {\r\n  RU = 'ru',\r\n  EN = 'en',\r\n}\r\n\r\nexport enum Namespaces {\r\n  DEFAULT = 'translation',\r\n  // pages\r\n  SIGNUP = 'signUp',\r\n  SIGNOUT = 'signout',\r\n  SIGNIN = 'signIn',\r\n  FORGOTPASSWORD = 'forgot-password',\r\n  CREATENEWPASSWORD = 'recovery-password',\r\n  CONFIRMATION_EMAIL = 'confirmationEmail',\r\n  PROFILE_SETTINGS = 'profile-settings',\r\n  PROFILE_PAGE = 'profile-page',\r\n  // widgets\r\n  DATE_PICKER = 'date-picker',\r\n  CITY_SELECT = 'city-select',\r\n  SIDEBAR = 'sidebar',\r\n  HEADER = 'header',\r\n  CREATE_POST = 'create-post',\r\n}\r\n\r\nexport type LanguageParams = { lng: LanguageIds }\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/shared/config/i18n/types.ts b/src/shared/config/i18n/types.ts
+--- a/src/shared/config/i18n/types.ts	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/shared/config/i18n/types.ts	(date 1706835332869)
+@@ -10,6 +10,7 @@
+   SIGNOUT = 'signout',
+   SIGNIN = 'signIn',
+   FORGOTPASSWORD = 'forgot-password',
++  POST_DETAILS = 'post-details',
+   CREATENEWPASSWORD = 'recovery-password',
+   CONFIRMATION_EMAIL = 'confirmationEmail',
+   PROFILE_SETTINGS = 'profile-settings',
+Index: src/widgets/PostList/model/slice/postListSlice.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit'\r\nimport { PostListSchema } from '../types/postListSchema'\r\nimport { IPost, createdPostMatcher } from '@/entities/Post'\r\nimport { StateSchema } from '@/providers/StoreProvider'\r\nimport { PostSortField } from '@/shared/const/postSortField'\r\nimport { fetchPostsByProfileId } from '../services/fetchPostsByProfileId'\r\nimport { PostListPage } from '../consts/postListPage'\r\nimport { PostListCardType } from '../consts/postListCardType'\r\nimport { initPostList } from '../services/initPostList'\r\n\r\nconst stringToDateTime = (s: string) => new Date(s).getTime()\r\n\r\nexport const postsAdapter = createEntityAdapter<IPost>({\r\n  selectId: post => post.id,\r\n  sortComparer: (a, b) => stringToDateTime(b.createdAt) - stringToDateTime(a.createdAt),\r\n})\r\n\r\nexport const getPosts = postsAdapter.getSelectors<StateSchema>(state => {\r\n  return state.postList || postsAdapter.getInitialState()\r\n})\r\n\r\nconst initialState = postsAdapter.getInitialState<PostListSchema>({\r\n  ids: [],\r\n  entities: {},\r\n  postListId: undefined,\r\n  page: PostListPage.HOME,\r\n  type: PostListCardType.IMAGE,\r\n  isLoading: false,\r\n  error: undefined,\r\n  sort: 'desc',\r\n  sortBy: PostSortField.CREATED,\r\n  lastPostId: undefined,\r\n  limit: 8,\r\n  hasMore: true,\r\n})\r\n\r\nexport const postListSlice = createSlice({\r\n  name: 'postList',\r\n  initialState,\r\n  reducers: {\r\n    addPosts: (state, { payload }: PayloadAction<IPost[]>) => {\r\n      postsAdapter.addMany(state, payload)\r\n    },\r\n    setPostListId: (state, { payload }: PayloadAction<string>) => {\r\n      state.postListId = payload\r\n    },\r\n    resetPostListState: () => initialState,\r\n  },\r\n  extraReducers: builder => {\r\n    builder\r\n      .addCase(initPostList.fulfilled, (state, { payload: page }) => {\r\n        if (!page) return\r\n\r\n        state.page = page\r\n\r\n        const type = page == PostListPage.HOME ? PostListCardType.EXTENDED : PostListCardType.IMAGE\r\n        state.type = type\r\n\r\n        const limit = type == PostListCardType.IMAGE ? 8 : 5\r\n        state.limit = limit\r\n      })\r\n      .addCase(fetchPostsByProfileId.pending, state => {\r\n        state.isLoading = true\r\n      })\r\n      .addCase(fetchPostsByProfileId.fulfilled, (state, { payload: postsData }) => {\r\n        state.isLoading = false\r\n\r\n        const { items: posts } = postsData\r\n        const lastPost = posts[posts.length - 1]\r\n        const hasMore = postsData.totalCount > state.ids.length + posts.length\r\n        state.lastPostId = lastPost?.id\r\n        state.hasMore = hasMore\r\n\r\n        postsAdapter.addMany(state, posts)\r\n      })\r\n      .addCase(fetchPostsByProfileId.rejected, (state, error) => {\r\n        state.isLoading = false\r\n        state.error = error.payload\r\n      })\r\n      .addMatcher(createdPostMatcher, (state, { payload }) => {\r\n        postsAdapter.addOne(state, payload)\r\n      })\r\n  },\r\n})\r\n\r\nexport const { reducer: postListReducer } = postListSlice\r\nexport const { resetPostListState, setPostListId, addPosts } = postListSlice.actions\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostList/model/slice/postListSlice.ts b/src/widgets/PostList/model/slice/postListSlice.ts
+--- a/src/widgets/PostList/model/slice/postListSlice.ts	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/widgets/PostList/model/slice/postListSlice.ts	(date 1706968173115)
+@@ -1,6 +1,6 @@
+ import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+ import { PostListSchema } from '../types/postListSchema'
+-import { IPost, createdPostMatcher } from '@/entities/Post'
++import { IPost, createdPostMatcher, deletePostMatcher } from '@/entities/Post'
+ import { StateSchema } from '@/providers/StoreProvider'
+ import { PostSortField } from '@/shared/const/postSortField'
+ import { fetchPostsByProfileId } from '../services/fetchPostsByProfileId'
+@@ -80,6 +80,10 @@
+       .addMatcher(createdPostMatcher, (state, { payload }) => {
+         postsAdapter.addOne(state, payload)
+       })
++      .addMatcher(deletePostMatcher, (state, payload) => {
++        const id = String(payload.meta.arg)
++        postsAdapter.removeOne(state, id)
++      })
+   },
+ })
+ 
+Index: src/widgets/PostDetails/ui/ImageSwiper/ImageSwiper.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/ui/ImageSwiper/ImageSwiper.tsx b/src/widgets/PostDetails/ui/ImageSwiper/ImageSwiper.tsx
+new file mode 100644
+--- /dev/null	(date 1706923448664)
++++ b/src/widgets/PostDetails/ui/ImageSwiper/ImageSwiper.tsx	(date 1706923448664)
+@@ -0,0 +1,33 @@
++import { PostImage } from '@/entities/Post'
++import { Swiper, SwiperSlide } from 'swiper/react'
++import s from '../../PostDetails.module.scss'
++import { Navigation, Pagination } from 'swiper/modules'
++import { HStack } from '@/shared/ui/Stack'
++import { MyImage } from '@/shared/ui/MyImage/MyImage'
++import React from 'react'
++
++type Props = {
++  images: PostImage[]
++}
++export const ImageSwiper = ({ images }: Props) => {
++  return (
++    <Swiper
++      className={s.imageContainer}
++      modules={[Navigation, Pagination]}
++      slidesPerView={1}
++      centeredSlides={true}
++      navigation
++      pagination={{ clickable: true }}
++    >
++      {images.map(({ url }) => {
++        return (
++          <SwiperSlide key={url}>
++            <HStack max>
++              <MyImage src={url} alt={''} />
++            </HStack>
++          </SwiperSlide>
++        )
++      })}
++    </Swiper>
++  )
++}
+Index: src/features/createPost/ui/FilteringImage/FilteringImage.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { ImageFilter, MyImage } from '@/shared/ui/MyImage/MyImage'\r\nimport { HStack, VStack } from '@/shared/ui/Stack'\r\nimport React, { useMemo, useState } from 'react'\r\nimport { Navigation, Pagination } from 'swiper/modules'\r\nimport { Swiper, SwiperSlide } from 'swiper/react'\r\nimport cls from './FilteringImage.module.scss'\r\nimport { getPostImages } from '../../model/selectors/getPostImages'\r\nimport { useSelector } from 'react-redux'\r\nimport { classNames } from '@/shared/lib/classNames/classNames'\r\nimport { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'\r\nimport { setPostImageFilter } from '@/features/createPost/model/slice/createPostSlice'\r\nimport { Skeleton } from '@/shared/ui/Skeleton/Skeleton'\r\nimport { Swiper as TSwiper } from 'swiper/types'\r\nimport { useClientTranslation } from '@/shared/config/i18n/client'\r\nimport { Namespaces } from '@/shared/config/i18n/types'\r\nimport { CreatePostImage } from '@/features/createPost/model/types/types'\r\n\r\nexport const getImageAlt = (filter?: ImageFilter) =>\r\n  filter\r\n    ? `Create Post Image With ${filter[0].toUpperCase() + filter.slice(1)} Filter`\r\n    : 'Create Post Image'\r\n\r\nexport const FilteringImage = () => {\r\n  const [currentSlide, setCurrentSlide] = useState<number>(0)\r\n  const { t } = useClientTranslation(Namespaces.CREATE_POST)\r\n  const images = useSelector(getPostImages)\r\n  const filters = Object.values(ImageFilter)\r\n  const dispatch = useAppDispatch()\r\n\r\n  const currentImage = useMemo(() => images[currentSlide], [images, currentSlide])\r\n\r\n  const { id, src, orientation, scale, filter: activeFilter } = currentImage\r\n\r\n  const setImageFilter = (id: number, filter: ImageFilter) => () => {\r\n    dispatch(setPostImageFilter({ id, filter }))\r\n  }\r\n  const onSlideChange = ({ activeIndex }: TSwiper) => setCurrentSlide(activeIndex)\r\n\r\n  return (\r\n    <HStack className={cls.FilteringImage} justify=\"start\">\r\n      <ImageSwiper onSlideChange={onSlideChange} images={images} />\r\n      <HStack className={cls.filtersContainer} justify=\"center\" wrap=\"wrap\" gap=\"24\">\r\n        {filters.map(filter => {\r\n          const mods = {\r\n            [cls.active]: filter == activeFilter,\r\n          }\r\n\r\n          return (\r\n            <VStack\r\n              key={filter}\r\n              className={classNames(cls.imageWithFilter, mods)}\r\n              onClick={setImageFilter(id, filter)}\r\n              justify=\"start\"\r\n              align=\"center\"\r\n              gap=\"8\"\r\n            >\r\n              <HStack className={cls.imageWrapper} max>\r\n                <MyImage\r\n                  src={src}\r\n                  variant={orientation}\r\n                  filter={filter}\r\n                  scale={scale}\r\n                  width={102}\r\n                  height={102}\r\n                  alt={getImageAlt(filter)}\r\n                  fallback={<Skeleton width={102} height={102} />}\r\n                />\r\n              </HStack>\r\n              <span>{t(`image-filtering.filters.${filter}`)}</span>\r\n            </VStack>\r\n          )\r\n        })}\r\n      </HStack>\r\n    </HStack>\r\n  )\r\n}\r\n\r\ntype Props = {\r\n  images: CreatePostImage[] | []\r\n  onSlideChange?: ({ activeIndex }: TSwiper) => void\r\n}\r\nexport const ImageSwiper = ({ images, onSlideChange }: Props) => {\r\n  debugger\r\n  return (\r\n    <Swiper\r\n      className={cls.imageContainer}\r\n      onSlideChange={onSlideChange}\r\n      modules={[Navigation, Pagination]}\r\n      slidesPerView={1}\r\n      centeredSlides={true}\r\n      navigation\r\n      pagination={{ clickable: true }}\r\n      style={{ width: 490 }}\r\n    >\r\n      {images.map(({ src, orientation, scale, filter }) => {\r\n        return (\r\n          <SwiperSlide key={src}>\r\n            <HStack max>\r\n              <MyImage\r\n                wrapperClassName=\"original-image-filter-rect\"\r\n                src={src}\r\n                variant={orientation}\r\n                filter={filter}\r\n                scale={scale}\r\n                alt={getImageAlt(filter)}\r\n                width={490}\r\n                height={490}\r\n                fallback={<Skeleton width={490} height={490} />}\r\n              />\r\n            </HStack>\r\n          </SwiperSlide>\r\n        )\r\n      })}\r\n    </Swiper>\r\n  )\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/features/createPost/ui/FilteringImage/FilteringImage.tsx b/src/features/createPost/ui/FilteringImage/FilteringImage.tsx
+--- a/src/features/createPost/ui/FilteringImage/FilteringImage.tsx	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/features/createPost/ui/FilteringImage/FilteringImage.tsx	(date 1706835332640)
+@@ -13,12 +13,6 @@
+ import { Swiper as TSwiper } from 'swiper/types'
+ import { useClientTranslation } from '@/shared/config/i18n/client'
+ import { Namespaces } from '@/shared/config/i18n/types'
+-import { CreatePostImage } from '@/features/createPost/model/types/types'
+-
+-export const getImageAlt = (filter?: ImageFilter) =>
+-  filter
+-    ? `Create Post Image With ${filter[0].toUpperCase() + filter.slice(1)} Filter`
+-    : 'Create Post Image'
+ 
+ export const FilteringImage = () => {
+   const [currentSlide, setCurrentSlide] = useState<number>(0)
+@@ -34,11 +28,44 @@
+   const setImageFilter = (id: number, filter: ImageFilter) => () => {
+     dispatch(setPostImageFilter({ id, filter }))
+   }
++
+   const onSlideChange = ({ activeIndex }: TSwiper) => setCurrentSlide(activeIndex)
+ 
++  const getImageAlt = (filter?: ImageFilter) =>
++    filter
++      ? `Create Post Image With ${filter[0].toUpperCase() + filter.slice(1)} Filter`
++      : 'Create Post Image'
++
+   return (
+     <HStack className={cls.FilteringImage} justify="start">
+-      <ImageSwiper onSlideChange={onSlideChange} images={images} />
++      <Swiper
++        className={cls.imageContainer}
++        onSlideChange={onSlideChange}
++        modules={[Navigation, Pagination]}
++        slidesPerView={1}
++        centeredSlides={true}
++        navigation
++        pagination={{ clickable: true }}
++        style={{ width: 490 }}
++      >
++        {images.map(({ src, orientation, scale, filter }) => (
++          <SwiperSlide key={src}>
++            <HStack max>
++              <MyImage
++                wrapperClassName="original-image-filter-rect"
++                src={src}
++                variant={orientation}
++                filter={filter}
++                scale={scale}
++                alt={getImageAlt(filter)}
++                width={490}
++                height={490}
++                fallback={<Skeleton width={490} height={490} />}
++              />
++            </HStack>
++          </SwiperSlide>
++        ))}
++      </Swiper>
+       <HStack className={cls.filtersContainer} justify="center" wrap="wrap" gap="24">
+         {filters.map(filter => {
+           const mods = {
+@@ -74,43 +101,3 @@
+     </HStack>
+   )
+ }
+-
+-type Props = {
+-  images: CreatePostImage[] | []
+-  onSlideChange?: ({ activeIndex }: TSwiper) => void
+-}
+-export const ImageSwiper = ({ images, onSlideChange }: Props) => {
+-  debugger
+-  return (
+-    <Swiper
+-      className={cls.imageContainer}
+-      onSlideChange={onSlideChange}
+-      modules={[Navigation, Pagination]}
+-      slidesPerView={1}
+-      centeredSlides={true}
+-      navigation
+-      pagination={{ clickable: true }}
+-      style={{ width: 490 }}
+-    >
+-      {images.map(({ src, orientation, scale, filter }) => {
+-        return (
+-          <SwiperSlide key={src}>
+-            <HStack max>
+-              <MyImage
+-                wrapperClassName="original-image-filter-rect"
+-                src={src}
+-                variant={orientation}
+-                filter={filter}
+-                scale={scale}
+-                alt={getImageAlt(filter)}
+-                width={490}
+-                height={490}
+-                fallback={<Skeleton width={490} height={490} />}
+-              />
+-            </HStack>
+-          </SwiperSlide>
+-        )
+-      })}
+-    </Swiper>
+-  )
+-}
+Index: src/widgets/PostDetails/ui/PostConfirmationModal/PostConfirmationModal.module.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/ui/PostConfirmationModal/PostConfirmationModal.module.scss b/src/widgets/PostDetails/ui/PostConfirmationModal/PostConfirmationModal.module.scss
+new file mode 100644
+--- /dev/null	(date 1706835332899)
++++ b/src/widgets/PostDetails/ui/PostConfirmationModal/PostConfirmationModal.module.scss	(date 1706835332899)
+@@ -0,0 +1,7 @@
++.text {
++  max-width: 438px;
++  line-height: 24px;
++}
++.modalButtons{
++  margin-top: 24px;
++}
+\ No newline at end of file
+Index: src/features/createPost/ui/FilteringImage/FilteringImage.module.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.FilteringImage {\r\n  width: 980px;\r\n\r\n  .imageContainer, .filtersContainer {\r\n    flex: 0 0 490px;\r\n  }\r\n  \r\n  .filtersContainer {\r\n    padding: 20px;\r\n    .imageWithFilter {\r\n      width: 102px;\r\n      cursor: pointer;\r\n\r\n      &.active {\r\n        .imageWrapper {\r\n          outline: 2px solid var(--accent-color-500);\r\n        }\r\n\r\n        span {\r\n          color: var(--accent-color-500);\r\n        }\r\n      }\r\n    }\r\n  }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/features/createPost/ui/FilteringImage/FilteringImage.module.scss b/src/features/createPost/ui/FilteringImage/FilteringImage.module.scss
+--- a/src/features/createPost/ui/FilteringImage/FilteringImage.module.scss	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/features/createPost/ui/FilteringImage/FilteringImage.module.scss	(date 1706835332660)
+@@ -4,7 +4,7 @@
+   .imageContainer, .filtersContainer {
+     flex: 0 0 490px;
+   }
+-  
++
+   .filtersContainer {
+     padding: 20px;
+     .imageWithFilter {
+Index: src/widgets/PostDetails/Publication/PublicationForm/PublicationForm.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/Publication/PublicationForm/PublicationForm.tsx b/src/widgets/PostDetails/Publication/PublicationForm/PublicationForm.tsx
+new file mode 100644
+--- /dev/null	(date 1706960119527)
++++ b/src/widgets/PostDetails/Publication/PublicationForm/PublicationForm.tsx	(date 1706960119527)
+@@ -0,0 +1,59 @@
++import { ChangeEvent, MouseEvent } from 'react'
++import s from '@/widgets/PostDetails/PostDetails.module.scss'
++import { TextArea } from '@/shared/ui/TextArea/TextArea'
++import { Button } from '@/shared/ui/Button/Button'
++import { useUpdatePostByIdMutation } from '@/entities/Post/api/postApi'
++import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
++import { ApiError } from '@/shared/api/types'
++import toast from 'react-hot-toast'
++import { useClientTranslation } from '@/shared/config/i18n/client'
++import { Namespaces } from '@/shared/config/i18n/types'
++
++type Props = {
++  setEditMode: (mode: boolean) => void
++  id: number
++  description: string
++  textValue: string
++  setTextValue: (text: string) => void
++}
++export const PublicationForm = (props: Props) => {
++  const { t } = useClientTranslation(Namespaces.POST_DETAILS)
++  const { setEditMode, id, description, textValue, setTextValue } = props
++  const [update, { isLoading }] = useUpdatePostByIdMutation()
++  const onClickSaveChangesHandler = async (e: MouseEvent<HTMLButtonElement>) => {
++    e.preventDefault()
++    try {
++      if (description !== textValue) await update({ description: textValue, id })
++      setTextValue(textValue)
++      setEditMode(false)
++    } catch (error) {
++      if (isFetchBaseQueryError(error)) {
++        const apiError = error.data as ApiError
++        if (Array.isArray(apiError.messages)) {
++          toast.error(apiError.messages[0].message)
++        }
++      }
++    }
++  }
++  const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
++    setTextValue(event.target.value)
++  }
++
++  return (
++    <div className={s.publicationBlock}>
++      <form className={s.form}>
++        <TextArea
++          className={s.textArea}
++          id="publication descriptions"
++          title={t('textAreaDescriptions')}
++          withCounter={true}
++          value={textValue}
++          onChange={onChangeHandler}
++        />
++        <Button isLoading={isLoading} type="submit" onClick={onClickSaveChangesHandler}>
++          {t('saveChanges')}
++        </Button>
++      </form>
++    </div>
++  )
++}
+Index: src/widgets/PostDetails/Publication/Publication.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/Publication/Publication.tsx b/src/widgets/PostDetails/Publication/Publication.tsx
+new file mode 100644
+--- /dev/null	(date 1706960236061)
++++ b/src/widgets/PostDetails/Publication/Publication.tsx	(date 1706960236061)
+@@ -0,0 +1,35 @@
++import s from '../PostDetails.module.scss'
++import { PublicationForm } from '@/widgets/PostDetails/Publication/PublicationForm/PublicationForm'
++import { PublicationDescription } from '@/widgets/PostDetails/Publication/PublicationDescription/PublicationDescription'
++import { useState } from 'react'
++
++type PropsPublication = {
++  editMode: boolean
++  setEditMode: (mode: boolean) => void
++  avatar: string
++  id: number
++  description: string
++  userName: string
++  textValue: string
++  setTextValue: (text: string) => void
++}
++export const Publication = (props: PropsPublication) => {
++  const { avatar, description, id, userName, editMode, setEditMode, textValue, setTextValue } =
++    props
++  return (
++    <>
++      {editMode && (
++        <PublicationForm
++          textValue={textValue}
++          setTextValue={setTextValue}
++          description={description}
++          id={id}
++          setEditMode={setEditMode}
++        />
++      )}
++      {!editMode && (
++        <PublicationDescription userName={userName} avatar={avatar} textValue={textValue} />
++      )}
++    </>
++  )
++}
+Index: src/widgets/PostDetails/model/hooks/usePostDetails.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/model/hooks/usePostDetails.ts b/src/widgets/PostDetails/model/hooks/usePostDetails.ts
+new file mode 100644
+--- /dev/null	(date 1706960119459)
++++ b/src/widgets/PostDetails/model/hooks/usePostDetails.ts	(date 1706960119459)
+@@ -0,0 +1,69 @@
++import { useState } from 'react'
++import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
++import { ApiError } from '@/shared/api/types'
++import toast from 'react-hot-toast'
++import { useDeletePostMutation } from '@/entities/Post'
++
++type Args = {
++  onClose: () => void
++  id: number
++  description: string
++}
++export const usePostDetails = ({ onClose, id, description }: Args) => {
++  const [editMode, setEditMode] = useState(false)
++  const [isOpenConfirmationModal, setIsOpenConfirmationModal] = useState(false)
++  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false)
++  const [textValue, setTextValue] = useState(description)
++  const [remove, { isLoading }] = useDeletePostMutation()
++
++  const handleOpenConfirmationModal = () => {
++    description !== textValue ? setIsOpenConfirmationModal(true) : onClose()
++  }
++  const onCloseHandler = () => {
++    editMode ? handleOpenConfirmationModal() : onClose()
++  }
++  const handleCloseConfirmationModal = () => {
++    setIsOpenConfirmationModal(false)
++  }
++  const handleCloseDeleteModal = () => {
++    setIsOpenDeleteModal(false)
++  }
++
++  const onClickCloseHandler = () => {
++    onClose()
++    setIsOpenConfirmationModal(false)
++    setEditMode(false)
++  }
++  const onClickDeleteHandler = async () => {
++    try {
++      await remove(id)
++      onClose()
++      setIsOpenConfirmationModal(false)
++      setEditMode(false)
++    } catch (error) {
++      if (isFetchBaseQueryError(error)) {
++        const apiError = error.data as ApiError
++        if (Array.isArray(apiError.messages)) {
++          toast.error(apiError.messages[0].message)
++        }
++      }
++    }
++  }
++
++  return {
++    isLoading,
++    editMode,
++    setEditMode,
++    isOpenConfirmationModal,
++    isOpenDeleteModal,
++    setIsOpenDeleteModal,
++    handleCloseConfirmationModal,
++    handleOpenConfirmationModal,
++    handleCloseDeleteModal,
++    onClickCloseHandler,
++    onClickDeleteHandler,
++    onCloseHandler,
++    textValue,
++    setTextValue,
++  }
++}
+Index: src/shared/ui/MyImage/MyImage.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import NextImage from 'next/image'\r\nimport type { ImageProps, StaticImageData } from 'next/image'\r\nimport {\r\n  CSSProperties,\r\n  ReactElement,\r\n  forwardRef,\r\n  memo,\r\n  useEffect,\r\n  useLayoutEffect,\r\n  useRef,\r\n  useState,\r\n} from 'react'\r\nimport cls from './MyImage.module.scss'\r\nimport { classNames } from '@/shared/lib/classNames/classNames'\r\nimport { getDynamicImageStyles } from './utils/getDynamicImageStyles'\r\n\r\nexport enum ImageFilter {\r\n  NORMAL = 'normal',\r\n  CLARENDON = 'clarendon',\r\n  LARK = 'lark',\r\n  GINGHAM = 'gingham',\r\n  MOON = 'moon',\r\n  ADEN = 'aden',\r\n  BRANNAN = 'brannan',\r\n  INKWELL = 'inkwell',\r\n  REYES = 'reyes',\r\n}\r\n\r\nexport enum ImageVariant {\r\n  ORIGINAL = 'original',\r\n  SQUARE = 'square',\r\n  NARROW = 'narrow',\r\n  WIDE = 'wide',\r\n}\r\n\r\nexport type MyImageProps = {\r\n  width?: string | number\r\n  height?: string | number\r\n  wrapperClassName?: string\r\n  variant?: ImageVariant\r\n  filter?: ImageFilter\r\n  scale?: number\r\n  fallback?: ReactElement\r\n  errorFallback?: ReactElement\r\n  ar?: string\r\n} & Omit<ImageProps, 'width' | 'height'>\r\n\r\nexport const MyImage = memo(\r\n  forwardRef<HTMLImageElement, MyImageProps>((props, forwardRef) => {\r\n    const {\r\n      wrapperClassName,\r\n      variant = ImageVariant.ORIGINAL,\r\n      filter = ImageFilter.NORMAL,\r\n      scale,\r\n      className,\r\n      src,\r\n      fallback,\r\n      errorFallback,\r\n      sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',\r\n      style,\r\n      width = '100%',\r\n      height = '100%',\r\n      ar,\r\n      alt = 'image',\r\n      ...rest\r\n    } = props\r\n    const [dynamicImageStyles, setDynamicImageStyles] = useState<CSSProperties>()\r\n    const intrinsicWidthRef = useRef<number>(0)\r\n    const intrinsicHeightRef = useRef<number>(0)\r\n    const [isLoading, setIsLoading] = useState<boolean>(true)\r\n    const [isHasError, setIsHasError] = useState<boolean>(false)\r\n\r\n    useLayoutEffect(() => {\r\n      const img = new Image()\r\n      img.src = typeof src != 'string' ? (src as StaticImageData).src : src ?? ''\r\n      img.onload = function () {\r\n        const self = this as HTMLImageElement\r\n        const { width, height } = self\r\n\r\n        intrinsicWidthRef.current = width\r\n        intrinsicHeightRef.current = height\r\n\r\n        if (variant == ImageVariant.ORIGINAL && filter != ImageFilter.NORMAL) {\r\n          setDynamicImageStyles(getDynamicImageStyles(width, height))\r\n        }\r\n\r\n        setIsLoading(false)\r\n      }\r\n      img.onerror = () => {\r\n        setIsLoading(false)\r\n        setIsHasError(true)\r\n      }\r\n    }, [src])\r\n\r\n    useEffect(() => {\r\n      if (variant == ImageVariant.ORIGINAL && filter != ImageFilter.NORMAL) {\r\n        setDynamicImageStyles(\r\n          getDynamicImageStyles(intrinsicWidthRef.current, intrinsicHeightRef.current),\r\n        )\r\n      }\r\n    }, [variant, filter])\r\n\r\n    if (isLoading) return fallback\r\n\r\n    if (isHasError) return errorFallback\r\n\r\n    const classes = [cls[variant], cls[filter], 'dynamic-image-styles', wrapperClassName]\r\n\r\n    // const shimmerUrl = `data:image/svg+xml;base64,${toBase64(shimmer(wrapperWidth, wrapperHeight))}`\r\n\r\n    return (\r\n      <>\r\n        <style\r\n          dangerouslySetInnerHTML={{\r\n            __html: `\r\n            .dynamic-image-styles::before, .dynamic-image-styles::after {\r\n              inset: ${dynamicImageStyles?.inset};\r\n              width: ${dynamicImageStyles?.width};\r\n              height: ${dynamicImageStyles?.height};\r\n              scale: ${scale};\r\n            }\r\n          `,\r\n          }}\r\n        ></style>\r\n\r\n        <div\r\n          data-testid=\"image-wrapper\"\r\n          className={classNames(cls.wrapper, {}, classes)}\r\n          style={{\r\n            maxWidth: width,\r\n            width: width && '100%',\r\n            height: height,\r\n            aspectRatio: ar || `${intrinsicWidthRef.current} / ${intrinsicHeightRef.current}`,\r\n          }}\r\n        >\r\n          <NextImage\r\n            ref={forwardRef}\r\n            className={classNames(cls.NextImage, {}, [cls[variant], className])}\r\n            src={src || ''}\r\n            width={0}\r\n            height={0}\r\n            alt={alt}\r\n            sizes={sizes}\r\n            style={{ scale: scale || '', ...style }}\r\n            {...rest}\r\n          />\r\n        </div>\r\n      </>\r\n    )\r\n  }),\r\n)\r\n\r\nMyImage.displayName = 'MyImage'\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/shared/ui/MyImage/MyImage.tsx b/src/shared/ui/MyImage/MyImage.tsx
+--- a/src/shared/ui/MyImage/MyImage.tsx	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/shared/ui/MyImage/MyImage.tsx	(date 1706922344989)
+@@ -137,7 +137,7 @@
+             ref={forwardRef}
+             className={classNames(cls.NextImage, {}, [cls[variant], className])}
+             src={src || ''}
+-            width={0}
++            width={400}
+             height={0}
+             alt={alt}
+             sizes={sizes}
+Index: public/locales/en/post-details.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/public/locales/en/post-details.json b/public/locales/en/post-details.json
+new file mode 100644
+--- /dev/null	(date 1706835332926)
++++ b/public/locales/en/post-details.json	(date 1706835332926)
+@@ -0,0 +1,17 @@
++{
++  "editPost": "Edit Post",
++  "modal": {
++    "closeTitle": "Close Post",
++    "closeText": "Do you really want to close the edition of the publication? If you close changes won’t be saved",
++    "deleteTitle": "Delete Post",
++    "deleteText": "Are you sure you want to delete this post?"
++  },
++  "Yes": "Yes",
++  "No": "No",
++  "dropDown": {
++    "editPost": "Edit Post",
++    "deletePost": "Delete Post"
++  },
++  "saveChanges": "Save Changes",
++  "textAreaDescriptions": "Add publication descriptions"
++}
+\ No newline at end of file
+Index: public/locales/ru/post-details.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/public/locales/ru/post-details.json b/public/locales/ru/post-details.json
+new file mode 100644
+--- /dev/null	(date 1706835332919)
++++ b/public/locales/ru/post-details.json	(date 1706835332919)
+@@ -0,0 +1,17 @@
++{
++  "editPost": "Редактировать Пост",
++  "modal": {
++    "closeTitle": "Закрыть Пост",
++    "closeText": "Вы действительно хотите закрыть публикацию? При закрытии изменения не будут сохранены",
++    "deleteTitle": "Удалить Пост",
++    "deleteText": "Вы уверены, что хотите удалить это сообщение?"
++  },
++  "Yes": "Да",
++  "No": "Нет",
++  "dropDown": {
++    "editPost": "Редактировать Пост",
++    "deletePost": "Удалить Пост"
++  },
++  "saveChanges": "Сохранить Изменения",
++  "textAreaDescriptions": "Добавить описание публикации"
++}
+\ No newline at end of file
+Index: src/widgets/PostDetails/Publication/PublicationDescription/PublicationDescription.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/Publication/PublicationDescription/PublicationDescription.tsx b/src/widgets/PostDetails/Publication/PublicationDescription/PublicationDescription.tsx
+new file mode 100644
+--- /dev/null	(date 1706961729710)
++++ b/src/widgets/PostDetails/Publication/PublicationDescription/PublicationDescription.tsx	(date 1706961729710)
+@@ -0,0 +1,100 @@
++import Image from 'next/image'
++import s from '@/widgets/PostDetails/PostDetails.module.scss'
++import ava from 'public/images/avatar-story.jpg'
++import HeartIconMin from '@/shared/assets/icons/heart-outline-min.svg'
++import React, { ReactNode } from 'react'
++import HeartIcon from '@/shared/assets/icons/heart-outline.svg'
++import PaperPlane from '@/shared/assets/icons/paper-plane-outline.svg'
++import BookMark from '@/shared/assets/icons/bookmark.svg'
++import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
++
++const text =
++  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
++
++const user = 'URLProfiele '
++
++type Props = {
++  avatar: string
++  textValue: string
++  userName: string
++}
++export const PublicationDescription = ({ avatar, textValue, userName }: Props) => {
++  return (
++    <div>
++      <div className={s.publicationBlock}>
++        <ItemDescription userName={userName} textValue={textValue} avatar={avatar} />
++        <ItemDescription userName={user} textValue={text} avatar={ava.src}>
++          <HeartIconMin />
++        </ItemDescription>
++        <ItemDescription userName={user} textValue={text} avatar={ava.src}>
++          <HeartIconMin />
++        </ItemDescription>
++      </div>
++      <div className={s.publicationFooter}>
++        <IconBlock />
++        <LikeBlock />
++      </div>
++      <AddCommentBlock />
++    </div>
++  )
++}
++
++type PropsItem = {
++  avatar: string
++  textValue: string
++  userName?: string
++  children?: ReactNode
++}
++const ItemDescription = ({ avatar, textValue, userName, children }: PropsItem) => {
++  return (
++    <div className={s.itemDescription}>
++      <Image className={s.imageAvatar} width={34} height={34} src={avatar} alt={'avatar'} />
++      <div>
++        <span className={s.itemName}>{userName}</span>
++        <span className={s.itemText}>{textValue}</span>
++        <div className={s.itemTimestamp}>2 hours ago</div>
++      </div>
++      <div className={s.itemDescriptionChildren}>{children}</div>
++    </div>
++  )
++}
++
++const IconBlock = () => {
++  return (
++    <div className={s.iconBlockContainer}>
++      <div className={s.iconBlockLeft}>
++        <button>
++          <HeartIcon />
++        </button>
++        <button>
++          <PaperPlane />
++        </button>
++      </div>
++      <button>
++        <BookMark />
++      </button>
++    </div>
++  )
++}
++
++const LikeBlock = () => {
++  return (
++    <div>
++      <div className={s.likeBlockContainer}>
++        <Image className={s.imageAvatar} width={24} height={24} src={ava} alt={'avatar'} />
++        {/* eslint-disable-next-line react/no-unescaped-entities */}
++        <span className={s.likes}>2 243 'Like'</span>
++      </div>
++      <span className={s.date}>July 3, 2021</span>
++    </div>
++  )
++}
++
++const AddCommentBlock = () => {
++  return (
++    <div className={s.addCommentBlockContainer}>
++      <input placeholder={'Add a Comment...'} type={'text'} className={s.addInput}></input>
++      <Button theme={ButtonTheme.TEXT}>Publish</Button>
++    </div>
++  )
++}
+Index: src/widgets/PostDetails/ui/PostDetails.module.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/ui/PostDetails.module.scss b/src/widgets/PostDetails/PostDetails.module.scss
+rename from src/widgets/PostDetails/ui/PostDetails.module.scss
+rename to src/widgets/PostDetails/PostDetails.module.scss
+--- a/src/widgets/PostDetails/ui/PostDetails.module.scss	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/widgets/PostDetails/PostDetails.module.scss	(date 1706961851848)
+@@ -1,11 +1,24 @@
+-button {
+-  all: unset;
+-}
+-
+ //PostDetails
+ 
++.modal {
++  @media (max-width: 768px) {
++    display: none;
++  }
++}
++
++.mainBlock {
++  max-width: 980px;
++
++  .imageContainer {
++    flex: 0 0 490px;
++    @media (max-width: 1024px) {
++      flex-shrink: 0.3;
++    }
++  }
++}
+ 
+ .buttonClose {
++  all: unset;
+   cursor: pointer;
+   position: absolute;
+   top: -35px;
+@@ -16,13 +29,23 @@
+ //PostOptionsDropdown
+ 
+ .MenuContent {
++  button {
++    all: unset;
++  }
++
+   display: flex;
+   flex-direction: column;
+   cursor: pointer;
+-  padding: 0 15px;
++  padding: 0 10px;
+   gap: 10px;
++
++  .buttonItem {
++    display: flex;
++    gap: 12px;
++    font-size: 14px;
++    align-items: center;
++  }
+ }
+-
+ 
+ //PostHeader
+ 
+@@ -35,19 +58,13 @@
+   border-bottom: 1px solid #4C4C4C;
+   padding: 15px 20px;
+ 
+-  .profileInfo {
+-    display: flex;
+-    justify-content: center;
+-    align-items: center;
+-
+-    .name {
+-      font-size: 15px;
+-    }
++  .name {
++    font-size: 15px;
+   }
+ }
+ 
+ .imageAvatar {
+-  margin-right: 10px;
++  margin: 6px 10px 0 0;
+   border-radius: 50%;
+ }
+ 
+@@ -57,24 +74,107 @@
+ 
+ 
+ //Publication
++.publicationBlock {
++  width: 100%;
++  padding: 0 22px 0 22px;
++}
+ 
+ .form {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+-}
+-
+-.publicationBlock {
+-  width: 100%;
+-  margin: 0 22px 0 22px;
++  gap: 200px;
+ }
+ 
+ .textArea {
+   height: 114px;
+ }
+ 
+-.button {
+-  margin-top: 190px;
++//PublicationDescription
++
++.publicationFooter {
++  border-top: 1px solid #4c4c4c;
++  width: 100%;
++  padding: 10px 22px 5px 22px;
++  border-bottom: 1px solid #4c4c4c;
++}
++
++.itemDescription {
++  display: flex;
++  align-items: flex-start;
++  font-size: 14px;
++  margin: 15px 0 5px 0;
++  color: var(--light-color-100)
++}
++
++.itemName {
++  font-weight: 600;
++  margin-right: 4px;
++  line-height: 24px;
++  font-size: 14px;
++}
++
++.itemText {
++  line-height: 24px;
++  font-size: 14px;
++}
++
++.itemTimestamp {
++  color: var(--light-color-900);
++  font-size: 12px;
++  margin-top: 5px;
++}
++
++
++.addInput {
++  outline: 0;
++  padding: 22px;
++  width: 100%;
++  border: none;
++  background: var(--dark-color-300);
++  color: var(--dark-color-500);
++
++  &::placeholder {
++    font-size: 14px;
++  }
++}
++
++.itemDescriptionChildren {
++  margin-top: 16px;
++}
++
++.iconBlockContainer {
++  button {
++    all: unset;
++  }
++
++  display: flex;
++  justify-content: space-between;
++}
++
++.iconBlockLeft {
++  display: flex;
++  gap: 16px;
++}
++
++.likeBlockContainer {
++  display: flex;
++  align-items: center;
++  margin: 16px 0 0 0;
++}
++
++.likes {
++  font-size: 14px;
++}
++
++.date {
++  color: #8D9094;
++  font-size: 12px;
++}
++
++.addCommentBlockContainer {
++  display: flex;
++  width: 100%;
+ }
+ 
+ 
+Index: src/widgets/PostDetails/PostHeader/PostHeader.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/PostHeader/PostHeader.tsx b/src/widgets/PostDetails/PostHeader/PostHeader.tsx
+new file mode 100644
+--- /dev/null	(date 1706918958895)
++++ b/src/widgets/PostDetails/PostHeader/PostHeader.tsx	(date 1706918958895)
+@@ -0,0 +1,32 @@
++import Image from 'next/image'
++import { PostOptionsDropdown } from './PostOptionsDropdown/PostOptionsDropdown'
++import s from '../PostDetails.module.scss'
++import { classNames } from '@/shared/lib/classNames/classNames'
++import { HStack } from '@/shared/ui/Stack'
++
++type Props = {
++  editMode: boolean
++  setEditMode: (mode: boolean) => void
++  avatar: string
++  setIsOpenDeleteModal: (open: boolean) => void
++  userName: string
++}
++export const PostHeader = (props: Props) => {
++  const { avatar, editMode, setEditMode, setIsOpenDeleteModal, userName } = props
++  const mods = { [s.noBorder]: editMode }
++  const headerClass = classNames(s.headerBlock, mods, [])
++  return (
++    <header className={headerClass}>
++      <HStack justify="center" align="center">
++        <Image className={s.imageAvatar} width={34} height={34} src={avatar} alt={'avatar'} />
++        <span className={s.name}>{userName}</span>
++      </HStack>
++      {!editMode && (
++        <PostOptionsDropdown
++          setIsOpenDeleteModal={setIsOpenDeleteModal}
++          setEditMode={setEditMode}
++        />
++      )}
++    </header>
++  )
++}
+Index: src/widgets/PostDetails/PostHeader/PostOptionsDropdown/PostOptionsDropdown.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/PostHeader/PostOptionsDropdown/PostOptionsDropdown.tsx b/src/widgets/PostDetails/PostHeader/PostOptionsDropdown/PostOptionsDropdown.tsx
+new file mode 100644
+--- /dev/null	(date 1706969247932)
++++ b/src/widgets/PostDetails/PostHeader/PostOptionsDropdown/PostOptionsDropdown.tsx	(date 1706969247932)
+@@ -0,0 +1,59 @@
++import { ReactNode, useState } from 'react'
++import {
++  DropdownMenu,
++  DropdownMenuContent,
++  DropdownMenuTrigger,
++} from '@/shared/ui/Dropdown/Dropdown'
++import { DottedMenuIcon } from '@/shared/ui/DottedMenuIcon/DottedMenuIcon'
++import s from '../../PostDetails.module.scss'
++import EditIcon from '@/shared/assets/icons/edit-2-outline.svg'
++import DeleteIcon from '@/shared/assets/icons/trash-outline.svg'
++import { useClientTranslation } from '@/shared/config/i18n/client'
++import { Namespaces } from '@/shared/config/i18n/types'
++
++type Props = {
++  setEditMode: (editMode: boolean) => void
++  setIsOpenDeleteModal: (open: boolean) => void
++}
++export const PostOptionsDropdown = ({ setEditMode, setIsOpenDeleteModal }: Props) => {
++  const { t } = useClientTranslation(Namespaces.POST_DETAILS)
++  const [isOpenMenu, setIsOpenMenu] = useState(false)
++  const onClickDeletePost = () => {
++    setIsOpenDeleteModal(true)
++    setIsOpenMenu(false)
++  }
++  const onClickEditPost = () => {
++    setEditMode(true)
++  }
++  return (
++    <DropdownMenu open={isOpenMenu} onOpenChange={setIsOpenMenu}>
++      <DropdownMenuTrigger>
++        <DottedMenuIcon isActive={isOpenMenu} />
++      </DropdownMenuTrigger>
++      <DropdownMenuContent sticky="always">
++        <div className={s.MenuContent}>
++          <ButtonItem onClick={onClickEditPost} text={t('dropDown.editPost')}>
++            <EditIcon />
++          </ButtonItem>
++          <ButtonItem onClick={onClickDeletePost} text={t('dropDown.deletePost')}>
++            <DeleteIcon />
++          </ButtonItem>
++        </div>
++      </DropdownMenuContent>
++    </DropdownMenu>
++  )
++}
++
++type PropsItem = {
++  onClick: () => void
++  text: string
++  children?: ReactNode
++}
++const ButtonItem = ({ onClick, text, children }: PropsItem) => {
++  return (
++    <button onClick={onClick} className={s.buttonItem}>
++      {children}
++      <span>{text}</span>
++    </button>
++  )
++}
+Index: src/widgets/PostDetails/ui/PostConfirmationModal/PostConfirmationModal.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/widgets/PostDetails/ui/PostConfirmationModal/PostConfirmationModal.tsx b/src/widgets/PostDetails/ui/PostConfirmationModal/PostConfirmationModal.tsx
+new file mode 100644
+--- /dev/null	(date 1706835332624)
++++ b/src/widgets/PostDetails/ui/PostConfirmationModal/PostConfirmationModal.tsx	(date 1706835332624)
+@@ -0,0 +1,35 @@
++import { Modal } from '@/shared/ui/Modal/Modal'
++import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
++import s from './PostConfirmationModal.module.scss'
++import { HStack } from '@/shared/ui/Stack'
++import { TFunction } from 'i18next'
++import { Namespaces } from '@/shared/config/i18n/types'
++
++type Props = {
++  onClick: () => void
++  title: string
++  text: string
++  handleClose: () => void
++  isOpen: boolean
++  isLoading?: boolean
++  t: TFunction<Namespaces, undefined>
++}
++export const PostConfirmationModal = (props: Props) => {
++  const { isLoading, isOpen, text, title, handleClose, onClick, t } = props
++  return (
++    <Modal onClose={handleClose} isOpen={isOpen}>
++      <Modal.Header close={handleClose}>{title}</Modal.Header>
++      <Modal.Body>
++        <div className={s.text}>{text}</div>
++        <HStack className={s.modalButtons} justify="end" align={'center'} gap="24">
++          <Button isLoading={isLoading} theme={ButtonTheme.OUTLINED} onClick={onClick}>
++            {t('Yes')}
++          </Button>
++          <Button theme={ButtonTheme.DEFAULT} onClick={handleClose}>
++            {t('No')}
++          </Button>
++        </HStack>
++      </Modal.Body>
++    </Modal>
++  )
++}
+Index: src/entities/Post/index.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>export { fetchPostById } from './api/postApi'\r\nexport type { PostImage, IPost, UploadPostRequestParams } from './model/types/types'\r\nexport {\r\n  useFetchPostByIdQuery,\r\n  useFetchAllPostsQuery,\r\n  useFetchPostsByUserIdQuery,\r\n  useCreatePostMutation,\r\n  useDeletePostImageMutation,\r\n  useDeletePostMutation,\r\n  uploadPostImages,\r\n  createPost,\r\n  createdPostMatcher,\r\n} from './api/postApi'\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/entities/Post/index.tsx b/src/entities/Post/index.tsx
+--- a/src/entities/Post/index.tsx	(revision 6611bf0c75f85da43030868ac2151fca6d1ee898)
++++ b/src/entities/Post/index.tsx	(date 1706970127611)
+@@ -10,4 +10,5 @@
+   uploadPostImages,
+   createPost,
+   createdPostMatcher,
++  deletePostMatcher,
+ } from './api/postApi'

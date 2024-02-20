@@ -1,5 +1,6 @@
 import { PostSortField } from '@/shared/const/postSortField'
 import { SortOrder } from '@/shared/types/sort'
+import { IUser } from '@/entities/User'
 
 export type PostOwner = {
   firstName: string
