@@ -9,11 +9,14 @@ import { ICreatePostSchema } from '@/features/createPost'
 import { PostListSchema } from '@/widgets/PostList'
 import { UISchema } from '@/features/UI'
 import { PostDetailsSchema } from '@/widgets/PostDetails/model/types/postDetailsSchema'
+import { IPost } from '@/entities/Post'
+import { IPostSchema } from '@/entities/Post/model/types/types'
 
 export type StateSchema = {
   // Остальные типы ваших редьюсеров
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
   user: IUserSchema
+  post: IPostSchema
   profile: IProfileSchema
   signIn: ISignInSchema
   signup: ISignUpSchema

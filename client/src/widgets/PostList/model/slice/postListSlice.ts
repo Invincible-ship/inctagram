@@ -1,6 +1,11 @@
 import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { PostListSchema } from '../types/postListSchema'
-import { IPost, createdPostMatcher, deletePostMatcher } from '@/entities/Post'
+import {
+  IPost,
+  createdPostMatcher,
+  deletePostMatcher,
+  updatePostByIdMatcher,
+} from '@/entities/Post'
 import { StateSchema } from '@/providers/StoreProvider'
 import { PostSortField } from '@/shared/const/postSortField'
 import { fetchPostsByProfileId } from '../services/fetchPostsByProfileId'
@@ -80,8 +85,14 @@ export const postListSlice = createSlice({
         postsAdapter.addOne(state, payload)
       })
       .addMatcher(deletePostMatcher, (state, payload) => {
-        const id = String(payload.meta.arg)
+        const id = payload.meta.arg.originalArgs
         postsAdapter.removeOne(state, id)
+      })
+      .addMatcher(updatePostByIdMatcher, (state, payload) => {
+        const id = payload.meta.arg.originalArgs.id
+        const description = payload.meta.arg.originalArgs.description
+
+        postsAdapter.updateOne(state, { id, changes: { description } })
       })
   },
 })

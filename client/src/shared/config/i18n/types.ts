@@ -26,6 +26,8 @@ export enum Namespaces {
   HEADER = 'header',
   CREATE_POST = 'create-post',
   POST_DETAILS = 'post-details',
+  // entities
+  COMMENT_LIST = 'comment-list',
 }
 
 export type LanguageParams = { lng: LanguageIds }

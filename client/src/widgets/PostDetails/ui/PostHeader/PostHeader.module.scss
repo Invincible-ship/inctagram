@@ -5,11 +5,15 @@
   flex-wrap: wrap;
   align-items: center;
   border-bottom: 1px solid #4C4C4C;
-  padding: 15px 20px;
+  padding: 12px 24px;
 
   .name {
     font-size: 15px;
   }
+}
+
+.userName {
+  font-weight: 600;
 }
 
 .noBorder {

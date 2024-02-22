@@ -1,6 +1,6 @@
 {
   "editPost": "Edit Post",
-  "modal": {
+  "modale": {
     "closeTitle": "Close Post",
     "closeText": "Do you really want to close the edition of the publication? If you close changes won’t be saved",
     "deleteTitle": "Delete Post",
@@ -13,5 +13,34 @@
     "deletePost": "Delete Post"
   },
   "saveChanges": "Save Changes",
-  "textAreaDescriptions": "Add publication descriptions"
+  "textAreaDescriptions": "Add publication descriptions",
+  "info": {
+    "likes": "Likes"
+  },
+  "edit": {
+    "descriptionTitle": "Add publication descriptions",
+    "btn": "Save Changes"
+  },
+  "modal": {
+    "yes": "Yes",
+    "no": "No",
+    "update": {
+      "title": "Close Edit Post",
+      "text": "Do you really want to close the edition of the publication? If you close changes won’t be saved"
+    },
+    "delete": {
+      "title": "Delete Post",
+      "text": "Are you sure you want to delete this post?"
+    }
+  },
+  "toast": {
+    "success": {
+      "update": "The publication has been successfully updated",
+      "delete": "The publication was successfully deleted"
+    },
+    "error": {
+      "update": "Something went wrong, the post could not be updated. Please try again a little later...",
+      "delete": "Something went wrong, the post could not be deleted. Please try again a little later..."
+    }
+  }
 }

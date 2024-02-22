@@ -53,7 +53,7 @@ type ModalHeaderProps = {
   width?: number | string
 }
 
-export const ModalHeader = memo(({ children, close }: ModalHeaderProps) => {
+export const ModalHeader = ({ children, close }: ModalHeaderProps) => {
   return (
     <div className={cls.header}>
       <h2 className={cls.title}>{children}</h2>
@@ -62,9 +62,7 @@ export const ModalHeader = memo(({ children, close }: ModalHeaderProps) => {
       </span>
     </div>
   )
-})
-
-ModalHeader.displayName = 'ModalHeader'
+}
 
 export const ModalBody = memo(
   ({ children, className }: { children: ReactNode; className?: string }) => {

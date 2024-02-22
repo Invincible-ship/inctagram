@@ -1,26 +1,54 @@
-import s from './CommentCard.module.scss'
-import Image from 'next/image'
-import { ReactNode } from 'react'
-import { classNames } from '@/shared/lib/classNames/classNames'
+import { FC, useMemo } from 'react'
+import { IComment } from '../../model/types/types'
+import { HStack, VStack } from '@/shared/ui/Stack'
+import { Avatar, AvatarSize } from '@/shared/ui/Avatar/Avatar'
+import cls from './CommentCard.module.scss'
+import { useDateFormatter } from '@/shared/lib/hooks/useDateFormatter/useDateFormatter'
+import { Namespaces } from '@/shared/config/i18n/types'
+import { getFormattedPublciationDate } from '@/shared/utils/getFormattedPublciationDate'
+import HeartIcon from '@/shared/assets/icons/heart-outline.svg'
+import { TFunction } from 'i18next'
 
-type Props = {
-  avatar: string
-  userName: string
-  textValue: string
-  children?: ReactNode
-  className?: string
+type CommentCardProps = {
+  comment: IComment
+  t: TFunction<Namespaces, undefined>
+  commonT: TFunction<Namespaces, undefined>
 }
-export const CommentCard = (props: Props) => {
-  const { children, userName, textValue, avatar, className } = props
+
+export const CommentCard: FC<CommentCardProps> = ({ comment, t, commonT }) => {
+  const formatter = useDateFormatter({
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+
+  const avatarUrl = useMemo(() => {
+    const avatar = comment.from.avatars.find(avatar => avatar.width == AvatarSize.SMALL)
+
+    return avatar ? avatar.url : ''
+  }, [comment])
+
   return (
-    <div className={s.itemDescription}>
-      <Image className={s.imageAvatar} width={34} height={34} src={avatar} alt={'avatar'} />
-      <div className={classNames(s.commentBlock, {}, [className])}>
-        <span className={s.itemName}>{userName}</span>
-        <span className={s.itemText}>{textValue}</span>
-        <div className={s.itemTimestamp}>2 hours ago</div>
-      </div>
-      <div className={s.itemDescriptionChildren}>{children}</div>
-    </div>
+    <HStack className={cls.CommentCard} gap="12" max>
+      <HStack className={cls.avatarWrapper}>
+        <Avatar src={avatarUrl} size={AvatarSize.SMALLEST} />
+      </HStack>
+      <VStack gap="8" max>
+        <HStack align="center" justify="between" gap="12" max>
+          <HStack className={cls.content}>
+            <span className={cls.username}>{comment.from.username}</span>
+            {comment.content}
+          </HStack>
+          <HStack>
+            <HeartIcon viewBox="0 0 24 24" width="16" height="16" />
+          </HStack>
+        </HStack>
+        <HStack className={cls.infoBlock} gap="12" max>
+          <span>{getFormattedPublciationDate(comment.createdAt, formatter, commonT)}</span>
+          <span>{t('card.likes', { count: 1 })}</span>
+          <span className={cls.answer}>{t('card.answer')}</span>
+        </HStack>
+      </VStack>
+    </HStack>
   )
 }

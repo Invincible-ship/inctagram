@@ -3,6 +3,7 @@ import {
   AllPostsRequestParams,
   IPost,
   PostImage,
+  UpdatePostByIdRequest,
   UploadPostRequestParams,
 } from '../model/types/types'
 import {
@@ -75,13 +76,13 @@ export const postApi = rtkApi.injectEndpoints({
       invalidatesTags: () => [{ type: POST_TAG, id: 'LIST' }],
     }),
     // updating posts
-    updatePostById: build.mutation<void, any>({
+    updatePostById: build.mutation<void, UpdatePostByIdRequest>({
       query: body => ({
         method: 'PUT',
         url: `${CREATE_POST_ENDPOINT}/${body.id}`,
         body,
       }),
-      invalidatesTags: (result, error, id) => [{ type: POST_TAG, id }],
+      invalidatesTags: (result, error, arg) => [{ type: POST_TAG, id: arg.id }],
     }),
     // deleting post's images and posts
     deletePostImage: build.mutation<void, string>({
@@ -103,8 +104,10 @@ export const postApi = rtkApi.injectEndpoints({
 export const fetchPostById = postApi.endpoints.fetchPostById.initiate
 export const uploadPostImages = postApi.endpoints.uploadPostImages.initiate
 export const createPost = postApi.endpoints.createPost.initiate
+export const deletePostMutation = postApi.endpoints.deletePost.initiate
 export const createdPostMatcher = postApi.endpoints.createPost.matchFulfilled
 export const deletePostMatcher = postApi.endpoints.deletePost.matchFulfilled
+export const updatePostByIdMatcher = postApi.endpoints.updatePostById.matchFulfilled
 export const {
   useFetchPostByIdQuery,
   useFetchAllPostsQuery,

@@ -11,12 +11,14 @@ import { createPostReducer } from '@/features/createPost'
 import { postListReducer } from '@/widgets/PostList'
 import { UIReducer } from '@/features/UI'
 import { postDetailsReducer } from '@/widgets/PostDetails/model/slice/postDetailsSlice'
+import { postReducer } from '@/entities/Post'
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducer: ReducersMapObject<StateSchema> = {
     // Ваши остальные редьюсеры
     [rtkApi.reducerPath]: rtkApi.reducer,
     user: userReducer,
+    post: postReducer,
     profile: profileReducer,
     signIn: signInReducer,
     signup: signupReducer,

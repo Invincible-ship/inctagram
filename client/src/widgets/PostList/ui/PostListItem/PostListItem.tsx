@@ -1,4 +1,4 @@
-import { IPost } from '@/entities/Post'
+import { IPost, setCurrentPost } from '@/entities/Post'
 import { ImageVariant, MyImage } from '@/shared/ui/MyImage/MyImage'
 import { PostListCardType } from '../../model/consts/postListCardType'
 import React, { FC, useMemo } from 'react'
@@ -11,6 +11,7 @@ import cls from './PostListItem.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import HeartIcon from '@/shared/assets/icons/heart-outline.svg'
 import CommentIcon from '@/shared/assets/icons/message-circle-outline.svg'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 
 type PostListItemProps = {
   className?: string
@@ -21,6 +22,7 @@ type PostListItemProps = {
 const PREVIEW_IMAGE_WIDTH = 640
 
 export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) => {
+  const dispatch = useAppDispatch()
   const searchParams = new URLSearchParams(Array.from(useSearchParams()))
   const imagePreview = useMemo(() => {
     return post.images.find(image => image.width == PREVIEW_IMAGE_WIDTH)

@@ -9,6 +9,7 @@ import { HStack } from '@/shared/ui/Stack'
 import DefaultAvatar from '@/shared/assets/icons/person.svg'
 
 export enum AvatarSize {
+  SMALLEST = 36,
   SMALL = 45,
   MEDIUM = 72,
   LARGE = 192,

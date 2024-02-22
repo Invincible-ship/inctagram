@@ -14,11 +14,11 @@
 .DropdownContent {
   min-width: var(--radix-dropdown-menu-trigger-width);
   min-height: var(--radix-dropdown-menu-trigger-height);
-  padding: 12px 0;
   color: var(--primary-text-color);
   background-color: var(--dark-color-500);
   border: 1px solid var(--dark-color-100);
   border-radius: 2px;
+  padding: 6px 0;
   overflow: hidden;
   z-index: 1100;
   animation-duration: 400ms;
@@ -46,9 +46,19 @@
   width: 100%;
   padding: 6px 12px;
   cursor: pointer;
+  transition: all .15s linear;
 
   &:focus-visible {
     outline: none;
+  }
+
+  &:hover {
+    color: var(--light-color-900);
+
+    svg g path {
+      fill: var(--light-color-900);
+      transition: all .15s linear;
+    }
   }
 }
 

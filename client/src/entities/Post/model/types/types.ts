@@ -28,6 +28,11 @@ export type IPost = {
   owner: PostOwner
 }
 
+export type IPostSchema = {
+  post: IPost
+  isBeingDeleted: boolean
+}
+
 export type AllPostsRequestParams = {
   idLastUploadedPost: number
   params: {
@@ -42,4 +47,9 @@ export type UploadPostRequestParams = {
   childrenMetadata: Array<{
     uploadId: string
   }>
+}
+
+export type UpdatePostByIdRequest = {
+  description: string
+  id: number
 }

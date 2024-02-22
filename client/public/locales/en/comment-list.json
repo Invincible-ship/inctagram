@@ -1,0 +1,8 @@
+{
+  "next-comments": "Show Next Comments ({{count}})",
+  "all-comments": "Show All Comments ({{count}})",
+  "card": {
+    "likes": "Like: {{count}}",
+    "answer": "Answer"
+  }
+}
