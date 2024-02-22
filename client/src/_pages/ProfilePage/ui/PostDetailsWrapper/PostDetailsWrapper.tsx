@@ -21,9 +21,12 @@ export const PostDetailsWrapper = () => {
   }
 
   useEffect(() => {
-    if (post) {
-      dispatch(setCurrentPost(post))
+    if (!post) {
+      dispatch(setCurrentPost({}))
+      return
     }
+
+    dispatch(setCurrentPost(post))
   }, [post, dispatch])
 
   // TODO: add PostDetails component
