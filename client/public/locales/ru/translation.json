@@ -11,5 +11,9 @@
     "seconds": "{{count}} секунд{{ending}} назад",
     "minutes": "{{count}} минут{{ending}} назад",
     "hours": "{{count}} час{{ending}} назад"
+  },
+  "comment": {
+    "publish": "Опубликовать",
+    "publishPlaceholder": "Написать комментарий..."
   }
 }

@@ -39,7 +39,7 @@ export const CommentCard: FC<CommentCardProps> = ({ comment, t, commonT }) => {
             <span className={cls.username}>{comment.from.username}</span>
             {comment.content}
           </HStack>
-          <HStack>
+          <HStack className={cls.icon}>
             <HeartIcon viewBox="0 0 24 24" width="16" height="16" />
           </HStack>
         </HStack>

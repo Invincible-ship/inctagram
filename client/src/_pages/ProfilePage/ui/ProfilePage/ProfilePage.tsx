@@ -46,7 +46,7 @@ export const ProfilePage: FC<ProfilePageProps> = ({ profile }) => {
   const memoizedProfile = useMemo(() => profile, [profile])
 
   return (
-    <Suspense fallback={<ProfilePageSkeleton mobile={mobile} postsLength={8} />}>
+    <Suspense fallback={<ProfilePageSkeleton mobile={mobile} />}>
       <Page isTriggerActive={hasMore} onScrollEnd={onScrollEnd}>
         <VStack data-testid="profile-page" gap={gap} max>
           <ProfileCard profile={memoizedProfile} mobile={mobile} />

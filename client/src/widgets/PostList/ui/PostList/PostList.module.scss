@@ -13,11 +13,6 @@
     }
   }
 
-  .skeleton {
-    flex-basis: 24.65%;
-    aspect-ratio: 1 / 1;
-  }
-
   &:has(.item:hover) {
     .item:not(:hover) {
       scale: .985;
@@ -31,10 +26,6 @@
 
   @media (max-width: 769px) {
     gap: 2px;
-
-    .skeleton {
-      flex-basis: calc(33.333% - 2px);
-    }
   }
 }
 

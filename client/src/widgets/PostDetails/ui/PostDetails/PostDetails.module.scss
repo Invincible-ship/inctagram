@@ -24,7 +24,7 @@
 
 .descriptionContainer{
   width: 100%;
-  border-left: 1px solid #4c4c4c;
+  border-left: 1px solid #f5a7a7;
 }
 
 .publicationFooter {
@@ -67,6 +67,35 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.mainSkeleton {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--modal-z-index);
+
+  .container {
+    width: 980px;
+    background-color: var(--dark-color-300);
+    border: 1px solid var(--dark-color-100);
+    z-index: var(--modal-z-index);
+
+    .header {
+      border-bottom: 1px solid var(--dark-color-100);
+      padding-bottom: 12px;
+    }
+  
+    .padding {
+      padding: 12px;
+    }
+  
+    .content > .padding {
+      border-right: 1px solid var(--dark-color-100);
+    }
+  }
 }
 
 

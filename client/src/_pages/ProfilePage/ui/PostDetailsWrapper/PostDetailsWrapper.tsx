@@ -3,10 +3,12 @@ import { getPosts } from '@/widgets/PostList'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { POST_DETAILS_ID } from '@/widgets/PostList'
 import { StateSchema } from '@/providers/StoreProvider'
-import { PostDetails } from '@/widgets/PostDetails/ui/PostDetails/PostDetails'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { setCurrentPost } from '@/entities/Post'
-import { useEffect } from 'react'
+import { IPost, setCurrentPost } from '@/entities/Post'
+import { lazy, useEffect } from 'react'
+const PostDetails = lazy(() =>
+  import('@/widgets/PostDetails').then(mod => ({ default: mod.PostDetails })),
+)
 
 export const PostDetailsWrapper = () => {
   const router = useRouter()
@@ -22,7 +24,7 @@ export const PostDetailsWrapper = () => {
 
   useEffect(() => {
     if (!post) {
-      dispatch(setCurrentPost({}))
+      dispatch(setCurrentPost({} as IPost))
       return
     }
 

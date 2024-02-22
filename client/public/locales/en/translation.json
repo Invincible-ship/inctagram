@@ -11,5 +11,9 @@
     "seconds": "{{count}} Seconds ago",
     "minutes": "{{count}} Minutes ago",
     "hours": "{{count}} Hours ago"
+  },
+  "comment": {
+    "publish": "Publish",
+    "publishPlaceholder": "Add a Comment..."
   }
 }
