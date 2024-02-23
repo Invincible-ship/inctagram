@@ -1,6 +1,6 @@
 import { getUserDataByTokenQuery } from '../api/userApi'
 import { IUser } from '../model/types/types'
-import { ThunkConfig } from '@/providers/StoreProvider'
+import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { createAsyncThunk } from '@reduxjs/toolkit'

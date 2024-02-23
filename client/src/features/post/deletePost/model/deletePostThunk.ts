@@ -1,5 +1,5 @@
 import { deletePostMutation, getCurrentPost } from '@/entities/Post'
-import { ThunkConfig } from '@/providers/StoreProvider'
+import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
 import { createAsyncThunk } from '@reduxjs/toolkit'

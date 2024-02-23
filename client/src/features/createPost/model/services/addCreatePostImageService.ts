@@ -1,7 +1,6 @@
 import { addPostImage, setCurrentStep } from '../slice/createPostSlice'
-import { ThunkConfig } from '@/providers/StoreProvider'
+import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { ImageFilter, ImageVariant } from '@/shared/ui/MyImage/MyImage'
-import { file2Base64 } from '@/shared/utils/file2Base64'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const addCreatePostImageService = createAsyncThunk<
