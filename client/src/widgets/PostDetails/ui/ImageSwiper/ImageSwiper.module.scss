@@ -1,0 +1,15 @@
+.imageContainer {
+  align-self: center;
+  flex: 0 0 490px;
+  height: 100%;
+
+  .imageSlide {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1.1;
+  }
+
+  @media (max-width: 1024px) {
+    flex-shrink: 0.3;
+  }
+}

@@ -13,7 +13,7 @@
     height: 4px;
     background-color: var(--light-color-100);
     border-radius: 50%;
-    transition: background-color .15s ease-in;
+    transition: background-color 0.15s ease-in;
   }
 
   &.active .dot {

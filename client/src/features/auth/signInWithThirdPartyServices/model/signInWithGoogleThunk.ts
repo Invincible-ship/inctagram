@@ -1,5 +1,5 @@
 import { getAccessTokenByGoogleMutation } from '@/entities/User'
-import { ThunkConfig } from '@/providers/StoreProvider'
+import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
 import { LOCAL_STORAGE_TOKEN_KEY } from '@/shared/const/localStorage'

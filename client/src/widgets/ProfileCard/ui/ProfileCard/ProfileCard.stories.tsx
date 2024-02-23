@@ -2,8 +2,6 @@ import type { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { ProfileCard } from './ProfileCard'
 import cls from './ProfileCard.module.scss'
 import { HStack } from '@/shared/ui/Stack'
-import { useClientTranslation } from '@/shared/config/i18n/client'
-import { Namespaces } from '@/shared/config/i18n/types'
 import { IViewer } from '@/entities/Viewer'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
 

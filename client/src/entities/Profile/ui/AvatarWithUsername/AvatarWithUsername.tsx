@@ -1,40 +1,45 @@
 import { IAvatar, IProfile } from '../../model/types/types'
 import { IViewer } from '@/entities/Viewer'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { Routes } from '@/shared/types/routes'
 import { Avatar, AvatarSize } from '@/shared/ui/Avatar/Avatar'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { HStack } from '@/shared/ui/Stack'
 import Link from 'next/link'
-import { FC, Suspense, useContext, useMemo } from 'react'
+import { FC, Suspense, memo, useContext, useMemo } from 'react'
 
 type AvatarWithUsernameProps = {
-  user: IViewer | IProfile
+  className?: string
+  user: DeepPartial<IViewer | IProfile> & { avatarUrl?: string }
 }
 
-const AvatarWithUsername: FC<AvatarWithUsernameProps> = ({ user }) => {
+const AvatarWithUsername: FC<AvatarWithUsernameProps> = memo(({ user, className }) => {
   const lngId = useContext(LanguageContext)
-  const { id, avatars, userName } = user
+  const { id, avatars, userName, avatarUrl } = user
 
   const url = useMemo(() => {
-    if (avatars.length) {
-      const avatar = avatars.find(avatar => avatar.width == AvatarSize.SMALL) as IAvatar
+    if (avatarUrl) return avatarUrl
+
+    if (avatars?.length) {
+      const avatar = avatars.find(avatar => avatar?.width == AvatarSize.SMALL) as IAvatar
 
       return avatar?.url
     }
 
     return ''
-  }, [avatars])
+  }, [avatars, avatarUrl])
 
   return (
     <Link href={`/${lngId}${Routes.PROFILE}/${id}`}>
-      <HStack align="center" justify="start" gap="12">
-        <Avatar src={url} size={AvatarSize.SMALL} />
+      <HStack className={className} align="center" justify="start" gap="12">
+        <Avatar src={url} size={AvatarSize.SMALLEST} />
         {userName}
       </HStack>
     </Link>
   )
-}
+})
+
+AvatarWithUsername.displayName = 'AvatarWithUsername'
 
 export const AvatarWithUsernameSkeleton = () => (
   <HStack align="center" justify="start" gap="12">
@@ -43,8 +48,12 @@ export const AvatarWithUsernameSkeleton = () => (
   </HStack>
 )
 
-export const AvatarWithUsernameSuspense: FC<AvatarWithUsernameProps> = ({ user }) => (
-  <Suspense fallback={<AvatarWithUsernameSkeleton />}>
-    <AvatarWithUsername user={user} />
-  </Suspense>
+export const AvatarWithUsernameSuspense: FC<AvatarWithUsernameProps> = memo(
+  ({ user, className }) => (
+    <Suspense fallback={<AvatarWithUsernameSkeleton />}>
+      <AvatarWithUsername user={user} className={className} />
+    </Suspense>
+  ),
 )
+
+AvatarWithUsernameSuspense.displayName = 'AvatarWithUsernameSuspense'

@@ -48,5 +48,5 @@ export const getSkeletons = (length: number, type: PostListCardType) =>
       return <>Extended Skeleton Component</>
     }
 
-    return <Skeleton key={idx} className={cls.skeleton} />
+    return <Skeleton key={idx} className="profile-card-image-skeleton" />
   })

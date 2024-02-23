@@ -1,5 +1,5 @@
 import { LanguageIds } from '@/shared/config/i18n/types'
-import { AppLayout } from '@/shared/ui/Layouts/AppLayout'
+import { AppLayout } from '@/app/layouts/AppLayout'
 import { StoryFn } from '@storybook/react'
 
 export const PageDecorator = (StoryComponent: StoryFn) => {

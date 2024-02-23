@@ -4,7 +4,7 @@ import { ConfirmationEmailViaCode as ConfirmationEmail } from '@/features/auth/c
 import { useContext } from 'react'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { PageDecorator } from '@/shared/config/storybook/PageDecorator/PageDecorator'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
 

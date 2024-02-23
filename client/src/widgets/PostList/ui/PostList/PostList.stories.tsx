@@ -1,7 +1,7 @@
 import type { Meta, StoryFn, StoryObj } from '@storybook/react'
 
 import { PostList } from './PostList'
-import { StateSchema, mockedReduxData } from '@/providers/StoreProvider'
+import { StateSchema, mockedReduxData } from '@/app/providers/StoreProvider'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
 import { PostListPage } from '../../model/consts/postListPage'
 import { PostListCardType } from '../../model/consts/postListCardType'

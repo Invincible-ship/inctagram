@@ -2,7 +2,7 @@
 
 import { getUserAuthData } from '@/entities/User'
 import { SignOut } from '@/features/auth/signout'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { Routes } from '@/shared/types/routes'

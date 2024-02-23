@@ -4,12 +4,11 @@ import { Inter } from 'next/font/google'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import Loading from './loading'
 import { NextFont } from 'next/dist/compiled/@next/font'
-import { AppLayout } from '@/shared/ui/Layouts/AppLayout'
-import { StoreProvider } from '@/providers/StoreProvider'
-import { SessionProvider } from '@/providers/SessionProvider/SessionProvider'
-import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
-import '@/shared/styles/index.scss'
-import { languages } from '@/shared/config/i18n/settings'
+import { AppLayout } from '../layouts/AppLayout'
+import { StoreProvider } from '../providers/StoreProvider'
+import { SessionProvider } from '../providers/SessionProvider/SessionProvider'
+import { LanguageProvider } from '../providers/LanguageProvider/LanguageProvider'
+import '../styles/index.scss'
 
 const inter: NextFont = Inter({
   weight: ['400', '500', '600', '700', '900'],

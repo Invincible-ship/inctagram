@@ -1,5 +1,5 @@
-import '@/shared/styles/index.scss'
-import '@/shared/styles/variables/common.scss'
+import '@/app/styles/index.scss'
+import '@/app/styles/variables/common.scss'
 import { StoryFn } from '@storybook/react'
 import { Inter } from 'next/font/google'
 

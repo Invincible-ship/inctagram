@@ -1,7 +1,7 @@
 import { IProfile, getProfileDataQuery } from '@/entities/Profile'
 import { setProfileData } from '@/entities/Profile'
 import { getUserId } from '@/entities/User'
-import { ThunkConfig } from '@/providers/StoreProvider'
+import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError, FieldError } from '@/shared/api/types'
 import { createAsyncThunk } from '@reduxjs/toolkit'

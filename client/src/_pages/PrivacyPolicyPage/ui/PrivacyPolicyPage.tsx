@@ -2,7 +2,7 @@
 
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
-import '@/shared/styles/variables/common/_document.scss'
+import '@/app/styles/variables/common/_document.scss'
 import s from '@/_pages/TermsOfServicePage/ui/TermsOfServicePage.module.scss'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import ArrowBack from '@/shared/assets/icons/arrow-back.svg'

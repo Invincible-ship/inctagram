@@ -120,37 +120,33 @@ export const MyImage = memo(
     const classes = [cls[variant], cls[filter], 'dynamic-image-styles', wrapperClassName]
 
     return (
-      <>
+      <div
+        data-testid="image-wrapper"
+        className={classNames(cls.wrapper, {}, classes)}
+        style={{
+          maxWidth: width,
+          width: width && '100%',
+          height: height,
+          aspectRatio: ar || `${intrinsicWidthRef.current} / ${intrinsicHeightRef.current}`,
+        }}
+      >
         {dynamicStyles}
-        <div
-          data-testid="image-wrapper"
-          className={classNames(cls.wrapper, {}, classes)}
-          style={{
-            maxWidth: width,
-            width: width && '100%',
-            height: height,
-            aspectRatio: ar || `${intrinsicWidthRef.current} / ${intrinsicHeightRef.current}`,
-          }}
-        >
-          <NextImage
-            ref={forwardRef}
-            className={classNames(cls.NextImage, {}, [cls[variant], className])}
-            src={src || ''}
-            width={0}
-            height={0}
-            alt={alt}
-            sizes={sizes}
-            style={{ scale: scale || '', ...style }}
-            onLoad={onLoad}
-            onLoadingComplete={() => setIsLoading(false)}
-            onError={onError}
-            {...rest}
-          />
-          {isLoading && (
-            <Skeleton style={{ position: 'absolute', inset: 0 }} className={className} />
-          )}
-        </div>
-      </>
+        <NextImage
+          ref={forwardRef}
+          className={classNames(cls.NextImage, {}, [cls[variant], className])}
+          src={src || ''}
+          width={0}
+          height={0}
+          alt={alt}
+          sizes={sizes}
+          style={{ scale: scale || '', ...style }}
+          onLoad={onLoad}
+          onLoadingComplete={() => setIsLoading(false)}
+          onError={onError}
+          {...rest}
+        />
+        {isLoading && <Skeleton style={{ position: 'absolute', inset: 0 }} className={className} />}
+      </div>
     )
   }),
 )

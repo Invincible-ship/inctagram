@@ -9,7 +9,7 @@ import { HStack } from '@/shared/ui/Stack'
 import { Routes } from '@/shared/types/routes'
 import Link from 'next/link'
 import { HeaderMenu } from './HeaderMenu'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 
 type HeaderProps = {

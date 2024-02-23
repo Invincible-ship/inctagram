@@ -16,7 +16,7 @@ import { Routes } from '@/shared/types/routes'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { SignOut } from '@/features/auth/signout'
 import { useRouter } from 'next/navigation'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 
 export const HeaderMenu = () => {

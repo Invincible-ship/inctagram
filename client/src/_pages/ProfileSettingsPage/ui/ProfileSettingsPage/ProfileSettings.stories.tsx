@@ -2,7 +2,7 @@ import type { Meta, StoryFn, StoryObj } from '@storybook/react'
 
 import { ProfileSettingsPage } from './ProfileSettingsPage'
 import { PageDecorator } from '@/shared/config/storybook/PageDecorator/PageDecorator'
-import { StateSchema, mockedReduxData } from '@/providers/StoreProvider'
+import { StateSchema, mockedReduxData } from '@/app/providers/StoreProvider'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
 import { ProfileSettingValue } from '@/features/editableProfileGeneralInfo'
 

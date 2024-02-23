@@ -1,0 +1,33 @@
+.swiper {
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+  }
+
+  .swiper-pagination {
+    left: 110px;
+    right: 110px;
+    width: auto;
+  }
+
+  .swiper-button-prev, .swiper-button-next {
+    width: 36px;
+    height: 36px;
+    background-color: rgba(23, 23, 23, 0.8);
+    border-radius: 2px;
+
+    &::after {
+      content: '';
+      font-size: 0;
+      line-height: 1;
+    }
+  }
+
+  .swiper-button-prev::after {
+    content: url('./../../shared/assets/icons/arrow-ios-back.svg')
+  }
+
+  .swiper-button-next::after {
+    content: url('./../../shared/assets/icons/arrow-ios-forward.svg')
+  }
+}
