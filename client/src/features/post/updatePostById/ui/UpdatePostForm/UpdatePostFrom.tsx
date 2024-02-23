@@ -55,11 +55,12 @@ export const UpdatePostForm: FC<UpdatePostFormProps> = memo(
           toast.success(t('toast.success.update'))
         }
       } catch (error) {
+        toast.error(t('toast.error.update'))
+
         if (isFetchBaseQueryError(error)) {
           const apiError = error.data as ApiError
 
           if (Array.isArray(apiError.messages)) {
-            toast.error(t('toast.error.update'))
             toast.error(apiError.messages[0].message)
           }
         }

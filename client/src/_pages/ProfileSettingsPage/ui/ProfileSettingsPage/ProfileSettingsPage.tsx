@@ -14,11 +14,6 @@ import cls from './ProfileSettingsPage.module.scss'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { UserRole } from '@/shared/lib/HOC/withAuth/routes'
 
-type ProfileSettingsPageProps = {
-  className?: string
-  initialTabValue?: ProfileSettingValue
-}
-
 const EditableProfileGeneralInfo = lazy(() =>
   import('@/features/editableProfileGeneralInfo').then(mod => ({
     default: mod.EditableProfileGeneralInfo,
@@ -34,6 +29,11 @@ const SubscriptionsPayments = lazy(() =>
     default: mod.SubscriptionsPayments,
   })),
 )
+
+type ProfileSettingsPageProps = {
+  className?: string
+  initialTabValue?: ProfileSettingValue
+}
 
 const mapProfileSettings = {
   [ProfileSettingValue.GENERAL_INFO]: EditableProfileGeneralInfo,

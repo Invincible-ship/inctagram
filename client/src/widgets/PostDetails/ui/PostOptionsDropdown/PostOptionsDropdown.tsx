@@ -35,7 +35,7 @@ export const PostOptionsDropdown = ({ openDeletePostModal }: PostOptionsDropdown
   return (
     <DropdownMenu open={isOpenMenu} onOpenChange={setIsOpenMenu}>
       <DropdownMenuTrigger>
-        <DottedMenuIcon isActive={isOpenMenu} />
+        <DottedMenuIcon isActive={isOpenMenu} className={cls.trigger} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className={cls.dropdownContent} sticky="always">
         <DropdownMenuItem role="button" onClick={onClickActivateEditMode}>

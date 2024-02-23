@@ -7,7 +7,7 @@ import { ReactNode, Suspense, useContext, useMemo, useState } from 'react'
 import { usePathname, useSearchParams, redirect } from 'next/navigation'
 import cls from './LangSwitcher.module.scss'
 import { LanguageIds } from '@/shared/config/i18n/types'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { Select, SelectItem } from '@/shared/ui/Select/Select'
 
 type TLanguageOption = {

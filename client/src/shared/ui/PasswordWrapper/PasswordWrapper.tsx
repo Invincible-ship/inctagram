@@ -1,9 +1,9 @@
 import { FieldError } from 'react-hook-form'
 import { AriaRole, FC } from 'react'
 import { Input } from '@/shared/ui/Input/Input'
-import '@/shared/styles/variables/common/_form.scss'
-import '@/shared/styles/variables/common/_b-titles.scss'
-import '@/shared/styles/variables/common/_buttons.scss'
+import '@/app/styles/variables/common/_form.scss'
+import '@/app/styles/variables/common/_b-titles.scss'
+import '@/app/styles/variables/common/_buttons.scss'
 import cls from '@/features/auth/signup/ui/signup.module.scss'
 
 export type PasswordWrapperProps = {

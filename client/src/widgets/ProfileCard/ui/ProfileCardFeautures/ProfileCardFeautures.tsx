@@ -1,9 +1,8 @@
 'use client'
 
 import { getUserId } from '@/entities/User'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
-import { useClientTranslation } from '@/shared/config/i18n/client'
-import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
+import { Namespaces } from '@/shared/config/i18n/types'
 import { Routes } from '@/shared/types/routes'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { Flex } from '@/shared/ui/Stack'

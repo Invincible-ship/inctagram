@@ -1,4 +1,4 @@
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { mapLngIdToLocale } from '@/shared/utils/mapLngIdToLocale'
 import { useContext } from 'react'

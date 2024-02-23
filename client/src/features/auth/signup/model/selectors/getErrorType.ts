@@ -1,3 +1,3 @@
-import { StateSchema } from '@/providers/StoreProvider'
+import { StateSchema } from '@/app/providers/StoreProvider'
 
 export const getErrorType = (state: StateSchema) => state.signup.errorType

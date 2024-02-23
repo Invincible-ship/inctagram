@@ -96,7 +96,10 @@ export const postApi = rtkApi.injectEndpoints({
         method: 'DELETE',
         url: `${DELETE_POST_ENDPOINT}/${id}`,
       }),
-      invalidatesTags: (result, error, id) => [{ type: POST_TAG, id }],
+      invalidatesTags: (result, error, id) => [
+        { type: POST_TAG, id },
+        { type: POST_TAG, id: 'LIST' },
+      ],
     }),
   }),
 })

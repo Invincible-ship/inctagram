@@ -1,6 +1,6 @@
 import { IAvatar, IProfile } from '../../model/types/types'
 import { IViewer } from '@/entities/Viewer'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { Routes } from '@/shared/types/routes'
 import { Avatar, AvatarSize } from '@/shared/ui/Avatar/Avatar'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'

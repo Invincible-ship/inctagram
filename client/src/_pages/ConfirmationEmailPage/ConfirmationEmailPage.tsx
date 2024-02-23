@@ -5,7 +5,7 @@ import { ConfirmationEmailViaCode } from '@/features/auth/confirmationEmailViaCo
 import { useSearchParams } from 'next/navigation'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { useContext, useEffect } from 'react'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { useConfirmationEmailViaCodeMutation } from '@/entities/User'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
 

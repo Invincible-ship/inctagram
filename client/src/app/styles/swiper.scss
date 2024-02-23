@@ -24,10 +24,10 @@
   }
 
   .swiper-button-prev::after {
-    content: url('./../assets/icons/arrow-ios-back.svg')
+    content: url('./../../shared/assets/icons/arrow-ios-back.svg')
   }
 
   .swiper-button-next::after {
-    content: url('./../assets/icons/arrow-ios-forward.svg')
+    content: url('./../../shared/assets/icons/arrow-ios-forward.svg')
   }
 }

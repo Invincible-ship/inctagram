@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react'
 import s from './Input.module.scss'
-import '@/shared/styles/variables/common/_form.scss'
+import '@/app/styles/variables/common/_form.scss'
 import { FieldError } from 'react-hook-form'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import Eye from '@/shared/assets/icons/eye-outline.svg'

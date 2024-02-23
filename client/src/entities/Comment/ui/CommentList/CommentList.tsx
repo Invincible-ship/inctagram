@@ -45,8 +45,9 @@ export const CommentList: FC<CommentListProps> = ({
   return show ? (
     <VStack className={cls.CommentList} gap="16" max>
       {ownerCard}
-      {visibleComments.map(comment => {
-        return <CommentCard key={comment.id} comment={comment} t={t} commonT={commonT} />
+      {visibleComments.map((comment, idx) => {
+        // FIXME: change "key" prop to "comment.id" when comment api will be added
+        return <CommentCard key={idx} comment={comment} t={t} commonT={commonT} />
       })}
       {sortedComments.length > visibleComments.length && (
         <HStack

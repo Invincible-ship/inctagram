@@ -1,4 +1,4 @@
-import { StateSchema } from '@/providers/StoreProvider'
+import { StateSchema } from '@/app/providers/StoreProvider'
 import { createSelector } from '@reduxjs/toolkit'
 
 export const getDraft = createSelector(

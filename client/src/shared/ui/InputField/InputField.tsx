@@ -1,8 +1,8 @@
 import { Input } from '@/shared/ui/Input/Input'
-import { ChangeEvent, FC } from 'react'
-import '@/shared/styles/variables/common/_form.scss'
-import '@/shared/styles/variables/common/_b-titles.scss'
-import '@/shared/styles/variables/common/_buttons.scss'
+import { FC } from 'react'
+import '@/app/styles/variables/common/_form.scss'
+import '@/app/styles/variables/common/_b-titles.scss'
+import '@/app/styles/variables/common/_buttons.scss'
 import { FieldError } from 'react-hook-form'
 
 type InputFieldProps = {
