@@ -6,7 +6,7 @@ import {
   deletePostMatcher,
   updatePostByIdMatcher,
 } from '@/entities/Post'
-import { StateSchema } from '@/providers/StoreProvider'
+import { StateSchema } from '@/app/providers/StoreProvider'
 import { PostSortField } from '@/shared/const/postSortField'
 import { fetchPostsByProfileId } from '../services/fetchPostsByProfileId'
 import { PostListPage } from '../consts/postListPage'
