@@ -6,8 +6,13 @@ import {
   Action,
 } from '@reduxjs/toolkit'
 import { PostListSchema } from '../types/postListSchema'
-import { IPost, createdPostMatcher } from '@/entities/Post'
-import { StateSchema } from '@/providers/StoreProvider'
+import {
+  IPost,
+  createdPostMatcher,
+  deletePostMatcher,
+  updatePostByIdMatcher,
+} from '@/entities/Post'
+import { StateSchema } from '@/app/providers/StoreProvider'
 import { PostSortField } from '@/shared/const/postSortField'
 import { fetchPostsByProfileId } from '../services/fetchPostsByProfileId'
 import { fetchAllPosts } from '../services/fetchAllPosts'
@@ -15,8 +20,7 @@ import { PostListPage } from '../consts/postListPage'
 import { PostListCardType } from '../consts/postListCardType'
 import { initPostList } from '../services/initPostList'
 import { PostListResponse } from '@/entities/Viewer'
-
-const stringToDateTime = (s: string) => new Date(s).getTime()
+import { stringToDateTime } from '@/shared/utils/stringToDateTime'
 
 export const postsAdapter = createEntityAdapter<IPost>({
   selectId: post => post.id,
@@ -72,11 +76,11 @@ export const postListSlice = createSlice({
 
         state.page = page
 
-        // const type = page == PostListPage.HOME ? PostListCardType.EXTENDED : PostListCardType.IMAGE
-        state.type = PostListCardType.IMAGE
+        const type = page == PostListPage.HOME ? PostListCardType.EXTENDED : PostListCardType.IMAGE
+        state.type = type
 
-        // const limit = type == PostListCardType.IMAGE ? 8 : 5
-        state.limit = 8
+        const limit = type == PostListCardType.IMAGE ? 8 : 5
+        state.limit = limit
       })
       .addMatcher(postsPending, state => {
         state.isLoading = true
@@ -98,6 +102,16 @@ export const postListSlice = createSlice({
       })
       .addMatcher(createdPostMatcher, (state, { payload }) => {
         postsAdapter.addOne(state, payload)
+      })
+      .addMatcher(deletePostMatcher, (state, payload) => {
+        const id = payload.meta.arg.originalArgs
+        postsAdapter.removeOne(state, id)
+      })
+      .addMatcher(updatePostByIdMatcher, (state, payload) => {
+        const id = payload.meta.arg.originalArgs.id
+        const description = payload.meta.arg.originalArgs.description
+
+        postsAdapter.updateOne(state, { id, changes: { description } })
       })
   },
 })

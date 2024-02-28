@@ -10,19 +10,11 @@ import {
   initPostList,
 } from '@/widgets/PostList'
 
-type HookResponse = {
-  data: IViewer
-  isLoading: boolean
-}
-
-const mockedProfile: HookResponse = {
-  data: {
-    id: 1,
-    userName: 'test',
-    aboutMe: 'About Me',
-    avatars: [],
-  },
-  isLoading: false,
+const mockedProfile: IViewer = {
+  id: 1,
+  userName: 'John Doe',
+  avatars: [],
+  aboutMe: 'About me',
 }
 
 jest.mock('next/navigation', () => ({
@@ -32,10 +24,6 @@ jest.mock('next/navigation', () => ({
   useRouter: jest.fn(() => ({
     push: jest.fn(),
   })),
-}))
-jest.mock('../../../../entities/Viewer', () => ({
-  ...jest.requireActual('../../../../entities/Viewer'),
-  useGetPublicUserProfileQuery: jest.fn((id: string) => mockedProfile),
 }))
 jest.mock('../../../../widgets/PostList', () => ({
   ...jest.requireActual('../../../../widgets/PostList'),
@@ -59,7 +47,7 @@ const initialState = {
 
 describe('Profile Page', () => {
   beforeEach(() => {
-    componentRender(<ProfilePage />, { initialState })
+    componentRender(<ProfilePage profile={mockedProfile} />, { initialState })
   })
 
   it('should render correctly', () => {
@@ -73,7 +61,5 @@ describe('Profile Page', () => {
     expect(initPostList).toHaveBeenCalledWith({ page: PostListPage.PROFILE, currentId: '1' })
     expect(fetchPostsByProfileId).toHaveBeenCalledTimes(1)
     expect(fetchPostsByProfileId).toHaveBeenCalledWith('1')
-    expect(useGetPublicUserProfileQuery).toHaveBeenCalledTimes(2)
-    expect(useGetPublicUserProfileQuery).toHaveBeenCalledWith('1')
   })
 })

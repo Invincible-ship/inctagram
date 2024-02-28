@@ -1,11 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ErrorType, RegisterParamsType } from './types/types'
-import { ThunkConfig } from '@/providers/StoreProvider'
+import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { userApi } from '@/entities/User'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { UseFormReset, UseFormSetError } from 'react-hook-form'
 import { ApiError } from '@/shared/api/types'
-import { setErrorType, setIsErrorModalOpen } from './slice/signUpSlice'
 import { FormSchemaType } from '../lib/validationConstants/validationConstants'
 
 type SignupThunkPayload = {

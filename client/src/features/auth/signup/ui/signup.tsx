@@ -2,8 +2,8 @@
 import { useContext, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import '@/shared/styles/variables/common/_form.scss'
-import '@/shared/styles/variables/common/_b-titles.scss'
+import '@/app/styles/variables/common/_form.scss'
+import '@/app/styles/variables/common/_b-titles.scss'
 import style from './signup.module.scss'
 import { FormSchemaType, formSchema } from '../lib/validationConstants/validationConstants'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -11,7 +11,7 @@ import Link from 'next/link'
 import { signupThunk } from '../model/signup'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { getIsLoading as getIsSignUpLoading } from '../model/selectors/getIsLoading'
@@ -19,7 +19,7 @@ import { getIsConfirmationModalOpen } from '../model/selectors/getIsConfirmation
 import { getIsErrorModalOpen } from '../model/selectors/getIsErrorModalOpen'
 import { Routes } from '@/shared/types/routes'
 import {
-  ThirdPartyOAuthButtons,
+  ThirdPartyOAuth,
   getIsSignInWithGoogleLoading,
 } from '@/features/auth/signInWithThirdPartyServices'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
@@ -94,7 +94,7 @@ export const SignUp = () => {
       <div className={'form registration'}>
         <div className="form-wrapper auth-form">
           <div className={'title b-title bt26 semibold align-center'}>{t('signUp')}</div>
-          <ThirdPartyOAuthButtons />
+          <ThirdPartyOAuth />
           <SignUpForm
             lngId={lngId}
             onSubmit={handleSubmit(onSubmit)}

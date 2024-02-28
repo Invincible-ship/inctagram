@@ -1,0 +1,70 @@
+@import "variables/global";
+@import "variables/common";
+@import "reset";
+
+// swiper/react
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
+@import './swiper.scss';
+
+@media (min-width: 950px) {
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--dark-color-100);
+    border-radius: 4px;
+    cursor: pointer;
+  
+    &:hover {
+      background: var(--dark-color-300);
+    }
+  }
+}
+
+.app {
+  position: relative;
+
+  .app-container {
+    max-width: var(--app-container-width);
+    width: 100%;
+    padding: 0 30px;
+    margin: 0 auto;
+
+    @media (max-width: 769px) {
+      padding: 0 15px;
+    }
+  }
+
+  .page-container {
+    padding: 36px 0;
+
+    @media (max-width: 769px) {
+      padding: 24px 0;
+    }
+
+    &.padding {
+      padding-left: calc(var(--sidebar-width) + 30px);
+
+      @media (max-width: 769px) {
+        margin-bottom: var(--mobile-sidebar-height);
+        padding-left: 0;
+      }
+    }
+  }
+
+  .profile-card-image-skeleton {
+    flex-basis: 24.65%;
+    aspect-ratio: 1 / 1;
+
+    @media (max-width: 769px) {
+      flex-basis: calc(33.333% - 2px);
+    }
+  }
+}

@@ -1,6 +1,6 @@
-import { Modal } from '@/shared/ui/Modal/Modal'
+import { ModalBody } from '@/shared/ui/Modal/Modal'
 import { HStack, VStack } from '@/shared/ui/Stack'
-import { FC, MutableRefObject, useRef } from 'react'
+import { FC, MutableRefObject, Suspense, useRef } from 'react'
 import cls from './SelectImage.module.scss'
 import ImageIcon from '@/shared/assets/icons/image-outline.svg'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
@@ -16,6 +16,7 @@ import { openDraftAC } from '../../model/slice/createPostSlice'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { getDraft } from '../../model/selectors/getDraft'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 type SelectImageProps = {}
 
@@ -44,8 +45,8 @@ export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
     (toastSizeErrorIdRef.current = toast.error(t('toasts.sizeError'), { duration: Infinity }))
 
   return (
-    <>
-      <Modal.Body className={cls.content}>
+    <Suspense fallback={<Skeleton width={490} height={490} />}>
+      <ModalBody className={cls.content}>
         <VStack align="center" gap="36">
           <HStack className={cls.imgPlaceholder} align="center" justify="center">
             <ImageIcon width={36} height={36} viewBox="0 0 24 24" />
@@ -68,7 +69,7 @@ export const SelectImage: FC<ComponentCommonProps & SelectImageProps> = ({
             )}
           </VStack>
         </VStack>
-      </Modal.Body>
-    </>
+      </ModalBody>
+    </Suspense>
   )
 }

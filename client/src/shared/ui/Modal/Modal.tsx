@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { ReactNode, memo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 import { Portal } from '../Portal/Portal'
@@ -19,7 +19,7 @@ type ModalProps = {
 
 const ANIMATION_DELAY = 200
 
-export const Modal = (props: ModalProps) => {
+export const Modal = memo((props: ModalProps) => {
   const { children, className, isOpen, onClose, withoutAnimation } = props
 
   const { isClosing, close } = useModal({
@@ -43,7 +43,7 @@ export const Modal = (props: ModalProps) => {
       </div>
     </Portal>
   )
-}
+})
 
 Modal.displayName = 'Modal'
 
@@ -53,9 +53,7 @@ type ModalHeaderProps = {
   width?: number | string
 }
 
-//eslint-disable-next-line
-Modal.Header = ({ children, close, width }: ModalHeaderProps) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export const ModalHeader = ({ children, close }: ModalHeaderProps) => {
   return (
     <div className={cls.header}>
       <h2 className={cls.title}>{children}</h2>
@@ -66,7 +64,10 @@ Modal.Header = ({ children, close, width }: ModalHeaderProps) => {
   )
 }
 
-//eslint-disable-next-line
-Modal.Body = ({ children, className }: { children: ReactNode; className?: string }) => {
-  return <div className={classNames(cls.body, {}, [className])}>{children}</div>
-}
+export const ModalBody = memo(
+  ({ children, className }: { children: ReactNode; className?: string }) => {
+    return <div className={classNames(cls.body, {}, [className])}>{children}</div>
+  },
+)
+
+ModalBody.displayName = 'ModalBody'

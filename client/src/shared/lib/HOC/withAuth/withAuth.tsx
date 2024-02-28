@@ -8,14 +8,14 @@ import { redirect, usePathname } from 'next/navigation'
 import { RedirectType } from 'next/dist/client/components/redirect'
 import { Preloader } from '@/shared/ui/Preloader/Preloader'
 import { Routes } from '@/shared/types/routes'
-import { LanguageContext } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { LOCAL_STORAGE_IS_FIRST_AUTHORIZED } from '@/shared/const/localStorage'
 
-export function withAuth(Component: FC<any>, options: WithAuthOptions) {
+export function withAuth<T extends {} = {}>(Component: FC<T>, options: WithAuthOptions) {
   const { routeRole, userRole = '', redirectTo = '' } = options
 
-  const ComponentWithAtuh = (props: any) => {
+  const ComponentWithAtuh = (props: T) => {
     const lngId = useContext(LanguageContext) as LanguageIds
     const isLoading = useSelector(getIsLoading)
     const inited = useSelector(getIsUserInited)

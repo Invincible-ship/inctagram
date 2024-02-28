@@ -1,0 +1,28 @@
+.PostInfoBlock {
+  font-size: 14px;
+
+  .avatarsContainer {
+    .avatar:first-child {
+      z-index: 3;
+    }
+
+    .avatar:nth-child(2) {
+      transform: translateX(-30%);
+      z-index: 2;
+    }
+
+    .avatar:nth-child(3) {
+      transform: translateX(-60%);
+      z-index: 1;
+    }
+  }
+
+  .likeText {
+    font-weight: 700;
+  }
+
+  .date {
+    font-size: 12px;
+    color: var(--light-color-900);
+  }
+}

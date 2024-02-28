@@ -1,6 +1,6 @@
 import { Namespaces } from '@/shared/config/i18n/types'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { Modal } from '@/shared/ui/Modal/Modal'
+import { Modal, ModalBody, ModalHeader } from '@/shared/ui/Modal/Modal'
 import { TFunction } from 'i18next'
 import { FC } from 'react'
 import cls from './DeleteAvatarModal.module.scss'
@@ -8,6 +8,8 @@ import { HStack, VStack } from '@/shared/ui/Stack'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { setProfileAvatars, useDeleteProfileAvatarsMutation } from '@/entities/Profile'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
+import { VIEWER_TAG } from '@/shared/const/rtk'
+import { revalidateDataByPath } from '@/shared/lib/serverActions/revalidateDataByPath'
 
 type DeleteAvatarModalProps = {
   isOpen: boolean
@@ -26,6 +28,8 @@ export const DeleteAvatarModal: FC<DeleteAvatarModalProps> = ({ isOpen, onClose,
 
       dispatch(setProfileAvatars([]))
       onClose()
+
+      revalidateDataByPath(VIEWER_TAG)
     } catch (err) {
       console.log('Delete avatar error: ', err)
     }
@@ -33,8 +37,8 @@ export const DeleteAvatarModal: FC<DeleteAvatarModalProps> = ({ isOpen, onClose,
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={438}>
-      <Modal.Header close={onClose}>{t('general-info.delete-modal.title')}</Modal.Header>
-      <Modal.Body>
+      <ModalHeader close={onClose}>{t('general-info.delete-modal.title')}</ModalHeader>
+      <ModalBody>
         <VStack gap="36" align="stretch">
           <p className={cls.text}>{t('general-info.delete-modal.text')}</p>
           <HStack gap="24" justify="end" max>
@@ -52,7 +56,7 @@ export const DeleteAvatarModal: FC<DeleteAvatarModalProps> = ({ isOpen, onClose,
             </Button>
           </HStack>
         </VStack>
-      </Modal.Body>
+      </ModalBody>
     </Modal>
   )
 }

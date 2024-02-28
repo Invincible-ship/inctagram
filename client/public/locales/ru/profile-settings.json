@@ -54,5 +54,50 @@
     "update-success": "Данные профиля успешно обновлены",
     "button": "Сохранить изменения",
     "avatar-btn": "Добавить аватар"
+  },
+  "account-managment": {
+    "loader": {
+      "create": "Пожалуйста, подождите. Идет перенаправление на страницу оплаты...",
+      "cancel": "Пожалуйста, подождите. Идет отмена автоматического продления подписки..."
+    },
+    "auto-renewal": "Автоматическое продление",
+    "current-subscription": {
+      "title": "Текущая Подписка:",
+      "payment-date": "Дата оплаты",
+      "payment-next": "Следующая оплата"
+    },
+    "select-account": {
+      "title": "Тип Аккаунта:",
+      "personal": "Личный",
+      "business": "Бизнес"
+    },
+    "select-plan": {
+      "title": "Изменить свою подписку:",
+      "DAY": "${{amount}} за 1 День",
+      "WEEKLY": "${{amount}} за 7 Дней",
+      "MONTHLY": "${{amount}} за месяц"
+    },
+    "payments": {
+      "text": "Или"
+    }
+  },
+  "payments": {
+    "titles": {
+      "payment-date": "Дата оплаты",
+      "subscription-end-date": "Дата окончания подписки",
+      "price": "Цена",
+      "subscription-type": "Тип подписки",
+      "payment-type": "Тип оплаты"
+    },
+    "subscription-types": {
+      "DAY": "1 день",
+      "WEEKLY": "7 дней",
+      "MONTHLY": "1 месяц"
+    },
+    "payment-types": {
+      "STRIPE": "Stripe",
+      "PAYPAL": "PayPal",
+      "CREDIT_CARD": "Credit card"
+    }
   }
 }

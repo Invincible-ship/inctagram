@@ -2,9 +2,9 @@ import { ReactNode } from 'react'
 import { RenderOptions, render } from '@testing-library/react'
 import { I18nextProvider } from 'react-i18next'
 import i18nForTests from '@/shared/config/i18n/i18nForTests'
-import { StateSchema, StoreProvider } from '@/providers/StoreProvider'
-import { createReduxStore } from '@/providers/StoreProvider/config/store'
-import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
+import { StateSchema, StoreProvider } from '@/app/providers/StoreProvider'
+import { createReduxStore } from '@/app/providers/StoreProvider/config/store'
+import { LanguageProvider } from '@/app/providers/LanguageProvider/LanguageProvider'
 import { LanguageIds } from '@/shared/config/i18n/types'
 
 type ProviderOptions = {

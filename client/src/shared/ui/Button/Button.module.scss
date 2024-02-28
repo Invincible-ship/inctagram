@@ -90,7 +90,7 @@
   
     &:focus {
       color: var(--accent-color-700);
-      border: 2px solid var(--accent-color-700);
+      outline: 2px solid var(--accent-color-700);
     }
   
     &[disabled] {
@@ -114,7 +114,7 @@
   
     &:focus {
       color: var(--accent-color-700);
-      border: 2px solid var(--accent-color-700);
+      outline: 2px solid var(--accent-color-700);
     }
   
     &[disabled] {

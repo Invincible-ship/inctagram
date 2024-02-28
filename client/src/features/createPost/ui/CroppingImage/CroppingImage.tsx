@@ -15,6 +15,7 @@ import {
   MouseEventHandler,
   useMemo,
   useEffect,
+  Suspense,
 } from 'react'
 import ScaleIcon from '@/shared/assets/icons/maximize-outline.svg'
 import ExpandIcon from '@/shared/assets/icons/expand-outline.svg'
@@ -44,34 +45,38 @@ import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 
-export const CroppingImage: FC<ComponentCommonProps> = ({ toastSizeErrorIdRef }) => {
+export const CroppingImage: FC<ComponentCommonProps> = memo(({ toastSizeErrorIdRef }) => {
   const images = useSelector(getPostImages)
 
   return (
-    <div className={cls.CroppingImage}>
-      <Swiper
-        modules={[Navigation, Pagination]}
-        slidesPerView={1}
-        centeredSlides={true}
-        navigation
-        pagination={{ clickable: true }}
-        style={{ width: 490 }}
-      >
-        {images.map(image => {
-          return (
-            <SwiperSlide key={image.src}>
-              <ImageWithTools
-                image={image}
-                images={images}
-                toastSizeErrorIdRef={toastSizeErrorIdRef}
-              />
-            </SwiperSlide>
-          )
-        })}
-      </Swiper>
-    </div>
+    <Suspense fallback={<Skeleton width={490} height={490} />}>
+      <div className={cls.CroppingImage}>
+        <Swiper
+          modules={[Navigation, Pagination]}
+          slidesPerView={1}
+          centeredSlides={true}
+          navigation
+          pagination={{ clickable: true }}
+          style={{ width: 490 }}
+        >
+          {images.map(image => {
+            return (
+              <SwiperSlide key={image.src}>
+                <ImageWithTools
+                  image={image}
+                  images={images}
+                  toastSizeErrorIdRef={toastSizeErrorIdRef}
+                />
+              </SwiperSlide>
+            )
+          })}
+        </Swiper>
+      </div>
+    </Suspense>
   )
-}
+})
+
+CroppingImage.displayName = 'CroppingImage'
 
 type ImageWithToolsProps = {
   image: CreatePostImage

@@ -1,0 +1,18 @@
+.addCommentBlockContainer {
+  display: flex;
+  width: 100%;
+}
+
+.addInput {
+  outline: 0;
+  padding: 22px;
+  width: 100%;
+  border: none;
+  background: var(--dark-color-300);
+  color: white;
+  font-size: 14px;
+
+  &::placeholder {
+    font-size: 14px;
+  }
+}

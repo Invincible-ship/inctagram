@@ -1,0 +1,16 @@
+.PaymentsList {
+  table {
+    width: 100%;
+    font-size: 14px;
+    border-collapse: collapse;
+    border: 1px solid var(--dark-color-500);
+
+    th, td {
+      padding: 12px 24px;
+    }
+
+    tbody tr:not(:last-child) {
+      border-bottom: 1px solid var(--dark-color-500);
+    }
+  }
+}

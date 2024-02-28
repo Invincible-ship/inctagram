@@ -7,16 +7,19 @@ interface SkeletonProps {
   height?: string | number
   width?: string | number
   border?: string
+  style?: CSSProperties
 }
 
 export const Skeleton = memo((props: SkeletonProps) => {
-  const { className, height, width, border } = props
+  const { className, height, width, border, style } = props
 
-  const styles: CSSProperties = {
+  const withinStyles: CSSProperties = {
     width,
     height,
     borderRadius: border,
   }
+
+  const styles = style ? { ...withinStyles, ...style } : withinStyles
 
   return <div className={classNames(cls.Skeleton, {}, [className])} style={styles} />
 })

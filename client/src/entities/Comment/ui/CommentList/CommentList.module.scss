@@ -1,0 +1,19 @@
+.CommentList {
+  padding: 12px 24px;
+  max-height: 302px;
+  overflow-y: scroll;
+
+  .labelNext {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--light-color-900);
+    cursor: pointer;
+  }
+}
+
+.labelAll {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--light-color-900);
+  cursor: pointer;
+}

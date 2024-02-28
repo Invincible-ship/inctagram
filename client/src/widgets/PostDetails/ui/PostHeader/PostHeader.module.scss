@@ -1,0 +1,26 @@
+.headerBlock {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 1px solid #4C4C4C;
+  padding: 12px 24px;
+
+  .name {
+    font-size: 15px;
+  }
+}
+
+.userName {
+  font-weight: 600;
+}
+
+.noBorder {
+  border: none;
+}
+
+.imageAvatar {
+    margin: 6px 10px 0 0;
+    border-radius: 50%;
+}

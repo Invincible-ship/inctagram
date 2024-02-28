@@ -1,7 +1,8 @@
 'use client'
+
 import { Namespaces } from '@/shared/config/i18n/types'
 import { useClientTranslation } from '@/shared/config/i18n/client'
-import '@/shared/styles/variables/common/_document.scss'
+import '@/app/styles/variables/common/_document.scss'
 import { useRouter } from 'next/navigation'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import ArrowBack from '@/shared/assets/icons/arrow-back.svg'

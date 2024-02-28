@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { PostListItem } from '../PostListItem/PostListItem'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import cls from './PostList.module.scss'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 type PostListProps = {
@@ -14,7 +14,7 @@ type PostListProps = {
   className?: string
 }
 
-export const PostList: FC<PostListProps> = ({ className }) => {
+export const PostList: FC<PostListProps> = memo(({ className }) => {
   const posts = useSelector(getPosts.selectAll)
   const type = useSelector(getPostListType)
   const limit = useSelector(getLimit)
@@ -37,14 +37,16 @@ export const PostList: FC<PostListProps> = ({ className }) => {
       {isLoading && getSkeletons(limit, type)}
     </Flex>
   )
-}
+})
 
-const getSkeletons = (length: number, type: PostListCardType) =>
+PostList.displayName = 'PostList'
+
+export const getSkeletons = (length: number, type: PostListCardType) =>
   Array.from({ length }).map((_, idx) => {
     if (type == PostListCardType.EXTENDED) {
       // TODO: add extended card type skeleton
       return <>Extended Skeleton Component</>
     }
 
-    return <Skeleton key={idx} className={cls.skeleton} />
+    return <Skeleton key={idx} className="profile-card-image-skeleton" />
   })

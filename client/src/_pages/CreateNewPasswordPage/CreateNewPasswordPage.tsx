@@ -8,7 +8,7 @@ import { Routes } from '@/shared/types/routes'
 const CreateNewPasswordPage = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const code = searchParams.get('code')
+  const code = searchParams.get('code') as string
   const [check] = useCheckRecoveryCodeMutation()
   useEffect(() => {
     check({ recoveryCode: code })

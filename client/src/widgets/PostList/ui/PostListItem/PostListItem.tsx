@@ -1,16 +1,17 @@
-import { IPost } from '@/entities/Post'
+import { IPost, setCurrentPost } from '@/entities/Post'
 import { ImageVariant, MyImage } from '@/shared/ui/MyImage/MyImage'
 import { PostListCardType } from '../../model/consts/postListCardType'
 import React, { FC, useMemo } from 'react'
 import { HStack } from '@/shared/ui/Stack'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { POST_DETAILS_ID } from '../../model/consts/postDetailsId'
 import cls from './PostListItem.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import HeartIcon from '@/shared/assets/icons/heart-outline.svg'
 import CommentIcon from '@/shared/assets/icons/message-circle-outline.svg'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 
 type PostListItemProps = {
   className?: string
@@ -21,14 +22,16 @@ type PostListItemProps = {
 const PREVIEW_IMAGE_WIDTH = 640
 
 export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) => {
-  const searchParams = new URLSearchParams(Array.from(useSearchParams()))
+  const pathname = usePathname()
+  const sp = useSearchParams()
+  const searchParams = new URLSearchParams(Array.from(sp))
   const imagePreview = useMemo(() => {
     return post.images.find(image => image.width == PREVIEW_IMAGE_WIDTH)
   }, [post])
 
   if (!imagePreview) return <Skeleton width="100%" height="100%" />
 
-  const imageTypeSizes = '(max-width: 768px) 33vw, 15vw'
+  const imageTypeSizes = '(max-width: 768px) 50vw, 33vw'
 
   searchParams.set(POST_DETAILS_ID, String(post.id))
 
@@ -39,7 +42,7 @@ export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) =
 
   return (
     <HStack data-id={post.id} className={classNames(cls.PostListItem, {}, [className])}>
-      <Link href={`?${searchParams.toString()}`} className={cls.postLink}>
+      <Link href={`${pathname}?${searchParams.toString()}`} className={cls.postLink}>
         <MyImage
           src={imagePreview.url}
           variant={ImageVariant.SQUARE}

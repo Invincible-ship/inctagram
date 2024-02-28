@@ -1,7 +1,7 @@
 'use client'
 
 import { getScrollPositionByPath, setScrollPositionForPath } from '@/features/UI'
-import { StateSchema } from '@/providers/StoreProvider'
+import { StateSchema } from '@/app/providers/StoreProvider'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { useThrottle } from '@/shared/lib/hooks/useThrottle/useThrottle'
 import { usePathname } from 'next/navigation'

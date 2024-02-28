@@ -2,7 +2,7 @@ import { getPostListId } from '../selectors/postListSelectors'
 import { PostListPage } from '../consts/postListPage'
 import { resetPostListState, setPostListId } from '../slice/postListSlice'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { ThunkConfig } from '@/providers/StoreProvider'
+import { ThunkConfig } from '@/app/providers/StoreProvider'
 
 type InitPostListProps = {
   page: PostListPage

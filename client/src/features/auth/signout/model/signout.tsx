@@ -1,4 +1,4 @@
-import { ThunkConfig } from '@/providers/StoreProvider'
+import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { clearAuthData, userApi } from '@/entities/User'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'

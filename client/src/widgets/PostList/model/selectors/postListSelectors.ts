@@ -1,4 +1,4 @@
-import { StateSchema } from '@/providers/StoreProvider'
+import { StateSchema } from '@/app/providers/StoreProvider'
 
 export const getIsLoading = (state: StateSchema) => {
   return state.postList.isLoading

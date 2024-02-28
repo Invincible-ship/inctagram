@@ -1,4 +1,4 @@
-import { LanguageProvider } from '@/providers/LanguageProvider/LanguageProvider'
+import { LanguageProvider } from '@/app/providers/LanguageProvider/LanguageProvider'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { StoryFn } from '@storybook/react'
 

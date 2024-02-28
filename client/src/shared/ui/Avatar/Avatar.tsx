@@ -1,3 +1,5 @@
+'use client'
+
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { MyImage } from '@/shared/ui/MyImage/MyImage'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
@@ -7,6 +9,7 @@ import { HStack } from '@/shared/ui/Stack'
 import DefaultAvatar from '@/shared/assets/icons/person.svg'
 
 export enum AvatarSize {
+  SMALLEST = 36,
   SMALL = 45,
   MEDIUM = 72,
   LARGE = 192,
@@ -46,6 +49,7 @@ export const Avatar: FC<AvatarProps> = ({
       style={{
         width: size,
         height: size,
+        flexShrink: 0,
       }}
     >
       <DefaultAvatar className={cls.defaultAvatar} width={size} height={size} viewBox="0 0 24 24" />

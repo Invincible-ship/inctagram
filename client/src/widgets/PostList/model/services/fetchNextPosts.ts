@@ -1,4 +1,4 @@
-import { ThunkConfig } from '@/providers/StoreProvider'
+import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { getHasMore, getIsLoading, getPage } from '../selectors/postListSelectors'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { PostListPage } from '../consts/postListPage'
