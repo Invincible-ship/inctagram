@@ -78,4 +78,4 @@ const ProfilePageSkeleton: FC<ProfilePageSkeletonProps> = props => {
   )
 }
 
-export const ProfilePageClient = withAuth<ProfilePageProps>(ProfilePage, { routeRole: 'all' })
+export default withAuth<ProfilePageProps>(ProfilePage, { routeRole: 'optional' })

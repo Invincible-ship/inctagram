@@ -32,5 +32,5 @@ export const PostDetailsWrapper = () => {
   }, [post, dispatch])
 
   // TODO: add PostDetails component
-  return post && <PostDetails isOpen={!!post.id} onClose={onClose} />
+  return post && <PostDetails isOpen={!!post.id} postId={postId} onClose={onClose} />
 }

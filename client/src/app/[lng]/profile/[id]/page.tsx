@@ -1,9 +1,13 @@
-import { ProfilePageClient } from '@/_pages/ProfilePage'
+// import { ProfilePageClient } from '@/_pages/ProfilePage'
 import { IViewer } from '@/entities/Viewer'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { GET_PUBLIC_USER_PROFILE, GET_USERS_TOTAL_COUNT } from '@/shared/const/apiEndpoints'
 import { VIEWER_TAG } from '@/shared/const/rtk'
+import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
+const ProfilePageClient = dynamic(() => import('@/_pages/ProfilePage/ui/ProfilePage/ProfilePage'), {
+  ssr: false,
+})
 
 type ProfilePageParams = {
   id: string

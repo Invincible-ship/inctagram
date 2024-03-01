@@ -2,7 +2,9 @@
   "editPost": "Edit Post",
   "dropDown": {
     "editPost": "Edit Post",
-    "deletePost": "Delete Post"
+    "deletePost": "Delete Post",
+    "follow": "Follow",
+    "copy": "Copy Link"
   },
   "info": {
     "likes": "Likes"

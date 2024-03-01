@@ -1,5 +1,5 @@
 import { Routes } from '@/shared/types/routes'
-import { SidebarValues, TSidebarItemsSchema } from '../types'
+import { SidebarValues, TSidebarItemsSchema } from '../../types'
 import HomeIcon from '@/shared/assets/icons/home.svg'
 import CreateIcon from '@/shared/assets/icons/plus-square-outline.svg'
 import AccountIcon from '@/shared/assets/icons/person.svg'

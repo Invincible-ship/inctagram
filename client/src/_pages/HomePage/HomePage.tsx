@@ -3,17 +3,20 @@
 import { PostListResponse } from '@/entities/Viewer'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { VStack } from '@/shared/ui/Stack'
 import { Page } from '@/widgets/Page/Page'
 import {
   PostList,
+  PostListCardType,
   PostListPage,
   fetchAllPosts,
   fetchNextPosts,
   getHasMore,
+  getSkeletons,
   initPostList,
   setPostsFromServer,
 } from '@/widgets/PostList'
-import { FC, useCallback, useEffect } from 'react'
+import { FC, Suspense, useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 type HomePageProps = {
@@ -27,7 +30,7 @@ const HomePage: FC<HomePageProps> = ({ postsData }) => {
   useEffect(() => {
     dispatch(initPostList({ page: PostListPage.HOME }))
 
-    if (postsData) dispatch(setPostsFromServer(postsData))
+    postsData ? dispatch(setPostsFromServer(postsData)) : dispatch(fetchAllPosts())
   }, [])
 
   const onScrollEnd = useCallback(() => {
@@ -35,10 +38,18 @@ const HomePage: FC<HomePageProps> = ({ postsData }) => {
   }, [dispatch])
 
   return (
-    <Page onScrollEnd={onScrollEnd} isTriggerActive={hasMore}>
-      <PostList />
-    </Page>
+    <Suspense fallback={<HomePageSkeleton />}>
+      <Page onScrollEnd={onScrollEnd} isTriggerActive={hasMore}>
+        <PostList />
+      </Page>
+    </Suspense>
   )
 }
 
-export default withAuth(HomePage, { routeRole: 'optional' })
+const HomePageSkeleton = () => (
+  <VStack align="center" gap="36" max>
+    {getSkeletons(2, PostListCardType.EXTENDED)}
+  </VStack>
+)
+
+export default withAuth<HomePageProps>(HomePage, { routeRole: 'optional' })

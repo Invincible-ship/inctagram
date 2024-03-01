@@ -10,7 +10,7 @@ import { Namespaces } from '@/shared/config/i18n/types'
 import { TFunction } from 'i18next'
 
 type Args = {
-  onClose: () => void
+  onClose?: () => void
   t: TFunction<Namespaces, undefined>
 }
 
@@ -25,7 +25,7 @@ export const usePostDetails = ({ onClose, t }: Args) => {
     if (editMode) {
       setEditPostModalOpen(true)
     } else {
-      onClose()
+      onClose?.()
     }
   }
 
@@ -49,7 +49,7 @@ export const usePostDetails = ({ onClose, t }: Args) => {
     try {
       await dispatch(deletePostThunk()).unwrap()
       toast.success(t('toast.success.delete'))
-      onClose()
+      onClose?.()
     } catch (err) {
       if (err) toast.error(err as string)
       toast.error(t('toast.error.delete'))

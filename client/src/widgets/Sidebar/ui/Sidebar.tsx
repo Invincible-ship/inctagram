@@ -1,7 +1,7 @@
 import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { FC, useContext, useMemo, useState } from 'react'
-import { SidebarValues } from './types'
+import { SidebarValues } from '../types'
 import cls from './Sidebar.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
@@ -11,9 +11,10 @@ import { useClientTranslation } from '@/shared/config/i18n/client'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { SignOut } from '@/features/auth/signout'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
-import { getSidebarItems } from './utils/getSidebarItems'
+import { getSidebarItems } from '../model/utils/getSidebarItems'
 import { useSearchParams } from 'next/navigation'
-import { getTabs } from './utils/getTabs'
+import { getTabs } from '../model/utils/getTabs'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 export type SidebarItemProps = {
   text: string
@@ -37,8 +38,8 @@ export const Sidebar = () => {
   const lngId = useContext(LanguageContext) as LanguageIds
   const { t } = useClientTranslation(Namespaces.SIDEBAR)
   const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY) as string
-  const matched = useMediaQuery('(max-width: 769px)')
-  const direction = matched ? 'row' : 'column'
+  const mobile = useMediaQuery('(max-width: 769px)')
+  const direction = mobile ? 'row' : 'column'
   const justify = direction == 'row' ? 'stretch' : 'start'
 
   const onTabClick = (tab: Tab<SidebarValues>) => setValue(tab.value)
@@ -59,17 +60,17 @@ export const Sidebar = () => {
 
   return (
     <div className={cls.SidebarWrapper}>
-      <VStack className={cls.sidebar} justify={justify} gap={!matched ? '48' : undefined} max>
+      <VStack className={cls.sidebar} justify={justify} gap={!mobile ? '48' : undefined} max>
         <Tabs
           direction={direction}
-          gap={!matched ? '16' : undefined}
-          justifyChild={matched ? 'center' : 'start'}
+          gap={!mobile ? '16' : undefined}
+          justifyChild={mobile ? 'center' : 'start'}
           tabs={majorTabs}
           value={value}
           onTabClick={onTabClick}
           textColor="var(--primary-text-color)"
         />
-        {!matched && (
+        {!mobile && (
           <>
             <Tabs
               direction={direction}
@@ -87,3 +88,25 @@ export const Sidebar = () => {
     </div>
   )
 }
+
+export const SidebarSkeleton = ({ mobile }: { mobile?: boolean }) =>
+  !mobile ? (
+    <VStack className={cls.skeleton} justify="between">
+      <VStack gap="48" max>
+        <VStack gap="24" max>
+          <Skeleton width="100%" height="40px" border="15px" />
+          <Skeleton width="100%" height="40px" border="15px" />
+          <Skeleton width="100%" height="40px" border="15px" />
+          <Skeleton width="100%" height="40px" border="15px" />
+          <Skeleton width="100%" height="40px" border="15px" />
+        </VStack>
+        <VStack gap="24" max>
+          <Skeleton width="100%" height="40px" border="15px" />
+          <Skeleton width="100%" height="40px" border="15px" />
+        </VStack>
+      </VStack>
+      <VStack max>
+        <Skeleton width="100%" height="40px" border="15px" />
+      </VStack>
+    </VStack>
+  ) : null

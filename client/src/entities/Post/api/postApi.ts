@@ -7,9 +7,9 @@ import {
   UploadPostRequestParams,
 } from '../model/types/types'
 import {
-  ALL_POSTS_ENDPOINT,
-  POST_BY_ID_ENDPOINT,
-  POST_BY_USER_ID_ENDPOINT,
+  GET_ALL_POSTS,
+  GET_POSTS_BY_PROFILE_ID,
+  // POST_BY_USER_ID_ENDPOINT,
   UPLOAD_POST_IMAGE_ENDPOINT,
   CREATE_POST_ENDPOINT,
   DELETE_POST_IMAGE_ENDPOINT,
@@ -21,12 +21,13 @@ export const postApi = rtkApi.injectEndpoints({
   endpoints: build => ({
     // fetchings posts
     fetchPostById: build.query<IPost, number>({
-      query: id => `${POST_BY_ID_ENDPOINT}/{${id}}`,
+      // FIXME: change to real endpoint
+      query: id => `${'dsad'}/{${id}}`,
       providesTags: (result, error, id) => [{ type: POST_TAG, id }],
     }),
     fetchAllPosts: build.query<IPost[], AllPostsRequestParams>({
       query: ({ idLastUploadedPost, params: { limit, sort, order } }) => ({
-        url: `${ALL_POSTS_ENDPOINT}/${idLastUploadedPost}`,
+        url: `${GET_ALL_POSTS}/${idLastUploadedPost}`,
         params: {
           pageSize: limit,
           sortBy: sort,
@@ -43,7 +44,7 @@ export const postApi = rtkApi.injectEndpoints({
     }),
     fetchPostsByUserId: build.query<IPost[], AllPostsRequestParams>({
       query: ({ idLastUploadedPost, params: { limit, sort, order } }) => ({
-        url: `${POST_BY_USER_ID_ENDPOINT}/${idLastUploadedPost}`,
+        url: `${GET_POSTS_BY_PROFILE_ID}/${idLastUploadedPost}`,
         params: {
           pageSize: limit,
           sortBy: sort,

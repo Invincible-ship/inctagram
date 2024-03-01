@@ -1,1 +1,1 @@
-export { ProfilePageClient } from './ui/ProfilePage/ProfilePage'
+// export { ProfilePageClient } from './ui/ProfilePage/ProfilePage'

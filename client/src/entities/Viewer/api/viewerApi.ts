@@ -7,6 +7,7 @@ import {
 } from '@/shared/const/apiEndpoints'
 import { PostListResponse } from '../types/types'
 import { POST_TAG } from '@/shared/const/rtk'
+import { getPostRequestQuery } from '@/entities/Viewer/model/utils/getPostRequestQuery'
 
 export const viewerApi = rtkApi.injectEndpoints({
   endpoints: build => ({
@@ -16,23 +17,7 @@ export const viewerApi = rtkApi.injectEndpoints({
       providesTags: (result, error, id) => [{ type: POST_TAG, id }],
     }),
     getPostsByProfileId: build.query<PostListResponse, PublicPostsByIdRequestParams>({
-      query: config => {
-        const { profileId, lastPostId, order, sort, limit } = config
-
-        const lastPostIdURL = lastPostId ? `/${lastPostId}` : ''
-        const url = `${GET_POSTS_BY_PROFILE_ID}/${profileId}${lastPostIdURL}`
-
-        const params = {
-          pageSize: limit,
-          sortBy: sort,
-          sortDirection: order,
-        }
-
-        return {
-          url,
-          params,
-        }
-      },
+      query: config => getPostRequestQuery(config),
       providesTags: (result, error, arg) =>
         result
           ? [
@@ -42,23 +27,7 @@ export const viewerApi = rtkApi.injectEndpoints({
           : [{ type: POST_TAG, id: 'LIST' }],
     }),
     getAllPosts: build.query<PostListResponse, AllPostsRequestParams>({
-      query: config => {
-        const { lastPostId, order, sort, limit } = config
-
-        const lastPostIdURL = lastPostId ? `/${lastPostId}` : ''
-        const url = `${GET_ALL_POSTS}${lastPostIdURL}`
-
-        const params = {
-          pageSize: limit,
-          sortBy: sort,
-          sortDirection: order,
-        }
-
-        return {
-          url,
-          params,
-        }
-      },
+      query: config => getPostRequestQuery(config),
       providesTags: (result, error, arg) =>
         result
           ? [

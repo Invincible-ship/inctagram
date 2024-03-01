@@ -8,11 +8,13 @@ import { TFunction } from 'i18next'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { FlexGap } from '@/shared/ui/Stack/Flex/Flex'
 import { useClientTranslation } from '@/shared/config/i18n/client'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 type PostInfoBlockProps = {
+  className?: string
   likesCount: number
   avatarUrls?: string[]
-  createdAt: string
+  createdAt?: string
   t: TFunction<Namespaces, undefined>
 }
 
@@ -22,7 +24,13 @@ const avatarsGap = {
   '3': undefined,
 } as Record<string, FlexGap | undefined>
 
-export const PostInfoBlock: FC<PostInfoBlockProps> = ({ likesCount, avatarUrls, createdAt, t }) => {
+export const PostInfoBlock: FC<PostInfoBlockProps> = ({
+  likesCount,
+  avatarUrls,
+  createdAt,
+  t,
+  className,
+}) => {
   const { t: commonT } = useClientTranslation()
   const formatter = useDateFormatter({
     day: 'numeric',
@@ -33,7 +41,7 @@ export const PostInfoBlock: FC<PostInfoBlockProps> = ({ likesCount, avatarUrls, 
   const gap = avatarUrls?.length ? avatarsGap[String(avatarUrls.length)] : '12'
 
   return (
-    <VStack className={cls.PostInfoBlock} gap="4" max>
+    <VStack className={classNames(cls.PostInfoBlock, {}, [className])} gap="4" max>
       <HStack align="center" gap={gap}>
         <HStack className={cls.avatarsContainer}>
           {avatarUrls?.map((url, idx) => (
@@ -53,9 +61,11 @@ export const PostInfoBlock: FC<PostInfoBlockProps> = ({ likesCount, avatarUrls, 
           <span className={cls.likeText}>&quot;{t('info.likes')}&quot;</span>
         </HStack>
       </HStack>
-      <HStack className={cls.date}>
-        {getFormattedPublciationDate(createdAt, formatter, commonT)}
-      </HStack>
+      {createdAt && (
+        <HStack className={cls.date}>
+          {getFormattedPublciationDate(createdAt, formatter, commonT)}
+        </HStack>
+      )}
     </VStack>
   )
 }
