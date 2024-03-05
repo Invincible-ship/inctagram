@@ -7,8 +7,10 @@ export const getPostRequestQuery = (
   const { lastPostId, order, sort, limit } = config
 
   const lastPostIdURL = lastPostId ? `/${lastPostId}` : ''
+  // @ts-ignore
   const url = config?.profileId
-    ? `${GET_POSTS_BY_PROFILE_ID}/${config.profileId}${lastPostIdURL}`
+    ? // @ts-ignore
+      `${GET_POSTS_BY_PROFILE_ID}/${config.profileId}${lastPostIdURL}`
     : `${GET_ALL_POSTS}${lastPostIdURL}`
 
   const params = {
