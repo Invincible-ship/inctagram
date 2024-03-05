@@ -61,7 +61,7 @@ export const EditableProfileGeneralInfo = () => {
     }
 
     if (isSuccess || isError) resetMutation()
-  }, [isSuccess, isError, error])
+  }, [isSuccess, isError, error, t])
 
   const onSubmit = async (profileData: TGeneralInfo) => {
     const normalizedProfileData = !profileData.aboutMe
@@ -69,7 +69,7 @@ export const EditableProfileGeneralInfo = () => {
       : profileData
 
     await updateProfileData({ ...normalizedProfileData, id: userId })
-    isError && revalidateDataByPath(VIEWER_TAG)
+    !isError && revalidateDataByPath(VIEWER_TAG)
 
     resetForm(undefined, { keepValues: true, keepErrors: true })
   }

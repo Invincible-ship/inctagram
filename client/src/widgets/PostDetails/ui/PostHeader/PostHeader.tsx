@@ -59,9 +59,9 @@ export const PostHeader = memo(
         </HStack>
         {!editMode && (
           <PostOptionsDropdown
+            isModal={isModal}
             postId={postId}
             ownerId={ownerId}
-            isModal={isModal}
             openDeletePostModal={openDeletePostModal}
           />
         )}

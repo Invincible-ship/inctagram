@@ -1,13 +1,13 @@
 import { componentRender } from '@/shared/lib/tests/componentRender'
 import { ProfilePage } from './ProfilePage'
 import { screen } from '@testing-library/react'
-import { IViewer, useGetPublicUserProfileQuery } from '@/entities/Viewer'
+import { IViewer } from '@/entities/Viewer'
 import {
   PostListCardType,
   PostListPage,
   createMockedPostListData,
-  fetchPostsByProfileId,
   initPostList,
+  fetchPostsByProfileId,
 } from '@/widgets/PostList'
 
 const mockedProfile: IViewer = {
@@ -25,17 +25,21 @@ jest.mock('next/navigation', () => ({
     push: jest.fn(),
   })),
 }))
-jest.mock('../../../../widgets/PostList', () => ({
-  ...jest.requireActual('../../../../widgets/PostList'),
-  initPostList: jest.fn((props: any) => ({
-    type: '',
-    payload: {},
-  })),
-  fetchPostsByProfileId: jest.fn((id: string) => ({
-    type: '',
-    payload: {},
-  })),
-}))
+jest.mock('../../../../widgets/PostList', () => {
+  const actual = jest.requireActual('../../../../widgets/PostList')
+
+  return {
+    ...actual,
+    initPostList: jest.fn((props: any) => ({
+      type: '',
+      payload: {},
+    })),
+    fetchPostsByProfileId: jest.fn((id: string) => ({
+      type: '',
+      payload: {},
+    })),
+  }
+})
 
 const initialState = {
   postList: createMockedPostListData({
@@ -47,7 +51,11 @@ const initialState = {
 
 describe('Profile Page', () => {
   beforeEach(() => {
-    componentRender(<ProfilePage profile={mockedProfile} />, { initialState })
+    jest.resetModules()
+
+    componentRender(<ProfilePage publicProfile={mockedProfile} posts={undefined} />, {
+      initialState,
+    })
   })
 
   it('should render correctly', () => {

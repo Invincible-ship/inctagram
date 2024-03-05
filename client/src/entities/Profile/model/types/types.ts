@@ -16,6 +16,21 @@ export type IProfile = {
   avatars: IAvatar[]
 }
 
+export type ExtendedProfile = IProfile & {
+  isFollowing: boolean
+  isFollowedBy: boolean
+  followingCount: number
+  followersCount: number
+  publicationsCount: number
+}
+
+export type AllProfilesRequestParams = {
+  search?: string
+  pageSize?: number
+  pageNumber?: number
+  cursor?: number
+}
+
 export type IProfileSchema = {
   profileData?: IProfile
   readonly: boolean

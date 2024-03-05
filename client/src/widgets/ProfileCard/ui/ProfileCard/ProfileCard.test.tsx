@@ -19,7 +19,7 @@ const mockedProfile: IViewer = {
 
 const mockedUser: (owner?: boolean) => DeepPartial<IUserSchema> = owner => ({
   authData: {
-    userId: owner ? 1 : 0,
+    userId: owner ? 1 : 10,
   },
 })
 
@@ -27,9 +27,22 @@ jest.mock('next/navigation', () => ({
   useParams: jest.fn().mockImplementation(() => ({ id: '1' })),
 }))
 
-const renderProfileCard = ({ owner, mobile }: { owner?: boolean; mobile?: boolean }) => {
+const renderProfileCard = ({
+  owner,
+  mobile,
+  isLoading,
+}: {
+  owner?: boolean
+  mobile?: boolean
+  isLoading?: boolean
+}) => {
   return componentRender(
-    <ProfileCard isLoading={false} profile={mockedProfile} mobile={mobile} />,
+    <ProfileCard
+      isLoading={isLoading}
+      profile={mockedProfile}
+      mobile={mobile}
+      isAuthorized={true}
+    />,
     {
       initialState: { user: mockedUser(owner) },
       renderOptions: {
@@ -50,9 +63,9 @@ describe('ProfileCard', () => {
     expect(screen.getByRole('button', { name: 'Follow' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Send message' })).toBeInTheDocument()
 
-    expect(screen.getByText('2 218')).toBeInTheDocument()
-    expect(screen.getByText('2 358')).toBeInTheDocument()
-    expect(screen.getByText('2 764')).toBeInTheDocument()
+    expect(screen.getByText('profile.following')).toBeInTheDocument()
+    expect(screen.getByText('profile.followers')).toBeInTheDocument()
+    expect(screen.getByText('profile.publications')).toBeInTheDocument()
   })
 
   // eslint-disable-next-line prettier/prettier
@@ -64,9 +77,9 @@ describe('ProfileCard', () => {
 
     expect(screen.getByTestId('settings-btn')).toBeInTheDocument()
 
-    expect(screen.getByText('2 218')).toBeInTheDocument()
-    expect(screen.getByText('2 358')).toBeInTheDocument()
-    expect(screen.getByText('2 764')).toBeInTheDocument()
+    expect(screen.getByText('profile.following')).toBeInTheDocument()
+    expect(screen.getByText('profile.followers')).toBeInTheDocument()
+    expect(screen.getByText('profile.publications')).toBeInTheDocument()
   })
 
   // eslint-disable-next-line prettier/prettier
@@ -81,9 +94,9 @@ describe('ProfileCard', () => {
     expect(screen.getByRole('button', { name: 'Follow' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Send message' })).toBeInTheDocument()
 
-    expect(screen.queryByText('2 218')).toBeInTheDocument()
-    expect(screen.queryByText('2 358')).toBeInTheDocument()
-    expect(screen.queryByText('2 764')).toBeInTheDocument()
+    expect(screen.queryByText('profile.following')).toBeInTheDocument()
+    expect(screen.queryByText('profile.followers')).toBeInTheDocument()
+    expect(screen.queryByText('profile.publications')).toBeInTheDocument()
   })
 
   // eslint-disable-next-line prettier/prettier
@@ -97,15 +110,15 @@ describe('ProfileCard', () => {
 
     expect(screen.queryByTestId('settings-btn')).not.toBeInTheDocument()
 
-    expect(screen.getByText('2 218')).toBeInTheDocument()
-    expect(screen.getByText('2 358')).toBeInTheDocument()
-    expect(screen.getByText('2 764')).toBeInTheDocument()
+    expect(screen.getByText('profile.following')).toBeInTheDocument()
+    expect(screen.getByText('profile.followers')).toBeInTheDocument()
+    expect(screen.getByText('profile.publications')).toBeInTheDocument()
   })
 
-  it('renders the loading skeleton when isLoading is true', () => {
-    render(<ProfileCard profile={mockedProfile} isLoading />)
+  it('renders the info container skeleton when isLoading is true', () => {
+    renderProfileCard({ isLoading: true })
 
-    expect(screen.getByTestId('profile-skeleton')).toBeInTheDocument()
+    expect(screen.getByTestId('post-info-skeleton')).toBeInTheDocument()
   })
 
   // eslint-disable-next-line prettier/prettier

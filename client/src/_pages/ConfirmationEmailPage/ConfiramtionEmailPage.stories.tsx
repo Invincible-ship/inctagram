@@ -6,11 +6,10 @@ import { useClientTranslation } from '@/shared/config/i18n/client'
 import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { PageDecorator } from '@/shared/config/storybook/PageDecorator/PageDecorator'
-import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
 
 const meta: Meta<typeof ConfirmationEmail> = {
   title: 'pages/ConfirmationEmail',
-  decorators: [(Story: StoryFn) => PageDecorator(Story), (Story: StoryFn) => StoreDecorator(Story)],
+  decorators: [(Story: StoryFn) => PageDecorator(Story)],
   component: ConfirmationEmail,
 }
 

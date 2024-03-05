@@ -18,8 +18,8 @@ const preview: Preview = {
     },
   },
   decorators: [
+    (Story: StoryFn) => StoreDecorator(Story, { user: { _inited: true } }),
     (Story: StoryFn) => StyleDecorator(Story),
-    (Story: StoryFn) => StoreDecorator(Story, { user: mockedReduxData.user }),
     (Story: StoryFn) => LanguageDecorator(Story),
   ],
 }

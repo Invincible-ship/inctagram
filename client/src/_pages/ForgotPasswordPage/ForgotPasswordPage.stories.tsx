@@ -7,7 +7,7 @@ import ForgotPasswordPage from '@/_pages/ForgotPasswordPage/ForgotPasswordPage'
 const meta: Meta<typeof ForgotPasswordPage> = {
   title: 'Pages/ForgotPasswordPage',
   component: ForgotPasswordPage,
-  decorators: [(Story: StoryFn) => PageDecorator(Story), (Story: StoryFn) => StoreDecorator(Story)],
+  decorators: [(Story: StoryFn) => PageDecorator(Story)],
 }
 
 export default meta

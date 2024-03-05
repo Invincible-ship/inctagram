@@ -52,6 +52,7 @@ const initialState = postsAdapter.getInitialState<PostListSchema>({
   error: undefined,
   sort: 'desc',
   sortBy: PostSortField.CREATED,
+  totalCount: undefined,
   lastPostId: undefined,
   limit: 8,
   hasMore: true,
@@ -91,6 +92,7 @@ export const postListSlice = createSlice({
         const { items: posts } = postsData
         const lastPost = posts[posts.length - 1]
         const hasMore = postsData.totalCount > state.ids.length + posts.length
+        state.totalCount = postsData.totalCount
         state.lastPostId = lastPost?.id
         state.hasMore = hasMore
 

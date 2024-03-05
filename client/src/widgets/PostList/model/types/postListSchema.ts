@@ -19,6 +19,7 @@ export type PostListSchema = EntityState<IPost> & {
   sortBy: PostSortField
 
   // post pagination
+  totalCount?: number
   lastPostId?: number
   limit: number
   hasMore: boolean

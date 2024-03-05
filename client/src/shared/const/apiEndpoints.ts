@@ -15,6 +15,10 @@ export const CREATE_NEW_PASSWORD_ENDPOINT = '/api/v1/auth/new-password'
 export const PROFILE_ENDPOINT = '/api/v1/users/profile'
 export const PROFILE_AVATARS_ENDPOINT = '/api/v1/users/profile/avatar'
 export const DELETE_PROFILE_AVATARS_ENDPOINT = '/api/v1/users/profile/avatar'
+export const GET_USER_PROFILE = '/api/v1/users'
+export const GET_PROFILE_FOLLOWERS = (userName: string) => `/api/v1/users/${userName}/followers`
+export const GET_PROFILE_FOLLOWING = (userName: string) => `/api/v1/users/${userName}/following`
+export const GET_ALL_PROFILES = '/api/v1/users'
 
 // POST ENDPOINTS
 export const UPLOAD_POST_IMAGE_ENDPOINT = '/api/v1/posts/image'

@@ -20,6 +20,7 @@ import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 import { useSelector } from 'react-redux'
 import { getUserId } from '@/entities/User'
 import { Routes } from '@/shared/types/routes'
+import { POST_DETAILS_ID } from '@/widgets/PostList'
 
 type PostOptionsDropdownProps = {
   postId: string
@@ -27,7 +28,9 @@ type PostOptionsDropdownProps = {
   isModal?: boolean
   openDeletePostModal?: () => void
 }
+
 export const PostOptionsDropdown = ({
+  isModal,
   postId,
   openDeletePostModal,
   ownerId,
@@ -49,14 +52,16 @@ export const PostOptionsDropdown = ({
   }
 
   const copyLink = () => {
-    const base = process.env.NEXT_PUBLIC_PRODUCTION_CLIENT_URL as string
     const sp = new URLSearchParams({
-      postDetailsId: postId,
+      [POST_DETAILS_ID]: postId,
     })
 
-    const url = `${base}/${lngId}${Routes.PROFILE}/${ownerId}?${sp.toString()}`
+    const url = new URL(
+      `${lngId}${Routes.PROFILE}/${ownerId}?${sp.toString()}`,
+      window.location.origin,
+    )
 
-    navigator.clipboard.writeText(url)
+    navigator.clipboard.writeText(url.href)
   }
 
   const ownerContent = (
@@ -93,7 +98,7 @@ export const PostOptionsDropdown = ({
     </>
   )
 
-  if (!userId) return null
+  if (!userId || (owner && !isModal)) return null
 
   return (
     <DropdownMenu open={isOpenMenu} onOpenChange={setIsOpenMenu}>

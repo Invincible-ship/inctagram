@@ -9,11 +9,11 @@ export { getProfileData } from './model/selectors/getProfileData'
 export * as ProfileAvatars from './model/selectors/getProfileAvatars'
 export { initProfileDataThunk } from './model/services/initProfileDataThunk'
 export {
-  useGetProfileDataQuery,
+  useGetOwnerProfileDataQuery,
   useUpdateProfileMutation,
   useDeleteProfileMutation,
   useUpdateProfileAvatarsMutation,
   useDeleteProfileAvatarsMutation,
-  getProfileDataQuery,
+  getOwnerProfileDataQuery,
 } from './api/profileApi'
-export type { IAvatar, IProfile, IProfileSchema } from './model/types/types'
+export type { IAvatar, IProfile, IProfileSchema, ExtendedProfile } from './model/types/types'

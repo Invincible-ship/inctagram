@@ -1,13 +1,12 @@
 import React from 'react'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { SignInPage } from './SignInPage'
-import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
 import { PageDecorator } from '@/shared/config/storybook/PageDecorator/PageDecorator'
 
 const meta: Meta<typeof SignInPage> = {
   title: 'Pages/SignInPage',
   component: SignInPage,
-  decorators: [(Story: StoryFn) => PageDecorator(Story), (Story: StoryFn) => StoreDecorator(Story)],
+  decorators: [(Story: StoryFn) => PageDecorator(Story)],
 }
 
 export default meta

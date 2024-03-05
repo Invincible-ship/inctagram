@@ -1,8 +1,8 @@
-import { IPost, setCurrentPost } from '@/entities/Post'
+import { IPost } from '@/entities/Post'
 import { ImageVariant, MyImage } from '@/shared/ui/MyImage/MyImage'
 import { PostListCardType } from '../../model/consts/postListCardType'
 import React, { FC, useMemo } from 'react'
-import { HStack, VStack } from '@/shared/ui/Stack'
+import { HStack } from '@/shared/ui/Stack'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -11,8 +11,6 @@ import cls from './PostListItem.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import HeartIcon from '@/shared/assets/icons/heart-outline.svg'
 import CommentIcon from '@/shared/assets/icons/message-circle-outline.svg'
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { PostListItemExtended } from '@/widgets/PostList/ui/PostListItemExtended/PostListItemExtended'
 import { PostDetails } from '@/widgets/PostDetails'
 import { PostDetailsVariant } from '@/widgets/PostDetails/model/consts/variant'
 
@@ -25,16 +23,17 @@ type PostListItemProps = {
 const PREVIEW_IMAGE_WIDTH = 640
 
 export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) => {
-  const pathname = usePathname()
-  const sp = useSearchParams()
-  const searchParams = new URLSearchParams(Array.from(sp))
   const imagePreview = useMemo(() => {
     return post.images.find(image => image.width == PREVIEW_IMAGE_WIDTH)
   }, [post])
 
   const imageTypeSizes = '(max-width: 768px) 50vw, 33vw'
 
-  searchParams.set(POST_DETAILS_ID, String(post.id))
+  const getNewSearchParams = () => {
+    const sp = new URLSearchParams(window.location.search)
+    sp.set(POST_DETAILS_ID, String(post.id))
+    return sp.toString()
+  }
 
   if (type == PostListCardType.EXTENDED) {
     return <PostDetails postId={String(post.id)} variant={PostDetailsVariant.CARD} />
@@ -42,7 +41,7 @@ export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) =
 
   return (
     <HStack data-id={post.id} className={classNames(cls.PostListItem, {}, [className])}>
-      <Link href={`${pathname}?${searchParams.toString()}`} className={cls.postLink}>
+      <Link href={`?${getNewSearchParams()}`} className={cls.postLink}>
         <MyImage
           src={imagePreview?.url || ''}
           variant={ImageVariant.SQUARE}

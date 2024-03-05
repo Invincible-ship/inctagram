@@ -6,4 +6,5 @@ export const user: DeepPartial<IUserSchema> = {
     userId: 1,
     email: 'storybook',
   },
+  _inited: true,
 }
