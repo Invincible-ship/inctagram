@@ -1,5 +1,6 @@
-import { IProfile, getProfileDataQuery } from '@/entities/Profile'
-import { setProfileData } from '@/entities/Profile'
+import { getOwnerProfileDataQuery } from '../../api/profileApi'
+import { IProfile } from '../types/types'
+import { setProfileData } from '../slice/profileSlice'
 import { getUserId } from '@/entities/User'
 import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
@@ -15,7 +16,7 @@ export const initProfileDataThunk = createAsyncThunk<
 
   try {
     if (id) {
-      const profileData = await dispatch(getProfileDataQuery(id)).unwrap()
+      const profileData = await dispatch(getOwnerProfileDataQuery(id)).unwrap()
 
       dispatch(setProfileData(profileData))
     }

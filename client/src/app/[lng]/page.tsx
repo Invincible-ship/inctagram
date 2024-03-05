@@ -1,47 +1,33 @@
-'use client'
+import { PostListResponse } from '@/entities/Viewer'
+import { GET_ALL_POSTS } from '@/shared/const/apiEndpoints'
+import { PostSortField } from '@/shared/const/postSortField'
+import dynamic from 'next/dynamic'
+// import { HomePageClient } from '@/_pages/HomePage/HomePage'
+const HomePageClient = dynamic(() => import('@/_pages/HomePage/HomePage'), { ssr: false })
 
-import { getUserAuthData } from '@/entities/User'
-import { SignOut } from '@/features/auth/signout'
-import { LanguageContext } from '@/shared/lib/context/LanguageContext'
-import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
-import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
-import { Routes } from '@/shared/types/routes'
-import { Button } from '@/shared/ui/Button/Button'
-import { Pagination, usePagination } from '@/shared/ui/Pagination'
-import { HStack, VStack } from '@/shared/ui/Stack'
-import Link from 'next/link'
-import React, { useContext } from 'react'
-import { useSelector } from 'react-redux'
+const fetchAllPostsData = async () => {
+  const baseUrl = process.env.API
+  const qp = new URLSearchParams({
+    pageSize: '5',
+    sortBy: PostSortField.CREATED,
+    sortDirection: 'desc',
+  })
 
-const Page = () => {
-  const lngId = useContext(LanguageContext)
-  const userData = useSelector(getUserAuthData)
-  const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY)
-  const { currentPage, itemsOnPage, onChangePage, onChangePageAmount } = usePagination()
+  const response = await fetch(`${baseUrl}${GET_ALL_POSTS}?${qp.toString()}`, {
+    next: {
+      revalidate: 60,
+    },
+  })
 
-  return (
-    <VStack gap="24">
-      <h1>Home page</h1>
-      <HStack gap="24" max>
-        <Link href={`/${lngId}${Routes.PROFILE}/${userId}/edit?setting=general-info`}>
-          <Button>Edit Profile</Button>
-        </Link>
-        <SignOut />
-      </HStack>
-      <div>
-        <p>User Data: </p>
-        <pre>{JSON.stringify(userData, null, 2)}</pre>
-      </div>
+  if (!response.ok) return undefined
 
-      <Pagination
-        itemsLength={1678}
-        currentPage={currentPage}
-        itemsOnPage={itemsOnPage}
-        onChangePage={onChangePage}
-        onChangePageAmount={onChangePageAmount}
-      />
-    </VStack>
-  )
+  return (await response.json()) as PostListResponse
 }
 
-export default withAuth(Page, { routeRole: 'all' })
+const HomePageServer = async () => {
+  const postsData = await fetchAllPostsData()
+
+  return <HomePageClient postsData={postsData} />
+}
+
+export default HomePageServer

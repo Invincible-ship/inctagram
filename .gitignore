@@ -40,4 +40,4 @@
 /client/*.tsbuildinfo
 /client/next-env.d.ts
 
-/.idea
+/client/.idea

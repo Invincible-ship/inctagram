@@ -23,6 +23,8 @@ import { TextArea } from '@/shared/ui/TextArea/TextArea'
 import { Button } from '@/shared/ui/Button/Button'
 
 type UpdatePostFormProps = {
+  id: number
+  description: string
   t: TFunction<Namespaces, undefined>
   isModalOpen: boolean
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
@@ -30,8 +32,7 @@ type UpdatePostFormProps = {
 }
 
 export const UpdatePostForm: FC<UpdatePostFormProps> = memo(
-  ({ t, closeForm, isModalOpen, setIsModalOpen }) => {
-    const { id, description } = useSelector(getCurrentPost)
+  ({ t, closeForm, isModalOpen, setIsModalOpen, id, description }) => {
     const [newDescription, setNewDescription] = useState<string>(description)
     const isDescriptionChanged = description !== newDescription
     const [updatePostByIdMutation, { isLoading }] = useUpdatePostByIdMutation()

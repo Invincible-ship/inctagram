@@ -34,6 +34,7 @@ type SelectProps = {
   valueClassName?: string
   arrowDownIconClassName?: string
   contentClassName?: string
+  portalContainer?: HTMLElement | null
 }
 
 export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
@@ -49,6 +50,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
       position = 'popper',
       testId,
       defaultSelectedItem,
+      portalContainer,
       ...rest
     },
     forwardedRef,
@@ -72,7 +74,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             <ArrowDown />
           </SelectPrimitive.Icon>
         </SelectPrimitive.Trigger>
-        <SelectPrimitive.Portal>
+        <SelectPrimitive.Portal container={portalContainer}>
           <SelectPrimitive.Content
             position={position}
             className={classNames(cls.SelectContent, {}, [contentClassName])}

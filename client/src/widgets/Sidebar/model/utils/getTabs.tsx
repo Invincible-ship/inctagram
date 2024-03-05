@@ -1,6 +1,6 @@
 import { LanguageIds } from '@/shared/config/i18n/types'
-import { SidebarItem } from '../Sidebar'
-import { SidebarValues, TSidebarItemsSchema, TSidebarTab } from '../types'
+import { SidebarItem } from '../../ui/Sidebar'
+import { SidebarValues, TSidebarItemsSchema, TSidebarTab } from '../../types'
 
 export type TabsOptions = {
   type: keyof TSidebarItemsSchema

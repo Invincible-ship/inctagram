@@ -1,7 +1,7 @@
 'use client'
 
 import { PostDetailsWrapper } from '../PostDetailsWrapper/PostDetailsWrapper'
-import { IViewer } from '@/entities/Viewer'
+import { IViewer, PostListResponse } from '@/entities/Viewer'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { Page } from '@/widgets/Page/Page'
@@ -15,6 +15,7 @@ import {
   getHasMore,
   PostListCardType,
   getSkeletons,
+  setPostsFromServer,
 } from '@/widgets/PostList'
 import { ProfileCard, ProfileCardSkeleton } from '@/widgets/ProfileCard'
 import { useParams } from 'next/navigation'
@@ -22,34 +23,53 @@ import { FC, Suspense, useCallback, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 import React from 'react'
+import { useGetProfileDataQuery } from '@/entities/Profile/api/profileApi'
+import { getUserId } from '@/entities/User'
 
 type ProfilePageProps = {
-  profile: IViewer
+  publicProfile: IViewer
+  posts: PostListResponse | undefined
 }
 
-export const ProfilePage: FC<ProfilePageProps> = ({ profile }) => {
+export const ProfilePage: FC<ProfilePageProps> = ({ publicProfile, posts }) => {
   const { id: profileId } = useParams()
+  const isAuthorized = !!useSelector(getUserId)
   const hasMore = useSelector(getHasMore)
   const mobile = useMediaQuery('(max-width: 769px)')
   const gap = !mobile ? '48' : '24'
   const dispatch = useAppDispatch()
 
+  const { data: authorizedProfile, isLoading: isProfileLoading } = useGetProfileDataQuery(
+    publicProfile.userName,
+    {
+      skip: !isAuthorized,
+    },
+  )
+
   useEffect(() => {
     dispatch(initPostList({ page: PostListPage.PROFILE, currentId: profileId }))
-    dispatch(fetchPostsByProfileId(profileId))
-  }, [dispatch, profileId])
+    posts ? dispatch(setPostsFromServer(posts)) : dispatch(fetchPostsByProfileId(profileId))
+  }, [dispatch, profileId, posts])
 
   const onScrollEnd = useCallback(() => {
     dispatch(fetchNextPosts(profileId))
   }, [dispatch, profileId])
 
-  const memoizedProfile = useMemo(() => profile, [profile])
+  const memoizedProfile = useMemo(
+    () => authorizedProfile || publicProfile,
+    [publicProfile, authorizedProfile],
+  )
 
   return (
     <Suspense fallback={<ProfilePageSkeleton mobile={mobile} />}>
       <Page isTriggerActive={hasMore} onScrollEnd={onScrollEnd}>
         <VStack data-testid="profile-page" gap={gap} max>
-          <ProfileCard profile={memoizedProfile} mobile={mobile} />
+          <ProfileCard
+            profile={memoizedProfile}
+            mobile={mobile}
+            isAuthorized={isAuthorized}
+            isLoading={isProfileLoading}
+          />
           <PostList />
           <PostDetailsWrapper />
         </VStack>
@@ -78,4 +98,4 @@ const ProfilePageSkeleton: FC<ProfilePageSkeletonProps> = props => {
   )
 }
 
-export const ProfilePageClient = withAuth<ProfilePageProps>(ProfilePage, { routeRole: 'all' })
+export default withAuth<ProfilePageProps>(ProfilePage, { routeRole: 'optional' })

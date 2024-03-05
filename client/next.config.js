@@ -1,6 +1,8 @@
 /** @type {import("next").NextConfig} */
 
-// const isDev = process.env.NODE_ENV === 'development'
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 const nextConfig = {
   webpack(config, { webpack, dev }) {
@@ -49,4 +51,4 @@ const nextConfig = {
   transpilePackages: ['swiper']
 };
 
-module.exports = nextConfig
+module.exports = withBundleAnalyzer(nextConfig)

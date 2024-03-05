@@ -15,11 +15,12 @@ export const CREATE_NEW_PASSWORD_ENDPOINT = '/api/v1/auth/new-password'
 export const PROFILE_ENDPOINT = '/api/v1/users/profile'
 export const PROFILE_AVATARS_ENDPOINT = '/api/v1/users/profile/avatar'
 export const DELETE_PROFILE_AVATARS_ENDPOINT = '/api/v1/users/profile/avatar'
+export const GET_USER_PROFILE = '/api/v1/users'
+export const GET_PROFILE_FOLLOWERS = (userName: string) => `/api/v1/users/${userName}/followers`
+export const GET_PROFILE_FOLLOWING = (userName: string) => `/api/v1/users/${userName}/following`
+export const GET_ALL_PROFILES = '/api/v1/users'
 
 // POST ENDPOINTS
-export const POST_BY_ID_ENDPOINT = '/api/v1/posts/p'
-export const ALL_POSTS_ENDPOINT = '/api/v1/posts/all'
-export const POST_BY_USER_ID_ENDPOINT = '/api/v1/posts/user'
 export const UPLOAD_POST_IMAGE_ENDPOINT = '/api/v1/posts/image'
 export const CREATE_POST_ENDPOINT = '/api/v1/posts'
 export const DELETE_POST_IMAGE_ENDPOINT = '/api/v1/posts/image'
@@ -29,6 +30,7 @@ export const DELETE_POST_ENDPOINT = '/api/v1/posts'
 export const GET_PUBLIC_USER_PROFILE = '/api/v1/public-user/profile'
 export const GET_USERS_TOTAL_COUNT = '/api/v1/public-user'
 export const GET_POSTS_BY_PROFILE_ID = '/api/v1/public-posts/user'
+export const GET_ALL_POSTS = '/api/v1/public-posts/all'
 
 // SUBSCRIPTION ENDPOINTS
 export const GET_CURRENT_SUBSCRIPTIONS = '/api/v1/subscriptions/current-subscriptions'

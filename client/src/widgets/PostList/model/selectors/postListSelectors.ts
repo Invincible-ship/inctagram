@@ -30,3 +30,6 @@ export const getPostListType = (state: StateSchema) => {
 export const getPostListId = (state: StateSchema) => {
   return state.postList.postListId
 }
+export const getTotalCount = (state: StateSchema) => {
+  return state.postList.totalCount
+}

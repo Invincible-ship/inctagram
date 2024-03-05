@@ -3,7 +3,16 @@
 import FlagRU from '@/shared/assets/icons/ru-flag.svg'
 import FlagUK from '@/shared/assets/icons/uk-flag.svg'
 import { languages } from '@/shared/config/i18n/settings'
-import { ReactNode, Suspense, useContext, useMemo, useState } from 'react'
+import {
+  FC,
+  MutableRefObject,
+  ReactNode,
+  Suspense,
+  memo,
+  useContext,
+  useMemo,
+  useState,
+} from 'react'
 import { usePathname, useSearchParams, redirect } from 'next/navigation'
 import cls from './LangSwitcher.module.scss'
 import { LanguageIds } from '@/shared/config/i18n/types'
@@ -27,9 +36,12 @@ const languagesOptions: TLanguageOption[] = languages.map(lng => {
   }
 })
 
-const LangSwitcher = () => {
-  const initialLngId = useContext(LanguageContext)
-  const [lngId, setLngId] = useState(initialLngId)
+type LangSwitcherProps = {
+  portalContainer?: HTMLElement | null
+}
+
+export const LangSwitcher: FC<LangSwitcherProps> = memo(({ portalContainer }) => {
+  const lngId = useContext(LanguageContext)
   const pathname = usePathname() as string
   const searchParams = useSearchParams()
 
@@ -38,8 +50,6 @@ const LangSwitcher = () => {
   }, [lngId]) as TLanguageOption
 
   const onChange = (value: LanguageIds) => {
-    setLngId(value)
-
     const newPathname = `${pathname.replace(`${lngId}`, value)}${
       searchParams && `?${searchParams?.toString()}`
     }`
@@ -52,6 +62,7 @@ const LangSwitcher = () => {
     <Select
       testId="lang-switcher"
       onValueChange={onChange}
+      portalContainer={portalContainer}
       triggerClassName={cls.trigger}
       contentClassName={cls.content}
       defaultSelectedItem={defaultSelectedItem}
@@ -63,17 +74,13 @@ const LangSwitcher = () => {
       ))}
     </Select>
   )
-}
+})
+
+LangSwitcher.displayName = 'LangSwitcher'
 
 const Option = ({ option }: { option: TLanguageOption }) => (
   <div className={cls.value}>
     <span>{option?.icon}</span>
     <span className={cls.lngName}>{option?.lng}</span>
   </div>
-)
-
-export const SuspenseLangSwitcher = () => (
-  <Suspense fallback={<>placeholder</>}>
-    <LangSwitcher />
-  </Suspense>
 )

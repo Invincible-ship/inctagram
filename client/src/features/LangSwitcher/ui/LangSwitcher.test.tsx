@@ -1,4 +1,4 @@
-import { SuspenseLangSwitcher } from '@/features/LangSwitcher/ui/LangSwitcher'
+import { LangSwitcher } from '@/features/LangSwitcher'
 import { render, screen } from '@testing-library/react'
 
 jest.mock('next/navigation', () => ({
@@ -19,8 +19,7 @@ jest.mock('next/navigation', () => ({
 
 describe('LangSwitcher', () => {
   test('Test render', () => {
-    render(<SuspenseLangSwitcher />)
+    render(<LangSwitcher />)
     expect(screen.getByTestId('lang-switcher')).toBeInTheDocument()
-    screen.debug()
   })
 })

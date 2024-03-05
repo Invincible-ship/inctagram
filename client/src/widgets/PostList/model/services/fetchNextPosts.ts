@@ -1,8 +1,9 @@
 import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { getHasMore, getIsLoading, getPage } from '../selectors/postListSelectors'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { PostListPage } from '@/widgets/PostList/model/consts/postListPage'
-import { fetchPostsByProfileId } from '@/widgets/PostList/model/services/fetchPostsByProfileId'
+import { PostListPage } from '../consts/postListPage'
+import { fetchPostsByProfileId } from './fetchPostsByProfileId'
+import { fetchAllPosts } from './fetchAllPosts'
 
 export const fetchNextPosts = createAsyncThunk<void, string | undefined, ThunkConfig<unknown>>(
   'post/fetchNextPosts',
@@ -21,6 +22,8 @@ export const fetchNextPosts = createAsyncThunk<void, string | undefined, ThunkCo
         case PostListPage.PROFILE:
           profileId && dispatch(fetchPostsByProfileId(profileId))
           break
+        case PostListPage.HOME:
+          dispatch(fetchAllPosts())
         default:
           return
       }

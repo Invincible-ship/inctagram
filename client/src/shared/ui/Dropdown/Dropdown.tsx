@@ -4,7 +4,14 @@ import CheckIcon from '@/shared/assets/icons/check.svg'
 import cls from './Dropdown.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
-export const DropdownMenu = DropdownMenuPrimitive.Root
+export const DropdownMenu: FC<DropdownMenuPrimitive.DropdownMenuProps> = ({
+  children,
+  ...rest
+}) => (
+  <DropdownMenuPrimitive.Root modal={false} {...rest}>
+    {children}
+  </DropdownMenuPrimitive.Root>
+)
 
 export const DropdownMenuTrigger: FC<DropdownMenuPrimitive.DropdownMenuTriggerProps> = ({
   className,

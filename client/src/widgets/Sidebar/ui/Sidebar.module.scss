@@ -42,12 +42,19 @@
       }
     }
 
-    
-
     .sidebarBtn {
       position: absolute;
       bottom: 110px;
     }
   }
+}
+
+.skeleton {
+  position: fixed;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height));
+  padding-top: 72px;
+  padding-bottom: 110px;
+  z-index: 1000;
 }
 

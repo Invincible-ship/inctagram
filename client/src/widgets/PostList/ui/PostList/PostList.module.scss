@@ -1,6 +1,10 @@
 .PostList {
   gap: 4px;
 
+  &.extended {
+    gap: 36px;
+  }
+
   .item {
     transition: scale .35s ease, opacity .35s linear;
 

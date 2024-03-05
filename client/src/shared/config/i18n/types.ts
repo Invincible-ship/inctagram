@@ -19,6 +19,7 @@ export enum Namespaces {
   CONFIRMATION_EMAIL = 'confirmationEmail',
   PROFILE_SETTINGS = 'profile-settings',
   PROFILE_PAGE = 'profile-page',
+  HOME_PAGE = 'home-page',
   // widgets
   DATE_PICKER = 'date-picker',
   CITY_SELECT = 'city-select',

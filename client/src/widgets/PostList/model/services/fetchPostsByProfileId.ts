@@ -26,10 +26,10 @@ export const fetchPostsByProfileId = createAsyncThunk<
   }
 
   try {
-    addQueryParams({
-      sort,
-      order,
-    })
+    // addQueryParams({
+    //   sort,
+    //   order,
+    // })
     const postsData = await dispatch(getPostsByProfileId(config)).unwrap()
 
     return postsData

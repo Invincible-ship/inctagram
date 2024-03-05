@@ -8,6 +8,7 @@ import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import cls from './PostList.module.scss'
 import { FC, memo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { PostDetailsCardSkeleton } from '@/widgets/PostDetails'
 
 type PostListProps = {
   mobile?: boolean
@@ -22,10 +23,14 @@ export const PostList: FC<PostListProps> = memo(({ className }) => {
   const direction = type == PostListCardType.IMAGE ? 'row' : 'column'
   const align = type == PostListCardType.EXTENDED ? 'center' : 'start'
 
+  const mods = {
+    [cls.extended]: type == PostListCardType.EXTENDED,
+  }
+
   return (
     <Flex
       data-testid="post-list"
-      className={classNames(cls.PostList, {}, [className])}
+      className={classNames(cls.PostList, mods, [className])}
       direction={direction}
       align={align}
       wrap="wrap"
@@ -44,9 +49,8 @@ PostList.displayName = 'PostList'
 export const getSkeletons = (length: number, type: PostListCardType) =>
   Array.from({ length }).map((_, idx) => {
     if (type == PostListCardType.EXTENDED) {
-      // TODO: add extended card type skeleton
-      return <>Extended Skeleton Component</>
+      return <PostDetailsCardSkeleton key={idx} />
     }
 
-    return <Skeleton key={idx} className="profile-card-image-skeleton" />
+    return <Skeleton key={idx} className="post-list-image-skeleton" />
   })

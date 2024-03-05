@@ -31,7 +31,7 @@ const AvatarWithUsername: FC<AvatarWithUsernameProps> = memo(({ user, className 
 
   return (
     <Link href={`/${lngId}${Routes.PROFILE}/${id}`}>
-      <HStack className={className} align="center" justify="start" gap="12">
+      <HStack className={className} align="center" justify="start" gap="12" max>
         <Avatar src={url} size={AvatarSize.SMALLEST} />
         {userName}
       </HStack>

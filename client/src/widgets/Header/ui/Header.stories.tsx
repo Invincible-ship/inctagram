@@ -11,9 +11,9 @@ export default meta
 type Story = StoryObj<typeof Header>
 
 export const Authorized: Story = {
-  render: () => <Header isAuthorized />,
+  render: () => <Header isAuthorized isUserInited />,
 }
 
 export const NonAuthorized: Story = {
-  render: () => <Header />,
+  render: () => <Header isUserInited />,
 }
