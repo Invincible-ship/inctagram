@@ -7,22 +7,28 @@ import s from '@/_pages/TermsOfServicePage/ui/TermsOfServicePage.module.scss'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import ArrowBack from '@/shared/assets/icons/arrow-back.svg'
 import { useRouter } from 'next/navigation'
+import { getUserId } from '@/entities/User'
+import { useSelector } from 'react-redux'
 
 const PrivacyPolicyPage = () => {
+  const { t } = useClientTranslation(Namespaces.SIGNUP)
+  const isAuthorized = useSelector(getUserId)
   const router = useRouter()
+
   const goBack = () => {
     router.back()
   }
 
-  const { t } = useClientTranslation(Namespaces.SIGNUP)
   return (
     <div className={'document'}>
-      <div className={s.backToBlock}>
-        <Button theme={ButtonTheme.TEXT} style={{ color: 'white' }} onClick={goBack}>
-          <ArrowBack />
-          {t('agree.backToSignUp')}
-        </Button>
-      </div>
+      {!isAuthorized && (
+        <div className={s.backToBlock}>
+          <Button theme={ButtonTheme.TEXT} style={{ color: 'white' }} onClick={goBack}>
+            <ArrowBack />
+            {t('agree.backToSignUp')}
+          </Button>
+        </div>
+      )}
       <div className={'document-content'}>
         <h1>{t('agree.privacyPolicy')}</h1>
         <p>

@@ -33,7 +33,7 @@ export const ImageSwiper: FC<ImageSwiperProps> = memo(({ postId }) => {
         return (
           <SwiperSlide key={url} className={cls.imageSlide}>
             <HStack max>
-              <MyImage src={url} variant={ImageVariant.SQUARE} alt="Post Image" />
+              <MyImage src={url} variant={ImageVariant.SQUARE} priority alt="Post Image" />
             </HStack>
           </SwiperSlide>
         )

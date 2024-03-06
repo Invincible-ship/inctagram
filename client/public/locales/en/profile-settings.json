@@ -26,14 +26,16 @@
       "aboutMe": {
         "max": "This field must contain no more than 200 characters"
       },
-      "update": "Failed to update profile information. Try again later"
+      "update": "Failed to update profile information. Try again later",
+      "internet": "Failed to update profile information, there is no Internet connection"
     },
     "upload-modal": {
       "title": "Add a Profile Photo",
       "btn": "Select from Computer",
       "cropper-btn": "Save",
       "errors": {
-        "size": "Error! Photo size must be less than 10 MB!"
+        "size": "Error! Photo size must be less than 10 MB!",
+        "internet": "Failed to upload a profile photo, there is no Internet connection"
       }
     },
     "delete-modal": {
