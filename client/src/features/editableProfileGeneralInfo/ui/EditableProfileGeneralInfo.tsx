@@ -15,6 +15,7 @@ import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
 import { revalidateDataByPath } from '@/shared/lib/serverActions/revalidateDataByPath'
 import { VIEWER_TAG } from '@/shared/const/rtk'
+import { getInternetConnection } from '@/shared/utils/getInternetConnection'
 
 const defaultGeneralInfoValues: TGeneralInfo = {
   userName: '',
@@ -28,8 +29,7 @@ export const EditableProfileGeneralInfo = () => {
   const userId = useSelector(getUserId)
   const profileGeneralInfoData = useSelector(getProfileGeneralInfo)
 
-  const [updateProfileData, { isError, isSuccess, isLoading, error, reset: resetMutation }] =
-    useUpdateProfileMutation()
+  const [updateProfileData, { isLoading }] = useUpdateProfileMutation()
 
   const {
     control,
@@ -45,33 +45,30 @@ export const EditableProfileGeneralInfo = () => {
     values: profileGeneralInfoData,
   })
 
-  useEffect(() => {
-    if (isSuccess) toast.success(t('general-info.update-success'))
+  const onSubmit = async (profileData: TGeneralInfo) => {
+    try {
+      await updateProfileData({ ...profileData, id: userId }).unwrap()
+      toast.success(t('general-info.update-success'))
+      revalidateDataByPath(VIEWER_TAG)
 
-    if (isError) toast.error(t('general-info.errors.update'))
+      resetForm(undefined, { keepValues: true, keepErrors: true })
+    } catch (err) {
+      if (isFetchBaseQueryError(err)) {
+        if (err.status == 'FETCH_ERROR') {
+          toast.error(t('general-info.errors.internet'))
+          return
+        }
 
-    if (error && isFetchBaseQueryError(error)) {
-      const apiError = error.data as ApiError
+        toast.error(t('general-info.errors.update'))
+        const apiError = err.data as ApiError
 
-      if (Array.isArray(apiError.messages) && apiError.messages.length) {
-        apiError.messages.forEach(({ message, field }) => {
-          setError(field as keyof TGeneralInfo, { type: 'server', message })
-        })
+        if (Array.isArray(apiError.messages) && apiError.messages.length) {
+          apiError.messages.forEach(({ message, field }) => {
+            setError(field as keyof TGeneralInfo, { type: 'server', message })
+          })
+        }
       }
     }
-
-    if (isSuccess || isError) resetMutation()
-  }, [isSuccess, isError, error, t])
-
-  const onSubmit = async (profileData: TGeneralInfo) => {
-    const normalizedProfileData = !profileData.aboutMe
-      ? { ...profileData, aboutMe: null }
-      : profileData
-
-    await updateProfileData({ ...normalizedProfileData, id: userId })
-    !isError && revalidateDataByPath(VIEWER_TAG)
-
-    resetForm(undefined, { keepValues: true, keepErrors: true })
   }
 
   return (

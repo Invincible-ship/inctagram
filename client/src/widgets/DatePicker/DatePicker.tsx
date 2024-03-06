@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useLayoutEffect, useState } from 'react'
+import { FC, useContext, useLayoutEffect, useState } from 'react'
 import DatePickerInstance from 'react-datepicker'
 import './DatePicker.scss'
 import { DatePickerHeader } from './DatePickerHeader'
@@ -13,6 +13,8 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { customizeDatePickerInput } from './utils/customizeDatePickerInput'
 import { Control, Controller, FieldError } from 'react-hook-form'
 import Link from 'next/link'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
+import { Routes } from '@/shared/types/routes'
 
 type DatePickerProps = {
   control: Control<any>
@@ -40,6 +42,7 @@ export const DatePicker: FC<DatePickerProps> = ({
   minDate,
   maxDate,
 }) => {
+  const lngId = useContext(LanguageContext)
   const [startDate, setStartDate] = useState<Value>(null)
   const [endDate, setEndDate] = useState<Value>(null)
   const { t } = useClientTranslation(Namespaces.DATE_PICKER)
@@ -81,7 +84,7 @@ export const DatePicker: FC<DatePickerProps> = ({
         const birthdayError = (
           <>
             {error?.message}.{' '}
-            <Link className={cls.birthdayErrorLink} href="#" target="_blank">
+            <Link className={cls.birthdayErrorLink} href={`/${lngId}${Routes.PRIVACY_POLICY}`}>
               {t('privacy-policy')}
             </Link>
           </>

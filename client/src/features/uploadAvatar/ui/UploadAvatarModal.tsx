@@ -14,6 +14,8 @@ import { useUpdateProfileAvatarsMutation } from '@/entities/Profile'
 import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
 import { revalidateDataByPath } from '@/shared/lib/serverActions/revalidateDataByPath'
 import { PROFILE_TAG, VIEWER_TAG } from '@/shared/const/rtk'
+import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
+import { getInternetConnection } from '@/shared/utils/getInternetConnection'
 
 type UploadAvatarModalProps = {
   isOpen: boolean
@@ -58,8 +60,10 @@ export const UploadAvatarModal: FC<UploadAvatarModalProps> = ({
 
       revalidateDataByPath(VIEWER_TAG)
     } catch (err) {
+      if (isFetchBaseQueryError(err) && err.status == 'FETCH_ERROR') {
+        return toast.error(t('general-info.upload-modal.errors.internet'))
+      }
       toast.error('Something went wrong, please try again...')
-      console.log('Upload avatar error: ', err)
     }
   }
 
