@@ -7,6 +7,7 @@ import {
   GET_USERS_TOTAL_COUNT,
 } from '@/shared/const/apiEndpoints'
 import { PostSortField } from '@/shared/const/postSortField'
+import { VIEWER_TAG } from '@/shared/const/rtk'
 import { SortOrder } from '@/shared/types/sort'
 import dynamicImport from 'next/dynamic'
 import { notFound } from 'next/navigation'
@@ -26,6 +27,9 @@ const profileEndpoint = (id: string) => `${API}${GET_PUBLIC_USER_PROFILE}/${id}`
 const getPublicProfile = async (profileId: string) => {
   const profileResponse = await fetch(profileEndpoint(profileId), {
     cache: 'no-cache',
+    next: {
+      tags: [VIEWER_TAG],
+    },
   })
 
   if (!profileResponse.ok) {
@@ -93,8 +97,6 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
   const postsData = fetchProfilePosts(profileId, searchParams)
 
   const [publicProfile, posts] = await Promise.all([publicProfileData, postsData])
-
-  console.log('Public profile: ', publicProfile)
 
   return <ProfilePageClient publicProfile={publicProfile} posts={posts} />
 }
