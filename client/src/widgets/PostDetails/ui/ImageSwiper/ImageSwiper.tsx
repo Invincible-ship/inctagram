@@ -16,10 +16,6 @@ type ImageSwiperProps = {
 export const ImageSwiper: FC<ImageSwiperProps> = memo(({ postId }) => {
   const post = useSelector(getCurrentPost(postId))
 
-  const fullImage = useMemo(() => {
-    return post?.images.filter(image => (image.width ? image.width == IMAGE_WIDTH : image))
-  }, [post])
-
   return (
     <Swiper
       className={cls.imageContainer}
@@ -29,7 +25,7 @@ export const ImageSwiper: FC<ImageSwiperProps> = memo(({ postId }) => {
       navigation
       pagination={{ clickable: true }}
     >
-      {fullImage?.map(({ url }) => {
+      {post?.images?.map(({ url }) => {
         return (
           <SwiperSlide key={url} className={cls.imageSlide}>
             <HStack max>
