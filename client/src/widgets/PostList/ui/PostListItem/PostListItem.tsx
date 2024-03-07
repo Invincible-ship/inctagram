@@ -20,13 +20,10 @@ type PostListItemProps = {
   type: PostListCardType
 }
 
-const PREVIEW_IMAGE_WIDTH = 640
+const PREVIEW_IMAGE_WIDTH = 1440
 
 export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) => {
-  const imagePreview = useMemo(() => {
-    return post.images.find(image => image.width == PREVIEW_IMAGE_WIDTH)
-  }, [post])
-
+  const imagePreview = post.images[0]
   const imageTypeSizes = '(max-width: 768px) 50vw, 33vw'
 
   const getNewSearchParams = () => {

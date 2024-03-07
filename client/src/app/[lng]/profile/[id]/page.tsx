@@ -21,7 +21,7 @@ const profileEndpoint = (id: string) => `${API}${GET_PUBLIC_USER_PROFILE}/${id}`
 
 const getPublicProfile = async (profileId: string) => {
   const profileResponse = await fetch(profileEndpoint(profileId), {
-    next: { revalidate: 3600, tags: [VIEWER_TAG] },
+    next: { revalidate: 60, tags: [VIEWER_TAG] },
   })
 
   if (!profileResponse.ok) {

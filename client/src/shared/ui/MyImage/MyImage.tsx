@@ -90,6 +90,8 @@ export const MyImage = memo(
       if (variant == ImageVariant.ORIGINAL && filter != ImageFilter.NORMAL) {
         setDynamicImageStyles(getDynamicImageStyles(naturalWidth, naturalHeight))
       }
+
+      setIsLoading(false)
     }
 
     function onError() {
@@ -141,11 +143,10 @@ export const MyImage = memo(
           sizes={sizes}
           style={{ scale: scale || '', ...style }}
           onLoad={onLoad}
-          onLoadingComplete={() => setIsLoading(false)}
           onError={onError}
           {...rest}
         />
-        {isLoading && <Skeleton style={{ position: 'absolute', inset: 0 }} className={className} />}
+        {isLoading && <Skeleton style={{ width, height }} className={className} />}
       </div>
     )
   }),

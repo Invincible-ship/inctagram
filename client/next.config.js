@@ -38,9 +38,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'storage.yandexcloud.net',
+        hostname: 'staging-it-incubator.s3.eu-central-1.amazonaws.com',
         port: '',
-        pathname: '/users-inctagram/users/**',
+        pathname: '/trainee-instagram-api/Image/**',
       },
     ],
   },
