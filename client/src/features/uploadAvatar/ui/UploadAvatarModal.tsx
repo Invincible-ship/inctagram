@@ -12,10 +12,9 @@ import toast from 'react-hot-toast'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { useUpdateProfileAvatarsMutation } from '@/entities/Profile'
 import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
-import { revalidateDataByPath } from '@/shared/lib/serverActions/revalidateDataByPath'
-import { PROFILE_TAG, VIEWER_TAG } from '@/shared/const/rtk'
+import { revalidateDataByTag } from '@/shared/lib/serverActions/revalidateDataByTag'
+import { VIEWER_TAG } from '@/shared/const/rtk'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
-import { getInternetConnection } from '@/shared/utils/getInternetConnection'
 
 type UploadAvatarModalProps = {
   isOpen: boolean
@@ -58,7 +57,7 @@ export const UploadAvatarModal: FC<UploadAvatarModalProps> = ({
       await updateAvatars({ formData, id: userId }).unwrap()
       onClose()
 
-      revalidateDataByPath(VIEWER_TAG)
+      revalidateDataByTag(VIEWER_TAG)
     } catch (err) {
       if (isFetchBaseQueryError(err) && err.status == 'FETCH_ERROR') {
         return toast.error(t('general-info.upload-modal.errors.internet'))

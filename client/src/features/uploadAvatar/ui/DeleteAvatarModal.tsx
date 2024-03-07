@@ -9,7 +9,7 @@ import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { setProfileAvatars, useDeleteProfileAvatarsMutation } from '@/entities/Profile'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { VIEWER_TAG } from '@/shared/const/rtk'
-import { revalidateDataByPath } from '@/shared/lib/serverActions/revalidateDataByPath'
+import { revalidateDataByTag } from '@/shared/lib/serverActions/revalidateDataByTag'
 
 type DeleteAvatarModalProps = {
   isOpen: boolean
@@ -29,7 +29,7 @@ export const DeleteAvatarModal: FC<DeleteAvatarModalProps> = ({ isOpen, onClose,
       dispatch(setProfileAvatars([]))
       onClose()
 
-      revalidateDataByPath(VIEWER_TAG)
+      revalidateDataByTag(VIEWER_TAG)
     } catch (err) {
       console.log('Delete avatar error: ', err)
     }

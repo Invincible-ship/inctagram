@@ -3,7 +3,6 @@
 import { ProfileGeneralInfo, useUpdateProfileMutation } from '@/entities/Profile'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
-import { useEffect } from 'react'
 import { generalInfoSchemaFn, TGeneralInfo } from '../model/types/generalInfo'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,9 +12,8 @@ import toast from 'react-hot-toast'
 import { getUserId } from '@/entities/User'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
-import { revalidateDataByPath } from '@/shared/lib/serverActions/revalidateDataByPath'
+import { revalidateDataByTag } from '@/shared/lib/serverActions/revalidateDataByTag'
 import { VIEWER_TAG } from '@/shared/const/rtk'
-import { getInternetConnection } from '@/shared/utils/getInternetConnection'
 
 const defaultGeneralInfoValues: TGeneralInfo = {
   userName: '',
@@ -49,7 +47,7 @@ export const EditableProfileGeneralInfo = () => {
     try {
       await updateProfileData({ ...profileData, id: userId }).unwrap()
       toast.success(t('general-info.update-success'))
-      revalidateDataByPath(VIEWER_TAG)
+      revalidateDataByTag(VIEWER_TAG)
 
       resetForm(undefined, { keepValues: true, keepErrors: true })
     } catch (err) {
