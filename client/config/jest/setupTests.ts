@@ -24,6 +24,6 @@ const intersectionObserverMock = () => ({
 
 window.IntersectionObserver = jest.fn().mockImplementation(intersectionObserverMock)
 
-jest.mock('../../src/shared/lib/serverActions/revalidateDataByPath', () => ({
+jest.mock('../../src/shared/lib/serverActions/revalidateDataByTag', () => ({
   default: jest.fn().mockImplementation((s: string) => Promise.resolve()),
 }))

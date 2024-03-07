@@ -7,13 +7,17 @@ import {
   GET_USERS_TOTAL_COUNT,
 } from '@/shared/const/apiEndpoints'
 import { PostSortField } from '@/shared/const/postSortField'
-import { VIEWER_TAG } from '@/shared/const/rtk'
 import { SortOrder } from '@/shared/types/sort'
-import dynamic from 'next/dynamic'
+import dynamicImport from 'next/dynamic'
 import { notFound } from 'next/navigation'
-const ProfilePageClient = dynamic(() => import('@/_pages/ProfilePage/ui/ProfilePage/ProfilePage'), {
-  ssr: false,
-})
+const ProfilePageClient = dynamicImport(
+  () => import('@/_pages/ProfilePage/ui/ProfilePage/ProfilePage'),
+  {
+    ssr: false,
+  },
+)
+
+export const dynamic = 'force-dynamic'
 
 const API = process.env.API
 const totalUsersCountEndpoint = `${API}${GET_USERS_TOTAL_COUNT}`
@@ -21,14 +25,14 @@ const profileEndpoint = (id: string) => `${API}${GET_PUBLIC_USER_PROFILE}/${id}`
 
 const getPublicProfile = async (profileId: string) => {
   const profileResponse = await fetch(profileEndpoint(profileId), {
-    next: { tags: [VIEWER_TAG] },
+    cache: 'no-cache',
   })
 
   if (!profileResponse.ok) {
     notFound()
   }
 
-  return await profileResponse.json()
+  return profileResponse.json() as Promise<IViewer>
 }
 
 const fetchProfilePosts = async (profileId: string, sp: SearchParams) => {
@@ -52,7 +56,7 @@ const fetchProfilePosts = async (profileId: string, sp: SearchParams) => {
 
   if (!response.ok) return undefined
 
-  return (await response.json()) as PostListResponse
+  return response.json() as Promise<PostListResponse>
 }
 
 // export const generateStaticParams = async () => {
@@ -85,8 +89,12 @@ type ProfilePageProps = {
 const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
   const { id: profileId } = params
 
-  const publicProfile: IViewer = await getPublicProfile(profileId)
-  const posts: PostListResponse | undefined = await fetchProfilePosts(profileId, searchParams)
+  const publicProfileData = getPublicProfile(profileId)
+  const postsData = fetchProfilePosts(profileId, searchParams)
+
+  const [publicProfile, posts] = await Promise.all([publicProfileData, postsData])
+
+  console.log('Public profile: ', publicProfile)
 
   return <ProfilePageClient publicProfile={publicProfile} posts={posts} />
 }
