@@ -56,7 +56,6 @@ export const UploadAvatarModal: FC<UploadAvatarModalProps> = ({
     try {
       await updateAvatars({ formData, id: userId }).unwrap()
       onClose()
-
       revalidateDataByTag(VIEWER_TAG)
     } catch (err) {
       if (isFetchBaseQueryError(err) && err.status == 'FETCH_ERROR') {

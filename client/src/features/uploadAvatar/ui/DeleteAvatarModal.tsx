@@ -28,7 +28,6 @@ export const DeleteAvatarModal: FC<DeleteAvatarModalProps> = ({ isOpen, onClose,
 
       dispatch(setProfileAvatars([]))
       onClose()
-
       revalidateDataByTag(VIEWER_TAG)
     } catch (err) {
       console.log('Delete avatar error: ', err)

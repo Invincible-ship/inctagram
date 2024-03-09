@@ -5,8 +5,8 @@ import { LoginRequestType } from './types/types'
 import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { LOCAL_STORAGE_TOKEN_KEY } from '@/shared/const/localStorage'
 import { ApiError } from '@/shared/api/types'
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
 import { UseFormSetError } from 'react-hook-form'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
 type SignInThunkPayload = {
   body: LoginRequestType

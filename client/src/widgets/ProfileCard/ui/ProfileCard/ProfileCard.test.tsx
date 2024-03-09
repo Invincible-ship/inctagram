@@ -9,6 +9,7 @@ import { mockRouter, MemoryRouterProvider } from '@/shared/lib/tests/mockRouter/
 import { componentRender } from '@/shared/lib/tests/componentRender'
 import { Routes } from '@/shared/types/routes'
 import { IUser, IUserSchema } from '@/entities/User'
+import { ProfileSettingValue } from '@/features/editableProfileGeneralInfo'
 
 const mockedProfile: IViewer = {
   id: 1,
@@ -127,7 +128,9 @@ describe('ProfileCard', () => {
     const settingsBtn = screen.getByTestId('settings-btn')
 
     fireEvent.click(settingsBtn)
-    const expectedUrl = `/${LanguageIds.EN}${Routes.PROFILE}/1/edit`
+
+    const qp = new URLSearchParams({ setting: ProfileSettingValue.GENERAL_INFO })
+    const expectedUrl = `/${LanguageIds.EN}${Routes.PROFILE}/1/edit?${qp.toString()}`
 
     expect(expectedUrl).toBe(mockRouter.asPath)
   })

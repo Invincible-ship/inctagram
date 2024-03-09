@@ -2,7 +2,7 @@
 
 import { getIsLoading, getIsUserInited, getUserAuthData } from '@/entities/User'
 import { UserRole, WithAuthOptions } from './routes'
-import { FC, useContext, useEffect, useRef } from 'react'
+import { FC, Suspense, useContext, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { redirect, usePathname } from 'next/navigation'
 import { RedirectType } from 'next/dist/client/components/redirect'
@@ -13,7 +13,7 @@ import { LanguageIds } from '@/shared/config/i18n/types'
 import { LOCAL_STORAGE_IS_FIRST_AUTHORIZED } from '@/shared/const/localStorage'
 
 export function withAuth<T extends {} = {}>(Component: FC<T>, options: WithAuthOptions) {
-  const { routeRole, userRole = '', redirectTo = '' } = options
+  const { routeRole, userRole = '', redirectTo = '', fallback = null } = options
 
   const ComponentWithAtuh = (props: T) => {
     const lngId = useContext(LanguageContext) as LanguageIds

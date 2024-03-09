@@ -13,6 +13,11 @@ type Filter = {
   additional: AdditionalFilter[]
 }
 
+type TempFiles = {
+  file: File
+  index: number
+}
+
 const filters: Record<ImageFilter, Filter> = {
   normal: {
     major: '',
@@ -113,15 +118,15 @@ const isImageModifed = (orientation?: ImageVariant, filter?: ImageFilter, scale?
 
 export const getEditedImages = (images: CreatePostImage[] | []): Promise<File[]> => {
   return new Promise<File[]>(async resolve => {
-    const files: File[] = []
+    const temp: TempFiles[] = []
 
     images.forEach(({ file, src, scale, orientation, filter }, index) => {
       const isLastImage = index == images.length - 1
 
       if (!isImageModifed(orientation, filter, scale)) {
-        files.push(file)
+        temp.push({ file, index })
 
-        return isLastImage ? setTimeout(() => resolve(files)) : null
+        return isLastImage ? setTimeout(() => resolve(sortFiles(temp))) : null
       }
 
       const inputImage = new Image()
@@ -158,9 +163,9 @@ export const getEditedImages = (images: CreatePostImage[] | []): Promise<File[]>
         const newDataUrl = outputImage.toDataURL('image/jpeg')
 
         const modifedFile = base64ToFile(newDataUrl, file.name)
-        files.push(modifedFile)
+        temp.push({ file: modifedFile, index })
 
-        if (isLastImage) resolve(files)
+        if (isLastImage) resolve(sortFiles(temp))
       }
 
       inputImage.src = src
@@ -236,3 +241,6 @@ const setAdditionalImageFilters = (
     }
   })
 }
+
+const sortFiles = (temp: TempFiles[]) =>
+  temp.sort((a, b) => a.index - b.index).map(({ file }) => file)

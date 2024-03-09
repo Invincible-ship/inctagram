@@ -2,7 +2,7 @@
 
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Suspense, lazy, memo, useCallback, useMemo } from 'react'
-import { Flex, VStack } from '@/shared/ui/Stack'
+import { Flex, HStack, VStack } from '@/shared/ui/Stack'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ProfileSettingValue, ProfileSettingsTab } from '@/features/editableProfileGeneralInfo'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
@@ -65,15 +65,7 @@ export const ProfileSettingsPage = ({ className, initialTabValue }: ProfileSetti
   return (
     <VStack gap="24" max className={classNames(cls.ProfileSettings, {}, [className])}>
       <ProfileSettingsHeader tabValue={currentTabValue} handleTabClick={handleTabClick} />
-      <Suspense
-        fallback={
-          <ProfileSettingsSkeleton
-            isWithAvatar={currentTabValue == ProfileSettingValue.GENERAL_INFO}
-          />
-        }
-      >
-        <CurrentTabComponent />
-      </Suspense>
+      <CurrentTabComponent />
     </VStack>
   )
 }
@@ -123,28 +115,33 @@ const ProfileSettingsHeader = memo(({ tabValue, handleTabClick }: ProfileSetting
 
 ProfileSettingsHeader.displayName = 'ProfileSettingsHeader'
 
-const ProfileSettingsSkeleton = ({ isWithAvatar }: { isWithAvatar: boolean }) => {
-  const matches = useMediaQuery('(max-width: 768px)')
-  const direction = matches ? 'column' : 'row'
+export const ProfileSettingsSkeleton = ({ mobile }: { mobile?: boolean }) => {
+  const direction = mobile ? 'column' : 'row'
   const align = direction == 'column' ? 'center' : 'start'
 
   return (
-    <Flex gap="24" align={align} direction={direction} max>
-      {isWithAvatar ? (
-        !matches ? (
-          <Skeleton width={300} height={300} />
+    <VStack gap="24" max>
+      <HStack gap="12" max>
+        <Skeleton width="calc(25% - 6px)" height="50px" border="5px" />
+        <Skeleton width="calc(25% - 6px)" height="50px" border="5px" />
+        <Skeleton width="calc(25% - 6px)" height="50px" border="5px" />
+        <Skeleton width="calc(25% - 6px)" height="50px" border="5px" />
+      </HStack>
+      <Flex gap="24" align={align} direction={direction} max>
+        {!mobile ? (
+          <Skeleton width={300} height={300} border="5px" />
         ) : (
-          <Skeleton width="inherit" height={80} />
-        )
-      ) : null}
-      <VStack gap="24" max>
-        {Array(6)
-          .fill('')
-          .map((_, i) => {
-            return <Skeleton key={i} width="inherit" height={80} border="5px" />
-          })}
-      </VStack>
-    </Flex>
+          <Skeleton width="inherit" height={80} border="5px" />
+        )}
+        <VStack gap="24" max>
+          {Array(6)
+            .fill('')
+            .map((_, i) => {
+              return <Skeleton key={i} width="inherit" height={80} border="5px" />
+            })}
+        </VStack>
+      </Flex>
+    </VStack>
   )
 }
 
