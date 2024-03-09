@@ -25,9 +25,7 @@ export const publishPostThunk = createAsyncThunk<void, void, ThunkConfig<string[
     try {
       const { images } = await dispatch(uploadPostImages(formData)).unwrap()
 
-      const childrenMetadata = images
-        .filter((image, idx) => image.uploadId == images[idx + 1]?.uploadId)
-        .map(({ uploadId }) => ({ uploadId }))
+      const childrenMetadata = images.map(({ uploadId }) => ({ uploadId }))
 
       const postData: UploadPostRequestParams = {
         description,

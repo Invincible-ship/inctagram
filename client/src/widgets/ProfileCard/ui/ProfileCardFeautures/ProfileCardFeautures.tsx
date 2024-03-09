@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { FC, memo, useContext, useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { ProfileSettingValue } from '@/features/editableProfileGeneralInfo'
 
 type ProfileCardFeauturesProps = {
   t: TFunction<Namespaces, undefined>
@@ -26,14 +27,19 @@ export const ProfileCardFeautures: FC<ProfileCardFeauturesProps> = memo(({ mobil
 
   if (!userId) return
 
-  if (owner)
+  if (owner) {
+    const ownerSP = new URLSearchParams({
+      setting: ProfileSettingValue.GENERAL_INFO,
+    })
+
     return !mobile ? (
-      <Link href={`/${lngId}${Routes.PROFILE}/${profileId}/edit`}>
+      <Link href={`/${lngId}${Routes.PROFILE}/${profileId}/edit?${ownerSP.toString()}`}>
         <Button data-testid="settings-btn" theme={ButtonTheme.SECONDARY}>
           {t('profile.settings')}
         </Button>
       </Link>
     ) : null
+  }
 
   // TODO: change to real features after api will be added
   return (

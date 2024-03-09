@@ -11,6 +11,8 @@ import { VIEWER_TAG } from '@/shared/const/rtk'
 import { SortOrder } from '@/shared/types/sort'
 import dynamicImport from 'next/dynamic'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
+import Loading from './loading'
 const ProfilePageClient = dynamicImport(
   () => import('@/_pages/ProfilePage/ui/ProfilePage/ProfilePage'),
   {
@@ -19,6 +21,7 @@ const ProfilePageClient = dynamicImport(
 )
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 const API = process.env.API
 const totalUsersCountEndpoint = `${API}${GET_USERS_TOTAL_COUNT}`
@@ -26,7 +29,6 @@ const profileEndpoint = (id: string) => `${API}${GET_PUBLIC_USER_PROFILE}/${id}`
 
 const getPublicProfile = async (profileId: string) => {
   const profileResponse = await fetch(profileEndpoint(profileId), {
-    cache: 'no-cache',
     next: {
       tags: [VIEWER_TAG],
     },
@@ -49,14 +51,7 @@ const fetchProfilePosts = async (profileId: string, sp: SearchParams) => {
     sortDirection: order || 'desc',
   })
 
-  const response = await fetch(
-    `${baseUrl}${GET_POSTS_BY_PROFILE_ID}/${profileId}?${qp.toString()}`,
-    {
-      next: {
-        revalidate: 60,
-      },
-    },
-  )
+  const response = await fetch(`${baseUrl}${GET_POSTS_BY_PROFILE_ID}/${profileId}?${qp.toString()}`)
 
   if (!response.ok) return undefined
 
@@ -98,7 +93,11 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
 
   const [publicProfile, posts] = await Promise.all([publicProfileData, postsData])
 
-  return <ProfilePageClient publicProfile={publicProfile} posts={posts} />
+  return (
+    <Suspense fallback={<Loading />}>
+      <ProfilePageClient publicProfile={publicProfile} posts={posts} />
+    </Suspense>
+  )
 }
 
 export default ProfilePage

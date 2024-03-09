@@ -15,6 +15,8 @@ import { getSidebarItems } from '../model/utils/getSidebarItems'
 import { useSearchParams } from 'next/navigation'
 import { getTabs } from '../model/utils/getTabs'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
+import { useSelector } from 'react-redux'
+import { getUserId } from '@/entities/User'
 
 export type SidebarItemProps = {
   text: string
@@ -37,7 +39,7 @@ export const Sidebar = () => {
   const [value, setValue] = useState<SidebarValues>(SidebarValues.HOME)
   const lngId = useContext(LanguageContext) as LanguageIds
   const { t } = useClientTranslation(Namespaces.SIDEBAR)
-  const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY) as string
+  const userId = useSelector(getUserId)
   const mobile = useMediaQuery('(max-width: 769px)')
   const direction = mobile ? 'row' : 'column'
   const justify = direction == 'row' ? 'stretch' : 'start'

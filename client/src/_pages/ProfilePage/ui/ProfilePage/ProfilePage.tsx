@@ -31,8 +31,12 @@ type ProfilePageProps = {
   posts: PostListResponse | undefined
 }
 
+type ProfilePageParams = {
+  id: string
+}
+
 export const ProfilePage: FC<ProfilePageProps> = ({ publicProfile, posts }) => {
-  const { id: profileId } = useParams()
+  const { id: profileId } = useParams<ProfilePageParams>()
   const isAuthorized = !!useSelector(getUserId)
   const hasMore = useSelector(getHasMore)
   const mobile = useMediaQuery('(max-width: 769px)')
@@ -84,7 +88,7 @@ type ProfilePageSkeletonProps = {
   postsLength?: number
 }
 
-const ProfilePageSkeleton: FC<ProfilePageSkeletonProps> = props => {
+export const ProfilePageSkeleton: FC<ProfilePageSkeletonProps> = props => {
   const { mobile, postCardType = PostListCardType.IMAGE, postsLength = 8 } = props
   const gap = !mobile ? '48' : '24'
 
@@ -98,4 +102,7 @@ const ProfilePageSkeleton: FC<ProfilePageSkeletonProps> = props => {
   )
 }
 
-export default withAuth<ProfilePageProps>(ProfilePage, { routeRole: 'optional' })
+export default withAuth<ProfilePageProps>(ProfilePage, {
+  routeRole: 'optional',
+  fallback: <ProfilePageSkeleton />,
+})

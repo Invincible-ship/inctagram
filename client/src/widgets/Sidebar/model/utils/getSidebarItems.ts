@@ -11,7 +11,7 @@ import { TFunction } from 'i18next'
 import { Namespaces } from '@/shared/config/i18n/types'
 
 export const getSidebarItems = (
-  userId: string,
+  userId: number | undefined,
   t: TFunction<Namespaces, undefined>,
   searchParams?: URLSearchParams,
 ): TSidebarItemsSchema => {

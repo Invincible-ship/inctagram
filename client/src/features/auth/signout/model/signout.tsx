@@ -3,6 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { clearAuthData, userApi } from '@/entities/User'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
+import { revalidateDataByTag } from '@/shared/lib/serverActions/revalidateDataByTag'
+import { VIEWER_TAG } from '@/shared/const/rtk'
 
 export const signoutThunk = createAsyncThunk<void, void, ThunkConfig<string>>(
   'auth/logout',
@@ -11,6 +13,7 @@ export const signoutThunk = createAsyncThunk<void, void, ThunkConfig<string>>(
 
     try {
       await dispatch(userApi.endpoints.signout.initiate()).unwrap()
+      revalidateDataByTag(VIEWER_TAG)
     } catch (error) {
       if (isFetchBaseQueryError(error)) {
         const apiError = error.data as ApiError

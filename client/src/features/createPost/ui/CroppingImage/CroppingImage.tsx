@@ -13,7 +13,6 @@ import {
   useRef,
   useState,
   MouseEventHandler,
-  useMemo,
   useEffect,
   Suspense,
 } from 'react'
@@ -283,10 +282,11 @@ const AddAnotherImageTool: FC<ImageToolProps> = memo(
     const { previousStep } = useSelector(getAllSteps)
     const dispatch = useAppDispatch()
     const swiper = useSwiper()
+    console.log('Swiper instance: ', swiper)
 
     useEffect(() => {
-      swiper.slideTo(images.length)
-    }, [images.length])
+      swiper.slideTo(images.length, 300)
+    }, [images.length, swiper])
 
     const handleSelectImageClick = () => {
       fileRef?.current?.click()
