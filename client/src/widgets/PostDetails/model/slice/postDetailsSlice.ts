@@ -15,6 +15,9 @@ export const postDetailsSlice = createSlice({
     setEditMode: (state, { payload }: PayloadAction<boolean>) => {
       state.editMode = payload
     },
+    setUpdatedPostList: (state, { payload }: PayloadAction<boolean>) => {
+      state.updatedPostList = payload
+    },
   },
   extraReducers: builder => {
     builder
@@ -34,4 +37,4 @@ export const postDetailsSlice = createSlice({
 })
 
 export const { reducer: postDetailsReducer } = postDetailsSlice
-export const { setEditMode } = postDetailsSlice.actions
+export const { setEditMode, setUpdatedPostList } = postDetailsSlice.actions

@@ -15,5 +15,9 @@
   "comment": {
     "publish": "Publish",
     "publishPlaceholder": "Add a Comment..."
+  },
+  "header": {
+    "signin": "Sign In",
+    "signup": "Sign Up"
   }
 }

@@ -65,6 +65,9 @@ export const postListSlice = createSlice({
     addPosts: (state, { payload }: PayloadAction<IPost[]>) => {
       postsAdapter.addMany(state, payload)
     },
+    removePost: (state, { payload }: PayloadAction<number>) => {
+      postsAdapter.removeOne(state, payload)
+    },
     setPostListId: (state, { payload }: PayloadAction<string>) => {
       state.postListId = payload
     },
@@ -80,7 +83,7 @@ export const postListSlice = createSlice({
         const type = page == PostListPage.HOME ? PostListCardType.EXTENDED : PostListCardType.IMAGE
         state.type = type
 
-        const limit = type == PostListCardType.IMAGE ? 8 : 5
+        const limit = type == PostListCardType.EXTENDED ? 5 : 8
         state.limit = limit
       })
       .addMatcher(postsPending, state => {
@@ -119,4 +122,4 @@ export const postListSlice = createSlice({
 })
 
 export const { reducer: postListReducer } = postListSlice
-export const { resetPostListState, setPostListId, addPosts } = postListSlice.actions
+export const { resetPostListState, setPostListId, addPosts, removePost } = postListSlice.actions

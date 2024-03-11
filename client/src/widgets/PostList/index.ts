@@ -1,4 +1,10 @@
-export { postListReducer, getPosts, setPostsFromServer } from './model/slice/postListSlice'
+export {
+  postListReducer,
+  getPosts,
+  setPostsFromServer,
+  addPosts,
+  removePost,
+} from './model/slice/postListSlice'
 export type { PostListSchema } from './model/types/postListSchema'
 export { fetchNextPosts } from './model/services/fetchNextPosts'
 export { fetchPostsByProfileId } from './model/services/fetchPostsByProfileId'

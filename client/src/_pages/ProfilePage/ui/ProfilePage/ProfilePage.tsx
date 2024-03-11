@@ -1,6 +1,6 @@
 'use client'
 
-import { PostDetailsWrapper } from '../PostDetailsWrapper/PostDetailsWrapper'
+import { PostDetailsWrapper } from '@/widgets/PostDetails'
 import { IViewer, PostListResponse } from '@/entities/Viewer'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'

@@ -8,8 +8,7 @@ import { ISignInWithGoogleSchema } from '@/features/auth/signInWithThirdPartySer
 import { ICreatePostSchema } from '@/features/createPost'
 import { PostListSchema } from '@/widgets/PostList'
 import { UISchema } from '@/features/UI'
-import { PostDetailsSchema } from '@/widgets/PostDetails/model/types/postDetailsSchema'
-import { IPost } from '@/entities/Post'
+import { PostDetailsSchema } from '@/widgets/PostDetails'
 import { IPostSchema } from '@/entities/Post/model/types/types'
 
 export type StateSchema = {

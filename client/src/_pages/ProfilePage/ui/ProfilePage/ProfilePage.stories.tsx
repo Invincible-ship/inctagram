@@ -10,7 +10,7 @@ import {
 } from '@/widgets/PostList'
 import { VStack } from '@/shared/ui/Stack'
 import { ProfileCard } from '@/widgets/ProfileCard'
-import { PostDetailsWrapper } from '../PostDetailsWrapper/PostDetailsWrapper'
+import { PostDetailsWrapper } from '../../../../widgets/PostDetails/ui/PostDetailsWrapper/PostDetailsWrapper'
 import { IViewer } from '@/entities/Viewer'
 import { FC } from 'react'
 import { useClientTranslation } from '@/shared/config/i18n/client'

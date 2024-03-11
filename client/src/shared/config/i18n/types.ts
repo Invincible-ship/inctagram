@@ -20,6 +20,8 @@ export enum Namespaces {
   PROFILE_SETTINGS = 'profile-settings',
   PROFILE_PAGE = 'profile-page',
   HOME_PAGE = 'home-page',
+  SEARCH_PAGE = 'search-page',
+  FAVORITES = 'favorites-page',
   // widgets
   DATE_PICKER = 'date-picker',
   CITY_SELECT = 'city-select',

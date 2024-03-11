@@ -80,6 +80,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>((props, ref) =
         {...restProps}
         data-testid="input"
       />
+      {type == 'search' || role == 'search'}
       {(type == 'password' || role == 'password') && (
         <span data-open={valueType != 'password'} className={s.eye} onClick={toggleShowPassword}>
           <Eye />

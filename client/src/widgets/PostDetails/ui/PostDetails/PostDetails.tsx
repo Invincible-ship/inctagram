@@ -13,6 +13,7 @@ import cls from './PostDetails.module.scss'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { useSelector } from 'react-redux'
 import { getCurrentPost } from '../../model/selectors/getCurrentPost'
+import { getUpdatedPostList } from '@/widgets/PostDetails/model/selectors/getUpdatedPostList'
 
 type PostDetailsProps = {
   postId: string
@@ -31,8 +32,9 @@ export const PostDetails = ({
 }: PostDetailsProps) => {
   const { t } = useClientTranslation(Namespaces.POST_DETAILS)
   const post = useSelector(getCurrentPost(postId))
+  const updatedPostList = useSelector(getUpdatedPostList)
 
-  if (!post) return <PostDetailsCardSkeleton />
+  if (!post) return !updatedPostList ? <PostDetailsCardSkeleton /> : null
 
   if (variant === PostDetailsVariant.MODAL) {
     return <PostDetailsModal isOpen={isOpen} onClose={onClose} t={t} postId={postId} />

@@ -1,5 +1,11 @@
 import { getAllProfilesRequestQuery } from '../model/utils/getAllProfilesRequestQuery'
-import { AllProfilesRequestParams, ExtendedProfile, IAvatar, IProfile } from '../model/types/types'
+import {
+  AllProfilesRequestParams,
+  AllProfilesResponse,
+  ExtendedProfile,
+  IAvatar,
+  IProfile,
+} from '../model/types/types'
 import { rtkApi } from '@/shared/api/rtkApi'
 import {
   DELETE_PROFILE_AVATARS_ENDPOINT,
@@ -58,7 +64,7 @@ export const profileApi = rtkApi.injectEndpoints({
       invalidatesTags: [USER_TAG],
     }),
     // Other profiles
-    getAllProfiles: build.query<ExtendedProfile[], AllProfilesRequestParams>({
+    getAllProfiles: build.query<AllProfilesResponse, AllProfilesRequestParams>({
       query: config => getAllProfilesRequestQuery(config),
       providesTags: [PROFILE_TAG],
     }),
@@ -88,4 +94,5 @@ export const {
   useUpdateProfileAvatarsMutation,
   useDeleteProfileAvatarsMutation,
   useGetProfileDataQuery,
+  useLazyGetAllProfilesQuery,
 } = profileApi

@@ -3,13 +3,17 @@
 import { getIsUserInited, getUserAuthData } from '@/entities/User'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Header } from '@/widgets/Header'
-import { Sidebar, SidebarSkeleton } from '@/widgets/Sidebar'
-import { FC, ReactNode, Suspense, useMemo } from 'react'
+import { SidebarSkeleton } from '@/widgets/Sidebar'
+import { FC, ReactNode, lazy, useMemo } from 'react'
 import { Toaster } from '@/shared/ui/Toaster/Toaster'
 import { useSelector } from 'react-redux'
 import { CreatePost } from '@/features/createPost'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { getIsLoading as getIsUserLoading } from '@/entities/User'
+import dynamic from 'next/dynamic'
+const Sidebar = dynamic(() => import('@/widgets/Sidebar').then(mod => mod.Sidebar), {
+  ssr: false,
+})
 
 type AppLayoutProps = {
   children: ReactNode

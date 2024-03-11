@@ -1,0 +1,13 @@
+{
+  "title": "Search",
+  "input": {
+    "placeholder": "Search"
+  },
+  "list": {
+    "recent": {
+      "title": "Recent requests",
+      "subtitle": "Oops! This place looks empty!",
+      "text": "No recent requests"
+    }
+  }
+}

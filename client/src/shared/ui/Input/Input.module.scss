@@ -55,6 +55,21 @@
     &.errorInput {
       border: 1px solid var(--danger-500, #cc1439) !important;
     }
+
+    &::-webkit-search-cancel-button{
+      position:relative;
+      right: 0px;  
+  
+      -webkit-appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 10px;
+      background-image: url('../../../shared/assets/icons/close-outline.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      cursor: pointer;
+  }
   }
 
   .eye {

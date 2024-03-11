@@ -3,6 +3,7 @@ import { PostListPage } from '../consts/postListPage'
 import { resetPostListState, setPostListId } from '../slice/postListSlice'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ThunkConfig } from '@/app/providers/StoreProvider'
+import { setUpdatedPostList } from '@/widgets/PostDetails'
 
 type InitPostListProps = {
   page: PostListPage
@@ -20,6 +21,7 @@ export const initPostList = createAsyncThunk<
   if (currentId != undefined && prevId == currentId) return
 
   dispatch(resetPostListState())
+  dispatch(setUpdatedPostList(false))
   if (currentId) dispatch(setPostListId(currentId))
 
   return page

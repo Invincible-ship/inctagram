@@ -9,6 +9,8 @@ import { StoreProvider } from '../providers/StoreProvider'
 import { SessionProvider } from '../providers/SessionProvider/SessionProvider'
 import { LanguageProvider } from '../providers/LanguageProvider/LanguageProvider'
 import '../styles/index.scss'
+import { UserAgentProvider } from '@/app/providers/UserAgentProvider/UserAgentProvider'
+import { headers } from 'next/headers'
 
 const inter: NextFont = Inter({
   weight: ['400', '500', '600', '700', '900'],
@@ -30,6 +32,9 @@ type RootLayoutProps = {
 }
 
 const RootLayout = ({ children, params: { lng } }: RootLayoutProps) => {
+  const mobileHeader = headers().get('is-mobile')
+  const mobile = mobileHeader ? (JSON.parse(mobileHeader) as boolean) : false
+
   return (
     <html lang={lng} dir={dir('ltr')} className={inter.className}>
       <head />
@@ -38,9 +43,11 @@ const RootLayout = ({ children, params: { lng } }: RootLayoutProps) => {
           <StoreProvider>
             <SessionProvider>
               <LanguageProvider lngId={lng}>
-                <AppLayout lngId={lng as LanguageIds}>
-                  <Suspense fallback={<Loading />}>{children}</Suspense>
-                </AppLayout>
+                <UserAgentProvider mobile={mobile}>
+                  <AppLayout lngId={lng as LanguageIds}>
+                    <Suspense fallback={<Loading />}>{children}</Suspense>
+                  </AppLayout>
+                </UserAgentProvider>
               </LanguageProvider>
             </SessionProvider>
           </StoreProvider>

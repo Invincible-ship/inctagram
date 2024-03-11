@@ -15,5 +15,6 @@ export {
   useUpdateProfileAvatarsMutation,
   useDeleteProfileAvatarsMutation,
   getOwnerProfileDataQuery,
+  useLazyGetAllProfilesQuery,
 } from './api/profileApi'
 export type { IAvatar, IProfile, IProfileSchema, ExtendedProfile } from './model/types/types'
