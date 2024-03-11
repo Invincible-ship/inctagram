@@ -1,10 +1,11 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import i18next from 'i18next'
 import { initReactI18next, useTranslation as useTranslationOrg } from 'react-i18next'
 import resourcesToBackend from 'i18next-resources-to-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { getOptions, languages } from './settings'
 import { Namespaces } from './types'
+import { LanguageContext } from '@/shared/lib/context/LanguageContext'
 
 const runsOnServerSide = typeof window === 'undefined'
 
@@ -30,7 +31,7 @@ export function useClientTranslation(
   ns: Namespaces = Namespaces.DEFAULT,
   options: Record<string, any> = {},
 ) {
-  const lng = ''
+  const lng = useContext(LanguageContext)
   const ret = useTranslationOrg(ns, options)
   const { i18n } = ret
   if (runsOnServerSide && i18n.resolvedLanguage !== lng) {

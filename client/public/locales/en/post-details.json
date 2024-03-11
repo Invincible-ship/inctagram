@@ -6,6 +6,12 @@
     "follow": "Follow",
     "copy": "Copy Link"
   },
+  "features": {
+    "bookmark": {
+      "remove": "The publication was successfully removed from bookmarks",
+      "add": "The publication has been successfully bookmarked"
+    }
+  },
   "info": {
     "likes": "Likes"
   },

@@ -27,9 +27,8 @@ const avatarUrls = Array.from({ length: 3 }, () => mockedAvatar.src)
 export const PublicationDescription: FC<PublicationDescriptionProps> = memo(
   ({ t, variant = PostDetailsVariant.MODAL, postId }) => {
     const isAuthorized = useSelector(getUserId)
-    const { description, avatarOwner, userName, ownerId, createdAt } = useSelector(
-      getCurrentPost(postId),
-    )
+    const post = useSelector(getCurrentPost(postId))
+    const { description, avatarOwner, userName, ownerId, createdAt } = post
     const isModal = variant == PostDetailsVariant.MODAL
     const gap = !isModal ? '16' : undefined
 
@@ -47,7 +46,9 @@ export const PublicationDescription: FC<PublicationDescriptionProps> = memo(
         gap={gap}
         max
       >
-        {isAuthorized && <PostDetailsFeatures className={cls.features} postOwnerId={ownerId} />}
+        {isAuthorized && (
+          <PostDetailsFeatures className={cls.features} post={post} t={t} postOwnerId={ownerId} />
+        )}
         {!isModal && description.length > 0 && (
           <CommentCardOwner content={description} avatarUrl={avatarOwner} username={userName} />
         )}

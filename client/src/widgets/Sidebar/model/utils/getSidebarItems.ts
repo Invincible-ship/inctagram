@@ -11,7 +11,7 @@ import { TFunction } from 'i18next'
 import { Namespaces } from '@/shared/config/i18n/types'
 
 export const getSidebarItems = (
-  userId: number | undefined,
+  userId: string | undefined,
   t: TFunction<Namespaces, undefined>,
   searchParams?: URLSearchParams,
 ): TSidebarItemsSchema => {
@@ -36,11 +36,16 @@ export const getSidebarItems = (
         Icon: AccountIcon,
       },
       { value: SidebarValues.MESSENGER, text: t('messenger'), href: '#', Icon: MessengerIcon },
-      { value: SidebarValues.SEARCH, text: t('search'), href: '#', Icon: SearchIcon },
+      { value: SidebarValues.SEARCH, text: t('search'), href: Routes.SEARCH, Icon: SearchIcon },
     ],
     additional: [
       { value: SidebarValues.STATISTICS, text: t('statistics'), href: '#', Icon: TrendingIcon },
-      { value: SidebarValues.FAVORITES, text: t('favorites'), href: '#', Icon: BookmarkIcon },
+      {
+        value: SidebarValues.FAVORITES,
+        text: t('favorites'),
+        href: Routes.FAVORITES,
+        Icon: BookmarkIcon,
+      },
     ],
   }
 }

@@ -1,5 +1,7 @@
 export enum Routes {
+  // optional routes
   MAIN = '/',
+  PROFILE = '/profile',
   // auth routes
   SIGNIN = '/auth/login',
   SIGNUP = '/auth/registration',
@@ -8,7 +10,8 @@ export enum Routes {
   MERGE = '/auth/merge',
   GOOGLE_CLIENT = '/google',
   // user routes
-  PROFILE = '/profile',
+  SEARCH = '/search',
+  FAVORITES = '/favorites',
   TERMS_OF_SERVICE = '/terms-of-service',
   PRIVACY_POLICY = '/privacy-policy',
 }

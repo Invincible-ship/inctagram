@@ -1,0 +1,25 @@
+.SearchUserList {
+  min-height: 25vh;
+
+  .title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .recentField {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+
+    .subtitle {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--light-color-900);
+    }
+  
+    .text {
+      font-size: 12px;
+      color: var(--light-color-900);
+    }
+  }
+}

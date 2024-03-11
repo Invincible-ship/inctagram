@@ -15,5 +15,9 @@
   "comment": {
     "publish": "Опубликовать",
     "publishPlaceholder": "Написать комментарий..."
+  },
+  "header": {
+    "signin": "Войти",
+    "signup": "Зарегистрироваться"
   }
 }

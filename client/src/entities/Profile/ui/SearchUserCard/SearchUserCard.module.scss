@@ -1,0 +1,13 @@
+.SearchUserCard {
+  cursor: pointer;
+  font-size: 14px;
+
+  .username {
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  
+  .name {
+    color: var(--light-color-900);
+  }
+}

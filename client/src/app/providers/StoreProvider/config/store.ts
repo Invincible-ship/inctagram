@@ -10,7 +10,7 @@ import { signInWithGoogleReducer } from '@/features/auth/signInWithThirdPartySer
 import { createPostReducer } from '@/features/createPost'
 import { postListReducer } from '@/widgets/PostList'
 import { UIReducer } from '@/features/UI'
-import { postDetailsReducer } from '@/widgets/PostDetails/model/slice/postDetailsSlice'
+import { postDetailsReducer } from '@/widgets/PostDetails'
 import { postReducer } from '@/entities/Post'
 
 export function createReduxStore(initialState?: StateSchema) {

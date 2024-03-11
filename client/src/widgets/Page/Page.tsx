@@ -55,7 +55,7 @@ export const Page: FC<PageProps> = memo(
     }, 100)
 
     return (
-      <div ref={wrapperRef} className={classNames(cls.Page, {}, [className])}>
+      <div ref={wrapperRef} className={classNames(cls.Page, {}, ['Page', className])}>
         {children}
         {onScrollEnd ? (
           <div
