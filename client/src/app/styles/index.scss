@@ -58,13 +58,13 @@
       }
     }
   }
+}
 
-  .post-list-image-skeleton {
-    flex-basis: 24.65%;
-    aspect-ratio: 1 / 1;
+.post-list-image-skeleton {
+  flex-basis: 24.65%;
+  aspect-ratio: 1 / 1;
 
-    @media (max-width: 769px) {
-      flex-basis: calc(33.333% - 2px);
-    }
+  @media (max-width: 769px) {
+    flex-basis: calc(33.333% - 2px);
   }
 }

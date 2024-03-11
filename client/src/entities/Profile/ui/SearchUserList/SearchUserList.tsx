@@ -53,7 +53,7 @@ export const SearchUserList: FC<SearchUserListProps> = ({ users, recent, t, load
   )
 }
 
-const getCardSkeletons = () => {
+export const getCardSkeletons = () => {
   return Array.from({ length: 12 }, (_, idx) => (
     <HStack key={idx} gap="12">
       <Skeleton width={AvatarSize.SMALL} height={AvatarSize.SMALL} border="50%" />

@@ -11,8 +11,6 @@ import { VIEWER_TAG } from '@/shared/const/rtk'
 import { SortOrder } from '@/shared/types/sort'
 import dynamicImport from 'next/dynamic'
 import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
-import Loading from './loading'
 const ProfilePageClient = dynamicImport(
   () => import('@/_pages/ProfilePage/ui/ProfilePage/ProfilePage'),
   {
@@ -93,11 +91,7 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
 
   const [publicProfile, posts] = await Promise.all([publicProfileData, postsData])
 
-  return (
-    <Suspense fallback={<Loading />}>
-      <ProfilePageClient publicProfile={publicProfile} posts={posts} />
-    </Suspense>
-  )
+  return <ProfilePageClient publicProfile={publicProfile} posts={posts} />
 }
 
 export default ProfilePage

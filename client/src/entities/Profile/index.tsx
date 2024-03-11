@@ -17,4 +17,11 @@ export {
   getOwnerProfileDataQuery,
   useLazyGetAllProfilesQuery,
 } from './api/profileApi'
-export type { IAvatar, IProfile, IProfileSchema, ExtendedProfile } from './model/types/types'
+export type {
+  IAvatar,
+  IProfile,
+  IProfileSchema,
+  ExtendedProfile,
+  ProfileSearchType,
+} from './model/types/types'
+export { SearchUserList, getCardSkeletons } from './ui/SearchUserList/SearchUserList'

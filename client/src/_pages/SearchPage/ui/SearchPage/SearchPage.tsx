@@ -1,17 +1,21 @@
 'use client'
 
 import { HStack, VStack } from '@/shared/ui/Stack'
-import React, { ChangeEvent, useCallback, useState } from 'react'
+import React, { ChangeEvent, Suspense, useCallback, useState } from 'react'
 import cls from './SearchPage.module.scss'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
-import { useLazyGetAllProfilesQuery } from '@/entities/Profile'
 import { Input } from '@/shared/ui/Input/Input'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce/useDebounce'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
-import { SearchUserList } from '@/entities/Profile/ui/SearchUserList/SearchUserList'
+import {
+  SearchUserList,
+  getCardSkeletons,
+  ProfileSearchType,
+  useLazyGetAllProfilesQuery,
+} from '@/entities/Profile'
 import { Page } from '@/widgets/Page/Page'
-import { ProfileSearchType } from '@/entities/Profile/model/types/types'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 const SearchPage = () => {
   const { t } = useClientTranslation(Namespaces.SEARCH_PAGE)
@@ -69,6 +73,16 @@ const SearchPage = () => {
         />
       </VStack>
     </Page>
+  )
+}
+
+export const SearchPageSkeleton = () => {
+  return (
+    <VStack gap="24" max>
+      <Skeleton width={250} height={30} border="8px" />
+      <Skeleton width="100%" height={30} border="8px" />
+      {getCardSkeletons()}
+    </VStack>
   )
 }
 
