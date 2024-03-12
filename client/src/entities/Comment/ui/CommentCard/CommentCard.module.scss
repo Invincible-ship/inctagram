@@ -7,12 +7,17 @@
   }
 
   .content {
+    display: block;
     font-size: 14px;
-    display: inline-block;
+    width: calc(100% - 48px);
 
     .username {
       margin-right: 4px;
       font-weight: 700;
+    }
+
+    .text {
+      word-wrap: break-word;
     }
   }
 

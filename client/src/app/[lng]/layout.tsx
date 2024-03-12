@@ -44,9 +44,7 @@ const RootLayout = ({ children, params: { lng } }: RootLayoutProps) => {
             <SessionProvider>
               <LanguageProvider lngId={lng}>
                 <UserAgentProvider mobile={mobile}>
-                  <AppLayout lngId={lng as LanguageIds}>
-                    <Suspense fallback={<Loading />}>{children}</Suspense>
-                  </AppLayout>
+                  <AppLayout lngId={lng as LanguageIds}>{children}</AppLayout>
                 </UserAgentProvider>
               </LanguageProvider>
             </SessionProvider>

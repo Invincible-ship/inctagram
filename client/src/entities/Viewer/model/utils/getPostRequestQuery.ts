@@ -1,4 +1,7 @@
-import { AllPostsRequestParams, PublicPostsByIdRequestParams } from '@/entities/Viewer/types/types'
+import {
+  AllPostsRequestParams,
+  PublicPostsByIdRequestParams,
+} from '@/entities/Viewer/model/types/types'
 import { GET_POSTS_BY_PROFILE_ID, GET_ALL_POSTS } from '@/shared/const/apiEndpoints'
 
 export const getPostRequestQuery = (

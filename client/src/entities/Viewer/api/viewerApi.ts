@@ -1,11 +1,11 @@
-import { IViewer, AllPostsRequestParams, PublicPostsByIdRequestParams } from '../types/types'
+import { IViewer, AllPostsRequestParams, PublicPostsByIdRequestParams } from '../model/types/types'
 import { rtkApi } from '@/shared/api/rtkApi'
 import {
   GET_ALL_POSTS,
   GET_POSTS_BY_PROFILE_ID,
   GET_PUBLIC_USER_PROFILE,
 } from '@/shared/const/apiEndpoints'
-import { PostListResponse } from '../types/types'
+import { PostListResponse } from '../model/types/types'
 import { POST_TAG } from '@/shared/const/rtk'
 import { getPostRequestQuery } from '@/entities/Viewer/model/utils/getPostRequestQuery'
 

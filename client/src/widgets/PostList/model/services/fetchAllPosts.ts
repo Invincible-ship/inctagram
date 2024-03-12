@@ -1,6 +1,6 @@
 import { getLastPostId, getLimit, getSort, getSortOrder } from '../selectors/postListSelectors'
 import { getAllPosts } from '@/entities/Viewer'
-import { PostListResponse } from '@/entities/Viewer/types/types'
+import { PostListResponse } from '@/entities/Viewer/model/types/types'
 import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'

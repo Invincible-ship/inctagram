@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 const HomePageClient = dynamic(() => import('@/_pages/HomePage/HomePage'), { ssr: false })
 
 const fetchAllPostsData = async () => {
+  'use server'
   const baseUrl = process.env.API
   const qp = new URLSearchParams({
     pageSize: '5',

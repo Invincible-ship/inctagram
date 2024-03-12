@@ -19,7 +19,7 @@ export const CommentCardOwner: FC<CommentCardOwnerProps> = ({ avatarUrl, usernam
       <VStack gap="8" max>
         <HStack className={cls.content}>
           <span className={cls.username}>{username}</span>
-          {content}
+          <span className={cls.text}>{content}</span>
         </HStack>
       </VStack>
     </HStack>

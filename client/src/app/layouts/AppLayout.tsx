@@ -1,19 +1,15 @@
 'use client'
 
-import { getIsUserInited, getUserAuthData } from '@/entities/User'
+import { getIsUserInited, getUserAuthData, getUserId } from '@/entities/User'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Header } from '@/widgets/Header'
-import { SidebarSkeleton } from '@/widgets/Sidebar'
-import { FC, ReactNode, lazy, useMemo } from 'react'
+import { Sidebar, SidebarSkeleton } from '@/widgets/Sidebar'
+import { FC, ReactNode, Suspense, lazy, useMemo } from 'react'
 import { Toaster } from '@/shared/ui/Toaster/Toaster'
 import { useSelector } from 'react-redux'
 import { CreatePost } from '@/features/createPost'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { getIsLoading as getIsUserLoading } from '@/entities/User'
-import dynamic from 'next/dynamic'
-const Sidebar = dynamic(() => import('@/widgets/Sidebar').then(mod => mod.Sidebar), {
-  ssr: false,
-})
 
 type AppLayoutProps = {
   children: ReactNode
@@ -23,7 +19,7 @@ type AppLayoutProps = {
 export const AppLayout: FC<AppLayoutProps> = ({ children, lngId }) => {
   const isUserLoading = useSelector(getIsUserLoading)
   const isUserInited = useSelector(getIsUserInited)
-  const isAuthorized = !!useSelector(getUserAuthData)
+  const isAuthorized = !!useSelector(getUserId)
 
   const pageContainerMods = useMemo(
     () => ({
@@ -38,10 +34,10 @@ export const AppLayout: FC<AppLayoutProps> = ({ children, lngId }) => {
       <div className="app-container">
         {isUserLoading && <SidebarSkeleton />}
         {isAuthorized && (
-          <>
+          <Suspense fallback={<SidebarSkeleton />}>
             <Sidebar />
             <CreatePost />
-          </>
+          </Suspense>
         )}
         <div className={classNames('page-container', pageContainerMods)}>{children}</div>
       </div>

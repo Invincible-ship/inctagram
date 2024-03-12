@@ -2,7 +2,7 @@
 
 import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import { HStack, VStack } from '@/shared/ui/Stack'
-import { FC, memo, useContext, useMemo, useState } from 'react'
+import { FC, Suspense, memo, useContext, useMemo, useState } from 'react'
 import { SidebarValues } from '../types'
 import cls from './Sidebar.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -61,33 +61,35 @@ export const Sidebar = memo(() => {
   }, [userId, lngId, t, editableSearchParams])
 
   return (
-    <div className={cls.SidebarWrapper}>
-      <VStack className={cls.sidebar} justify={justify} gap={!mobile ? '48' : undefined} max>
-        <Tabs
-          direction={direction}
-          gap={!mobile ? '16' : undefined}
-          justifyChild={mobile ? 'center' : 'start'}
-          tabs={majorTabs}
-          value={value}
-          onTabClick={onTabClick}
-          textColor="var(--primary-text-color)"
-        />
-        {!mobile && (
-          <>
-            <Tabs
-              direction={direction}
-              gap="16"
-              tabs={additionalTabs}
-              value={value}
-              onTabClick={onTabClick}
-              textColor="var(--primary-text-color)"
-            />
+    <Suspense fallback={<SidebarSkeleton />}>
+      <div className={cls.SidebarWrapper}>
+        <VStack className={cls.sidebar} justify={justify} gap={!mobile ? '48' : undefined} max>
+          <Tabs
+            direction={direction}
+            gap={!mobile ? '16' : undefined}
+            justifyChild={mobile ? 'center' : 'start'}
+            tabs={majorTabs}
+            value={value}
+            onTabClick={onTabClick}
+            textColor="var(--primary-text-color)"
+          />
+          {!mobile && (
+            <>
+              <Tabs
+                direction={direction}
+                gap="16"
+                tabs={additionalTabs}
+                value={value}
+                onTabClick={onTabClick}
+                textColor="var(--primary-text-color)"
+              />
 
-            <SignOut className={cls.sidebarBtn} />
-          </>
-        )}
-      </VStack>
-    </div>
+              <SignOut className={cls.sidebarBtn} />
+            </>
+          )}
+        </VStack>
+      </div>
+    </Suspense>
   )
 })
 
