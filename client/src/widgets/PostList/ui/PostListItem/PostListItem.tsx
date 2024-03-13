@@ -23,13 +23,14 @@ type PostListItemProps = {
 const PREVIEW_IMAGE_WIDTH = 1440
 
 export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) => {
+  const sp = useSearchParams()
   const imagePreview = post.images[0]
   const imageTypeSizes = '(max-width: 768px) 50vw, 33vw'
 
   const getNewSearchParams = () => {
-    const sp = new URLSearchParams(window.location.search)
-    sp.set(POST_DETAILS_ID, String(post.id))
-    return sp.toString()
+    const editableSP = new URLSearchParams(Array.from(sp))
+    editableSP.set(POST_DETAILS_ID, String(post.id))
+    return editableSP.toString()
   }
 
   if (type == PostListCardType.EXTENDED) {

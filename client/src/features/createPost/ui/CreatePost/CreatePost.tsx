@@ -3,16 +3,7 @@
 import { CreatePostStep } from '../../model/consts/createPost'
 import { getCurrentStep } from '../../model/selectors/getCurrentStep'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import {
-  FC,
-  ForwardRefExoticComponent,
-  RefAttributes,
-  lazy,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { CSSProperties, FC, lazy, useCallback, useMemo, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import CloseModal from '@/features/createPost/ui/CloseModal/CloseModal'
@@ -26,7 +17,12 @@ import './canvas.scss'
 import { getCreatePostErorrs } from '../../model/selectors/getCreatePostErorrs'
 import toast from 'react-hot-toast'
 import { resetCreatePostState } from '../../model/slice/createPostSlice'
-import { publishPostThunk } from '@/features/createPost/model/services/publishPostThunk'
+import { publishPostThunk } from '../../model/services/publishPostThunk'
+import { getIsModalForward } from '../../model/selectors/getIsModalForward'
+import { getIsModalBackward } from '../../model/selectors/getIsModalBackward'
+import { getAnimationDirection } from '../../model/selectors/getAnimationDirection'
+import cls from './CreatePost.module.scss'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 const SelectImage = lazy(() =>
   import('../SelectImage/SelectImage').then(mod => ({ default: mod.SelectImage })),
@@ -48,11 +44,7 @@ const mapStepToValue: Record<number, CreatePostStep> = {
   4: CreatePostStep.PUBLISH,
 }
 
-const mapValueToComponent: Record<
-  CreatePostStep,
-  | ForwardRefExoticComponent<Omit<ComponentCommonProps, 'ref'> & RefAttributes<string>>
-  | FC<ComponentCommonProps>
-> = {
+const mapValueToComponent: Record<CreatePostStep, FC<ComponentCommonProps>> = {
   [CreatePostStep.SELECT]: SelectImage,
   [CreatePostStep.EDIT]: CroppingImage,
   [CreatePostStep.FILTER]: FilteringImage,
@@ -66,18 +58,21 @@ export const CreatePost = () => {
   const toastSizeErrorIdRef = useRef<string>()
   const [isCloseModalOpen, setIsCloseModalOpen] = useState<boolean>(false)
   const currentStep = useSelector(getCurrentStep)
+  const isModalForward = useSelector(getIsModalForward)
+  const isModalBackward = useSelector(getIsModalBackward)
+  const animationDirection = useSelector(getAnimationDirection)
   const errors = useSelector(getCreatePostErorrs)
   const dispatch = useAppDispatch()
   const { t } = useClientTranslation(Namespaces.CREATE_POST)
 
-  const closeCreatePostModal = () => {
+  const closeCreatePostModal = useCallback(() => {
     toast.remove(toastSizeErrorIdRef.current)
 
-    const actualSearchParams = new URLSearchParams(window.location.search)
+    const actualSearchParams = new URLSearchParams(Array.from(sp))
     actualSearchParams.delete('createPost')
     router.push(`?${actualSearchParams.toString()}`)
     // router.back()
-  }
+  }, [sp, router])
 
   const handleCreatePostModalClose = useCallback(() => {
     if (mapStepToValue[currentStep] != CreatePostStep.SELECT) {
@@ -85,7 +80,7 @@ export const CreatePost = () => {
     }
 
     closeCreatePostModal()
-  }, [currentStep])
+  }, [currentStep, closeCreatePostModal])
 
   const handleCloseModalClose = () => {
     setIsCloseModalOpen(false)
@@ -100,21 +95,48 @@ export const CreatePost = () => {
 
     closeCreatePostModal()
     dispatch(resetCreatePostState())
-  }, [errors, dispatch, t])
+  }, [errors, dispatch, t, closeCreatePostModal])
 
   const title = useMemo(() => getTitle(currentStep, t), [currentStep, t])
 
   const CurrentStepComponent = mapValueToComponent[mapStepToValue[currentStep]]
 
+  console.log('Is modal backward: ', isModalBackward)
+  console.log('Is modal forward: ', isModalForward)
+
+  const mods = useMemo(
+    () => ({
+      [cls.openBackward]: animationDirection == 'backward',
+      [cls.openForward]: animationDirection == 'forward',
+      [cls.closingForward]: isModalForward,
+      [cls.closingBackward]: isModalBackward,
+    }),
+    [isModalForward, isModalBackward, animationDirection],
+  )
+
+  const modalContentStyles: CSSProperties = {
+    backgroundColor: 'transparent',
+    border: 'none',
+  }
+
   return (
     <>
-      <Modal isOpen={isPostCreating} onClose={handleCreatePostModalClose} withoutAnimation>
+      <Modal
+        contentStyles={modalContentStyles}
+        isOpen={isPostCreating}
+        onClose={handleCreatePostModalClose}
+        withoutAnimation
+      >
         <CreatePostHeader
           title={title}
           onClose={handleCreatePostModalClose}
           publishPost={publishPost}
+          animationDirection={animationDirection}
         />
-        <CurrentStepComponent toastSizeErrorIdRef={toastSizeErrorIdRef} />
+        <CurrentStepComponent
+          className={classNames(cls.currentStepComponent, mods)}
+          toastSizeErrorIdRef={toastSizeErrorIdRef}
+        />
       </Modal>
       <CloseModal
         isOpen={isCloseModalOpen}

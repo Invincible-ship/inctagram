@@ -34,10 +34,12 @@ export const AppLayout: FC<AppLayoutProps> = ({ children, lngId }) => {
       <div className="app-container">
         {isUserLoading && <SidebarSkeleton />}
         {isAuthorized && (
-          <Suspense fallback={<SidebarSkeleton />}>
-            <Sidebar />
+          <>
+            <Suspense fallback={<SidebarSkeleton />}>
+              <Sidebar />
+            </Suspense>
             <CreatePost />
-          </Suspense>
+          </>
         )}
         <div className={classNames('page-container', pageContainerMods)}>{children}</div>
       </div>

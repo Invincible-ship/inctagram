@@ -8,16 +8,19 @@ import { getIsPostBeingDeleted } from '../../selectors/getIsPostBeingDeleted'
 import { deletePostThunk } from '@/features/post/deletePost'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { TFunction } from 'i18next'
+import { getCurrentPost } from '../../selectors/getCurrentPost'
 
 type Args = {
+  postId: string
   onClose?: () => void
   t: TFunction<Namespaces, undefined>
 }
 
-export const usePostDetails = ({ onClose, t }: Args) => {
+export const usePostDetails = ({ postId, onClose, t }: Args) => {
   const [editPostModalOpen, setEditPostModalOpen] = useState<boolean>(false)
   const [deletePostModalOpen, setDeletePostModalOpen] = useState<boolean>(false)
   const isPostBeingDeleted = useSelector(getIsPostBeingDeleted)
+  const { id } = useSelector(getCurrentPost(postId))
   const editMode = useSelector(getEditMode)
   const dispatch = useAppDispatch()
 
@@ -47,14 +50,14 @@ export const usePostDetails = ({ onClose, t }: Args) => {
 
   const deletePost = useCallback(async () => {
     try {
-      await dispatch(deletePostThunk()).unwrap()
+      await dispatch(deletePostThunk(id)).unwrap()
       toast.success(t('toast.success.delete'))
       onClose?.()
     } catch (err) {
       if (err) toast.error(err as string)
       toast.error(t('toast.error.delete'))
     }
-  }, [dispatch, t])
+  }, [dispatch, t, id, onClose])
 
   return {
     isPostBeingDeleted,

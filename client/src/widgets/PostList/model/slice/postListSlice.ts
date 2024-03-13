@@ -110,11 +110,10 @@ export const postListSlice = createSlice({
       })
       .addMatcher(deletePostMatcher, (state, payload) => {
         const id = payload.meta.arg.originalArgs
-        postsAdapter.removeOne(state, id)
+        postsAdapter.removeOne(state, String(id))
       })
       .addMatcher(updatePostByIdMatcher, (state, payload) => {
-        const id = payload.meta.arg.originalArgs.id
-        const description = payload.meta.arg.originalArgs.description
+        const { id, description } = payload.meta.arg.originalArgs
 
         postsAdapter.updateOne(state, { id, changes: { description } })
       })

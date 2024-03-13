@@ -1,10 +1,12 @@
-.imgPlaceholder {
-  width: 220px;
-  height: 220px;
-  background-color: var(--dark-color-500);
-  border-radius: 2px;
-}
+.content {
+  background-color: var(--dark-color-300);
+  border: 1px solid var(--dark-color-100);
+  border-top: none;
 
-.contnet {
-  width: 490px;
+  .imgPlaceholder {
+    width: 220px;
+    height: 220px;
+    background-color: var(--dark-color-500);
+    border-radius: 2px;
+  }
 }

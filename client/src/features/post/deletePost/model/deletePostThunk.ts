@@ -4,11 +4,9 @@ import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-export const deletePostThunk = createAsyncThunk<void, void, ThunkConfig<string>>(
+export const deletePostThunk = createAsyncThunk<void, number, ThunkConfig<string>>(
   'post/deletePost',
-  async (_, { getState, dispatch, rejectWithValue }) => {
-    const { id } = getCurrentPost(getState())
-
+  async (id, { dispatch, rejectWithValue }) => {
     try {
       await dispatch(deletePostMutation(id)).unwrap()
     } catch (err) {

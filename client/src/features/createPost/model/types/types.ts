@@ -17,6 +17,8 @@ export type PostData = {
   description?: string
 }
 
+export type AnimationDirection = 'backward' | 'forward'
+
 export type ICreatePostSchema = {
   postData: PostData
   maxStep: number
@@ -26,8 +28,15 @@ export type ICreatePostSchema = {
   isLoading: boolean
   errors: string[]
   draft?: Omit<ICreatePostSchema, 'draft'>
+  // animation
+  animationDirection: AnimationDirection
+  isModalForward: boolean
+  isModalBackward: boolean
 }
 
 export type ComponentCommonProps = {
+  className?: string
+  mods?: Record<string, boolean>
+  isModalChanging?: boolean
   toastSizeErrorIdRef: MutableRefObject<string | undefined>
 }

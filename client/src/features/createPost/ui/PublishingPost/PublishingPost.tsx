@@ -8,15 +8,17 @@ import { MyImage } from '@/shared/ui/MyImage/MyImage'
 import { AvatarWithUsername } from '@/entities/Profile/ui/AvatarWithUsername'
 import { TextArea } from '@/shared/ui/TextArea/TextArea'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { ChangeEvent, Suspense, memo, useCallback } from 'react'
+import { ChangeEvent, FC, memo, useCallback } from 'react'
 import { setPostDescription } from '../../model/slice/createPostSlice'
 import { getPostDescription } from '../../model/selectors/getPostDescription'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { IProfile, getProfileData } from '@/entities/Profile'
+import { ComponentCommonProps } from '../../model/types/types'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
-export const PublishingPost = memo(() => {
+export const PublishingPost: FC<ComponentCommonProps> = memo(({ className }) => {
   const { t } = useClientTranslation(Namespaces.CREATE_POST)
   const user = useSelector(getProfileData) as IProfile
   const images = useSelector(getPostImages)
@@ -29,52 +31,50 @@ export const PublishingPost = memo(() => {
   )
 
   return (
-    <Suspense fallback={<Skeleton width={980} height={490} />}>
-      <HStack className={cls.PublishingPost}>
-        <Swiper
-          className={cls.imageContainer}
-          modules={[Navigation, Pagination]}
-          slidesPerView={1}
-          centeredSlides={true}
-          navigation
-          pagination={{ clickable: true }}
-          style={{ width: 490 }}
-        >
-          {images.map(({ src, orientation, scale, filter }) => (
-            <SwiperSlide key={src}>
-              <HStack max>
-                <MyImage
-                  src={src}
-                  variant={orientation}
-                  filter={filter}
-                  scale={scale}
-                  alt="Create Post Image"
-                  width={490}
-                  height={490}
-                  fallback={<Skeleton width={490} height={490} />}
-                />
-              </HStack>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <form className={cls.postInfoForm}>
-          <VStack className={cls.postInfoContainer} justify="start" max>
-            <VStack className={cls.descriptionField} justify="start" gap="24" max>
-              <AvatarWithUsername user={user} />
-              <TextArea
-                className={cls.textarea}
-                value={description}
-                title={t('post-publishing.textarea-label')}
-                onChange={handlePostDescription}
-                maxLength={500}
-                withCounter
+    <HStack className={classNames(cls.PublishingPost, {}, [className])}>
+      <Swiper
+        className={cls.imageContainer}
+        modules={[Navigation, Pagination]}
+        slidesPerView={1}
+        centeredSlides={true}
+        navigation
+        pagination={{ clickable: true }}
+        style={{ width: 490 }}
+      >
+        {images.map(({ src, orientation, scale, filter }) => (
+          <SwiperSlide key={src}>
+            <HStack max>
+              <MyImage
+                src={src}
+                variant={orientation}
+                filter={filter}
+                scale={scale}
+                alt="Create Post Image"
+                width={490}
+                height={490}
+                fallback={<Skeleton width={490} height={490} />}
               />
-              <span className={cls.underline}></span>
-            </VStack>
+            </HStack>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <form className={cls.postInfoForm}>
+        <VStack className={cls.postInfoContainer} justify="start" max>
+          <VStack className={cls.descriptionField} justify="start" gap="24" max>
+            <AvatarWithUsername user={user} />
+            <TextArea
+              className={cls.textarea}
+              value={description}
+              title={t('post-publishing.textarea-label')}
+              onChange={handlePostDescription}
+              maxLength={500}
+              withCounter
+            />
+            <span className={cls.underline}></span>
           </VStack>
-        </form>
-      </HStack>
-    </Suspense>
+        </VStack>
+      </form>
+    </HStack>
   )
 })
 

@@ -1,5 +1,11 @@
 import { getAllSteps } from '../../model/selectors/getAllSteps'
-import { resetCreatePostState, setCurrentStep } from '../../model/slice/createPostSlice'
+import {
+  resetCreatePostState,
+  setCurrentStep,
+  setIsModalForward,
+  setIsModalBackward,
+  setAnimationDirection,
+} from '../../model/slice/createPostSlice'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { HStack } from '@/shared/ui/Stack'
 import ArrowBackIcon from '@/shared/assets/icons/arrow-back.svg'
@@ -11,27 +17,48 @@ import { ModalHeader } from '@/shared/ui/Modal/Modal'
 import { getIsLoading } from '../../model/selectors/getIsLoading'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
+import { ANIMATION_DELAY } from '../../model/consts/aniamtion'
+import { AnimationDirection } from '../../model/types/types'
 
 type CreatePostHeaderProps = {
   title: string
   onClose: () => void
   publishPost: () => void
+  animationDirection: AnimationDirection
 }
 
 export const CreatePostHeader: FC<CreatePostHeaderProps> = memo(
-  ({ title, onClose, publishPost }) => {
+  ({ title, onClose, publishPost, animationDirection }) => {
     const { t } = useClientTranslation(Namespaces.CREATE_POST)
     const { previousStep, nextStep, currentStep } = useSelector(getAllSteps)
     const isLoading = useSelector(getIsLoading)
     const dispatch = useAppDispatch()
 
-    const handleBackClick = () => {
-      if (previousStep) {
-        previousStep > 1 ? dispatch(setCurrentStep(previousStep)) : dispatch(resetCreatePostState())
-      }
+    const back = (previousStep: number) => {
+      animationDirection !== 'backward' && dispatch(setAnimationDirection('backward'))
+      dispatch(setIsModalBackward(true))
+
+      setTimeout(() => {
+        dispatch(setIsModalBackward(false))
+        dispatch(setCurrentStep(previousStep))
+      }, ANIMATION_DELAY)
     }
 
-    const next = (step: number) => dispatch(setCurrentStep(step))
+    const handleBackClick = () => {
+      if (!previousStep) return
+      if (previousStep < 2) return dispatch(resetCreatePostState())
+      back(previousStep)
+    }
+
+    const next = (step: number) => {
+      animationDirection !== 'forward' && dispatch(setAnimationDirection('forward'))
+      dispatch(setIsModalForward(true))
+
+      setTimeout(() => {
+        dispatch(setIsModalForward(false))
+        dispatch(setCurrentStep(step))
+      }, ANIMATION_DELAY)
+    }
 
     const handleNextclick = () => {
       nextStep ? next(nextStep) : publishPost()
@@ -54,7 +81,9 @@ export const CreatePostHeader: FC<CreatePostHeaderProps> = memo(
         </Button>
       </HStack>
     ) : (
-      <ModalHeader close={onClose}>{title}</ModalHeader>
+      <ModalHeader className={cls.defaultHeader} close={onClose}>
+        {title}
+      </ModalHeader>
     )
   },
 )

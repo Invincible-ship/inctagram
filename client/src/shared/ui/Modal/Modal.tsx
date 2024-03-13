@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, memo } from 'react'
+import { CSSProperties, ReactNode, memo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 import { Portal } from '../Portal/Portal'
@@ -10,6 +10,7 @@ import cls from './Modal.module.scss'
 
 type ModalProps = {
   className?: string
+  contentStyles?: CSSProperties
   children?: ReactNode
   isOpen?: boolean
   onClose?: () => void
@@ -20,7 +21,7 @@ type ModalProps = {
 const ANIMATION_DELAY = 200
 
 export const Modal = memo((props: ModalProps) => {
-  const { children, className, isOpen, onClose, withoutAnimation } = props
+  const { children, className, contentStyles, isOpen, onClose, withoutAnimation } = props
 
   const { isClosing, close } = useModal({
     animationDelay: ANIMATION_DELAY,
@@ -39,7 +40,9 @@ export const Modal = memo((props: ModalProps) => {
     <Portal>
       <div className={classNames(cls.Modal, mods, [className])}>
         <Overlay onClick={close} />
-        <div className={cls.content}>{children}</div>
+        <div className={cls.content} style={contentStyles}>
+          {children}
+        </div>
       </div>
     </Portal>
   )
@@ -51,11 +54,12 @@ type ModalHeaderProps = {
   children: ReactNode
   close: () => void
   width?: number | string
+  className?: string
 }
 
-export const ModalHeader = ({ children, close }: ModalHeaderProps) => {
+export const ModalHeader = ({ children, close, className }: ModalHeaderProps) => {
   return (
-    <div className={cls.header}>
+    <div className={classNames(cls.header, {}, [className])}>
       <h2 className={cls.title}>{children}</h2>
       <span className={cls.close} onClick={close}>
         <CloseIcon />

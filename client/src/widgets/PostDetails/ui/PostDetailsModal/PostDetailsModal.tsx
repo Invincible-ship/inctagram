@@ -42,7 +42,7 @@ export const PostDetailsModal = ({ isOpen, onClose, t, postId }: PostDetailsModa
     openDeletePostModal,
     closeDeletePostModal,
     deletePost,
-  } = usePostDetails({ onClose, t })
+  } = usePostDetails({ postId, onClose, t })
 
   return (
     <Suspense fallback={<PostDetailsModalSkeleton />}>

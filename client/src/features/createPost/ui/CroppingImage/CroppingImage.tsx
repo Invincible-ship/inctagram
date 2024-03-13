@@ -44,12 +44,12 @@ import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 
-export const CroppingImage: FC<ComponentCommonProps> = memo(({ toastSizeErrorIdRef }) => {
-  const images = useSelector(getPostImages)
+export const CroppingImage: FC<ComponentCommonProps> = memo(
+  ({ toastSizeErrorIdRef, className }) => {
+    const images = useSelector(getPostImages)
 
-  return (
-    <Suspense fallback={<Skeleton width={490} height={490} />}>
-      <div className={cls.CroppingImage}>
+    return (
+      <div className={classNames(cls.CroppingImage, {}, [className])}>
         <Swiper
           modules={[Navigation, Pagination]}
           slidesPerView={1}
@@ -71,9 +71,9 @@ export const CroppingImage: FC<ComponentCommonProps> = memo(({ toastSizeErrorIdR
           })}
         </Swiper>
       </div>
-    </Suspense>
-  )
-})
+    )
+  },
+)
 
 CroppingImage.displayName = 'CroppingImage'
 

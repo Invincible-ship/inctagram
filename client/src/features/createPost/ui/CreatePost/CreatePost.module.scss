@@ -1,3 +1,70 @@
 .createPostModal {
   min-width: 490px;
 }
+
+.currentStepComponent {
+  background-color: var(--dark-color-300);
+  border: 1px solid var(--dark-color-100);
+  border-top: none;
+  animation-duration: .15s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+
+  &.openForward {
+    animation-name: visibleToLeft;
+    transform-origin: right;
+  }
+
+  &.openBackward {
+    animation-name: visibleToRight;
+    transform-origin: left;
+  }
+
+  &.closingForward {
+    animation-name: fadeToLeft;
+    transform-origin: left;
+  }
+
+  &.closingBackward {
+    animation-name: fadeToRight;
+    transform-origin: right;
+  }
+}
+
+@keyframes visibleToLeft {
+  from {
+    opacity: 0.2;
+    transform: scaleX(0.6) translate(75%);
+  } to {
+    opacity: 1;
+    transform: scaleX(1) translateX(0%);
+  }
+}
+
+@keyframes visibleToRight {
+  from {
+    opacity: 0.2;
+    transform: scaleX(0.6) translate(-75%);
+  } to {
+    opacity: 1;
+    transform: scaleX(1) translateX(0%);
+  }
+}
+
+@keyframes fadeToLeft {
+  from {
+    transform: scaleX(1) translate(0);
+  } to {
+    opacity: 0.2;
+    transform: scaleX(0.6) translateX(-75%);
+  }
+}
+
+@keyframes fadeToRight {
+  from {
+    transform: scaleX(1) translate(0);
+  } to {
+    opacity: 0.2;
+    transform: scaleX(0.6) translateX(75%);
+  }
+}

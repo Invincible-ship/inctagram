@@ -1,5 +1,5 @@
 import { publishPostThunk } from '@/features/createPost/model/services/publishPostThunk'
-import { ICreatePostSchema, CreatePostImage } from '../types/types'
+import { ICreatePostSchema, CreatePostImage, AnimationDirection } from '../types/types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { ImageFilter, ImageVariant } from '@/shared/ui/MyImage/MyImage'
 
@@ -11,12 +11,25 @@ const initialState: ICreatePostSchema = {
   currentStep: 1,
   isLoading: false,
   errors: [],
+  isModalForward: false,
+  isModalBackward: false,
+  animationDirection: 'forward',
 }
 
 export const createPostSlice = createSlice({
   name: 'createPost',
   initialState,
   reducers: {
+    // animation
+    setAnimationDirection: (state, { payload }: PayloadAction<AnimationDirection>) => {
+      state.animationDirection = payload
+    },
+    setIsModalForward: (state, { payload }: PayloadAction<boolean>) => {
+      state.isModalForward = payload
+    },
+    setIsModalBackward: (state, { payload }: PayloadAction<boolean>) => {
+      state.isModalBackward = payload
+    },
     // Manage create post steps
     setCurrentStep: (state, { payload }: PayloadAction<number>) => {
       state.currentStep = payload
@@ -100,4 +113,7 @@ export const {
   saveDraft,
   openDraftAC,
   resetCreatePostState,
+  setIsModalBackward,
+  setIsModalForward,
+  setAnimationDirection,
 } = createPostSlice.actions
