@@ -1,9 +1,7 @@
 import { PostListResponse } from '@/entities/Viewer'
 import { GET_ALL_POSTS } from '@/shared/const/apiEndpoints'
 import { PostSortField } from '@/shared/const/postSortField'
-import dynamic from 'next/dynamic'
-// import { HomePageClient } from '@/_pages/HomePage/HomePage'
-const HomePageClient = dynamic(() => import('@/_pages/HomePage/HomePage'), { ssr: false })
+import HomePageClient from '@/_pages/HomePage/HomePage'
 
 const fetchAllPostsData = async () => {
   'use server'

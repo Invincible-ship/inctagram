@@ -4,8 +4,6 @@ import { LanguageIds } from '@/shared/config/i18n/types'
 import { PostSortField } from '@/shared/const/postSortField'
 import { SortOrder } from '@/shared/types/sort'
 
-export const dynamic = 'force-dynamic'
-
 // const totalUsersCountEndpoint = `${API}${GET_USERS_TOTAL_COUNT}`
 // export const generateStaticParams = async () => {
 //   const totalUsersCountResponse = await fetch(totalUsersCountEndpoint, {
