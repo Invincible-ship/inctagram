@@ -1,4 +1,3 @@
-import { setPostImageFilter } from '@/features/createPost/model/slice/createPostSlice'
 import { ImageFilter, ImageVariant } from '@/shared/ui/MyImage/MyImage'
 import { CreatePostImage } from '../types/types'
 import { base64ToFile } from '@/shared/utils/base64ToFile'

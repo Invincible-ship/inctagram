@@ -14,7 +14,6 @@ import {
   useState,
   MouseEventHandler,
   useEffect,
-  Suspense,
 } from 'react'
 import ScaleIcon from '@/shared/assets/icons/maximize-outline.svg'
 import ExpandIcon from '@/shared/assets/icons/expand-outline.svg'
@@ -39,7 +38,7 @@ import { handleDownloadedImage } from '@/shared/lib/utils/handleDownloadedImage'
 import { Input } from '@/shared/ui/Input/Input'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
-import { CroppingImageToolValue } from '@/features/createPost/model/consts/croppingImage'
+import { CroppingImageToolValue } from '../../model/consts/croppingImage'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
@@ -282,7 +281,6 @@ const AddAnotherImageTool: FC<ImageToolProps> = memo(
     const { previousStep } = useSelector(getAllSteps)
     const dispatch = useAppDispatch()
     const swiper = useSwiper()
-    console.log('Swiper instance: ', swiper)
 
     useEffect(() => {
       swiper.slideTo(images.length, 300)

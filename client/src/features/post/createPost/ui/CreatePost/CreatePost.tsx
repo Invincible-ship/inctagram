@@ -6,7 +6,7 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { CSSProperties, FC, lazy, useCallback, useMemo, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Modal } from '@/shared/ui/Modal/Modal'
-import CloseModal from '@/features/createPost/ui/CloseModal/CloseModal'
+import CloseModal from '../CloseModal/CloseModal'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ComponentCommonProps } from '../../model/types/types'
 import { useClientTranslation } from '@/shared/config/i18n/client'
@@ -100,9 +100,6 @@ export const CreatePost = () => {
   const title = useMemo(() => getTitle(currentStep, t), [currentStep, t])
 
   const CurrentStepComponent = mapValueToComponent[mapStepToValue[currentStep]]
-
-  console.log('Is modal backward: ', isModalBackward)
-  console.log('Is modal forward: ', isModalForward)
 
   const mods = useMemo(
     () => ({

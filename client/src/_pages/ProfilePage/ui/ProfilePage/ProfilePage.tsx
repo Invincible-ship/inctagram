@@ -1,6 +1,6 @@
 'use client'
 
-import { PostDetailsWrapper } from '@/widgets/PostDetails'
+import { PostDetails } from '@/widgets/PostDetails'
 import { IViewer, PostListResponse } from '@/entities/Viewer'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
@@ -25,6 +25,7 @@ import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 import React from 'react'
 import { useGetProfileDataQuery } from '@/entities/Profile/api/profileApi'
 import { getUserId } from '@/entities/User'
+import { PostDetailsVariant } from '@/widgets/PostDetails'
 
 type ProfilePageProps = {
   publicProfile: IViewer
@@ -75,7 +76,7 @@ export const ProfilePage: FC<ProfilePageProps> = ({ publicProfile, posts }) => {
             isLoading={isProfileLoading}
           />
           <PostList />
-          <PostDetailsWrapper />
+          <PostDetails variant={PostDetailsVariant.MODAL} />
         </VStack>
       </Page>
     </Suspense>

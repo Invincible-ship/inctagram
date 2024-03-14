@@ -10,9 +10,8 @@ import {
 } from '@/widgets/PostList'
 import { VStack } from '@/shared/ui/Stack'
 import { ProfileCard } from '@/widgets/ProfileCard'
-import { PostDetailsWrapper } from '../../../../widgets/PostDetails/ui/PostDetailsWrapper/PostDetailsWrapper'
+import { PostDetails, PostDetailsVariant } from '@/widgets/PostDetails'
 import { IViewer } from '@/entities/Viewer'
-import { FC } from 'react'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
@@ -43,7 +42,7 @@ const ProfilePageComponent = () => {
     <VStack gap="48" max>
       <ProfileCard profile={mockedProfileData} mobile={mobile} isLoading={false} />
       <PostList />
-      <PostDetailsWrapper />
+      <PostDetails variant={PostDetailsVariant.MODAL} />
     </VStack>
   )
 }

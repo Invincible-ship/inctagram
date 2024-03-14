@@ -1,7 +1,7 @@
 import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getPostImages } from '../selectors/getPostImages'
-import { getPostDescription } from '@/features/createPost/model/selectors/getPostDescription'
+import { getPostDescription } from '../selectors/getPostDescription'
 import { getEditedImages } from '../utils/getEditedImages'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { UploadPostRequestParams, createPost, uploadPostImages } from '@/entities/Post'

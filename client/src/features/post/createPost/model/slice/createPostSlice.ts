@@ -1,4 +1,4 @@
-import { publishPostThunk } from '@/features/createPost/model/services/publishPostThunk'
+import { publishPostThunk } from '../services/publishPostThunk'
 import { ICreatePostSchema, CreatePostImage, AnimationDirection } from '../types/types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { ImageFilter, ImageVariant } from '@/shared/ui/MyImage/MyImage'

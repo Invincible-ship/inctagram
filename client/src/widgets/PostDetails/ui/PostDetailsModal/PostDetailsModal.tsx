@@ -22,14 +22,10 @@ import { getCurrentPost } from '@/widgets/PostDetails/model/selectors/getCurrent
 import { useSelector } from 'react-redux'
 
 type PostDetailsModalProps = {
-  postId: string
   t: TFunction<Namespaces, undefined>
-  isOpen?: boolean
-  onClose?: () => void
 }
 
-export const PostDetailsModal = ({ isOpen, onClose, t, postId }: PostDetailsModalProps) => {
-  const { description } = useSelector(getCurrentPost(postId))
+export const PostDetailsModal = ({ t }: PostDetailsModalProps) => {
   const {
     isPostBeingDeleted,
     editPostModalOpen,
@@ -42,7 +38,12 @@ export const PostDetailsModal = ({ isOpen, onClose, t, postId }: PostDetailsModa
     openDeletePostModal,
     closeDeletePostModal,
     deletePost,
-  } = usePostDetails({ postId, onClose, t })
+    isOpen,
+    postId,
+  } = usePostDetails({ t })
+  const post = useSelector(getCurrentPost(postId))
+
+  if (!postId) return
 
   return (
     <Suspense fallback={<PostDetailsModalSkeleton />}>
@@ -68,7 +69,7 @@ export const PostDetailsModal = ({ isOpen, onClose, t, postId }: PostDetailsModa
               {editMode ? (
                 <UpdatePostForm
                   id={+postId}
-                  description={description}
+                  description={post?.description}
                   isModalOpen={editPostModalOpen}
                   setIsModalOpen={setEditPostModalOpen}
                   t={t}

@@ -18,9 +18,10 @@ import { LocalStorageUser } from '@/shared/types/localStorage'
 import { useSelector } from 'react-redux'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
-import { PostDetailsWrapper, setUpdatedPostList } from '@/widgets/PostDetails'
+import { PostDetails, setUpdatedPostList } from '@/widgets/PostDetails'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { getSkeletons as getPostCardSkeletons } from '@/widgets/PostList'
+import { PostDetailsVariant } from '@/widgets/PostDetails/model/consts/variant'
 
 const FavoritesPage = () => {
   const { t } = useClientTranslation(Namespaces.FAVORITES)
@@ -49,7 +50,7 @@ const FavoritesPage = () => {
           <HStack className={cls.text}>{t('absent.text')}</HStack>
         </VStack>
       )}
-      <PostDetailsWrapper />
+      <PostDetails variant={PostDetailsVariant.MODAL} />
     </VStack>
   )
 }

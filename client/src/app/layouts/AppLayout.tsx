@@ -7,7 +7,7 @@ import { Sidebar, SidebarSkeleton } from '@/widgets/Sidebar'
 import { FC, ReactNode, Suspense, lazy, useMemo } from 'react'
 import { Toaster } from '@/shared/ui/Toaster/Toaster'
 import { useSelector } from 'react-redux'
-import { CreatePost } from '@/features/createPost'
+import { CreatePost } from '@/features/post/createPost'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { getIsLoading as getIsUserLoading } from '@/entities/User'
 
@@ -16,7 +16,7 @@ type AppLayoutProps = {
   lngId: LanguageIds
 }
 
-export const AppLayout: FC<AppLayoutProps> = ({ children, lngId }) => {
+export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   const isUserLoading = useSelector(getIsUserLoading)
   const isUserInited = useSelector(getIsUserInited)
   const isAuthorized = !!useSelector(getUserId)

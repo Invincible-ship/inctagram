@@ -1,19 +1,12 @@
+import ProfilePageClient from '@/_pages/ProfilePage/ui/ProfilePage/ProfilePage'
 import { fetchProfilePosts, fetchPublicProfile } from '@/entities/Viewer'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { PostSortField } from '@/shared/const/postSortField'
 import { SortOrder } from '@/shared/types/sort'
-import dynamicImport from 'next/dynamic'
-const ProfilePageClient = dynamicImport(
-  () => import('@/_pages/ProfilePage/ui/ProfilePage/ProfilePage'),
-  {
-    ssr: false,
-  },
-)
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 // const totalUsersCountEndpoint = `${API}${GET_USERS_TOTAL_COUNT}`
-
 // export const generateStaticParams = async () => {
 //   const totalUsersCountResponse = await fetch(totalUsersCountEndpoint, {
 //     next: { revalidate: 3600, tags: [VIEWER_TAG] },

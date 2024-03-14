@@ -9,26 +9,35 @@ import { deletePostThunk } from '@/features/post/deletePost'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { TFunction } from 'i18next'
 import { getCurrentPost } from '../../selectors/getCurrentPost'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { POST_DETAILS_ID } from '@/widgets/PostList'
 
 type Args = {
-  postId: string
-  onClose?: () => void
   t: TFunction<Namespaces, undefined>
 }
 
-export const usePostDetails = ({ postId, onClose, t }: Args) => {
+export const usePostDetails = ({ t }: Args) => {
+  const router = useRouter()
+  const sp = useSearchParams()
+  const postId = sp.get(POST_DETAILS_ID) as string
+  console.log('SEARC_PARAMS_KEYS: ', sp.keys())
   const [editPostModalOpen, setEditPostModalOpen] = useState<boolean>(false)
   const [deletePostModalOpen, setDeletePostModalOpen] = useState<boolean>(false)
   const isPostBeingDeleted = useSelector(getIsPostBeingDeleted)
-  const { id } = useSelector(getCurrentPost(postId))
   const editMode = useSelector(getEditMode)
   const dispatch = useAppDispatch()
+
+  const closePostDetails = useCallback(() => {
+    const editableSP = new URLSearchParams(Array.from(sp))
+    editableSP.delete(POST_DETAILS_ID)
+    router.push(`?${editableSP.toString()}`)
+  }, [sp, router])
 
   const onPostDetailsClose = () => {
     if (editMode) {
       setEditPostModalOpen(true)
     } else {
-      onClose?.()
+      closePostDetails()
     }
   }
 
@@ -50,20 +59,21 @@ export const usePostDetails = ({ postId, onClose, t }: Args) => {
 
   const deletePost = useCallback(async () => {
     try {
-      await dispatch(deletePostThunk(id)).unwrap()
+      await dispatch(deletePostThunk(+postId)).unwrap()
       toast.success(t('toast.success.delete'))
-      onClose?.()
+      closePostDetails()
     } catch (err) {
       if (err) toast.error(err as string)
       toast.error(t('toast.error.delete'))
     }
-  }, [dispatch, t, id, onClose])
+  }, [dispatch, t, postId, closePostDetails])
 
   return {
     isPostBeingDeleted,
     editPostModalOpen,
     deletePostModalOpen,
     editMode,
+    closePostDetails,
     onPostDetailsClose,
     onEditModeClose,
     exitFromEditMode,
@@ -71,5 +81,7 @@ export const usePostDetails = ({ postId, onClose, t }: Args) => {
     openDeletePostModal,
     closeDeletePostModal,
     deletePost,
+    postId,
+    isOpen: !!postId,
   }
 }

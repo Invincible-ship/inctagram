@@ -1,7 +1,6 @@
 import { CSSProperties } from 'react'
 
 export const getDynamicImageStyles = (width: number, height: number): CSSProperties => {
-  console.log('Dynamic width: ', width, 'Dynamic height: ', height)
   const filterOriginalWidth = width < height ? `${(width / height) * 100}%` : '100%'
   const filterOriginalHeight = height < width ? `${(height / width) * 100}%` : '100%'
   const filterInset = calculateFilterInset(filterOriginalWidth, filterOriginalHeight)

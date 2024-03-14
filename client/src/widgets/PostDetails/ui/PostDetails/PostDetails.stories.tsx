@@ -3,8 +3,7 @@ import { PostDetails } from './PostDetails'
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator'
 import { PostDetailsVariant } from '../../model/consts/variant'
 import { HStack } from '@/shared/ui/Stack'
-import { StateSchema } from '@/app/providers/StoreProvider'
-import { PostListSchema } from '@/widgets/PostList'
+import { POST_DETAILS_ID, PostListSchema } from '@/widgets/PostList'
 
 const url =
   'https://www.ixbt.com/img/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg'
@@ -38,9 +37,7 @@ type Story = StoryObj<typeof PostDetails>
 
 export const ModalAuthorized: Story = {
   render: () => {
-    return (
-      <PostDetails variant={PostDetailsVariant.MODAL} postId="1" onClose={() => {}} isOpen={true} />
-    )
+    return <PostDetails variant={PostDetailsVariant.MODAL} postId="1" />
   },
   decorators: [
     (Story: StoryFn) =>
@@ -53,13 +50,29 @@ export const ModalAuthorized: Story = {
         },
       }),
   ],
+  parameters: {
+    nextjs: {
+      navigation: {
+        query: {
+          [POST_DETAILS_ID]: '1',
+        },
+      },
+    },
+  },
 }
 
 export const ModalUnauthorized: Story = {
   render: () => {
-    return (
-      <PostDetails variant={PostDetailsVariant.MODAL} postId="1" onClose={() => {}} isOpen={true} />
-    )
+    return <PostDetails variant={PostDetailsVariant.MODAL} />
+  },
+  parameters: {
+    nextjs: {
+      navigation: {
+        query: {
+          [POST_DETAILS_ID]: '1',
+        },
+      },
+    },
   },
 }
 
@@ -67,12 +80,7 @@ export const CardAuthorized: Story = {
   render: () => {
     return (
       <HStack justify="center" max>
-        <PostDetails
-          variant={PostDetailsVariant.CARD}
-          postId="1"
-          onClose={() => {}}
-          isOpen={true}
-        />
+        <PostDetails variant={PostDetailsVariant.CARD} postId="1" />
       </HStack>
     )
   },
@@ -93,12 +101,7 @@ export const CardUnauthorized: Story = {
   render: () => {
     return (
       <HStack justify="center" max>
-        <PostDetails
-          variant={PostDetailsVariant.CARD}
-          postId="1"
-          onClose={() => {}}
-          isOpen={true}
-        />
+        <PostDetails variant={PostDetailsVariant.CARD} postId="1" />
       </HStack>
     )
   },
