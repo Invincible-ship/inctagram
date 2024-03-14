@@ -112,7 +112,9 @@ export const CreatePost = () => {
   )
 
   const modalContentStyles: CSSProperties = {
-    backgroundColor: 'transparent',
+    // backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: 'rgba(51, 51, 51, .5)',
+    backdropFilter: 'blur(15px)',
     border: 'none',
   }
 

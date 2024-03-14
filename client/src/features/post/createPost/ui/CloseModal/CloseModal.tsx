@@ -21,14 +21,14 @@ const CloseModal: FC<CloseModalProps> = memo(({ isOpen, onClose, closeCreatePost
   const dispatch = useAppDispatch()
 
   const handleClick = (role: ButtonRole) => () => {
+    onClose()
     closeCreatePostModal()
-    setTimeout(onClose)
+    setTimeout(() => dispatch(resetCreatePostState()), 500)
 
     if (role == 'save') {
       dispatch(saveDraft())
       toast.success(t('toasts.draft'))
     }
-    dispatch(resetCreatePostState())
   }
 
   return (
