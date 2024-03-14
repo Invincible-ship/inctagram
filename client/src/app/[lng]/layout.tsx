@@ -1,8 +1,7 @@
-import { ReactNode, Suspense } from 'react'
+import { ReactNode } from 'react'
 import { dir } from 'i18next'
 import { Inter } from 'next/font/google'
 import { LanguageIds } from '@/shared/config/i18n/types'
-import Loading from './loading'
 import { NextFont } from 'next/dist/compiled/@next/font'
 import { AppLayout } from '../layouts/AppLayout'
 import { StoreProvider } from '../providers/StoreProvider'
@@ -11,6 +10,7 @@ import { LanguageProvider } from '../providers/LanguageProvider/LanguageProvider
 import '../styles/index.scss'
 import { UserAgentProvider } from '@/app/providers/UserAgentProvider/UserAgentProvider'
 import { headers } from 'next/headers'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter: NextFont = Inter({
   weight: ['400', '500', '600', '700', '900'],
@@ -50,6 +50,7 @@ const RootLayout = ({ children, params: { lng } }: RootLayoutProps) => {
             </SessionProvider>
           </StoreProvider>
         </div>
+        <SpeedInsights />
       </body>
     </html>
   )

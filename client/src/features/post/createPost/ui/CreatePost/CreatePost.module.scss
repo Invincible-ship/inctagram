@@ -35,36 +35,44 @@
   from {
     opacity: 0;
     transform: scaleX(0);
+    backdrop-filter: filter(15px);
   } to {
     opacity: 1;
     transform: scaleX(1);
+    backdrop-filter: filter(0);
   }
 }
 
 @keyframes visibleToRight {
   from {
+    backdrop-filter: filter(15px);
     opacity: 0;
     transform: scaleX(0);
   } to {
     opacity: 1;
     transform: scaleX(1);
+    backdrop-filter: filter(0);
   }
 }
 
 @keyframes fadeToLeft {
   from {
-    transform: scaleX(1) ;
+    transform: scaleX(1);
+    backdrop-filter: filter(0);
   } to {
     opacity: 0;
     transform: scaleX(0);
+    backdrop-filter: filter(15px);
   }
 }
 
 @keyframes fadeToRight {
   from {
+    backdrop-filter: filter(0);
     transform: scaleX(1) ;
   } to {
     opacity: 0;
     transform: scaleX(0);
+    backdrop-filter: filter(15px);
   }
 }

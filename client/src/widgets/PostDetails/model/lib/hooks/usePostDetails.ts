@@ -8,7 +8,6 @@ import { getIsPostBeingDeleted } from '../../selectors/getIsPostBeingDeleted'
 import { deletePostThunk } from '@/features/post/deletePost'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { TFunction } from 'i18next'
-import { getCurrentPost } from '../../selectors/getCurrentPost'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { POST_DETAILS_ID } from '@/widgets/PostList'
 
@@ -20,7 +19,6 @@ export const usePostDetails = ({ t }: Args) => {
   const router = useRouter()
   const sp = useSearchParams()
   const postId = sp.get(POST_DETAILS_ID) as string
-  console.log('SEARC_PARAMS_KEYS: ', sp.keys())
   const [editPostModalOpen, setEditPostModalOpen] = useState<boolean>(false)
   const [deletePostModalOpen, setDeletePostModalOpen] = useState<boolean>(false)
   const isPostBeingDeleted = useSelector(getIsPostBeingDeleted)

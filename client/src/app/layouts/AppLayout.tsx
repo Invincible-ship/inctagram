@@ -1,15 +1,16 @@
 'use client'
 
-import { getIsUserInited, getUserAuthData, getUserId } from '@/entities/User'
+import { getIsUserInited, getUserId } from '@/entities/User'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Header } from '@/widgets/Header'
 import { Sidebar, SidebarSkeleton } from '@/widgets/Sidebar'
-import { FC, ReactNode, Suspense, lazy, useMemo } from 'react'
+import { FC, ReactNode, Suspense, useMemo } from 'react'
 import { Toaster } from '@/shared/ui/Toaster/Toaster'
 import { useSelector } from 'react-redux'
-import { CreatePost } from '@/features/post/createPost'
 import { LanguageIds } from '@/shared/config/i18n/types'
 import { getIsLoading as getIsUserLoading } from '@/entities/User'
+import dynamic from 'next/dynamic'
+const CreatePost = dynamic(() => import('@/features/post/createPost').then(mod => mod.CreatePost))
 
 type AppLayoutProps = {
   children: ReactNode
@@ -41,7 +42,7 @@ export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
             <CreatePost />
           </>
         )}
-        <div className={classNames('page-container', pageContainerMods)}>{children}</div>
+        <main className={classNames('page-container', pageContainerMods)}>{children}</main>
       </div>
       <Toaster />
     </>

@@ -23,19 +23,23 @@ import { getIsModalBackward } from '../../model/selectors/getIsModalBackward'
 import { getAnimationDirection } from '../../model/selectors/getAnimationDirection'
 import cls from './CreatePost.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { SelectImage } from '../SelectImage/SelectImage'
+import { CroppingImage } from '../CroppingImage/CroppingImage'
+import { FilteringImage } from '../FilteringImage/FilteringImage'
+import { PublishingPost } from '../PublishingPost/PublishingPost'
 
-const SelectImage = lazy(() =>
-  import('../SelectImage/SelectImage').then(mod => ({ default: mod.SelectImage })),
-)
-const CroppingImage = lazy(() =>
-  import('../CroppingImage/CroppingImage').then(mod => ({ default: mod.CroppingImage })),
-)
-const FilteringImage = lazy(() =>
-  import('../FilteringImage/FilteringImage').then(mod => ({ default: mod.FilteringImage })),
-)
-const PublishingPost = lazy(() =>
-  import('../PublishingPost/PublishingPost').then(mod => ({ default: mod.PublishingPost })),
-)
+// const SelectImage = lazy(() =>
+//   import('../SelectImage/SelectImage').then(mod => ({ default: mod.SelectImage })),
+// )
+// const CroppingImage = lazy(() =>
+//   import('../CroppingImage/CroppingImage').then(mod => ({ default: mod.CroppingImage })),
+// )
+// const FilteringImage = lazy(() =>
+//   import('../FilteringImage/FilteringImage').then(mod => ({ default: mod.FilteringImage })),
+// )
+// const PublishingPost = lazy(() =>
+//   import('../PublishingPost/PublishingPost').then(mod => ({ default: mod.PublishingPost })),
+// )
 
 const mapStepToValue: Record<number, CreatePostStep> = {
   1: CreatePostStep.SELECT,

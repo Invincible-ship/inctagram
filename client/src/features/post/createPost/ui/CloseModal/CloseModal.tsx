@@ -23,7 +23,7 @@ const CloseModal: FC<CloseModalProps> = memo(({ isOpen, onClose, closeCreatePost
   const handleClick = (role: ButtonRole) => () => {
     onClose()
     closeCreatePostModal()
-    setTimeout(() => dispatch(resetCreatePostState()), 500)
+    setTimeout(() => dispatch(resetCreatePostState()), 1000)
 
     if (role == 'save') {
       dispatch(saveDraft())
