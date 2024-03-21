@@ -1,14 +1,17 @@
-import { PostListResponse } from '@/entities/Viewer'
+import { PostListResponse, TotalUsersCounter } from '@/entities/Viewer'
 import { GET_ALL_POSTS } from '@/shared/const/apiEndpoints'
 import { PostSortField } from '@/shared/const/postSortField'
 import HomePageClient from '@/_pages/HomePage/HomePage'
 import { POST_TAG } from '@/shared/const/rtk'
+import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
+import { FC } from 'react'
+import { useServerTranslation } from '@/shared/config/i18n/server'
 
 const fetchAllPostsData = async () => {
   'use server'
   const baseUrl = process.env.API
   const qp = new URLSearchParams({
-    pageSize: '5',
+    pageSize: '4',
     sortBy: PostSortField.CREATED,
     sortDirection: 'desc',
   })
@@ -25,10 +28,24 @@ const fetchAllPostsData = async () => {
   return (await response.json()) as PostListResponse
 }
 
-const HomePageServer = async () => {
-  const postsData = await fetchAllPostsData()
+type HomePageServerParams = {
+  lng: LanguageIds
+}
 
-  return <HomePageClient postsData={postsData} />
+type HomePageServerProps = {
+  params: HomePageServerParams
+}
+
+const HomePageServer: FC<HomePageServerProps> = async ({ params }) => {
+  const { lng } = params
+  const postsData = await fetchAllPostsData()
+  const { t } = await useServerTranslation(lng, Namespaces.HOME_PAGE)
+
+  return (
+    <HomePageClient postsData={postsData}>
+      <TotalUsersCounter t={t} />
+    </HomePageClient>
+  )
 }
 
 export default HomePageServer

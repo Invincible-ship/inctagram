@@ -4,18 +4,6 @@ import { LanguageIds } from '@/shared/config/i18n/types'
 import { PostSortField } from '@/shared/const/postSortField'
 import { SortOrder } from '@/shared/types/sort'
 
-// const totalUsersCountEndpoint = `${API}${GET_USERS_TOTAL_COUNT}`
-// export const generateStaticParams = async () => {
-//   const totalUsersCountResponse = await fetch(totalUsersCountEndpoint, {
-//     next: { revalidate: 3600, tags: [VIEWER_TAG] },
-//   })
-//   const totalUsersCount = await totalUsersCountResponse.json()
-
-//   return Array.from({ length: totalUsersCount }).map((_, idx) => ({
-//     id: String(++idx),
-//   }))
-// }
-
 type ProfilePageParams = {
   id: string
   lng: LanguageIds

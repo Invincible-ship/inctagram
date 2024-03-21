@@ -1,4 +1,7 @@
 {
+  "counter": {
+    "title": "Registred Users:"
+  },
   "info": {
     "likes": "Likes"
   }

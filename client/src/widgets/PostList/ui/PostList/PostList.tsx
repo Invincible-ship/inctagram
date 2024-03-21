@@ -20,11 +20,11 @@ export const PostList: FC<PostListProps> = memo(({ className }) => {
   const type = useSelector(getPostListType)
   const limit = useSelector(getLimit)
   const isLoading = useSelector(getIsLoading)
-  const direction = type == PostListCardType.IMAGE ? 'row' : 'column'
-  const align = type == PostListCardType.EXTENDED ? 'center' : 'start'
+  const direction = type == PostListCardType.POST_DETAILS ? 'column' : 'row'
+  const align = type == PostListCardType.POST_DETAILS ? 'center' : 'start'
 
   const mods = {
-    [cls.extended]: type == PostListCardType.EXTENDED,
+    [cls.postDetails]: type == PostListCardType.POST_DETAILS,
   }
 
   return (
@@ -33,7 +33,7 @@ export const PostList: FC<PostListProps> = memo(({ className }) => {
       className={classNames(cls.PostList, mods, [className])}
       direction={direction}
       align={align}
-      wrap="wrap"
+      wrap={type !== PostListCardType.EXTENDED ? 'wrap' : 'nowrap'}
       max
     >
       {posts.map(post => {
@@ -48,7 +48,7 @@ PostList.displayName = 'PostList'
 
 export const getSkeletons = (length: number, type: PostListCardType = PostListCardType.IMAGE) =>
   Array.from({ length }).map((_, idx) => {
-    if (type == PostListCardType.EXTENDED) {
+    if (type == PostListCardType.POST_DETAILS) {
       return <PostDetailsCardSkeleton key={idx} />
     }
 

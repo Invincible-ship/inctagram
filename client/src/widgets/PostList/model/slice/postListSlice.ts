@@ -75,15 +75,14 @@ export const postListSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(initPostList.fulfilled, (state, { payload: page }) => {
-        if (!page) return
+      .addCase(initPostList.fulfilled, (state, { payload }) => {
+        if (!payload) return
+        const { page, type } = payload
 
         state.page = page
-
-        const type = page == PostListPage.HOME ? PostListCardType.EXTENDED : PostListCardType.IMAGE
         state.type = type
 
-        const limit = type == PostListCardType.EXTENDED ? 5 : 8
+        const limit = type == PostListCardType.IMAGE ? 8 : 4
         state.limit = limit
       })
       .addMatcher(postsPending, state => {

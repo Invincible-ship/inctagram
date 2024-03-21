@@ -1,0 +1,53 @@
+.PostCardExtended {
+  .postLink {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+
+    .imageContainer {
+      max-width: 320px;
+      width: 100%;
+    
+      .imageSlide {
+        aspect-ratio: 1 / 1;
+      }
+    }
+
+    .postAdditionalInfo {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .2s linear;
+      pointer-events: none;
+    }
+
+    :hover {
+      opacity: 0.8;
+
+      @media (max-width: 769px) {
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      .postAdditionalInfo {
+        opacity: 1;
+  
+        @media (max-width: 769px) {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  .date {
+    font-size: 12px;
+    color: var(--light-color-900);
+  }
+
+  .description {
+    font-size: 14px;
+  }
+}
+
