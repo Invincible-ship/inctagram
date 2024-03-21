@@ -29,3 +29,7 @@ export type PostListResponse = {
   totalUsers: number
   items: IPost[]
 }
+
+export type UsersTotalCountResponse = {
+  totalCount: number
+}

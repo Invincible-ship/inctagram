@@ -7,3 +7,4 @@ export {
 } from './api/viewerApi'
 export { fetchPublicProfile } from './model/lib/serverActions/fetchPublicProfile'
 export { fetchProfilePosts } from './model/lib/serverActions/fetchProfilePosts'
+export { TotalUsersCounter } from './ui/TotalUsersCounter/TotalUsersCounter'

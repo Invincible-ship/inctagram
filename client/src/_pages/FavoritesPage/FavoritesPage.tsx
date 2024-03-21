@@ -29,7 +29,7 @@ const FavoritesPage = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(initPostList({ page: PostListPage.FAVORITES }))
+    dispatch(initPostList({ page: PostListPage.FAVORITES, type: PostListCardType.IMAGE }))
 
     const userLocalStorage = JSON.parse(
       localStorage.getItem(LOCAL_STORAGE_USER_KEY) || 'null',

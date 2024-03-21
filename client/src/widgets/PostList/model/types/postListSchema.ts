@@ -3,7 +3,7 @@ import { PostSortField } from '@/shared/const/postSortField'
 import { SortOrder } from '@/shared/types/sort'
 import { EntityState } from '@reduxjs/toolkit'
 import { PostListCardType } from '../consts/postListCardType'
-import { PostListPage } from '@/widgets/PostList/model/consts/postListPage'
+import { PostListPage } from '../consts/postListPage'
 
 export type PostListSchema = EntityState<IPost> & {
   postListId?: string
@@ -23,4 +23,9 @@ export type PostListSchema = EntityState<IPost> & {
   lastPostId?: number
   limit: number
   hasMore: boolean
+}
+
+export type InitPostListPayload = {
+  page: PostListPage
+  type: PostListCardType
 }

@@ -1,0 +1,32 @@
+.TotalUserCounter {
+  background-color: var(--dark-color-500);
+  border: 1px solid var(--dark-color-300);
+  border-radius: 2px;
+  padding: 12px 24px;
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .counter {
+    background-color: var(--dark-color-700);
+    border: 1px solid var(--dark-color-300);
+    border-radius: 2px;
+    padding: 8px 12px;
+
+    .digit {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+      font-weight: 700;
+      
+      &:not(:last-child) {
+        border-right: 1px solid var(--dark-color-300);
+      }
+    }
+  }
+}
+

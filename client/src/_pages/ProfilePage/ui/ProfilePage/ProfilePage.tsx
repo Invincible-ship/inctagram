@@ -52,7 +52,13 @@ export const ProfilePage: FC<ProfilePageProps> = ({ publicProfile }) => {
   )
 
   useEffect(() => {
-    dispatch(initPostList({ page: PostListPage.PROFILE, currentId: profileId }))
+    dispatch(
+      initPostList({
+        page: PostListPage.PROFILE,
+        type: PostListCardType.IMAGE,
+        currentId: profileId,
+      }),
+    )
     dispatch(fetchPostsByProfileId(profileId))
   }, [dispatch, profileId])
 

@@ -4,17 +4,20 @@ import { resetPostListState, setPostListId } from '../slice/postListSlice'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { setUpdatedPostList } from '@/widgets/PostDetails'
+import { PostListCardType } from '../consts/postListCardType'
+import { InitPostListPayload } from '../types/postListSchema'
 
 type InitPostListProps = {
+  type: PostListCardType
   page: PostListPage
   currentId?: string
 }
 
 export const initPostList = createAsyncThunk<
-  PostListPage | void,
+  InitPostListPayload | void,
   InitPostListProps,
   ThunkConfig<void>
->('postList/initPostList', ({ page, currentId }, { dispatch, getState }) => {
+>('postList/initPostList', ({ page, type, currentId }, { dispatch, getState }) => {
   const prevId = getPostListId(getState())
 
   // prevent reseting state if the same profile page
@@ -24,5 +27,5 @@ export const initPostList = createAsyncThunk<
   dispatch(setUpdatedPostList(false))
   if (currentId) dispatch(setPostListId(currentId))
 
-  return page
+  return { page, type }
 })

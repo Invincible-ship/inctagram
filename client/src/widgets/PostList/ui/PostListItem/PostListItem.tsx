@@ -1,4 +1,4 @@
-import { IPost } from '@/entities/Post'
+import { IPost, PostCardExtended } from '@/entities/Post'
 import { ImageVariant, MyImage } from '@/shared/ui/MyImage/MyImage'
 import { PostListCardType } from '../../model/consts/postListCardType'
 import React, { FC } from 'react'
@@ -12,6 +12,7 @@ import HeartIcon from '@/shared/assets/icons/heart-outline.svg'
 import CommentIcon from '@/shared/assets/icons/message-circle-outline.svg'
 import { PostDetails } from '@/widgets/PostDetails'
 import { PostDetailsVariant } from '@/widgets/PostDetails/model/consts/variant'
+import { PostCardImage } from '@/entities/Post/ui/PostCardImage/PostCardImage'
 
 type PostListItemProps = {
   className?: string
@@ -19,12 +20,8 @@ type PostListItemProps = {
   type: PostListCardType | undefined
 }
 
-const PREVIEW_IMAGE_WIDTH = 1440
-
 export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) => {
   const sp = useSearchParams()
-  const imagePreview = post.images[0]
-  const imageSizes = '(max-width: 768px) 50vw, 33vw'
 
   const getNewSearchParams = () => {
     const editableSP = new URLSearchParams(Array.from(sp))
@@ -36,33 +33,20 @@ export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) =
     history.pushState(null, '', `?${getNewSearchParams()}`)
   }
 
-  if (type == PostListCardType.EXTENDED) {
-    return <PostDetails postId={String(post.id)} variant={PostDetailsVariant.CARD} />
-  }
-
-  return (
-    <HStack data-id={post.id} className={classNames(cls.PostListItem, {}, [className])}>
-      <div role="link" className={cls.postLink} onClick={onClick}>
-        <MyImage
-          src={imagePreview?.url || ''}
-          variant={ImageVariant.SQUARE}
-          sizes={imageSizes}
-          fallback={<Skeleton width="100%" height="100%" />}
-          alt="Post Image"
+  switch (type) {
+    case PostListCardType.POST_DETAILS:
+      return <PostDetails postId={String(post.id)} variant={PostDetailsVariant.CARD} />
+    case PostListCardType.EXTENDED:
+      return <PostCardExtended className={cls.PostListItem} post={post} onClick={onClick} />
+    case PostListCardType.IMAGE:
+      return (
+        <PostCardImage
+          postId={post.id}
+          image={post.images[0]}
+          onClick={onClick}
+          className={classNames(cls.PostListItem, {}, [className])}
+          additionalInfoClassName={cls.postInfo}
         />
-      </div>
-      <HStack className={cls.postInfo} justify="center" align="center">
-        <HStack gap="16">
-          <HStack gap="4">
-            <HeartIcon />
-            238
-          </HStack>
-          <HStack gap="4">
-            <CommentIcon />
-            18
-          </HStack>
-        </HStack>
-      </HStack>
-    </HStack>
-  )
+      )
+  }
 }
