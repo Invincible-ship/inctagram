@@ -6,7 +6,7 @@ import { fetchPostsByProfileId } from './fetchPostsByProfileId'
 import { fetchAllPosts } from './fetchAllPosts'
 
 export const fetchNextPosts = createAsyncThunk<void, string | undefined, ThunkConfig<unknown>>(
-  'post/fetchNextPosts',
+  'postList/fetchNextPosts',
   async (profileId, { dispatch, getState }) => {
     const page = getPage(getState())
     const isLoading = getIsLoading(getState())

@@ -1,6 +1,7 @@
 'use client'
 
 import { PostListResponse } from '@/entities/Viewer'
+import { HOME_PAGE_ID } from '@/shared/const/pages'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { VStack } from '@/shared/ui/Stack'
@@ -31,7 +32,7 @@ const HomePage: FC<HomePageProps> = ({ postsData }) => {
     dispatch(initPostList({ page: PostListPage.HOME }))
 
     postsData ? dispatch(setPostsFromServer(postsData)) : dispatch(fetchAllPosts())
-  }, [])
+  }, [dispatch, postsData])
 
   const onScrollEnd = useCallback(() => {
     dispatch(fetchNextPosts())
@@ -39,7 +40,7 @@ const HomePage: FC<HomePageProps> = ({ postsData }) => {
 
   return (
     <Suspense fallback={<HomePageSkeleton />}>
-      <Page onScrollEnd={onScrollEnd} isTriggerActive={hasMore}>
+      <Page id={HOME_PAGE_ID} onScrollEnd={onScrollEnd} isTriggerActive={hasMore}>
         <PostList />
       </Page>
     </Suspense>

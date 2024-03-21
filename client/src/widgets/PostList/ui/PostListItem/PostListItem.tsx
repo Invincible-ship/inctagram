@@ -5,7 +5,6 @@ import React, { FC } from 'react'
 import { HStack } from '@/shared/ui/Stack'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { useSearchParams } from 'next/navigation'
-import Link from 'next/link'
 import { POST_DETAILS_ID } from '../../model/consts/postDetailsId'
 import cls from './PostListItem.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -25,12 +24,16 @@ const PREVIEW_IMAGE_WIDTH = 1440
 export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) => {
   const sp = useSearchParams()
   const imagePreview = post.images[0]
-  const imageTypeSizes = '(max-width: 768px) 50vw, 33vw'
+  const imageSizes = '(max-width: 768px) 50vw, 33vw'
 
   const getNewSearchParams = () => {
     const editableSP = new URLSearchParams(Array.from(sp))
     editableSP.set(POST_DETAILS_ID, String(post.id))
     return editableSP.toString()
+  }
+
+  const onClick = () => {
+    history.pushState(null, '', `?${getNewSearchParams()}`)
   }
 
   if (type == PostListCardType.EXTENDED) {
@@ -39,15 +42,15 @@ export const PostListItem: FC<PostListItemProps> = ({ post, type, className }) =
 
   return (
     <HStack data-id={post.id} className={classNames(cls.PostListItem, {}, [className])}>
-      <Link href={`?${getNewSearchParams()}`} className={cls.postLink}>
+      <div role="link" className={cls.postLink} onClick={onClick}>
         <MyImage
           src={imagePreview?.url || ''}
           variant={ImageVariant.SQUARE}
-          sizes={imageTypeSizes}
+          sizes={imageSizes}
           fallback={<Skeleton width="100%" height="100%" />}
           alt="Post Image"
         />
-      </Link>
+      </div>
       <HStack className={cls.postInfo} justify="center" align="center">
         <HStack gap="16">
           <HStack gap="4">

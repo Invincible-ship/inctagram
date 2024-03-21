@@ -2,6 +2,7 @@ import { PostListResponse } from '@/entities/Viewer'
 import { GET_ALL_POSTS } from '@/shared/const/apiEndpoints'
 import { PostSortField } from '@/shared/const/postSortField'
 import HomePageClient from '@/_pages/HomePage/HomePage'
+import { POST_TAG } from '@/shared/const/rtk'
 
 const fetchAllPostsData = async () => {
   'use server'
@@ -14,6 +15,7 @@ const fetchAllPostsData = async () => {
 
   const response = await fetch(`${baseUrl}${GET_ALL_POSTS}?${qp.toString()}`, {
     next: {
+      tags: [POST_TAG],
       revalidate: 60,
     },
   })

@@ -1,4 +1,4 @@
-import { PostDetailsConfirmationModal, getCurrentPost } from '@/entities/Post'
+import { PostDetailsConfirmationModal } from '@/entities/Post'
 import { useUpdatePostByIdMutation } from '@/entities/Post/api/postApi'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
@@ -9,18 +9,18 @@ import {
   memo,
   useState,
   ChangeEvent,
-  useMemo,
   FormEvent,
   Dispatch,
   SetStateAction,
   useCallback,
 } from 'react'
 import toast from 'react-hot-toast'
-import { useSelector } from 'react-redux'
 import cls from './UpdatePostForm.module.scss'
 import { VStack } from '@/shared/ui/Stack'
 import { TextArea } from '@/shared/ui/TextArea/TextArea'
 import { Button } from '@/shared/ui/Button/Button'
+import { revalidateDataByTag } from '@/shared/lib/serverActions/revalidateDataByTag'
+import { POST_TAG } from '@/shared/const/rtk'
 
 type UpdatePostFormProps = {
   id: number
@@ -54,6 +54,7 @@ export const UpdatePostForm: FC<UpdatePostFormProps> = memo(
         if (isDescriptionChanged) {
           await updatePostByIdMutation({ description: newDescription, id })
           toast.success(t('toast.success.update'))
+          revalidateDataByTag(POST_TAG)
         }
       } catch (error) {
         toast.error(t('toast.error.update'))

@@ -10,9 +10,9 @@ export type PostListSchema = EntityState<IPost> & {
 
   isLoading?: boolean
   error?: string | string[]
-  page: PostListPage
+  page: PostListPage | undefined
 
-  type: PostListCardType
+  type: PostListCardType | undefined
 
   // post filters
   sort: SortOrder

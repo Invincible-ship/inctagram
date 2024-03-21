@@ -2,7 +2,7 @@
 
 import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import { HStack, VStack } from '@/shared/ui/Stack'
-import { FC, Suspense, memo, useContext, useMemo, useState } from 'react'
+import { FC, Suspense, memo, useContext, useMemo, useState, MouseEvent } from 'react'
 import { SidebarValues } from '../types'
 import cls from './Sidebar.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -19,20 +19,33 @@ import { getTabs } from '../model/utils/getTabs'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 export type SidebarItemProps = {
+  value: SidebarValues
   text: string
   href: string
   Icon: FC<React.SVGProps<SVGSVGElement>>
   className?: string
 }
 
-export const SidebarItem: FC<SidebarItemProps> = ({ text, href, Icon, className }) => (
-  <Link className={classNames(cls.sidebarItem, {}, [className])} href={href}>
-    <HStack gap="16" align="center">
-      <Icon />
-      <span className={classNames(cls.sidebarText, {}, [`${className}-text`])}>{text}</span>
-    </HStack>
-  </Link>
-)
+export const SidebarItem: FC<SidebarItemProps> = ({ value, text, href, Icon, className }) => {
+  const onLinkClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (value !== SidebarValues.CREATE) return
+    e.preventDefault()
+    history.pushState(null, '', href)
+  }
+
+  return (
+    <Link
+      className={classNames(cls.sidebarItem, {}, [className])}
+      href={href}
+      onClick={onLinkClick}
+    >
+      <HStack gap="16" align="center">
+        <Icon />
+        <span className={classNames(cls.sidebarText)}>{text}</span>
+      </HStack>
+    </Link>
+  )
+}
 
 export const Sidebar = memo(() => {
   const sp = useSearchParams()

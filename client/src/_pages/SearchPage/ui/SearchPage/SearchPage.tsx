@@ -16,6 +16,7 @@ import {
 } from '@/entities/Profile'
 import { Page } from '@/widgets/Page/Page'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
+import { SEARCH_PAGE_ID } from '@/shared/const/pages'
 
 const SearchPage = () => {
   const { t } = useClientTranslation(Namespaces.SEARCH_PAGE)
@@ -53,7 +54,11 @@ const SearchPage = () => {
   }, 300)
 
   return (
-    <Page onScrollEnd={fetchNextUsers} isTriggerActive={!!usersData?.nextCursor}>
+    <Page
+      id={SEARCH_PAGE_ID}
+      onScrollEnd={fetchNextUsers}
+      isTriggerActive={!!usersData?.nextCursor}
+    >
       <VStack className={cls.SearchPage} gap="24" max>
         <VStack gap="16" max>
           <HStack className={cls.title}>{t('title')}</HStack>

@@ -4,14 +4,13 @@ import { PostListResponse } from '@/entities/Viewer/model/types/types'
 import { ThunkConfig } from '@/app/providers/StoreProvider'
 import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
-import { addQueryParams } from '@/shared/lib/addQueryParams/addQueryParams'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const fetchPostsByProfileId = createAsyncThunk<
   PostListResponse,
   string,
   ThunkConfig<string | string[]>
->('profilePage/fetchPostByUserId', async (profileId, { getState, dispatch, rejectWithValue }) => {
+>('postList/fetchPostsByProfileId', async (profileId, { getState, dispatch, rejectWithValue }) => {
   const order = getSortOrder(getState())
   const sort = getSort(getState())
   const limit = getLimit(getState())

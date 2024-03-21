@@ -21,7 +21,6 @@ import { TResendLinkBody } from '@/features/auth/confirmationEmailViaCode/model/
 
 export const userApi = rtkApi.injectEndpoints({
   endpoints: build => ({
-    // signout migrated
     signout: build.mutation<void, void>({
       query: () => ({
         url: SIGN_OUT_ENDPOINT,
@@ -29,7 +28,6 @@ export const userApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: [USER_TAG],
     }),
-    // SignUp migrated
     signup: build.mutation<void, RegisterParamsType>({
       query: data => ({
         method: 'POST',
@@ -37,7 +35,6 @@ export const userApi = rtkApi.injectEndpoints({
         body: data,
       }),
     }),
-    // confirmationEmailViaCode migrated
     confirmationEmailViaCode: build.mutation<void, TConfirmationEmailViaCodeRequest>({
       query: body => ({
         method: 'POST',
@@ -45,7 +42,6 @@ export const userApi = rtkApi.injectEndpoints({
         body,
       }),
     }),
-    // resendLink migrated
     resendLink: build.mutation<void, TResendLinkBody>({
       query: data => ({
         url: RESEND_LINK_ENDPOINT,
@@ -53,7 +49,6 @@ export const userApi = rtkApi.injectEndpoints({
         body: data,
       }),
     }),
-    // signIn migrated
     signIn: build.mutation<LoginResponseType, LoginRequestType>({
       query: data => ({
         url: SIGN_IN_ENDPOINT,
@@ -62,7 +57,6 @@ export const userApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: [USER_TAG],
     }),
-    // TODO: migrate signInWithGoogle to new backend api
     signInWithGoogle: build.mutation<TOAuthLoginResponse, string>({
       query: code => ({
         method: 'POST',
@@ -75,7 +69,6 @@ export const userApi = rtkApi.injectEndpoints({
       query: () => ME_ENDPOINT,
       providesTags: [USER_TAG],
     }),
-
     forgotPassword: build.mutation<void, any>({
       query: body => {
         return {

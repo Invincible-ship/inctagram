@@ -1,7 +1,7 @@
 'use client'
 
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { FC, MutableRefObject, ReactNode, memo, useRef } from 'react'
+import { FC, MutableRefObject, ReactNode, memo, useEffect, useRef } from 'react'
 import cls from './Page.module.scss'
 import { useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll/useInfiniteScroll'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -13,6 +13,7 @@ import { useThrottle } from '@/shared/lib/hooks/useThrottle/useThrottle'
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect'
 
 type PageProps = {
+  id: string
   children: ReactNode
   className?: string
   onScrollEnd?: () => void
@@ -20,11 +21,11 @@ type PageProps = {
 }
 
 export const Page: FC<PageProps> = memo(
-  ({ className, onScrollEnd, children, isTriggerActive = true }) => {
+  ({ id, className, onScrollEnd, children, isTriggerActive = true }) => {
+    const pathname = usePathname()
     const searchParams = useSearchParams()
     const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>
     const triggerRef = useRef() as MutableRefObject<HTMLDivElement>
-    const pathname = usePathname()
     const scrollPosition = useSelector((state: StateSchema) =>
       getScrollPositionByPath(state, pathname),
     )
@@ -36,26 +37,32 @@ export const Page: FC<PageProps> = memo(
       callback: onScrollEnd,
     })
 
-    useInitialEffect(() => {
-      window.scrollTo({ top: scrollPosition })
-
-      window.addEventListener('scroll', onScroll)
-
-      return () => {
-        window.removeEventListener('scroll', onScroll)
-      }
-    }, [searchParams])
-
     const onScroll = useThrottle(() => {
       const position = window.scrollY
 
       if (position != undefined && position != 0) {
         dispatch(setScrollPositionForPath({ position, pathname }))
       }
-    }, 100)
+    }, 200)
+
+    useInitialEffect(() => {
+      document.addEventListener('scroll', onScroll)
+
+      return () => document.removeEventListener('scroll', onScroll)
+    }, [])
+
+    useEffect(() => {
+      window.scrollTo({ top: scrollPosition })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchParams])
 
     return (
-      <div ref={wrapperRef} className={classNames(cls.Page, {}, ['Page', className])}>
+      <div
+        id={id}
+        data-id={id}
+        ref={wrapperRef}
+        className={classNames(cls.Page, {}, ['Page', id, className])}
+      >
         {children}
         {onScrollEnd ? (
           <div

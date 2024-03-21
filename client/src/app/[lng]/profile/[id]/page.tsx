@@ -32,15 +32,13 @@ type ProfilePageProps = {
   searchParams: SearchParams
 }
 
-const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
+const ProfilePage = async ({ params }: ProfilePageProps) => {
   const { id: profileId } = params
 
-  const publicProfileData = fetchPublicProfile(profileId)
-  const postsData = fetchProfilePosts(profileId, searchParams)
+  const publicProfile = await fetchPublicProfile(profileId)
+  // const postsData = fetchProfilePosts(profileId)
 
-  const [publicProfile, posts] = await Promise.all([publicProfileData, postsData])
-
-  return <ProfilePageClient publicProfile={publicProfile} posts={posts} />
+  return <ProfilePageClient publicProfile={publicProfile} />
 }
 
 export default ProfilePage

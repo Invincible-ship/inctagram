@@ -46,8 +46,8 @@ const initialState = postsAdapter.getInitialState<PostListSchema>({
   ids: [],
   entities: {},
   postListId: undefined,
-  page: PostListPage.HOME,
-  type: PostListCardType.EXTENDED,
+  page: undefined,
+  type: undefined,
   isLoading: false,
   error: undefined,
   sort: 'desc',
@@ -114,7 +114,6 @@ export const postListSlice = createSlice({
       })
       .addMatcher(updatePostByIdMatcher, (state, payload) => {
         const { id, description } = payload.meta.arg.originalArgs
-
         postsAdapter.updateOne(state, { id, changes: { description } })
       })
   },

@@ -15,28 +15,28 @@ import {
   getHasMore,
   PostListCardType,
   getSkeletons,
-  setPostsFromServer,
 } from '@/widgets/PostList'
 import { ProfileCard, ProfileCardSkeleton } from '@/widgets/ProfileCard'
 import { useParams } from 'next/navigation'
-import { FC, Suspense, useCallback, useEffect, useMemo } from 'react'
+import { FC, useCallback, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 import React from 'react'
 import { useGetProfileDataQuery } from '@/entities/Profile/api/profileApi'
 import { getUserId } from '@/entities/User'
 import { PostDetailsVariant } from '@/widgets/PostDetails'
+import { PROFILE_PAGE_ID } from '@/shared/const/pages'
 
 type ProfilePageProps = {
   publicProfile: IViewer
-  posts: PostListResponse | undefined
+  posts?: PostListResponse | undefined
 }
 
 type ProfilePageParams = {
   id: string
 }
 
-export const ProfilePage: FC<ProfilePageProps> = ({ publicProfile, posts }) => {
+export const ProfilePage: FC<ProfilePageProps> = ({ publicProfile }) => {
   const { id: profileId } = useParams<ProfilePageParams>()
   const isAuthorized = !!useSelector(getUserId)
   const hasMore = useSelector(getHasMore)
@@ -53,8 +53,8 @@ export const ProfilePage: FC<ProfilePageProps> = ({ publicProfile, posts }) => {
 
   useEffect(() => {
     dispatch(initPostList({ page: PostListPage.PROFILE, currentId: profileId }))
-    posts ? dispatch(setPostsFromServer(posts)) : dispatch(fetchPostsByProfileId(profileId))
-  }, [dispatch, profileId, posts])
+    dispatch(fetchPostsByProfileId(profileId))
+  }, [dispatch, profileId])
 
   const onScrollEnd = useCallback(() => {
     dispatch(fetchNextPosts(profileId))
@@ -66,20 +66,18 @@ export const ProfilePage: FC<ProfilePageProps> = ({ publicProfile, posts }) => {
   )
 
   return (
-    <Suspense fallback={<ProfilePageSkeleton mobile={mobile} />}>
-      <Page isTriggerActive={hasMore} onScrollEnd={onScrollEnd}>
-        <VStack data-testid="profile-page" gap={gap} max>
-          <ProfileCard
-            profile={memoizedProfile}
-            mobile={mobile}
-            isAuthorized={isAuthorized}
-            isLoading={isProfileLoading}
-          />
-          <PostList />
-          <PostDetails variant={PostDetailsVariant.MODAL} />
-        </VStack>
-      </Page>
-    </Suspense>
+    <Page id={PROFILE_PAGE_ID} isTriggerActive={hasMore} onScrollEnd={onScrollEnd}>
+      <VStack data-testid="profile-page" gap={gap} max>
+        <ProfileCard
+          profile={memoizedProfile}
+          mobile={mobile}
+          isAuthorized={isAuthorized}
+          isLoading={isProfileLoading}
+        />
+        <PostList />
+        <PostDetails variant={PostDetailsVariant.MODAL} />
+      </VStack>
+    </Page>
   )
 }
 

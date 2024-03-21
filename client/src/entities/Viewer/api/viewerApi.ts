@@ -17,6 +17,7 @@ export const viewerApi = rtkApi.injectEndpoints({
       providesTags: (result, error, id) => [{ type: POST_TAG, id }],
     }),
     getPostsByProfileId: build.query<PostListResponse, PublicPostsByIdRequestParams>({
+      keepUnusedDataFor: 300,
       query: config => getPostRequestQuery(config),
       providesTags: (result, error, arg) =>
         result

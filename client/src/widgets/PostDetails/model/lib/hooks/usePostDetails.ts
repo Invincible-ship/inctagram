@@ -28,8 +28,9 @@ export const usePostDetails = ({ t }: Args) => {
   const closePostDetails = useCallback(() => {
     const editableSP = new URLSearchParams(Array.from(sp))
     editableSP.delete(POST_DETAILS_ID)
-    router.push(`?${editableSP.toString()}`)
-  }, [sp, router])
+    // router.push(`?${editableSP.toString()}`)
+    history.pushState(null, '', `?${editableSP.toString()}`)
+  }, [sp])
 
   const onPostDetailsClose = () => {
     if (editMode) {
@@ -59,12 +60,13 @@ export const usePostDetails = ({ t }: Args) => {
     try {
       await dispatch(deletePostThunk(+postId)).unwrap()
       toast.success(t('toast.success.delete'))
+      closeDeletePostModal()
       closePostDetails()
     } catch (err) {
       if (err) toast.error(err as string)
       toast.error(t('toast.error.delete'))
     }
-  }, [dispatch, t, postId, closePostDetails])
+  }, [dispatch, t, postId, closePostDetails, closeDeletePostModal])
 
   return {
     isPostBeingDeleted,

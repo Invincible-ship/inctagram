@@ -43,7 +43,7 @@ export const PostDetailsModal = ({ t }: PostDetailsModalProps) => {
   } = usePostDetails({ t })
   const post = useSelector(getCurrentPost(postId))
 
-  if (!postId) return
+  if (!post) return
 
   return (
     <Suspense fallback={<PostDetailsModalSkeleton />}>

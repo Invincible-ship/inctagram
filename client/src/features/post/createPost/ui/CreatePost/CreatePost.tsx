@@ -3,7 +3,7 @@
 import { CreatePostStep } from '../../model/consts/createPost'
 import { getCurrentStep } from '../../model/selectors/getCurrentStep'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { CSSProperties, FC, lazy, useCallback, useMemo, useRef, useState } from 'react'
+import { CSSProperties, FC, useCallback, useMemo, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import CloseModal from '../CloseModal/CloseModal'
@@ -27,19 +27,8 @@ import { SelectImage } from '../SelectImage/SelectImage'
 import { CroppingImage } from '../CroppingImage/CroppingImage'
 import { FilteringImage } from '../FilteringImage/FilteringImage'
 import { PublishingPost } from '../PublishingPost/PublishingPost'
-
-// const SelectImage = lazy(() =>
-//   import('../SelectImage/SelectImage').then(mod => ({ default: mod.SelectImage })),
-// )
-// const CroppingImage = lazy(() =>
-//   import('../CroppingImage/CroppingImage').then(mod => ({ default: mod.CroppingImage })),
-// )
-// const FilteringImage = lazy(() =>
-//   import('../FilteringImage/FilteringImage').then(mod => ({ default: mod.FilteringImage })),
-// )
-// const PublishingPost = lazy(() =>
-//   import('../PublishingPost/PublishingPost').then(mod => ({ default: mod.PublishingPost })),
-// )
+import { revalidateDataByTag } from '@/shared/lib/serverActions/revalidateDataByTag'
+import { POST_TAG } from '@/shared/const/rtk'
 
 const mapStepToValue: Record<number, CreatePostStep> = {
   1: CreatePostStep.SELECT,
@@ -74,9 +63,8 @@ export const CreatePost = () => {
 
     const actualSearchParams = new URLSearchParams(Array.from(sp))
     actualSearchParams.delete('createPost')
-    router.push(`?${actualSearchParams.toString()}`)
-    // router.back()
-  }, [sp, router])
+    history.pushState(null, '', `?${actualSearchParams.toString()}`)
+  }, [sp])
 
   const handleCreatePostModalClose = useCallback(() => {
     if (mapStepToValue[currentStep] != CreatePostStep.SELECT) {

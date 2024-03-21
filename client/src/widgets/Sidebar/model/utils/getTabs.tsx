@@ -16,6 +16,15 @@ export const getTabs = (
 
     return {
       value,
-      content: <SidebarItem key={value} text={text} href={href} className={value} Icon={Icon} />,
+      content: (
+        <SidebarItem
+          key={value}
+          text={text}
+          value={value}
+          href={href}
+          className={value}
+          Icon={Icon}
+        />
+      ),
     }
   })

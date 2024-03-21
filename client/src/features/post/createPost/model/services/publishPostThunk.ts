@@ -7,6 +7,8 @@ import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { UploadPostRequestParams, createPost, uploadPostImages } from '@/entities/Post'
 import { ApiError } from '@/shared/api/types'
 import { FORM_DATA_FILE } from '../consts/createPost'
+import { revalidateDataByTag } from '@/shared/lib/serverActions/revalidateDataByTag'
+import { POST_TAG } from '@/shared/const/rtk'
 
 export const publishPostThunk = createAsyncThunk<void, void, ThunkConfig<string[]>>(
   'createPost/publishPost',
@@ -33,6 +35,7 @@ export const publishPostThunk = createAsyncThunk<void, void, ThunkConfig<string[
       }
 
       await dispatch(createPost(postData)).unwrap()
+      revalidateDataByTag(POST_TAG)
     } catch (err) {
       console.warn('Error has occured')
       if (isFetchBaseQueryError(err)) {
