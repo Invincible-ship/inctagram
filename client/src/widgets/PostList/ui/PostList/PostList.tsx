@@ -46,7 +46,7 @@ export const PostList: FC<PostListProps> = memo(({ className }) => {
 
 PostList.displayName = 'PostList'
 
-export const getSkeletons = (length: number, type: PostListCardType) =>
+export const getSkeletons = (length: number, type: PostListCardType = PostListCardType.IMAGE) =>
   Array.from({ length }).map((_, idx) => {
     if (type == PostListCardType.EXTENDED) {
       return <PostDetailsCardSkeleton key={idx} />

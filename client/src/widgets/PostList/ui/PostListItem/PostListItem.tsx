@@ -16,7 +16,7 @@ import { PostDetailsVariant } from '@/widgets/PostDetails/model/consts/variant'
 type PostListItemProps = {
   className?: string
   post: IPost
-  type: PostListCardType
+  type: PostListCardType | undefined
 }
 
 const PREVIEW_IMAGE_WIDTH = 1440
