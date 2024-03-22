@@ -1,4 +1,3 @@
-import { TGeneralInfo } from '@/features/editableProfileGeneralInfo'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Input } from '@/shared/ui/Input/Input'
 import { Flex, VStack } from '@/shared/ui/Stack'
@@ -12,6 +11,7 @@ import { CitySelect } from '@/widgets/CitySelect/CitySelect'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
 import { UploadAvatar } from '@/features/uploadAvatar'
+import { TGeneralInfo } from '../../model/types/generalInfoSchema'
 
 type ProfileGeneralInfoProps = {
   control: Control<TGeneralInfo>

@@ -84,7 +84,11 @@ export const DatePicker: FC<DatePickerProps> = ({
         const birthdayError = (
           <>
             {error?.message}.{' '}
-            <Link className={cls.birthdayErrorLink} href={`/${lngId}${Routes.PRIVACY_POLICY}`}>
+            <Link
+              target="_blank"
+              className={cls.birthdayErrorLink}
+              href={`/${lngId}${Routes.PRIVACY_POLICY}`}
+            >
               {t('privacy-policy')}
             </Link>
           </>

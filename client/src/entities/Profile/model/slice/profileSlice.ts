@@ -4,6 +4,7 @@ import {
   updateProfileAvatarsFulfilledMatcher,
   updateProfileFulfilledMatcher,
 } from '../../api/profileApi'
+import { TGeneralInfo } from '../types/generalInfoSchema'
 
 const initialState: IProfileSchema = {
   readonly: true,
@@ -22,6 +23,13 @@ const profileSlice = createSlice({
     clearProfileData: state => {
       state.profileData = undefined
     },
+    // edit profile form
+    saveTempValues: (state, { payload }: PayloadAction<TGeneralInfo>) => {
+      state.tempValues = payload
+    },
+    clearTempValues: state => {
+      state.tempValues = undefined
+    },
   },
   extraReducers: builder => {
     builder.addMatcher(updateProfileFulfilledMatcher, (state, { meta }) => {
@@ -37,4 +45,10 @@ const profileSlice = createSlice({
 })
 
 export const profileReducer = profileSlice.reducer
-export const { setProfileData, setProfileAvatars, clearProfileData } = profileSlice.actions
+export const {
+  setProfileData,
+  setProfileAvatars,
+  clearProfileData,
+  saveTempValues,
+  clearTempValues,
+} = profileSlice.actions

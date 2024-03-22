@@ -1,3 +1,5 @@
+import { TGeneralInfo } from './generalInfoSchema'
+
 export type IAvatar = {
   url: string
   width: number
@@ -46,6 +48,7 @@ export type AllProfilesResponse = {
 }
 
 export type IProfileSchema = {
+  tempValues?: TGeneralInfo
   profileData?: IProfile
   readonly: boolean
 }

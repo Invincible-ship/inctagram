@@ -1,9 +1,13 @@
 'use client'
 
-import { ProfileGeneralInfo, useUpdateProfileMutation } from '@/entities/Profile'
+import {
+  ProfileGeneralInfo,
+  TGeneralInfo,
+  generalInfoSchemaFn,
+  useUpdateProfileMutation,
+} from '@/entities/Profile'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
-import { generalInfoSchemaFn, TGeneralInfo } from '../model/types/generalInfo'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSelector } from 'react-redux'
@@ -47,9 +51,9 @@ export const EditableProfileGeneralInfo = () => {
     try {
       await updateProfileData({ ...profileData, id: userId }).unwrap()
       toast.success(t('general-info.update-success'))
-      revalidateDataByTag(VIEWER_TAG)
-
       resetForm(undefined, { keepValues: true, keepErrors: true })
+
+      revalidateDataByTag(VIEWER_TAG)
     } catch (err) {
       if (isFetchBaseQueryError(err)) {
         if (err.status == 'FETCH_ERROR') {
