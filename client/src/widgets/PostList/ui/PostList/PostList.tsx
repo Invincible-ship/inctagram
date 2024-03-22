@@ -9,6 +9,7 @@ import cls from './PostList.module.scss'
 import { FC, memo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { PostDetailsCardSkeleton } from '@/widgets/PostDetails'
+import { PostCardExtendedSkeleton } from '@/entities/Post'
 
 type PostListProps = {
   mobile?: boolean
@@ -50,6 +51,9 @@ export const getSkeletons = (length: number, type: PostListCardType = PostListCa
   Array.from({ length }).map((_, idx) => {
     if (type == PostListCardType.POST_DETAILS) {
       return <PostDetailsCardSkeleton key={idx} />
+    }
+    if (type == PostListCardType.EXTENDED) {
+      return <PostCardExtendedSkeleton key={idx} />
     }
 
     return <Skeleton key={idx} className="post-list-image-skeleton" />

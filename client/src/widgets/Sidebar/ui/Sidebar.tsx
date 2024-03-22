@@ -2,7 +2,7 @@
 
 import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import { HStack, VStack } from '@/shared/ui/Stack'
-import { FC, Suspense, memo, useContext, useMemo, useState, MouseEvent } from 'react'
+import { FC, memo, useContext, useMemo, useState, MouseEvent } from 'react'
 import { SidebarValues } from '../types'
 import cls from './Sidebar.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -14,9 +14,10 @@ import { LanguageIds, Namespaces } from '@/shared/config/i18n/types'
 import { SignOut } from '@/features/auth/signout'
 import { LOCAL_STORAGE_USER_ID_KEY } from '@/shared/const/localStorage'
 import { getSidebarItems } from '../model/utils/getSidebarItems'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { getTabs } from '../model/utils/getTabs'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
+import { getSidebarInitialValue } from '../model/utils/getSidebarInitialValue'
 
 export type SidebarItemProps = {
   value: SidebarValues
@@ -48,9 +49,10 @@ export const SidebarItem: FC<SidebarItemProps> = ({ value, text, href, Icon, cla
 }
 
 export const Sidebar = memo(() => {
+  const pathname = usePathname()
   const sp = useSearchParams()
-  const [value, setValue] = useState<SidebarValues>(SidebarValues.HOME)
   const lngId = useContext(LanguageContext) as LanguageIds
+  const [value, setValue] = useState<SidebarValues>(getSidebarInitialValue(pathname))
   const { t } = useClientTranslation(Namespaces.SIDEBAR)
   const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY) as string
   const mobile = useMediaQuery('(max-width: 769px)')
