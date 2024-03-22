@@ -11,6 +11,7 @@ import { useDateFormatter } from '@/shared/lib/hooks/useDateFormatter/useDateFor
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { getFormattedPublciationDate } from '@/shared/utils/getFormattedPublciationDate'
 import { PostAdditionalInfo } from '@/entities/Post/ui/PostAdditionalInfo/PostAdditionalInfo'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 type PostCardExtendedProps = {
   className?: string
@@ -67,6 +68,21 @@ export const PostCardExtended: FC<PostCardExtendedProps> = ({ className, post, o
         <HStack className={cls.description} max>
           {description}
         </HStack>
+      </VStack>
+    </VStack>
+  )
+}
+
+export const PostCardExtendedSkeleton = () => {
+  return (
+    <VStack gap="12" className={cls.Skeleton}>
+      <Skeleton width="100%" height="300px" border="5px" />
+      <Skeleton width="50%" height="20px" border="5px" />
+      <Skeleton width="20%" height="20px" border="5px" />
+      <VStack gap="4" max>
+        <Skeleton width="100%" height="20px" border="5px" />
+        <Skeleton width="100%" height="20px" border="5px" />
+        <Skeleton width="85%" height="20px" border="5px" />
       </VStack>
     </VStack>
   )

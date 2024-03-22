@@ -1,18 +1,12 @@
 import { IPost, PostCardExtended } from '@/entities/Post'
-import { ImageVariant, MyImage } from '@/shared/ui/MyImage/MyImage'
 import { PostListCardType } from '../../model/consts/postListCardType'
 import React, { FC } from 'react'
-import { HStack } from '@/shared/ui/Stack'
-import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { useSearchParams } from 'next/navigation'
 import { POST_DETAILS_ID } from '../../model/consts/postDetailsId'
 import cls from './PostListItem.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import HeartIcon from '@/shared/assets/icons/heart-outline.svg'
-import CommentIcon from '@/shared/assets/icons/message-circle-outline.svg'
-import { PostDetails } from '@/widgets/PostDetails'
-import { PostDetailsVariant } from '@/widgets/PostDetails/model/consts/variant'
-import { PostCardImage } from '@/entities/Post/ui/PostCardImage/PostCardImage'
+import { PostDetails, PostDetailsVariant } from '@/widgets/PostDetails'
+import { PostCardImage } from '@/entities/Post'
 
 type PostListItemProps = {
   className?: string

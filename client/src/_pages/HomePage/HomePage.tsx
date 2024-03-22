@@ -1,12 +1,12 @@
 'use client'
 
 import { getIsUserInited, getUserId } from '@/entities/User'
-import { PostListResponse, TotalUsersCounter } from '@/entities/Viewer'
+import { PostListResponse } from '@/entities/Viewer'
 import { HOME_PAGE_ID } from '@/shared/const/pages'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
-import { VStack } from '@/shared/ui/Stack'
+import { HStack, VStack } from '@/shared/ui/Stack'
 import { Page } from '@/widgets/Page/Page'
 import { PostDetails, PostDetailsVariant } from '@/widgets/PostDetails'
 import {
@@ -70,8 +70,16 @@ const HomePage: FC<HomePageProps> = ({ postsData, children }) => {
 
 const HomePageSkeleton = ({ isAuth }: { isAuth?: boolean }) => (
   <VStack align="center" gap="36" max>
-    {!isAuth && <Skeleton width="100%" height={70} border="5px" />}
-    {getSkeletons(2, PostListCardType.POST_DETAILS)}
+    {!isAuth ? (
+      <>
+        <Skeleton width="100%" height={70} border="5px" />
+        <HStack gap="8" max>
+          {getSkeletons(4, PostListCardType.EXTENDED)}
+        </HStack>
+      </>
+    ) : (
+      getSkeletons(2, PostListCardType.POST_DETAILS)
+    )}
   </VStack>
 )
 

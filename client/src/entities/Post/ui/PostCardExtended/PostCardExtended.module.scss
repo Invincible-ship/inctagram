@@ -51,3 +51,11 @@
   }
 }
 
+.Skeleton {
+  width: 24.65%;
+
+  @media (max-width: 769px) {
+    width: 33.33333%;
+  }
+}
+
