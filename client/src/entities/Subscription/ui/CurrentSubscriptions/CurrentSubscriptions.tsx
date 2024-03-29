@@ -73,7 +73,7 @@ export const CurrentSubscriptions: FC<CurrentSubscriptionProps> = ({
   )
 }
 
-const CurrentSubscriptionsSkeleton = () => (
+export const CurrentSubscriptionsSkeleton = () => (
   <VStack gap="12" max>
     <Skeleton width="100%" height={30} border="5px"></Skeleton>
     <Skeleton width="100%" height={100} border="10px"></Skeleton>

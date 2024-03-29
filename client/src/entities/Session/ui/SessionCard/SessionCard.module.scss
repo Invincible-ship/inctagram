@@ -1,0 +1,30 @@
+.Card {
+  min-height: 120px;
+  background-color: var(--dark-color-500);
+  border: 1px solid var(--dark-color-300);
+  border-radius: 2px;
+  padding: 18px 24px;
+  font-weight: 400;
+
+  &.rightPadding {
+    padding-right: 0px;
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .ip {
+    font-size: 14px;
+  }
+
+  .lastVisit {
+    font-size: 12px;
+  }
+
+  .action {
+    align-self: center;
+  }
+}

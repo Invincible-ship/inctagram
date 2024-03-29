@@ -2,17 +2,23 @@
 
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Suspense, lazy, memo, useCallback, useMemo } from 'react'
-import { Flex, HStack, VStack } from '@/shared/ui/Stack'
+import { HStack, VStack } from '@/shared/ui/Stack'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { ProfileSettingValue, ProfileSettingsTab } from '@/features/editableProfileGeneralInfo'
-import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
-import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery/useMediaQuery'
+import {
+  EditableProfileGeneralInfoSkeleton,
+  ProfileSettingValue,
+  ProfileSettingsTab,
+} from '@/features/editableProfileGeneralInfo'
 import { useClientTranslation } from '@/shared/config/i18n/client'
 import { Namespaces } from '@/shared/config/i18n/types'
 import { Tab, Tabs } from '@/shared/ui/Tabs/Tabs'
 import cls from './ProfileSettingsPage.module.scss'
 import { withAuth } from '@/shared/lib/HOC/withAuth/withAuth'
 import { UserRole } from '@/shared/lib/HOC/withAuth/routes'
+import { DevicesSkeleton } from '../Devices/Devices'
+import { CurrentSubscriptionsSkeleton } from '@/entities/Subscription'
+import { SubscriptionsPaymentsSkeleton } from '../SubscriptionPayments/SubscriptionsPayments'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 const EditableProfileGeneralInfo = lazy(() =>
   import('@/features/editableProfileGeneralInfo').then(mod => ({
@@ -29,6 +35,7 @@ const SubscriptionsPayments = lazy(() =>
     default: mod.SubscriptionsPayments,
   })),
 )
+const Devices = lazy(() => import('../Devices/Devices').then(mod => ({ default: mod.Devices })))
 
 type ProfileSettingsPageProps = {
   className?: string
@@ -37,13 +44,18 @@ type ProfileSettingsPageProps = {
 
 const mapProfileSettings = {
   [ProfileSettingValue.GENERAL_INFO]: EditableProfileGeneralInfo,
-  [ProfileSettingValue.DEVICES]: () => <h1>Devices</h1>,
+  [ProfileSettingValue.DEVICES]: Devices,
   [ProfileSettingValue.ACCOUNT_MANAGMENT]: AccountManagement,
   [ProfileSettingValue.PAYMENTS]: SubscriptionsPayments,
 }
+const mapProfileSettingsToSkeleton = {
+  [ProfileSettingValue.GENERAL_INFO]: <EditableProfileGeneralInfoSkeleton />,
+  [ProfileSettingValue.DEVICES]: <DevicesSkeleton />,
+  [ProfileSettingValue.ACCOUNT_MANAGMENT]: <CurrentSubscriptionsSkeleton />,
+  [ProfileSettingValue.PAYMENTS]: <SubscriptionsPaymentsSkeleton />,
+}
 
 export const ProfileSettingsPage = ({ className, initialTabValue }: ProfileSettingsPageProps) => {
-  const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const editableSearchParams = new URLSearchParams(Array.from(searchParams))
@@ -57,7 +69,8 @@ export const ProfileSettingsPage = ({ className, initialTabValue }: ProfileSetti
 
   const handleTabClick = useCallback((tab: ProfileSettingsTab) => {
     editableSearchParams.set('setting', tab.value)
-    router.push(`${pathname}?${editableSearchParams.toString()}`)
+    // router.push(`${pathname}?${editableSearchParams.toString()}`)
+    history.pushState(null, '', `?${editableSearchParams.toString()}`)
   }, [])
 
   const CurrentTabComponent = mapProfileSettings[currentTabValue]
@@ -65,7 +78,9 @@ export const ProfileSettingsPage = ({ className, initialTabValue }: ProfileSetti
   return (
     <VStack gap="24" max className={classNames(cls.ProfileSettings, {}, [className])}>
       <ProfileSettingsHeader tabValue={currentTabValue} handleTabClick={handleTabClick} />
-      <CurrentTabComponent />
+      <Suspense fallback={mapProfileSettingsToSkeleton[currentTabValue]}>
+        <CurrentTabComponent />
+      </Suspense>
     </VStack>
   )
 }
@@ -116,31 +131,15 @@ const ProfileSettingsHeader = memo(({ tabValue, handleTabClick }: ProfileSetting
 ProfileSettingsHeader.displayName = 'ProfileSettingsHeader'
 
 export const ProfileSettingsSkeleton = ({ mobile }: { mobile?: boolean }) => {
-  const direction = mobile ? 'column' : 'row'
-  const align = direction == 'column' ? 'center' : 'start'
-
   return (
     <VStack gap="24" max>
-      <HStack gap="12" max>
-        <Skeleton width="calc(25% - 6px)" height="50px" border="5px" />
-        <Skeleton width="calc(25% - 6px)" height="50px" border="5px" />
-        <Skeleton width="calc(25% - 6px)" height="50px" border="5px" />
-        <Skeleton width="calc(25% - 6px)" height="50px" border="5px" />
+      <HStack gap="8" wrap="nowrap" justify="stretch" max>
+        <Skeleton width="25%" height="40px" border="5px" />
+        <Skeleton width="25%" height="40px" border="5px" />
+        <Skeleton width="25%" height="40px" border="5px" />
+        <Skeleton width="25%" height="40px" border="5px" />
       </HStack>
-      <Flex gap="24" align={align} direction={direction} max>
-        {!mobile ? (
-          <Skeleton width={300} height={300} border="5px" />
-        ) : (
-          <Skeleton width="inherit" height={80} border="5px" />
-        )}
-        <VStack gap="24" max>
-          {Array(6)
-            .fill('')
-            .map((_, i) => {
-              return <Skeleton key={i} width="inherit" height={80} border="5px" />
-            })}
-        </VStack>
-      </Flex>
+      <EditableProfileGeneralInfoSkeleton mobile={mobile} />
     </VStack>
   )
 }

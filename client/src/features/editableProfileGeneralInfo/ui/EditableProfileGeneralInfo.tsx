@@ -18,6 +18,9 @@ import { isFetchBaseQueryError } from '@/shared/api/isFetchBaseQueryError'
 import { ApiError } from '@/shared/api/types'
 import { revalidateDataByTag } from '@/shared/lib/serverActions/revalidateDataByTag'
 import { VIEWER_TAG } from '@/shared/const/rtk'
+import { Flex, VStack } from '@/shared/ui/Stack'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
+import { Suspense } from 'react'
 
 const defaultGeneralInfoValues: TGeneralInfo = {
   userName: '',
@@ -87,5 +90,27 @@ export const EditableProfileGeneralInfo = () => {
         t={t}
       />
     )
+  )
+}
+
+export const EditableProfileGeneralInfoSkeleton = ({ mobile }: { mobile?: boolean }) => {
+  const direction = mobile ? 'column' : 'row'
+  const align = direction == 'column' ? 'center' : 'start'
+
+  return (
+    <Flex gap="24" align={align} direction={direction} max>
+      {!mobile ? (
+        <Skeleton width={300} height={300} border="5px" />
+      ) : (
+        <Skeleton width="inherit" height={80} border="5px" />
+      )}
+      <VStack gap="24" max>
+        {Array(6)
+          .fill('')
+          .map((_, i) => {
+            return <Skeleton key={i} width="inherit" height={80} border="5px" />
+          })}
+      </VStack>
+    </Flex>
   )
 }

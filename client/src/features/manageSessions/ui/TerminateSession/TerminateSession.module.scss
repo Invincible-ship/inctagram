@@ -1,0 +1,9 @@
+.buttonContent {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-text-color);
+
+  svg g {
+    fill: var(--primary-text-color);
+  }
+}
