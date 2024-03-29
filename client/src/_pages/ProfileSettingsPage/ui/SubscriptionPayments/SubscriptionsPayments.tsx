@@ -53,7 +53,7 @@ export const SubscriptionsPayments = memo(() => {
   )
 })
 
-const SubscriptionsPaymentsSkeleton = ({ mobile }: { mobile?: boolean }) =>
+export const SubscriptionsPaymentsSkeleton = ({ mobile }: { mobile?: boolean }) =>
   mobile ? (
     <VStack gap="12" max>
       <Skeleton width="100%" height={200} border="10px" />

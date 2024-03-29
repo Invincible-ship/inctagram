@@ -38,3 +38,8 @@ export const GET_SUBSCRIPTION_COST = '/api/v1/subscriptions/cost-of-subscription
 export const GET_ALL_PAYMENTS = '/api/v1/subscriptions/my-payments'
 export const CREATE_SUBSCRIPTION = '/api/v1/subscriptions'
 export const CANCEL_AUTO_RENEWAL = '/api/v1/subscriptions/canceled-auto-renewal'
+
+// SESSION ENDPOINTS
+export const GET_ALL_SESSIONS = '/api/v1/sessions'
+export const TERMINATE_SESSION = (deviceId: number) => `/api/v1/sessions/${deviceId}`
+export const TERMINATE_ALL_SESSIONS = '/api/v1/sessions/terminate-all'

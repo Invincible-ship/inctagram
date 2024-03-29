@@ -49,7 +49,14 @@ export const subscriptionApi = rtkApi.injectEndpoints({
         url: CANCEL_AUTO_RENEWAL,
         body,
       }),
-      invalidatesTags: [{ type: SUBSCRIPTION_TAG, id: 'RENEWAL' }],
+      onQueryStarted(_, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          subscriptionApi.util.updateQueryData('getCurrentSubscription', undefined, draft => {
+            draft.hasAutoRenewal = false
+          }),
+        )
+        queryFulfilled.catch(patchResult.undo)
+      },
     }),
   }),
 })

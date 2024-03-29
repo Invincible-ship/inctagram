@@ -57,6 +57,20 @@
     "button": "Save Changes",
     "avatar-btn": "Add a profile photo"
   },
+  "devices": {
+    "title": {
+      "current": "Current device",
+      "active": "Active devices"
+    },
+    "text": {
+      "absent": "You have not yet logged in from other devices",
+      "lastVisit": "Last visit"
+    },
+    "features": {
+      "terminateOne": "Log Out",
+      "terminateAll": "Terminate all other session"
+    }
+  },
   "account-managment": {
     "loader": {
       "create": "Please wait. Redirecting to payment page...",
